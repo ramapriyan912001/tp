@@ -2,11 +2,14 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.group.Group;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,6 +26,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final List<Group> groups = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
@@ -52,6 +56,10 @@ public class Person {
         return address;
     }
 
+    public List<Group> getGroups() {
+        return groups;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -71,6 +79,18 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    public void addGroup(Group group) {
+        this.groups.add(group);
+    }
+
+    public String getGroupsName() {
+        String result = "";
+        for (Group group : groups) {
+            result = result + group.getName() + ", ";
+        }
+        return result;
     }
 
     /**
@@ -110,7 +130,9 @@ public class Person {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("; Groups: ")
+                .append(getGroupsName());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

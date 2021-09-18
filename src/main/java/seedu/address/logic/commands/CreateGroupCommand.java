@@ -1,15 +1,12 @@
 package seedu.address.logic.commands;
+import static java.util.Objects.requireNonNull;
+
+import java.util.ArrayList;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
-
-import java.util.ArrayList;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 public class CreateGroupCommand extends Command {
     public static final String COMMAND_WORD = "creategroup";
@@ -30,13 +27,25 @@ public class CreateGroupCommand extends Command {
         this.validCommand = validCommand;
     }
 
+    /**
+     * Adds a given group object into the groups attribute for each member.
+     *
+     * @param group Group object that is added to every member.
+     */
+    public void addGroupForAllMembers(Group group) {
+        for (Person member : members) {
+            member.addGroup(group);
+        }
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (!validCommand) {
             return new CommandResult(MESSAGE_ERROR);
         }
-        new Group(groupName, members);
+        Group group = new Group(groupName, members);
+        addGroupForAllMembers(group);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
