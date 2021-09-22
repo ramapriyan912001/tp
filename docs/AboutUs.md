@@ -9,13 +9,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Chrus Chong Kai Ngee
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chrus-chong.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[LinkedIn](https://www.linkedin.com/in/chrus-chong/)
+[GitHub](https://github.com/chrus-chong)
+[Portfolio](team/johndoe.md)
 
 * Role: Project Advisor
 
