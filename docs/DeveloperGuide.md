@@ -4,7 +4,11 @@ title: Developer Guide
 ---
 * Table of Contents
 {:toc}
-
+## Table of Contents
+1. [Acknowledgements](#acknowledgements)
+2. [Setting up, getting started](#setting-up-getting-started)
+3. [Architecture](#architecture)
+4. [Product Scope](#product-scope)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
