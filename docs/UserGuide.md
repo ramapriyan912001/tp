@@ -166,6 +166,20 @@ AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
 
+###Creating a Travel Group: ```create group```
+Creates a group of people of your choice from your address book.
+Adds you as a member of the group by default.
+
+Format: ```create group GROUP_NAME : NAME1 : NAME2 : NAME3```
+GROUP_NAME is a mandatory field.
+At least one NAME is necessary.
+The names are required to be in the address book and should match contact names exactly.
+
+Examples:
+create group Bali : Jacob Tan : Max Chia : Julianne Tay
+create group London: Justin Lee : Raj Gopal : Keith Chia
+
+
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
