@@ -7,8 +7,29 @@ title: Developer Guide
 ## Table of Contents
 1. [Acknowledgements](#acknowledgements)
 2. [Setting up, getting started](#setting-up-getting-started)
-3. [Architecture](#architecture)
-4. [Product Scope](#product-scope)
+3. [Design](#design)
+4. [Architecture](#architecture)
+   1. [UI component](#ui-component)
+   2. [Logic component](#logic-component)
+   3. [Model component](#model-component)
+   4. [Storage component](#storage-component)
+   5. [Common classes](#common-classes)
+5. [Implementation](#implementation)
+   1. [Proposed Undo/Redo feature](#proposed-undoredo-feature)
+   2. [Proposed implementation](#proposed-implementation)
+   3. [Design considerations](#design-considerations)
+   4. [Proposed data archiving](#proposed-data-archiving)
+6. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+7. [Appendix: Requirements](#appendix-requirements)
+   1. [Product Scope](#product-scope)
+   2. [User stories](#user-stories)
+   3. [Use cases](#use-cases)
+   4. [Non-functional requirements](#non-functional-requirements)
+   5. [Glossary](#glossary)
+8. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+   1. [Launch and shutdown](#launch-and-shutdown)
+   2. [Deleting a person](#deleting-a-person)
+   3. [Saving data](#saving-data)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
@@ -261,13 +282,19 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* travels in groups
+* wants to split expenses in a convenient and efficient manner
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+
+Travellers have big notes that make settling payments inconvenient.
+Most travel groups often designate one person to pay.
+This method of settling payments poses a vexing task of splitting costs at the end of the day or on-the-spot.
+Our app effectively splits bills between different contacts to serve this purpose.
 
 
 ### User stories
@@ -275,13 +302,16 @@ _{Explain here how the data archiving feature will be implemented}_
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| -------- | ------------------------------------------ | -------------------------------------------------- | ------------------------------------------------------------------------ |
+| `* * *`  | user that has paid for a shared experience | easily check how much I have paid up front         | ensure I have liquidity for emergencies and or other unforeseen expenses |
+| `* * *`  | user who has paid for others               | easily check how much I am owed by friends         | recoup the money I have paid on their behalf                             |
+| `* * *`  | user paying for a shared expense           | enter the amount I have paid                       | update the total amount they have to pay                                 |
+| `* * *`  | user that owes my friend money             | easily check how much I owe each person            | conveniently proceed to pay my friend                                    |
+| `* *`    | user who has to recoup the money           | divide up the expenses suitably amongst my friends | know how much to recoup from each person                                 |
+| `* *`    | user paying for the shared expense         | see how much I have paid according to the date     | monitor the amount spent each day                                        |
+| `* *`    | user who worries about individual expenses | check the breakdown of my personal expenditure     | keep track of how much money I have spent                                |
+| `*`      | user who values organisation               | view the group’s expenditure by categories         | plan the budgeting for future expenses more effectively                  |
+| `*`      | user who needs to repay debt               | easily set up installment payments                 | can avoid paying too much money at one go                                |
 
 *{More to be added}*
 
@@ -312,7 +342,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+
+**Use case: Create Travel Group**
+
+**MSS**
+
+1. User chooses to create a group.
+2. User enters create group command into CLI along with group name and names of members.
+3. AWE displays confirmation message.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. AWE detects group member whose name is not in the addressbook.
+  * 2a1. AWE displays message to remind User to type in full name of members as in the addressbook.
+
+    Use case ends.
+
+
 
 ### Non-Functional Requirements
 
