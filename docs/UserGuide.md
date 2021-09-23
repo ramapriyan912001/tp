@@ -154,6 +154,18 @@ Exits the program.
 
 Format: `exit`
 
+### Viewing a shared expense: `expense`
+Returns a message containing all existing expenses within the active travel group. Expenses are sorted from most recent to least recent.
+
+Format: `expense INDEX`
+
+* GROUP_ID argument is mandatory
+* GROUP_ID must represent the id of an existing travel group
+
+Examples: 
+* `group` followed by `expense 1` shows all the expenses of the 1st travel group in the group list.
+
+
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -166,10 +178,6 @@ AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -177,6 +185,14 @@ _Details coming soon ..._
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
+**Q**: What if the Jar file does not open properly when I double click on it?<br>
+**A**: Open a command prompt in that folder and run the command `java -jar -ea AWE.jar`.
+
+**Q**: What do I do if I see `AWE.jar` cannot be opened because it is from an unidentified developer when I double click the jar file on a mac?<br>
+**A**: Go to ` System Preferences -> Security and Privacy -> General` and click on `Open anyways` as such
+![Mac Security Preference](images/MacSecurityPreference.png)<br>
+<br>
+If your questions are not answered in the FAQ, check out the issue page on our GitHub linked [here](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues).
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
@@ -190,3 +206,4 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**View Expense** | `expense INDEX` <br> e.g., `expense 2`
