@@ -312,7 +312,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user who worries about individual expenses | check the breakdown of my personal expenditure     | keep track of how much money I have spent                                |
 | `*`      | user who values organisation               | view the group’s expenditure by categories         | plan the budgeting for future expenses more effectively                  |
 | `*`      | user who needs to repay debt               | easily set up installment payments                 | can avoid paying too much money at one go                                |
-
+| `* * *`  | busy user who cannot be bothered to put extra effort into remembering everyone's phone numbers on top of my daily tasks | easily save all my friends' numbers | conveniently proceed to pay my friend |
+| `* *`    | user who likes to differentiate work from leisure | use this app to separate the different types of contacts I have | I won’t mix them up                                  |
+| `*`      | user who has lots of contacts to keep track of | tag each contact | easily find groups of people using the tags |
+| `* `     | user whose friends frequently change numbers | use this app to easily edit their numbers or save multiple numbers with notes | easily remember which number to use         |
+| `**`     | user who wants to stay in contact with friends | use this app to easily save their phone numbers | I can remain in contact                                                 |
+| `**`     | potential user exploring the app              | see the app containing sample data                | see what the app generally looks like when it is used                  |
+| `**`     | potential user exploring the app              | undo my actions                                 | test the app's features with the same data                               |
+| `**`     | potential user testing the app              | run the app on different platforms (windows, linux and os-x) | not have to specifically run a certain platform               |
 *{More to be added}*
 
 ### Use cases
