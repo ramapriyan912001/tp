@@ -14,25 +14,27 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `addressbook.jar` from here (Coming Soon!).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your tp.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/AWEUi.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`list`** : The command `list` lists all expenses / contacts / groups.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`add`** : The command `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` adds a contact named `John Doe` to the Address Book.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`delete`**`3` : The command `delete` removes the 3rd contact/expense shown in the current list.
 
-   * **`clear`** : Deletes all contacts.
+   * **`clear`** : The command `clear` removes all expenses / contacts / groups.
 
-   * **`exit`** : Exits the app.
+   * **`edit`** : The command `edit 1 n/Thomas Betty` edits the name of the 1st person to be Thomas Betty and removes all existing tags.
+
+   * **`exit`** : The command `exit` exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -42,7 +44,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -154,6 +156,19 @@ Exits the program.
 
 Format: `exit`
 
+### Deleting a Travel Group: `delete group`
+Deletes a group from your groups.
+All the details from the group are lost once this action is completed.
+
+Format: `delete group GROUP_NAME`
+
+* GROUP_NAME is a mandatory field.
+* A group with GROUP_NAME as its name must exist.
+
+Examples:
+* `delete group Bali`
+* `delete group London`
+
 ### Viewing a shared expense: `expense`
 Returns a message containing all existing expenses within the active travel group. Expenses are sorted from most recent to least recent.
 
@@ -206,4 +221,5 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**Delete Group** | `delete group GROUP_NAME` <br> e.g., `delete group Vienna`
 **View Expense** | `expense INDEX` <br> e.g., `expense 2`
