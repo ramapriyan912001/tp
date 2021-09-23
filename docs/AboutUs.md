@@ -31,14 +31,16 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Ramapriyan Srivatsan Purisai Devarajan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ramapriyan912001.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[LinkedIn](https://www.linkedin.com/in/ramapriyansrivatsanpd/)
+[Github](https://github.com/ramapriyan912001)
+[Portfolio](team/johndoe.md)
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Team Lead
+* Responsibilities: Backend Engineering
 
 ### Jean Doe
 
