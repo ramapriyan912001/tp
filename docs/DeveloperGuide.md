@@ -367,6 +367,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+**Use case: Delete Travel Group**
+
+**MSS**
+
+1. User chooses to delete a group.
+2. User enters create group command into CLI along with group name.
+3. AWE displays confirmation message.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. AWE detects group name that is not in address book.
+    * 2a1. AWE displays message to remind User to type in name of a group inside the addressbook.
+
+      Use case ends.
+
 
 
 ### Non-Functional Requirements
