@@ -177,7 +177,7 @@ Format: `expense INDEX`
 * GROUP_ID argument is mandatory
 * GROUP_ID must represent the id of an existing travel group
 
-Examples: 
+Examples:
 * `group` followed by `expense 1` shows all the expenses of the 1st travel group in the group list.
 
 
