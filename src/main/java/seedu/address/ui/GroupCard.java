@@ -1,9 +1,8 @@
 package seedu.address.ui;
 
-import java.util.Collections;
+import static java.util.stream.Collectors.joining;
+
 import java.util.Comparator;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -14,7 +13,6 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
-import static java.util.stream.Collectors.joining;
 
 /**
  * An UI component that displays information of a {@code Person}.

@@ -1,11 +1,9 @@
 package seedu.address.ui;
 
-import java.util.*;
 import java.util.logging.Logger;
 
-import javafx.beans.InvalidationListener;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -121,172 +119,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        groupListPanel = new GroupListPanel(new ObservableList<Group>() {
-            @Override
-            public void addListener(ListChangeListener<? super Group> listener) {
-
-            }
-
-            @Override
-            public void removeListener(ListChangeListener<? super Group> listener) {
-
-            }
-
-            @Override
-            public boolean addAll(Group... elements) {
-                return false;
-            }
-
-            @Override
-            public boolean setAll(Group... elements) {
-                return false;
-            }
-
-            @Override
-            public boolean setAll(Collection<? extends Group> col) {
-                return false;
-            }
-
-            @Override
-            public boolean removeAll(Group... elements) {
-                return false;
-            }
-
-            @Override
-            public boolean retainAll(Group... elements) {
-                return false;
-            }
-
-            @Override
-            public void remove(int from, int to) {
-
-            }
-
-            @Override
-            public int size() {
-                return 0;
-            }
-
-            @Override
-            public boolean isEmpty() {
-                return false;
-            }
-
-            @Override
-            public boolean contains(Object o) {
-                return false;
-            }
-
-            @Override
-            public Iterator<Group> iterator() {
-                return null;
-            }
-
-            @Override
-            public Object[] toArray() {
-                return new Object[0];
-            }
-
-            @Override
-            public <T> T[] toArray(T[] a) {
-                return null;
-            }
-
-            @Override
-            public boolean add(Group group) {
-                return false;
-            }
-
-            @Override
-            public boolean remove(Object o) {
-                return false;
-            }
-
-            @Override
-            public boolean containsAll(Collection<?> c) {
-                return false;
-            }
-
-            @Override
-            public boolean addAll(Collection<? extends Group> c) {
-                return false;
-            }
-
-            @Override
-            public boolean addAll(int index, Collection<? extends Group> c) {
-                return false;
-            }
-
-            @Override
-            public boolean removeAll(Collection<?> c) {
-                return false;
-            }
-
-            @Override
-            public boolean retainAll(Collection<?> c) {
-                return false;
-            }
-
-            @Override
-            public void clear() {
-
-            }
-
-            @Override
-            public Group get(int index) {
-                return null;
-            }
-
-            @Override
-            public Group set(int index, Group element) {
-                return null;
-            }
-
-            @Override
-            public void add(int index, Group element) {
-
-            }
-
-            @Override
-            public Group remove(int index) {
-                return null;
-            }
-
-            @Override
-            public int indexOf(Object o) {
-                return 0;
-            }
-
-            @Override
-            public int lastIndexOf(Object o) {
-                return 0;
-            }
-
-            @Override
-            public ListIterator<Group> listIterator() {
-                return null;
-            }
-
-            @Override
-            public ListIterator<Group> listIterator(int index) {
-                return null;
-            }
-
-            @Override
-            public List<Group> subList(int fromIndex, int toIndex) {
-                return null;
-            }
-
-            @Override
-            public void addListener(InvalidationListener listener) {
-
-            }
-
-            @Override
-            public void removeListener(InvalidationListener listener) {
-
-            }
-        }); //logic.getFilteredPersonList()
+        // Need to update to get grouplist
+        groupListPanel = new GroupListPanel(new FilteredList<Group>(FXCollections.observableArrayList()));
 
         listPanelPlaceholder.getChildren().add(personListPanel.getRoot()); // Starts with addressbook
 
@@ -370,19 +204,22 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
+
             if (commandResult.isShowHelp()) {
                 handleHelp();
+
             }
 
             if (commandResult.isExit()) {
                 handleExit();
             }
 
-            /**
+            /* Update to handle this
             if (commandResult.isShowAddressBook()) {
                 switchView(UiView.ADDRESS_BOOK);
             }
             */
+
 
             switchView(UiView.GROUP_PAGE);
 
