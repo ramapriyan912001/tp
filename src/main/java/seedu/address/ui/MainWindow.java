@@ -1,7 +1,11 @@
 package seedu.address.ui;
 
+import java.util.*;
 import java.util.logging.Logger;
 
+import javafx.beans.InvalidationListener;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -16,6 +20,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.group.Group;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -31,9 +36,12 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+
+    // Panels for toggling
+    private PersonListPanel personListPanel;
+    private GroupListPanel groupListPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -42,13 +50,15 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane listPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -111,7 +121,174 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        groupListPanel = new GroupListPanel(new ObservableList<Group>() {
+            @Override
+            public void addListener(ListChangeListener<? super Group> listener) {
+
+            }
+
+            @Override
+            public void removeListener(ListChangeListener<? super Group> listener) {
+
+            }
+
+            @Override
+            public boolean addAll(Group... elements) {
+                return false;
+            }
+
+            @Override
+            public boolean setAll(Group... elements) {
+                return false;
+            }
+
+            @Override
+            public boolean setAll(Collection<? extends Group> col) {
+                return false;
+            }
+
+            @Override
+            public boolean removeAll(Group... elements) {
+                return false;
+            }
+
+            @Override
+            public boolean retainAll(Group... elements) {
+                return false;
+            }
+
+            @Override
+            public void remove(int from, int to) {
+
+            }
+
+            @Override
+            public int size() {
+                return 0;
+            }
+
+            @Override
+            public boolean isEmpty() {
+                return false;
+            }
+
+            @Override
+            public boolean contains(Object o) {
+                return false;
+            }
+
+            @Override
+            public Iterator<Group> iterator() {
+                return null;
+            }
+
+            @Override
+            public Object[] toArray() {
+                return new Object[0];
+            }
+
+            @Override
+            public <T> T[] toArray(T[] a) {
+                return null;
+            }
+
+            @Override
+            public boolean add(Group group) {
+                return false;
+            }
+
+            @Override
+            public boolean remove(Object o) {
+                return false;
+            }
+
+            @Override
+            public boolean containsAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public boolean addAll(Collection<? extends Group> c) {
+                return false;
+            }
+
+            @Override
+            public boolean addAll(int index, Collection<? extends Group> c) {
+                return false;
+            }
+
+            @Override
+            public boolean removeAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public boolean retainAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public void clear() {
+
+            }
+
+            @Override
+            public Group get(int index) {
+                return null;
+            }
+
+            @Override
+            public Group set(int index, Group element) {
+                return null;
+            }
+
+            @Override
+            public void add(int index, Group element) {
+
+            }
+
+            @Override
+            public Group remove(int index) {
+                return null;
+            }
+
+            @Override
+            public int indexOf(Object o) {
+                return 0;
+            }
+
+            @Override
+            public int lastIndexOf(Object o) {
+                return 0;
+            }
+
+            @Override
+            public ListIterator<Group> listIterator() {
+                return null;
+            }
+
+            @Override
+            public ListIterator<Group> listIterator(int index) {
+                return null;
+            }
+
+            @Override
+            public List<Group> subList(int fromIndex, int toIndex) {
+                return null;
+            }
+
+            @Override
+            public void addListener(InvalidationListener listener) {
+
+            }
+
+            @Override
+            public void removeListener(InvalidationListener listener) {
+
+            }
+        }); //logic.getFilteredPersonList()
+
+        listPanelPlaceholder.getChildren().add(personListPanel.getRoot()); // Starts with addressbook
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -121,6 +298,21 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    private void switchView(UiView uiView) {
+        listPanelPlaceholder.getChildren().clear();
+
+        switch (uiView) {
+        case ADDRESS_BOOK:
+            listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+            break;
+        case GROUP_PAGE:
+            listPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+            break;
+        default:
+            throw new AssertionError("No view name");
+        }
     }
 
     /**
@@ -185,6 +377,14 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
+
+            /**
+            if (commandResult.isShowAddressBook()) {
+                switchView(UiView.ADDRESS_BOOK);
+            }
+            */
+
+            switchView(UiView.GROUP_PAGE);
 
             return commandResult;
         } catch (CommandException | ParseException e) {
