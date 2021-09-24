@@ -174,7 +174,7 @@ Examples:
 Deletes a shared expense from the currently active travel group.
 This command deletes the expense for all members involved in the expense.
 
-Format: `delete expense [EXPENSE_ID]`
+Format: `delete expense EXPENSE_ID`
 
 * EXPENSE_ID argument is mandatory.
 * EXPENSE_ID must represent the id of an existing expense object.
@@ -236,4 +236,5 @@ Action | Format, Examples
 **List** | `list`
 **Help** | `help`
 **Delete Group** | `delete group GROUP_NAME` <br> e.g., `delete group Vienna`
+**Delete Expense** | `delete expense EXPENSE_ID` <br> e.g., `delete expense 5`
 **View Expense** | `expense INDEX` <br> e.g., `expense 2`
