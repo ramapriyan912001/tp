@@ -54,7 +54,7 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 
 ### Ong Jingwen 
 
-<img src="images/Jingwencloud.png" width="200px">
+<img src="images/jingwencloud.png" width="200px">
 
 [Github](http://github.com/Jingwencloud)
 [Portfolio](team/johndoe.md)
