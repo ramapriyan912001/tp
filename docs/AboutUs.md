@@ -42,15 +42,16 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 * Role: Team Lead
 * Responsibilities: Backend Engineering
 
-### Jean Doe
+### Ee Kar Hee, Nicholas
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kheekheekhee.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[LinkedIn](https://www.linkedin.com/in/ekhn/)
+[Github](http://github.com/kheekheekhee)
+[Portfolio](team/johndoe.md)
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Frontend Engineering
 
 ### James Doe
 
