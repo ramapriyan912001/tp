@@ -169,6 +169,20 @@ Examples:
 * `delete group Bali`
 * `delete group London`
 
+### Deleting a shared expense: `delete expense`
+
+Deletes a shared expense from the currently active travel group.
+This command deletes the expense for all members involved in the expense.
+
+Format: `delete expense EXPENSE_ID`
+
+* EXPENSE_ID argument is mandatory.
+* EXPENSE_ID must represent the id of an existing expense object.
+
+Examples:
+* `delete expense 10213`
+* `delete expense 33421`
+
 ### Viewing a shared expense: `expense`
 Returns a message containing all existing expenses within the active travel group. Expenses are sorted from most recent to least recent.
 
@@ -222,4 +236,5 @@ Action | Format, Examples
 **List** | `list`
 **Help** | `help`
 **Delete Group** | `delete group GROUP_NAME` <br> e.g., `delete group Vienna`
+**Delete Expense** | `delete expense EXPENSE_ID` <br> e.g., `delete expense 5`
 **View Expense** | `expense INDEX` <br> e.g., `expense 2`
