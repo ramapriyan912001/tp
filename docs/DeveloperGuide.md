@@ -320,6 +320,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `**`     | potential user exploring the app              | see the app containing sample data                | see what the app generally looks like when it is used                  |
 | `**`     | potential user exploring the app              | undo my actions                                 | test the app's features with the same data                               |
 | `**`     | potential user testing the app              | run the app on different platforms (windows, linux and os-x) | not have to specifically run a certain platform               |
+| `**`     | user ready to start using the app           | remove all existing data                          | discard data I used only for testing the app                             |
+| `**`     | potential user                              | immediately use the app without any hindrance     | use this app without being annoyed and discard it                        |
+| `***`    | potential user                              | have a consolidated platform to track expenses with my friends | use a single platform to compare expenses                   |
 *{More to be added}*
 
 ### Use cases
@@ -367,7 +370,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+**Use case: Add Expense**
+**MSS**
 
+1. User requests to add an expense to the active travel group
+2. AWE displays confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. AWE detects that there are no travel groups active.
+  * 1a1. AWE informs user that no travel groups are active.
+  
+    Use case ends.
+* 1b. AWE detects that inputted command is an incorrect format.
+  * 1b1. AWE informs user that expense was not added and reminds the user of the correct format/
+
+    Use case ends.
 
 ### Non-Functional Requirements
 
