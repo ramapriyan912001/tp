@@ -8,6 +8,7 @@ import seedu.address.logic.commands.CreateGroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -37,7 +38,7 @@ public class CreateGroupParser implements Parser<CreateGroupCommand> {
      * @throws ParseException If user input is incorrectly formatted.
      */
     public CreateGroupCommand parse(String args) throws ParseException {
-        String groupName = findGroupName(args);
+        GroupName groupName = new GroupName(findGroupName(args));
         ArrayList<Person> members = findGroupMembers(args);
         boolean validCommand = true;
         if (groupName.equals(BAD_FORMATTING) || Objects.isNull(members)) {

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.person.Person;
 
 public class CreateGroupCommand extends Command {
@@ -15,14 +16,14 @@ public class CreateGroupCommand extends Command {
     public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists";
 
     private final ArrayList<Person> members;
-    private String groupName;
+    private GroupName groupName;
     private final boolean validCommand;
 
     /**
      * Creates a CreateGroupCommand to create the specified {@code Group}
      */
-    public CreateGroupCommand(String name, ArrayList<Person> members, boolean validCommand) {
-        this.groupName = name;
+    public CreateGroupCommand(GroupName groupName, ArrayList<Person> members, boolean validCommand) {
+        this.groupName = groupName;
         this.members = members;
         this.validCommand = validCommand;
     }
