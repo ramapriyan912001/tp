@@ -331,7 +331,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | expert user                                       | create my own shortcuts for commands               | control what I can do with the app more effectively                      |
 | `*`      | expert user                                       | mass delete contacts from the app                  | save time by not deleting it manually                                    |
 | `*`      | expert user                                       | refer to previous trips and the expenditure        | plan future trips efficiently                                            |
-
+| `* * *`  | user who wants an easy workflow                   | easily toggle between contacts and groups page with a command or a click of a button | make my workflow on the app smoother   |
 *{More to be added}*
 
 ### Use cases
