@@ -10,6 +10,6 @@
    </padding>
 
    <children>
-      <Button mnemonicParsing="false" fx:id="personViewButton" text="Groups" minWidth="200" maxWidth="200"/>
+      <Button mnemonicParsing="false" fx:id="personViewButton" text="Contacts" minWidth="200" maxWidth="200"/>
    </children>
 </HBox>
