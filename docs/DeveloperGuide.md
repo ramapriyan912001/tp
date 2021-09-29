@@ -407,6 +407,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: Add Expense**
 
+**Preconditions: User has selected a travel group**
+
 **MSS**
 
 1. User requests to add an expense to the active travel group
