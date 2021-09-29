@@ -2,8 +2,6 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
 ## Table of Contents
 1. [Acknowledgements](#acknowledgements)
 2. [Setting up, getting started](#setting-up-getting-started)
@@ -307,36 +305,73 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user who has paid for others                      | easily check how much I am owed by friends         | recoup the money I have paid on their behalf                             |
 | `* * *`  | user paying for a shared expense                  | enter the amount I have paid                       | update the total amount they have to pay                                 |
 | `* * *`  | user that owes my friend money                    | easily check how much I owe each person            | conveniently proceed to pay my friend                                    |
+| `* * *`  | busy user who does not want to remember phone numbers | easily save all my friends' numbers            | conveniently proceed to pay my friend                                    |
+| `* * *`  | user with flexible travel plans                   | edit the details of expenditure for events         | modify the records quickly and easily                                    |
+| `* * *`  | beginner user                                     | run the app easily with a click of a button        | avoid wasting time trying to figure out how to get the app to work       |
+| `* * *   | inexperienced user in the app who types fast      | type in the commands for the app                   | do more things in the app with the same amount of time compared to using a mouse to click |
+| `* * *`  | user who wants an easy workflow                   | easily toggle between contacts and groups page with a command or a click of a button | make my workflow on the app smoother   |
 | `* *`    | user who has to recoup the money                  | divide up the expenses suitably amongst my friends | know how much to recoup from each person                                 |
 | `* *`    | user paying for the shared expense                | see how much I have paid according to the date     | monitor the amount spent each day                                        |
 | `* *`    | user who worries about individual expenses        | check the breakdown of my personal expenditure     | keep track of how much money I have spent                                |
-| `*`      | user who values organisation                      | view the group’s expenditure by categories         | plan the budgeting for future expenses more effectively                  |
-| `*`      | user who needs to repay debt                      | easily set up installment payments                 | can avoid paying too much money at one go                                |
-| `* * *`  | busy user who cannot be bothered to put extra effort into remembering everyone's phone numbers | easily save all my friends' numbers | conveniently proceed to pay my friend      |
 | `* *`    | user who likes to differentiate work from leisure | use this app to separate the different types of contacts I have | I won’t mix them up                                         |
-| `*`      | user who has lots of contacts to keep track of    | tag each contact                                   | easily find groups of people using the tags                              |
-| `* `     | user whose friends frequently change numbers      | use this app to easily edit their numbers or save multiple numbers with notes | easily remember which number to use           |
 | `* *`    | user who wants to stay in contact with friends    | use this app to easily save their phone numbers    | I can remain in contact                                                  |
 | `* *`    | potential user exploring the app                  | see the app containing sample data                 | see what the app generally looks like when it is used                    |
 | `* *`    | potential user exploring the app                  | undo my actions                                    | test the app's features with the same data                               |
 | `* *`    | potential user testing the app                    | run the app on different platforms (windows, linux and os-x) | not have to specifically run a certain platform                |
-| `* * *`  | user with flexible travel plans                   | edit the details of expenditure for events         | modify the records quickly and easily                                    |
 | `* *`    | user with flexible travel plans                   | delete a group                                     | modify the records easily if plans change                                |
-| `***`    | beginner user                                     | run the app easily with a click of a button        | avoid wasting time trying to figure out how to get the app to work       |
-| `***`    | inexperienced user in the app who types fast      | type in the commands for the app                   | do more things in the app with the same amount of time compared to using a mouse to click |
-| `**`     | beginner user who first opened the app            | view the help page                                 | so that I can learn how to use the app                                   |
+| `* *`     | beginner user who first opened the app           | view the help page                                 | so that I can learn how to use the app                                   |
+| `*`      | user who values organisation                      | view the group’s expenditure by categories         | plan the budgeting for future expenses more effectively                  |
+| `*`      | user who needs to repay debt                      | easily set up installment payments                 | can avoid paying too much money at one go                                |
+| `*`      | user who has lots of contacts to keep track of    | tag each contact                                   | easily find groups of people using the tags                              |
+| `* `     | user whose friends frequently change numbers      | use this app to easily edit their numbers or save multiple numbers with notes | easily remember which number to use           |
 | `*`      | beginner user that is tech-savvy                  | view the documentation                             | figure out how to use the app                                            |
 | `*`      | beginner user                                     | mass add my contacts                               | avoid manually keying in one by one                                      |
 | `*`      | beginner user                                     | easily distinguish functions in the app            | use it without the app being too daunting                                |
 | `*`      | expert user                                       | create my own shortcuts for commands               | control what I can do with the app more effectively                      |
 | `*`      | expert user                                       | mass delete contacts from the app                  | save time by not deleting it manually                                    |
 | `*`      | expert user                                       | refer to previous trips and the expenditure        | plan future trips efficiently                                            |
-| `* * *`  | user who wants an easy workflow                   | easily toggle between contacts and groups page with a command or a click of a button | make my workflow on the app smoother   |
 *{More to be added}*
 
 ### Use cases
 
 (For all use cases below, the **System** is the `AWE` and the **Actor** is the `user`, unless specified otherwise)
+
+**Use case: Adding a Person**
+
+**MSS**
+
+1. User chooses to add a person to the AddressBook.
+2. User enters add command into CLI along with person name, phone number, email, and address, and tags if applicable.
+3. AWE displays confirmation message.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. AWE detects invalid command format that does not contain all 4 parameter identifiers ("n/", "p/", "e/", "a/").
+    * 2a1. AWE returns invalid command format error and displays ```add``` command format and example.
+
+      Use case ends.
+
+* 2b. Command contains 4 parameter identifiers but name is blank.
+    * 2b1. AWE reminds user that names should only contain alphanumeric characters and should not be blank.
+
+      Use case ends.
+
+* 2c. Command contains 4 parameter identifiers but phone number is less than 3 digits or not a number.
+    * 2c1. AWE reminds user that phone numbers should only contain numbers and be at least 3 digits long.
+
+      Use case ends.
+
+* 2d. Command contains 4 parameter identifiers but email is blank or does not contain domain.
+    * 2d1. AWE reminds user of format of email input.
+
+      Use case ends.
+
+* 2e. Command contains 4 parameter identifiers but address is blank.
+    * 2e1. AWE reminds user that address can take any values and should not be blank.
+
+      Use case ends.
 
 **Use case: Edit a person**
 
@@ -388,9 +423,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. The given index is invalid.
 
     * 3a1. AWE shows an error message.
-
-      Use case resumes at step 2.
-
+    
 **Use case: Create Travel Group**
 
 **MSS**
@@ -484,6 +517,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Clear AddressBook of all entries**
+
+**MSS**
+
+1. User enters clear command.
+2. All entries are deleted from AddressBook.
+
+   Use case ends.
 
 ### Non-Functional Requirements
 
