@@ -2,8 +2,6 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
-import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -18,7 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.group.Group;
+
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -38,8 +36,8 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
 
     // Panels for toggling
-    private PersonListPanel personListPanel;
-    private GroupListPanel groupListPanel;
+    private ViewPanel viewPanel;
+    private NavigationButtonPanel navigationButtonPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -56,6 +54,11 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
+    @FXML
+    private StackPane viewPanelPlaceholder;
+
+    @FXML
+    private StackPane navigationButtonPlaceholder;
 
 
     /**
@@ -118,11 +121,12 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        // Need to update to get grouplist
-        groupListPanel = new GroupListPanel(new FilteredList<Group>(FXCollections.observableArrayList()));
+        viewPanel = new ViewPanel(logic);
+        viewPanelPlaceholder.getChildren().add(viewPanel.getRoot());
 
-        listPanelPlaceholder.getChildren().add(personListPanel.getRoot()); // Starts with addressbook
+
+        navigationButtonPanel = new NavigationButtonPanel(viewPanel);
+        navigationButtonPlaceholder.getChildren().add(navigationButtonPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -132,21 +136,6 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
-    }
-
-    private void switchView(UiView uiView) {
-        listPanelPlaceholder.getChildren().clear();
-
-        switch (uiView) {
-        case ADDRESS_BOOK:
-            listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-            break;
-        case GROUP_PAGE:
-            listPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
-            break;
-        default:
-            throw new AssertionError("No view name");
-        }
     }
 
     /**
@@ -189,10 +178,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
-    }
-
     /**
      * Executes the command and returns the result.
      *
@@ -213,15 +198,6 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
-
-            /* Update to handle this
-            if (commandResult.isShowAddressBook()) {
-                switchView(UiView.ADDRESS_BOOK);
-            }
-            */
-
-
-            switchView(UiView.GROUP_PAGE);
 
             return commandResult;
         } catch (CommandException | ParseException e) {
