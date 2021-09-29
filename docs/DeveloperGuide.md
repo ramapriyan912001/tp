@@ -322,6 +322,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | potential user testing the app                    | run the app on different platforms (windows, linux and os-x) | not have to specifically run a certain platform                |
 | `* * *`  | user with flexible travel plans                   | edit the details of expenditure for events         | modify the records quickly and easily                                    |
 | `* *`    | user with flexible travel plans                   | delete a group                                     | modify the records easily if plans change                                |
+| `***`    | beginner user                                     | run the app easily with a click of a button        | avoid wasting time trying to figure out how to get the app to work       |
+| `***`    | inexperienced user in the app who types fast      | type in the commands for the app                   | do more things in the app with the same amount of time compared to using a mouse to click |
+| `**`     | beginner user who first opened the app            | view the help page                                 | so that I can learn how to use the app                                   |
+| `*`      | beginner user that is tech-savvy                  | view the documentation                             | figure out how to use the app                                            |
+| `*`      | beginner user                                     | mass add my contacts                               | avoid manually keying in one by one                                      |
+| `*`      | beginner user                                     | easily distinguish functions in the app            | use it without the app being too daunting                                |
+| `*`      | expert user                                       | create my own shortcuts for commands               | control what I can do with the app more effectively                      |
+| `*`      | expert user                                       | mass delete contacts from the app                  | save time by not deleting it manually                                    |
+| `*`      | expert user                                       | refer to previous trips and the expenditure        | plan future trips efficiently                                            |
 
 *{More to be added}*
 
@@ -351,9 +360,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  AWE shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  AWE deletes the person
 
     Use case ends.
 
@@ -364,9 +373,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 * 3a. The given index is invalid.
-    * 3a1. AddressBook shows an error message.
-    
-      Use case resumes at step 2.
+
+    * 3a1. AWE shows an error message.
+
 
 **Use case: Viewing expenses of a travel group**
 
@@ -395,6 +404,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 4a1. AWE displays message about no transaction.
     
       Use case ends.
+
+
+
+**Use case: Delete a shared expense**
+
+**MSS**
+
+1. User requests to list expenses for a travel group.
+2. AWE lists all expenses. 
+3. User requests to delete an expense at a specific index in the list.
+4. AWE deletes the specified expense. 
+
+   Use case ends. 
+
+**Extensions**
+
+* 2a. The expense list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. AWE shows an error message.
+
+      Use case resumes at step 2.
+
 
 ### Non-Functional Requirements
 
