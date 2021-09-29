@@ -338,6 +338,59 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AWE` and the **Actor** is the `user`, unless specified otherwise)
 
+**Use case: Edit a person**
+
+**MSS**
+
+1. User requests to list persons
+2. AWE shows a list of persons
+3. User requests to edit a specific person in the list
+4. User enters edited information
+5. AWE edits the person
+    
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. AWE shows an error message.
+
+      Use case resumes at step 2.
+
+* 4a. The given information has an invalid format.
+
+    * 4a1. AWE shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Delete a person**
+
+**MSS**
+
+1. User requests to list persons
+2. AWE shows a list of persons
+3. User requests to delete a specific person in the list
+4. AWE deletes the person
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. AWE shows an error message.
+
+      Use case resumes at step 2.
+
 **Use case: Create Travel Group**
 
 **MSS**
@@ -354,28 +407,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 2a1. AWE displays message to remind User to type in full name of members as in the AddressBook.
   
     Use case ends.
-
-**Use case: Delete a person**
-
-**MSS**
-
-1.  User requests to list persons
-2.  AWE shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AWE deletes the person
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. AWE shows an error message.
-
 
 **Use case: Viewing expenses of a travel group**
 
@@ -419,13 +450,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. AWE detects that there are no travel groups active.
-  * 1a1. AWE informs user that no travel groups are active.
-  
-    Use case ends.
-* 1b. AWE detects that inputted command is an incorrect format.
-  * 1b1. AWE informs user that expense was not added and reminds the user of the correct format/
 
-    Use case ends.
+    * 1a1. AWE informs user that no travel groups are active.
+  
+      Use case ends.
+
+* 1b. AWE detects that inputted command is an incorrect format.
+
+    * 1b1. AWE informs user that expense was not added and reminds the user of the correct format/
+
+      Use case ends.
 
 **Use case: Delete a shared expense**
 
