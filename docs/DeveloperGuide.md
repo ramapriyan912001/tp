@@ -230,7 +230,7 @@ The `redo` command does the opposite — it calls `Model#redoAddressBook()`,
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `contacts`. Commands that do not modify the address book, such as `contacts`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
@@ -403,6 +403,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Find a person**
+
+**Preconditions: User is in ContactsPage**
+
+**MSS**
+
+1. User request to find person based on keyword(s).
+2. AWE shows a list of persons that matches the keyword(s).
+
+**Extensions**
+
+* 2a. There isn't any contacts saved.
+    * 2a1. AWE displays nothing in the contacts page.
+    * 2a2. AWE shows a message saying no person found.
+    
+      Use case ends.
+      
+* 2b. There is not contacts matching the search parameters.
+    * 2b1. AWE displays nothing in the contacts page.
+    * 2b2. AWE shows a message saying no person found.
+    
+      Use case ends.
+
+
 **Use case: Delete a person**
 
 **MSS**
@@ -441,12 +465,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
     Use case ends.
 
+**Use case: Listing all travel groups**
+
+**MSS**
+
+1. User choose to list all groups
+2. GroupsPage shows a list of groups
+
+**Extension**
+* 2a. AWE detects that there is no group created.
+    * 2a1 AWE displays a blank screen.
+    
+      Use case ends.
+
 **Use case: Viewing expenses of a travel group**
 
 **MSS**
 
 1. User request to list groups.
-2. GroupPage shows a list of groups.
+2. GroupsPage shows a list of groups.
 3. User request to see expenses of a specific group.
 4. AW3 displays all the expenses of the group.
 
@@ -455,7 +492,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. AWE detects no groups created yet.
-  * 2a1. AWE displays message to remind User to create a group before empty GroupPage displayed.
+  * 2a1. AWE displays message to remind User to create a group before empty GroupsPage displayed.
   
     Use case ends.
     
@@ -539,7 +576,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **AddressBook**: The page displaying all the contacts
-* **GroupPage**: The page displaying all the travel groups
+* **ContactPage**: The page displaying all the contacts
+* **GroupsPage**: The page displaying all the travel groups
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -573,7 +611,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `contacts` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
