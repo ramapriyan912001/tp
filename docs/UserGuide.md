@@ -169,6 +169,24 @@ Examples:
 * `delete group Bali`
 * `delete group London`
 
+### Adding a shared expense: `add expense`
+Adds a shared expense to the currently active travel group.
+The expense can be paid for and split among any number of contacts within the travel group.
+
+Format: `add expense /des [DESCRIPTION] /by [PAYER_NAME1] [AMOUNT PAID BY NAME1] /for [PAYEE_NAME1][PAYEE_NAME2]`
+
+* There should be at least one PAYER_NAME1 in the command.
+* PAYER_NAME must be immediately followed by the AMOUNT PAID.
+* ":" demarcates the distinction between PAYERS and PAYEES.
+* By default, PAYER_NAME will not be included in the expense. Add name into list of PAYEES if user wishes for PAYER_NAME to be included in the bill.
+* The names are required to be in the address book.
+* Each expense is a class with a unique ID.
+
+Examples:
+* add expense /des Dinner at MBS /by Jake 50.70 /for Jake, Jacob, Max, Julianne
+* add expense /des Koi /by Jake 20.00 /for Justin, Raj, Keith
+* add expense /des Souvenirs for friends /by Tom 20.00 Joan 30.00 Nicholas 10.00 /for Tom, Joan, Nicholas, Keith, Raj
+
 ### Deleting a shared expense: `delete expense`
 
 Deletes a shared expense from the currently active travel group.
@@ -207,7 +225,25 @@ AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
 
---------------------------------------------------------------------------------------------------------------------
+
+### Creating a Travel Group: ```create group```
+Creates a group of people of your choice from your address book.
+Adds you as a member of the group by default.
+
+Format: ```create group GROUP_NAME : NAME1 : NAME2 : NAME3```
+GROUP_NAME is a mandatory field.
+At least one NAME is necessary.
+The names are required to be in the address book and should match contact names exactly.
+
+Examples:
+create group Bali : Jacob Tan : Max Chia : Julianne Tay
+create group London: Justin Lee : Raj Gopal : Keith Chia
+
+
+### Archiving data files `[coming in v2.0]`
+
+_Details coming soon ..._
+
 
 ## FAQ
 
@@ -236,5 +272,6 @@ Action | Format, Examples
 **List** | `list`
 **Help** | `help`
 **Delete Group** | `delete group GROUP_NAME` <br> e.g., `delete group Vienna`
+**Add Expense** | `add expense add expense /des DESCRIPTION /by PAYER_NAME1 AMOUNT PAID BY NAME 1 /for PAYEE_NAME1 PAYEE_NAME 2` <br> e.g., `add expense /des Koi /by Jake 20.00 /for Justin, Raj, Keith`
 **Delete Expense** | `delete expense EXPENSE_ID` <br> e.g., `delete expense 5`
 **View Expense** | `expense INDEX` <br> e.g., `expense 2`
