@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Around the World in $80 (AWE) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AWE can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -14,7 +14,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from here (Coming Soon!).
+1. Download the latest `awe.jar` from here (Coming Soon!).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your tp.
 
@@ -24,7 +24,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : The command `list` lists all expenses / contacts / groups.
+   * **`contacts`** : The command `contacts` lists all contacts.
+   
+   * **`groups`** : The command `groups` lists all groups.
 
    * **`add`** : The command `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` adds a contact named `John Doe` to the Address Book.
 
@@ -89,11 +91,11 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all persons : `list`
+### Listing all contacts : `contacts`
 
-Shows a list of all persons in the address book.
+Shows a list of all contacts in address book.
 
-Format: `list`
+Format: `contacts`
 
 ### Editing a person : `edit`
 
@@ -141,20 +143,27 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `persons` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Clearing all entries : `clear`
+### Creating a Travel Group: ```create group```
+Creates a group of people of your choice from your address book.
+Adds you as a member of the group by default.
 
-Clears all entries from the address book.
+Format: `create group GROUP_NAME : NAME1 : NAME2 : NAME3`
+GROUP_NAME is a mandatory field.
+At least one NAME is necessary.
+The names are required to be in the address book and should match contact names exactly.
 
-Format: `clear`
+Examples:
+create group Bali : Jacob Tan : Max Chia : Julianne Tay
+create group London: Justin Lee : Raj Gopal : Keith Chia
 
-### Exiting the program : `exit`
+### Listing all groups : `groups`
 
-Exits the program.
+Shows a list of all groups in GroupPage.
 
-Format: `exit`
+Format: `groups`
 
 ### Deleting a Travel Group: `delete group`
 Deletes a group from your groups.
@@ -187,6 +196,17 @@ Examples:
 * add expense /des Koi /by Jake 20.00 /for Justin, Raj, Keith
 * add expense /des Souvenirs for friends /by Tom 20.00 Joan 30.00 Nicholas 10.00 /for Tom, Joan, Nicholas, Keith, Raj
 
+### Viewing a shared expense: `expense`
+Returns a message containing all existing expenses within the active travel group. Expenses are sorted from most recent to least recent.
+
+Format: `expense INDEX`
+
+* GROUP_ID argument is mandatory
+* GROUP_ID must represent the id of an existing travel group
+
+Examples: 
+* `group` followed by `expense 1` shows all the expenses of the 1st travel group in the group list.
+
 ### Deleting a shared expense: `delete expense`
 
 Deletes a shared expense from the currently active travel group.
@@ -201,43 +221,29 @@ Examples:
 * `delete expense 10213`
 * `delete expense 33421`
 
-### Viewing a shared expense: `expense`
-Returns a message containing all existing expenses within the active travel group. Expenses are sorted from most recent to least recent.
-
-Format: `expense INDEX`
-
-* GROUP_ID argument is mandatory
-* GROUP_ID must represent the id of an existing travel group
-
-Examples: 
-* `group` followed by `expense 1` shows all the expenses of the 1st travel group in the group list.
-
-
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+AWE data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+AWE data are saved as a JSON file `[JAR file location]/data/awe.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, AWE will discard all data and start with an empty data file at the next run.
 </div>
 
+### Clearing all entries : `clear`
 
-### Creating a Travel Group: ```create group```
-Creates a group of people of your choice from your address book.
-Adds you as a member of the group by default.
+Clears all entries from the AWE.
 
-Format: ```create group GROUP_NAME : NAME1 : NAME2 : NAME3```
-GROUP_NAME is a mandatory field.
-At least one NAME is necessary.
-The names are required to be in the address book and should match contact names exactly.
+Format: `clear`
 
-Examples:
-create group Bali : Jacob Tan : Max Chia : Julianne Tay
-create group London: Justin Lee : Raj Gopal : Keith Chia
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
 
 
 ### Archiving data files `[coming in v2.0]`
@@ -264,14 +270,16 @@ If your questions are not answered in the FAQ, check out the issue page on our G
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add Contact** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add Expense** | `add expense add expense /des DESCRIPTION /by PAYER_NAME1 AMOUNT PAID BY NAME 1 /for PAYEE_NAME1 PAYEE_NAME 2` <br> e.g., `add expense /des Koi /by Jake 20.00 /for Justin, Raj, Keith`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Create Group** | `create group GROUP_NAME : NAME1 : NAME2 : NAME3` <br> e.g., `create group Bali : Jacob Tan : Max Chia : Julianne Tay`
+**Delete Contact** | `delete INDEX`<br> e.g., `delete 3`
+**Delete Group** | `delete group GROUP_NAME` <br> e.g., `delete group Vienna`
+**Delete Expense** | `delete expense EXPENSE_ID` <br> e.g., `delete expense 5`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
 **Help** | `help`
-**Delete Group** | `delete group GROUP_NAME` <br> e.g., `delete group Vienna`
-**Add Expense** | `add expense add expense /des DESCRIPTION /by PAYER_NAME1 AMOUNT PAID BY NAME 1 /for PAYEE_NAME1 PAYEE_NAME 2` <br> e.g., `add expense /des Koi /by Jake 20.00 /for Justin, Raj, Keith`
-**Delete Expense** | `delete expense EXPENSE_ID` <br> e.g., `delete expense 5`
+**View Contacts** | `contacts`
+**View Groups** | `groups`
 **View Expense** | `expense INDEX` <br> e.g., `expense 2`
