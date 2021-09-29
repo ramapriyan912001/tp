@@ -7,6 +7,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.address.logic.Logic;
 import seedu.address.model.group.Group;
+import seedu.address.ui.group.GroupListPanel;
+import seedu.address.ui.person.PersonListPanel;
 
 /**
  * The View Window. Handles the displaying of individual viewPanel.
