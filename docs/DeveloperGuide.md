@@ -336,6 +336,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AWE` and the **Actor** is the `user`, unless specified otherwise)
 
+
+**Use case: Help User Understand Product**
+
+**MSS**
+
+1. User request to find commands and their explanations.
+2. AWE shows a list of command keyword(s) and explanations.
+
+**Extensions**
+
+* 2a. AWE detects errant command.
+    * 2a1. AWE displays the list of command keyword(s) and explanations.
+
+      Use case ends.
+    
+
 **Use case: Adding a Person**
 
 **MSS**
@@ -464,6 +480,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 2a1. AWE displays message to remind User to type in full name of members as in the AddressBook.
   
     Use case ends.
+    
+    
+**Use case: Delete Travel Group**
+
+**MSS**
+
+1. User chooses to delete a group.
+2. User enters delete group command into CLI along with group name.
+3. AWE displays confirmation message.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. AWE detects group name that is not in address book.
+    * 2a1. AWE displays message to remind User to type in name of a group inside the addressbook.
+
+      Use case ends.    
 
 **Use case: Listing all travel groups**
 
