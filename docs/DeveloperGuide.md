@@ -308,7 +308,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | busy user who does not want to remember phone numbers | easily save all my friends' numbers            | conveniently proceed to pay my friend                                    |
 | `* * *`  | user with flexible travel plans                   | edit the details of expenditure for events         | modify the records quickly and easily                                    |
 | `* * *`  | beginner user                                     | run the app easily with a click of a button        | avoid wasting time trying to figure out how to get the app to work       |
-| `* * *   | inexperienced user in the app who types fast      | type in the commands for the app                   | do more things in the app with the same amount of time compared to using a mouse to click |
+| `* * *`  | inexperienced user in the app who types fast      | type in the commands for the app                   | do more things in the app with the same amount of time compared to using a mouse to click |
 | `* * *`  | user who wants an easy workflow                   | easily toggle between contacts and groups page with a command or a click of a button | make my workflow on the app smoother   |
 | `* *`    | user who has to recoup the money                  | divide up the expenses suitably amongst my friends | know how much to recoup from each person                                 |
 | `* *`    | user paying for the shared expense                | see how much I have paid according to the date     | monitor the amount spent each day                                        |
@@ -319,7 +319,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | potential user exploring the app                  | undo my actions                                    | test the app's features with the same data                               |
 | `* *`    | potential user testing the app                    | run the app on different platforms (windows, linux and os-x) | not have to specifically run a certain platform                |
 | `* *`    | user with flexible travel plans                   | delete a group                                     | modify the records easily if plans change                                |
-| `* *`     | beginner user who first opened the app           | view the help page                                 | so that I can learn how to use the app                                   |
+| `* *`    | beginner user who first opened the app           | view the help page                                 | so that I can learn how to use the app                                   |
 | `*`      | user who values organisation                      | view the group’s expenditure by categories         | plan the budgeting for future expenses more effectively                  |
 | `*`      | user who needs to repay debt                      | easily set up installment payments                 | can avoid paying too much money at one go                                |
 | `*`      | user who has lots of contacts to keep track of    | tag each contact                                   | easily find groups of people using the tags                              |
