@@ -2,8 +2,6 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
 ## Table of Contents
 1. [Acknowledgements](#acknowledgements)
 2. [Setting up, getting started](#setting-up-getting-started)
@@ -232,7 +230,7 @@ The `redo` command does the opposite — it calls `Model#redoAddressBook()`,
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `contacts`. Commands that do not modify the address book, such as `contacts`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
@@ -301,32 +299,45 @@ Our app effectively splits bills between different contacts to serve this purpos
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | -------------------------------------------------- | ------------------------------------------------------------------------ |
-| `* * *`  | user that has paid for a shared experience | easily check how much I have paid up front         | ensure I have liquidity for emergencies and or other unforeseen expenses |
-| `* * *`  | user who has paid for others               | easily check how much I am owed by friends         | recoup the money I have paid on their behalf                             |
-| `* * *`  | user paying for a shared expense           | enter the amount I have paid                       | update the total amount they have to pay                                 |
-| `* * *`  | user that owes my friend money             | easily check how much I owe each person            | conveniently proceed to pay my friend                                    |
-| `* *`    | user who has to recoup the money           | divide up the expenses suitably amongst my friends | know how much to recoup from each person                                 |
-| `* *`    | user paying for the shared expense         | see how much I have paid according to the date     | monitor the amount spent each day                                        |
-| `* *`    | user who worries about individual expenses | check the breakdown of my personal expenditure     | keep track of how much money I have spent                                |
-| `*`      | user who values organisation               | view the group’s expenditure by categories         | plan the budgeting for future expenses more effectively                  |
-| `*`      | user who needs to repay debt               | easily set up installment payments                 | can avoid paying too much money at one go                                |
-| `* * *`  | busy user who cannot be bothered to put extra effort into remembering everyone's phone numbers on top of my daily tasks | easily save all my friends' numbers | conveniently proceed to pay my friend |
-| `* *`    | user who likes to differentiate work from leisure | use this app to separate the different types of contacts I have | I won’t mix them up                                  |
-| `*`      | user who has lots of contacts to keep track of | tag each contact | easily find groups of people using the tags |
-| `* `     | user whose friends frequently change numbers | use this app to easily edit their numbers or save multiple numbers with notes | easily remember which number to use         |
-| `**`     | user who wants to stay in contact with friends | use this app to easily save their phone numbers | I can remain in contact                                                 |
-| `**`     | potential user exploring the app              | see the app containing sample data                | see what the app generally looks like when it is used                  |
-| `**`     | potential user exploring the app              | undo my actions                                 | test the app's features with the same data                               |
-| `**`     | potential user testing the app              | run the app on different platforms (windows, linux and os-x) | not have to specifically run a certain platform               |
+| Priority | As a …​                                            | I want to …​                                        | So that I can…​                                                           |
+| -------- | ------------------------------------------------- | -------------------------------------------------- | ------------------------------------------------------------------------ |
+| `* * *`  | user that has paid for a shared experience        | easily check how much I have paid up front         | ensure I have liquidity for emergencies and or other unforeseen expenses |
+| `* * *`  | user who has paid for others                      | easily check how much I am owed by friends         | recoup the money I have paid on their behalf                             |
+| `* * *`  | user paying for a shared expense                  | enter the amount I have paid                       | update the total amount they have to pay                                 |
+| `* * *`  | user that owes my friend money                    | easily check how much I owe each person            | conveniently proceed to pay my friend                                    |
+| `* * *`  | busy user who does not want to remember phone numbers | easily save all my friends' numbers            | conveniently proceed to pay my friend                                    |
+| `* * *`  | user with flexible travel plans                   | edit the details of expenditure for events         | modify the records quickly and easily                                    |
+| `* * *`  | beginner user                                     | run the app easily with a click of a button        | avoid wasting time trying to figure out how to get the app to work       |
+| `* * *   | inexperienced user in the app who types fast      | type in the commands for the app                   | do more things in the app with the same amount of time compared to using a mouse to click |
+| `* * *`  | user who wants an easy workflow                   | easily toggle between contacts and groups page with a command or a click of a button | make my workflow on the app smoother   |
+| `* *`    | user who has to recoup the money                  | divide up the expenses suitably amongst my friends | know how much to recoup from each person                                 |
+| `* *`    | user paying for the shared expense                | see how much I have paid according to the date     | monitor the amount spent each day                                        |
+| `* *`    | user who worries about individual expenses        | check the breakdown of my personal expenditure     | keep track of how much money I have spent                                |
+| `* *`    | user who likes to differentiate work from leisure | use this app to separate the different types of contacts I have | I won’t mix them up                                         |
+| `* *`    | user who wants to stay in contact with friends    | use this app to easily save their phone numbers    | I can remain in contact                                                  |
+| `* *`    | potential user exploring the app                  | see the app containing sample data                 | see what the app generally looks like when it is used                    |
+| `* *`    | potential user exploring the app                  | undo my actions                                    | test the app's features with the same data                               |
+| `* *`    | potential user testing the app                    | run the app on different platforms (windows, linux and os-x) | not have to specifically run a certain platform                |
+| `* *`    | user with flexible travel plans                   | delete a group                                     | modify the records easily if plans change                                |
+| `* *`     | beginner user who first opened the app           | view the help page                                 | so that I can learn how to use the app                                   |
+| `*`      | user who values organisation                      | view the group’s expenditure by categories         | plan the budgeting for future expenses more effectively                  |
+| `*`      | user who needs to repay debt                      | easily set up installment payments                 | can avoid paying too much money at one go                                |
+| `*`      | user who has lots of contacts to keep track of    | tag each contact                                   | easily find groups of people using the tags                              |
+| `* `     | user whose friends frequently change numbers      | use this app to easily edit their numbers or save multiple numbers with notes | easily remember which number to use           |
+| `*`      | beginner user that is tech-savvy                  | view the documentation                             | figure out how to use the app                                            |
+| `*`      | beginner user                                     | mass add my contacts                               | avoid manually keying in one by one                                      |
+| `*`      | beginner user                                     | easily distinguish functions in the app            | use it without the app being too daunting                                |
+| `*`      | expert user                                       | create my own shortcuts for commands               | control what I can do with the app more effectively                      |
+| `*`      | expert user                                       | mass delete contacts from the app                  | save time by not deleting it manually                                    |
+| `*`      | expert user                                       | refer to previous trips and the expenditure        | plan future trips efficiently                                            |
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `AWE` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Help user understand product**
+
+**Use case: Help User Understand Product**
 
 **MSS**
 
@@ -340,14 +351,106 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
     
+
+**Use case: Adding a Person**
+
+**MSS**
+
+1. User chooses to add a person to the AddressBook.
+2. User enters add command into CLI along with person name, phone number, email, and address, and tags if applicable.
+3. AWE displays confirmation message.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. AWE detects invalid command format that does not contain all 4 parameter identifiers ("n/", "p/", "e/", "a/").
+    * 2a1. AWE returns invalid command format error and displays ```add``` command format and example.
+
+      Use case ends.
+
+* 2b. Command contains 4 parameter identifiers but name is blank.
+    * 2b1. AWE reminds user that names should only contain alphanumeric characters and should not be blank.
+
+      Use case ends.
+
+* 2c. Command contains 4 parameter identifiers but phone number is less than 3 digits or not a number.
+    * 2c1. AWE reminds user that phone numbers should only contain numbers and be at least 3 digits long.
+
+      Use case ends.
+
+* 2d. Command contains 4 parameter identifiers but email is blank or does not contain domain.
+    * 2d1. AWE reminds user of format of email input.
+
+      Use case ends.
+
+* 2e. Command contains 4 parameter identifiers but address is blank.
+    * 2e1. AWE reminds user that address can take any values and should not be blank.
+
+      Use case ends.
+
+**Use case: Edit a person**
+
+**MSS**
+
+1. User requests to list persons
+2. AWE shows a list of persons
+3. User requests to edit a specific person in the list
+4. User enters edited information
+5. AWE edits the person
+    
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. AWE shows an error message.
+
+      Use case resumes at step 2.
+
+* 4a. The given information has an invalid format.
+
+    * 4a1. AWE shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Find a person**
+
+**Preconditions: User is in ContactsPage**
+
+**MSS**
+
+1. User request to find person based on keyword(s).
+2. AWE shows a list of persons that matches the keyword(s).
+
+**Extensions**
+
+* 2a. There isn't any contacts saved.
+    * 2a1. AWE displays nothing in the contacts page.
+    * 2a2. AWE shows a message saying no person found.
+    
+      Use case ends.
+      
+* 2b. There is not contacts matching the search parameters.
+    * 2b1. AWE displays nothing in the contacts page.
+    * 2b2. AWE shows a message saying no person found.
+    
+      Use case ends.
+
+
 **Use case: Delete a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to list persons
+2. AWE shows a list of persons
+3. User requests to delete a specific person in the list
+4. AWE deletes the person
 
     Use case ends.
 
@@ -359,11 +462,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
-
-
+    * 3a1. AWE shows an error message.
+    
 **Use case: Create Travel Group**
 
 **MSS**
@@ -376,11 +476,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. AWE detects group member whose name is not in the addressbook.
-  * 2a1. AWE displays message to remind User to type in full name of members as in the addressbook.
-
+* 2a. AWE detects group member whose name is not in the AddressBook.
+  * 2a1. AWE displays message to remind User to type in full name of members as in the AddressBook.
+  
     Use case ends.
-
+    
+    
 **Use case: Delete Travel Group**
 
 **MSS**
@@ -396,9 +497,105 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. AWE detects group name that is not in address book.
     * 2a1. AWE displays message to remind User to type in name of a group inside the addressbook.
 
+      Use case ends.    
+
+**Use case: Listing all travel groups**
+
+**MSS**
+
+1. User choose to list all groups
+2. GroupsPage shows a list of groups
+
+**Extension**
+* 2a. AWE detects that there is no group created.
+    * 2a1 AWE displays a blank screen.
+    
       Use case ends.
 
+**Use case: Viewing expenses of a travel group**
 
+**MSS**
+
+1. User request to list groups.
+2. GroupsPage shows a list of groups.
+3. User request to see expenses of a specific group.
+4. AW3 displays all the expenses of the group.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. AWE detects no groups created yet.
+  * 2a1. AWE displays message to remind User to create a group before empty GroupsPage displayed.
+  
+    Use case ends.
+    
+* 3a. The given index is invalid.
+    * 3a1. AWE displays an error.
+    
+      Use case ends.
+      
+* 4a. AWE detect no expenses logged under the group.
+    * 4a1. AWE displays message about no transaction.
+    
+      Use case ends.
+
+**Use case: Add Expense**
+
+**Preconditions: User has selected a travel group**
+
+**MSS**
+
+1. User requests to add an expense to the active travel group
+2. AWE displays confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. AWE detects that there are no travel groups active.
+
+    * 1a1. AWE informs user that no travel groups are active.
+  
+      Use case ends.
+
+* 1b. AWE detects that inputted command is an incorrect format.
+
+    * 1b1. AWE informs user that expense was not added and reminds the user of the correct format/
+
+      Use case ends.
+
+**Use case: Delete a shared expense**
+
+**MSS**
+
+1. User requests to list expenses for a travel group.
+2. AWE lists all expenses. 
+3. User requests to delete an expense at a specific index in the list.
+4. AWE deletes the specified expense. 
+
+   Use case ends. 
+
+**Extensions**
+
+* 2a. The expense list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. AWE shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Clear AddressBook of all entries**
+
+**MSS**
+
+1. User enters clear command.
+2. All entries are deleted from AddressBook.
+
+   Use case ends.
 
 ### Non-Functional Requirements
 
@@ -412,6 +609,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **AddressBook**: The page displaying all the contacts
+* **ContactPage**: The page displaying all the contacts
+* **GroupsPage**: The page displaying all the travel groups
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -445,13 +645,30 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `contacts` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+1. _{ more test cases …​ }_
+
+### Viewing expenses
+
+1. Viewing all expenses of a travel group
+
+   1. Prerequisites: List all travel groups using the `groups` command. Multiple travel groups in the list.
+
+   1. Test case: `expenses 1`<br>
+      Expected: Expenses under the first travel group displayed. Details of the operation shown in the status message.
+
+   1. Test case: `delete 0`<br>
+      Expected: No expenses displayed. Error details shown in the status message.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
