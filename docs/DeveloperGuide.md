@@ -386,7 +386,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User chooses to delete a group.
-2. User enters create group command into CLI along with group name.
+2. User enters delete group command into CLI along with group name.
 3. AWE displays confirmation message.
 
    Use case ends.
