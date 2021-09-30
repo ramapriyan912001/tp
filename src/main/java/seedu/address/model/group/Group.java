@@ -8,18 +8,20 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 public class Group {
-    private String name;
+    public static final String MESSAGE_CONSTRAINTS = "MESSAGE_CONSTRAINT TO BE COMPLETED";
+    //TODO: WRITE MESSAGE CONSTRAINTS MESSAGE
+    private GroupName groupName;
     private final ArrayList<Person> members = new ArrayList<>();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Creates new Group object.
      *
-     * @param name String object representing name of the group.
+     * @param groupName String object representing name of the group.
      * @param members ArrayList of Person objects representing list of members.
      */
-    public Group(String name, ArrayList<Person> members) {
-        this.name = name;
+    public Group(GroupName groupName, ArrayList<Person> members) {
+        this.groupName = groupName;
         for (Person member : members) {
             this.addMember(member);
         }
@@ -28,12 +30,12 @@ public class Group {
     /**
      * Creates new Group object with tags.
      *
-     * @param name String object representing name of the group.
+     * @param groupName String object representing name of the group.
      * @param members ArrayList of Person objects representing list of members.
      * @param tags Set of Tag objects to describe group.
      */
-    public Group(String name, ArrayList<Person> members, Set<Tag> tags) {
-        this.name = name;
+    public Group(GroupName groupName, ArrayList<Person> members, Set<Tag> tags) {
+        this.groupName = groupName;
         for (Person member : members) {
             this.addMember(member);
         }
@@ -58,8 +60,8 @@ public class Group {
         this.members.remove(member);
     }
 
-    public String getName() {
-        return name;
+    public GroupName getGroupName() {
+        return groupName;
     }
 
     public ArrayList<Person> getMembers() {
@@ -70,7 +72,13 @@ public class Group {
         return tags;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public boolean isSameGroup(Group group) {
+        return this.groupName.equals(group.getGroupName());
+    }
+
+    @Override
+    public String toString() {
+        //TODO: TO BE IMPROVED TO POSSIBLY LIST ALL MEMBERS NAMES
+        return String.format("Group %s with %d members", this.groupName, this.members.size());
     }
 }

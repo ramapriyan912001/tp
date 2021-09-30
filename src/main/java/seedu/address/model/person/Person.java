@@ -88,7 +88,7 @@ public class Person {
     public String getGroupsName() {
         String result = "";
         for (Group group : groups) {
-            result = result + group.getName() + ", ";
+            result = result + group.getGroupName() + ", ";
         }
         return result;
     }
