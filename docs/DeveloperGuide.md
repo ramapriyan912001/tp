@@ -326,6 +326,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
+**Use case: Help user understand product**
+
+**MSS**
+
+1. User request to find commands and their explanations.
+2. AWE shows a list of command keyword(s) and explanations.
+
+**Extensions**
+
+* 2a. AWE detects errant command.
+    * 2a1. AWE displays the list of command keyword(s) and explanations.
+
+      Use case ends.
+    
 **Use case: Delete a person**
 
 **MSS**
