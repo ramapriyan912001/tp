@@ -17,13 +17,22 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** The application should show groups */
+    private final boolean showGroups;
+
+    /** The application should show contacts */
+    private final boolean showContacts;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
+                         boolean showGroups, boolean showContacts) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.showGroups = showGroups;
+        this.showContacts = showContacts;
     }
 
     /**
@@ -31,7 +40,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -44,6 +53,14 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isShowGroups() {
+        return showGroups;
+    }
+
+    public boolean isShowContacts() {
+        return showContacts;
     }
 
     @Override
@@ -60,12 +77,14 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && showGroups == otherCommandResult.showGroups
+                && showContacts == otherCommandResult.showContacts;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, showGroups, showContacts);
     }
 
 }

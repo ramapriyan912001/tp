@@ -199,6 +199,14 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.isShowContacts()) {
+                viewPanel.toggleView(UiView.ADDRESS_BOOK);
+            }
+
+            if (commandResult.isShowGroups()) {
+                viewPanel.toggleView(UiView.GROUP_PAGE);
+            }
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
