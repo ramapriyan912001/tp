@@ -402,6 +402,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 4a1. AWE shows an error message.
 
       Use case resumes at step 2.
+    
+**Use case: List all persons**
+
+**MSS**
+
+1. User requests to list persons.
+2. AWE shows list of persons. 
+
+   Use case ends. 
+
+**Extensions**
+
+* 2a. There are no persons to be listed.
+    * 2a1. AWE does not display any contacts.
+      
+      Use case ends.
+
 
 **Use case: Find a person**
 
@@ -578,6 +595,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **AddressBook**: The page displaying all the contacts
 * **ContactPage**: The page displaying all the contacts
 * **GroupsPage**: The page displaying all the travel groups
+* **ExpensesPage**: The page displaying all the expenses of a travel group
 
 --------------------------------------------------------------------------------------------------------------------
 
