@@ -46,6 +46,7 @@ public class CreateGroupCommand extends Command {
             return new CommandResult(MESSAGE_ERROR);
         }
         Group group = new Group(groupName, members);
+        model.addGroup(group);
         addGroupForAllMembers(group);
         return new CommandResult(MESSAGE_SUCCESS);
     }

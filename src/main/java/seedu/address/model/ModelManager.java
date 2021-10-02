@@ -131,6 +131,16 @@ public class ModelManager implements Model {
     }
 
     /**
+     * Adds group into addresbook.
+     * Assumption is that group name is unique.
+     * @param group Group object representing members going on a trip.
+     */
+    @Override
+    public void addGroup(Group group) {
+        addressBook.addGroup(group);
+    }
+
+    /**
      * Deletes group based on groupName.
      * Assumption is that group name is unique.
      * @param group
