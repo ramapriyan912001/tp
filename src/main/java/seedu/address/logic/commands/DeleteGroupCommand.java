@@ -19,6 +19,7 @@ public class DeleteGroupCommand extends Command {
 
     /**
      * Delete group command, delete based on name
+     *
      * @param group group object to be deleted
      */
     public DeleteGroupCommand(Group group) {
@@ -27,6 +28,7 @@ public class DeleteGroupCommand extends Command {
 
     /**
      * Get group field
+     *
      * @return Group object
      */
     public Group getGroup() {
