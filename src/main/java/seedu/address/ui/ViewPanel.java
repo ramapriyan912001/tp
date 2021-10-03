@@ -43,7 +43,7 @@ public class ViewPanel extends UiPart<Region> {
         groupListPanel = new GroupListPanel(new FilteredList<Group>(FXCollections.observableArrayList()));
         // Need update with logic and get groups
 
-        viewListPlaceholder.getChildren().add(personListPanel.getRoot());
+        toggleView(UiView.ADDRESS_BOOK);
     }
 
     /**
