@@ -117,14 +117,6 @@ public class Person {
         this.groups.add(group);
     }
 
-    public String getGroupsName() {
-        String result = "";
-        for (Group group : groups) {
-            result = result + group.getGroupName() + ", ";
-        }
-        return result;
-    }
-
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
@@ -162,9 +154,7 @@ public class Person {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress())
-                .append("; Groups: ")
-                .append(getGroupsName());
+                .append(getAddress());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
