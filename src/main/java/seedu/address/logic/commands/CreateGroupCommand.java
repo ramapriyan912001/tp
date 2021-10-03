@@ -29,16 +29,13 @@ public class CreateGroupCommand extends Command {
     }
 
     /**
-     * Adds a given group object into the groups attribute for each member.
+     * Returns CommandResult object with message representing successful creation of group.
+     * If not a valid command, returns CommandResult object with error message.
      *
-     * @param group Group object that is added to every member.
+     * @param model {@code Model} which the command should operate on.
+     * @return CommandResult object to depict status of group creation.
+     * @throws CommandException If model is null.
      */
-    public void addGroupForAllMembers(Group group) {
-        for (Person member : members) {
-            member.addGroup(group);
-        }
-    }
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -47,7 +44,6 @@ public class CreateGroupCommand extends Command {
         }
         Group group = new Group(groupName, members);
         model.addGroup(group);
-        addGroupForAllMembers(group);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

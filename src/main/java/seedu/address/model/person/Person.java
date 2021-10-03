@@ -5,10 +5,10 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.group.Group;
 import seedu.address.model.tag.Tag;
 
@@ -26,19 +26,17 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final List<Group> groups = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, List<Group> groups) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.groups.addAll(groups);
     }
 
     public Name getName() {
@@ -57,16 +55,43 @@ public class Person {
         return address;
     }
 
-    public List<Group> getGroups() {
-        return groups;
-    }
-
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an ArrayList of groups that the instance of Person belongs to.
+     *
+     * @param groups ObservableList of Group objects that exist in the addressbook.
+     * @return ArrayList of Group objects that the instance of Person belongs to.
+     */
+    public ArrayList<Group> getPersonGroups(ObservableList<Group> groups) {
+        ArrayList personGroups = new ArrayList();
+        for (Group group : groups) {
+            if (group.getMembers().stream().anyMatch(p -> p.getName().equals(this.getName()))) {
+                personGroups.add(group);
+            }
+        }
+        return personGroups;
+    }
+
+    /**
+     * Returns a String representation of group names that the instance of Person belongs to.
+     *
+     * @param groups ObservableList of Group objects that exist in the addressbook.
+     * @return String object representing all groups that the instance of Person belongs to.
+     */
+    public String getGroupsName(ObservableList<Group> groups) {
+        String result = "";
+        ArrayList<Group> personGroups = getPersonGroups(groups);
+        for (Group group : personGroups) {
+            result = result + group.getGroupName() + ", ";
+        }
+        return result;
     }
 
     /**
@@ -80,18 +105,6 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
-    }
-
-    public void addGroup(Group group) {
-        this.groups.add(group);
-    }
-
-    public String getGroupsName() {
-        String result = "";
-        for (Group group : groups) {
-            result = result + group.getGroupName() + ", ";
-        }
-        return result;
     }
 
     /**
@@ -131,9 +144,7 @@ public class Person {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress())
-                .append("; Groups: ")
-                .append(getGroupsName());
+                .append(getAddress());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

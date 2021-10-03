@@ -131,8 +131,9 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Adds group into addresbook.
+     * Adds group into addressbook.
      * Assumption is that group name is unique.
+     *
      * @param group Group object representing members going on a trip.
      */
     @Override
@@ -143,7 +144,8 @@ public class ModelManager implements Model {
     /**
      * Deletes group based on groupName.
      * Assumption is that group name is unique.
-     * @param group
+     *
+     * @param group Group object representing members going on a trip.
      */
     @Override
     public void deleteGroup(Group group) {
@@ -151,9 +153,10 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Deletes group based on groupName.
-     * Assumption is that group name is unique.
-     * @param group
+     * Returns boolean representing if a given group is in the model.
+     *
+     * @param group Group object representing members going on a trip.
+     * @return boolean object representing if a given group is in the model.
      */
     @Override
     public boolean hasGroup(Group group) {
