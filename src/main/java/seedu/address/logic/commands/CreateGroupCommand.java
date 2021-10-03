@@ -14,6 +14,8 @@ public class CreateGroupCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New group created";
     public static final String MESSAGE_ERROR = "Group not created. Be sure to use the exact names of group members";
     public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists";
+    public static final String MESSAGE_USAGE = "creategroup gn/[GROUPNAME] n/[NAME1] n/[OPTIONAL NAME2]...";
+    public static final String MESSAGE_EMPTY_GROUP = "Group requires at least 1 member. \n%1$s";
 
     private final ArrayList<Person> members;
     private GroupName groupName;

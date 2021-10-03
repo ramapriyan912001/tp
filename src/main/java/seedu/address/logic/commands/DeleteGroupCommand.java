@@ -8,11 +8,11 @@ import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 
 public class DeleteGroupCommand extends Command {
-    public static final String COMMAND_WORD = "delete group";
+    public static final String COMMAND_WORD = "deletegroup";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": deletes a group from the address book. "
             + "Parameters: "
             + PREFIX_GROUP_NAME + "GROUP_NAME ";
-    public static final String MESSAGE_SUCCESS = "Gerson deleted: %1$s";
+    public static final String MESSAGE_SUCCESS = "Group deleted: %1$s";
     public static final String MESSAGE_GROUP_DOES_NOT_EXIST = "This group does not exist in the address book";
 
     private Group group;

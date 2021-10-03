@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +27,24 @@ public class ArgumentTokenizer {
     public static ArgumentMultimap tokenize(String argsString, Prefix... prefixes) {
         List<PrefixPosition> positions = findAllPrefixPositions(argsString, prefixes);
         return extractArguments(argsString, positions);
+    }
+
+    /**
+     * Tokenizes an arguments string and returns an {@code ArgumentMultimap} object that maps prefixes to their
+     * respective argument values. Only the given prefixes will be recognized in the arguments string.
+     *
+     * @param argsString Arguments string of the form: {@code preamble <prefix>value <prefix>value ...}
+     * @param prefixes   Prefixes to tokenize the arguments string with
+     * @return           ArgumentMultimap object that maps prefixes to their arguments
+     */
+    public static ArgumentMultimap tokenizeStringWithRepeatedPrefixes(String argsString, Prefix repeatedPrefix,
+                                                             Prefix... prefixes) {
+
+        int startOfRepeatedPrefix = argsString.indexOf(" " + repeatedPrefix.getPrefix());
+        String stringWihoutRepeatedPrefixes = argsString.substring(0, startOfRepeatedPrefix);
+
+        List<PrefixPosition> positions = findAllPrefixPositions(stringWihoutRepeatedPrefixes, prefixes);
+        return extractArguments(stringWihoutRepeatedPrefixes, positions);
     }
 
     /**
