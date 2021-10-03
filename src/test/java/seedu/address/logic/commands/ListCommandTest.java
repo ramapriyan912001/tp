@@ -36,4 +36,10 @@ public class ListCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel, false, true);
     }
+
+    @Test
+    public void execute_showContacts_success() {
+        CommandResult expectedCommandResult = new CommandResult(ListCommand.MESSAGE_SUCCESS, false, false, false, true);
+        assertCommandSuccess(new ListCommand(), new ModelManager(), expectedCommandResult, new ModelManager());
+    }
 }
