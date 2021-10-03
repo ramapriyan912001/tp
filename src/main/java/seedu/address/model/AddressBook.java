@@ -119,10 +119,18 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
+    /**
+     * Adds group to unique group list.
+     * @param group new Group object to be added.
+     */
     public void addGroup(Group group) {
         groups.add(group);
     }
 
+    /**
+     * Removes group from unique group list.
+     * @param group new Group object to be removed.
+     */
     public void removeGroup(Group group) {
         groups.remove(group);
     }

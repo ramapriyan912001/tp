@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -26,6 +27,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final List<Group> groups = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
@@ -53,6 +55,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public List<Group> getGroups() {
+        return groups;
     }
 
     /**
@@ -107,6 +113,18 @@ public class Person {
                 && otherPerson.getName().equals(getName());
     }
 
+    public void addGroup(Group group) {
+        this.groups.add(group);
+    }
+
+    public String getGroupsName() {
+        String result = "";
+        for (Group group : groups) {
+            result = result + group.getGroupName() + ", ";
+        }
+        return result;
+    }
+
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
@@ -144,7 +162,9 @@ public class Person {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("; Groups: ")
+                .append(getGroupsName());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
