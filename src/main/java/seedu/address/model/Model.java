@@ -86,6 +86,12 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    /**
+     * Adds the given group.
+     * {@code Group} must not already exist in the address book.
+     */
+    void addGroup(Group person);
+
     void deleteGroup(Group group);
 
     boolean hasGroup(Group group);

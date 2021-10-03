@@ -21,7 +21,7 @@ public class JsonAdaptedGroup {
     private final List<JsonAdaptedPerson> members = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedGroup} with the given person details.
+     * Constructs a {@code JsonAdaptedGroup} with the given group details.
      */
     @JsonCreator
     public JsonAdaptedGroup(@JsonProperty("name") String groupName,

@@ -28,17 +28,6 @@ public class CreateGroupCommand extends Command {
         this.validCommand = validCommand;
     }
 
-    /**
-     * Adds a given group object into the groups attribute for each member.
-     *
-     * @param group Group object that is added to every member.
-     */
-    public void addGroupForAllMembers(Group group) {
-        for (Person member : members) {
-            member.addGroup(group);
-        }
-    }
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -46,7 +35,7 @@ public class CreateGroupCommand extends Command {
             return new CommandResult(MESSAGE_ERROR);
         }
         Group group = new Group(groupName, members);
-        addGroupForAllMembers(group);
+        model.addGroup(group);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
