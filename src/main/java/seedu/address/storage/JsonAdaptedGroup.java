@@ -21,7 +21,7 @@ public class JsonAdaptedGroup {
     private final List<JsonAdaptedPerson> members = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedGroup} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedGroup(@JsonProperty("name") String groupName,
@@ -31,7 +31,7 @@ public class JsonAdaptedGroup {
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Group} into this class for Jackson use.
      */
     public JsonAdaptedGroup(Group source) {
         groupName = source.getGroupName().name;
@@ -41,7 +41,7 @@ public class JsonAdaptedGroup {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted person object into the model's {@code Group} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
