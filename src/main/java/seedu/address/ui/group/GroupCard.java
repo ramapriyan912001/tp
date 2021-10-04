@@ -50,7 +50,7 @@ public class GroupCard extends UiPart<Region> {
         super(FXML);
         this.group = group;
         id.setText(displayedIndex + ". ");
-        groupName.setText(group.getName());
+        groupName.setText(group.getGroupName().toString());
         members.setText(group.getMembers().stream()
                 .map(Person::getName)
                 .map(Name::toString)

@@ -1,13 +1,21 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CreateGroupCommand.MESSAGE_EMPTY_GROUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.CreateGroupCommand;
+import seedu.address.logic.parser.exceptions.EmptyGroupException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -26,8 +34,6 @@ public class CreateGroupParser implements Parser<CreateGroupCommand> {
         this.allMembers = addressBook.getPersonList();
         this.toBeAddedToGroup = new ArrayList<>();
     }
-    //assume command is of the following form
-    //creategroup Berlin : Chrus Chong : Nancy Chua : Tom Hiddleston
 
     /**
      * Returns CreateGroupCommand based on user input.
@@ -37,12 +43,23 @@ public class CreateGroupParser implements Parser<CreateGroupCommand> {
      * @throws ParseException If user input is incorrectly formatted.
      */
     public CreateGroupCommand parse(String args) throws ParseException {
-        String groupName = findGroupName(args);
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenizeStringWithRepeatedPrefixes(args, PREFIX_NAME, PREFIX_GROUP_NAME);
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_GROUP_NAME)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateGroupCommand.MESSAGE_USAGE));
+        }
+
         ArrayList<Person> members = findGroupMembers(args);
+
+        GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).get());
+
         boolean validCommand = true;
         if (groupName.equals(BAD_FORMATTING) || Objects.isNull(members)) {
             validCommand = false;
         }
+
         return new CreateGroupCommand(groupName, members, validCommand);
     }
 
@@ -71,32 +88,39 @@ public class CreateGroupParser implements Parser<CreateGroupCommand> {
      * @param args String object representing user input into the addressbook.
      * @return ArrayList of Person objects representing members to be added to the group
      */
-    private ArrayList<Person> findGroupMembers(String args) {
+    private ArrayList<Person> findGroupMembers(String args) throws ParseException {
         try {
-            int startIndex = args.indexOf(':') + 2;
+            int startIndex = args.indexOf(" n/") + 3;
+
+            if (startIndex == 1) {
+                throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
+            }
             String teamMembers = args.substring(startIndex);
 
-            int nextColon = teamMembers.indexOf(':');
-            while (nextColon != -1) {
-                Name memberName = new Name(teamMembers.substring(0, nextColon - 1));
+            int nextPrefix = teamMembers.indexOf(" n/");
+            while (nextPrefix != -1) {
+                Name memberName = new Name(teamMembers.substring(0, nextPrefix - 1));
                 if (Objects.isNull(addMemberIfExist(memberName))) {
                     return null;
                 }
-                teamMembers = teamMembers.substring(nextColon + 2);
-                nextColon = teamMembers.indexOf(':');
+                teamMembers = teamMembers.substring(nextPrefix + 3);
+                nextPrefix = teamMembers.indexOf(" n/");
             }
             if (Objects.isNull(addMemberIfExist(new Name(teamMembers)))) {
                 return null;
             }
             if (toBeAddedToGroup.size() == 0) {
-                return null;
+                throw new EmptyGroupException(MESSAGE_EMPTY_GROUP);
             } else {
                 return toBeAddedToGroup;
             }
         } catch (IndexOutOfBoundsException e) {
             return null;
+        } catch (EmptyGroupException err) {
+            throw new EmptyGroupException(String.format(MESSAGE_EMPTY_GROUP, CreateGroupCommand.MESSAGE_USAGE));
+        } catch (ParseException err) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateGroupCommand.MESSAGE_USAGE));
         }
-
     }
 
     /**
@@ -131,5 +155,13 @@ public class CreateGroupParser implements Parser<CreateGroupCommand> {
             }
         }
         return null;
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

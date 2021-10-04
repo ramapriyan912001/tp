@@ -65,6 +65,14 @@ public class EditCommand extends Command {
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
+    /**
+     * Returns CommandResult object with message representing successful edit of person.
+     * If not a valid command, returns CommandResult object with error message.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return CommandResult object to depict status of edit operation.
+     * @throws CommandException If model is null.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
