@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.UniqueGroupList;
+import seedu.address.model.group.exceptions.DuplicateGroupException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -123,7 +124,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds group to unique group list.
      * @param group new Group object to be added.
      */
-    public void addGroup(Group group) {
+    public void addGroup(Group group) throws DuplicateGroupException {
         groups.add(group);
     }
 

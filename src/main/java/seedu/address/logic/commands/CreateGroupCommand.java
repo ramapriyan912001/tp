@@ -7,6 +7,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
+import seedu.address.model.group.exceptions.DuplicateGroupException;
 import seedu.address.model.person.Person;
 
 public class CreateGroupCommand extends Command {
@@ -31,7 +32,7 @@ public class CreateGroupCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException, DuplicateGroupException {
         requireNonNull(model);
         if (!validCommand) {
             return new CommandResult(MESSAGE_ERROR);
