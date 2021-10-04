@@ -1,12 +1,9 @@
 package seedu.address.ui;
 
-import javafx.collections.FXCollections;
-import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.address.logic.Logic;
-import seedu.address.model.group.Group;
 import seedu.address.ui.group.GroupListPanel;
 import seedu.address.ui.person.PersonListPanel;
 
