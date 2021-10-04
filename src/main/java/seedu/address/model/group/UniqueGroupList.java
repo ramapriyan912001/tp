@@ -10,19 +10,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.group.exceptions.DuplicateGroupException;
 import seedu.address.model.group.exceptions.GroupNotFoundException;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
- * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
- * as to ensure that the person with exactly the same fields will be removed.
+ * A list of groups that enforces uniqueness between its elements and does not allow nulls.
+ * A group is considered unique by comparing using {@code Group#isSameGroup(Group)}. As such, adding and updating of
+ * groups uses Group#isSameGroup(Group) for equality so as to ensure that the group being added or updated is
+ * unique in terms of identity in the UniqueGroupList. However, the removal of a group uses Group#equals(Object) so
+ * as to ensure that the group with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
- * @see Person#isSamePerson(Person)
+ * @see Group#isSameGroup(Group)
  */
 public class UniqueGroupList implements Iterable<Group> {
 
@@ -31,7 +29,7 @@ public class UniqueGroupList implements Iterable<Group> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent group as the given argument.
      */
     public boolean contains(Group toCheck) {
         requireNonNull(toCheck);
@@ -39,13 +37,13 @@ public class UniqueGroupList implements Iterable<Group> {
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds a group to the list.
+     * The group must not already exist in the list.
      */
     public void add(Group toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateGroupException();
         }
         internalList.add(toAdd);
     }
@@ -98,13 +96,13 @@ public class UniqueGroupList implements Iterable<Group> {
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code groups}.
+     * {@code groups} must not contain duplicate groups.
      */
     public void setGroups(List<Group> groups) {
         requireAllNonNull(groups);
         if (!groupsAreUnique(groups)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateGroupException();
         }
 
         internalList.setAll(groups);
@@ -135,7 +133,7 @@ public class UniqueGroupList implements Iterable<Group> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code groups} contains only unique groups.
      */
     private boolean groupsAreUnique(List<Group> groups) {
         for (int i = 0; i < groups.size() - 1; i++) {
@@ -146,5 +144,21 @@ public class UniqueGroupList implements Iterable<Group> {
             }
         }
         return true;
+    }
+
+    /**
+     * Get group object from internal list by group name.
+     * @param groupName name of group to find from list.
+     * @return group object from internal list.
+     */
+    public Group getGroupByName(GroupName groupName) {
+        requireNonNull(groupName);
+        for (int i = 0; i < internalList.size(); i++) {
+            Group group = internalList.get(i);
+            if (group.getGroupName().equals(groupName)) {
+                return group;
+            }
+        }
+        throw new GroupNotFoundException();
     }
 }

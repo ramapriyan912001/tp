@@ -99,7 +99,7 @@ public class CreateGroupParser implements Parser<CreateGroupCommand> {
 
             int nextPrefix = teamMembers.indexOf(" n/");
             while (nextPrefix != -1) {
-                Name memberName = new Name(teamMembers.substring(0, nextPrefix - 1));
+                Name memberName = new Name(teamMembers.substring(0, nextPrefix));
                 if (Objects.isNull(addMemberIfExist(memberName))) {
                     return null;
                 }
