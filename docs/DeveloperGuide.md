@@ -308,7 +308,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | busy user who does not want to remember phone numbers | easily save all my friends' numbers            | conveniently proceed to pay my friend                                    |
 | `* * *`  | user with flexible travel plans                   | edit the details of expenditure for events         | modify the records quickly and easily                                    |
 | `* * *`  | beginner user                                     | run the app easily with a click of a button        | avoid wasting time trying to figure out how to get the app to work       |
-| `* * *   | inexperienced user in the app who types fast      | type in the commands for the app                   | do more things in the app with the same amount of time compared to using a mouse to click |
+| `* * *`  | inexperienced user in the app who types fast      | type in the commands for the app                   | do more things in the app with the same amount of time compared to using a mouse to click |
 | `* * *`  | user who wants an easy workflow                   | easily toggle between contacts and groups page with a command or a click of a button | make my workflow on the app smoother   |
 | `* *`    | user who has to recoup the money                  | divide up the expenses suitably amongst my friends | know how much to recoup from each person                                 |
 | `* *`    | user paying for the shared expense                | see how much I have paid according to the date     | monitor the amount spent each day                                        |
@@ -319,7 +319,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | potential user exploring the app                  | undo my actions                                    | test the app's features with the same data                               |
 | `* *`    | potential user testing the app                    | run the app on different platforms (windows, linux and os-x) | not have to specifically run a certain platform                |
 | `* *`    | user with flexible travel plans                   | delete a group                                     | modify the records easily if plans change                                |
-| `* *`     | beginner user who first opened the app           | view the help page                                 | so that I can learn how to use the app                                   |
+| `* *`    | beginner user who first opened the app            | view the help page                                 | so that I can learn how to use the app                                   |
 | `*`      | user who values organisation                      | view the group’s expenditure by categories         | plan the budgeting for future expenses more effectively                  |
 | `*`      | user who needs to repay debt                      | easily set up installment payments                 | can avoid paying too much money at one go                                |
 | `*`      | user who has lots of contacts to keep track of    | tag each contact                                   | easily find groups of people using the tags                              |
@@ -330,11 +330,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | expert user                                       | create my own shortcuts for commands               | control what I can do with the app more effectively                      |
 | `*`      | expert user                                       | mass delete contacts from the app                  | save time by not deleting it manually                                    |
 | `*`      | expert user                                       | refer to previous trips and the expenditure        | plan future trips efficiently                                            |
-*{More to be added}*
 
 ### Use cases
 
 (For all use cases below, the **System** is the `AWE` and the **Actor** is the `user`, unless specified otherwise)
+
+
+**Use case: Help User Understand Product**
+
+**MSS**
+
+1. User request to find commands and their explanations.
+2. AWE shows a list of command keyword(s) and explanations.
+
+**Extensions**
+
+* 2a. AWE detects errant command.
+    * 2a1. AWE displays the list of command keyword(s) and explanations.
+
+      Use case ends.
+    
 
 **Use case: Adding a Person**
 
@@ -402,6 +417,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 4a1. AWE shows an error message.
 
       Use case resumes at step 2.
+    
+**Use case: List all persons**
+
+**MSS**
+
+1. User requests to list persons.
+2. AWE shows list of persons. 
+
+   Use case ends. 
+
+**Extensions**
+
+* 2a. There are no persons to be listed.
+    * 2a1. AWE does not display any contacts.
+      
+      Use case ends.
+
 
 **Use case: Find a person**
 
@@ -464,6 +496,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 2a1. AWE displays message to remind User to type in full name of members as in the AddressBook.
   
     Use case ends.
+    
+    
+**Use case: Delete Travel Group**
+
+**MSS**
+
+1. User chooses to delete a group.
+2. User enters delete group command into CLI along with group name.
+3. AWE displays confirmation message.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. AWE detects group name that is not in address book.
+    * 2a1. AWE displays message to remind User to type in name of a group inside the addressbook.
+
+      Use case ends.    
 
 **Use case: Listing all travel groups**
 
@@ -568,6 +618,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Should be able to hold up to 100 groups without a noticeable sluggishness in performance for typical usage.
+5.  Layout between persons and groups should be intuitive and easy to understand and navigate.
+6.  Usage of `$` should be standardized for money.
 
 *{More to be added}*
 
@@ -578,6 +631,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **AddressBook**: The page displaying all the contacts
 * **ContactPage**: The page displaying all the contacts
 * **GroupsPage**: The page displaying all the travel groups
+* **ExpensesPage**: The page displaying all the expenses of a travel group
 
 --------------------------------------------------------------------------------------------------------------------
 

@@ -11,6 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.exceptions.DuplicateGroupException;
 import seedu.address.model.person.Person;
 
 /**
@@ -127,6 +129,40 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    /**
+     * Adds group into addressbook.
+     * Assumption is that group name is unique.
+     *
+     * @param group Group object representing members going on a trip.
+     */
+    @Override
+    public void addGroup(Group group) throws DuplicateGroupException {
+        addressBook.addGroup(group);
+    }
+
+    /**
+     * Deletes group based on groupName.
+     * Assumption is that group name is unique.
+     *
+     * @param group Group object representing members going on a trip.
+     */
+    @Override
+    public void deleteGroup(Group group) {
+        addressBook.removeGroup(group);
+    }
+
+    /**
+     * Returns boolean representing if a given group is in the model.
+     *
+     * @param group Group object representing members going on a trip.
+     * @return boolean object representing if a given group is in the model.
+     */
+    @Override
+    public boolean hasGroup(Group group) {
+        requireNonNull(group);
+        return addressBook.hasGroup(group);
     }
 
     @Override

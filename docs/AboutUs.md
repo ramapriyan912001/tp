@@ -26,7 +26,7 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 
 [LinkedIn](https://www.linkedin.com/in/marcuspeh/)
 [Github](http://github.com/marcuspeh)
-[Portfolio](team/johndoe.md)
+[Portfolio](team/marcuspeh.md)
 
 * Role: Team Lead
 * Responsibilities: UI
@@ -37,7 +37,7 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 
 [LinkedIn](https://www.linkedin.com/in/ramapriyansrivatsanpd/)
 [Github](https://github.com/ramapriyan912001)
-[Portfolio](team/johndoe.md)
+[Portfolio](team/ramapriyansrivatsanpurisaidevarajan.md)
 
 * Role: Team Lead
 * Responsibilities: Backend Engineering
@@ -53,7 +53,7 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 * Role: Developer
 * Responsibilities: Frontend Engineering
 
-### Ong Jingwen 
+### Ong Jingwen
 
 <img src="images/jingwencloud.png" width="200px">
 
