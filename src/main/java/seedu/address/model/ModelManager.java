@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.exceptions.DuplicateGroupException;
 import seedu.address.model.person.Person;
 
 /**
@@ -143,7 +144,7 @@ public class ModelManager implements Model {
      * @param group Group object representing members going on a trip.
      */
     @Override
-    public void addGroup(Group group) {
+    public void addGroup(Group group) throws DuplicateGroupException {
         addressBook.addGroup(group);
     }
 
