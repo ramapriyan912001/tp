@@ -3,10 +3,8 @@ package seedu.address.logic.parser;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.stream.Stream;
-import java.util.Optional;
 
 import javafx.collections.ObservableList;
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CreateGroupCommand;
 import seedu.address.logic.parser.exceptions.EmptyGroupException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -58,9 +56,10 @@ public class CreateGroupParser implements Parser<CreateGroupCommand> {
         GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).get());
 
         boolean validCommand = true;
-        if (groupName.equals(BAD_FORMATTING) || members.isEmpty()) {
+        if (groupName.equals(BAD_FORMATTING) || Objects.isNull(members)) {
             validCommand = false;
         }
+
         return new CreateGroupCommand(groupName, members, validCommand);
     }
 
@@ -83,12 +82,11 @@ public class CreateGroupParser implements Parser<CreateGroupCommand> {
     }
 
     /**
-     * Returns Optional object containing list of members in the group.
-     * If user input not valid, empty Optional object is returned.
-     * Use Optional object here to avoid multiple conditionals dealing with null returns.
+     * Returns list of members in the group.
+     * If user input not valid, null is returned.
      *
      * @param args String object representing user input into the addressbook.
-     * @return Optional object containing ArrayList of Person objects representing members to be added to the group.
+     * @return ArrayList of Person objects representing members to be added to the group
      */
     private ArrayList<Person> findGroupMembers(String args) throws ParseException {
         try {
@@ -98,6 +96,7 @@ public class CreateGroupParser implements Parser<CreateGroupCommand> {
                 throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
             }
             String teamMembers = args.substring(startIndex);
+
             int nextPrefix = teamMembers.indexOf(" n/");
             while (nextPrefix != -1) {
                 Name memberName = new Name(teamMembers.substring(0, nextPrefix - 1));
@@ -105,16 +104,15 @@ public class CreateGroupParser implements Parser<CreateGroupCommand> {
                     return null;
                 }
                 teamMembers = teamMembers.substring(nextPrefix + 3);
-                nextPrefix = teamMembers.indexOf("n/");
+                nextPrefix = teamMembers.indexOf(" n/");
             }
-            Optional<ArrayList<Person>> updatedMembers = addMemberIfExist(new Name(teamMembers));
-            if (updatedMembers.isEmpty()) {
-                return Optional.empty();
+            if (Objects.isNull(addMemberIfExist(new Name(teamMembers)))) {
+                return null;
             }
             if (toBeAddedToGroup.size() == 0) {
                 throw new EmptyGroupException(MESSAGE_EMPTY_GROUP);
             } else {
-                return Optional.of(toBeAddedToGroup);
+                return toBeAddedToGroup;
             }
         } catch (IndexOutOfBoundsException e) {
             return null;
@@ -126,41 +124,37 @@ public class CreateGroupParser implements Parser<CreateGroupCommand> {
     }
 
     /**
-     * Returns Optional object containing list of members in the group.
-     * If user input not valid, empty Optional is returned.
-     * Use Optional object here to avoid multiple conditionals dealing with null returns.
+     * Returns list of members in the group.
+     * If user input not valid, null is returned.
      *
      * @param memberName Name object representing name of member to be added.
-     * @return Optional object containing ArrayList of Person objects representing members to be added to the group.
+     * @return ArrayList of Person objects representing members to be added to the group
      */
-    private Optional<ArrayList<Person>> addMemberIfExist(Name memberName) {
-        Optional<Person> memberFound = findMember(memberName, this.allMembers);
-        if (!memberFound.isEmpty()) {
-            toBeAddedToGroup.add(memberFound.get());
+    private ArrayList<Person> addMemberIfExist(Name memberName) {
+        Person memberFound = findMember(memberName, this.allMembers);
+        if (!Objects.isNull(memberFound)) {
+            toBeAddedToGroup.add(memberFound);
         } else {
-            return Optional.empty();
+            return null;
         }
-        return Optional.of(this.toBeAddedToGroup);
+        return this.toBeAddedToGroup;
     }
 
     /**
-     * Returns Optional object containing person that matches a given Name object if in addressbook.
-     * If person not in addressbook, empty Optional is returned.
-     * Use Optional object here to avoid multiple conditionals dealing with null returns.
+     * Returns person that matches a given Name object if in addressbook.
+     * If person not in addressbook, null is returned.
      *
      * @param memberName Name object representing person that is being searched for in the addressbook.
      * @param members ObservableList of Person objects representing all contacts in the addressbook.
-     * @return Optional object containing Person object if name matches that of a person from the addressbook.
+     * @return Person object if name matches that of a person from the addressbook.
      */
-    private Optional<Person> findMember(Name memberName, ObservableList<Person> members) {
-        Optional<Person> foundPerson;
+    private Person findMember(Name memberName, ObservableList<Person> members) {
         for (Person member : members) {
             if (member.getName().equals(memberName)) {
-                foundPerson = Optional.of(member);
-                return foundPerson;
+                return member;
             }
         }
-        return Optional.empty();
+        return null;
     }
 
     /**
