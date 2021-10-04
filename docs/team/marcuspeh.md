@@ -12,7 +12,7 @@ Given below are my contributions to the project. [RepoSense link]()
 ### Features
 * **New Feature**: Added the ability to change between contacts and groups view.
   * What it does: Allows the user to see groups / contacts with a command.
-  * Justification: This feature is crucial as the user should be able to view the groups and contacts created. 
+  * Justification: This feature is crucial as the user should be able to view the groups and contacts created.
   * Highlights: This implementation added in a new command `groups` to see all groups. It changes the command `list` to `contacts`. `contacts` allows the user to see all contacts.
 
 * **Enhancements to existing features**:
@@ -25,7 +25,7 @@ Given below are my contributions to the project. [RepoSense link]()
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `view groups` and `expenses` 
+    * Added documentation for the features `view groups` and `expenses`
   * Developer Guide:
     * Added use cases for `view groups`, `find person` and `view expenses`.
 
