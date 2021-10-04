@@ -14,10 +14,11 @@ Given below are my contributions to the project. [RepoSense link]()
   * What it does: Allows the user to see groups / contacts with a command.
   * Justification: This feature is crucial as the user should be able to view the groups and contacts created.
   * Highlights: This implementation added in a new command `groups` to see all groups. It changes the command `list` to `contacts`. `contacts` allows the user to see all contacts.
+  * RepoSense: [link](https://app.codecov.io/gh/AY2122S1-CS2103T-F13-1/tp/compare/121)
 
 * **Enhancements to existing features**:
-  * Updated the UI interface layout.
-  * Added in buttons to toggle between contacts page and group page
+  * Updated the UI interface layout. [\#121](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/121)
+  * Added in buttons to toggle between contacts page and group page [\#121](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/121)
 
 ### Others
 * **Project management**
@@ -30,7 +31,7 @@ Given below are my contributions to the project. [RepoSense link]()
     * Added use cases for `view groups`, `find person` and `view expenses`.
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#113]()
+  * PRs reviewed (with non-trivial review comments): [\#113](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/113)
   * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
   * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
   * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
