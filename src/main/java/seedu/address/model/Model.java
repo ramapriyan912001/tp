@@ -91,7 +91,7 @@ public interface Model {
      * Adds the given group.
      * {@code Group} must not already exist in the address book.
      */
-    void addGroup(Group person);
+    void addGroup(Group person) throws DuplicateGroupException;
 
     void deleteGroup(Group group);
 

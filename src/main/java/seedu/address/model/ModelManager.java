@@ -138,7 +138,7 @@ public class ModelManager implements Model {
      * @param group Group object representing members going on a trip.
      */
     @Override
-    public void addGroup(Group group) {
+    public void addGroup(Group group) throws DuplicateGroupException {
         addressBook.addGroup(group);
     }
 
