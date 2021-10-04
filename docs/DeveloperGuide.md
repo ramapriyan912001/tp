@@ -319,7 +319,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | potential user exploring the app                  | undo my actions                                    | test the app's features with the same data                               |
 | `* *`    | potential user testing the app                    | run the app on different platforms (windows, linux and os-x) | not have to specifically run a certain platform                |
 | `* *`    | user with flexible travel plans                   | delete a group                                     | modify the records easily if plans change                                |
-| `* *`    | beginner user who first opened the app           | view the help page                                 | so that I can learn how to use the app                                   |
+| `* *`    | beginner user who first opened the app            | view the help page                                 | so that I can learn how to use the app                                   |
 | `*`      | user who values organisation                      | view the group’s expenditure by categories         | plan the budgeting for future expenses more effectively                  |
 | `*`      | user who needs to repay debt                      | easily set up installment payments                 | can avoid paying too much money at one go                                |
 | `*`      | user who has lots of contacts to keep track of    | tag each contact                                   | easily find groups of people using the tags                              |
@@ -330,7 +330,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | expert user                                       | create my own shortcuts for commands               | control what I can do with the app more effectively                      |
 | `*`      | expert user                                       | mass delete contacts from the app                  | save time by not deleting it manually                                    |
 | `*`      | expert user                                       | refer to previous trips and the expenditure        | plan future trips efficiently                                            |
-*{More to be added}*
 
 ### Use cases
 
