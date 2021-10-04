@@ -40,7 +40,7 @@ public class ViewPanel extends UiPart<Region> {
 
     private void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getAddressBook());
-        groupListPanel = new GroupListPanel(new FilteredList<Group>(FXCollections.observableArrayList()));
+        groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
         // Need update with logic and get groups
 
         toggleView(UiView.ADDRESS_BOOK);

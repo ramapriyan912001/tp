@@ -92,7 +92,20 @@ public interface Model {
      */
     void addGroup(Group person);
 
+    /**
+     * Deletes group based on groupName.
+     * {@code Group} must be unique in the address book.
+     */
     void deleteGroup(Group group);
 
+    /** Returns boolean representing if a given group is in the model. */
     boolean hasGroup(Group group);
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Group} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    ObservableList<Group> getFilteredGroupList();
+
+    void updateFilteredGroupList(Predicate<Group> predicate);
 }
