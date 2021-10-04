@@ -1,5 +1,10 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CreateGroupCommand.MESSAGE_EMPTY_GROUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
+
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -13,12 +18,6 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CreateGroupCommand.MESSAGE_EMPTY_GROUP;
-
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 
 public class CreateGroupParser implements Parser<CreateGroupCommand> {
     private static final String BAD_FORMATTING = "\"creategroup command\" is not properly formatted";
