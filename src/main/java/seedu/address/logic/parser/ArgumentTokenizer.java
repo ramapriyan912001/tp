@@ -37,9 +37,11 @@ public class ArgumentTokenizer {
      * @return           ArgumentMultimap object that maps prefixes to their arguments
      */
     public static ArgumentMultimap tokenizeStringWithRepeatedPrefixes(String argsString, Prefix repeatedPrefix,
-                                                             Prefix... prefixes) {
-
+                                                                      Prefix... prefixes) {
         int startOfRepeatedPrefix = argsString.indexOf(" " + repeatedPrefix.getPrefix());
+        if (startOfRepeatedPrefix == -1) {
+            return new ArgumentMultimap();
+        }
         String stringWihoutRepeatedPrefixes = argsString.substring(0, startOfRepeatedPrefix);
 
         List<PrefixPosition> positions = findAllPrefixPositions(stringWihoutRepeatedPrefixes, prefixes);
