@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.group.exceptions.DuplicateGroupException;
 import seedu.address.model.person.Person;
 
@@ -91,7 +92,7 @@ public interface Model {
      * Adds the given group.
      * {@code Group} must not already exist in the address book.
      */
-    void addGroup(Group person) throws DuplicateGroupException;
+    void addGroup(Group person) throws DuplicateGroupException, DuplicateGroupException;
 
     /**
      * Deletes group based on groupName.
@@ -109,4 +110,7 @@ public interface Model {
     ObservableList<Group> getFilteredGroupList();
 
     void updateFilteredGroupList(Predicate<Group> predicate);
+
+    Group getGroupByName(GroupName groupName);
+
 }

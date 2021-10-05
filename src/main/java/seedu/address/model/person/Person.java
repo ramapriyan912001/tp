@@ -76,7 +76,7 @@ public class Person {
      * @return ArrayList of Group objects that the instance of Person belongs to.
      */
     public ArrayList<Group> getPersonGroups(ObservableList<Group> groups) {
-        ArrayList personGroups = new ArrayList();
+        ArrayList<Group> personGroups = new ArrayList<>();
         for (Group group : groups) {
             if (group.getMembers().stream().anyMatch(p -> p.getName().equals(this.getName()))) {
                 personGroups.add(group);

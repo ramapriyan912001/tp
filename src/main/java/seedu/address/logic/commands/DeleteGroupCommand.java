@@ -12,7 +12,7 @@ public class DeleteGroupCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": deletes a group from the address book. "
             + "Parameters: "
             + PREFIX_GROUP_NAME + "GROUP_NAME ";
-    public static final String MESSAGE_SUCCESS = "Group deleted: %1$s";
+    public static final String MESSAGE_SUCCESS = "Group %s with %d member(s) deleted";
     public static final String MESSAGE_GROUP_DOES_NOT_EXIST = "This group does not exist in the address book";
 
     private Group group;
@@ -43,7 +43,11 @@ public class DeleteGroupCommand extends Command {
             throw new CommandException(MESSAGE_GROUP_DOES_NOT_EXIST);
         }
 
-        model.deleteGroup(group);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, group));
+        Group groupFromInternalList = model.getGroupByName(group.getGroupName());
+        model.deleteGroup(groupFromInternalList);
+        int numberOfMembers = groupFromInternalList.getMembers().size();
+        String groupName = groupFromInternalList.getGroupName().getName();
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, groupName, numberOfMembers));
     }
 }

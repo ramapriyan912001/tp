@@ -41,9 +41,15 @@ public class GroupName {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof GroupName // instanceof handles nulls
-                && name.equals(((GroupName) other).name)); // state check
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof GroupName)) { // instanceof handles nulls
+            return false;
+        }
+
+        return name.equals(((GroupName) other).name); // state check
     }
 
     @Override
@@ -51,4 +57,7 @@ public class GroupName {
         return name.hashCode();
     }
 
+    public String getName() {
+        return name;
+    }
 }

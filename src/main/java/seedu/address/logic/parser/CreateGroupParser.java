@@ -55,12 +55,12 @@ public class CreateGroupParser implements Parser<CreateGroupCommand> {
 
         GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).get());
 
-        boolean validCommand = true;
+        boolean isValidCommand = true;
         if (groupName.equals(BAD_FORMATTING) || Objects.isNull(members)) {
-            validCommand = false;
+            isValidCommand = false;
         }
 
-        return new CreateGroupCommand(groupName, members, validCommand);
+        return new CreateGroupCommand(groupName, members, isValidCommand);
     }
 
     /**
@@ -99,7 +99,7 @@ public class CreateGroupParser implements Parser<CreateGroupCommand> {
 
             int nextPrefix = teamMembers.indexOf(" n/");
             while (nextPrefix != -1) {
-                Name memberName = new Name(teamMembers.substring(0, nextPrefix - 1));
+                Name memberName = new Name(teamMembers.substring(0, nextPrefix));
                 if (Objects.isNull(addMemberIfExist(memberName))) {
                     return null;
                 }
