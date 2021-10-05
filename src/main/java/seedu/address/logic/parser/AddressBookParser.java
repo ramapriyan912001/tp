@@ -82,10 +82,10 @@ public class AddressBookParser {
             return new HelpCommand();
 
         case CreateGroupCommand.COMMAND_WORD:
-            return new CreateGroupParser(model).parse(arguments);
+            return new CreateGroupCommandParser(model).parse(arguments);
 
         case DeleteGroupCommand.COMMAND_WORD:
-            return new DeleteGroupParser(model).parse(arguments);
+            return new DeleteGroupCommandParser(model).parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

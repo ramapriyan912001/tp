@@ -13,7 +13,7 @@ public class GroupName {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String name;
+    private final String name;
 
     /**
      * Constructs a {@code Name}.
@@ -22,17 +22,24 @@ public class GroupName {
      */
     public GroupName(String name) {
         requireNonNull(name);
-        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidGroupName(name), MESSAGE_CONSTRAINTS);
         this.name = name;
     }
 
     /**
      * Returns true if a given string is a valid name.
      */
-    public static boolean isValidName(String test) {
+    public static boolean isValidGroupName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Name getter
+     * @return String name
+     */
+    public String getName() {
+        return name;
+    }
 
     @Override
     public String toString() {
@@ -57,7 +64,4 @@ public class GroupName {
         return name.hashCode();
     }
 
-    public String getName() {
-        return name;
-    }
 }
