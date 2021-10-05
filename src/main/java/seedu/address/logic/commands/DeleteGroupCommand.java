@@ -45,8 +45,9 @@ public class DeleteGroupCommand extends Command {
 
         Group groupFromInternalList = model.getGroupByName(group.getGroupName());
         model.deleteGroup(groupFromInternalList);
+        int numberOfMembers = groupFromInternalList.getMembers().size();
+        String groupName = groupFromInternalList.getGroupName().getName();
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, groupFromInternalList.getGroupName(),
-                groupFromInternalList.getMembers().size()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, groupName, numberOfMembers));
     }
 }
