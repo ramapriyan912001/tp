@@ -78,4 +78,27 @@ public class GroupBuilder {
         return new Group(this.groupName, this.members, this.tags);
     }
 
+    /**
+     * Returns a valid Group object.
+     *
+     * @return Group object with default name "Venice" and default member "Amy Bee".
+     */
+    public Group buildValidGroup() {
+        GroupName venice = new GroupName("Venice");
+        ArrayList<Person> members = new ArrayList<Person>();
+        members.add(new PersonBuilder().build());
+        return new Group(venice, members);
+    }
+
+    public GroupName getValidGroupName() {
+        GroupName venice = new GroupName("Venice");
+        return venice;
+    }
+
+    public ArrayList<Person> getValidMembers() {
+        ArrayList<Person> members = new ArrayList<Person>();
+        members.add(new PersonBuilder().build());
+        return members;
+    }
+
 }

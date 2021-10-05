@@ -26,6 +26,8 @@ public class CreateGroupCommand extends Command {
      * Creates a CreateGroupCommand to create the specified {@code Group}
      */
     public CreateGroupCommand(GroupName groupName, ArrayList<Person> members, boolean isValidCommand) {
+        requireNonNull(groupName);
+        requireNonNull(members);
         this.groupName = groupName;
         this.members = members;
         this.isValidCommand = isValidCommand;
@@ -39,6 +41,9 @@ public class CreateGroupCommand extends Command {
         }
 
         Group group = new Group(groupName, members);
+        if (model.hasGroup(group)) {
+            throw new CommandException(MESSAGE_DUPLICATE_GROUP);
+        }
         model.addGroup(group);
         return new CommandResult(MESSAGE_SUCCESS);
     }
