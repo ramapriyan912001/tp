@@ -92,7 +92,7 @@ public class CreateGroupCommandParser implements Parser<CreateGroupCommand> {
         try {
             String prefixWithWhiteSpace = " " + PREFIX_NAME;
             int startIndex = args.indexOf(prefixWithWhiteSpace) + 3;
-            if (startIndex == 1) {
+            if (startIndex == 2) {
                 throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
             }
             String teamMembers = args.substring(startIndex);
