@@ -20,23 +20,24 @@ public class CreateGroupCommand extends Command {
 
     private final ArrayList<Person> members;
     private GroupName groupName;
-    private final boolean validCommand;
+    private final boolean isValidCommand;
 
     /**
      * Creates a CreateGroupCommand to create the specified {@code Group}
      */
-    public CreateGroupCommand(GroupName groupName, ArrayList<Person> members, boolean validCommand) {
+    public CreateGroupCommand(GroupName groupName, ArrayList<Person> members, boolean isValidCommand) {
         this.groupName = groupName;
         this.members = members;
-        this.validCommand = validCommand;
+        this.isValidCommand = isValidCommand;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException, DuplicateGroupException {
         requireNonNull(model);
-        if (!validCommand) {
+        if (!isValidCommand) {
             return new CommandResult(MESSAGE_ERROR);
         }
+
         Group group = new Group(groupName, members);
         model.addGroup(group);
         return new CommandResult(MESSAGE_SUCCESS);

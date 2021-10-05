@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's name in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidGroupName(String)}
  */
 public class Name {
 
@@ -27,14 +27,14 @@ public class Name {
      */
     public Name(String name) {
         requireNonNull(name);
-        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidGroupName(name), MESSAGE_CONSTRAINTS);
         fullName = name;
     }
 
     /**
      * Returns true if a given string is a valid name.
      */
-    public static boolean isValidName(String test) {
+    public static boolean isValidGroupName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
@@ -46,9 +46,15 @@ public class Name {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Name // instanceof handles nulls
-                && fullName.equals(((Name) other).fullName)); // state check
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Name)) { // instanceof handles nulls
+            return false;
+        }
+
+        return fullName.equals(((Name) other).fullName); // state check
     }
 
     @Override

@@ -111,9 +111,15 @@ public class UniquePersonList implements Iterable<Person> {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof UniquePersonList // instanceof handles nulls
-                        && internalList.equals(((UniquePersonList) other).internalList));
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof UniquePersonList)) { // instanceof handles nulls
+            return false;
+        }
+
+        return internalList.equals(((UniquePersonList) other).internalList);
     }
 
     @Override

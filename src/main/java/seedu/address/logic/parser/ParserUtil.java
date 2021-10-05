@@ -46,7 +46,7 @@ public class ParserUtil {
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        if (!Name.isValidName(trimmedName)) {
+        if (!Name.isValidGroupName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
@@ -106,7 +106,7 @@ public class ParserUtil {
     public static GroupName parseGroupName(String groupName) throws ParseException {
         requireNonNull(groupName);
         String trimmedGroupName = groupName.trim();
-        if (!GroupName.isValidName(trimmedGroupName)) {
+        if (!GroupName.isValidGroupName(trimmedGroupName)) {
             throw new ParseException(Group.MESSAGE_CONSTRAINTS);
         }
         return new GroupName(trimmedGroupName);
