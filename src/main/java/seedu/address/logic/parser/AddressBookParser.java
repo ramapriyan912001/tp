@@ -16,7 +16,8 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListContactsCommand;
+import seedu.address.logic.commands.ListGroupsCommand;
 import seedu.address.logic.parser.exceptions.EmptyGroupException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -68,8 +69,11 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+        case ListContactsCommand.COMMAND_WORD:
+            return new ListContactsCommand();
+
+        case ListGroupsCommand.COMMAND_WORD:
+            return new ListGroupsCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -78,10 +82,11 @@ public class AddressBookParser {
             return new HelpCommand();
 
         case CreateGroupCommand.COMMAND_WORD:
-            return new CreateGroupParser(model).parse(arguments);
+            return new CreateGroupCommandParser(model).parse(arguments);
 
         case DeleteGroupCommand.COMMAND_WORD:
-            return new DeleteGroupParser(model).parse(arguments);
+            return new DeleteGroupCommandParser(model).parse(arguments);
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

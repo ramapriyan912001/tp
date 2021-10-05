@@ -40,9 +40,15 @@ public class Phone {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Phone // instanceof handles nulls
-                && value.equals(((Phone) other).value)); // state check
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Phone)) { // instanceof handles nulls
+            return false;
+        }
+
+        return value.equals(((Phone) other).value); // state check
     }
 
     @Override

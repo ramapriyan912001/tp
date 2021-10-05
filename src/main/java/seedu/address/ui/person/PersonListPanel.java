@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.person;
 
 import java.util.logging.Logger;
 
@@ -10,6 +10,7 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.ui.UiPart;
 
 /**
  * Panel containing the list of persons.
@@ -41,10 +42,10 @@ public class PersonListPanel extends UiPart<Region> {
         }
 
         @Override
-        protected void updateItem(Person person, boolean empty) {
-            super.updateItem(person, empty);
+        protected void updateItem(Person person, boolean isEmpty) {
+            super.updateItem(person, isEmpty);
 
-            if (empty || person == null) {
+            if (isEmpty || person == null) {
                 setGraphic(null);
                 setText(null);
             } else {
