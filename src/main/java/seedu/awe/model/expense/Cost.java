@@ -1,15 +1,15 @@
 package seedu.awe.model.expense;
 
-import java.math.BigDecimal;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.awe.commons.util.AppUtil.checkArgument;
+
+import java.math.BigDecimal;
 
 public class Cost {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Cost should only contain numeric characters without spaces up to only 2 decimal places," +
-                    "and it should not be blank";
+            "Cost should only contain numeric characters without spaces up to only 2 decimal places,"
+                    + "and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -19,6 +19,11 @@ public class Cost {
 
     public final BigDecimal cost;
 
+    /**
+     * Constructs a {@code Cost}.
+     *
+     * @param cost A valid cost.
+     */
     public Cost(String cost) {
         requireNonNull(cost);
         checkArgument(isValidCost(cost), MESSAGE_CONSTRAINTS);

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;

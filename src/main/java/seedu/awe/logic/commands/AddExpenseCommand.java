@@ -1,5 +1,12 @@
 package seedu.awe.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.awe.logic.parser.CliSyntax.PREFIX_COST;
+import static seedu.awe.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
+
+import java.util.List;
+
 import seedu.awe.commons.core.Messages;
 import seedu.awe.commons.core.index.Index;
 import seedu.awe.logic.commands.exceptions.CommandException;
@@ -11,13 +18,6 @@ import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.group.exceptions.DuplicateGroupException;
 import seedu.awe.model.person.Person;
-
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.awe.logic.parser.CliSyntax.PREFIX_COST;
-import static seedu.awe.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 
 /**
  * Adds an expense to a group.
@@ -38,6 +38,14 @@ public class AddExpenseCommand extends Command {
     private final Cost cost;
     private final Description description;
 
+    /**
+     * Creates a AddExpenseCommand from the specified Person {@code Index} for the specified {@code Group}
+     *
+     * @param index of the person in the filtered person list to add an expense to
+     * @param groupName of the group to have the expense added to
+     * @param cost of the expense
+     * @param description of the expense
+     */
     public AddExpenseCommand(Index index, GroupName groupName, Cost cost, Description description) {
         requireNonNull(index);
         requireNonNull(groupName);

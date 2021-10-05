@@ -45,6 +45,14 @@ public class Group {
         this.tags.addAll(tags);
     }
 
+    /**
+     * Creates new Group object with tags.
+     *
+     * @param groupName String object representing name of the group.
+     * @param members ArrayList of Person objects representing list of members.
+     * @param tags Set of Tag objects to describe group.
+     * @param expenses List of expenses in the group.
+     */
     public Group(GroupName groupName, ArrayList<Person> members, Set<Tag> tags, ArrayList<Expense> expenses) {
         this.groupName = groupName;
         for (Person member : members) {
@@ -121,6 +129,12 @@ public class Group {
         }
     }
 
+    /**
+     * Adds an expense into the group.
+     *
+     * @param expense to be added to the group.
+     * @return A new group with the expense added to it.
+     */
     public Group addExpense(Expense expense) {
         ArrayList<Expense> newExpenses = new ArrayList<>(expenses);
         newExpenses.add(expense);

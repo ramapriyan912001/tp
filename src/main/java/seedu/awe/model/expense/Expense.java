@@ -1,8 +1,8 @@
 package seedu.awe.model.expense;
 
-import seedu.awe.model.person.Person;
-
 import java.util.Objects;
+
+import seedu.awe.model.person.Person;
 
 public class Expense {
 
@@ -13,6 +13,13 @@ public class Expense {
     private final Cost cost;
     private final Description description;
 
+    /**
+     * Constructs an {@code Expense}.
+     *
+     * @param payer of expense.
+     * @param cost of expense.
+     * @param description of expense.
+     */
     public Expense(Person payer, Cost cost, Description description) {
         this.payer = payer;
         this.cost = cost;
