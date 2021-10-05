@@ -2,9 +2,12 @@ package seedu.awe.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+
+import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.group.UniqueGroupList;
@@ -59,6 +62,15 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setGroups(List<Group> groups) {
         this.groups.setGroups(groups);
+    }
+
+    public void setGroup(Group group, Group newGroup) throws DuplicateGroupException {
+        groups.setGroup(group, newGroup);
+    }
+
+    public ArrayList<Expense> getExpenses(Group group) {
+        Group groupToListExpenses = groups.getGroupByName(group.getGroupName());
+        return groupToListExpenses.getExpenses();
     }
 
     /**

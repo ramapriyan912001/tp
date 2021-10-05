@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.awe.model.expense.Expense;
 import seedu.awe.model.person.Person;
 import seedu.awe.model.tag.Tag;
 
@@ -14,6 +15,7 @@ public class Group {
     private GroupName groupName;
     private final ArrayList<Person> members = new ArrayList<>();
     private final Set<Tag> tags = new HashSet<>();
+    private final ArrayList<Expense> expenses = new ArrayList<>();
 
     /**
      * Creates new Group object.
@@ -41,6 +43,17 @@ public class Group {
             this.addMember(member);
         }
         this.tags.addAll(tags);
+    }
+
+    public Group(GroupName groupName, ArrayList<Person> members, Set<Tag> tags, ArrayList<Expense> expenses) {
+        this.groupName = groupName;
+        for (Person member : members) {
+            this.addMember(member);
+        }
+        this.tags.addAll(tags);
+        for (Expense expense : expenses) {
+            this.expenses.add(expense);
+        }
     }
 
     /**
@@ -77,6 +90,10 @@ public class Group {
         return Collections.unmodifiableSet(tags);
     }
 
+    public ArrayList<Expense> getExpenses() {
+        return expenses;
+    }
+
     /**
      * Checks for group equality
      * @param otherGroup group to be compared
@@ -102,6 +119,12 @@ public class Group {
         } else {
             return false;
         }
+    }
+
+    public Group addExpense(Expense expense) {
+        ArrayList<Expense> newExpenses = new ArrayList<>(expenses);
+        newExpenses.add(expense);
+        return new Group(groupName, members, tags, newExpenses);
     }
 
     @Override
