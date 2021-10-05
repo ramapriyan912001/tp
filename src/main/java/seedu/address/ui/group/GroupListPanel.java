@@ -22,7 +22,7 @@ public class GroupListPanel extends UiPart<Region> {
     private ListView<Group> groupListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code GroupListPanel} with the given {@code ObservableList}.
      */
     public GroupListPanel(ObservableList<Group> groupList) {
         super(FXML);
