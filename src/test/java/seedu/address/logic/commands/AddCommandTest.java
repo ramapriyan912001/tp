@@ -160,6 +160,20 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        /**
+         * Returns an unmodifiable view of the list of {@code Group} backed by the internal list of
+         * {@code versionedAddressBook}
+         */
+        @Override
+        public ObservableList<Group> getFilteredGroupList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredGroupList(Predicate<Group> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public Group getGroupByName(GroupName groupName) {
             throw new AssertionError("This method should not be called.");
