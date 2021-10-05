@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.group.UniqueGroupList;
 import seedu.address.model.group.exceptions.DuplicateGroupException;
 import seedu.address.model.person.Person;
@@ -149,6 +150,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Group> getGroupList() {
         return groups.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public Group getGroupByName(GroupName groupName) {
+        requireNonNull(groupName);
+        return groups.getGroupByName(groupName);
     }
 
     @Override

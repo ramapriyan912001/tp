@@ -57,4 +57,7 @@ public class GroupName {
         return name.hashCode();
     }
 
+    public String getName() {
+        return name;
+    }
 }
