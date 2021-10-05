@@ -75,17 +75,17 @@ public class UniqueGroupList implements Iterable<Group> {
      */
     public void remove(Group toRemove) {
         requireNonNull(toRemove);
-        boolean groupFound = false;
+        boolean isGroupFound = false;
         Group groupToDelete = null;
         for (int i = 0; i < internalList.size(); i++) {
             Group group = internalList.get(i);
             if (group.isSameGroup(toRemove)) {
-                groupFound = true;
+                isGroupFound = true;
                 groupToDelete = group;
                 break;
             }
         }
-        if (!groupFound) {
+        if (!isGroupFound) {
             throw new GroupNotFoundException();
         }
         internalList.remove(groupToDelete);
@@ -123,9 +123,15 @@ public class UniqueGroupList implements Iterable<Group> {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof UniqueGroupList // instanceof handles nulls
-                && internalList.equals(((UniqueGroupList) other).internalList));
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof UniqueGroupList)) { // instanceof handles nulls
+            return false;
+        }
+
+        return internalList.equals(((UniqueGroupList) other).internalList);
     }
 
     @Override

@@ -55,12 +55,12 @@ public class CreateGroupCommandParser implements Parser<CreateGroupCommand> {
 
         GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).get());
 
-        boolean validCommand = true;
+        boolean isValidCommand = true;
         if (groupName.equals(BAD_FORMATTING) || Objects.isNull(members)) {
-            validCommand = false;
+            isValidCommand = false;
         }
 
-        return new CreateGroupCommand(groupName, members, validCommand);
+        return new CreateGroupCommand(groupName, members, isValidCommand);
     }
 
     /**
