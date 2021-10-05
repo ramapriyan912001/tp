@@ -1,6 +1,7 @@
 package seedu.address.model.group;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -68,12 +69,39 @@ public class Group {
         return members;
     }
 
+    /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
     public Set<Tag> getTags() {
-        return tags;
+        return Collections.unmodifiableSet(tags);
     }
 
-    public boolean isSameGroup(Group group) {
-        return this.groupName.equals(group.getGroupName());
+    /**
+     * Checks for group equality
+     * @param otherGroup group to be compared
+     * @return Boolean value for equality
+     */
+    public boolean isSameGroup(Group otherGroup) {
+        if (this == otherGroup) {
+            return true;
+        }
+        return otherGroup != null
+               && this.groupName.equals(otherGroup.getGroupName());
+    }
+
+
+    @Override
+    public boolean equals (Object otherGroup) {
+        if (this == otherGroup) {
+            return true;
+        } else if (otherGroup == null) {
+            return false;
+        } else if (otherGroup instanceof Group) {
+            return this.isSameGroup((Group) otherGroup);
+        } else {
+            return false;
+        }
     }
 
     @Override
