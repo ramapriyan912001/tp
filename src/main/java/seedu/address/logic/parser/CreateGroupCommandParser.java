@@ -19,7 +19,7 @@ import seedu.address.model.group.GroupName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
-public class CreateGroupParser implements Parser<CreateGroupCommand> {
+public class CreateGroupCommandParser implements Parser<CreateGroupCommand> {
     private static final String BAD_FORMATTING = "\"creategroup command\" is not properly formatted";
     private ObservableList<Person> allMembers;
     private final ArrayList<Person> toBeAddedToGroup;
@@ -29,7 +29,7 @@ public class CreateGroupParser implements Parser<CreateGroupCommand> {
      *
      * @param model Model object passed into constructor to provide list of contacts.
      */
-    public CreateGroupParser(Model model) {
+    public CreateGroupCommandParser(Model model) {
         ReadOnlyAddressBook addressBook = model.getAddressBook();
         this.allMembers = addressBook.getPersonList();
         this.toBeAddedToGroup = new ArrayList<>();

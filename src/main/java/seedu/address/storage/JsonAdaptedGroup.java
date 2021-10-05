@@ -1,7 +1,9 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -10,8 +12,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 public class JsonAdaptedGroup {
 
@@ -19,6 +21,7 @@ public class JsonAdaptedGroup {
 
     private final String groupName;
     private final List<JsonAdaptedPerson> members = new ArrayList<>();
+    private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedGroup} with the given group details.
@@ -27,7 +30,25 @@ public class JsonAdaptedGroup {
     public JsonAdaptedGroup(@JsonProperty("name") String groupName,
                             @JsonProperty("members") List<JsonAdaptedPerson> members) {
         this.groupName = groupName;
-        this.members.addAll(members);
+        if (members != null) {
+            this.members.addAll(members);
+        }
+    }
+
+    /**
+     * Constructs a {@code JsonAdaptedGroup} with the given group details.
+     */
+    @JsonCreator
+    public JsonAdaptedGroup(@JsonProperty("name") String groupName,
+                            @JsonProperty("members") List<JsonAdaptedPerson> members,
+                            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+        this.groupName = groupName;
+        if (members != null) {
+            this.members.addAll(members);
+        }
+        if (tags != null) {
+            this.tags.addAll(tags);
+        }
     }
 
     /**
@@ -50,16 +71,22 @@ public class JsonAdaptedGroup {
         for (JsonAdaptedPerson member : members) {
             modelMembers.add(member.toModelType());
         }
+        final List<Tag> groupTags = new ArrayList<>();
+        for (JsonAdaptedTag tag : tags) {
+            groupTags.add(tag.toModelType());
+        }
 
         if (groupName == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    GroupName.class.getSimpleName()));
         }
         if (!GroupName.isValidGroupName(groupName)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(GroupName.MESSAGE_CONSTRAINTS);
         }
         final GroupName modelName = new GroupName(groupName);
 
-        return new Group(modelName, modelMembers);
+        final Set<Tag> modelTags = new HashSet<>(groupTags);
+        return new Group(modelName, modelMembers, modelTags);
     }
 
 }

@@ -13,14 +13,14 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 
-public class DeleteGroupParser implements Parser<DeleteGroupCommand> {
+public class DeleteGroupCommandParser implements Parser<DeleteGroupCommand> {
 
     /**
      * Creates new CreateGroupParser object.
      *
      * @param model Model object passed into constructor to provide list of contacts.
      */
-    public DeleteGroupParser(Model model) {
+    public DeleteGroupCommandParser(Model model) {
         ReadOnlyAddressBook addressBook = model.getAddressBook();
     }
     //assume command is of the following form
