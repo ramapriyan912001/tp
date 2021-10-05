@@ -18,21 +18,21 @@ public class CommandResult {
     private final boolean exit;
 
     /** The application should show groups */
-    private final boolean showGroups;
+    private final boolean isShowGroupsCommand;
 
     /** The application should show contacts */
-    private final boolean showContacts;
+    private final boolean isShowContactsCommand;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
-                         boolean showGroups, boolean showContacts) {
+                         boolean isShowGroupsCommand, boolean isShowContactsCommand) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.showGroups = showGroups;
-        this.showContacts = showContacts;
+        this.isShowGroupsCommand = isShowGroupsCommand;
+        this.isShowContactsCommand = isShowContactsCommand;
     }
 
     /**
@@ -56,11 +56,11 @@ public class CommandResult {
     }
 
     public boolean isShowGroups() {
-        return showGroups;
+        return isShowGroupsCommand;
     }
 
     public boolean isShowContacts() {
-        return showContacts;
+        return isShowContactsCommand;
     }
 
     @Override
@@ -78,13 +78,13 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
-                && showGroups == otherCommandResult.showGroups
-                && showContacts == otherCommandResult.showContacts;
+                && isShowGroupsCommand == otherCommandResult.isShowGroupsCommand
+                && isShowContactsCommand == otherCommandResult.isShowContactsCommand;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, showGroups, showContacts);
+        return Objects.hash(feedbackToUser, showHelp, exit, isShowGroupsCommand, isShowContactsCommand);
     }
 
 }
