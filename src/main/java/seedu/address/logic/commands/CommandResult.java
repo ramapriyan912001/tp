@@ -12,18 +12,27 @@ public class CommandResult {
     private final String feedbackToUser;
 
     /** Help information should be shown to the user. */
-    private final boolean showHelp;
+    private final boolean isHelpCommand;
 
     /** The application should exit. */
-    private final boolean exit;
+    private final boolean isExitCommand;
+
+    /** The application should show groups */
+    private final boolean isShowGroupsCommand;
+
+    /** The application should show contacts */
+    private final boolean isShowContactsCommand;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean isHelpCommand, boolean isExitCommand,
+                         boolean isShowGroupsCommand, boolean isShowContactsCommand) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = showHelp;
-        this.exit = exit;
+        this.isHelpCommand = isHelpCommand;
+        this.isExitCommand = isExitCommand;
+        this.isShowGroupsCommand = isShowGroupsCommand;
+        this.isShowContactsCommand = isShowContactsCommand;
     }
 
     /**
@@ -31,7 +40,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -39,11 +48,19 @@ public class CommandResult {
     }
 
     public boolean isShowHelp() {
-        return showHelp;
+        return isHelpCommand;
     }
 
     public boolean isExit() {
-        return exit;
+        return isExitCommand;
+    }
+
+    public boolean isShowGroups() {
+        return isShowGroupsCommand;
+    }
+
+    public boolean isShowContacts() {
+        return isShowContactsCommand;
     }
 
     @Override
@@ -59,13 +76,16 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && isHelpCommand == otherCommandResult.isHelpCommand
+                && isExitCommand == otherCommandResult.isExitCommand
+                && isShowGroupsCommand == otherCommandResult.isShowGroupsCommand
+                && isShowContactsCommand == otherCommandResult.isShowContactsCommand;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, isHelpCommand, isExitCommand, isShowGroupsCommand, isShowContactsCommand);
+
     }
 
 }
