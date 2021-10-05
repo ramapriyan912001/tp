@@ -34,7 +34,7 @@ public class JsonAdaptedGroup {
      * Converts a given {@code Group} into this class for Jackson use.
      */
     public JsonAdaptedGroup(Group source) {
-        groupName = source.getGroupName().name;
+        groupName = source.getGroupName().getName();
         members.addAll(source.getMembers().stream()
                 .map(JsonAdaptedPerson::new)
                 .collect(Collectors.toList()));
@@ -54,7 +54,7 @@ public class JsonAdaptedGroup {
         if (groupName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
-        if (!GroupName.isValidName(groupName)) {
+        if (!GroupName.isValidGroupName(groupName)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
         final GroupName modelName = new GroupName(groupName);

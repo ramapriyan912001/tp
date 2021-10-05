@@ -90,21 +90,20 @@ public class CreateGroupParser implements Parser<CreateGroupCommand> {
      */
     private ArrayList<Person> findGroupMembers(String args) throws ParseException {
         try {
-            int startIndex = args.indexOf(" n/") + 3;
-
+            String prefixWithWhiteSpace = " " + PREFIX_NAME;
+            int startIndex = args.indexOf(prefixWithWhiteSpace) + 3;
             if (startIndex == 1) {
                 throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
             }
             String teamMembers = args.substring(startIndex);
-
-            int nextPrefix = teamMembers.indexOf(" n/");
+            int nextPrefix = teamMembers.indexOf(prefixWithWhiteSpace);
             while (nextPrefix != -1) {
                 Name memberName = new Name(teamMembers.substring(0, nextPrefix));
                 if (Objects.isNull(addMemberIfExist(memberName))) {
                     return null;
                 }
                 teamMembers = teamMembers.substring(nextPrefix + 3);
-                nextPrefix = teamMembers.indexOf(" n/");
+                nextPrefix = teamMembers.indexOf(prefixWithWhiteSpace);
             }
             if (Objects.isNull(addMemberIfExist(new Name(teamMembers)))) {
                 return null;
@@ -115,7 +114,7 @@ public class CreateGroupParser implements Parser<CreateGroupCommand> {
                 return toBeAddedToGroup;
             }
         } catch (IndexOutOfBoundsException e) {
-            return null;
+            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
         } catch (EmptyGroupException err) {
             throw new EmptyGroupException(String.format(MESSAGE_EMPTY_GROUP, CreateGroupCommand.MESSAGE_USAGE));
         } catch (ParseException err) {
