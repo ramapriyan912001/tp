@@ -47,6 +47,7 @@ public class CreateGroupCommand extends Command {
 
     /**
      * Returns int object tracking the number of non matching members between this.members and otherMembers.
+     *
      * @param numberOfNonMatchingMembers int value to track the number of members in otherMembers
      *                                   that are not present in this.members.
      * @param member Person object that is being searched for in otherMembers.
@@ -65,6 +66,7 @@ public class CreateGroupCommand extends Command {
 
     /**
      * Returns a boolean object representing if this.members contains the same Person objects as otherMembers.
+     *
      * @param otherMembers List of Person objects from another instance of CreateGroupCommand.
      * @return boolean object representing if this.members contains the same Person objects as otherMembers.
      */
@@ -73,11 +75,7 @@ public class CreateGroupCommand extends Command {
         for (Person member : this.members) {
             numberOfNonMatchingMembers = checkForMember(numberOfNonMatchingMembers, member, otherMembers);
         }
-        if (numberOfNonMatchingMembers == 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return numberOfNonMatchingMembers == 0;
     }
 
     @Override
@@ -97,14 +95,14 @@ public class CreateGroupCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        if (other instanceof CreateGroupCommand) {
-            CreateGroupCommand otherCommand = (CreateGroupCommand) other;
-            if (this.isValidCommand == (otherCommand.getValidCommand())
-                    && checkSameMembers(otherCommand.getMembers())
-                    && this.groupName.equals(otherCommand.getGroupName())) {
-                return true;
-            }
+        if (!(other instanceof CreateGroupCommand)) {
             return false;
+        }
+        CreateGroupCommand otherCommand = (CreateGroupCommand) other;
+        if (this.isValidCommand == (otherCommand.getValidCommand())
+                && checkSameMembers(otherCommand.getMembers())
+                && this.groupName.equals(otherCommand.getGroupName())) {
+            return true;
         }
         return false;
     }

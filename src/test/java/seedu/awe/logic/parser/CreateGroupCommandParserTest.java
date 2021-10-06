@@ -38,24 +38,21 @@ public class CreateGroupCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() {
         GroupName expectedGroupName = BALI.getGroupName();
-        ArrayList<Person> expectedGroupMembers = new ArrayList<>();
-        expectedGroupMembers.addAll(BALI.getMembers());
+        ArrayList<Person> expectedGroupMembers = new ArrayList<>(BALI.getMembers());
 
         // regular input for CreateGroupCommand
-        assertParseSuccess(parser, GROUPNAME_DESC_BALI
-                        + NAME_DESC_ALICE + NAME_DESC_BOB + NAME_DESC_AMY,
+        assertParseSuccess(parser, GROUPNAME_DESC_BALI + NAME_DESC_ALICE + NAME_DESC_BOB + NAME_DESC_AMY,
                 new CreateGroupCommand(expectedGroupName, expectedGroupMembers, true));
 
         resetParser();
         // names in different order
-        assertParseSuccess(parser, GROUPNAME_DESC_BALI
-                        + NAME_DESC_BOB + NAME_DESC_AMY + NAME_DESC_ALICE,
+        assertParseSuccess(parser, GROUPNAME_DESC_BALI + NAME_DESC_BOB + NAME_DESC_AMY + NAME_DESC_ALICE,
                 new CreateGroupCommand(expectedGroupName, expectedGroupMembers, true));
 
         resetParser();
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + GROUPNAME_DESC_BALI
-                + NAME_DESC_ALICE + NAME_DESC_BOB + NAME_DESC_AMY,
+                        + NAME_DESC_ALICE + NAME_DESC_BOB + NAME_DESC_AMY,
                 new CreateGroupCommand(expectedGroupName, expectedGroupMembers, true));
 
         resetParser();
@@ -69,10 +66,6 @@ public class CreateGroupCommandParserTest {
         assertParseSuccess(parser, GROUPNAME_DESC_BALI
                         + NAME_DESC_BOB + NAME_DESC_BOB + NAME_DESC_AMY + NAME_DESC_ALICE + NAME_DESC_ALICE,
                 new CreateGroupCommand(expectedGroupName, expectedGroupMembers, true));
-
-        resetParser();
-        // Command fails if more than one group name is detected
-
     }
 
     @Test
