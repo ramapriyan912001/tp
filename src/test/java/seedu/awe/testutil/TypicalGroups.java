@@ -28,7 +28,7 @@ public class TypicalGroups {
 
     public static final Group BALI = new GroupBuilder().withGroupName("Bali")
             .withMembers(ALICE, BOB, AMY)
-            .withTags("friends").build();
+            .build();
     public static final Group OSLO = new GroupBuilder().withGroupName("Oslo")
             .withMembers(CARL, ELLE, DANIEL)
             .withTags("friends").build();

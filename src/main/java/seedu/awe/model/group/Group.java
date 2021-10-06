@@ -9,7 +9,7 @@ import seedu.awe.model.person.Person;
 import seedu.awe.model.tag.Tag;
 
 public class Group {
-    public static final String MESSAGE_CONSTRAINTS = "MESSAGE_CONSTRAINT TO BE COMPLETED";
+    public static final String MESSAGE_CONSTRAINTS = "Group names should comprise of alphanumeric characters";
     //TODO: WRITE MESSAGE CONSTRAINTS MESSAGE
     private GroupName groupName;
     private final ArrayList<Person> members = new ArrayList<>();
