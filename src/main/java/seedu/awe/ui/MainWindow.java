@@ -124,7 +124,6 @@ public class MainWindow extends UiPart<Stage> {
         viewPanel = new ViewPanel(logic);
         viewPanelPlaceholder.getChildren().add(viewPanel.getRoot());
 
-
         navigationButtonPanel = new NavigationButtonPanel(viewPanel);
         navigationButtonPlaceholder.getChildren().add(navigationButtonPanel.getRoot());
 

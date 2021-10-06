@@ -8,16 +8,14 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.awe.model.group.exceptions.DuplicateGroupException;
 import seedu.awe.model.group.exceptions.GroupNotFoundException;
-import seedu.awe.model.person.exceptions.DuplicatePersonException;
 
 /**
  * A list of expenses that enforces uniqueness between its elements and does not allow nulls.
  * An expense is considered unique by comparing using {@code Expense#isSameExpense(Expense)}. As such, adding and updating of
  * groups uses Expense#isSameExpense(Expense) for equality so as to ensure that the expense being added or updated is
- * unique in terms of identity in the UniqueExpenseList. However, the removal of an expense uses Expense#equals(Object) so
- * as to ensure that the expense with exactly the same fields will be removed.
+ * unique in terms of identity in the UniqueExpenseList. However, the removal of an expense uses
+ * Expense#equals(Object) so as to ensure that the expense with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *

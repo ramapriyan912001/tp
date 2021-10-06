@@ -23,7 +23,7 @@ public class ExpenseListPanel extends UiPart<Region> {
     private ListView<Expense> expenseListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code ExpenseListPanel} with the given {@code ObservableList}.
      */
     public ExpenseListPanel(ObservableList<Expense> expenseList) {
         super(FXML);
@@ -32,7 +32,7 @@ public class ExpenseListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Group} using a {@code GroupCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Expense} using a {@code ExpenseCard}.
      */
     class ExpenseListViewCell extends ListCell<Expense> {
         @Override

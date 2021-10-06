@@ -1,6 +1,7 @@
 package seedu.awe.logic.parser;
 import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.awe.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,8 +17,8 @@ import seedu.awe.logic.commands.ExitCommand;
 import seedu.awe.logic.commands.FindCommand;
 import seedu.awe.logic.commands.HelpCommand;
 import seedu.awe.logic.commands.ListContactsCommand;
-import seedu.awe.logic.commands.ListGroupsCommand;
 import seedu.awe.logic.commands.ListExpensesCommand;
+import seedu.awe.logic.commands.ListGroupsCommand;
 import seedu.awe.logic.parser.exceptions.EmptyGroupException;
 import seedu.awe.logic.parser.exceptions.ParseException;
 import seedu.awe.model.Model;

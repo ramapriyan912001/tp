@@ -10,7 +10,6 @@ import java.util.stream.Stream;
 
 import seedu.awe.commons.core.index.Index;
 import seedu.awe.commons.exceptions.IllegalValueException;
-import seedu.awe.logic.commands.AddCommand;
 import seedu.awe.logic.commands.AddExpenseCommand;
 import seedu.awe.logic.parser.exceptions.ParseException;
 import seedu.awe.model.expense.Cost;

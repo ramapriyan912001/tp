@@ -36,10 +36,8 @@ public class ExpenseCard extends UiPart<Region> {
     private Label payer;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code ExpenseCode} with the given {@code Expense} and index to display.
      *
-     * Introduce addressbook here so that personCard can display group membership of each person without adding Group
-     * as an attribute of Person class. Doing so prevents circular dependencies.
      */
     public ExpenseCard(Expense expense, int displayedIndex) {
         super(FXML);

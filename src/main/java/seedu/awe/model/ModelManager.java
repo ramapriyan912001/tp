@@ -28,7 +28,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Group> filteredGroups;
-    private final FilteredList<Expense> filteredExpense;
+    private final FilteredList<Expense> filteredExpenses;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -43,7 +43,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredGroups = new FilteredList<>(this.addressBook.getGroupList());
-        filteredExpense = new FilteredList<>(this.addressBook.getExpenseList());
+        filteredExpenses = new FilteredList<>(this.addressBook.getExpenseList());
     }
 
     public ModelManager() {
@@ -231,13 +231,13 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Expense> getFilteredExpenseList() {
-        return filteredExpense;
+        return filteredExpenses;
     }
 
     @Override
     public void updateFilteredExpenseList(Predicate<Expense> predicate) {
         requireNonNull(predicate);
-        filteredExpense.setPredicate(predicate);
+        filteredExpenses.setPredicate(predicate);
     }
 
     @Override
