@@ -169,7 +169,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.awe.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -351,7 +351,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
     
 
-**Use case: Adding a Person**
+**Use case: Add a Person**
 
 **MSS**
 
@@ -515,7 +515,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.    
 
-**Use case: Listing all travel groups**
+**Use case: List all travel groups**
 
 **MSS**
 
@@ -528,7 +528,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
       Use case ends.
 
-**Use case: Viewing expenses of a travel group**
+**Use case: View expenses of a travel group**
 
 **MSS**
 
