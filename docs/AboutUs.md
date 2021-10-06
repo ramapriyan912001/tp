@@ -16,7 +16,7 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 
 [LinkedIn](https://www.linkedin.com/in/chrus-chong/)
 [GitHub](https://github.com/chrus-chong)
-[Portfolio](team/johndoe.md)
+[Portfolio](team/chruschong.md)
 
 * Role: Project Advisor
 
