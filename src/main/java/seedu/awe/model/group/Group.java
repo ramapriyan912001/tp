@@ -91,6 +91,21 @@ public class Group {
     }
 
     /**
+     * Checks if a person is part of the group.
+     *
+     * @param person to check if is part of the group.
+     * @return Whether the person is part of the group.
+     */
+    public boolean isPartOfGroup(Person person) {
+        for (Person member : members) {
+            if (member.equals(person)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
