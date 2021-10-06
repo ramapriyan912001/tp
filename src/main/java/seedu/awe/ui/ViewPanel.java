@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.awe.logic.Logic;
+import seedu.awe.ui.expense.ExpenseListPanel;
 import seedu.awe.ui.group.GroupListPanel;
 import seedu.awe.ui.person.PersonListPanel;
 
@@ -19,6 +20,7 @@ public class ViewPanel extends UiPart<Region> {
     // Panels for toggling
     private PersonListPanel personListPanel;
     private GroupListPanel groupListPanel;
+    private ExpenseListPanel expenseListPanel;
 
     @FXML
     private StackPane viewListPlaceholder;
@@ -38,6 +40,7 @@ public class ViewPanel extends UiPart<Region> {
     private void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getAddressBook());
         groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
+        expenseListPanel = new ExpenseListPanel(logic.getFilteredExpenseList());
         // Need update with logic and get groups
 
         toggleView(UiView.ADDRESS_BOOK);
@@ -55,6 +58,8 @@ public class ViewPanel extends UiPart<Region> {
             viewListPlaceholder.getChildren().add(personListPanel.getRoot());
         } else if (uiView == UiView.GROUP_PAGE) {
             viewListPlaceholder.getChildren().add(groupListPanel.getRoot());
+        } else if (uiView == UiView.EXPENSE_PAGE) {
+            viewListPlaceholder.getChildren().add(expenseListPanel.getRoot());
         } else {
             throw new AssertionError("Toggle tab not found");
         }

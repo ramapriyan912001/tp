@@ -1,6 +1,7 @@
 package seedu.awe.model;
 
 import javafx.collections.ObservableList;
+import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.person.Person;
@@ -17,6 +18,8 @@ public interface ReadOnlyAddressBook {
     ObservableList<Person> getPersonList();
 
     ObservableList<Group> getGroupList();
+
+    ObservableList<Expense> getExpenseList();
 
     Group getGroupByName(GroupName groupName);
 }

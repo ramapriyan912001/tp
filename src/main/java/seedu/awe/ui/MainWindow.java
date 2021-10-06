@@ -207,6 +207,10 @@ public class MainWindow extends UiPart<Stage> {
                 viewPanel.toggleView(UiView.GROUP_PAGE);
             }
 
+            if (commandResult.isShowExpenses()) {
+                viewPanel.toggleView(UiView.EXPENSE_PAGE);
+            }
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);

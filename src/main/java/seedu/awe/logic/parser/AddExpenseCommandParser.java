@@ -35,11 +35,6 @@ public class AddExpenseCommandParser implements Parser<AddExpenseCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_GROUP_NAME, PREFIX_COST, PREFIX_DESCRIPTION);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_GROUP_NAME, PREFIX_COST, PREFIX_DESCRIPTION)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-        }
-
         Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());

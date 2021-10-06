@@ -28,6 +28,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Group> filteredGroups;
+    private final FilteredList<Expense> filteredExpense;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -42,6 +43,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredGroups = new FilteredList<>(this.addressBook.getGroupList());
+        filteredExpense = new FilteredList<>(this.addressBook.getExpenseList());
     }
 
     public ModelManager() {
@@ -206,6 +208,36 @@ public class ModelManager implements Model {
     public Group getGroupByName(GroupName groupName) {
         requireNonNull(groupName);
         return addressBook.getGroupByName(groupName);
+    }
+
+    //=========== Expenses ================================================================================
+
+    /**
+     * Adds expense into addressbook.
+     *
+     * @param expense Expense object representing expenses of a group.
+     */
+    @Override
+    public void addExpense(Expense expense) {
+        addressBook.addExpense(expense);
+    }
+
+    //=========== Filtered Expense List Accessors =============================================================
+
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Expense} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Expense> getFilteredExpenseList() {
+        return filteredExpense;
+    }
+
+    @Override
+    public void updateFilteredExpenseList(Predicate<Expense> predicate) {
+        requireNonNull(predicate);
+        filteredExpense.setPredicate(predicate);
     }
 
     @Override

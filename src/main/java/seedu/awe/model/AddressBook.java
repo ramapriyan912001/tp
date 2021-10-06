@@ -7,6 +7,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.awe.model.expense.Expense;
+import seedu.awe.model.expense.UniqueExpenseList;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.group.UniqueGroupList;
@@ -22,6 +23,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final UniqueGroupList groups;
+    private final UniqueExpenseList expenses;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -33,6 +35,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         groups = new UniqueGroupList();
+        expenses = new UniqueExpenseList();
     }
 
     public AddressBook() {}
@@ -167,6 +170,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     public Group getGroupByName(GroupName groupName) {
         requireNonNull(groupName);
         return groups.getGroupByName(groupName);
+    }
+
+    /**
+     * Adds expense to unique expense list.
+     * @param expense new Expense object to be added.
+     */
+    public void addExpense(Expense expense) {
+        expenses.add(expense);
+    }
+
+    @Override
+    public ObservableList<Expense> getExpenseList() {
+        return expenses.asUnmodifiableObservableList();
     }
 
     @Override
