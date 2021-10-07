@@ -1,16 +1,16 @@
 package seedu.awe.logic.commands;
 
-import org.junit.jupiter.api.Test;
-import seedu.awe.model.Model;
-import seedu.awe.model.ModelManager;
-import seedu.awe.model.group.Group;
-import seedu.awe.model.group.GroupName;
-import seedu.awe.testutil.ModelBuilder;
-
 import static seedu.awe.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.awe.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.awe.testutil.Assert.assertThrows;
 import static seedu.awe.testutil.TypicalGroups.BALI;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.awe.model.Model;
+import seedu.awe.model.group.GroupName;
+import seedu.awe.testutil.ModelBuilder;
+
 
 public class ListExpensesCommandTest {
     private Model model = new ModelBuilder().build();
@@ -30,7 +30,7 @@ public class ListExpensesCommandTest {
 
     @Test
     public void execute_showExpenses_success() {
-        ListExpensesCommand listExpensesCommand= new ListExpensesCommand(BALI.getGroupName());
+        ListExpensesCommand listExpensesCommand = new ListExpensesCommand(BALI.getGroupName());
         CommandResult expectedCommandResult = new CommandResult(ListExpensesCommand.MESSAGE_SUCCESS,
                 false, false, false, false, true);
         assertCommandSuccess(listExpensesCommand, model, expectedCommandResult, expectedModel);
