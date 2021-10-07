@@ -3,7 +3,6 @@ package seedu.awe.model.expense;
 import static java.util.Objects.requireNonNull;
 import static seedu.awe.commons.util.AppUtil.checkArgument;
 
-import java.math.BigDecimal;
 
 public class Cost {
 

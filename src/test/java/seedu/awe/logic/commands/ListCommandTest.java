@@ -29,20 +29,20 @@ public class ListCommandTest {
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
         assertCommandSuccess(new ListContactsCommand(), model, ListContactsCommand.MESSAGE_SUCCESS,
-                expectedModel, false, true);
+                expectedModel, false, true, false);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         assertCommandSuccess(new ListContactsCommand(), model, ListContactsCommand.MESSAGE_SUCCESS,
-                expectedModel, false, true);
+                expectedModel, false, true, false);
     }
 
     @Test
     public void execute_showContacts_success() {
         CommandResult expectedCommandResult = new CommandResult(ListContactsCommand.MESSAGE_SUCCESS,
-                false, false, false, true);
+                false, false, false, true, false);
         assertCommandSuccess(new ListContactsCommand(), new ModelManager(), expectedCommandResult, new ModelManager());
     }
 }

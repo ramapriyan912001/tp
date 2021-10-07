@@ -7,7 +7,6 @@ import seedu.awe.commons.core.GuiSettings;
 import seedu.awe.logic.commands.CommandResult;
 import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.logic.parser.exceptions.ParseException;
-import seedu.awe.model.Model;
 import seedu.awe.model.ReadOnlyAddressBook;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;

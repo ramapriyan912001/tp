@@ -1,13 +1,11 @@
 package seedu.awe.model;
 
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.person.Person;
 
-import java.util.ArrayList;
 
 /**
  * Unmodifiable view of an awe book

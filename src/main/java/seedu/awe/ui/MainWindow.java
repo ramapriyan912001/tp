@@ -15,13 +15,8 @@ import seedu.awe.commons.core.LogsCenter;
 import seedu.awe.logic.Logic;
 import seedu.awe.logic.commands.CommandResult;
 import seedu.awe.logic.commands.exceptions.CommandException;
-import seedu.awe.logic.parser.ArgumentMultimap;
-import seedu.awe.logic.parser.ArgumentTokenizer;
-import seedu.awe.logic.parser.ParserUtil;
 import seedu.awe.logic.parser.exceptions.ParseException;
-import seedu.awe.model.group.GroupName;
 
-import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 
 
 /**

@@ -24,12 +24,18 @@ public class ListExpensesCommand extends Command {
 
     private final GroupName groupName;
 
+    /**
+     * A public constructor to initialise the group name
+     * to the given one.
+     *
+     * @param groupName The name of the group.
+     */
     public ListExpensesCommand(GroupName groupName) {
         requireNonNull(groupName);
         this.groupName = groupName;
 
     }
-    
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);

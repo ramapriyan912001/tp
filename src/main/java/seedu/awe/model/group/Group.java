@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import javafx.collections.transformation.FilteredList;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.person.Person;
 import seedu.awe.model.tag.Tag;

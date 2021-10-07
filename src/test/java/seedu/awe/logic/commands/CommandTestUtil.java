@@ -117,7 +117,8 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-                                            Model expectedModel, boolean showGroups, boolean showContacts, boolean showExpenses) {
+                                            Model expectedModel, boolean showGroups, boolean showContacts,
+                                            boolean showExpenses) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false,
                 false, showGroups, showContacts, showExpenses);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);

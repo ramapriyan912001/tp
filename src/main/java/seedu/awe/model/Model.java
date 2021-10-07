@@ -1,11 +1,9 @@
 package seedu.awe.model;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import seedu.awe.commons.core.GuiSettings;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;

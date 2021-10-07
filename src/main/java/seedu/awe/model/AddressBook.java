@@ -2,12 +2,10 @@ package seedu.awe.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
@@ -92,8 +90,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         expenses.addAll(group.getExpenses());
     }
 
-    public ObservableList<Expense> getExpenseList() { ;
-            return expenses;
+    public ObservableList<Expense> getExpenseList() {
+        return expenses;
     }
 
     public UniqueGroupList getGroups() {

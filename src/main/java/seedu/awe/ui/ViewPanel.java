@@ -38,6 +38,9 @@ public class ViewPanel extends UiPart<Region> {
         fillInnerParts();
     }
 
+    /**
+     * Fills up all the placeholders of this window.
+     */
     public void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getAddressBook());
         groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
