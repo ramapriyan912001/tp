@@ -7,7 +7,6 @@ import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.model.Model;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
-import seedu.awe.model.group.exceptions.DuplicateGroupException;
 import seedu.awe.model.person.Person;
 
 public class CreateGroupCommand extends Command {
@@ -33,8 +32,53 @@ public class CreateGroupCommand extends Command {
         this.isValidCommand = isValidCommand;
     }
 
+    public ArrayList<Person> getMembers() {
+        return members;
+    }
+
+    public GroupName getGroupName() {
+        return groupName;
+    }
+
+    public boolean getValidCommand() {
+        return isValidCommand;
+    }
+
+    /**
+     * Returns int object tracking the number of non matching members between this.members and otherMembers.
+     *
+     * @param numberOfNonMatchingMembers int value to track the number of members in otherMembers
+     *                                   that are not present in this.members.
+     * @param member Person object that is being searched for in otherMembers.
+     * @param otherMembers List of Person objects from another instance of CreateGroupCommand.
+     * @return int object to track the number of members in otherMembers that are not present in this.members.
+     */
+    public int checkForMember(int numberOfNonMatchingMembers, Person member, ArrayList<Person> otherMembers) {
+        for (Person otherMember : otherMembers) {
+            if (member.equals(otherMember)) {
+                numberOfNonMatchingMembers--;
+                break;
+            }
+        }
+        return numberOfNonMatchingMembers;
+    }
+
+    /**
+     * Returns a boolean object representing if this.members contains the same Person objects as otherMembers.
+     *
+     * @param otherMembers List of Person objects from another instance of CreateGroupCommand.
+     * @return boolean object representing if this.members contains the same Person objects as otherMembers.
+     */
+    public boolean checkSameMembers(ArrayList<Person> otherMembers) {
+        int numberOfNonMatchingMembers = otherMembers.size();
+        for (Person member : this.members) {
+            numberOfNonMatchingMembers = checkForMember(numberOfNonMatchingMembers, member, otherMembers);
+        }
+        return numberOfNonMatchingMembers == 0;
+    }
+
     @Override
-    public CommandResult execute(Model model) throws CommandException, DuplicateGroupException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (!isValidCommand) {
             return new CommandResult(MESSAGE_ERROR);
@@ -46,5 +90,19 @@ public class CreateGroupCommand extends Command {
         }
         model.addGroup(group);
         return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof CreateGroupCommand)) {
+            return false;
+        }
+        CreateGroupCommand otherCommand = (CreateGroupCommand) other;
+        if (this.isValidCommand == (otherCommand.getValidCommand())
+                && checkSameMembers(otherCommand.getMembers())
+                && this.groupName.equals(otherCommand.getGroupName())) {
+            return true;
+        }
+        return false;
     }
 }

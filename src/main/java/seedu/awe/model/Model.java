@@ -9,7 +9,6 @@ import seedu.awe.commons.core.GuiSettings;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
-import seedu.awe.model.group.exceptions.DuplicateGroupException;
 import seedu.awe.model.person.Person;
 
 /**
@@ -94,7 +93,7 @@ public interface Model {
      * Adds the given group.
      * {@code Group} must not already exist in the awe book.
      */
-    void addGroup(Group person) throws DuplicateGroupException;
+    void addGroup(Group person);
 
     /**
      * Deletes group based on groupName.
@@ -116,19 +115,10 @@ public interface Model {
     Group getGroupByName(GroupName groupName);
 
     /**
-     * Replaces the target group with the newGroup.
-     *
-     * @param group Target group.
-     * @param newGroup to replace the target group.
-     * @throws DuplicateGroupException if the group is unchanged.
-     */
-    void setGroup(Group group, Group newGroup) throws DuplicateGroupException;
-
-    /**
      * Returns all expenses in the specified group.
      *
      * @param group Specified group to get expenses from.
      * @return A list of all expenses in the specified group.
      */
-    public ArrayList<Expense> getExpenses(Group group);
+    ArrayList<Expense> getExpenses(Group group);
 }

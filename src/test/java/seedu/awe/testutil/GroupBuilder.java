@@ -81,22 +81,22 @@ public class GroupBuilder {
     /**
      * Returns a valid Group object.
      *
-     * @return Group object with default name "Venice" and default member "Amy Bee".
+     * @return Group object with default name "Bali" and default member "Amy Bee".
      */
     public Group buildValidGroup() {
-        GroupName venice = new GroupName("Venice");
+        GroupName bali = new GroupName("Bali");
         ArrayList<Person> members = new ArrayList<Person>();
         members.add(new PersonBuilder().build());
-        return new Group(venice, members);
+        return new Group(bali, members);
     }
 
     public GroupName getValidGroupName() {
-        GroupName venice = new GroupName("Venice");
-        return venice;
+        GroupName bali = new GroupName("Bali");
+        return bali;
     }
 
     public ArrayList<Person> getValidMembers() {
-        ArrayList<Person> members = new ArrayList<Person>();
+        ArrayList<Person> members = new ArrayList<>();
         members.add(new PersonBuilder().build());
         return members;
     }

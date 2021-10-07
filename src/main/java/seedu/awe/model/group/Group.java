@@ -10,9 +10,8 @@ import seedu.awe.model.person.Person;
 import seedu.awe.model.tag.Tag;
 
 public class Group {
-    public static final String MESSAGE_CONSTRAINTS = "MESSAGE_CONSTRAINT TO BE COMPLETED";
     //TODO: WRITE MESSAGE CONSTRAINTS MESSAGE
-    private GroupName groupName;
+    private final GroupName groupName;
     private final ArrayList<Person> members = new ArrayList<>();
     private final Set<Tag> tags = new HashSet<>();
     private final ArrayList<Expense> expenses = new ArrayList<>();

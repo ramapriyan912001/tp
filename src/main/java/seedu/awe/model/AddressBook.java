@@ -10,7 +10,6 @@ import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.group.UniqueGroupList;
-import seedu.awe.model.group.exceptions.DuplicateGroupException;
 import seedu.awe.model.person.Person;
 import seedu.awe.model.person.UniquePersonList;
 
@@ -136,7 +135,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds group to unique group list.
      * @param group new Group object to be added.
      */
-    public void addGroup(Group group) throws DuplicateGroupException {
+    public void addGroup(Group group) {
         groups.add(group);
     }
 

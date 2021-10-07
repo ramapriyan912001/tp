@@ -11,7 +11,6 @@ import seedu.awe.commons.util.StringUtil;
 import seedu.awe.logic.parser.exceptions.ParseException;
 import seedu.awe.model.expense.Cost;
 import seedu.awe.model.expense.Description;
-import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.person.Address;
 import seedu.awe.model.person.Email;
@@ -109,7 +108,7 @@ public class ParserUtil {
         requireNonNull(groupName);
         String trimmedGroupName = groupName.trim();
         if (!GroupName.isValidGroupName(trimmedGroupName)) {
-            throw new ParseException(Group.MESSAGE_CONSTRAINTS);
+            throw new ParseException(GroupName.MESSAGE_CONSTRAINTS);
         }
         return new GroupName(trimmedGroupName);
     }
@@ -151,7 +150,7 @@ public class ParserUtil {
         requireNonNull(cost);
         String trimmedCost = cost.trim();
         if (!Cost.isValidCost(trimmedCost)) {
-            throw new ParseException(Group.MESSAGE_CONSTRAINTS);
+            throw new ParseException(GroupName.MESSAGE_CONSTRAINTS);
         }
         return new Cost(trimmedCost);
     }
@@ -166,7 +165,7 @@ public class ParserUtil {
         requireNonNull(description);
         String trimmedDescription = description.trim();
         if (!Description.isValidDescription(trimmedDescription)) {
-            throw new ParseException(Group.MESSAGE_CONSTRAINTS);
+            throw new ParseException(GroupName.MESSAGE_CONSTRAINTS);
         }
         return new Description(trimmedDescription);
     }
