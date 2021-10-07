@@ -17,7 +17,6 @@ import seedu.awe.logic.commands.CommandResult;
 import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.logic.parser.exceptions.ParseException;
 
-
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
@@ -124,7 +123,6 @@ public class MainWindow extends UiPart<Stage> {
         viewPanel = new ViewPanel(logic);
         viewPanelPlaceholder.getChildren().add(viewPanel.getRoot());
 
-
         navigationButtonPanel = new NavigationButtonPanel(viewPanel);
         navigationButtonPlaceholder.getChildren().add(navigationButtonPanel.getRoot());
 
@@ -205,6 +203,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowGroups()) {
                 viewPanel.toggleView(UiView.GROUP_PAGE);
+            }
+
+            if (commandResult.isShowExpenses()) {
+                viewPanel.toggleView(UiView.EXPENSE_PAGE);
             }
 
             return commandResult;
