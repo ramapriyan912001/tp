@@ -7,7 +7,10 @@ import org.junit.jupiter.api.Test;
 import seedu.awe.model.Model;
 import seedu.awe.model.ModelManager;
 
-public class GroupCommandTest {
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for ListGroupsCommand.
+ */
+public class ListGroupsCommandTest {
     private Model model = new ModelManager();
     private Model expectedModel = new ModelManager();
 
