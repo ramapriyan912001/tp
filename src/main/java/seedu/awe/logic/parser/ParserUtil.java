@@ -9,7 +9,6 @@ import java.util.Set;
 import seedu.awe.commons.core.index.Index;
 import seedu.awe.commons.util.StringUtil;
 import seedu.awe.logic.parser.exceptions.ParseException;
-import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.person.Address;
 import seedu.awe.model.person.Email;
@@ -107,7 +106,7 @@ public class ParserUtil {
         requireNonNull(groupName);
         String trimmedGroupName = groupName.trim();
         if (!GroupName.isValidGroupName(trimmedGroupName)) {
-            throw new ParseException(Group.MESSAGE_CONSTRAINTS);
+            throw new ParseException(GroupName.MESSAGE_CONSTRAINTS);
         }
         return new GroupName(trimmedGroupName);
     }

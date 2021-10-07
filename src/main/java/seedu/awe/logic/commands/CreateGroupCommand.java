@@ -7,7 +7,6 @@ import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.model.Model;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
-import seedu.awe.model.group.exceptions.DuplicateGroupException;
 import seedu.awe.model.person.Person;
 
 public class CreateGroupCommand extends Command {
@@ -79,7 +78,7 @@ public class CreateGroupCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException, DuplicateGroupException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (!isValidCommand) {
             return new CommandResult(MESSAGE_ERROR);
