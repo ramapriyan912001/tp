@@ -1,10 +1,10 @@
-package seedu.address.ui;
+package seedu.awe.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.group.Expense;
+import seedu.awe.model.expense.Expense;
 
 /**
  * A UI component that displays information of a {@code Person}.
@@ -44,9 +44,9 @@ public class ExpenseCard extends UiPart<Region> {
         super(FXML);
         this.expense = expense;
         id.setText(displayedIndex + ". ");
-        expenseName.setText(expense.getName());
-        amount.setText(expense.getAmount());
-        payer.setText(expense.getPayer());
+        expenseName.setText(expense.getDescription().toString());
+        amount.setText(expense.getCost().toString());
+        payer.setText(expense.getPayer().toString());
     }
 
     @Override
