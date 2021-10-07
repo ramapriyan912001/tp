@@ -99,15 +99,23 @@ public class CreateGroupCommandParser implements Parser<CreateGroupCommand> {
             int nextPrefix = teamMembers.indexOf(prefixWithWhiteSpace);
             while (nextPrefix != -1) {
                 Name memberName = new Name(teamMembers.substring(0, nextPrefix));
+                if (containsMemberName(memberName)) {
+                    teamMembers = teamMembers.substring(nextPrefix + 3);
+                    nextPrefix = teamMembers.indexOf(prefixWithWhiteSpace);
+                    continue;
+                }
                 if (Objects.isNull(addMemberIfExist(memberName))) {
                     return null;
                 }
                 teamMembers = teamMembers.substring(nextPrefix + 3);
                 nextPrefix = teamMembers.indexOf(prefixWithWhiteSpace);
             }
-            if (Objects.isNull(addMemberIfExist(new Name(teamMembers)))) {
-                return null;
+            if (!containsMemberName(new Name(teamMembers))) {
+                if (Objects.isNull(addMemberIfExist(new Name(teamMembers)))) {
+                    return null;
+                }
             }
+
             if (toBeAddedToGroup.size() == 0) {
                 throw new EmptyGroupException(MESSAGE_EMPTY_GROUP);
             } else {
@@ -154,6 +162,21 @@ public class CreateGroupCommandParser implements Parser<CreateGroupCommand> {
             }
         }
         return null;
+    }
+
+    /**
+     * Returns boolean representing if toBeAddedToGroup contains a member with the same name as the given name.
+     *
+     * @param memberName Name object that belongs to a member.
+     * @return boolean object representing if toBeAddedToGroup contains a member with the same name as the given name.
+     */
+    private boolean containsMemberName(Name memberName) {
+        for (Person member : toBeAddedToGroup) {
+            if (member.getName().equals(memberName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
