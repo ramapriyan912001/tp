@@ -9,7 +9,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.awe.commons.core.LogsCenter;
 import seedu.awe.model.expense.Expense;
-import seedu.awe.ui.UiPart;
 
 /**
  * Panel containing the list of group.

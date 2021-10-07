@@ -121,7 +121,6 @@ public interface Model {
      */
     void setGroup(Group group, Group newGroup);
 
-
     /**
      * Returns all expenses in the input group.
      *
