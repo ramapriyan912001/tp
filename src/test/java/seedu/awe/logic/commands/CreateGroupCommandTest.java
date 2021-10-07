@@ -20,8 +20,10 @@ import seedu.awe.model.AddressBook;
 import seedu.awe.model.Model;
 import seedu.awe.model.ReadOnlyAddressBook;
 import seedu.awe.model.ReadOnlyUserPrefs;
+import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
+import seedu.awe.model.group.exceptions.DuplicateGroupException;
 import seedu.awe.model.person.Person;
 import seedu.awe.testutil.GroupBuilder;
 
@@ -189,6 +191,16 @@ public class CreateGroupCommandTest {
 
         @Override
         public void addGroup(Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setGroup(Group group, Group newGroup) throws DuplicateGroupException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ArrayList<Expense> getExpenses(Group group) {
             throw new AssertionError("This method should not be called.");
         }
     }

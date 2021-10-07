@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.awe.commons.exceptions.IllegalValueException;
+import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.person.Person;
@@ -22,6 +23,7 @@ public class JsonAdaptedGroup {
     private final String groupName;
     private final List<JsonAdaptedPerson> members = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedExpense> expenses = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedGroup} with the given group details.
@@ -29,13 +31,17 @@ public class JsonAdaptedGroup {
     @JsonCreator
     public JsonAdaptedGroup(@JsonProperty("name") String groupName,
                             @JsonProperty("members") List<JsonAdaptedPerson> members,
-                            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                            @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                            @JsonProperty("expenses") List<JsonAdaptedExpense> expenses) {
         this.groupName = groupName;
         if (members != null) {
             this.members.addAll(members);
         }
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        if (expenses != null) {
+            this.expenses.addAll(expenses);
         }
     }
 
@@ -46,6 +52,14 @@ public class JsonAdaptedGroup {
         groupName = source.getGroupName().getName();
         members.addAll(source.getMembers().stream()
                 .map(JsonAdaptedPerson::new)
+                .collect(Collectors.toList()));
+        tags.addAll(source.getTags()
+                .stream()
+                .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
+        expenses.addAll(source.getExpenses()
+                .stream()
+                .map(JsonAdaptedExpense::new)
                 .collect(Collectors.toList()));
     }
 
@@ -63,6 +77,10 @@ public class JsonAdaptedGroup {
         for (JsonAdaptedTag tag : tags) {
             groupTags.add(tag.toModelType());
         }
+        final ArrayList<Expense> modelExpenses = new ArrayList<>();
+        for (JsonAdaptedExpense expense : expenses) {
+            modelExpenses.add(expense.toModelType());
+        }
 
         if (groupName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -74,7 +92,7 @@ public class JsonAdaptedGroup {
         final GroupName modelName = new GroupName(groupName);
 
         final Set<Tag> modelTags = new HashSet<>(groupTags);
-        return new Group(modelName, modelMembers, modelTags);
+        return new Group(modelName, modelMembers, modelTags, modelExpenses);
     }
 
 }

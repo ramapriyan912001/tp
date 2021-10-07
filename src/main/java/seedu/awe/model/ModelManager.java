@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.awe.commons.core.GuiSettings;
 import seedu.awe.commons.core.LogsCenter;
+import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.person.Person;
@@ -169,6 +171,17 @@ public class ModelManager implements Model {
     public boolean hasGroup(Group group) {
         requireNonNull(group);
         return addressBook.hasGroup(group);
+    }
+
+    @Override
+    public void setGroup(Group group, Group newGroup) {
+        requireNonNull(group);
+        addressBook.setGroup(group, newGroup);
+    }
+
+    public ArrayList<Expense> getExpenses(Group group) {
+        requireNonNull(group);
+        return addressBook.getExpenses(group);
     }
 
     //=========== Filtered Group List Accessors =============================================================

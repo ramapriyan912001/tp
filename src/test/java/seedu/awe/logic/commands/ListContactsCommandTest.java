@@ -13,9 +13,9 @@ import seedu.awe.model.ModelManager;
 import seedu.awe.model.UserPrefs;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for ListContactCommand.
  */
-public class ListCommandTest {
+public class ListContactsCommandTest {
 
     private Model model;
     private Model expectedModel;
