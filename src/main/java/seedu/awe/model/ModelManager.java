@@ -174,7 +174,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setGroup(Group group, Group newGroup) throws DuplicateGroupException {
+    public void setGroup(Group group, Group newGroup) {
         requireNonNull(group);
         addressBook.setGroup(group, newGroup);
     }

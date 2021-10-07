@@ -62,7 +62,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.groups.setGroups(groups);
     }
 
-    public void setGroup(Group group, Group newGroup) throws DuplicateGroupException {
+    public void setGroup(Group group, Group newGroup) {
         groups.setGroup(group, newGroup);
     }
 

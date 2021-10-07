@@ -115,6 +115,15 @@ public interface Model {
     Group getGroupByName(GroupName groupName);
 
     /**
+     * Replaces the target group with the newGroup.
+     *
+     * @param group Target group.
+     * @param newGroup to replace the target group.
+     */
+    void setGroup(Group group, Group newGroup);
+
+
+    /**
      * Returns all expenses in the specified group.
      *
      * @param group Specified group to get expenses from.
