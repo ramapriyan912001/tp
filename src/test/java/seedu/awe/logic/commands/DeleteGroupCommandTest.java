@@ -1,17 +1,76 @@
 package seedu.awe.logic.commands;
 
-import static seedu.awe.testutil.TypicalGroups.getTypicalAddressBook;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.awe.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.awe.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.awe.testutil.TypicalGroups.BALI;
+import static seedu.awe.testutil.TypicalGroups.OSLO;
+import static seedu.awe.testutil.TypicalGroups.VIENNA_NOT_IN_GROUPS;
+
+import org.junit.jupiter.api.Test;
 
 import seedu.awe.model.Model;
-import seedu.awe.model.ModelManager;
-import seedu.awe.model.UserPrefs;
-import seedu.awe.model.group.exceptions.DuplicateGroupException;
+import seedu.awe.model.group.Group;
+import seedu.awe.testutil.ModelBuilder;
 
 public class DeleteGroupCommandTest {
 
-    private Model model;
+    private Model model = new ModelBuilder().build();
 
-    public DeleteGroupCommandTest() throws DuplicateGroupException {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    public void resetModel() {
+        model = new ModelBuilder().build();
+    }
+
+    @Test
+    public void execute_validGroupCommand_success() {
+        // Group is within model
+        Group groupToDelete = BALI;
+        DeleteGroupCommand deleteGroupCommand = new DeleteGroupCommand(groupToDelete);
+
+        String expectedMessage = String.format(DeleteGroupCommand.MESSAGE_SUCCESS, groupToDelete.getGroupName(),
+                groupToDelete.getMembers().size());
+
+        assertCommandSuccess(deleteGroupCommand, model, expectedMessage, model);
+    }
+
+    @Test
+    public void execute_invalidGroup_throwsCommandException() {
+        // Group not in model
+        Group groupNotInModel = VIENNA_NOT_IN_GROUPS;
+        DeleteGroupCommand deleteGroupCommand = new DeleteGroupCommand(groupNotInModel);
+
+        assertCommandFailure(deleteGroupCommand, model, DeleteGroupCommand.MESSAGE_GROUP_DOES_NOT_EXIST);
+    }
+
+    @Test
+    public void equals() {
+        DeleteGroupCommand deleteFirstGroupCommand = new DeleteGroupCommand(BALI);
+        DeleteGroupCommand deleteSecondGroupCommand = new DeleteGroupCommand(OSLO);
+
+        // same object -> returns true
+        assertTrue(deleteFirstGroupCommand.equals(deleteFirstGroupCommand));
+
+        // same values -> returns true
+        DeleteGroupCommand deleteFirstGroupCommandCopy = new DeleteGroupCommand(BALI);
+        assertTrue(deleteFirstGroupCommand.equals(deleteFirstGroupCommandCopy));
+
+        // different types -> returns false
+        assertFalse(deleteFirstGroupCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(deleteFirstGroupCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(deleteFirstGroupCommand.equals(deleteSecondGroupCommand));
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show no group.
+     */
+    private void showNoGroup(Model model) {
+        model.updateFilteredGroupList(g -> false);
+
+        assertTrue(model.getFilteredGroupList().isEmpty());
     }
 }

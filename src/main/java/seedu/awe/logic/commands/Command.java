@@ -2,7 +2,6 @@ package seedu.awe.logic.commands;
 
 import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.model.Model;
-import seedu.awe.model.group.exceptions.DuplicateGroupException;
 
 /**
  * Represents a command with hidden internal logic and the ability to be executed.
@@ -16,6 +15,6 @@ public abstract class Command {
      * @return feedback message of the operation result for display
      * @throws CommandException If an error occurs during command execution.
      */
-    public abstract CommandResult execute(Model model) throws CommandException, DuplicateGroupException;
+    public abstract CommandResult execute(Model model) throws CommandException;
 
 }
