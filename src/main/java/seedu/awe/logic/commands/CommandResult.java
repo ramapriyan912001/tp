@@ -23,16 +23,21 @@ public class CommandResult {
     /** The application should show contacts */
     private final boolean isShowContactsCommand;
 
+    /** The application should show expenses */
+    private final boolean isShowExpensesCommand;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean isHelpCommand, boolean isExitCommand,
-                         boolean isShowGroupsCommand, boolean isShowContactsCommand) {
+                         boolean isShowGroupsCommand, boolean isShowContactsCommand,
+                                boolean isShowExpensesCommand) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.isHelpCommand = isHelpCommand;
         this.isExitCommand = isExitCommand;
         this.isShowGroupsCommand = isShowGroupsCommand;
         this.isShowContactsCommand = isShowContactsCommand;
+        this.isShowExpensesCommand = isShowExpensesCommand;
     }
 
     /**
@@ -40,7 +45,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false, false);
+        this(feedbackToUser, false, false, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -63,6 +68,10 @@ public class CommandResult {
         return isShowContactsCommand;
     }
 
+    public boolean isShowExpenses() {
+        return isShowExpensesCommand;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -79,12 +88,14 @@ public class CommandResult {
                 && isHelpCommand == otherCommandResult.isHelpCommand
                 && isExitCommand == otherCommandResult.isExitCommand
                 && isShowGroupsCommand == otherCommandResult.isShowGroupsCommand
-                && isShowContactsCommand == otherCommandResult.isShowContactsCommand;
+                && isShowContactsCommand == otherCommandResult.isShowContactsCommand
+                && isShowExpensesCommand == otherCommandResult.isShowExpensesCommand;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, isHelpCommand, isExitCommand, isShowGroupsCommand, isShowContactsCommand);
+        return Objects.hash(feedbackToUser, isHelpCommand, isExitCommand,
+                isShowGroupsCommand, isShowContactsCommand, isShowExpensesCommand);
 
     }
 

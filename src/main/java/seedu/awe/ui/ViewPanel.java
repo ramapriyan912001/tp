@@ -4,8 +4,10 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.awe.logic.Logic;
+import seedu.awe.ui.expense.ExpenseListPanel;
 import seedu.awe.ui.group.GroupListPanel;
 import seedu.awe.ui.person.PersonListPanel;
+
 
 /**
  * The View Window. Handles the displaying of individual viewPanel.
@@ -19,6 +21,7 @@ public class ViewPanel extends UiPart<Region> {
     // Panels for toggling
     private PersonListPanel personListPanel;
     private GroupListPanel groupListPanel;
+    private ExpenseListPanel expenseListPanel;
 
     @FXML
     private StackPane viewListPlaceholder;
@@ -35,16 +38,19 @@ public class ViewPanel extends UiPart<Region> {
         fillInnerParts();
     }
 
-    private void fillInnerParts() {
+    /**
+     * Fills up all the placeholders of this window.
+     */
+    public void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getAddressBook());
         groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
-        // Need update with logic and get groups
+        expenseListPanel = new ExpenseListPanel(logic.getExpenses());
 
         toggleView(UiView.ADDRESS_BOOK);
     }
 
     /**
-     * Switches different different view for AddressBook and GroupsPage.
+     * Switches different different view for AddressBook, GroupsPage and ExpensesPage.
      *
      * @param uiView Page to be changed
      */
@@ -55,6 +61,8 @@ public class ViewPanel extends UiPart<Region> {
             viewListPlaceholder.getChildren().add(personListPanel.getRoot());
         } else if (uiView == UiView.GROUP_PAGE) {
             viewListPlaceholder.getChildren().add(groupListPanel.getRoot());
+        } else if (uiView == UiView.EXPENSE_PAGE) {
+            viewListPlaceholder.getChildren().add(expenseListPanel.getRoot());
         } else {
             throw new AssertionError("Toggle tab not found");
         }

@@ -14,6 +14,7 @@ import seedu.awe.logic.parser.AddressBookParser;
 import seedu.awe.logic.parser.exceptions.ParseException;
 import seedu.awe.model.Model;
 import seedu.awe.model.ReadOnlyAddressBook;
+import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.person.Person;
 import seedu.awe.storage.Storage;
@@ -68,6 +69,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Group> getFilteredGroupList() {
         return model.getFilteredGroupList();
+    }
+
+    @Override
+    public ObservableList<Expense> getExpenses() {
+        return model.getExpenses();
     }
 
     @Override

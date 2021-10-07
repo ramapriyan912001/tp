@@ -2,9 +2,9 @@ package seedu.awe.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
@@ -21,6 +21,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final UniqueGroupList groups;
+    private ObservableList<Expense> expenses;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -32,6 +33,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         groups = new UniqueGroupList();
+        expenses = FXCollections.observableArrayList();
     }
 
     public AddressBook() {}
@@ -66,9 +68,26 @@ public class AddressBook implements ReadOnlyAddressBook {
         groups.setGroup(group, newGroup);
     }
 
-    public ArrayList<Expense> getExpenses(Group group) {
-        Group groupToListExpenses = groups.getGroupByName(group.getGroupName());
-        return groupToListExpenses.getExpenses();
+    /**
+     * Replaces the contents of the expenses list with the given group's
+     * expenses.
+     *
+     * @param group
+     */
+    public void setExpenses(Group group) {
+        expenses.addAll(group.getExpenses());
+    }
+
+    public ObservableList<Expense> getExpenseList() {
+        return expenses;
+    }
+
+    public UniqueGroupList getGroups() {
+        return this.groups;
+    }
+
+    public UniquePersonList getPersons() {
+        return this.persons;
     }
 
     /**
