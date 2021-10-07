@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import seedu.awe.logic.commands.CreateGroupCommand;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.group.exceptions.DuplicateGroupException;
+import seedu.awe.model.person.Name;
 import seedu.awe.model.person.Person;
 import seedu.awe.testutil.ModelBuilder;
 
@@ -96,7 +97,7 @@ public class CreateGroupCommandParserTest {
         resetParser();
         // invalid name returns IllegalArgumentException
         String userInput = GROUPNAME_DESC_BALI + INVALID_NAME_DESC + NAME_DESC_AMY + NAME_DESC_ALICE;
-        assertThrows(IllegalArgumentException.class, GroupName.MESSAGE_CONSTRAINTS, () -> parser.parse(userInput));
+        assertThrows(IllegalArgumentException.class, Name.MESSAGE_CONSTRAINTS, () -> parser.parse(userInput));
 
         resetParser();
         // non-empty preamble
