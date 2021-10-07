@@ -18,7 +18,6 @@ import java.util.List;
 
 import seedu.awe.model.AddressBook;
 import seedu.awe.model.group.Group;
-import seedu.awe.model.group.exceptions.DuplicateGroupException;
 import seedu.awe.model.person.Person;
 
 /**
@@ -64,6 +63,10 @@ public class TypicalGroups {
             .withMembers(HOON, IDA, ELLE)
             .withTags("friends").build();
 
+    public static final Group VIENNA_NOT_IN_GROUPS = new GroupBuilder().withGroupName("Vienna")
+            .withMembers(BENSON, IDA, FIONA)
+            .withTags("friends").build();
+
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalGroups() {} // prevents instantiation
@@ -71,7 +74,7 @@ public class TypicalGroups {
     /**
      * Returns an {@code AddressBook} with all the typical persons and groups.
      */
-    public static AddressBook getTypicalAddressBook() throws DuplicateGroupException {
+    public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);

@@ -50,4 +50,16 @@ public class DeleteGroupCommand extends Command {
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, groupName, numberOfMembers));
     }
+
+    @Override
+    public boolean equals (Object otherCommand) {
+        if (this == otherCommand) {
+            return true;
+        }
+        if (!(otherCommand instanceof DeleteGroupCommand)) {
+            return false;
+        }
+        DeleteGroupCommand otherDeleteGroupCommand = (DeleteGroupCommand) otherCommand;
+        return this.getGroup().equals(otherDeleteGroupCommand.getGroup());
+    }
 }

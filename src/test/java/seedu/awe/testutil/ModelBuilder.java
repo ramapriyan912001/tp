@@ -1,4 +1,15 @@
 package seedu.awe.testutil;
+
+import static seedu.awe.testutil.TypicalGroups.AMSTERDAM;
+import static seedu.awe.testutil.TypicalGroups.BALI;
+import static seedu.awe.testutil.TypicalGroups.CHINA;
+import static seedu.awe.testutil.TypicalGroups.DUBAI;
+import static seedu.awe.testutil.TypicalGroups.HELSINKI;
+import static seedu.awe.testutil.TypicalGroups.INDIA;
+import static seedu.awe.testutil.TypicalGroups.LONDON;
+import static seedu.awe.testutil.TypicalGroups.MALIBU;
+import static seedu.awe.testutil.TypicalGroups.OSLO;
+import static seedu.awe.testutil.TypicalGroups.PARIS;
 import static seedu.awe.testutil.TypicalPersons.ALICE;
 import static seedu.awe.testutil.TypicalPersons.AMY;
 import static seedu.awe.testutil.TypicalPersons.BENSON;
@@ -17,6 +28,7 @@ import seedu.awe.model.Model;
 import seedu.awe.model.ModelManager;
 import seedu.awe.model.UserPrefs;
 import seedu.awe.model.group.Group;
+import seedu.awe.model.group.exceptions.DuplicateGroupException;
 import seedu.awe.model.person.Person;
 
 /**
@@ -42,6 +54,7 @@ public class ModelBuilder {
     public ModelBuilder() {
         addressBook = new AddressBook();
         addTypicalPersons(addressBook);
+        addTypicalGroups(addressBook);
         userPrefs = DEFAULT_USERPREFS;
         filteredPersons = DEFAULT_FILTEREDPERSONS;
         filteredGroups = DEFAULT_FILTEREDGROUPS;
@@ -90,6 +103,24 @@ public class ModelBuilder {
         addressBook.addPerson(IDA);
         addressBook.addPerson(AMY);
         addressBook.addPerson(BOB);
+    }
+
+    /**
+     * Adds all Person attributes from TypicalPersons into the sample addressbook.
+     *
+     * @param addressBook AddressBook object to be used for testing purposes.
+     */
+    public void addTypicalGroups(AddressBook addressBook) throws DuplicateGroupException {
+        addressBook.addGroup(AMSTERDAM);
+        addressBook.addGroup(BALI);
+        addressBook.addGroup(INDIA);
+        addressBook.addGroup(LONDON);
+        addressBook.addGroup(DUBAI);
+        addressBook.addGroup(PARIS);
+        addressBook.addGroup(CHINA);
+        addressBook.addGroup(MALIBU);
+        addressBook.addGroup(HELSINKI);
+        addressBook.addGroup(OSLO);
     }
 
     public Model build() {

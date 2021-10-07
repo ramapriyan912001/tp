@@ -19,19 +19,23 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import seedu.awe.logic.commands.CreateGroupCommand;
-import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
+import seedu.awe.model.group.exceptions.DuplicateGroupException;
 import seedu.awe.model.person.Person;
 import seedu.awe.testutil.ModelBuilder;
 
 public class CreateGroupCommandParserTest {
-    private CreateGroupCommandParser parser = new CreateGroupCommandParser(new ModelBuilder().build());
+    private CreateGroupCommandParser parser;
+
+    public CreateGroupCommandParserTest() {
+        parser = new CreateGroupCommandParser(new ModelBuilder().build());
+    }
 
     /**
      * Resets parser. Necessary as CreateGroupCommand parser needs to be initialised with a model for each call.
      * Failure to reset parser will result in Duplicate exceptions being raised.
      */
-    public void resetParser() {
+    public void resetParser() throws DuplicateGroupException {
         parser = new CreateGroupCommandParser(new ModelBuilder().build());
     }
 
@@ -69,7 +73,7 @@ public class CreateGroupCommandParserTest {
     }
 
     @Test
-    public void parse_compulsoryFieldMissing_failure() {
+    public void parse_compulsoryFieldMissing_failure() throws DuplicateGroupException {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateGroupCommand.MESSAGE_USAGE);
 
         resetParser();
@@ -87,7 +91,7 @@ public class CreateGroupCommandParserTest {
         resetParser();
         // invalid group name
         assertParseFailure(parser, INVALID_GROUP_NAME_DESC + NAME_DESC_BOB + NAME_DESC_AMY + NAME_DESC_ALICE,
-                Group.MESSAGE_CONSTRAINTS);
+                GroupName.MESSAGE_CONSTRAINTS);
 
         resetParser();
         // invalid name returns IllegalArgumentException

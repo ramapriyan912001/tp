@@ -7,7 +7,6 @@ import javafx.collections.ObservableList;
 import seedu.awe.commons.core.GuiSettings;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
-import seedu.awe.model.group.exceptions.DuplicateGroupException;
 import seedu.awe.model.person.Person;
 
 /**
@@ -92,7 +91,7 @@ public interface Model {
      * Adds the given group.
      * {@code Group} must not already exist in the awe book.
      */
-    void addGroup(Group person) throws DuplicateGroupException, DuplicateGroupException;
+    void addGroup(Group person);
 
     /**
      * Deletes group based on groupName.

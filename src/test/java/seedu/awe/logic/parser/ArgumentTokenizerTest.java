@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
+import static seedu.awe.logic.parser.CliSyntax.PREFIX_NAME;
 
 import org.junit.jupiter.api.Test;
 
@@ -61,6 +63,15 @@ public class ArgumentTokenizerTest {
         // Same string expected as preamble, but leading/trailing spaces should be trimmed
         assertPreamblePresent(argMultimap, argsString.trim());
 
+    }
+
+    @Test
+    public void tokenizeWithRepeatedPrefixes_success() {
+        String argString = " gn/Bali n/ALICE n/BENSON";
+        ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenizeStringWithRepeatedPrefixes(argString, PREFIX_NAME,
+                PREFIX_GROUP_NAME);
+
+        assertArgumentPresent(argumentMultimap, PREFIX_GROUP_NAME, "Bali");
     }
 
     @Test

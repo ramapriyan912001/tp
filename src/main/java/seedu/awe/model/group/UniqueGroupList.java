@@ -41,7 +41,7 @@ public class UniqueGroupList implements Iterable<Group> {
      * Adds a group to the list.
      * The group must not already exist in the list.
      */
-    public void add(Group toAdd) throws DuplicateGroupException {
+    public void add(Group toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicateGroupException();
@@ -54,7 +54,7 @@ public class UniqueGroupList implements Iterable<Group> {
      * {@code target} must exist in the list.
      * The group identity of {@code editedGroup} must not be the same as another existing group in the list.
      */
-    public void setGroup(Group target, Group editedGroup) throws DuplicateGroupException {
+    public void setGroup(Group target, Group editedGroup) {
         requireAllNonNull(target, editedGroup);
 
         int index = internalList.indexOf(target);
