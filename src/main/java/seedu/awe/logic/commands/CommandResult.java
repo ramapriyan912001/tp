@@ -26,7 +26,6 @@ public class CommandResult {
     /** The application should show expenses */
     private final boolean isShowExpensesCommand;
 
-
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */

@@ -37,7 +37,6 @@ public class LogicManager implements Logic {
         this.model = model;
         this.storage = storage;
         addressBookParser = new AddressBookParser(model);
-
     }
 
     @Override
