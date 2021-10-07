@@ -1,4 +1,4 @@
-package seedu.awe.ui;
+package seedu.awe.ui.expense;
 
 import java.util.logging.Logger;
 
@@ -9,6 +9,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.awe.commons.core.LogsCenter;
 import seedu.awe.model.expense.Expense;
+import seedu.awe.ui.UiPart;
 
 /**
  * Panel containing the list of expenses.
@@ -30,13 +31,12 @@ public class ExpenseListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of an {@code Expense} using an {@code ExpenseCard}.
+     * Custom {@code ExpenseListCell} that displays the graphics of an {@code Expense} using an {@code ExpenseCard}.
      */
     class ExpenseListViewCell extends ListCell<Expense> {
         @Override
         protected void updateItem(Expense expense, boolean empty) {
             super.updateItem(expense, empty);
-
             if (empty || expense == null) {
                 setGraphic(null);
                 setText(null);

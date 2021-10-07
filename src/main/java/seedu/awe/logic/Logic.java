@@ -8,6 +8,7 @@ import seedu.awe.logic.commands.CommandResult;
 import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.logic.parser.exceptions.ParseException;
 import seedu.awe.model.ReadOnlyAddressBook;
+import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.person.Person;
 
@@ -15,6 +16,7 @@ import seedu.awe.model.person.Person;
  * API of the Logic component
  */
 public interface Logic {
+
     /**
      * Executes the command and returns the result.
      * @param commandText The command as entered by the user.
@@ -36,6 +38,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of groups */
     ObservableList<Group> getFilteredGroupList();
+
+    /** Returns the list of expenses. */
+    ObservableList<Expense> getExpenses();
 
     /**
      * Returns the user prefs' awe book file path.

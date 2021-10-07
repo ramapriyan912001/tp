@@ -1,13 +1,14 @@
-package seedu.awe.ui;
+package seedu.awe.ui.expense;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.awe.model.expense.Expense;
+import seedu.awe.ui.UiPart;
 
 /**
- * A UI component that displays information of a {@code Expense}.
+ * A UI component that displays information of an {@code Expense}.
  */
 public class ExpenseCard extends UiPart<Region> {
 
@@ -26,11 +27,11 @@ public class ExpenseCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label expenseName;
+    private Label description;
     @FXML
     private Label id;
     @FXML
-    private Label amount;
+    private Label cost;
     @FXML
     private Label payer;
 
@@ -41,9 +42,9 @@ public class ExpenseCard extends UiPart<Region> {
         super(FXML);
         this.expense = expense;
         id.setText(displayedIndex + ". ");
-        expenseName.setText(expense.getDescription().toString());
-        amount.setText(expense.getCost().toString());
-        payer.setText(expense.getPayer().toString());
+        description.setText(expense.getDescription().toString());
+        cost.setText(expense.getCost().toString());
+        payer.setText(expense.getPayer().getName().toString());
     }
 
     @Override

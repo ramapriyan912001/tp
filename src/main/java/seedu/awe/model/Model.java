@@ -1,7 +1,6 @@
 package seedu.awe.model;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -123,10 +122,12 @@ public interface Model {
     void setGroup(Group group, Group newGroup);
 
     /**
-     * Returns all expenses in the specified group.
+     * Returns all expenses in the input group.
      *
-     * @param group Specified group to get expenses from.
      * @return A list of all expenses in the specified group.
      */
-    ArrayList<Expense> getExpenses(Group group);
+    ObservableList<Expense> getExpenses();
+
+    void setExpenses(Group group);
+
 }
