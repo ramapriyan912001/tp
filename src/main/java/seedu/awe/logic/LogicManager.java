@@ -37,6 +37,7 @@ public class LogicManager implements Logic {
         this.model = model;
         this.storage = storage;
         addressBookParser = new AddressBookParser(model);
+
     }
 
     @Override
@@ -72,8 +73,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Expense> getFilteredExpenseList() {
-        return model.getFilteredExpenseList();
+    public ObservableList<Expense> getExpenses() {
+        return model.getExpenses();
     }
 
     @Override

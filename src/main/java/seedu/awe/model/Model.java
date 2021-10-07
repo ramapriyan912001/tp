@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.awe.commons.core.GuiSettings;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
@@ -124,26 +125,13 @@ public interface Model {
      */
     void setGroup(Group group, Group newGroup) throws DuplicateGroupException;
 
+
     /**
-     * Returns all expenses in the specified group.
+     * Returns all expenses in the input group.
      *
-     * @param group Specified group to get expenses from.
      * @return A list of all expenses in the specified group.
      */
-    public ArrayList<Expense> getExpenses(Group group);
+    ObservableList<Expense> getExpenses();
 
-    /**
-     * Adds the given expense.
-     * {@code Expense} must not already exist in the awe book.
-     */
-    void addExpense(Expense expense);
-
-    /**
-     * Returns an unmodifiable view of the list of {@code Expense} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
-    ObservableList<Expense> getFilteredExpenseList();
-
-    void updateFilteredExpenseList(Predicate<Expense> predicate);
-
+    void setExpenses(GroupName groupName);
 }

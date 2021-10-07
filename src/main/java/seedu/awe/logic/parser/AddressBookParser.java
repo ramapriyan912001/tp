@@ -5,6 +5,7 @@ import static seedu.awe.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.awe.logic.Logic;
 import seedu.awe.logic.commands.AddCommand;
 import seedu.awe.logic.commands.AddExpenseCommand;
 import seedu.awe.logic.commands.ClearCommand;
@@ -77,7 +78,7 @@ public class AddressBookParser {
             return new ListGroupsCommand();
 
         case ListExpensesCommand.COMMAND_WORD:
-            return new ListExpensesCommand();
+            return new ListExpensesCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

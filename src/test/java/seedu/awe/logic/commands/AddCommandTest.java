@@ -192,9 +192,15 @@ public class AddCommandTest {
         }
 
         @Override
-        public ArrayList<Expense> getExpenses(Group group) {
+        public ObservableList<Expense> getExpenses() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void setExpenses(GroupName groupName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**

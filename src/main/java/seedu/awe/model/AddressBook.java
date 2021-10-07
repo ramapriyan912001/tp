@@ -5,9 +5,10 @@ import static java.util.Objects.requireNonNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.awe.model.expense.Expense;
-import seedu.awe.model.expense.UniqueExpenseList;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.group.UniqueGroupList;
@@ -22,8 +23,9 @@ import seedu.awe.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-    private final UniqueGroupList groups;
-    private final UniqueExpenseList expenses;
+    private UniqueGroupList groups;
+    private ObservableList<Expense> expenses;
+
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -35,8 +37,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         groups = new UniqueGroupList();
-        expenses = new UniqueExpenseList();
+        expenses = FXCollections.observableArrayList();
     }
+
+    /*
+    public AddressBook(ArrayList<Expense> expenses, ObservableList<Group> groups,
+            ObservableList<Person> persons) {
+        this.expenses = expenses;
+        this.persons.setPersons(persons);
+        this.groups.setGroups(groups);
+    }
+     */
 
     public AddressBook() {}
 
@@ -70,9 +81,27 @@ public class AddressBook implements ReadOnlyAddressBook {
         groups.setGroup(group, newGroup);
     }
 
-    public ArrayList<Expense> getExpenses(Group group) {
-        Group groupToListExpenses = groups.getGroupByName(group.getGroupName());
-        return groupToListExpenses.getExpenses();
+    /**
+     * Replaces the contents of the expenses list with the given group's
+     * expenses.
+     *
+     * @param group
+     */
+    public void setExpenses(Group group) {
+
+        expenses.addAll(group.getExpenses());
+    }
+
+    public ObservableList<Expense> getExpenseList() { ;
+            return expenses;
+    }
+
+    public UniqueGroupList getGroups() {
+        return this.groups;
+    }
+
+    public UniquePersonList getPersons() {
+        return this.persons;
     }
 
     /**
@@ -83,6 +112,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setPersons(newData.getPersonList());
         setGroups(newData.getGroupList());
+
     }
 
     //// person-level operations
@@ -170,19 +200,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public Group getGroupByName(GroupName groupName) {
         requireNonNull(groupName);
         return groups.getGroupByName(groupName);
-    }
-
-    /**
-     * Adds expense to unique expense list.
-     * @param expense new Expense object to be added.
-     */
-    public void addExpense(Expense expense) {
-        expenses.add(expense);
-    }
-
-    @Override
-    public ObservableList<Expense> getExpenseList() {
-        return expenses.asUnmodifiableObservableList();
     }
 
     @Override

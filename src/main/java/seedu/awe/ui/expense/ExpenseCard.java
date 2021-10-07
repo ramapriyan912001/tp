@@ -8,7 +8,7 @@ import seedu.awe.model.expense.Expense;
 import seedu.awe.ui.UiPart;
 
 /**
- * A UI component that displays information of a {@code Person}.
+ * A UI component that displays information of an {@code Expense}.
  */
 public class ExpenseCard extends UiPart<Region> {
 
@@ -36,7 +36,7 @@ public class ExpenseCard extends UiPart<Region> {
     private Label payer;
 
     /**
-     * Creates a {@code ExpenseCode} with the given {@code Expense} and index to display.
+     * Creates an {@code ExpenseCard} with the given {@code Expense} and index to display.
      *
      */
     public ExpenseCard(Expense expense, int displayedIndex) {

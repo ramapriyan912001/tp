@@ -103,7 +103,7 @@ public class ParserUtil {
      * Parses a {@code String groupName} into an {@code Group}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code groupName} is invalid.
      */
     public static GroupName parseGroupName(String groupName) throws ParseException {
         requireNonNull(groupName);

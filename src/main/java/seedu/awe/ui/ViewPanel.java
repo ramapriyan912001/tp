@@ -8,6 +8,7 @@ import seedu.awe.ui.expense.ExpenseListPanel;
 import seedu.awe.ui.group.GroupListPanel;
 import seedu.awe.ui.person.PersonListPanel;
 
+
 /**
  * The View Window. Handles the displaying of individual viewPanel.
  */
@@ -37,17 +38,16 @@ public class ViewPanel extends UiPart<Region> {
         fillInnerParts();
     }
 
-    private void fillInnerParts() {
+    public void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getAddressBook());
         groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
-        expenseListPanel = new ExpenseListPanel(logic.getFilteredExpenseList());
-        // Need update with logic and get groups
+        expenseListPanel = new ExpenseListPanel(logic.getExpenses());
 
         toggleView(UiView.ADDRESS_BOOK);
     }
 
     /**
-     * Switches different different view for AddressBook and GroupsPage.
+     * Switches different different view for AddressBook, GroupsPage and ExpensesPage.
      *
      * @param uiView Page to be changed
      */

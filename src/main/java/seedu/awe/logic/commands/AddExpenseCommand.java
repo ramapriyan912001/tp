@@ -72,7 +72,6 @@ public class AddExpenseCommand extends Command {
         Expense expense = new Expense(payer, cost, description);
         Group newGroup = group.addExpense(expense);
         model.setGroup(group, newGroup);
-        model.addExpense(expense);
 
         return new CommandResult(MESSAGE_SUCCESS);
     }

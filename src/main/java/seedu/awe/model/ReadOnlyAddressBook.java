@@ -1,10 +1,13 @@
 package seedu.awe.model;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.person.Person;
+
+import java.util.ArrayList;
 
 /**
  * Unmodifiable view of an awe book
@@ -18,7 +21,9 @@ public interface ReadOnlyAddressBook {
     ObservableList<Person> getPersonList();
 
     ObservableList<Group> getGroupList();
-
+    /**
+     * Returns an unmodifiable view of the expenses list.
+     */
     ObservableList<Expense> getExpenseList();
 
     Group getGroupByName(GroupName groupName);

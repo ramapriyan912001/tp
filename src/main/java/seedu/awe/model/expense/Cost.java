@@ -17,7 +17,7 @@ public class Cost {
      */
     public static final String VALIDATION_REGEX = "([0-9]+)(\\.*)([0-9]*)";
 
-    public final BigDecimal cost;
+    public final Double cost;
 
     /**
      * Constructs a {@code Cost}.
@@ -27,7 +27,7 @@ public class Cost {
     public Cost(String cost) {
         requireNonNull(cost);
         checkArgument(isValidCost(cost), MESSAGE_CONSTRAINTS);
-        this.cost = new BigDecimal(cost);
+        this.cost = Double.parseDouble(cost);
     }
 
     /**

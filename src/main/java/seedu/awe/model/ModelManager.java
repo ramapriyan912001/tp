@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -28,7 +27,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Group> filteredGroups;
-    private final FilteredList<Expense> filteredExpenses;
+    private final FilteredList<Expense> expenses;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -43,7 +42,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredGroups = new FilteredList<>(this.addressBook.getGroupList());
-        filteredExpenses = new FilteredList<>(this.addressBook.getExpenseList());
+        expenses = new FilteredList<>(this.addressBook.getExpenseList());
     }
 
     public ModelManager() {
@@ -182,11 +181,6 @@ public class ModelManager implements Model {
         addressBook.setGroup(group, newGroup);
     }
 
-    public ArrayList<Expense> getExpenses(Group group) {
-        requireNonNull(group);
-        return addressBook.getExpenses(group);
-    }
-
     //=========== Filtered Group List Accessors =============================================================
 
     /**
@@ -212,32 +206,21 @@ public class ModelManager implements Model {
 
     //=========== Expenses ================================================================================
 
+
     /**
-     * Adds expense into addressbook.
+     * Returns the current list of expenses.
      *
-     * @param expense Expense object representing expenses of a group.
+     * @return expenseslist The list of expenses.
      */
     @Override
-    public void addExpense(Expense expense) {
-        addressBook.addExpense(expense);
-    }
-
-    //=========== Filtered Expense List Accessors =============================================================
-
-
-    /**
-     * Returns an unmodifiable view of the list of {@code Expense} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
-    @Override
-    public ObservableList<Expense> getFilteredExpenseList() {
-        return filteredExpenses;
+    public ObservableList<Expense> getExpenses() {
+        return expenses;
     }
 
     @Override
-    public void updateFilteredExpenseList(Predicate<Expense> predicate) {
-        requireNonNull(predicate);
-        filteredExpenses.setPredicate(predicate);
+    public void setExpenses(GroupName groupName) {
+        Group group = getGroupByName(groupName);
+        addressBook.setExpenses(group);
     }
 
     @Override
