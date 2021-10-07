@@ -31,7 +31,7 @@ Given below are my contributions to the project. [RepoSense link]()
     * Added use cases for `view groups`, `find person` and `view expenses`.
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#113](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/113)
+  * PRs reviewed (with non-trivial review comments): [\#113](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/113), [\#116](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/116)
   * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
   * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
   * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
