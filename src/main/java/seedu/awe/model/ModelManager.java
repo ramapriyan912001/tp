@@ -14,7 +14,6 @@ import seedu.awe.commons.core.LogsCenter;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
-import seedu.awe.model.group.exceptions.DuplicateGroupException;
 import seedu.awe.model.person.Person;
 
 /**
@@ -148,7 +147,7 @@ public class ModelManager implements Model {
      * @param group Group object representing members going on a trip.
      */
     @Override
-    public void addGroup(Group group) throws DuplicateGroupException {
+    public void addGroup(Group group) {
         addressBook.addGroup(group);
     }
 
@@ -176,7 +175,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setGroup(Group group, Group newGroup) throws DuplicateGroupException {
+    public void setGroup(Group group, Group newGroup) {
         requireNonNull(group);
         addressBook.setGroup(group, newGroup);
     }
@@ -238,7 +237,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && filteredGroups.equals(other.filteredGroups);
     }
 
 }

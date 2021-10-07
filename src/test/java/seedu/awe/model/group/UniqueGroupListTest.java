@@ -32,13 +32,13 @@ public class UniqueGroupListTest {
     }
 
     @Test
-    public void contains_groupInList_returnsTrue() throws DuplicateGroupException {
+    public void contains_groupInList_returnsTrue() {
         uniqueGroupList.add(BALI);
         assertTrue(uniqueGroupList.contains(BALI));
     }
 
     @Test
-    public void contains_groupWithSameIdentityFieldsInList_returnsTrue() throws DuplicateGroupException {
+    public void contains_groupWithSameIdentityFieldsInList_returnsTrue() {
         uniqueGroupList.add(BALI);
         Group editedBali = new GroupBuilder(BALI).withMembers(IDA, HOON).build();
         assertTrue(uniqueGroupList.contains(editedBali));
@@ -50,7 +50,7 @@ public class UniqueGroupListTest {
     }
 
     @Test
-    public void add_duplicateGroup_throwsDuplicateGroupException() throws DuplicateGroupException {
+    public void add_duplicateGroup_throwsDuplicateGroupException() {
         uniqueGroupList.add(BALI);
         assertThrows(DuplicateGroupException.class, () -> uniqueGroupList.add(BALI));
     }
@@ -71,7 +71,7 @@ public class UniqueGroupListTest {
     }
 
     @Test
-    public void setGroup_editedGroupIsSameGroup_success() throws DuplicateGroupException {
+    public void setGroup_editedGroupIsSameGroup_success() {
         uniqueGroupList.add(BALI);
         uniqueGroupList.setGroup(BALI, BALI);
         UniqueGroupList expectedUniqueGroupList = new UniqueGroupList();
@@ -80,7 +80,7 @@ public class UniqueGroupListTest {
     }
 
     @Test
-    public void setGroup_editedGroupHasSameIdentity_success() throws DuplicateGroupException {
+    public void setGroup_editedGroupHasSameIdentity_success() {
         uniqueGroupList.add(BALI);
         Group editedBali = new GroupBuilder(BALI).withTags("Business").build();
         uniqueGroupList.setGroup(BALI, editedBali);
@@ -90,7 +90,7 @@ public class UniqueGroupListTest {
     }
 
     @Test
-    public void setGroup_editedGroupHasDifferentIdentity_success() throws DuplicateGroupException {
+    public void setGroup_editedGroupHasDifferentIdentity_success() {
         uniqueGroupList.add(BALI);
         uniqueGroupList.setGroup(BALI, AMSTERDAM);
         UniqueGroupList expectedUniqueGroupList = new UniqueGroupList();
@@ -117,7 +117,7 @@ public class UniqueGroupListTest {
     }
 
     @Test
-    public void remove_existingGroup_removesGroup() throws DuplicateGroupException {
+    public void remove_existingGroup_removesGroup() {
         uniqueGroupList.add(BALI);
         uniqueGroupList.remove(BALI);
         UniqueGroupList expectedUniqueGroupList = new UniqueGroupList();
@@ -130,7 +130,7 @@ public class UniqueGroupListTest {
     }
 
     @Test
-    public void setGroups_uniqueGroupList_replacesOwnListWithProvidedUniqueGroupsList() throws DuplicateGroupException {
+    public void setGroups_uniqueGroupList_replacesOwnListWithProvidedUniqueGroupsList() {
         uniqueGroupList.add(BALI);
         UniqueGroupList expectedUniqueGroupList = new UniqueGroupList();
         expectedUniqueGroupList.add(AMSTERDAM);
@@ -144,7 +144,7 @@ public class UniqueGroupListTest {
     }
 
     @Test
-    public void setGroups_list_replacesOwnListWithProvidedList() throws DuplicateGroupException {
+    public void setGroups_list_replacesOwnListWithProvidedList() {
         uniqueGroupList.add(BALI);
         List<Group> groupList = Collections.singletonList(AMSTERDAM);
         uniqueGroupList.setGroups(groupList);

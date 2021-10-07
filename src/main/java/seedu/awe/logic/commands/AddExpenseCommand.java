@@ -32,6 +32,7 @@ public class AddExpenseCommand extends Command {
             + PREFIX_DESCRIPTION + "DESCRIPTION";
     public static final String MESSAGE_ARGUMENTS = "Index:";
     public static final String MESSAGE_SUCCESS = "Expense added!";
+    public static final String MESSAGE_NOT_PART_OF_GROUP = "The person isn't part of the specified group!";
 
     private final Index index;
     private final GroupName groupName;
@@ -69,6 +70,9 @@ public class AddExpenseCommand extends Command {
 
         Person payer = lastShownList.get(index.getZeroBased());
         Group group = model.getGroupByName(groupName);
+        if (!group.isPartOfGroup(payer)) {
+            return new CommandResult(MESSAGE_NOT_PART_OF_GROUP);
+        }
         Expense expense = new Expense(payer, cost, description);
         Group newGroup = group.addExpense(expense);
         model.setGroup(group, newGroup);

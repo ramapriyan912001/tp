@@ -48,7 +48,7 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 
 [LinkedIn](https://www.linkedin.com/in/ekhn/)
 [Github](http://github.com/kheekheekhee)
-[Portfolio](team/johndoe.md)
+[Portfolio](team/nicholasee.md)
 
 * Role: Developer
 * Responsibilities: Frontend Engineering

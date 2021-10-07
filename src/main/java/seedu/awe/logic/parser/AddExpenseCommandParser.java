@@ -6,8 +6,6 @@ import static seedu.awe.logic.parser.CliSyntax.PREFIX_COST;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 
-import java.util.stream.Stream;
-
 import seedu.awe.commons.core.index.Index;
 import seedu.awe.commons.exceptions.IllegalValueException;
 import seedu.awe.logic.commands.AddExpenseCommand;
@@ -47,13 +45,5 @@ public class AddExpenseCommandParser implements Parser<AddExpenseCommand> {
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).orElse(""));
 
         return new AddExpenseCommand(index, groupName, cost, description);
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

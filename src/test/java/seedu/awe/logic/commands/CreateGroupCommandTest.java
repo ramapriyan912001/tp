@@ -26,9 +26,6 @@ import seedu.awe.model.group.GroupName;
 import seedu.awe.model.group.exceptions.DuplicateGroupException;
 import seedu.awe.model.person.Person;
 import seedu.awe.testutil.GroupBuilder;
-import seedu.awe.testutil.PersonBuilder;
-
-
 
 public class CreateGroupCommandTest {
     private Model model;
@@ -43,11 +40,11 @@ public class CreateGroupCommandTest {
     public void execute_groupAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingGroupAdded modelStub = new ModelStubAcceptingGroupAdded();
         GroupBuilder builder = new GroupBuilder();
-        GroupName venice = builder.getValidGroupName();
+        GroupName bali = builder.getValidGroupName();
         ArrayList<Person> members = builder.getValidMembers();
-        Group groupAdded = new Group(venice, members);
+        Group groupAdded = new Group(bali, members);
 
-        CommandResult commandResult = new CreateGroupCommand(venice, members, true).execute(modelStub);
+        CommandResult commandResult = new CreateGroupCommand(bali, members, true).execute(modelStub);
 
         assertEquals(CreateGroupCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(groupAdded), modelStub.groupsAdded);
@@ -57,9 +54,9 @@ public class CreateGroupCommandTest {
     public void execute_duplicateGroup_throwsCommandException() {
         Group validGroup = new GroupBuilder().buildValidGroup();
         GroupBuilder builder = new GroupBuilder();
-        GroupName venice = builder.getValidGroupName();
+        GroupName bali = builder.getValidGroupName();
         ArrayList<Person> members = builder.getValidMembers();
-        CreateGroupCommand createGroupCommand = new CreateGroupCommand(venice, members, true);
+        CreateGroupCommand createGroupCommand = new CreateGroupCommand(bali, members, true);
         ModelStub modelStub = new ModelStubWithGroup(validGroup);
 
         assertThrows(CommandException.class, CreateGroupCommand.MESSAGE_DUPLICATE_GROUP, () ->
@@ -68,30 +65,25 @@ public class CreateGroupCommandTest {
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
-
-        GroupName venice = new GroupName("Venice");
-        GroupName london = new GroupName("London");
+        GroupName bali = new GroupName("Bali");
+        GroupName oslo = new GroupName("Oslo");
         ArrayList<Person> members = new GroupBuilder().getValidMembers();
-        CreateGroupCommand createVeniceCommand = new CreateGroupCommand(venice, members, true);
-        CreateGroupCommand createLondonCommand = new CreateGroupCommand(london, members, true);
+        CreateGroupCommand createBaliCommand = new CreateGroupCommand(bali, members, true);
+        CreateGroupCommand createOsloCommand = new CreateGroupCommand(oslo, members, true);
 
 
         // same object -> returns true
-        assertTrue(createVeniceCommand.equals(createVeniceCommand));
-        assertTrue(createLondonCommand.equals(createLondonCommand));
+        assertTrue(createBaliCommand.equals(createBaliCommand));
+        assertTrue(createOsloCommand.equals(createOsloCommand));
 
         // different types -> returns false
-        assertFalse(createLondonCommand.equals(1));
+        assertFalse(createOsloCommand.equals(1));
 
         // null -> returns false
-        assertFalse(createLondonCommand.equals(null));
+        assertFalse(createOsloCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(createLondonCommand.equals(createVeniceCommand));
+        assertFalse(createOsloCommand.equals(createBaliCommand));
     }
 
     /**
