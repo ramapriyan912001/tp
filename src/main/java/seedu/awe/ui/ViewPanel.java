@@ -1,5 +1,6 @@
 package seedu.awe.ui;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -50,7 +51,7 @@ public class ViewPanel extends UiPart<Region> {
     }
 
     /**
-     * Switches different different view for AddressBook, GroupsPage and ExpensesPage.
+     * Switches different view for AddressBook, GroupsPage and ExpensesPage.
      *
      * @param uiView Page to be changed
      */

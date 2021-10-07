@@ -13,6 +13,8 @@ import seedu.awe.ui.UiPart;
 public class ExpenseCard extends UiPart<Region> {
 
     private static final String FXML = "ExpenseListCard.fxml";
+    private static final String EXPENSE_COST = "Cost: $";
+    private static final String EXPENSE_PAYER = "Payer: ";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -41,10 +43,10 @@ public class ExpenseCard extends UiPart<Region> {
     public ExpenseCard(Expense expense, int displayedIndex) {
         super(FXML);
         this.expense = expense;
-        id.setText(displayedIndex + ". ");
+        id.setText(displayedIndex + ".");
         description.setText(expense.getDescription().toString());
-        cost.setText(expense.getCost().toString());
-        payer.setText(expense.getPayer().getName().toString());
+        cost.setText(EXPENSE_COST + expense.getCost().toString());
+        payer.setText(EXPENSE_PAYER + expense.getPayer().getName().toString());
     }
 
     @Override
