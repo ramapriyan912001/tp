@@ -3,18 +3,11 @@ package seedu.awe.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 
-import seedu.awe.model.AddressBook;
+import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.model.Model;
-import seedu.awe.model.ReadOnlyAddressBook;
-import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.group.exceptions.GroupNotFoundException;
-import seedu.awe.model.person.Person;
-import seedu.awe.ui.ViewPanel;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Lists all expenses of the group to the user.
@@ -27,6 +20,7 @@ public class ListExpensesCommand extends Command {
             + PREFIX_GROUP_NAME + "GROUP NAME ";
 
     public static final String MESSAGE_SUCCESS = "Listed all expenses";
+    public static final String MESSAGE_GROUP_NOT_FOUND = "The specified group does not exists.";
 
     private final GroupName groupName;
 
@@ -35,12 +29,18 @@ public class ListExpensesCommand extends Command {
         this.groupName = groupName;
 
     }
-
+    
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.setExpenses(groupName);
-        return new CommandResult(MESSAGE_SUCCESS, false, false, false, false, true);
+        try {
+            Group group = model.getGroupByName(groupName);
+            model.setExpenses(group);
+            return new CommandResult(MESSAGE_SUCCESS, false, false, false, false, true);
+        } catch (GroupNotFoundException e) {
+            throw new CommandException(MESSAGE_GROUP_NOT_FOUND);
+        }
     }
 }
+
 

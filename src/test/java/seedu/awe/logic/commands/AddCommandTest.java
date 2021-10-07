@@ -197,7 +197,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setExpenses(GroupName groupName) {
+        public void setExpenses(Group group) {
             throw new AssertionError("This method should not be called.");
         }
 

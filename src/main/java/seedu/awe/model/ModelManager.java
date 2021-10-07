@@ -218,8 +218,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setExpenses(GroupName groupName) {
-        Group group = getGroupByName(groupName);
+    public void setExpenses(Group group) {
         addressBook.setExpenses(group);
     }
 

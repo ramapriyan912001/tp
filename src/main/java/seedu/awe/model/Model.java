@@ -133,5 +133,5 @@ public interface Model {
      */
     ObservableList<Expense> getExpenses();
 
-    void setExpenses(GroupName groupName);
+    void setExpenses(Group group);
 }

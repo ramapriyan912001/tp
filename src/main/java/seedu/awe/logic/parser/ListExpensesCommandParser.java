@@ -29,15 +29,19 @@ public class ListExpensesCommandParser implements Parser<ListExpensesCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_GROUP_NAME);
 
-        GroupName groupName;
+        if (!arePrefixesPresent(argMultimap, PREFIX_GROUP_NAME)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListExpensesCommand.MESSAGE_USAGE));
+        }
+
         try {
-            groupName = ParserUtil.parseGroupName((argMultimap.getValue(PREFIX_GROUP_NAME)).get());
+            GroupName groupName = ParserUtil.parseGroupName((argMultimap.getValue(PREFIX_GROUP_NAME)).get());
+            return new ListExpensesCommand(groupName);
+
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ListExpensesCommand.MESSAGE_USAGE), ive);
         }
-
-        return new ListExpensesCommand(groupName);
     }
 
     /**
