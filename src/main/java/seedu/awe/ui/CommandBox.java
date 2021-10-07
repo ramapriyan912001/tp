@@ -49,7 +49,6 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
-
     /**
      * Sets the command box style to use the default style.
      */

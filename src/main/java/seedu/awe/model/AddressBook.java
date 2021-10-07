@@ -37,15 +37,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         expenses = FXCollections.observableArrayList();
     }
 
-    /*
-    public AddressBook(ArrayList<Expense> expenses, ObservableList<Group> groups,
-            ObservableList<Person> persons) {
-        this.expenses = expenses;
-        this.persons.setPersons(persons);
-        this.groups.setGroups(groups);
-    }
-     */
-
     public AddressBook() {}
 
     /**
@@ -85,7 +76,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @param group
      */
     public void setExpenses(Group group) {
-
         expenses.addAll(group.getExpenses());
     }
 
@@ -109,7 +99,6 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setPersons(newData.getPersonList());
         setGroups(newData.getGroupList());
-
     }
 
     //// person-level operations

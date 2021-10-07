@@ -18,7 +18,7 @@ public class ListExpensesCommandParser implements Parser<ListExpensesCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the ListExpensesCommand
-     * and returns an ListExpensesCommand object for execution.
+     * and returns a ListExpensesCommand object for execution.
      *
      * @param args user input
      * @return ListExpensesCommand object to represent command to be executed.
@@ -37,7 +37,6 @@ public class ListExpensesCommandParser implements Parser<ListExpensesCommand> {
         try {
             GroupName groupName = ParserUtil.parseGroupName((argMultimap.getValue(PREFIX_GROUP_NAME)).get());
             return new ListExpensesCommand(groupName);
-
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ListExpensesCommand.MESSAGE_USAGE), ive);

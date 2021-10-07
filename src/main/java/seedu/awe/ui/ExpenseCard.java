@@ -7,7 +7,7 @@ import javafx.scene.layout.Region;
 import seedu.awe.model.expense.Expense;
 
 /**
- * A UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Expense}.
  */
 public class ExpenseCard extends UiPart<Region> {
 
@@ -35,10 +35,7 @@ public class ExpenseCard extends UiPart<Region> {
     private Label payer;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
-     *
-     * Introduce addressbook here so that personCard can display group membership of each person without adding Group
-     * as an attribute of Person class. Doing so prevents circular dependencies.
+     * Creates an {@code ExpenseCard} with the given {@code Expense} and index to display.
      */
     public ExpenseCard(Expense expense, int displayedIndex) {
         super(FXML);

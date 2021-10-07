@@ -33,7 +33,6 @@ public class ListExpensesCommand extends Command {
     public ListExpensesCommand(GroupName groupName) {
         requireNonNull(groupName);
         this.groupName = groupName;
-
     }
 
     @Override

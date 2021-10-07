@@ -37,7 +37,6 @@ public class ExpenseCard extends UiPart<Region> {
 
     /**
      * Creates an {@code ExpenseCard} with the given {@code Expense} and index to display.
-     *
      */
     public ExpenseCard(Expense expense, int displayedIndex) {
         super(FXML);

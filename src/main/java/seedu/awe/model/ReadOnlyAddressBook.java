@@ -6,7 +6,6 @@ import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.person.Person;
 
-
 /**
  * Unmodifiable view of an awe book
  */
@@ -19,6 +18,7 @@ public interface ReadOnlyAddressBook {
     ObservableList<Person> getPersonList();
 
     ObservableList<Group> getGroupList();
+
     /**
      * Returns an unmodifiable view of the expenses list.
      */

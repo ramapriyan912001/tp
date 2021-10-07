@@ -113,7 +113,6 @@ public class Group {
     }
 
     public ArrayList<Expense> getExpenses() {
-
         return expenses;
     }
 

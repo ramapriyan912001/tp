@@ -11,7 +11,7 @@ import seedu.awe.commons.core.LogsCenter;
 import seedu.awe.model.expense.Expense;
 
 /**
- * Panel containing the list of group.
+ * Panel containing the list of expenses.
  */
 public class ExpenseListPanel extends UiPart<Region> {
     private static final String FXML = "ExpenseListPanel.fxml";
@@ -21,7 +21,7 @@ public class ExpenseListPanel extends UiPart<Region> {
     private ListView<Expense> expenseListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates an {@code ExpenseListPanel} with the given {@code ObservableList}.
      */
     public ExpenseListPanel(ObservableList<Expense> expenseList) {
         super(FXML);
@@ -30,7 +30,7 @@ public class ExpenseListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Group} using a {@code GroupCard}.
+     * Custom {@code ListCell} that displays the graphics of an {@code Expense} using an {@code ExpenseCard}.
      */
     class ExpenseListViewCell extends ListCell<Expense> {
         @Override

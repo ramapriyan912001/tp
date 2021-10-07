@@ -205,7 +205,6 @@ public class ModelManager implements Model {
 
     //=========== Expenses ================================================================================
 
-
     /**
      * Returns the current list of expenses.
      *

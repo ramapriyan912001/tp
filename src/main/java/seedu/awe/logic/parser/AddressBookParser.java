@@ -1,4 +1,5 @@
 package seedu.awe.logic.parser;
+
 import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.awe.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
