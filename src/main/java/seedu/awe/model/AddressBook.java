@@ -20,7 +20,7 @@ import seedu.awe.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-    private UniqueGroupList groups;
+    private final UniqueGroupList groups;
     private ObservableList<Expense> expenses;
 
 
