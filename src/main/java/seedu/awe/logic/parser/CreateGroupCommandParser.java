@@ -3,6 +3,7 @@ package seedu.awe.logic.parser;
 import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.awe.logic.commands.CreateGroupCommand.MESSAGE_EMPTY_GROUP;
 import static seedu.awe.logic.commands.CreateGroupCommand.MESSAGE_ERROR;
+import static seedu.awe.logic.commands.CreateGroupCommand.MESSAGE_INVALID_NAMES;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_TAG;
@@ -51,11 +52,9 @@ public class CreateGroupCommandParser implements Parser<CreateGroupCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_GROUP_NAME, PREFIX_NAME, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_GROUP_NAME)
+        if (!arePrefixesPresent(argMultimap, PREFIX_GROUP_NAME, PREFIX_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateGroupCommand.MESSAGE_USAGE));
-        } else if (!arePrefixesPresent(argMultimap, PREFIX_NAME)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_EMPTY_GROUP));
         }
 
         GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).get());
@@ -92,7 +91,8 @@ public class CreateGroupCommandParser implements Parser<CreateGroupCommand> {
         } catch (IndexOutOfBoundsException e) {
             throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
         } catch (EmptyGroupException err) {
-            throw new EmptyGroupException(String.format(MESSAGE_EMPTY_GROUP, CreateGroupCommand.MESSAGE_USAGE));
+            throw new EmptyGroupException(String.format(MESSAGE_EMPTY_GROUP, MESSAGE_INVALID_NAMES,
+                    CreateGroupCommand.MESSAGE_USAGE));
         }
     }
 

@@ -10,6 +10,8 @@ import java.util.Set;
 
 import seedu.awe.commons.core.index.Index;
 import seedu.awe.commons.util.StringUtil;
+import seedu.awe.logic.commands.CreateGroupCommand;
+import seedu.awe.logic.parser.exceptions.EmptyGroupException;
 import seedu.awe.logic.parser.exceptions.ParseException;
 import seedu.awe.model.expense.Cost;
 import seedu.awe.model.expense.Description;
@@ -152,16 +154,22 @@ public class ParserUtil {
         final Set<Name> memberNameSet = new HashSet<>();
         final List<Name> memberNameList = new ArrayList<>();
         boolean isValid = true;
+        int invalidCount = 0;
         for (String personName : names) {
             try {
                 new Name(personName);
             } catch (IllegalArgumentException err) {
+                invalidCount++;
                 isValid = false;
             }
             if (isValid) {
                 memberNameSet.add(new Name(personName));
             }
             isValid = true;
+        }
+        if (invalidCount == names.size()) {
+            throw new EmptyGroupException(String.format(CreateGroupCommand.MESSAGE_EMPTY_GROUP,
+                    CreateGroupCommand.MESSAGE_INVALID_NAMES, CreateGroupCommand.MESSAGE_INVALID_NAMES));
         }
         memberNameList.addAll(memberNameSet);
         return memberNameList;
