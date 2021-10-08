@@ -75,6 +75,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @param group
      */
     public void setExpenses(Group group) {
+        expenses.clear();
         expenses.addAll(group.getExpenses());
     }
 
