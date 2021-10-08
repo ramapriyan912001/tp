@@ -155,6 +155,18 @@ public class Group {
         return new Group(groupName, members, tags, newExpenses);
     }
 
+    /**
+     * Removes an expense from the group.
+     *
+     * @param expense to be removed from the group.
+     * @return A new group with the expense removed from it.
+     */
+    public Group deleteExpense(Expense expense) {
+        ArrayList<Expense> newExpenses = new ArrayList<>(expenses);
+        newExpenses.remove(expense);
+        return new Group(groupName, members, tags, newExpenses);
+    }
+
     @Override
     public String toString() {
         //TODO: TO BE IMPROVED TO POSSIBLY LIST ALL MEMBERS NAMES
