@@ -1,13 +1,16 @@
 package seedu.awe.logic.commands;
 import static java.util.Objects.requireNonNull;
+import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.model.Model;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.person.Person;
+import seedu.awe.model.tag.Tag;
 
 public class CreateGroupCommand extends Command {
     public static final String COMMAND_WORD = "creategroup";
@@ -18,18 +21,19 @@ public class CreateGroupCommand extends Command {
     public static final String MESSAGE_EMPTY_GROUP = "Group requires at least 1 member. \n%1$s";
 
     private final ArrayList<Person> members;
-    private GroupName groupName;
+    private final GroupName groupName;
     private final boolean isValidCommand;
+    private final Set<Tag> tags;
 
     /**
      * Creates a CreateGroupCommand to create the specified {@code Group}
      */
-    public CreateGroupCommand(GroupName groupName, ArrayList<Person> members, boolean isValidCommand) {
-        requireNonNull(groupName);
-        requireNonNull(members);
+    public CreateGroupCommand(GroupName groupName, ArrayList<Person> members, boolean isValidCommand, Set<Tag> tags) {
+        requireAllNonNull(groupName, members, isValidCommand, tags);
         this.groupName = groupName;
         this.members = members;
         this.isValidCommand = isValidCommand;
+        this.tags = tags;
     }
 
     public ArrayList<Person> getMembers() {
@@ -84,7 +88,7 @@ public class CreateGroupCommand extends Command {
             return new CommandResult(MESSAGE_ERROR);
         }
 
-        Group group = new Group(groupName, members);
+        Group group = new Group(groupName, members, tags);
         if (model.hasGroup(group)) {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }

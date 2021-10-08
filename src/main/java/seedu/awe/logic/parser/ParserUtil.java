@@ -2,8 +2,10 @@ package seedu.awe.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.awe.commons.core.index.Index;
@@ -138,6 +140,31 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code Collection<String> names} into a {@code List<Name>}.
+     * @param names
+     * @return List of names
+     */
+    public static List<Name> parseMemberNames(Collection<String> names) {
+        requireNonNull(names);
+        final Set<Name> memberNameSet = new HashSet<>();
+        final List<Name> memberNameList = new ArrayList<>();
+        boolean isValid = true;
+        for (String personName : names) {
+            try {
+                new Name(personName);
+            } catch (IllegalArgumentException err) {
+                isValid = false;
+            }
+            if (isValid) {
+                memberNameSet.add(new Name(personName));
+            }
+            isValid = true;
+        }
+        memberNameList.addAll(memberNameSet);
+        return memberNameList;
     }
 
     /**

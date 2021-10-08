@@ -15,6 +15,7 @@ import static seedu.awe.testutil.Assert.assertThrows;
 import static seedu.awe.testutil.TypicalGroups.BALI;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
@@ -47,30 +48,30 @@ public class CreateGroupCommandParserTest {
 
         // regular input for CreateGroupCommand
         assertParseSuccess(parser, GROUPNAME_DESC_BALI + NAME_DESC_ALICE + NAME_DESC_BOB + NAME_DESC_AMY,
-                new CreateGroupCommand(expectedGroupName, expectedGroupMembers, true));
+                new CreateGroupCommand(expectedGroupName, expectedGroupMembers, true, new HashSet<>()));
 
         resetParser();
         // names in different order
         assertParseSuccess(parser, GROUPNAME_DESC_BALI + NAME_DESC_BOB + NAME_DESC_AMY + NAME_DESC_ALICE,
-                new CreateGroupCommand(expectedGroupName, expectedGroupMembers, true));
+                new CreateGroupCommand(expectedGroupName, expectedGroupMembers, true, new HashSet<>()));
 
         resetParser();
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + GROUPNAME_DESC_BALI
                         + NAME_DESC_ALICE + NAME_DESC_BOB + NAME_DESC_AMY,
-                new CreateGroupCommand(expectedGroupName, expectedGroupMembers, true));
+                new CreateGroupCommand(expectedGroupName, expectedGroupMembers, true, new HashSet<>()));
 
         resetParser();
         // name repeats
         assertParseSuccess(parser, GROUPNAME_DESC_BALI
                         + NAME_DESC_BOB + NAME_DESC_AMY + NAME_DESC_ALICE + NAME_DESC_ALICE,
-                new CreateGroupCommand(expectedGroupName, expectedGroupMembers, true));
+                new CreateGroupCommand(expectedGroupName, expectedGroupMembers, true, new HashSet<>()));
 
         resetParser();
         // multiple name repeats
         assertParseSuccess(parser, GROUPNAME_DESC_BALI
                         + NAME_DESC_BOB + NAME_DESC_BOB + NAME_DESC_AMY + NAME_DESC_ALICE + NAME_DESC_ALICE,
-                new CreateGroupCommand(expectedGroupName, expectedGroupMembers, true));
+                new CreateGroupCommand(expectedGroupName, expectedGroupMembers, true, new HashSet<>()));
     }
 
     @Test
