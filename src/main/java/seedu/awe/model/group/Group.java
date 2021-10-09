@@ -1,13 +1,17 @@
 package seedu.awe.model.group;
 
+import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.person.Person;
 import seedu.awe.model.tag.Tag;
+
 
 public class Group {
     //TODO: WRITE MESSAGE CONSTRAINTS MESSAGE
@@ -153,6 +157,36 @@ public class Group {
         ArrayList<Expense> newExpenses = new ArrayList<>(expenses);
         newExpenses.add(expense);
         return new Group(groupName, members, tags, newExpenses);
+    }
+
+    /**
+     * Replaces the person {@code target} with {@code editedPerson}.
+     */
+    public void updatePerson(Person target, Person editedPerson) {
+        requireAllNonNull(target, editedPerson);
+
+        int index = members.indexOf(target);
+        if (index != -1) {
+            members.set(index, editedPerson);
+        }
+
+        updateExpense(target, editedPerson);
+    }
+
+    /**
+     * Replaces the person {@code target} with {@code editedPerson}.
+     * Only called by {@code updatePerson}.
+     */
+    private void updateExpense(Person target, Person editedPerson) {
+        requireAllNonNull(target, editedPerson);
+
+        for (int i = 0; i < expenses.size(); i++) {
+            Expense expense = expenses.get(i);
+            Optional<Expense> updatedExpense = expense.updatePerson(target, editedPerson);
+            if (updatedExpense.isPresent()) {
+                expenses.set(i, updatedExpense.get());
+            }
+        }
     }
 
     @Override
