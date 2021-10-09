@@ -22,7 +22,7 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
 
 ### Others
 * **Project management**
-  * Managed releases: -
+  * Managed releases: [v1.2](https://github.com/AY2122S1-CS2103T-F13-1/tp/releases/tag/v1.2), [v1.2b]()
 
 * **Documentation**:
   * User Guide:
@@ -34,4 +34,3 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
   * PRs reviewed (with non-trivial review comments): [\#113](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/113), [\#116](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/116)
   * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
   * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-  * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
