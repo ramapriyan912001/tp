@@ -62,8 +62,13 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIENDS = " " + PREFIX_TAG + VALID_GROUP_TAG_FRIENDS;
     public static final String TAG_DESC_FAMILY = " " + PREFIX_TAG + VALID_GROUP_TAG_FAMILY;
 
-    public static final String INVALID_NAME_DESC_ONE = " " + PREFIX_NAME + "James#"; // '&' not allowed in names
-    public static final String INVALID_NAME_DESC_TWO = " " + PREFIX_NAME + "Jo&hn*"; // '&' not allowed in names
+    public static final String INVALID_NAME_JAMES = "James#";
+    public static final String INVALID_NAME_JOHN = "Jo&hn*";
+    public static final String INVALID_NAME_GARY = "G(ary&";
+    public static final String INVALID_NAME_DESC_ONE = " "
+            + PREFIX_NAME + INVALID_NAME_JAMES; // '&' not allowed in names
+    public static final String INVALID_NAME_DESC_TWO = " "
+            + PREFIX_NAME + INVALID_NAME_JOHN; // '&' not allowed in names
     public static final String INVALID_NAME_DESC_THREE = " " + PREFIX_NAME + "G(ary&"; // '&' not allowed in names
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
