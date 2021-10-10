@@ -1,10 +1,10 @@
 package seedu.awe.model.group;
 
-import seedu.awe.commons.util.StringUtil;
-import seedu.awe.model.person.Person;
 
 import java.util.List;
 import java.util.function.Predicate;
+
+import seedu.awe.commons.util.StringUtil;
 
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.

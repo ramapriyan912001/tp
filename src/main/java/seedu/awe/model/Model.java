@@ -16,7 +16,6 @@ import seedu.awe.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
-    Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
 
     /** {@code Predicate} that always evaluate to true */
     Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;

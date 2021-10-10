@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import seedu.awe.commons.core.Messages;
 import seedu.awe.model.Model;
 import seedu.awe.model.group.GroupContainsKeywordsPredicate;
-import seedu.awe.model.person.NameContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in awe book whose name contains any of the argument keywords.

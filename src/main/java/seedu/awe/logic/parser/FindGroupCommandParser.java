@@ -8,7 +8,6 @@ import seedu.awe.logic.commands.FindGroupCommand;
 import seedu.awe.logic.commands.FindPersonCommand;
 import seedu.awe.logic.parser.exceptions.ParseException;
 import seedu.awe.model.group.GroupContainsKeywordsPredicate;
-import seedu.awe.model.person.NameContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
