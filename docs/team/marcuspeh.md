@@ -20,6 +20,11 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
   * Updated the UI interface layout. [\#121](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/121)
   * Added in buttons to toggle between contacts page and group page [\#121](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/121)
 
+### Bug Fixes
+* **severity.HIGH** Edit person does not update groups and expenses. [\#158](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/153)
+   * What happen: The command addPerson does not replace the instance of the old person from groups and expenses.
+   * Pull request: [\#158](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/158)
+
 ### Others
 * **Project management**
   * Managed releases: [v1.2](https://github.com/AY2122S1-CS2103T-F13-1/tp/releases/tag/v1.2), [v1.2b]()
