@@ -1,5 +1,8 @@
 package seedu.awe.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.awe.logic.commands.CommandTestUtil.GROUPNAME_DESC_BALI;
 import static seedu.awe.logic.commands.CommandTestUtil.INVALID_GROUP_NAME_DESC;
@@ -17,24 +20,33 @@ import static seedu.awe.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.awe.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.awe.testutil.Assert.assertThrows;
 import static seedu.awe.testutil.TypicalGroups.BALI;
+import static seedu.awe.testutil.TypicalPersons.ALICE;
+import static seedu.awe.testutil.TypicalPersons.AMY;
+import static seedu.awe.testutil.TypicalPersons.BOB;
+import static seedu.awe.testutil.TypicalPersons.NONEXISTENTPERSON;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
 import seedu.awe.logic.commands.CreateGroupCommand;
 import seedu.awe.logic.parser.exceptions.EmptyGroupException;
+import seedu.awe.logic.parser.exceptions.ParseException;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.group.exceptions.DuplicateGroupException;
+import seedu.awe.model.person.Name;
 import seedu.awe.model.person.Person;
 import seedu.awe.testutil.ModelBuilder;
 
 public class CreateGroupCommandParserTest {
     private CreateGroupCommandParser parser;
+    private CreateGroupCommandParser emptyParser;
 
     public CreateGroupCommandParserTest() {
         parser = new CreateGroupCommandParser(new ModelBuilder().build());
+        emptyParser = new CreateGroupCommandParser(new ModelBuilder().buildEmptyModel());
     }
 
     /**
@@ -110,4 +122,103 @@ public class CreateGroupCommandParserTest {
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + GROUPNAME_DESC_BALI
                         + NAME_DESC_ALICE + NAME_DESC_BOB + NAME_DESC_AMY, expectedMessage);
     }
+
+    @Test
+    public void findGroupMembers_validValues_success() throws ParseException {
+        resetParser();
+        //valid names for Bob, Amy, and Alice
+        ArrayList<Name> membersToFind = new ArrayList<>();
+        membersToFind.add(BOB.getName());
+        membersToFind.add(AMY.getName());
+        membersToFind.add(ALICE.getName());
+
+        ArrayList<Person> members = new ArrayList<>();
+        members.add(BOB);
+        members.add(AMY);
+        members.add(ALICE);
+        assertEquals(parser.findGroupMembers(membersToFind), members);
+
+        resetParser();
+        //valid names and additional person not found in the model addressbook.
+        membersToFind.add(NONEXISTENTPERSON.getName());
+        assertEquals(parser.findGroupMembers(membersToFind), members);
+    }
+
+    @Test
+    public void findGroupMembers_invalidValues_failure() throws ParseException {
+
+        //Argument membersToFind contains members but CreateGroupCommandParser has empty toBeAddedToGroup List.
+        //Throws ParseException.
+        ArrayList<Name> membersToFind = new ArrayList<>();
+        membersToFind.add(BOB.getName());
+        membersToFind.add(AMY.getName());
+        membersToFind.add(ALICE.getName());
+        assertThrows(ParseException.class, CreateGroupCommand.MESSAGE_ERROR, () ->
+                emptyParser.findGroupMembers(membersToFind));
+
+        //Argument membersToFind is empty list and CreateGroupCommandParser has empty toBeAddedToGroup List.
+        //Throws EmptyGroupException.
+        resetParser();
+        ArrayList<Name> emptyMembersToFind = new ArrayList<>();
+        String exceptionMessage = String.format(MESSAGE_EMPTY_GROUP, MESSAGE_INVALID_NAMES,
+                CreateGroupCommand.MESSAGE_USAGE);
+        assertThrows(EmptyGroupException.class, exceptionMessage, () ->
+                parser.findGroupMembers(emptyMembersToFind));
+    }
+
+    @Test
+    public void addMemberIfExist_validValues_trueReturned() {
+        resetParser();
+        //Add valid Person name (Bob)
+        assertTrue(parser.addMemberIfExist(BOB.getName()));
+
+        //Add valid Person name (Alice)
+        assertTrue(parser.addMemberIfExist(ALICE.getName()));
+
+        //Add valid Person name (Amy)
+        assertTrue(parser.addMemberIfExist(AMY.getName()));
+
+        //Attempts to add a repeat Bob name will return false
+        assertFalse(parser.addMemberIfExist(BOB.getName()));
+    }
+
+    @Test
+    public void addMemberIfExist_invalidValues_falseReturned() {
+        resetParser();
+        //Add valid Person name (Bob)
+        assertTrue(parser.addMemberIfExist(BOB.getName()));
+
+        //Attempts to add a repeat Bob name will return false
+        assertFalse(parser.addMemberIfExist(BOB.getName()));
+
+        resetParser();
+        //Add Person who does not exist
+        assertFalse(parser.addMemberIfExist(NONEXISTENTPERSON.getName()));
+    }
+
+    @Test
+    public void findMember_validValues_personReturned() {
+        ObservableList<Person> membersToSearch = new ModelBuilder().build().getAddressBook().getPersonList();
+
+        //search for existing member
+        Person bob = CreateGroupCommandParser.findMember(BOB.getName(), membersToSearch);
+        assertEquals(bob, BOB);
+
+        //search for existing member
+        Person alice = CreateGroupCommandParser.findMember(ALICE.getName(), membersToSearch);
+        assertEquals(alice, ALICE);
+
+    }
+
+    @Test
+    public void findMember_invalidValues_nullReturned() {
+        ObservableList<Person> membersToSearch = new ModelBuilder().build().getAddressBook().getPersonList();
+
+        //search for non-existent member
+        Person nonExistentPerson = CreateGroupCommandParser
+                .findMember(NONEXISTENTPERSON.getName(), membersToSearch);
+        assertEquals(nonExistentPerson, null);
+
+    }
+
 }
