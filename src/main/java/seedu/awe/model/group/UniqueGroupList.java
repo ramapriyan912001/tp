@@ -5,6 +5,7 @@ import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -99,8 +100,12 @@ public class UniqueGroupList implements Iterable<Group> {
     public void updatePerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        for (Group group: internalList) {
-            group.updatePerson(target, editedPerson);
+        for (int i = 0; i < internalList.size(); i++) {
+            Group group = internalList.get(i);
+            Optional<Group> updatedPersonGroup = group.updatePerson(target, editedPerson);
+            if (updatedPersonGroup.isPresent()) {
+                internalList.set(i, updatedPersonGroup.get());
+            }
         }
     }
 

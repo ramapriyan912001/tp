@@ -162,31 +162,57 @@ public class Group {
     /**
      * Replaces the person {@code target} with {@code editedPerson}.
      */
-    public void updatePerson(Person target, Person editedPerson) {
+    public Optional<Group> updatePerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
+        boolean isUpdated = false;
+
+        ArrayList<Person> updatedMembers = members;
         int index = members.indexOf(target);
         if (index != -1) {
-            members.set(index, editedPerson);
+            updatedMembers.set(index, editedPerson);
+            isUpdated = true;
         }
 
-        updateExpense(target, editedPerson);
+        Optional<ArrayList<Expense>> updatedExpensesOptional = updateExpense(target, editedPerson);
+
+        if (updatedExpensesOptional.isPresent()) {
+            isUpdated = true;
+        }
+
+        if (isUpdated) {
+            ArrayList<Expense> updatedExpense = updatedExpensesOptional.orElse(expenses);
+            return Optional.of(new Group(groupName, updatedMembers, tags, updatedExpense));
+        } else {
+            return Optional.ofNullable(null);
+        }
     }
 
     /**
      * Replaces the person {@code target} with {@code editedPerson}.
      * Only called by {@code updatePerson}.
      */
-    private void updateExpense(Person target, Person editedPerson) {
+    private Optional<ArrayList<Expense>> updateExpense(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        for (int i = 0; i < expenses.size(); i++) {
-            Expense expense = expenses.get(i);
+        ArrayList<Expense> updatedExpenses = new ArrayList<>(expenses);
+        boolean isUpdated = false;
+
+        for (int i = 0; i < updatedExpenses.size(); i++) {
+            Expense expense = updatedExpenses.get(i);
             Optional<Expense> updatedExpense = expense.updatePerson(target, editedPerson);
             if (updatedExpense.isPresent()) {
-                expenses.set(i, updatedExpense.get());
+                updatedExpenses.set(i, updatedExpense.get());
+                isUpdated = true;
             }
         }
+
+        if (!isUpdated) {
+            updatedExpenses = null;
+        }
+
+        return Optional.ofNullable(updatedExpenses);
+
     }
 
     @Override
