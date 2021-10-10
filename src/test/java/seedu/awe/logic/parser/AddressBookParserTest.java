@@ -19,7 +19,7 @@ import seedu.awe.logic.commands.DeleteCommand;
 import seedu.awe.logic.commands.EditCommand;
 import seedu.awe.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.awe.logic.commands.ExitCommand;
-import seedu.awe.logic.commands.FindCommand;
+import seedu.awe.logic.commands.FindPersonCommand;
 import seedu.awe.logic.commands.HelpCommand;
 import seedu.awe.logic.commands.ListContactsCommand;
 import seedu.awe.logic.parser.exceptions.ParseException;
@@ -71,9 +71,9 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        FindPersonCommand command = (FindPersonCommand) parser.parseCommand(
+                FindPersonCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindPersonCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
