@@ -12,15 +12,15 @@ import seedu.awe.logic.commands.ClearCommand;
 import seedu.awe.logic.commands.Command;
 import seedu.awe.logic.commands.CreateGroupCommand;
 import seedu.awe.logic.commands.DeleteContactCommand;
+import seedu.awe.logic.commands.DeleteExpenseCommand;
 import seedu.awe.logic.commands.DeleteGroupCommand;
 import seedu.awe.logic.commands.EditContactCommand;
 import seedu.awe.logic.commands.ExitCommand;
-import seedu.awe.logic.commands.FindCommand;
+import seedu.awe.logic.commands.FindPersonCommand;
 import seedu.awe.logic.commands.HelpCommand;
 import seedu.awe.logic.commands.ListContactsCommand;
 import seedu.awe.logic.commands.ListExpensesCommand;
 import seedu.awe.logic.commands.ListGroupsCommand;
-import seedu.awe.logic.parser.exceptions.EmptyGroupException;
 import seedu.awe.logic.parser.exceptions.ParseException;
 import seedu.awe.model.Model;
 
@@ -46,7 +46,7 @@ public class AddressBookParser {
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public Command parseCommand(String userInput) throws ParseException, EmptyGroupException {
+    public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -68,8 +68,8 @@ public class AddressBookParser {
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+        case FindPersonCommand.COMMAND_WORD:
+            return new FindPersonCommandParser().parse(arguments);
 
         case ListContactsCommand.COMMAND_WORD:
             return new ListContactsCommand();
@@ -79,6 +79,9 @@ public class AddressBookParser {
 
         case ListExpensesCommand.COMMAND_WORD:
             return new ListExpensesCommandParser().parse(arguments);
+
+        case DeleteExpenseCommand.COMMAND_WORD:
+            return new DeleteExpenseCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
