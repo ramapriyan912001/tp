@@ -160,7 +160,22 @@ public class Group {
     }
 
     /**
+     * Removes an expense from the group.
+     *
+     * @param expense to be removed from the group.
+     * @return A new group with the expense removed from it.
+     */
+    public Group deleteExpense(Expense expense) {
+        ArrayList<Expense> newExpenses = new ArrayList<>(expenses);
+        newExpenses.remove(expense);
+        return new Group(groupName, members, tags, newExpenses);
+    }
+
+    /**
      * Replaces the person {@code target} with {@code editedPerson}.
+     * @param target Person to edit
+     * @param editedPerson Person with updated details
+     * @return Group with new person
      */
     public Optional<Group> updatePerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
@@ -212,7 +227,6 @@ public class Group {
         }
 
         return Optional.ofNullable(updatedExpenses);
-
     }
 
     @Override
