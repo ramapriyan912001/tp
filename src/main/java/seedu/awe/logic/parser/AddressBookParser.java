@@ -15,7 +15,7 @@ import seedu.awe.logic.commands.DeleteCommand;
 import seedu.awe.logic.commands.DeleteGroupCommand;
 import seedu.awe.logic.commands.EditCommand;
 import seedu.awe.logic.commands.ExitCommand;
-import seedu.awe.logic.commands.FindCommand;
+import seedu.awe.logic.commands.FindPersonCommand;
 import seedu.awe.logic.commands.HelpCommand;
 import seedu.awe.logic.commands.ListContactsCommand;
 import seedu.awe.logic.commands.ListExpensesCommand;
@@ -67,7 +67,7 @@ public class AddressBookParser {
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
+        case FindPersonCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
         case ListContactsCommand.COMMAND_WORD:
