@@ -32,6 +32,12 @@ Around the World in $80 (AWE) is a **desktop app for managing contacts, optimize
 
    * **`delete`**`3` : The command `delete` removes the 3rd contact/expense shown in the current list.
 
+   * **`creategroup`** : The command `creategroup gn/Bali n/John Doe n/Jane Doe t/friends` creates a group named Bali containing members `John Doe` and `Jane Doe`, with the tag `friends`.
+
+   * **`deletegroup`** : The command `deletegroup gn/Bali` removes the group named Bali.
+
+   * **`deleteexpense`** : The command `deleteexpense gn/Bali i/1` removes the 1st expense (by one-based-index) from the list of expenses for the group named Bali.
+
    * **`clear`** : The command `clear` removes all expenses / contacts / groups.
 
    * **`edit`** : The command `edit 1 n/Thomas Betty` edits the name of the 1st person to be Thomas Betty and removes all existing tags.
@@ -146,18 +152,22 @@ Examples:
 * `persons` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Creating a Travel Group: ```create group```
+### Creating a Travel Group: ```creategroup```
 Creates a group of people of your choice from your address book.
 Adds you as a member of the group by default.
 
-Format: `create group GROUP_NAME : NAME1 : NAME2 : NAME3`
-GROUP_NAME is a mandatory field.
-At least one NAME is necessary.
-The names are required to be in the address book and should match contact names exactly.
+Format: `creategroup gn/[GROUP_NAME] n/[NAME1] n/NAME2 n/NAME3...t/TAG1`
+
+* GROUP_NAME is a mandatory field.
+* A group with the same name as GROUP_NAME cannot exist for the creation of a group through this command. 
+* At least one NAME is necessary.
+* The names are required to be in the address book and should match contact names exactly.
+* Tags cannot have whitespace and special characters other than alphanumeric characters.
+* Tags are optional.
 
 Examples:
-create group Bali : Jacob Tan : Max Chia : Julianne Tay
-create group London: Justin Lee : Raj Gopal : Keith Chia
+* creategroup gn/Bali n/Jacob Tan n/Max Chia n/Julianne Tay
+* creategroup gn/London n/Justin Lee n/Raj Gopal n/Keith Chia
 
 ### Listing all groups : `groups`
 
@@ -165,18 +175,18 @@ Shows a list of all groups in GroupPage.
 
 Format: `groups`
 
-### Deleting a Travel Group: `delete group`
+### Deleting a Travel Group: `deletegroup`
 Deletes a group from your groups.
 All the details from the group are lost once this action is completed.
 
-Format: `delete group GROUP_NAME`
+Format: `deletegroup gn/[GROUP_NAME]`
 
 * GROUP_NAME is a mandatory field.
 * A group with GROUP_NAME as its name must exist.
 
 Examples:
-* `delete group Bali`
-* `delete group London`
+* `deletegroup gn/Bali`
+* `deletegroup gn/London`
 
 ### Adding a shared expense: `add expense`
 Adds a shared expense to the currently active travel group.
@@ -207,19 +217,20 @@ Format: `expense INDEX`
 Examples: 
 * `group` followed by `expense 1` shows all the expenses of the 1st travel group in the group list.
 
-### Deleting a shared expense: `delete expense`
+### Deleting a shared expense: `deleteexpense`
 
-Deletes a shared expense from the currently active travel group.
+Deletes a shared expense from a travel group.
 This command deletes the expense for all members involved in the expense.
 
-Format: `delete expense EXPENSE_ID`
+Format: `deleteexpense gn/GROUP_NAME i/INDEX`
 
-* EXPENSE_ID argument is mandatory.
-* EXPENSE_ID must represent the id of an existing expense object.
+* GROUP_NAME argument is mandatory.
+* INDEX argument is mandatory.
+* INDEX has to be between 1 and the length of the list of expenses for the group with name GROUP_NAME.
 
 Examples:
-* `delete expense 10213`
-* `delete expense 33421`
+* `deleteexpense gn/Bali i/1`
+* `deleteexpense gn/London i/2`
 
 ### Saving the data
 
@@ -273,10 +284,10 @@ Action | Format, Examples
 **Add Contact** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Add Expense** | `add expense add expense /des DESCRIPTION /by PAYER_NAME1 AMOUNT PAID BY NAME 1 /for PAYEE_NAME1 PAYEE_NAME 2` <br> e.g., `add expense /des Koi /by Jake 20.00 /for Justin, Raj, Keith`
 **Clear** | `clear`
-**Create Group** | `create group GROUP_NAME : NAME1 : NAME2 : NAME3` <br> e.g., `create group Bali : Jacob Tan : Max Chia : Julianne Tay`
+**Create Group** | `creategroup gn/GROUP_NAME n/NAME1 n/NAME2 n/NAME3...t/TAG1` <br> e.g., `creategroup gn/Bali n/Jacob Tan n/Max Chia n/Julianne Tay t/friends`
 **Delete Contact** | `delete INDEX`<br> e.g., `delete 3`
-**Delete Group** | `delete group GROUP_NAME` <br> e.g., `delete group Vienna`
-**Delete Expense** | `delete expense EXPENSE_ID` <br> e.g., `delete expense 5`
+**Delete Group** | `deletegroup gn/GROUP_NAME` <br> e.g., `deletegroup gn/Vienna`
+**Delete Expense** | `deleteexpense gn/GROUP_NAME i/INDEX` <br> e.g., `deleteexpense gn/Bali i/1`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Help** | `help`

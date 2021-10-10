@@ -6,7 +6,22 @@ import static seedu.awe.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.awe.logic.commands.*;
+import seedu.awe.logic.commands.AddCommand;
+import seedu.awe.logic.commands.AddExpenseCommand;
+import seedu.awe.logic.commands.ClearCommand;
+import seedu.awe.logic.commands.Command;
+import seedu.awe.logic.commands.CreateGroupCommand;
+import seedu.awe.logic.commands.DeleteCommand;
+import seedu.awe.logic.commands.DeleteExpenseCommand;
+import seedu.awe.logic.commands.DeleteGroupCommand;
+import seedu.awe.logic.commands.EditCommand;
+import seedu.awe.logic.commands.ExitCommand;
+import seedu.awe.logic.commands.FindGroupCommand;
+import seedu.awe.logic.commands.FindPersonCommand;
+import seedu.awe.logic.commands.HelpCommand;
+import seedu.awe.logic.commands.ListContactsCommand;
+import seedu.awe.logic.commands.ListExpensesCommand;
+import seedu.awe.logic.commands.ListGroupsCommand;
 import seedu.awe.logic.parser.exceptions.ParseException;
 import seedu.awe.model.Model;
 
@@ -68,6 +83,9 @@ public class AddressBookParser {
 
         case ListExpensesCommand.COMMAND_WORD:
             return new ListExpensesCommandParser().parse(arguments);
+
+        case DeleteExpenseCommand.COMMAND_WORD:
+            return new DeleteExpenseCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
