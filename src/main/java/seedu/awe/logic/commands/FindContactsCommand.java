@@ -10,9 +10,9 @@ import seedu.awe.model.person.NameContainsKeywordsPredicate;
  * Finds and lists all persons in awe book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindPersonCommand extends Command {
+public class FindContactsCommand extends Command {
 
-    public static final String COMMAND_WORD = "findperson";
+    public static final String COMMAND_WORD = "findcontacts";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
@@ -21,7 +21,7 @@ public class FindPersonCommand extends Command {
 
     private final NameContainsKeywordsPredicate predicate;
 
-    public FindPersonCommand(NameContainsKeywordsPredicate predicate) {
+    public FindContactsCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -40,10 +40,10 @@ public class FindPersonCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof FindPersonCommand)) { // instanceof handles nulls
+        if (!(other instanceof FindContactsCommand)) { // instanceof handles nulls
             return false;
         }
 
-        return predicate.equals(((FindPersonCommand) other).predicate); // state check
+        return predicate.equals(((FindContactsCommand) other).predicate); // state check
     }
 }

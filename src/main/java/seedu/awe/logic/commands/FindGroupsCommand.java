@@ -10,9 +10,9 @@ import seedu.awe.model.group.GroupContainsKeywordsPredicate;
  * Finds and lists all persons in awe book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindGroupCommand extends Command {
+public class FindGroupsCommand extends Command {
 
-    public static final String COMMAND_WORD = "findgroup";
+    public static final String COMMAND_WORD = "findgroups";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all groups whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
@@ -21,7 +21,7 @@ public class FindGroupCommand extends Command {
 
     private final GroupContainsKeywordsPredicate predicate;
 
-    public FindGroupCommand(GroupContainsKeywordsPredicate predicate) {
+    public FindGroupsCommand(GroupContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -30,7 +30,7 @@ public class FindGroupCommand extends Command {
         requireNonNull(model);
         model.updateFilteredGroupList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_GROUPS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
+                String.format(Messages.MESSAGE_GROUPS_LISTED_OVERVIEW, model.getFilteredGroupList().size()),
                 false, false, true, false, false);
     }
 
@@ -40,10 +40,10 @@ public class FindGroupCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof FindGroupCommand)) { // instanceof handles nulls
+        if (!(other instanceof FindGroupsCommand)) { // instanceof handles nulls
             return false;
         }
 
-        return predicate.equals(((FindGroupCommand) other).predicate); // state check
+        return predicate.equals(((FindGroupsCommand) other).predicate); // state check
     }
 }
