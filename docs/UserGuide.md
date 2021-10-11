@@ -156,7 +156,7 @@ Examples:
 Creates a group of people of your choice from your address book.
 Adds you as a member of the group by default.
 
-Format: `creategroup gn/[GROUP_NAME] n/[NAME1] n/NAME2 n/NAME3...t/TAG1`
+Format: `creategroup gn/GROUP_NAME n/NAME1 [n/NAME2] [n/NAME3]...[t/TAG1]`
 
 * GROUP_NAME is a mandatory field.
 * A group with the same name as GROUP_NAME cannot exist for the creation of a group through this command. 
@@ -179,7 +179,7 @@ Format: `groups`
 Deletes a group from your groups.
 All the details from the group are lost once this action is completed.
 
-Format: `deletegroup gn/[GROUP_NAME]`
+Format: `deletegroup gn/GROUP_NAME`
 
 * GROUP_NAME is a mandatory field.
 * A group with GROUP_NAME as its name must exist.
