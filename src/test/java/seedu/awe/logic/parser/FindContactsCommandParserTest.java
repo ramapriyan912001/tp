@@ -8,28 +8,28 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.awe.logic.commands.FindPersonCommand;
+import seedu.awe.logic.commands.FindContactsCommand;
 import seedu.awe.model.person.NameContainsKeywordsPredicate;
 
-public class FindPersonCommandParserTest {
+public class FindContactsCommandParserTest {
 
-    private FindPersonCommandParser parser = new FindPersonCommandParser();
+    private FindContactsCommandParser parser = new FindContactsCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPersonCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindContactsCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
-        FindPersonCommand expectedFindPersonCommand =
-                new FindPersonCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
-        assertParseSuccess(parser, "Alice Bob", expectedFindPersonCommand);
+        FindContactsCommand expectedFindContactsCommand =
+                new FindContactsCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
+        assertParseSuccess(parser, "Alice Bob", expectedFindContactsCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindPersonCommand);
+        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindContactsCommand);
     }
 
 }
