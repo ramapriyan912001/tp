@@ -1,10 +1,10 @@
 package seedu.awe.testutil;
 
-import seedu.awe.logic.commands.CreateGroupCommand;
-import seedu.awe.model.group.Group;
-
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_TAG;
+
+import seedu.awe.logic.commands.CreateGroupCommand;
+import seedu.awe.model.group.Group;
 
 /**
  * A utility class for Group.
@@ -32,9 +32,9 @@ public class GroupUtil {
         return sb.toString();
     }
 
-    /**
+    /*
      * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
-     */ /*
+
     public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));

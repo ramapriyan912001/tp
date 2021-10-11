@@ -13,16 +13,21 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.awe.logic.commands.*;
+import seedu.awe.logic.commands.AddContactCommand;
+import seedu.awe.logic.commands.ClearCommand;
+import seedu.awe.logic.commands.DeleteContactCommand;
+import seedu.awe.logic.commands.EditContactCommand;
 import seedu.awe.logic.commands.EditContactCommand.EditPersonDescriptor;
+import seedu.awe.logic.commands.FindContactsCommand;
+import seedu.awe.logic.commands.FindGroupsCommand;
+import seedu.awe.logic.commands.HelpCommand;
+import seedu.awe.logic.commands.ListContactsCommand;
+import seedu.awe.logic.commands.ListGroupsCommand;
 import seedu.awe.logic.parser.exceptions.ParseException;
-import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupContainsKeywordsPredicate;
 import seedu.awe.model.person.NameContainsKeywordsPredicate;
 import seedu.awe.model.person.Person;
 import seedu.awe.testutil.EditPersonDescriptorBuilder;
-import seedu.awe.testutil.GroupBuilder;
-import seedu.awe.testutil.GroupUtil;
 import seedu.awe.testutil.PersonBuilder;
 import seedu.awe.testutil.PersonUtil;
 
