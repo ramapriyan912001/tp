@@ -77,7 +77,7 @@ public class CreateGroupCommandParser implements Parser<CreateGroupCommand> {
      * @param memberNames List of names representing names entered in command.
      * @return ArrayList of Person objects representing members to be added to the group
      */
-    private ArrayList<Person> findGroupMembers(List<Name> memberNames) throws ParseException {
+    public ArrayList<Person> findGroupMembers(List<Name> memberNames) throws ParseException {
         try {
             for (Name name : memberNames) {
                 addMemberIfExist(name);
@@ -102,11 +102,16 @@ public class CreateGroupCommandParser implements Parser<CreateGroupCommand> {
      *
      * @param memberName Name object representing name of member to be added.
      */
-    private void addMemberIfExist(Name memberName) {
+    public boolean addMemberIfExist(Name memberName) {
+        boolean added = false;
         Person memberFound = findMember(memberName, this.allMembers);
-        if (!Objects.isNull(memberFound)) {
+        Stream<Name> namesOfMembers = this.toBeAddedToGroup.stream().map(member -> member.getName());
+        long numOfMembersWithSameName = namesOfMembers.filter(existingName -> existingName.equals(memberName)).count();
+        if (!Objects.isNull(memberFound) && numOfMembersWithSameName == 0) {
             toBeAddedToGroup.add(memberFound);
+            added = true;
         }
+        return added;
     }
 
     /**
@@ -117,7 +122,7 @@ public class CreateGroupCommandParser implements Parser<CreateGroupCommand> {
      * @param members ObservableList of Person objects representing all contacts in the addressbook.
      * @return Person object if name matches that of a person from the addressbook.
      */
-    private static Person findMember(Name memberName, ObservableList<Person> members) {
+    public static Person findMember(Name memberName, ObservableList<Person> members) {
         for (Person member : members) {
             if (member.getName().equals(memberName)) {
                 return member;
