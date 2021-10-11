@@ -100,7 +100,7 @@ public class AddressBookParser {
             return new DeleteGroupCommandParser(model).parse(arguments);
 
         case AddExpenseCommand.COMMAND_WORD:
-            return new AddExpenseCommandParser().parse(arguments);
+            return new AddExpenseCommandParser(model).parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

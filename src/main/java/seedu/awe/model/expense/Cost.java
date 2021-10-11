@@ -7,7 +7,7 @@ import static seedu.awe.commons.util.AppUtil.checkArgument;
 public class Cost {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Cost should only contain numeric characters without spaces up to only 2 decimal places,"
+            "Cost should only contain numeric characters without spaces up to only 2 decimal places, "
                     + "and it should not be blank";
 
     /*
@@ -27,6 +27,34 @@ public class Cost {
         requireNonNull(cost);
         checkArgument(isValidCost(cost), MESSAGE_CONSTRAINTS);
         this.cost = Double.parseDouble(cost);
+    }
+
+    /**
+     * Sums two costs.
+     *
+     * @param c The other cost.
+     * @return The sum of the two costs.
+     */
+    public Cost add(Cost c) {
+        double result = cost + c.cost;
+        if (result < 0) {
+            result = 0;
+        }
+        return new Cost(String.format("%.2f", result));
+    }
+
+    /**
+     * Subtracts two costs.
+     *
+     * @param c The other cost.
+     * @return Result of the subtraction of the two costs.
+     */
+    public Cost subtract(Cost c) {
+        double result = cost - c.cost;
+        if (result < 0) {
+            result = 0;
+        }
+        return new Cost(String.format("%.2f", result));
     }
 
     /**
