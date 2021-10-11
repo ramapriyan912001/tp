@@ -6,15 +6,15 @@ import static seedu.awe.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.awe.logic.commands.AddCommand;
+import seedu.awe.logic.commands.AddContactCommand;
 import seedu.awe.logic.commands.AddExpenseCommand;
 import seedu.awe.logic.commands.ClearCommand;
 import seedu.awe.logic.commands.Command;
 import seedu.awe.logic.commands.CreateGroupCommand;
-import seedu.awe.logic.commands.DeleteCommand;
+import seedu.awe.logic.commands.DeleteContactCommand;
 import seedu.awe.logic.commands.DeleteExpenseCommand;
 import seedu.awe.logic.commands.DeleteGroupCommand;
-import seedu.awe.logic.commands.EditCommand;
+import seedu.awe.logic.commands.EditContactCommand;
 import seedu.awe.logic.commands.ExitCommand;
 import seedu.awe.logic.commands.FindContactsCommand;
 import seedu.awe.logic.commands.FindGroupsCommand;
@@ -57,13 +57,13 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
+        case AddContactCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
+        case EditContactCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
+        case DeleteContactCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
