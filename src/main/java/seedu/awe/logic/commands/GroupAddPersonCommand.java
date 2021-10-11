@@ -80,7 +80,7 @@ public class GroupAddPersonCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (!isValidCommand) {
-            return new CommandResult(MESSAGE_ERROR);
+            throw new CommandException(MESSAGE_ERROR);
         }
 
         Group oldGroup = model.getGroupByName(groupName);
