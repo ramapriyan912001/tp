@@ -18,6 +18,7 @@ import seedu.awe.logic.commands.EditContactCommand;
 import seedu.awe.logic.commands.ExitCommand;
 import seedu.awe.logic.commands.FindContactsCommand;
 import seedu.awe.logic.commands.FindGroupsCommand;
+import seedu.awe.logic.commands.GroupAddPersonCommand;
 import seedu.awe.logic.commands.HelpCommand;
 import seedu.awe.logic.commands.ListContactsCommand;
 import seedu.awe.logic.commands.ListExpensesCommand;
@@ -101,6 +102,9 @@ public class AddressBookParser {
 
         case AddExpenseCommand.COMMAND_WORD:
             return new AddExpenseCommandParser().parse(arguments);
+
+        case GroupAddPersonCommand.COMMAND_WORD:
+            return new GroupAddPersonCommandParser(model).parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
