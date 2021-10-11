@@ -50,7 +50,7 @@ public class ViewPanel extends UiPart<Region> {
     }
 
     /**
-     * Switches different different view for AddressBook, GroupsPage and ExpensesPage.
+     * Switches different view for AddressBook, GroupsPage and ExpensesPage.
      *
      * @param uiView Page to be changed
      */
