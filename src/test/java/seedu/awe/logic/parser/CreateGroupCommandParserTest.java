@@ -1,7 +1,6 @@
 package seedu.awe.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.awe.logic.commands.CommandTestUtil.GROUPNAME_DESC_BALI;
@@ -137,15 +136,19 @@ public class CreateGroupCommandParserTest {
         members.add(AMY);
         members.add(ALICE);
         assertEquals(parser.findGroupMembers(membersToFind), members);
-
-        resetParser();
-        //valid names and additional person not found in the model addressbook.
-        membersToFind.add(NONEXISTENTPERSON.getName());
-        assertEquals(parser.findGroupMembers(membersToFind), members);
     }
 
     @Test
     public void findGroupMembers_invalidValues_failure() throws ParseException {
+        resetParser();
+        //valid names and additional person not found in the model addressbook.
+        ArrayList<Name> membersToFindExtra = new ArrayList<>();
+        membersToFindExtra.add(BOB.getName());
+        membersToFindExtra.add(AMY.getName());
+        membersToFindExtra.add(ALICE.getName());
+        membersToFindExtra.add(NONEXISTENTPERSON.getName());
+        assertThrows(ParseException.class, CreateGroupCommand.MESSAGE_ERROR, () ->
+                emptyParser.findGroupMembers(membersToFindExtra));
 
         //Argument membersToFind contains members but CreateGroupCommandParser has empty toBeAddedToGroup List.
         //Throws ParseException.
@@ -167,7 +170,7 @@ public class CreateGroupCommandParserTest {
     }
 
     @Test
-    public void addMemberIfExist_validValues_trueReturned() {
+    public void addMemberIfExist_validValues_trueReturned() throws ParseException {
         resetParser();
         //Add valid Person name (Bob)
         assertTrue(parser.addMemberIfExist(BOB.getName()));
@@ -177,23 +180,22 @@ public class CreateGroupCommandParserTest {
 
         //Add valid Person name (Amy)
         assertTrue(parser.addMemberIfExist(AMY.getName()));
-
-        //Attempts to add a repeat Bob name will return false
-        assertFalse(parser.addMemberIfExist(BOB.getName()));
     }
 
     @Test
-    public void addMemberIfExist_invalidValues_falseReturned() {
+    public void addMemberIfExist_invalidValues_parseExceptionThrown() throws ParseException {
         resetParser();
         //Add valid Person name (Bob)
         assertTrue(parser.addMemberIfExist(BOB.getName()));
 
-        //Attempts to add a repeat Bob name will return false
-        assertFalse(parser.addMemberIfExist(BOB.getName()));
+        //Attempts to add a repeat Bob name will throw parseException
+        assertThrows(ParseException.class, CreateGroupCommand.MESSAGE_ERROR, () ->
+                parser.addMemberIfExist(BOB.getName()));
 
         resetParser();
         //Add Person who does not exist
-        assertFalse(parser.addMemberIfExist(NONEXISTENTPERSON.getName()));
+        assertThrows(ParseException.class, CreateGroupCommand.MESSAGE_ERROR, () ->
+                parser.addMemberIfExist(NONEXISTENTPERSON.getName()));
     }
 
     @Test

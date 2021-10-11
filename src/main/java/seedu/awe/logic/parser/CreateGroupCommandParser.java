@@ -52,7 +52,7 @@ public class CreateGroupCommandParser implements Parser<CreateGroupCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_GROUP_NAME, PREFIX_NAME, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_GROUP_NAME, PREFIX_NAME)
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_GROUP_NAME, PREFIX_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateGroupCommand.MESSAGE_USAGE));
         }
@@ -102,7 +102,7 @@ public class CreateGroupCommandParser implements Parser<CreateGroupCommand> {
      *
      * @param memberName Name object representing name of member to be added.
      */
-    public boolean addMemberIfExist(Name memberName) {
+    public boolean addMemberIfExist(Name memberName) throws ParseException {
         boolean added = false;
         Person memberFound = findMember(memberName, this.allMembers);
         Stream<Name> namesOfMembers = this.toBeAddedToGroup.stream().map(member -> member.getName());
@@ -110,6 +110,9 @@ public class CreateGroupCommandParser implements Parser<CreateGroupCommand> {
         if (!Objects.isNull(memberFound) && numOfMembersWithSameName == 0) {
             toBeAddedToGroup.add(memberFound);
             added = true;
+        }
+        if (!added) {
+            throw new ParseException(MESSAGE_ERROR);
         }
         return added;
     }
@@ -129,13 +132,5 @@ public class CreateGroupCommandParser implements Parser<CreateGroupCommand> {
             }
         }
         return null;
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
