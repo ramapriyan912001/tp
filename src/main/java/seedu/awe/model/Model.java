@@ -112,8 +112,6 @@ public interface Model {
      */
     ObservableList<Group> getFilteredGroupList();
 
-    void updateFilteredGroupList(Predicate<Group> predicate);
-
     Group getGroupByName(GroupName groupName);
 
     /**
@@ -123,6 +121,12 @@ public interface Model {
      * @param newGroup to replace the target group.
      */
     void setGroup(Group group, Group newGroup);
+
+    /**
+     * Updates the filter of the filtered group list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredGroupList(Predicate<Group> predicate);
 
     /**
      * Returns all expenses in the input group.
