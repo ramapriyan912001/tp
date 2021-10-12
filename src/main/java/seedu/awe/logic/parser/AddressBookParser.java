@@ -102,7 +102,7 @@ public class AddressBookParser {
             return new DeleteGroupCommandParser(model).parse(arguments);
 
         case AddExpenseCommand.COMMAND_WORD:
-            return new AddExpenseCommandParser().parse(arguments);
+            return new AddExpenseCommandParser(model).parse(arguments);
 
         case GroupAddPersonCommand.COMMAND_WORD:
             return new GroupAddPersonCommandParser(model).parse(arguments);
