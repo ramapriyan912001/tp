@@ -49,6 +49,10 @@ public class Expense {
         this.excluded = excluded;
     }
 
+    public Expense setCost(Cost newCost) {
+        return new Expense(payer, newCost, description, excluded);
+    }
+
     public Person getPayer() {
         return payer;
     }

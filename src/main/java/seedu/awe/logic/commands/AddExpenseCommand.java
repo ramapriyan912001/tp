@@ -13,7 +13,6 @@ import java.util.List;
 import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.model.Model;
 import seedu.awe.model.expense.Cost;
-import seedu.awe.model.expense.Description;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
@@ -41,38 +40,30 @@ public class AddExpenseCommand extends Command {
     public static final String MESSAGE_ALL_MEMBERS_EXCLUDED = "You can't exclude every member of the group!";
     public static final String MESSAGE_COST_ZERO_OR_LESS = "The cost of this expense is zero or less!";
 
-    private final Person payer;
+    private Expense expense;
     private final GroupName groupName;
-    private final Cost cost;
-    private final Description description;
     private final List<Person> selfPayees;
     private final List<Cost> selfCosts;
-    private final List<Person> excluded;
 
     /**
      * Creates a AddExpenseCommand from the specified Person {@code Index} for the specified {@code Group}
      *
-     * @param payer of the person in the filtered person list to add an expense to.
-     * @param groupName of the group to have the expense added to.
-     * @param cost of the expense.
-     * @param description of the expense.
-     * @param excluded List of persons to exclude from the expense.
+     * @param expense Expense to be added.
+     * @param groupName Name of group to add expense to.
+     * @param selfPayees List of persons to exclude from the expense.
+     * @param selfCosts List of costs to exclude from the expense.
      */
-    public AddExpenseCommand(Person payer, GroupName groupName, Cost cost, Description description,
-                             List<Person> selfPayees, List<Cost> selfCosts, List<Person> excluded) {
-        requireNonNull(payer);
+    public AddExpenseCommand(Expense expense, GroupName groupName,
+                             List<Person> selfPayees, List<Cost> selfCosts) {
+        requireNonNull(expense);
         requireNonNull(groupName);
-        requireNonNull(cost);
-        requireNonNull(description);
-        requireAllNonNull(excluded);
+        requireAllNonNull(selfPayees);
+        requireAllNonNull(selfCosts);
 
-        this.payer = payer;
+        this.expense = expense;
         this.groupName = groupName;
-        this.cost = cost;
-        this.description = description;
         this.selfPayees = selfPayees;
         this.selfCosts = selfCosts;
-        this.excluded = excluded;
     }
 
     @Override
@@ -80,19 +71,19 @@ public class AddExpenseCommand extends Command {
         requireNonNull(model);
 
         Group group = model.getGroupByName(groupName);
-        Cost finalCost = cost;
+        Cost finalCost = expense.getCost();
 
-        if (!group.isPartOfGroup(payer)) {
+        if (!group.isPartOfGroup(expense.getPayer())) {
             return new CommandResult(MESSAGE_NOT_PART_OF_GROUP);
         }
 
-        for (Person exclude : excluded) {
+        for (Person exclude : expense.getExcluded()) {
             if (!group.isPartOfGroup(exclude)) {
                 return new CommandResult(MESSAGE_NOT_PART_OF_GROUP);
             }
         }
 
-        if (group.getMembers().size() == excluded.size()) {
+        if (group.getMembers().size() == expense.getExcluded().size()) {
             return new CommandResult(MESSAGE_ALL_MEMBERS_EXCLUDED);
         }
 
@@ -107,18 +98,16 @@ public class AddExpenseCommand extends Command {
             return new CommandResult(MESSAGE_COST_ZERO_OR_LESS);
         }
 
-        Expense expense;
-        if (excluded.size() > 0) {
-            expense = new Expense(payer, finalCost, description, excluded);
-
-        } else {
-            expense = new Expense(payer, finalCost, description);
-        }
+        expense = expense.setCost(finalCost);
 
         Group newGroup = group.addExpense(expense);
         model.setGroup(group, newGroup);
 
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, expense));
+    }
+
+    public Expense getExpense() {
+        return expense;
     }
 
     @Override
@@ -129,10 +118,8 @@ public class AddExpenseCommand extends Command {
             return false;
         } else {
             AddExpenseCommand otherCommand = (AddExpenseCommand) other;
-            return payer.equals(otherCommand.payer)
-                    && groupName.equals(otherCommand.groupName)
-                    && cost.equals(otherCommand.cost)
-                    && description.equals(otherCommand.description);
+            return expense.equals(otherCommand.expense)
+                    && groupName.equals(otherCommand.groupName);
         }
     }
 }
