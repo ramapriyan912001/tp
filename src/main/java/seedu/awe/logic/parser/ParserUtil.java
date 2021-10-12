@@ -2,12 +2,17 @@ package seedu.awe.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import seedu.awe.commons.core.index.Index;
 import seedu.awe.commons.util.StringUtil;
+import seedu.awe.logic.commands.CreateGroupCommand;
+import seedu.awe.logic.parser.exceptions.EmptyGroupException;
 import seedu.awe.logic.parser.exceptions.ParseException;
 import seedu.awe.model.expense.Cost;
 import seedu.awe.model.expense.Description;
@@ -102,7 +107,7 @@ public class ParserUtil {
      * Parses a {@code String groupName} into an {@code Group}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code groupName} is invalid.
      */
     public static GroupName parseGroupName(String groupName) throws ParseException {
         requireNonNull(groupName);
@@ -141,6 +146,49 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code Collection<String> names} into a {@code List<Name>}.
+     * @param names Collection of strings that represent names.
+     * @return List of names
+     */
+    public static List<Name> parseMemberNames(Collection<String> names) {
+        requireNonNull(names);
+        final Set<Name> memberNameSet = new HashSet<>();
+        final List<Name> memberNameList = new ArrayList<>();
+        boolean isValid = true;
+        int invalidCount = 0;
+        for (String personName : names) {
+            try {
+                new Name(personName);
+            } catch (IllegalArgumentException err) {
+                invalidCount++;
+                isValid = false;
+            }
+            if (isValid) {
+                memberNameSet.add(new Name(personName));
+            }
+            isValid = true;
+        }
+        if (invalidCount == names.size()) {
+            throw new EmptyGroupException(String.format(CreateGroupCommand.MESSAGE_EMPTY_GROUP,
+                    CreateGroupCommand.MESSAGE_INVALID_NAMES, CreateGroupCommand.MESSAGE_INVALID_NAMES));
+        }
+        memberNameList.addAll(memberNameSet);
+        return memberNameList;
+    }
+
+    /**
+     * Parses {@code Collection<String> names} into a {@code List<Name>}.
+     */
+    public static List<Name> parseNames(Collection<String> names) throws ParseException {
+        requireNonNull(names);
+        final ArrayList<Name> nameList = new ArrayList<>();
+        for (String name : names) {
+            nameList.add(parseName(name));
+        }
+        return nameList;
+    }
+
+    /**
      * Parses a {@code String cost} into a {@code Cost}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -150,9 +198,21 @@ public class ParserUtil {
         requireNonNull(cost);
         String trimmedCost = cost.trim();
         if (!Cost.isValidCost(trimmedCost)) {
-            throw new ParseException(GroupName.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Cost.MESSAGE_CONSTRAINTS);
         }
         return new Cost(trimmedCost);
+    }
+
+    /**
+     * Parses {@code Collection<String> costs} into a {@code List<Cost>}.
+     */
+    public static List<Cost> parseCosts(Collection<String> costs) throws ParseException {
+        requireNonNull(costs);
+        final ArrayList<Cost> costList = new ArrayList<>();
+        for (String cost : costs) {
+            costList.add(parseCost(cost));
+        }
+        return costList;
     }
 
     /**
@@ -165,8 +225,31 @@ public class ParserUtil {
         requireNonNull(description);
         String trimmedDescription = description.trim();
         if (!Description.isValidDescription(trimmedDescription)) {
-            throw new ParseException(GroupName.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
         }
         return new Description(trimmedDescription);
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Parses a collection of {@code String name} into a list of {@code Name}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static List<Name> parseExcluded(Collection<String> toExclude) throws ParseException {
+        requireNonNull(toExclude);
+        final ArrayList<Name> excludedList = new ArrayList<>();
+        for (String excludedName : toExclude) {
+            excludedList.add(parseName(excludedName));
+        }
+        return excludedList;
     }
 }

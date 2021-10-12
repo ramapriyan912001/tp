@@ -1,7 +1,6 @@
 package seedu.awe.model;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -17,6 +16,9 @@ import seedu.awe.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -110,8 +112,6 @@ public interface Model {
      */
     ObservableList<Group> getFilteredGroupList();
 
-    void updateFilteredGroupList(Predicate<Group> predicate);
-
     Group getGroupByName(GroupName groupName);
 
     /**
@@ -122,12 +122,19 @@ public interface Model {
      */
     void setGroup(Group group, Group newGroup);
 
+    /**
+     * Updates the filter of the filtered group list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredGroupList(Predicate<Group> predicate);
 
     /**
-     * Returns all expenses in the specified group.
+     * Returns all expenses in the input group.
      *
-     * @param group Specified group to get expenses from.
      * @return A list of all expenses in the specified group.
      */
-    ArrayList<Expense> getExpenses(Group group);
+    ObservableList<Expense> getExpenses();
+
+    void setExpenses(Group group);
+
 }

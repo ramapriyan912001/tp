@@ -7,14 +7,17 @@ import org.junit.jupiter.api.Test;
 import seedu.awe.model.Model;
 import seedu.awe.model.ModelManager;
 
-public class GroupCommandTest {
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for ListGroupsCommand.
+ */
+public class ListGroupsCommandTest {
     private Model model = new ModelManager();
     private Model expectedModel = new ModelManager();
 
     @Test
     public void execute_showGroup_success() {
         CommandResult expectedCommandResult = new CommandResult(ListGroupsCommand.MESSAGE_SUCCESS,
-                false, false, true, false);
+                false, false, true, false, false);
         assertCommandSuccess(new ListGroupsCommand(), model, expectedCommandResult, expectedModel);
     }
 }
