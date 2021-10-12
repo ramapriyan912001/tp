@@ -2,6 +2,8 @@ package seedu.awe.model.expense;
 
 import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -16,6 +18,7 @@ public class Expense {
     // data fields
     private final Cost cost;
     private final Description description;
+    private final List<Person> excluded;
 
     /**
      * Constructs an {@code Expense}.
@@ -28,6 +31,26 @@ public class Expense {
         this.payer = payer;
         this.cost = cost;
         this.description = description;
+        excluded = new ArrayList<>();
+    }
+
+    /**
+     * Constructs an {@code Expense}.
+     *
+     * @param payer of expense.
+     * @param cost of expense.
+     * @param description of expense.
+     * @param excluded Person to be excluded from paying the expense.
+     */
+    public Expense(Person payer, Cost cost, Description description, List<Person> excluded) {
+        this.payer = payer;
+        this.cost = cost;
+        this.description = description;
+        this.excluded = excluded;
+    }
+
+    public Expense setCost(Cost newCost) {
+        return new Expense(payer, newCost, description, excluded);
     }
 
     public Person getPayer() {
@@ -40,6 +63,10 @@ public class Expense {
 
     public Description getDescription() {
         return description;
+    }
+
+    public List<Person> getExcluded() {
+        return excluded;
     }
 
     /**

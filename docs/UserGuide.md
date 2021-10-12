@@ -35,6 +35,8 @@ Around the World in $80 (AWE) is a **desktop app for managing contacts, optimize
    * **`creategroup`** : The command `creategroup gn/Bali n/John Doe n/Jane Doe t/friends` creates a group named Bali containing members `John Doe` and `Jane Doe`, with the tag `friends`.
 
    * **`deletegroup`** : The command `deletegroup gn/Bali` removes the group named Bali.
+   
+   * **`addexpense`** : The command `addexpense n/Alex Yeoh gn/Bali $/50 d/drinks` adds an expense paid for by `Alex Yeoh` into the group `Bali` of `$50` for `drinks`.
 
    * **`deleteexpense`** : The command `deleteexpense gn/Bali i/1` removes the 1st expense (by one-based-index) from the list of expenses for the group named Bali.
 
@@ -216,23 +218,24 @@ Format: `expense INDEX`
 Examples: 
 * `groups` followed by `expense 1` shows all the expenses of the 1st travel group in the group list.
 
-### Adding a shared expense: `add expense`
-Adds a shared expense to the currently active travel group.
+### Adding a shared expense: `addexpense`
+Adds a shared expense to the specified travel group.
 The expense can be paid for and split among any number of contacts within the travel group.
 
-Format: `add expense /des [DESCRIPTION] /by [PAYER_NAME1] [AMOUNT PAID BY NAME1] /for [PAYEE_NAME1][PAYEE_NAME2]`
+Format: `addexpense n/PAYER_NAME gn/GROUP_NAME $/TOTAL AMOUNT PAID d/DESCRIPTION n/[PAYEE WHO MADE A PERSONAL PAYMENT] $/[PAYEE'S PERSONAL PAYMENT TO EXCLUDE FROM TOTAL AMOUNT] ex/[PERSON TO EXCLUDE FROM EXPENSE]`
 
-* There should be at least one PAYER_NAME1 in the command.
-* PAYER_NAME must be immediately followed by the AMOUNT PAID.
-* ":" demarcates the distinction between PAYERS and PAYEES.
-* By default, PAYER_NAME will not be included in the expense. Add name into list of PAYEES if user wishes for PAYER_NAME to be included in the bill.
+* There should be at least one PAYER_NAME in the command.
+* PAYER_NAME must be immediately followed by the GROUP NAME.
+* By default, all members of the group will be included in the expense.
 * The names are required to be in the address book.
+* The names are required to be in the specified group.
 * Each expense is a class with a unique ID.
+* Each personal payment has to be a name immediately followed by the amount of the personal payment.
 
 Examples:
-* add expense /des Dinner at MBS /by Jake 50.70 /for Jake, Jacob, Max, Julianne
-* add expense /des Koi /by Jake 20.00 /for Justin, Raj, Keith
-* add expense /des Souvenirs for friends /by Tom 20.00 Joan 30.00 Nicholas 10.00 /for Tom, Joan, Nicholas, Keith, Raj
+* addexpense n/Nic gn/Catch up $/50 d/Movie and dinner
+* addexpense n/Tom gn/Date $/60 d/Big meal but Jerry wants to pay for his own Coke n/Jerry $/2
+* addexpense n/Keith gn/Movie night $/40 d/For movie but Kelly didn't watch ex/Kelly
 
 ### Deleting a shared expense: `deleteexpense`
 
