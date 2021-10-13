@@ -5,10 +5,12 @@ import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.awe.model.expense.exceptions.ExpenseNotFoundException;
+import seedu.awe.model.group.Group;
 import seedu.awe.model.person.exceptions.DuplicatePersonException;
 
 public class ExpenseList implements Iterable<Expense> {
@@ -16,6 +18,22 @@ public class ExpenseList implements Iterable<Expense> {
     private final ObservableList<Expense> internalList = FXCollections.observableArrayList();
     private final ObservableList<Expense> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
+    private Optional<Group> group;
+
+    public ExpenseList() {
+        group = Optional.empty();
+    }
+    public ExpenseList(Group group) {
+        this.group = Optional.of(group);
+    }
+
+    public void setGroup(Group group) {
+        this.group = Optional.of(group);
+    }
+
+    public Optional<Group> getGroup() {
+        return group;
+    }
 
     /**
      * Returns true if the list contains an equivalent expense as the given argument.

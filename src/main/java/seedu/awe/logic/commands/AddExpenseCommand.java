@@ -102,7 +102,7 @@ public class AddExpenseCommand extends Command {
 
         Group newGroup = group.addExpense(expense);
         model.setGroup(group, newGroup);
-
+        model.addExpense(expense, newGroup);
         return new CommandResult(String.format(MESSAGE_SUCCESS, expense));
     }
 

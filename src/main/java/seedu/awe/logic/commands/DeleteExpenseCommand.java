@@ -44,16 +44,17 @@ public class DeleteExpenseCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Expense> lastShownList = model.getExpenses();
         Group group = model.getGroupByName(groupName);
+        List<Expense> expenseList = group.getExpenses();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (index.getZeroBased() >= expenseList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
         }
 
-        Expense expenseToDelete = lastShownList.get(index.getZeroBased());
+        Expense expenseToDelete = expenseList.get(index.getZeroBased());
         Group newGroup = group.deleteExpense(expenseToDelete);
         model.setGroup(group, newGroup);
+        model.deleteExpense(expenseToDelete, newGroup);
         String expenseToDeleteDescriptionString = expenseToDelete.getDescription().getFullDescription();
         return new CommandResult(String.format(MESSAGE_SUCCESS, expenseToDeleteDescriptionString), false,
                 false, false, false, true);
