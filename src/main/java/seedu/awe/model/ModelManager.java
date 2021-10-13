@@ -207,6 +207,11 @@ public class ModelManager implements Model {
 
     //=========== Expenses ================================================================================
 
+    @Override
+    public void addExpense(Expense expense, Group group) {
+        addressBook.addExpense(expense, group);
+    }
+
     /**
      * Returns the current list of expenses.
      *

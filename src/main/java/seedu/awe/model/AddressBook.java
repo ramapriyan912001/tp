@@ -3,6 +3,7 @@ package seedu.awe.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.awe.model.expense.Expense;
@@ -77,6 +78,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setExpenses(Group group) {
         expenses.clear();
         expenses.addAll(group.getExpenses());
+        expenses.setGroup(group);
     }
 
     public ObservableList<Expense> getExpenseList() {
@@ -187,6 +189,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     public Group getGroupByName(GroupName groupName) {
         requireNonNull(groupName);
         return groups.getGroupByName(groupName);
+    }
+
+    public void addExpense(Expense expense, Group group) {
+        Optional<Group> current = expenses.getGroup();
+        boolean isCurrentGroup = current.isPresent() && current.get().equals(group);
+        if(isCurrentGroup) {
+            expenses.add(expense);
+        }
     }
 
     @Override

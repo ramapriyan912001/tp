@@ -137,4 +137,6 @@ public interface Model {
 
     void setExpenses(Group group);
 
+    void addExpense(Expense expense, Group group);
+
 }
