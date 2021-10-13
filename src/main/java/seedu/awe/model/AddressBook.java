@@ -192,7 +192,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Checks if the current expense list in address book
+     * belongs to the specified group.
      *
+     * @param group The group to check if the expense list belongs to.
+     * @return true if the expense list belongs to the group.
      */
     public boolean isCurrentExpenseList(Group group) {
         Optional<Group> current = expenses.getGroup();
