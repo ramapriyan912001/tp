@@ -310,6 +310,16 @@ public class AddExpenseCommandTest {
         }
 
         @Override
+        public void addExpense(Expense expense, Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteExpense(Expense expense, Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Expense> getExpenses() {
             throw new AssertionError("This method should not be called.");
         }
@@ -327,6 +337,7 @@ public class AddExpenseCommandTest {
     private class ModelStubAcceptingExpenseAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
         final ArrayList<Group> groups = new ArrayList<>();
+        final ArrayList<Expense> expenses = new ArrayList<>();
 
         @Override
         public boolean hasPerson(Person person) {
@@ -338,6 +349,13 @@ public class AddExpenseCommandTest {
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
+        }
+
+        @Override
+        public void addExpense(Expense expense, Group group) {
+            requireNonNull(expense);
+            requireNonNull(group);
+            expenses.add(expense);
         }
 
         @Override
