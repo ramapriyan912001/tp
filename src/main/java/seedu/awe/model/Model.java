@@ -145,4 +145,11 @@ public interface Model {
      */
     void updateFilteredExpenseList(Predicate<Expense> predicate);
 
+    void addExpense(Expense expense, Group group);
+
+    /**
+     * Deletes expense if the current expense list in address
+     * book belongs to the specified group.
+     */
+    void deleteExpense(Expense expense, Group group);
 }

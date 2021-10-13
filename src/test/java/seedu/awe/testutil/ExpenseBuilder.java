@@ -62,6 +62,17 @@ public class ExpenseBuilder {
     }
 
     /**
+     * Sets the {@code Description} of the {@code Expense} that we are building.
+     *
+     * @param description The description of the expense.
+     * @return An expensebuilder.
+     */
+    public ExpenseBuilder withDescription(String description) {
+        this.description = new Description(description);
+        return this;
+    }
+
+    /**
      * Sets the {@code Name} of the {@code Person} that we are building.
      */
     public ExpenseBuilder withName(String name) {
