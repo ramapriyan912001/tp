@@ -191,10 +191,17 @@ public class AddressBook implements ReadOnlyAddressBook {
         return groups.getGroupByName(groupName);
     }
 
+    /**
+     * Adds expense to the current expense list if it belongs to the
+     * specified group.
+     *
+     * @param expense The expense to add.
+     * @param group The group which the expense belongs to.
+     */
     public void addExpense(Expense expense, Group group) {
         Optional<Group> current = expenses.getGroup();
         boolean isCurrentGroup = current.isPresent() && current.get().equals(group);
-        if(isCurrentGroup) {
+        if (isCurrentGroup) {
             expenses.add(expense);
         }
     }

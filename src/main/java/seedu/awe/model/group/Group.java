@@ -9,7 +9,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.awe.model.expense.Expense;
-import seedu.awe.model.expense.ExpenseList;
 import seedu.awe.model.person.Person;
 import seedu.awe.model.tag.Tag;
 

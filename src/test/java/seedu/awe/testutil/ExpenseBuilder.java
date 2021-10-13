@@ -61,6 +61,12 @@ public class ExpenseBuilder {
         description = expenseToCopy.getDescription();
     }
 
+    /**
+     * Sets the {@code Description} of the {@code Expense} that we are building.
+     *
+     * @param description The description of the expense.
+     * @return An expensebuilder.
+     */
     public ExpenseBuilder withDescription(String description) {
         this.description = new Description(description);
         return this;

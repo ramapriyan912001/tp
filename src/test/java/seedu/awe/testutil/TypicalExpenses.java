@@ -14,7 +14,6 @@ import static seedu.awe.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.awe.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.awe.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.awe.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-
 import static seedu.awe.testutil.TypicalGroups.BALI;
 import static seedu.awe.testutil.TypicalGroups.LONDON;
 import static seedu.awe.testutil.TypicalGroups.OSLO;
@@ -26,15 +25,14 @@ import static seedu.awe.testutil.TypicalPersons.ELLE;
 import static seedu.awe.testutil.TypicalPersons.FIONA;
 import static seedu.awe.testutil.TypicalPersons.GEORGE;
 
-import seedu.awe.model.AddressBook;
-import seedu.awe.model.expense.Expense;
-import seedu.awe.model.group.Group;
-import seedu.awe.model.person.Person;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.awe.model.AddressBook;
+import seedu.awe.model.expense.Expense;
+import seedu.awe.model.group.Group;
+import seedu.awe.model.person.Person;
 
 
 public class TypicalExpenses {
