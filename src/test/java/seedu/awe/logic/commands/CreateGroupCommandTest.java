@@ -220,7 +220,7 @@ public class CreateGroupCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single group.
      */
     private class ModelStubWithGroup extends ModelStub {
         private final Group group;

@@ -1,5 +1,9 @@
 package seedu.awe.storage;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -16,17 +20,20 @@ public class JsonAdaptedExpense {
     private final JsonAdaptedPerson payer;
     private final String cost;
     private final String description;
+    private final List<JsonAdaptedPerson> excluded = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedExpense} with the given group details.
      */
     @JsonCreator
     public JsonAdaptedExpense(@JsonProperty("payer") JsonAdaptedPerson payer,
-                            @JsonProperty("cost") String cost,
-                            @JsonProperty("description") String description) {
+                              @JsonProperty("cost") String cost,
+                              @JsonProperty("description") String description,
+                              @JsonProperty("excluded") List<JsonAdaptedPerson> excluded) {
         this.payer = payer;
         this.cost = cost;
         this.description = description;
+        this.excluded.addAll(excluded);
     }
 
     /**
@@ -36,6 +43,10 @@ public class JsonAdaptedExpense {
         payer = new JsonAdaptedPerson(source.getPayer());
         cost = source.getCost().toString();
         description = source.getDescription().toString();
+        excluded.addAll(source.getExcluded()
+                .stream()
+                .map(JsonAdaptedPerson::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -61,8 +72,13 @@ public class JsonAdaptedExpense {
         if (!Description.isValidDescription(description)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
+
+        final ArrayList<Person> modelExcluded = new ArrayList<>();
+        for (JsonAdaptedPerson excludedPerson : excluded) {
+            modelExcluded.add(excludedPerson.toModelType());
+        }
         final Description modelDescription = new Description(description);
 
-        return new Expense(modelPayer, modelCost, modelDescription);
+        return new Expense(modelPayer, modelCost, modelDescription, modelExcluded);
     }
 }

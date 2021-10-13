@@ -147,7 +147,7 @@ public class ParserUtil {
 
     /**
      * Parses {@code Collection<String> names} into a {@code List<Name>}.
-     * @param names
+     * @param names Collection of strings that represent names.
      * @return List of names
      */
     public static List<Name> parseMemberNames(Collection<String> names) {
@@ -177,6 +177,18 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code Collection<String> names} into a {@code List<Name>}.
+     */
+    public static List<Name> parseNames(Collection<String> names) throws ParseException {
+        requireNonNull(names);
+        final ArrayList<Name> nameList = new ArrayList<>();
+        for (String name : names) {
+            nameList.add(parseName(name));
+        }
+        return nameList;
+    }
+
+    /**
      * Parses a {@code String cost} into a {@code Cost}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -186,9 +198,21 @@ public class ParserUtil {
         requireNonNull(cost);
         String trimmedCost = cost.trim();
         if (!Cost.isValidCost(trimmedCost)) {
-            throw new ParseException(GroupName.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Cost.MESSAGE_CONSTRAINTS);
         }
         return new Cost(trimmedCost);
+    }
+
+    /**
+     * Parses {@code Collection<String> costs} into a {@code List<Cost>}.
+     */
+    public static List<Cost> parseCosts(Collection<String> costs) throws ParseException {
+        requireNonNull(costs);
+        final ArrayList<Cost> costList = new ArrayList<>();
+        for (String cost : costs) {
+            costList.add(parseCost(cost));
+        }
+        return costList;
     }
 
     /**
@@ -201,7 +225,7 @@ public class ParserUtil {
         requireNonNull(description);
         String trimmedDescription = description.trim();
         if (!Description.isValidDescription(trimmedDescription)) {
-            throw new ParseException(GroupName.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
         }
         return new Description(trimmedDescription);
     }
@@ -212,5 +236,20 @@ public class ParserUtil {
      */
     public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Parses a collection of {@code String name} into a list of {@code Name}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static List<Name> parseExcluded(Collection<String> toExclude) throws ParseException {
+        requireNonNull(toExclude);
+        final ArrayList<Name> excludedList = new ArrayList<>();
+        for (String excludedName : toExclude) {
+            excludedList.add(parseName(excludedName));
+        }
+        return excludedList;
     }
 }
