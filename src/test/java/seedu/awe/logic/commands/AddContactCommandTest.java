@@ -193,6 +193,16 @@ public class AddContactCommandTest {
         }
 
         @Override
+        public void addExpense(Expense expense, Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteExpense(Expense expense, Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Expense> getExpenses() {
             throw new AssertionError("This method should not be called.");
         }
@@ -202,6 +212,10 @@ public class AddContactCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void updateFilteredExpenseList(Predicate<Expense> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
