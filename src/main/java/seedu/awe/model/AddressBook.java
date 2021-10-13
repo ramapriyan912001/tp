@@ -192,6 +192,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     *
+     */
+    public boolean isCurrentExpenseList(Group group) {
+        Optional<Group> current = expenses.getGroup();
+        boolean isCurrentGroup = current.isPresent() && current.get().equals(group);
+        return isCurrentGroup;
+    }
+
+    /**
      * Adds expense to the current expense list if it belongs to the
      * specified group.
      *
@@ -199,10 +208,23 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @param group The group which the expense belongs to.
      */
     public void addExpense(Expense expense, Group group) {
-        Optional<Group> current = expenses.getGroup();
-        boolean isCurrentGroup = current.isPresent() && current.get().equals(group);
+        boolean isCurrentGroup = isCurrentExpenseList(group);
         if (isCurrentGroup) {
             expenses.add(expense);
+        }
+    }
+
+    /**
+     * Deletes the specified expense in the current list if it belongs to the
+     * specified group.
+     *
+     * @param expense The expense to remove.
+     * @param group The group which the expense belongs to.
+     */
+    public void deleteExpense(Expense expense, Group group) {
+        boolean isCurrentGroup = isCurrentExpenseList(group);
+        if (isCurrentGroup) {
+            expenses.remove(expense);
         }
     }
 
