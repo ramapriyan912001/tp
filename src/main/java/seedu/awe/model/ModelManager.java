@@ -205,7 +205,7 @@ public class ModelManager implements Model {
         return addressBook.getGroupByName(groupName);
     }
 
-    //=========== Expenses ================================================================================
+    //=========== Expenses List Accessors ===================================================================
 
     /**
      * Adds expense into expense list in address book, if
@@ -242,6 +242,12 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Expense> getExpenses() {
         return expenses;
+    }
+
+    @Override
+    public void updateFilteredExpenseList(Predicate<Expense> predicate) {
+        requireNonNull(predicate);
+        expenses.setPredicate(predicate);
     }
 
     @Override

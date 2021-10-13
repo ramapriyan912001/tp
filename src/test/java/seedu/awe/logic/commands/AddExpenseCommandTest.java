@@ -310,6 +310,11 @@ public class AddExpenseCommandTest {
         }
 
         @Override
+        public void updateFilteredExpenseList(Predicate<Expense> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addExpense(Expense expense, Group group) {
             throw new AssertionError("This method should not be called.");
         }

@@ -137,6 +137,14 @@ public interface Model {
 
     void setExpenses(Group group);
 
+    /**
+     * Updates the filter of the filtered expense list to filter by the given {@code predicate}.
+     *
+     * @param predicate The predicate to filter the list.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredExpenseList(Predicate<Expense> predicate);
+
     void addExpense(Expense expense, Group group);
 
     /**
