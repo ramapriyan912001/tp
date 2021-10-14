@@ -24,7 +24,7 @@ import seedu.awe.model.tag.Tag;
  */
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
-        return new Person[]{
+        return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
                 getTagSet("friends")),
@@ -48,7 +48,7 @@ public class SampleDataUtil {
 
     public static Expense[] getSampleExpenses() {
         Person[] members = getSamplePersons();
-        return new Expense[]{
+        return new Expense[] {
             new Expense(members[0], new Cost("10"), new Description("Transportation")),
             new Expense(members[1], new Cost("300"), new Description("Buffet")),
             new Expense(members[2], new Cost("60"), new Description("Souvenirs")),
@@ -64,7 +64,7 @@ public class SampleDataUtil {
         ArrayList<Expense> londonExpenses = addSampleExpenses(0, 3);
         ArrayList<Expense> baliExpenses = addSampleExpenses(3, 6);
 
-        return new Group[]{
+        return new Group[] {
             new Group(new GroupName("London"), londonMembers, getTagSet("school trip"),
                 londonExpenses),
             new Group(new GroupName("Bali"), baliMembers, getTagSet("3-day trip"),
