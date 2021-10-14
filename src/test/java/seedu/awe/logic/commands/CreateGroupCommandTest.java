@@ -203,6 +203,16 @@ public class CreateGroupCommandTest {
         }
 
         @Override
+        public void addExpense(Expense expense, Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteExpense(Expense expense, Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Expense> getExpenses() {
             throw new AssertionError("This method should not be called.");
         }
@@ -212,10 +222,15 @@ public class CreateGroupCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void updateFilteredExpenseList(Predicate<Expense> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single group.
      */
     private class ModelStubWithGroup extends ModelStub {
         private final Group group;
