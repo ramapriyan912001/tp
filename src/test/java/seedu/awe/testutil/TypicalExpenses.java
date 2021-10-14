@@ -74,7 +74,7 @@ public class TypicalExpenses {
             .withCost("300").withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave").build();
 
-    // Manually added - Person's details found in {@code CommandTestUtil}
+    // Manually added - Expense's details found in {@code CommandTestUtil}
     public static final Expense BUFFET = new ExpenseBuilder().withDescription(VALID_DESCRIPTION_BUFFET)
             .withCost(VALID_COST_BUFFET).withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
@@ -88,7 +88,7 @@ public class TypicalExpenses {
     private TypicalExpenses() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code AddressBook} with all the typical expenses.
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
