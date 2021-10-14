@@ -3,7 +3,6 @@ package seedu.awe.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.awe.model.Model.PREDICATE_SHOW_ALL_EXPENSES;
-import static seedu.awe.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 
 import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.model.Model;

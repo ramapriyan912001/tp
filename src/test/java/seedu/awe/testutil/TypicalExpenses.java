@@ -83,7 +83,7 @@ public class TypicalExpenses {
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
 
-    public static final String KEYWORD_MATCHING_MEIER = "Buffet"; // A keyword that matches MEIER
+    public static final String KEYWORD_MATCHING_BUFFET = "Buffet"; // A keyword that matches BUFFET
 
     private TypicalExpenses() {} // prevents instantiation
 
@@ -97,6 +97,9 @@ public class TypicalExpenses {
             ab.addPerson(person);
         }
         for (Group group : getTypicalGroups()) {
+            for (Person person : getTypicalPersons()) {
+                group.addMember(person);
+            }
             for (Expense expense : getTypicalExpenses()) {
                 group.addExpense(expense);
             }
@@ -106,7 +109,7 @@ public class TypicalExpenses {
     }
 
     public static List<Expense> getTypicalExpenses() {
-        return new ArrayList<>(Arrays.asList(HOLIDAY, BUFFET, SOUVENIRS, PIZZA, PARTY, TRANSPORTATION, GIFTS));
+        return new ArrayList<>(Arrays.asList(HOLIDAY, PIZZA, PARTY, TRANSPORTATION, DINNER, GIFTS));
     }
 
     public static List<Group> getTypicalGroups() {

@@ -4,13 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.awe.commons.core.Messages.MESSAGE_EXPENSES_LISTED_OVERVIEW;
-import static seedu.awe.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.awe.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.awe.testutil.TypicalExpenses.*;
+import static seedu.awe.testutil.TypicalExpenses.getTypicalAddressBook;
 import static seedu.awe.testutil.TypicalGroups.BALI;
-import static seedu.awe.testutil.TypicalPersons.CARL;
-import static seedu.awe.testutil.TypicalPersons.ELLE;
-import static seedu.awe.testutil.TypicalPersons.FIONA;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -23,7 +19,7 @@ import seedu.awe.model.UserPrefs;
 import seedu.awe.model.expense.DescriptionContainsKeywordsPredicate;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code FindCommand}.
+ * Contains integration tests (interaction with the Model) for {@code FindExpensesCommand}.
  */
 public class FindExpensesCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -69,15 +65,15 @@ public class FindExpensesCommandTest {
     /*
     @Test
     public void execute_multipleKeywords_multipleExpensesFound() {
-        String expectedMessage = String.format(MESSAGE_EXPENSES_LISTED_OVERVIEW, 2);
-        DescriptionContainsKeywordsPredicate predicate = preparePredicate("Holiday Buffet");
+        String expectedMessage = String.format(MESSAGE_EXPENSES_LISTED_OVERVIEW, 0);
+        DescriptionContainsKeywordsPredicate predicate = preparePredicate("Souvenirs Buffet");
         FindExpensesCommand command = new FindExpensesCommand(BALI.getGroupName(), predicate);
+        expectedModel.setExpenses(BALI);
         expectedModel.updateFilteredExpenseList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel, false, false, true);
-        //assertEquals(Arrays.asList(HOLIDAY, BUFFET), model.getExpenses());
+        assertEquals(Arrays.asList(HOLIDAY, BUFFET), model.getExpenses());
     }
     */
-     */
 
     /**
      * Parses {@code userInput} into a {@code DescriptionContainsKeywordsPredicate}.
