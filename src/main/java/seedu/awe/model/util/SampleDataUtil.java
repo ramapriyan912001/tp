@@ -100,7 +100,6 @@ public class SampleDataUtil {
      * @param end   The ending index to add member.
      * @return List of members.
      */
-
     public static ArrayList<Person> addSampleMembers(int start, int end) {
         ArrayList<Person> members = new ArrayList<>();
         Person[] persons = getSamplePersons();
@@ -114,8 +113,8 @@ public class SampleDataUtil {
      * Returns a list of expenses containing the sample expenses
      * within the given range.
      *
-     * @param start The starting index.
-     * @param end   The ending index.
+     * @param start The starting index to add expense.
+     * @param end   The ending index to add expense.
      * @return List of expenses.
      */
     public static ArrayList<Expense> addSampleExpenses(int start, int end) {
