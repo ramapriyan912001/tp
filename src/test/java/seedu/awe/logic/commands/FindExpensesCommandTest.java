@@ -67,13 +67,13 @@ public class FindExpensesCommandTest {
     public void execute_multipleKeywords_multipleExpensesFound() {
         String expectedMessage = String.format(MESSAGE_EXPENSES_LISTED_OVERVIEW, 0);
         DescriptionContainsKeywordsPredicate predicate = preparePredicate("Souvenirs Buffet");
-        FindExpensesCommand command = new FindExpensesCommand(BALI.getGroupName(), predicate);
-        expectedModel.setExpenses(BALI);
+        FindExpensesCommand command = new FindExpensesCommand(new GroupName("Bali"), predicate);
+        expectedModel.setExpenses(expectedModel.getGroupByName(new GroupName("Bali")));
         expectedModel.updateFilteredExpenseList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel, false, false, true);
-        assertEquals(Arrays.asList(HOLIDAY, BUFFET), model.getExpenses());
+        assertEquals(Arrays.asList(BUFFET, SOUVENIRS), model.getExpenses());
     }
-    */
+     */
 
     /**
      * Parses {@code userInput} into a {@code DescriptionContainsKeywordsPredicate}.
