@@ -149,6 +149,7 @@ public class ModelManager implements Model {
     @Override
     public void addGroup(Group group) {
         addressBook.addGroup(group);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
     /**
@@ -178,6 +179,7 @@ public class ModelManager implements Model {
     public void setGroup(Group group, Group newGroup) {
         requireNonNull(group);
         addressBook.setGroup(group, newGroup);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
     //=========== Filtered Group List Accessors =============================================================
@@ -203,7 +205,34 @@ public class ModelManager implements Model {
         return addressBook.getGroupByName(groupName);
     }
 
-    //=========== Expenses ================================================================================
+    //=========== Expenses List Accessors ===================================================================
+
+    /**
+     * Adds expense into expense list in address book, if
+     * the current list of expenses belongs to the
+     * specified group.
+     *
+     * @param expense The expense to add.
+     * @param group The group which the expense belongs to.
+     */
+    @Override
+    public void addExpense(Expense expense, Group group) {
+        addressBook.addExpense(expense, group);
+    }
+
+    /**
+     * Deletes expense from the expense list in address book, if
+     * the current list of expenses belongs to the specified
+     * group.
+     *
+     * @param expense The expense to delete
+     */
+    @Override
+    public void deleteExpense(Expense expense, Group group) {
+        addressBook.deleteExpense(expense, group);
+    }
+
+    //=========== Filtered Expense List Accessors =============================================================
 
     /**
      * Returns the current list of expenses.
@@ -213,6 +242,12 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Expense> getExpenses() {
         return expenses;
+    }
+
+    @Override
+    public void updateFilteredExpenseList(Predicate<Expense> predicate) {
+        requireNonNull(predicate);
+        expenses.setPredicate(predicate);
     }
 
     @Override

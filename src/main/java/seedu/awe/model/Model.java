@@ -17,6 +17,9 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -109,8 +112,6 @@ public interface Model {
      */
     ObservableList<Group> getFilteredGroupList();
 
-    void updateFilteredGroupList(Predicate<Group> predicate);
-
     Group getGroupByName(GroupName groupName);
 
     /**
@@ -122,6 +123,12 @@ public interface Model {
     void setGroup(Group group, Group newGroup);
 
     /**
+     * Updates the filter of the filtered group list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredGroupList(Predicate<Group> predicate);
+
+    /**
      * Returns all expenses in the input group.
      *
      * @return A list of all expenses in the specified group.
@@ -129,5 +136,21 @@ public interface Model {
     ObservableList<Expense> getExpenses();
 
     void setExpenses(Group group);
+
+    /**
+     * Updates the filter of the filtered expense list to filter by the given {@code predicate}.
+     *
+     * @param predicate The predicate to filter the list.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredExpenseList(Predicate<Expense> predicate);
+
+    void addExpense(Expense expense, Group group);
+
+    /**
+     * Deletes expense if the current expense list in address
+     * book belongs to the specified group.
+     */
+    void deleteExpense(Expense expense, Group group);
 
 }

@@ -72,6 +72,32 @@ public class SampleDataUtil {
         };
     }
 
+    public static Expense[] getSampleExpenses() {
+        Person[] members = getSamplePersons();
+        return new Expense[] {
+            new Expense(members[0], new Cost("10"), new Description("Transportation")),
+            new Expense(members[1], new Cost("300"), new Description("Buffet")),
+            new Expense(members[2], new Cost("60"), new Description("Souvenirs")),
+            new Expense(members[3], new Cost("200"), new Description("Entry Tickets")),
+            new Expense(members[3], new Cost("150"), new Description("Lunch")),
+            new Expense(members[4], new Cost("180"), new Description("Supper"))
+        };
+    }
+
+    public static Group[] getSampleGroups() {
+        ArrayList<Person> londonMembers = addSampleMembers(0, 3);
+        ArrayList<Person> baliMembers = addSampleMembers(3, 6);
+        ArrayList<Expense> londonExpenses = addSampleExpenses(0, 3);
+        ArrayList<Expense> baliExpenses = addSampleExpenses(3, 6);
+
+        return new Group[] {
+            new Group(new GroupName("London"), londonMembers, getTagSet("school trip"),
+                londonExpenses),
+            new Group(new GroupName("Bali"), baliMembers, getTagSet("3-day trip"),
+                baliExpenses)
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
@@ -88,8 +114,42 @@ public class SampleDataUtil {
      */
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Tag::new)
-                .collect(Collectors.toSet());
+                   .map(Tag::new)
+                   .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a list of members containing the sample persons
+     * within the given range.
+     *
+     * @param start The starting index to add member.
+     * @param end   The ending index to add member.
+     * @return List of members.
+     */
+    public static ArrayList<Person> addSampleMembers(int start, int end) {
+        ArrayList<Person> members = new ArrayList<>();
+        Person[] persons = getSamplePersons();
+        for (int i = start; i < end; i++) {
+            members.add(persons[i]);
+        }
+        return members;
+    }
+
+    /**
+     * Returns a list of expenses containing the sample expenses
+     * within the given range.
+     *
+     * @param start The starting index to add expense.
+     * @param end   The ending index to add expense.
+     * @return List of expenses.
+     */
+    public static ArrayList<Expense> addSampleExpenses(int start, int end) {
+        ArrayList<Expense> expenses = new ArrayList<>();
+        Expense[] sampleExpenses = getSampleExpenses();
+        for (int i = start; i < end; i++) {
+            expenses.add(sampleExpenses[i]);
+        }
+        return expenses;
     }
 
     /**
