@@ -22,7 +22,7 @@ public class GroupEditNameCommand extends Command {
     private final boolean isValidCommand;
 
     /**
-     * Creates a GroupEditNameCommand to add the specified {@code Person}
+     * Creates a GroupEditNameCommand to edit the specified {@code GroupName}
      */
     public GroupEditNameCommand(GroupName oldGroupName, GroupName newGroupName, boolean isValidCommand) {
         requireAllNonNull(newGroupName, isValidCommand);
