@@ -2,6 +2,7 @@ package seedu.awe.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
+import static seedu.awe.model.Model.PREDICATE_SHOW_ALL_EXPENSES;
 
 import java.util.Objects;
 
@@ -48,6 +49,7 @@ public class ListExpensesCommand extends Command {
                 throw new CommandException(MESSAGE_GROUP_NOT_FOUND);
             }
             model.setExpenses(group);
+            model.updateFilteredExpenseList(PREDICATE_SHOW_ALL_EXPENSES);
             return new CommandResult(MESSAGE_SUCCESS, false, false, false, false, true);
         } catch (GroupNotFoundException e) {
             throw new CommandException(MESSAGE_GROUP_NOT_FOUND);
