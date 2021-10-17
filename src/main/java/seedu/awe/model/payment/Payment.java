@@ -10,8 +10,6 @@ public class Payment implements Comparable<Payment> {
     private Person payer;
     private Person payee;
     private Cost cost;
-    private boolean isPaymentFlow;
-
     /**
      * Payment object represents transactions to be made to balance expenses.
      * @param payer person to pay amount
@@ -22,27 +20,11 @@ public class Payment implements Comparable<Payment> {
         this.payer = payer;
         this.payee = payee;
         this.cost = cost;
-        isPaymentFlow = true;
-    }
-
-    /**
-     * Constructor without payer object.
-     * @param payee person who paid amount.
-     * @param cost amount paid.
-     */
-    public Payment(Person payee, Cost cost) {
-        this.payee = payee;
-        this.cost = cost;
-        isPaymentFlow = false;
     }
 
     @Override
     public String toString() {
-        if (isPaymentFlow) {
-            return String.format("%s pays $%.2f to %s.", payee.getName(), getCost(), payer.getName());
-        } else {
-            return String.format("%s spent $%0.2f.", payee.getName(), getCost());
-        }
+        return String.format("%s pays $%.2f to %s.", payee.getName(), getCost(), payer.getName());
     }
 
     public Person getPayer() {
@@ -55,10 +37,6 @@ public class Payment implements Comparable<Payment> {
 
     public Cost getCost() {
         return cost;
-    }
-
-    public boolean isPaymentFlow() {
-        return isPaymentFlow;
     }
 
     @Override
@@ -75,14 +53,13 @@ public class Payment implements Comparable<Payment> {
         boolean isSamePayer = otherExpense.getPayer().equals(getPayer());
         boolean isSamePayee = otherExpense.getPayee().equals(getPayee());
         boolean isSameCost = otherExpense.getCost().equals(getCost());
-        boolean isSamePaymentFlow = otherExpense.isPaymentFlow() == isPaymentFlow();
 
-        return isSamePayer && isSamePayee && isSameCost && isSamePaymentFlow;
+        return isSamePayer && isSamePayee && isSameCost;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(payer, payee, cost, isPaymentFlow);
+        return Objects.hash(payer, payee, cost);
     }
 
     /**
