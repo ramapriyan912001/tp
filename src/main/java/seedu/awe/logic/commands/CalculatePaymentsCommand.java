@@ -1,18 +1,26 @@
 package seedu.awe.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
-import java.util.PriorityQueue;
 
 import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.model.Model;
+import seedu.awe.model.expense.Cost;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.payment.Payment;
 import seedu.awe.model.person.Person;
 
 public class CalculatePaymentsCommand extends Command {
-    public static final String MESSAGE_USAGE = "calculatepayments gn/GROUP_NAME";
+
+    public static final String COMMAND_WORD = "calculatepayments";
+    public static final String MESSAGE_USAGE = "calculatepayments " + PREFIX_GROUP_NAME + "GROUPNAME";
+    public static final String MESSAGE_PAYMENTS_EMPTY = "There are no payments to be made!";
     public static final String MESSAGE_GROUP_DOES_NOT_EXIST = "This group does not exist in the awe book";
     private final Group group;
 
@@ -30,11 +38,11 @@ public class CalculatePaymentsCommand extends Command {
             this.person = person;
         }
 
-        public double getSurplus() {
+        double getSurplus() {
             return surplus;
         }
 
-        public Person getPerson() {
+        Person getPerson() {
             return person;
         }
 
@@ -82,10 +90,33 @@ public class CalculatePaymentsCommand extends Command {
         }
 
         Group group = model.getAddressBook().getGroupByName(this.group.getGroupName());
+        String paymentsString = getPayments(group);
 
-        // TODO: CALCULATE PAYMENTS HERE, EMPTY METHODS BELOW.
+        return new CommandResult(paymentsString);
+    }
 
-        return null;
+    private static List<Pair> sortPairs(List<Pair> pairs) {
+         pairs.sort(new Comparator<Pair>() {
+            @Override
+            public int compare(Pair pair, Pair t1) {
+                return pair.compareTo(t1);
+            }
+         });
+         return pairs;
+    }
+
+    public List<Pair> getNamesAndSurplusesList(Group group) {
+        List<Pair> namesAndSurpluses = new ArrayList<>();
+        Map<Person, Cost> amountsPaid = group.getPaidByPayers();
+        Map<Person, Cost> expensesIncurred = group.getPaidByPayees();
+        for (Person person: group.getMembers()) {
+            Cost amountPaid = amountsPaid.get(person);
+            Cost expenseIncurred = expensesIncurred.get(person);
+            double surplus = amountPaid.getCost() - expenseIncurred.getCost();
+            Pair nameSurplusPair = new Pair(surplus, person);
+            namesAndSurpluses.add(nameSurplusPair);
+        }
+        return namesAndSurpluses;
     }
 
     /**
@@ -93,12 +124,80 @@ public class CalculatePaymentsCommand extends Command {
      * @param group group for which payments are to be calculated
      * @return List of payments to make.
      */
-    public PriorityQueue<Payment> calculatePayments(Group group) {
-        // TODO: CALCULATES PAYMENTS
+    public String getPayments(Group group) throws CommandException {
+        List<Pair> namesAndSurplusesList = getNamesAndSurplusesList(group);
+        namesAndSurplusesList = sortPairs(namesAndSurplusesList);
+        List<Payment> payments = calculatePayments(namesAndSurplusesList);
+        String paymentsString = makePaymentsString(payments);
+        return paymentsString;
+    }
 
-        PriorityQueue<Payment> paymentsQueue = new PriorityQueue<>();
+    private boolean checkSumIsZero(List<Pair> pairs) {
+        double total = 0.00;
+        for (Pair pair: pairs) {
+            total += pair.getSurplus();
+        }
+        return total == 0.00;
+    }
 
-        return new PriorityQueue<>();
+
+    private static Pair getSmallerPair(Pair p1, Pair p2) {
+        double p1AbsoluteSurplus = Math.abs(p1.getSurplus());
+        double p2AbsoluteSurplus = Math.abs(p2.getSurplus());
+        if (p1AbsoluteSurplus < p2AbsoluteSurplus) {
+            return p1;
+        } else if (p1AbsoluteSurplus > p2AbsoluteSurplus) {
+            return p2;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Tabulates payments to make between all persons to balance payments and expenses.
+     * @param pairs Name and Surplus/Deficit of Person.
+     * @return List of payments to balance payments and expenses.
+     * @throws CommandException thrown if a discrepancy in payments is observed.
+     */
+    public List<Payment> calculatePayments(List<Pair> pairs) throws CommandException {
+        if (!checkSumIsZero(pairs)) {
+            throw new CommandException("There appears to be a discrepancy within your payments.");
+        }
+        List<Payment> payments = new ArrayList<>();
+        while (!pairs.isEmpty()) {
+            if (pairs.size() == 1) {
+                throw new CommandException("There appears to be a discrepancy within your payments.");
+            }
+            Pair pairWithLowestSurplus = pairs.get(0);
+            Pair pairWithHighestSurplus = pairs.get(pairs.size()-1);
+            Payment paymentToAdd = calculatePayment(pairWithLowestSurplus, pairWithHighestSurplus);
+            payments.add(paymentToAdd);
+            Pair smallerPair = getSmallerPair(pairWithLowestSurplus, pairWithHighestSurplus);
+            if (smallerPair.equals(pairWithHighestSurplus)) {
+                pairs.remove(pairs.size()-1);
+            } else if (smallerPair.equals(pairWithLowestSurplus)) {
+                pairs.remove(0);
+            } else {
+                pairs.remove(0);
+                pairs.remove(pairs.size()-1);
+            }
+        }
+        return payments;
+    }
+
+    /**
+     * Calculates individual Payments to make between persons to balance payments and expenditures.
+     * @param deficitPair Name and Amount pair for person paying amount.
+     * @param surplusPair Name and Amount pair for person receiving amount.
+     * @return Payment to make.
+     */
+    public Payment calculatePayment(Pair deficitPair, Pair surplusPair) {
+        Person payer = deficitPair.getPerson();
+        double absoluteDeficit = Math.abs(deficitPair.getSurplus());
+        Person payee = surplusPair.getPerson();
+        double absoluteSurplus = Math.abs(surplusPair.getSurplus());
+        Cost minimumAmount = new Cost(Math.min(absoluteDeficit, absoluteSurplus));
+        return new Payment(payer, payee, minimumAmount);
     }
 
     /**
@@ -106,8 +205,17 @@ public class CalculatePaymentsCommand extends Command {
      * @param payments List of payments
      * @return Readable string
      */
-    public String makePaymentsString(PriorityQueue<Payment> payments) {
-        // TODO: PAYMENTS STRING MAKER
-        return null;
+    public String makePaymentsString(List<Payment> payments) {
+        if (payments.isEmpty()) {
+            return MESSAGE_PAYMENTS_EMPTY;
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        payments.sort(Payment.getPaymentComparator());
+        for (int i = 0; i < payments.size()-1; i++) {
+            stringBuilder.append(payments.get(i));
+            stringBuilder.append("\n");
+        }
+        stringBuilder.append(payments.get(payments.size()-1));
+        return stringBuilder.toString();
     }
 }

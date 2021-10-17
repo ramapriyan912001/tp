@@ -126,6 +126,14 @@ public class Group {
         return members;
     }
 
+    public HashMap<Person, Cost> getPaidByPayees() {
+        return paidByPayees;
+    }
+
+    public HashMap<Person, Cost> getPaidByPayers() {
+        return paidByPayers;
+    }
+
     /**
      * Checks if a person is part of the group.
      *

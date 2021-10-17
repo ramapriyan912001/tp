@@ -29,6 +29,16 @@ public class Cost {
         this.cost = Double.parseDouble(cost);
     }
 
+    public Cost(double cost) {
+        String costDoubleToString = String.valueOf(cost);
+        checkArgument(isValidCost(costDoubleToString), MESSAGE_CONSTRAINTS);
+        this.cost = cost;
+    }
+
+    public Double getCost() {
+        return cost;
+    }
+
     /**
      * Sums two costs.
      *
