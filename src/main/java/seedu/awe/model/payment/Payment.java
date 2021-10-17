@@ -10,6 +10,7 @@ public class Payment implements Comparable<Payment> {
     private Person payer;
     private Person payee;
     private Cost cost;
+    private boolean isPaymentFlow;
 
     /**
      * Payment object represents transactions to be made to balance expenses.
@@ -21,6 +22,7 @@ public class Payment implements Comparable<Payment> {
         this.payer = payer;
         this.payee = payee;
         this.cost = cost;
+        isPaymentFlow = true;
     }
 
     /**
@@ -31,11 +33,16 @@ public class Payment implements Comparable<Payment> {
     public Payment(Person payee, Cost cost) {
         this.payee = payee;
         this.cost = cost;
+        isPaymentFlow = false;
     }
 
     @Override
     public String toString() {
-        return String.format("%s pays %.2f to %s.", payee.getName(), getCost(), payer.getName());
+        if (isPaymentFlow) {
+            return String.format("%s pays $%.2f to %s.", payee.getName(), getCost(), payer.getName());
+        } else {
+            return String.format("%s spent $%0.2f.", payee.getName(), getCost());
+        }
     }
 
     public Person getPayer() {
@@ -48,6 +55,10 @@ public class Payment implements Comparable<Payment> {
 
     public Cost getCost() {
         return cost;
+    }
+
+    public boolean isPaymentFlow() {
+        return isPaymentFlow;
     }
 
     @Override
@@ -64,15 +75,14 @@ public class Payment implements Comparable<Payment> {
         boolean isSamePayer = otherExpense.getPayer().equals(getPayer());
         boolean isSamePayee = otherExpense.getPayee().equals(getPayee());
         boolean isSameCost = otherExpense.getCost().equals(getCost());
+        boolean isSamePaymentFlow = otherExpense.isPaymentFlow() == isPaymentFlow();
 
-        return isSamePayer
-                && isSamePayee
-                && isSameCost;
+        return isSamePayer && isSamePayee && isSameCost && isSamePaymentFlow;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(payer, payee, cost);
+        return Objects.hash(payer, payee, cost, isPaymentFlow);
     }
 
     /**
