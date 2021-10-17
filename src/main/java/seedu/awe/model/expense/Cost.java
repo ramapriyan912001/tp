@@ -29,6 +29,11 @@ public class Cost {
         this.cost = Double.parseDouble(cost);
     }
 
+    /**
+     * Constructs a {@code Cost}.
+     *
+     * @param cost A valid cost of type double.
+     */
     public Cost(double cost) {
         String costDoubleToString = String.valueOf(cost);
         checkArgument(isValidCost(costDoubleToString), MESSAGE_CONSTRAINTS);

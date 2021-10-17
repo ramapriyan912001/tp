@@ -96,13 +96,13 @@ public class CalculatePaymentsCommand extends Command {
     }
 
     private static List<Pair> sortPairs(List<Pair> pairs) {
-         pairs.sort(new Comparator<Pair>() {
+        pairs.sort(new Comparator<Pair>() {
             @Override
             public int compare(Pair pair, Pair t1) {
                 return pair.compareTo(t1);
             }
-         });
-         return pairs;
+        });
+        return pairs;
     }
 
     public List<Pair> getNamesAndSurplusesList(Group group) {
@@ -169,17 +169,17 @@ public class CalculatePaymentsCommand extends Command {
                 throw new CommandException("There appears to be a discrepancy within your payments.");
             }
             Pair pairWithLowestSurplus = pairs.get(0);
-            Pair pairWithHighestSurplus = pairs.get(pairs.size()-1);
+            Pair pairWithHighestSurplus = pairs.get(pairs.size() - 1);
             Payment paymentToAdd = calculatePayment(pairWithLowestSurplus, pairWithHighestSurplus);
             payments.add(paymentToAdd);
             Pair smallerPair = getSmallerPair(pairWithLowestSurplus, pairWithHighestSurplus);
             if (smallerPair.equals(pairWithHighestSurplus)) {
-                pairs.remove(pairs.size()-1);
+                pairs.remove(pairs.size() - 1);
             } else if (smallerPair.equals(pairWithLowestSurplus)) {
                 pairs.remove(0);
             } else {
                 pairs.remove(0);
-                pairs.remove(pairs.size()-1);
+                pairs.remove(pairs.size() - 1);
             }
         }
         return payments;
@@ -211,11 +211,11 @@ public class CalculatePaymentsCommand extends Command {
         }
         StringBuilder stringBuilder = new StringBuilder();
         payments.sort(Payment.getPaymentComparator());
-        for (int i = 0; i < payments.size()-1; i++) {
+        for (int i = 0; i < payments.size() - 1; i++) {
             stringBuilder.append(payments.get(i));
             stringBuilder.append("\n");
         }
-        stringBuilder.append(payments.get(payments.size()-1));
+        stringBuilder.append(payments.get(payments.size() - 1));
         return stringBuilder.toString();
     }
 }
