@@ -11,6 +11,8 @@ import seedu.awe.model.expense.ExpenseList;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.group.UniqueGroupList;
+import seedu.awe.model.payment.Payment;
+import seedu.awe.model.payment.PaymentList;
 import seedu.awe.model.person.Person;
 import seedu.awe.model.person.UniquePersonList;
 
@@ -23,6 +25,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     private final UniquePersonList persons;
     private final UniqueGroupList groups;
     private final ExpenseList expenses;
+    private final PaymentList payments;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -35,6 +38,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons = new UniquePersonList();
         groups = new UniqueGroupList();
         expenses = new ExpenseList();
+        payments = new PaymentList();
     }
 
     public AddressBook() {}
@@ -83,6 +87,11 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public ObservableList<Expense> getExpenseList() {
         return expenses.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Payment> getPaymentList() {
+        return payments.asUnmodifiableObservableList();
     }
 
     public UniqueGroupList getGroups() {
