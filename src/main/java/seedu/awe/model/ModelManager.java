@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.awe.commons.core.GuiSettings;
 import seedu.awe.commons.core.LogsCenter;
+import seedu.awe.model.expense.Cost;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
@@ -180,6 +182,13 @@ public class ModelManager implements Model {
         requireNonNull(group);
         addressBook.setGroup(group, newGroup);
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+    }
+    //=========== TransactionSummary List Accessors =============================================================
+
+    @Override
+    public void setTransactionSummary(HashMap<Person, Cost> summary) {
+        requireNonNull(summary);
+        addressBook.setTransactionSummary(summary);
     }
 
     //=========== Filtered Group List Accessors =============================================================

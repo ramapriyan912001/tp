@@ -1,7 +1,6 @@
 package seedu.awe.model.transactionsummary;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
@@ -10,19 +9,19 @@ import java.util.Optional;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.awe.model.group.Group;
-import seedu.awe.model.person.exceptions.DuplicatePersonException;
-import seedu.awe.model.transactionsummary.exceptions.TransactionSummaryNotFoundException;
 
 public class TransactionSummaryList implements Iterable<TransactionSummary> {
 
     private final ObservableList<TransactionSummary> internalList = FXCollections.observableArrayList();
     private final ObservableList<TransactionSummary> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
+
     private Optional<Group> group;
 
     public TransactionSummaryList() {
         group = Optional.empty();
     }
+
     public TransactionSummaryList(Group group) {
         this.group = Optional.of(group);
     }
@@ -51,63 +50,13 @@ public class TransactionSummaryList implements Iterable<TransactionSummary> {
     }
 
     /**
-     * Adds all TransactionSummary from the given list to the list of TransactionSummary.
+     * Set TransactionSummary from the given list to the list of TransactionSummary.
      *
      * @param transactionSummary List of TransactionSummary to add.
      */
-    public void addAll(List<TransactionSummary> transactionSummary) {
+    public void set(List<TransactionSummary> transactionSummary) {
+        internalList.clear();
         internalList.addAll(transactionSummary);
-    }
-
-    /**
-     * Adds an TransactionSummary to the list.
-     */
-    public void add(TransactionSummary toAdd) {
-        requireNonNull(toAdd);
-        internalList.add(toAdd);
-    }
-
-    /**
-     * Removes the equivalent TransactionSummary from the list.
-     * The TransactionSummary must exist in the list.
-     */
-    public void remove(TransactionSummary toRemove) {
-        requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
-            throw new TransactionSummaryNotFoundException();
-        }
-    }
-
-    /**
-     * Replaces the TransactionSummary {@code target} in the list with {@code editedTransactionSummary}.
-     * {@code target} must exist in the list.
-     */
-    public void setTransactionSummary(TransactionSummary target, TransactionSummary editedTransactionSummary) {
-        requireAllNonNull(target, editedTransactionSummary);
-
-        int index = internalList.indexOf(target);
-        if (index == -1) {
-            throw new TransactionSummaryNotFoundException();
-        }
-
-        if (!target.equals(editedTransactionSummary) && contains(editedTransactionSummary)) {
-            throw new DuplicatePersonException();
-        }
-
-        internalList.set(index, editedTransactionSummary);
-    }
-
-    public void setTransactionSummary(TransactionSummaryList replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
-    }
-
-    /**
-     * Replaces the contents of this list with {@code transactionSummary}.
-     */
-    public void setTransactionSummary(List<TransactionSummary> transactionSummary) {
-        requireAllNonNull(transactionSummary);
-        internalList.setAll(transactionSummary);
     }
 
     /**
