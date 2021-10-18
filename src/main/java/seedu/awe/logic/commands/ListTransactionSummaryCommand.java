@@ -5,8 +5,6 @@ import static java.util.Objects.requireNonNull;
 import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.model.Model;
 import seedu.awe.model.group.Group;
-import seedu.awe.model.group.GroupName;
-import seedu.awe.model.group.exceptions.GroupNotFoundException;
 
 
 public class ListTransactionSummaryCommand extends Command {
