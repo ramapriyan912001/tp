@@ -1,6 +1,7 @@
 package seedu.awe.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.model.Model;
@@ -141,15 +143,16 @@ public class CalculatePaymentsCommand extends Command {
     }
 
 
-    private static Pair getSmallerPair(Pair p1, Pair p2) {
+    private static Optional<Pair> getSmallerPair(Pair p1, Pair p2) {
+        requireAllNonNull(p1, p2);
         double p1AbsoluteSurplus = Math.abs(p1.getSurplus());
         double p2AbsoluteSurplus = Math.abs(p2.getSurplus());
         if (p1AbsoluteSurplus < p2AbsoluteSurplus) {
-            return p1;
+            return Optional.ofNullable(p1);
         } else if (p1AbsoluteSurplus > p2AbsoluteSurplus) {
-            return p2;
+            return Optional.ofNullable(p2);
         } else {
-            return null;
+            return Optional.empty();
         }
     }
 
@@ -172,14 +175,14 @@ public class CalculatePaymentsCommand extends Command {
             Pair pairWithHighestSurplus = pairs.get(pairs.size() - 1);
             Payment paymentToAdd = calculatePayment(pairWithLowestSurplus, pairWithHighestSurplus);
             payments.add(paymentToAdd);
-            Pair smallerPair = getSmallerPair(pairWithLowestSurplus, pairWithHighestSurplus);
-            if (smallerPair.equals(pairWithHighestSurplus)) {
-                pairs.remove(pairs.size() - 1);
-            } else if (smallerPair.equals(pairWithLowestSurplus)) {
-                pairs.remove(0);
-            } else {
+            Optional<Pair> smallerPair = getSmallerPair(pairWithLowestSurplus, pairWithHighestSurplus);
+            if (smallerPair.isEmpty()) {
                 pairs.remove(0);
                 pairs.remove(pairs.size() - 1);
+            } else if (smallerPair.get().equals(pairWithHighestSurplus)) {
+                pairs.remove(pairs.size() - 1);
+            } else if (smallerPair.get().equals(pairWithLowestSurplus)) {
+                pairs.remove(0);
             }
         }
         return payments;
