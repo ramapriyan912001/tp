@@ -166,7 +166,6 @@ public class Group {
                && this.groupName.equals(otherGroup.getGroupName());
     }
 
-
     @Override
     public boolean equals (Object otherGroup) {
         if (this == otherGroup) {

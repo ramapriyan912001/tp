@@ -97,18 +97,18 @@ public class AddExpenseCommand extends Command {
 
         for (int i = 0; i < selfPayees.size(); i++) {
             Person currentPayer = selfPayees.get(i);
-            Cost currentCost = selfCosts.get(i);
+            Cost indivCost = selfCosts.get(i);
             if (excluded.contains(currentPayer)) {
                 return new CommandResult(MESSAGE_CANNOT_ADD_EXCLUDED_MEMBER);
             }
             if (currentPayer == null || !group.isPartOfGroup(currentPayer)) {
                 return new CommandResult(MESSAGE_NOT_PART_OF_GROUP);
             }
-            finalCost = finalCost.subtract(currentCost);
+            finalCost = finalCost.subtract(indivCost);
             if (!paidByPayees.containsKey(currentPayer)) {
-                paidByPayees.put(currentPayer, currentCost);
+                paidByPayees.put(currentPayer, indivCost);
             } else {
-                paidByPayees.computeIfPresent(currentPayer, (key, val) -> val.add(currentCost));
+                paidByPayees.computeIfPresent(currentPayer, (key, val) -> val.add(indivCost));
             }
         }
 
@@ -121,7 +121,16 @@ public class AddExpenseCommand extends Command {
             groupMembers.remove(toExclude);
         }
 
-        expense = expense.setCost(finalCost);
+        Cost toSplit = finalCost.divide(groupMembers.size());
+        for (int i = 0; i < groupMembers.size(); i++) {
+            Person currentPayer = groupMembers.get(i);
+            if (!paidByPayees.containsKey(currentPayer)) {
+                paidByPayees.put(currentPayer, toSplit);
+            } else {
+                paidByPayees.computeIfPresent(currentPayer, (key, val) -> val.add(toSplit));
+            }
+        }
+
         expense = expense.setIncluded(groupMembers);
 
         Group newGroup = group.addExpenseWithIndivPayments(expense, paidByPayees);

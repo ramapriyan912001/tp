@@ -58,6 +58,34 @@ public class Cost {
     }
 
     /**
+     * Multiplies the cost by the inputted value c.
+     *
+     * @param c Value to multiply the cost by.
+     * @return Result of the multiplication.
+     */
+    public Cost multiply(double c) {
+        double result = cost * c;
+        if (result < 0) {
+            result = 0;
+        }
+        return new Cost(String.format("%2.f", result));
+    }
+
+    /**
+     * Divides the cost by the inputted value c.
+     *
+     * @param c Value to divide the cost by.
+     * @return Result of the division.
+     */
+    public Cost divide(double c) {
+        double result = cost / c;
+        if (result < 0) {
+            result = 0;
+        }
+        return new Cost(String.format("%.2f", result));
+    }
+
+    /**
      * Returns true if a given string is a valid cost.
      */
     public static boolean isValidCost(String test) {
