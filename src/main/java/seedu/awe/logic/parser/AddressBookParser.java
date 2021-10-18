@@ -26,6 +26,7 @@ import seedu.awe.logic.commands.HelpCommand;
 import seedu.awe.logic.commands.ListContactsCommand;
 import seedu.awe.logic.commands.ListExpensesCommand;
 import seedu.awe.logic.commands.ListGroupsCommand;
+import seedu.awe.logic.commands.ListTransactionSummaryCommand;
 import seedu.awe.logic.parser.exceptions.ParseException;
 import seedu.awe.model.Model;
 
@@ -117,6 +118,9 @@ public class AddressBookParser {
 
         case GroupEditNameCommand.COMMAND_WORD:
             return new GroupEditNameCommandParser().parse(arguments);
+
+        case ListTransactionSummaryCommand.COMMAND_WORD:
+            return new ListTransactionSummaryCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
