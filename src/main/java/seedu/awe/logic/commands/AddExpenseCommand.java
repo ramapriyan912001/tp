@@ -105,11 +105,7 @@ public class AddExpenseCommand extends Command {
                 return new CommandResult(MESSAGE_NOT_PART_OF_GROUP);
             }
             finalCost = finalCost.subtract(currentCost);
-            if (!paidByPayees.containsKey(currentPayer)) {
-                paidByPayees.put(currentPayer, currentCost);
-            } else {
-                paidByPayees.computeIfPresent(currentPayer, (key, val) -> val.add(currentCost));
-            }
+            paidByPayees.merge(currentPayer, currentCost, (original, toAdd) -> original.add(toAdd));
         }
 
         if (finalCost.cost <= 0) {
