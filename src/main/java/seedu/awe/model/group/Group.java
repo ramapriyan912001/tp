@@ -34,6 +34,8 @@ public class Group {
         this.groupName = groupName;
         for (Person member : members) {
             this.addMember(member);
+            paidByPayers.put(member, new Cost(0));
+            paidByPayees.put(member, new Cost(0));
         }
     }
 
@@ -48,6 +50,8 @@ public class Group {
         this.groupName = groupName;
         for (Person member : members) {
             this.addMember(member);
+            paidByPayers.put(member, new Cost(0));
+            paidByPayees.put(member, new Cost(0));
         }
         this.tags.addAll(tags);
     }
@@ -64,6 +68,8 @@ public class Group {
         this.groupName = groupName;
         for (Person member : members) {
             this.addMember(member);
+            paidByPayers.put(member, new Cost(0));
+            paidByPayees.put(member, new Cost(0));
         }
         this.tags.addAll(tags);
         for (Expense expense : expenses) {
@@ -85,6 +91,7 @@ public class Group {
         this.groupName = groupName;
         for (Person member : members) {
             this.addMember(member);
+            paidByPayers.put(member, new Cost(0));
         }
         this.tags.addAll(tags);
         for (Expense expense : expenses) {
@@ -107,6 +114,8 @@ public class Group {
      */
     public void addMember(Person member) {
         this.members.add(member);
+        paidByPayers.put(member, new Cost(0));
+        paidByPayees.put(member, new Cost(0));
     }
 
     /**
@@ -124,6 +133,14 @@ public class Group {
 
     public ArrayList<Person> getMembers() {
         return members;
+    }
+
+    public HashMap<Person, Cost> getPaidByPayees() {
+        return paidByPayees;
+    }
+
+    public HashMap<Person, Cost> getPaidByPayers() {
+        return paidByPayers;
     }
 
     /**
