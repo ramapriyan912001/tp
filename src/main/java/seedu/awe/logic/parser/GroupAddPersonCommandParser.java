@@ -40,6 +40,7 @@ public class GroupAddPersonCommandParser implements Parser<GroupAddPersonCommand
      * @return GroupAddPersonCommand object to represent command to be executed.
      * @throws ParseException If user input is incorrectly formatted.
      */
+    @Override
     public GroupAddPersonCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_GROUP_NAME, PREFIX_NAME);
