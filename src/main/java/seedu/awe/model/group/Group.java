@@ -67,8 +67,14 @@ public class Group {
         }
         this.tags.addAll(tags);
         for (Expense expense : expenses) {
+            Person payer = expense.getPayer();
+            Cost cost = expense.getCost();
             this.expenses.add(expense);
-            paidByPayers.put(expense.getPayer(), expense.getCost());
+            if (!paidByPayers.containsKey(expense.getPayer())) {
+                paidByPayers.put(payer, cost);
+            } else {
+                paidByPayers.computeIfPresent(payer, (key, val) -> val.add(cost));
+            }
         }
     }
 
@@ -200,6 +206,13 @@ public class Group {
     public Group addExpenseWithIndivPayments(Expense expense, HashMap<Person, Cost> paidByPayees) {
         ArrayList<Expense> newExpenses = new ArrayList<>(expenses);
         newExpenses.add(expense);
+        for (Person p : this.paidByPayees.keySet()) {
+            if (!paidByPayees.containsKey(p)) {
+                paidByPayees.put(p, this.paidByPayees.get(p));
+            } else {
+                paidByPayees.computeIfPresent(p, (key, val) -> val.add(this.paidByPayees.get(p)));
+            }
+        }
         return new Group(groupName, members, tags, newExpenses, paidByPayees);
     }
 

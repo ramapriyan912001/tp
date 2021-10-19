@@ -93,8 +93,11 @@ public class AddExpenseCommand extends Command {
             return new CommandResult(MESSAGE_ALL_MEMBERS_EXCLUDED);
         }
 
-        HashMap<Person, Cost> paidByPayees = new HashMap<>();
+        return calculateExpense(group, finalCost, model);
+    }
 
+    private CommandResult calculateExpense(Group group, Cost finalCost, Model model) {
+        HashMap<Person, Cost> paidByPayees = new HashMap<>();
         for (int i = 0; i < selfPayees.size(); i++) {
             Person currentPayer = selfPayees.get(i);
             Cost indivCost = selfCosts.get(i);
@@ -111,17 +114,29 @@ public class AddExpenseCommand extends Command {
                 paidByPayees.computeIfPresent(currentPayer, (key, val) -> val.add(indivCost));
             }
         }
-
         if (finalCost.cost <= 0) {
             return new CommandResult(MESSAGE_COST_ZERO_OR_LESS);
         }
+        ArrayList<Person> groupMembers = removeExcludedFromGroup(group.getMembers());
+        Cost toSplit = finalCost.divide(groupMembers.size());
 
-        ArrayList<Person> groupMembers = new ArrayList<>(group.getMembers());
+        parseSplitExpenses(groupMembers, paidByPayees, toSplit);
+        expense = expense.setIncluded(groupMembers);
+        Group newGroup = group.addExpenseWithIndivPayments(expense, paidByPayees);
+        model.setGroup(group, newGroup);
+        model.addExpense(expense, newGroup);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, expense));
+    }
+
+    private ArrayList<Person> removeExcludedFromGroup(ArrayList<Person> members) {
+        ArrayList<Person> groupMembers = new ArrayList<>(members);
         for (Person toExclude : excluded) {
             groupMembers.remove(toExclude);
         }
+        return groupMembers;
+    }
 
-        Cost toSplit = finalCost.divide(groupMembers.size());
+    private void parseSplitExpenses(ArrayList<Person> groupMembers, HashMap<Person, Cost> paidByPayees, Cost toSplit) {
         for (int i = 0; i < groupMembers.size(); i++) {
             Person currentPayer = groupMembers.get(i);
             if (!paidByPayees.containsKey(currentPayer)) {
@@ -130,13 +145,6 @@ public class AddExpenseCommand extends Command {
                 paidByPayees.computeIfPresent(currentPayer, (key, val) -> val.add(toSplit));
             }
         }
-
-        expense = expense.setIncluded(groupMembers);
-
-        Group newGroup = group.addExpenseWithIndivPayments(expense, paidByPayees);
-        model.setGroup(group, newGroup);
-        model.addExpense(expense, newGroup);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, expense));
     }
 
     public Expense getExpense() {
