@@ -101,8 +101,8 @@ public class GroupRemovePersonCommand extends Command {
         ArrayList<Person> membersFromOldGroup = oldGroup.getMembers();
         ArrayList<Person> remainingMembers = removeMembers(membersFromOldGroup, membersToBeRemoved);
         Group newGroup = new Group(groupName, remainingMembers, oldGroup.getTags());
-        model.deleteGroup(oldGroup);
-        model.addGroup(newGroup);
+        model.setGroup(oldGroup, newGroup);
+        model.setAllMembersOfGroup(oldGroup);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

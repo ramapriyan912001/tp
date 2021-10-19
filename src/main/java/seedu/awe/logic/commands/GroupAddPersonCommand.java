@@ -97,8 +97,8 @@ public class GroupAddPersonCommand extends Command {
         }
         newMembers.addAll(membersFromOldGroup);
         Group newGroup = new Group(groupName, newMembers, oldGroup.getTags());
-        model.deleteGroup(oldGroup);
-        model.addGroup(newGroup);
+        model.setGroup(oldGroup, newGroup);
+        model.setAllMembersOfGroup(newGroup);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

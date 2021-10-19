@@ -2,6 +2,7 @@ package seedu.awe.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
+import static seedu.awe.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.model.Model;
@@ -45,9 +46,10 @@ public class DeleteGroupCommand extends Command {
 
         Group groupFromInternalList = model.getGroupByName(group.getGroupName());
         model.deleteGroup(groupFromInternalList);
+        model.setAllMembersOfGroup(groupFromInternalList);
         int numberOfMembers = groupFromInternalList.getMembers().size();
         String groupName = groupFromInternalList.getGroupName().getName();
-
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, groupName, numberOfMembers));
     }
 
