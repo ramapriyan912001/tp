@@ -89,8 +89,13 @@ public class Person {
     public String getGroupsName(ObservableList<Group> groups) {
         String result = "";
         ArrayList<Group> personGroups = getPersonGroups(groups);
-        for (Group group : personGroups) {
-            result = result + group.getGroupName() + ", ";
+        for (int i = 0; i < personGroups.size(); i++) {
+            Group group = personGroups.get(i);
+            if (i != personGroups.size() - 1) {
+                result = result + group.getGroupName() + ", ";
+            } else {
+                result = result + group.getGroupName();
+            }
         }
         return result;
     }
