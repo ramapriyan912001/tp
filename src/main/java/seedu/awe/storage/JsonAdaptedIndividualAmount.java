@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.awe.commons.exceptions.IllegalValueException;
 import seedu.awe.model.expense.IndividualAmount;
-import seedu.awe.model.person.Person;
 
 class JsonAdaptedIndividualAmount {
 
@@ -17,9 +16,9 @@ class JsonAdaptedIndividualAmount {
      * details.
      */
     @JsonCreator
-    public JsonAdaptedIndividualAmount (@JsonProperty("person") Person person,
+    public JsonAdaptedIndividualAmount (@JsonProperty("person") JsonAdaptedPerson jsonAdaptedPerson,
                               @JsonProperty("expenditure") String expenditure) {
-        this.person = new JsonAdaptedPerson(person);
+        this.person = jsonAdaptedPerson;
         this.expenditure = expenditure;
     }
 
