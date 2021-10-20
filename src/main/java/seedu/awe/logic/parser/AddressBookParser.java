@@ -21,8 +21,10 @@ import seedu.awe.logic.commands.FindContactsCommand;
 import seedu.awe.logic.commands.FindExpensesCommand;
 import seedu.awe.logic.commands.FindGroupsCommand;
 import seedu.awe.logic.commands.GroupAddContactCommand;
+import seedu.awe.logic.commands.GroupAddTagCommand;
 import seedu.awe.logic.commands.GroupEditNameCommand;
 import seedu.awe.logic.commands.GroupRemoveContactCommand;
+import seedu.awe.logic.commands.GroupRemoveTagCommand;
 import seedu.awe.logic.commands.HelpCommand;
 import seedu.awe.logic.commands.ListContactsCommand;
 import seedu.awe.logic.commands.ListExpensesCommand;
@@ -119,6 +121,12 @@ public class AddressBookParser {
 
         case GroupEditNameCommand.COMMAND_WORD:
             return new GroupEditNameCommandParser().parse(arguments);
+
+        case GroupAddTagCommand.COMMAND_WORD:
+            return new GroupAddTagCommandParser().parse(arguments);
+
+        case GroupRemoveTagCommand.COMMAND_WORD:
+            return new GroupRemoveTagCommandParser().parse(arguments);
 
         case ListTransactionSummaryCommand.COMMAND_WORD:
             return new ListTransactionSummaryCommandParser().parse(arguments);
