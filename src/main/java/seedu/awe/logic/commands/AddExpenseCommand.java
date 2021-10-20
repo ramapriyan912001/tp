@@ -93,37 +93,66 @@ public class AddExpenseCommand extends Command {
             return new CommandResult(MESSAGE_ALL_MEMBERS_EXCLUDED);
         }
 
-        HashMap<Person, Cost> paidByPayees = new HashMap<>();
+        return calculateExpense(group, expense.getPayer(), finalCost, model);
+    }
 
+    private CommandResult calculateExpense(Group group, Person payer, Cost finalCost, Model model) {
+        HashMap<Person, Cost> paidByPayees = new HashMap<>();
+        Cost paidAmount = new Cost(finalCost.getCost());
         for (int i = 0; i < selfPayees.size(); i++) {
             Person currentPayer = selfPayees.get(i);
-            Cost currentCost = selfCosts.get(i);
+            Cost indivCost = selfCosts.get(i);
             if (excluded.contains(currentPayer)) {
                 return new CommandResult(MESSAGE_CANNOT_ADD_EXCLUDED_MEMBER);
             }
             if (currentPayer == null || !group.isPartOfGroup(currentPayer)) {
                 return new CommandResult(MESSAGE_NOT_PART_OF_GROUP);
             }
-            finalCost = finalCost.subtract(currentCost);
-            paidByPayees.merge(currentPayer, currentCost, (original, toAdd) -> original.add(toAdd));
+
+            finalCost = finalCost.subtract(indivCost);
+            paidByPayees.merge(currentPayer, indivCost, (original, toAdd) -> original.add(toAdd));
+        }
+        HashMap<Person, Cost> paidByPayers = group.getPaidByPayers();
+        if (!paidByPayers.containsKey(payer)) {
+            paidByPayers.put(payer, paidAmount);
+        } else {
+            paidByPayers.computeIfPresent(payer, (key, val) -> val.add(paidAmount));
         }
 
         if (finalCost.cost <= 0) {
             return new CommandResult(MESSAGE_COST_ZERO_OR_LESS);
         }
+        ArrayList<Person> groupMembers = removeExcludedFromGroup(group.getMembers());
+        Cost toSplit = finalCost.divide(groupMembers.size());
 
-        ArrayList<Person> groupMembers = new ArrayList<>(group.getMembers());
-        for (Person toExclude : excluded) {
-            groupMembers.remove(toExclude);
-        }
-
-        expense = expense.setCost(finalCost);
+        parseSplitExpenses(groupMembers, paidByPayees, toSplit);
         expense = expense.setIncluded(groupMembers);
-
+        expense = expense.setIndividualExpenses(paidByPayees);
         Group newGroup = group.addExpenseWithIndivPayments(expense, paidByPayees);
+        newGroup = new Group(newGroup.getGroupName(), newGroup.getMembers(),
+                newGroup.getTags(), newGroup.getExpenses(), paidByPayers, newGroup.getPaidByPayees());
         model.setGroup(group, newGroup);
         model.addExpense(expense, newGroup);
         return new CommandResult(String.format(MESSAGE_SUCCESS, expense));
+    }
+
+    private ArrayList<Person> removeExcludedFromGroup(ArrayList<Person> members) {
+        ArrayList<Person> groupMembers = new ArrayList<>(members);
+        for (Person toExclude : excluded) {
+            groupMembers.remove(toExclude);
+        }
+        return groupMembers;
+    }
+
+    private void parseSplitExpenses(ArrayList<Person> groupMembers, HashMap<Person, Cost> paidByPayees, Cost toSplit) {
+        for (int i = 0; i < groupMembers.size(); i++) {
+            Person currentPayer = groupMembers.get(i);
+            if (!paidByPayees.containsKey(currentPayer)) {
+                paidByPayees.put(currentPayer, toSplit);
+            } else {
+                paidByPayees.computeIfPresent(currentPayer, (key, val) -> val.add(toSplit));
+            }
+        }
     }
 
     public Expense getExpense() {

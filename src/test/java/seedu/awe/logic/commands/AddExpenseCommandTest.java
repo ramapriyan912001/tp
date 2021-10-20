@@ -147,7 +147,7 @@ public class AddExpenseCommandTest {
         CommandResult commandResult = addExpenseCommand.execute(modelStub);
 
         Cost actualFinalCost = addExpenseCommand.getExpense().getCost();
-        Cost expectedFinalCost = new Cost("20");
+        Cost expectedFinalCost = new Cost("50");
 
         assertEquals(String.format(actualFinalCost.toString()),
                 expectedFinalCost.toString());

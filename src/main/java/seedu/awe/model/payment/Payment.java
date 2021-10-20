@@ -1,5 +1,6 @@
 package seedu.awe.model.payment;
 
+import java.util.Comparator;
 import java.util.Objects;
 
 import seedu.awe.model.expense.Cost;
@@ -24,7 +25,7 @@ public class Payment implements Comparable<Payment> {
 
     @Override
     public String toString() {
-        return String.format("%s pays $%.2f to %s.", payee.getName(), getCost(), payer.getName());
+        return String.format("%s pays $%.2f to %s.", payee.getName(), getCost().getCost(), payer.getName());
     }
 
     public Person getPayer() {
@@ -87,5 +88,14 @@ public class Payment implements Comparable<Payment> {
                 return 0;
             }
         }
+    }
+
+    public static Comparator<Payment> getPaymentComparator() {
+        return new Comparator<Payment>() {
+            @Override
+            public int compare(Payment payment, Payment t1) {
+                return payment.compareTo(t1);
+            }
+        };
     }
 }

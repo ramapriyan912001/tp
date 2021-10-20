@@ -1,12 +1,16 @@
 package seedu.awe.ui;
 
+import java.util.logging.Logger;
+
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import seedu.awe.commons.core.LogsCenter;
 import seedu.awe.logic.Logic;
 import seedu.awe.ui.expense.ExpenseListPanel;
 import seedu.awe.ui.group.GroupListPanel;
 import seedu.awe.ui.person.PersonListPanel;
+
 
 
 /**
@@ -15,6 +19,7 @@ import seedu.awe.ui.person.PersonListPanel;
 public class ViewPanel extends UiPart<Region> {
 
     private static final String FXML = "ViewPanel.fxml";
+    private static final Logger logger = LogsCenter.getLogger(ViewPanel.class);
 
     private Logic logic;
 
@@ -42,6 +47,8 @@ public class ViewPanel extends UiPart<Region> {
      * Fills up all the placeholders of this window.
      */
     public void fillInnerParts() {
+        logger.info("Setting up view panels...");
+
         personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getAddressBook());
         groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
         expenseListPanel = new ExpenseListPanel(logic.getExpenses());
@@ -64,6 +71,7 @@ public class ViewPanel extends UiPart<Region> {
         } else if (uiView == UiView.EXPENSE_PAGE) {
             viewListPlaceholder.getChildren().add(expenseListPanel.getRoot());
         } else {
+            logger.warning("Toggle tab not found");
             throw new AssertionError("Toggle tab not found");
         }
     }

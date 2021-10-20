@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.awe.logic.commands.AddContactCommand;
 import seedu.awe.logic.commands.AddExpenseCommand;
+import seedu.awe.logic.commands.CalculatePaymentsCommand;
 import seedu.awe.logic.commands.ClearCommand;
 import seedu.awe.logic.commands.Command;
 import seedu.awe.logic.commands.CreateGroupCommand;
@@ -122,6 +123,9 @@ public class AddressBookParser {
         case ListTransactionSummaryCommand.COMMAND_WORD:
             return new ListTransactionSummaryCommandParser().parse(arguments);
 
+        case CalculatePaymentsCommand.COMMAND_WORD:
+            return new CalculatePaymentsCommandParser().parse(arguments);
+            
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
