@@ -12,7 +12,7 @@ public class TransactionSummary implements Comparable<TransactionSummary> {
 
     /**
      * Payment object represents total transaction.
-     * @param payer person spending the money
+     * @param person person spending the money
      * @param cost amount spent
      */
     public TransactionSummary(Person person, Cost cost) {

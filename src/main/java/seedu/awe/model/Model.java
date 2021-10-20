@@ -1,10 +1,12 @@
 package seedu.awe.model;
 
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.awe.commons.core.GuiSettings;
+import seedu.awe.model.expense.Cost;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
@@ -84,6 +86,9 @@ public interface Model {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the awe book.
      */
     void setPerson(Person target, Person editedPerson);
+
+    /** Replaces the transactionsummary list with a new list */
+    void setTransactionSummary(HashMap<Person, Cost> summary);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

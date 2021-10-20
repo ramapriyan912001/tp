@@ -23,7 +23,8 @@ public class CalculatePaymentsCommand extends Command {
     public static final String COMMAND_WORD = "calculatepayments";
     public static final String MESSAGE_USAGE = "calculatepayments " + PREFIX_GROUP_NAME + "GROUPNAME";
     public static final String MESSAGE_PAYMENTS_EMPTY = "There are no payments to be made!";
-    public static final String MESSAGE_GROUP_DOES_NOT_EXIST = "This group does not exist in the awe book";
+    public static final String MESSAGE_GROUP_NOT_FOUND = "The specified group does not exists.";
+
     private final Group group;
 
     public CalculatePaymentsCommand(Group group) {
@@ -88,7 +89,7 @@ public class CalculatePaymentsCommand extends Command {
         requireNonNull(group);
 
         if (!model.hasGroup(group)) {
-            throw new CommandException(MESSAGE_GROUP_DOES_NOT_EXIST);
+            throw new CommandException(MESSAGE_GROUP_NOT_FOUND);
         }
 
         Group group = model.getAddressBook().getGroupByName(this.group.getGroupName());

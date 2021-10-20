@@ -2,10 +2,14 @@ package seedu.awe.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javafx.collections.ObservableList;
+import seedu.awe.model.expense.Cost;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.expense.ExpenseList;
 import seedu.awe.model.group.Group;
@@ -15,6 +19,8 @@ import seedu.awe.model.payment.Payment;
 import seedu.awe.model.payment.PaymentList;
 import seedu.awe.model.person.Person;
 import seedu.awe.model.person.UniquePersonList;
+import seedu.awe.model.transactionsummary.TransactionSummary;
+import seedu.awe.model.transactionsummary.TransactionSummaryList;
 
 /**
  * Wraps all data at the awe-book level
@@ -26,6 +32,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     private final UniqueGroupList groups;
     private final ExpenseList expenses;
     private final PaymentList payments;
+    private final TransactionSummaryList transactionSummary;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -39,6 +46,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         groups = new UniqueGroupList();
         expenses = new ExpenseList();
         payments = new PaymentList();
+        transactionSummary = new TransactionSummaryList();
     }
 
     public AddressBook() {}
@@ -211,6 +219,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         Optional<Group> current = expenses.getGroup();
         boolean isCurrentGroup = current.isPresent() && current.get().equals(group);
         return isCurrentGroup;
+    }
+
+    public void setTransactionSummary(HashMap<Person, Cost> summary) {
+        List<TransactionSummary> toSet = new ArrayList<>();
+        for (Map.Entry<Person, Cost> e: summary.entrySet()) {
+            toSet.add(new TransactionSummary(e.getKey(), e.getValue()));
+        }
+
+        this.transactionSummary.set(toSet);
     }
 
     /**
