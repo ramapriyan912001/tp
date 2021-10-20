@@ -162,7 +162,7 @@ public class ParserUtil {
      * @param names Collection of strings that represent names.
      * @return List of names
      */
-    public static List<Name> parseMemberNames(Collection<String> names) {
+    public static List<Name> parseMemberNames(Collection<String> names) throws EmptyGroupException {
         requireNonNull(names);
         final Set<Name> memberNameSet = new HashSet<>();
         final List<Name> memberNameList = new ArrayList<>();
