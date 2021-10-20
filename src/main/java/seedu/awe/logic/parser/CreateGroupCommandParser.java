@@ -48,7 +48,7 @@ public class CreateGroupCommandParser implements Parser<CreateGroupCommand> {
      * @return CreateGroupCommand object to represent command to be executed.
      * @throws ParseException If user input is incorrectly formatted.
      */
-    public CreateGroupCommand parse(String args) throws ParseException {
+    public CreateGroupCommand parse(String args) throws ParseException, EmptyGroupException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_GROUP_NAME, PREFIX_NAME, PREFIX_TAG);
 
@@ -77,7 +77,7 @@ public class CreateGroupCommandParser implements Parser<CreateGroupCommand> {
      * @param memberNames List of names representing names entered in command.
      * @return ArrayList of Person objects representing members to be added to the group
      */
-    public ArrayList<Person> findGroupMembers(List<Name> memberNames) throws ParseException {
+    public ArrayList<Person> findGroupMembers(List<Name> memberNames) throws ParseException, EmptyGroupException {
         try {
             for (Name name : memberNames) {
                 addMemberIfExist(name);
