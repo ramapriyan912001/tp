@@ -33,24 +33,10 @@ public class ListTransactionSummaryCommand extends Command {
         }
 
         Group group = model.getAddressBook().getGroupByName(this.group.getGroupName());
-        HashMap<Person, Cost> summary = generateSummary(group);
+        HashMap<Person, Cost> summary = group.getPaidByPayees();
 
         model.setTransactionSummary(summary);
 
         return new CommandResult(MESSAGE_SUCCESS, false, false, false, false, false);
     }
-
-    private HashMap<Person, Cost> generateSummary(Group group) {
-        HashMap<Person, Cost> summary = new HashMap<>();
-
-        group.getMembers().stream().forEach(person -> summary.put(person, new Cost("0")));
-        group.getExpenses().stream().forEach(expense -> calculateExpense(summary, expense));
-
-        return summary;
-    }
-
-    private void calculateExpense(HashMap<Person, Cost> summary, Expense expense) {
-        // DO SOMETHING BASED ON EXPENSE
-    }
-
 }

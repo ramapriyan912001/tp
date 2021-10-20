@@ -77,11 +77,7 @@ public class Group {
             Person payer = expense.getPayer();
             Cost cost = expense.getCost();
             this.expenses.add(expense);
-            if (!paidByPayers.containsKey(expense.getPayer())) {
-                paidByPayers.put(payer, cost);
-            } else {
-                paidByPayers.computeIfPresent(payer, (key, val) -> val.add(cost));
-            }
+            paidByPayers.merge(payer, cost, (original, toAdd) -> original.add(toAdd));
         }
     }
 
@@ -105,11 +101,7 @@ public class Group {
             Person payer = expense.getPayer();
             Cost cost = expense.getCost();
             this.expenses.add(expense);
-            if (!paidByPayers.containsKey(payer)) {
-                paidByPayers.put(payer, cost);
-            } else {
-                paidByPayers.computeIfPresent(payer, (key, val) -> val.add(cost));
-            }
+            paidByPayers.merge(payer, cost, (original, val) -> original.add(val));
         }
         this.paidByPayees.putAll(paidByPayees);
     }
@@ -252,11 +244,7 @@ public class Group {
         ArrayList<Expense> newExpenses = new ArrayList<>(expenses);
         newExpenses.add(expense);
         for (Person p : this.paidByPayees.keySet()) {
-            if (!paidByPayees.containsKey(p)) {
-                paidByPayees.put(p, this.paidByPayees.get(p));
-            } else {
-                paidByPayees.computeIfPresent(p, (key, val) -> val.add(this.paidByPayees.get(p)));
-            }
+            paidByPayees.merge(p, this.paidByPayees.get(p), (original, toAdd) -> original.add(toAdd));
         }
         return new Group(groupName, members, tags, newExpenses, paidByPayers, paidByPayees);
     }

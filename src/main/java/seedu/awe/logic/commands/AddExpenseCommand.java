@@ -113,11 +113,7 @@ public class AddExpenseCommand extends Command {
             paidByPayees.merge(currentPayer, indivCost, (original, toAdd) -> original.add(toAdd));
         }
         HashMap<Person, Cost> paidByPayers = group.getPaidByPayers();
-        if (!paidByPayers.containsKey(payer)) {
-            paidByPayers.put(payer, paidAmount);
-        } else {
-            paidByPayers.computeIfPresent(payer, (key, val) -> val.add(paidAmount));
-        }
+        paidByPayers.merge(payer, paidAmount, (original, toAdd) -> original.add(paidAmount));
 
         if (finalCost.cost <= 0) {
             return new CommandResult(MESSAGE_COST_ZERO_OR_LESS);
@@ -147,11 +143,7 @@ public class AddExpenseCommand extends Command {
     private void parseSplitExpenses(ArrayList<Person> groupMembers, HashMap<Person, Cost> paidByPayees, Cost toSplit) {
         for (int i = 0; i < groupMembers.size(); i++) {
             Person currentPayer = groupMembers.get(i);
-            if (!paidByPayees.containsKey(currentPayer)) {
-                paidByPayees.put(currentPayer, toSplit);
-            } else {
-                paidByPayees.computeIfPresent(currentPayer, (key, val) -> val.add(toSplit));
-            }
+            paidByPayees.merge(currentPayer, toSplit, (original, toAdd) -> original.add(toAdd));
         }
     }
 
