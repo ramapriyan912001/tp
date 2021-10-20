@@ -2,6 +2,7 @@ package seedu.awe.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -11,6 +12,7 @@ import seedu.awe.commons.exceptions.IllegalValueException;
 import seedu.awe.model.expense.Cost;
 import seedu.awe.model.expense.Description;
 import seedu.awe.model.expense.Expense;
+import seedu.awe.model.expense.IndividualAmount;
 import seedu.awe.model.person.Address;
 import seedu.awe.model.person.Person;
 
@@ -20,7 +22,8 @@ public class JsonAdaptedExpense {
     private final JsonAdaptedPerson payer;
     private final String cost;
     private final String description;
-    private final List<JsonAdaptedPerson> excluded = new ArrayList<>();
+    private final List<JsonAdaptedPerson> included = new ArrayList<>();
+    private final List<JsonAdaptedIndividualAmount> individualExpenses = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedExpense} with the given group details.
@@ -29,11 +32,16 @@ public class JsonAdaptedExpense {
     public JsonAdaptedExpense(@JsonProperty("payer") JsonAdaptedPerson payer,
                               @JsonProperty("cost") String cost,
                               @JsonProperty("description") String description,
-                              @JsonProperty("excluded") List<JsonAdaptedPerson> excluded) {
+                              @JsonProperty("included") List<JsonAdaptedPerson> included,
+                              @JsonProperty("individualExpenses")
+                                          List<JsonAdaptedIndividualAmount> individualExpenses) {
         this.payer = payer;
         this.cost = cost;
         this.description = description;
-        this.excluded.addAll(excluded);
+        this.included.addAll(included);
+        if (individualExpenses != null) {
+            this.individualExpenses.addAll(individualExpenses);
+        }
     }
 
     /**
@@ -41,11 +49,19 @@ public class JsonAdaptedExpense {
      */
     public JsonAdaptedExpense(Expense source) {
         payer = new JsonAdaptedPerson(source.getPayer());
-        cost = source.getCost().toString();
+        cost = String.valueOf(source.getCost().getCost());
         description = source.getDescription().toString();
-        excluded.addAll(source.getExcluded()
+        included.addAll(source.getIncluded()
                 .stream()
                 .map(JsonAdaptedPerson::new)
+                .collect(Collectors.toList()));
+        Map<Person, Cost> individualExpenses = source
+                .getIndividualExpenses();
+        List<IndividualAmount> individualAmounts = StorageUtils
+                .convertExpenseMapToListOfIndividualAmounts(individualExpenses);
+        this.individualExpenses.addAll(individualAmounts
+                .stream()
+                .map(JsonAdaptedIndividualAmount::new)
                 .collect(Collectors.toList()));
     }
 
@@ -73,12 +89,15 @@ public class JsonAdaptedExpense {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
 
-        final ArrayList<Person> modelExcluded = new ArrayList<>();
-        for (JsonAdaptedPerson excludedPerson : excluded) {
-            modelExcluded.add(excludedPerson.toModelType());
+        final ArrayList<Person> modelIncluded = new ArrayList<>();
+        for (JsonAdaptedPerson includedPerson : included) {
+            modelIncluded.add(includedPerson.toModelType());
         }
         final Description modelDescription = new Description(description);
 
-        return new Expense(modelPayer, modelCost, modelDescription, modelExcluded);
+        Map<Person, Cost> individualExpenses = StorageUtils
+                .convertListOfJsonAdaptedIndividualAmountsToExpenseMap(this.individualExpenses);
+
+        return new Expense(modelPayer, modelCost, modelDescription, modelIncluded, individualExpenses);
     }
 }

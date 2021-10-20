@@ -32,6 +32,14 @@ public class Name {
     }
 
     /**
+     * Gets the name String of name object.
+     * @return String name
+     */
+    public String getFullName() {
+        return fullName;
+    }
+
+    /**
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidGroupName(String test) {
