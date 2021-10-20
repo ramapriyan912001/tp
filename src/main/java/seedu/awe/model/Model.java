@@ -1,10 +1,12 @@
 package seedu.awe.model;
 
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.awe.commons.core.GuiSettings;
+import seedu.awe.model.expense.Cost;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
@@ -85,6 +87,9 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /** Replaces the transactionsummary list with a new list */
+    void setTransactionSummary(HashMap<Person, Cost> summary);
+
     /**
      * Replaces Person objects with updated Person objects within the {@code group}.
      * {@code group} must exist in the awe group list.
@@ -92,6 +97,7 @@ public interface Model {
      * @param group Group object containing members to be updated.
      */
     void setAllMembersOfGroup(Group group);
+
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

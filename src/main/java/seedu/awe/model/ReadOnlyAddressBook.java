@@ -4,6 +4,7 @@ import javafx.collections.ObservableList;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
+import seedu.awe.model.payment.Payment;
 import seedu.awe.model.person.Person;
 
 /**
@@ -23,6 +24,11 @@ public interface ReadOnlyAddressBook {
      * Returns an unmodifiable view of the expenses list.
      */
     ObservableList<Expense> getExpenseList();
+
+    /**
+     * Returns an unmodifiable view of the payments list.
+     */
+    ObservableList<Payment> getPaymentList();
 
     Group getGroupByName(GroupName groupName);
 }
