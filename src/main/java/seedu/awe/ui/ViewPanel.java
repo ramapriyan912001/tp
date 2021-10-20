@@ -10,7 +10,7 @@ import seedu.awe.logic.Logic;
 import seedu.awe.ui.expense.ExpenseListPanel;
 import seedu.awe.ui.group.GroupListPanel;
 import seedu.awe.ui.person.PersonListPanel;
-
+import seedu.awe.ui.transactionsummary.TransactionSummaryListPanel;
 
 
 /**
@@ -27,6 +27,7 @@ public class ViewPanel extends UiPart<Region> {
     private PersonListPanel personListPanel;
     private GroupListPanel groupListPanel;
     private ExpenseListPanel expenseListPanel;
+    private TransactionSummaryListPanel transactionSummaryListPanel;
 
     @FXML
     private StackPane viewListPlaceholder;
@@ -52,6 +53,7 @@ public class ViewPanel extends UiPart<Region> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getAddressBook());
         groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
         expenseListPanel = new ExpenseListPanel(logic.getExpenses());
+        transactionSummaryListPanel = new TransactionSummaryListPanel(logic.getTransactionSummary());
 
         toggleView(UiView.ADDRESS_BOOK);
     }
@@ -70,6 +72,8 @@ public class ViewPanel extends UiPart<Region> {
             viewListPlaceholder.getChildren().add(groupListPanel.getRoot());
         } else if (uiView == UiView.EXPENSE_PAGE) {
             viewListPlaceholder.getChildren().add(expenseListPanel.getRoot());
+        } else if (uiView == UiView.TRANSACTION_SUMMARY) {
+            viewListPlaceholder.getChildren().add(transactionSummaryListPanel.getRoot());
         } else {
             logger.warning("Toggle tab not found");
             throw new AssertionError("Toggle tab not found");

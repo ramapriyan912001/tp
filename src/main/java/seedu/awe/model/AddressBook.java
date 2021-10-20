@@ -110,6 +110,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         return this.persons;
     }
 
+    public ObservableList<TransactionSummary> getTransactionSummaryList() {
+        return this.transactionSummary.asUnmodifiableObservableList();
+    }
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */

@@ -58,7 +58,7 @@ public class FindExpensesCommandTest {
         DescriptionContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindExpensesCommand command = new FindExpensesCommand(BALI.getGroupName(), predicate);
         expectedModel.updateFilteredExpenseList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel, false, false, true);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel, false, false, true, false);
         assertEquals(Collections.emptyList(), model.getExpenses());
     }
 

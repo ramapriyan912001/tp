@@ -32,7 +32,7 @@ public class ListExpensesCommandTest {
     public void execute_showExpenses_success() {
         ListExpensesCommand listExpensesCommand = new ListExpensesCommand(BALI.getGroupName());
         CommandResult expectedCommandResult = new CommandResult(ListExpensesCommand.MESSAGE_SUCCESS,
-                false, false, false, false, true);
+                false, false, false, false, true, false);
         assertCommandSuccess(listExpensesCommand, model, expectedCommandResult, expectedModel);
     }
 }

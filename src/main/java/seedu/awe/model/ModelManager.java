@@ -17,6 +17,7 @@ import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.person.Person;
+import seedu.awe.model.transactionsummary.TransactionSummary;
 
 /**
  * Represents the in-memory model of the awe book data.
@@ -29,6 +30,7 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Group> filteredGroups;
     private final FilteredList<Expense> expenses;
+    private final FilteredList<TransactionSummary> transactionSummary;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -44,6 +46,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredGroups = new FilteredList<>(this.addressBook.getGroupList());
         expenses = new FilteredList<>(this.addressBook.getExpenseList());
+        transactionSummary = new FilteredList<>(this.addressBook.getTransactionSummaryList());
     }
 
     public ModelManager() {
@@ -198,6 +201,11 @@ public class ModelManager implements Model {
     public void setTransactionSummary(HashMap<Person, Cost> summary) {
         requireNonNull(summary);
         addressBook.setTransactionSummary(summary);
+    }
+
+    @Override
+    public ObservableList<TransactionSummary> getTransactionSummary() {
+        return transactionSummary;
     }
 
     //=========== Filtered Group List Accessors =============================================================

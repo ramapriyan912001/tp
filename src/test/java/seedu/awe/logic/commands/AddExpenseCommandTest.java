@@ -27,6 +27,7 @@ import seedu.awe.model.group.GroupName;
 import seedu.awe.model.group.exceptions.DuplicateGroupException;
 import seedu.awe.model.group.exceptions.GroupNotFoundException;
 import seedu.awe.model.person.Person;
+import seedu.awe.model.transactionsummary.TransactionSummary;
 import seedu.awe.testutil.ExpenseBuilder;
 import seedu.awe.testutil.GroupBuilder;
 import seedu.awe.testutil.PersonBuilder;
@@ -345,6 +346,11 @@ public class AddExpenseCommandTest {
 
         @Override
         public void setExpenses(Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<TransactionSummary> getTransactionSummary() {
             throw new AssertionError("This method should not be called.");
         }
 

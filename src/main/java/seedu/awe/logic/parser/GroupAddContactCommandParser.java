@@ -40,6 +40,7 @@ public class GroupAddContactCommandParser implements Parser<GroupAddContactComma
      * @return GroupAddContactCommand object to represent command to be executed.
      * @throws ParseException If user input is incorrectly formatted.
      */
+    @Override
     public GroupAddContactCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_GROUP_NAME, PREFIX_NAME);

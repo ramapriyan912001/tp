@@ -17,6 +17,7 @@ import seedu.awe.model.ReadOnlyAddressBook;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.person.Person;
+import seedu.awe.model.transactionsummary.TransactionSummary;
 import seedu.awe.storage.Storage;
 
 /**
@@ -74,6 +75,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Expense> getExpenses() {
         return model.getExpenses();
+    }
+
+    @Override
+    public ObservableList<TransactionSummary> getTransactionSummary() {
+        return model.getTransactionSummary();
     }
 
     @Override
