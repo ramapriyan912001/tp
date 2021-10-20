@@ -33,7 +33,8 @@ public class JsonAdaptedExpense {
                               @JsonProperty("cost") String cost,
                               @JsonProperty("description") String description,
                               @JsonProperty("included") List<JsonAdaptedPerson> included,
-                              @JsonProperty("individualExpenses") List<JsonAdaptedIndividualAmount> individualExpenses) {
+                              @JsonProperty("individualExpenses")
+                                          List<JsonAdaptedIndividualAmount> individualExpenses) {
         this.payer = payer;
         this.cost = cost;
         this.description = description;
@@ -54,9 +55,10 @@ public class JsonAdaptedExpense {
                 .stream()
                 .map(JsonAdaptedPerson::new)
                 .collect(Collectors.toList()));
-        Map<Person, Cost> individualExpenses = source.getIndividualExpenses();
-        List<IndividualAmount> individualAmounts = StorageUtils.
-                convertExpenseMapToListOfIndividualAmounts(individualExpenses);
+        Map<Person, Cost> individualExpenses = source
+                .getIndividualExpenses();
+        List<IndividualAmount> individualAmounts = StorageUtils
+                .convertExpenseMapToListOfIndividualAmounts(individualExpenses);
         this.individualExpenses.addAll(individualAmounts
                 .stream()
                 .map(JsonAdaptedIndividualAmount::new)

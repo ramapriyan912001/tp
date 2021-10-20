@@ -57,6 +57,14 @@ public class Expense {
         }
     }
 
+    /**
+     * Constructs an {@code Expense}.
+     * @param payer of expense.
+     * @param cost of expense.
+     * @param description of expense.
+     * @param included Persons to be included into paying the expense.
+     * @param individualExpenses Expense of each included person.
+     */
     public Expense(Person payer, Cost cost, Description description, List<Person> included,
                    Map<Person, Cost> individualExpenses) {
         this.payer = payer;

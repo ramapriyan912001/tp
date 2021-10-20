@@ -139,7 +139,8 @@ public class CalculatePaymentsCommand extends Command {
         for (Pair pair: pairs) {
             total += pair.getSurplus();
         }
-        return total == 0.00;
+        double marginOfError = 0.01;
+        return Math.abs(total) < marginOfError;
     }
 
 

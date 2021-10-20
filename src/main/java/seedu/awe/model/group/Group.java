@@ -12,7 +12,6 @@ import java.util.Set;
 
 import seedu.awe.model.expense.Cost;
 import seedu.awe.model.expense.Expense;
-import seedu.awe.model.expense.IndividualAmount;
 import seedu.awe.model.person.Person;
 import seedu.awe.model.tag.Tag;
 
@@ -115,6 +114,16 @@ public class Group {
         this.paidByPayees.putAll(paidByPayees);
     }
 
+    /**
+     * Creates new Group object with tags, expenses and paidByPayees hashmap.
+     *
+     * @param groupName String object representing name of the group.
+     * @param members ArrayList of Person objects representing list of members.
+     * @param tags Set of Tag objects to describe group.
+     * @param newExpenses List of expenses in the group.
+     * @param paidByPayers Maps people to their amounts paid
+     * @param paidByPayees Maps people to their expenses incurred.
+     */
     public Group(GroupName groupName, ArrayList<Person> members, Set<Tag> tags, ArrayList<Expense> newExpenses,
                  Map<Person, Cost> paidByPayers, Map<Person, Cost> paidByPayees) {
         this.groupName = groupName;
