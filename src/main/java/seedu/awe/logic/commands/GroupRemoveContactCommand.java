@@ -27,7 +27,9 @@ public class GroupRemoveContactCommand extends Command {
     /**
      * Creates a GroupRemoveContactCommand to add the specified {@code Person}
      */
-    public GroupRemoveContactCommand(GroupName groupName, ArrayList<Person> membersToBeRemoved, boolean isValidCommand) {
+    public GroupRemoveContactCommand(GroupName groupName,
+                                     ArrayList<Person> membersToBeRemoved,
+                                     boolean isValidCommand) {
         requireAllNonNull(groupName, membersToBeRemoved, isValidCommand);
         this.groupName = groupName;
         this.membersToBeRemoved = membersToBeRemoved;
