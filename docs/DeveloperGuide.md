@@ -202,12 +202,14 @@ The following sequence operation shows how the deletegroup operation works.
 
 * **Alternative 1 (current choice):** Delete based on `GroupName`
     * Pros: Easy to implement.
-    * Pros: Difficult for user to make an erroneous command. 
+    * Pros: Difficult for user to make an erroneous command.
+    * Cons: Long user command.  
     * Cons: Requires imposition of constraint that group names are unique.
     
 
 * **Alternative 2 (index based):** Delete based on index position in `ObservableList`
     * Pros: Easy to implement.
+    * Pros: Short user command  
     * Cons: Unintuitive for user.
     * Cons: Easy for user to make an erroneous command.
     
