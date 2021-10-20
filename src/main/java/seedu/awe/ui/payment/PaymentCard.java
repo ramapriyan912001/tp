@@ -8,7 +8,7 @@ import seedu.awe.model.payment.Payment;
 import seedu.awe.ui.UiPart;
 
 public class PaymentCard extends UiPart<Region> {
-    private static final String FXML = "TransactionSummaryListCard.fxml";
+    private static final String FXML = "PaymentListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -33,7 +33,7 @@ public class PaymentCard extends UiPart<Region> {
     private Label amount;
 
     /**
-     * Creates an {@code TransactionSummaryCard} with the given {@code TransactionSummary} and index to display.
+     * Creates an {@code Payment} with the given {@code Payment} and index to display.
      */
     public PaymentCard(Payment payment, int displayedIndex) {
         super(FXML);

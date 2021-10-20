@@ -19,7 +19,7 @@ public class PaymentListPanel extends UiPart<Region> {
     private ListView<Payment> paymentListView;
 
     /**
-     * Creates an {@code TransactionSummaryListPanel} with the given {@code ObservableList}.
+     * Creates an {@code PaymentListPanel} with the given {@code ObservableList}.
      */
     public PaymentListPanel(ObservableList<Payment> paymentList) {
         super(FXML);
@@ -28,8 +28,8 @@ public class PaymentListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code TransactionSummaryListCell} that displays the graphics of
-     * a {@code Transaction} using a {@code TransactionSummaryCard}.
+     * Custom {@code PaymentListCell} that displays the graphics of
+     * a {@code Payment} using a {@code PaymentCard}.
      */
     class PaymentListViewCell extends ListCell<Payment> {
         @Override
