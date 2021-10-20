@@ -1,0 +1,21 @@
+@startuml
+start
+:User executes command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([command is valid])
+    :New Group created with relevant members and tags;
+
+    if () then ([group not in model])
+        :Add new group to model;
+        :Update state of group members in contact list;
+
+    else ([else])
+    endif
+
+else([else])
+endif
+stop
+@enduml
