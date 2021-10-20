@@ -17,7 +17,7 @@ public class ListGroupsCommandTest {
     @Test
     public void execute_showGroup_success() {
         CommandResult expectedCommandResult = new CommandResult(ListGroupsCommand.MESSAGE_SUCCESS,
-                false, false, true, false, false, false);
+                false, false, true, false, false, false, false);
         assertCommandSuccess(new ListGroupsCommand(), model, expectedCommandResult, expectedModel);
     }
 }

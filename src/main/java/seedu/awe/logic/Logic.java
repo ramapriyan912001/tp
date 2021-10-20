@@ -10,6 +10,7 @@ import seedu.awe.logic.parser.exceptions.ParseException;
 import seedu.awe.model.ReadOnlyAddressBook;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
+import seedu.awe.model.payment.Payment;
 import seedu.awe.model.person.Person;
 import seedu.awe.model.transactionsummary.TransactionSummary;
 
@@ -45,6 +46,9 @@ public interface Logic {
 
     /** Returns the transaction summary as a list. */
     ObservableList<TransactionSummary> getTransactionSummary();
+
+    /** Returns the payments to make as a list. */
+    ObservableList<Payment> getPayments();
 
     /**
      * Returns the user prefs' awe book file path.

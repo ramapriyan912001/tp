@@ -60,7 +60,7 @@ public class FindContactsCommandTest {
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindContactsCommand command = new FindContactsCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel, false, true, false, false);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel, false, true, false, false, false);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
@@ -70,7 +70,7 @@ public class FindContactsCommandTest {
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindContactsCommand command = new FindContactsCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel, false, true, false, false);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel, false, true, false, false, false);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
     }
 

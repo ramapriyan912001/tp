@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -26,6 +27,7 @@ import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.group.exceptions.DuplicateGroupException;
 import seedu.awe.model.group.exceptions.GroupNotFoundException;
+import seedu.awe.model.payment.Payment;
 import seedu.awe.model.person.Person;
 import seedu.awe.model.transactionsummary.TransactionSummary;
 import seedu.awe.testutil.ExpenseBuilder;
@@ -295,6 +297,11 @@ public class AddExpenseCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void setPayments(List<Payment> payments) {
+
+        }
+
         /**
          * Returns an unmodifiable view of the list of {@code Group} backed by the internal list of
          * {@code versionedAddressBook}
@@ -337,6 +344,11 @@ public class AddExpenseCommandTest {
         @Override
         public void deleteExpense(Expense expense, Group group) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Payment> getPayments() {
+            return null;
         }
 
         @Override
