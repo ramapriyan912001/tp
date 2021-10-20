@@ -9,6 +9,7 @@ import static seedu.awe.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.function.Predicate;
 
@@ -21,6 +22,7 @@ import seedu.awe.model.AddressBook;
 import seedu.awe.model.Model;
 import seedu.awe.model.ReadOnlyAddressBook;
 import seedu.awe.model.ReadOnlyUserPrefs;
+import seedu.awe.model.expense.Cost;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
@@ -154,6 +156,16 @@ public class CreateGroupCommandTest {
         }
 
         @Override
+        public void setTransactionSummary(HashMap<Person, Cost> summary) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setAllMembersOfGroup(Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -268,6 +280,11 @@ public class CreateGroupCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public void setAllMembersOfGroup(Group group) {
+            requireNonNull(group);
         }
     }
 

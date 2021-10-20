@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.awe.logic.commands.AddContactCommand;
 import seedu.awe.logic.commands.AddExpenseCommand;
+import seedu.awe.logic.commands.CalculatePaymentsCommand;
 import seedu.awe.logic.commands.ClearCommand;
 import seedu.awe.logic.commands.Command;
 import seedu.awe.logic.commands.CreateGroupCommand;
@@ -19,12 +20,16 @@ import seedu.awe.logic.commands.ExitCommand;
 import seedu.awe.logic.commands.FindContactsCommand;
 import seedu.awe.logic.commands.FindExpensesCommand;
 import seedu.awe.logic.commands.FindGroupsCommand;
-import seedu.awe.logic.commands.GroupAddPersonCommand;
-import seedu.awe.logic.commands.GroupRemovePersonCommand;
+import seedu.awe.logic.commands.GroupAddContactCommand;
+import seedu.awe.logic.commands.GroupAddTagCommand;
+import seedu.awe.logic.commands.GroupEditNameCommand;
+import seedu.awe.logic.commands.GroupRemoveContactCommand;
+import seedu.awe.logic.commands.GroupRemoveTagCommand;
 import seedu.awe.logic.commands.HelpCommand;
 import seedu.awe.logic.commands.ListContactsCommand;
 import seedu.awe.logic.commands.ListExpensesCommand;
 import seedu.awe.logic.commands.ListGroupsCommand;
+import seedu.awe.logic.commands.ListTransactionSummaryCommand;
 import seedu.awe.logic.parser.exceptions.ParseException;
 import seedu.awe.model.Model;
 
@@ -108,11 +113,26 @@ public class AddressBookParser {
         case AddExpenseCommand.COMMAND_WORD:
             return new AddExpenseCommandParser(model).parse(arguments);
 
-        case GroupAddPersonCommand.COMMAND_WORD:
-            return new GroupAddPersonCommandParser(model).parse(arguments);
+        case GroupAddContactCommand.COMMAND_WORD:
+            return new GroupAddContactCommandParser(model).parse(arguments);
 
-        case GroupRemovePersonCommand.COMMAND_WORD:
-            return new GroupRemovePersonCommandParser(model).parse(arguments);
+        case GroupRemoveContactCommand.COMMAND_WORD:
+            return new GroupRemoveContactCommandParser(model).parse(arguments);
+
+        case GroupEditNameCommand.COMMAND_WORD:
+            return new GroupEditNameCommandParser().parse(arguments);
+
+        case GroupAddTagCommand.COMMAND_WORD:
+            return new GroupAddTagCommandParser().parse(arguments);
+
+        case GroupRemoveTagCommand.COMMAND_WORD:
+            return new GroupRemoveTagCommandParser().parse(arguments);
+
+        case ListTransactionSummaryCommand.COMMAND_WORD:
+            return new ListTransactionSummaryCommandParser().parse(arguments);
+
+        case CalculatePaymentsCommand.COMMAND_WORD:
+            return new CalculatePaymentsCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

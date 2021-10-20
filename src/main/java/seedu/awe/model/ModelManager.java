@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.awe.commons.core.GuiSettings;
 import seedu.awe.commons.core.LogsCenter;
+import seedu.awe.model.expense.Cost;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
@@ -121,6 +123,15 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public void setAllMembersOfGroup(Group group) {
+        requireNonNull(group);
+
+        for (Person member : group.getMembers()) {
+            addressBook.setPerson(member, member);
+        }
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -181,6 +192,13 @@ public class ModelManager implements Model {
         addressBook.setGroup(group, newGroup);
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
+    //=========== TransactionSummary List Accessors =============================================================
+
+    @Override
+    public void setTransactionSummary(HashMap<Person, Cost> summary) {
+        requireNonNull(summary);
+        addressBook.setTransactionSummary(summary);
+    }
 
     //=========== Filtered Group List Accessors =============================================================
 
@@ -218,6 +236,7 @@ public class ModelManager implements Model {
     @Override
     public void addExpense(Expense expense, Group group) {
         addressBook.addExpense(expense, group);
+        updateFilteredExpenseList(PREDICATE_SHOW_ALL_EXPENSES);
     }
 
     /**
@@ -253,6 +272,7 @@ public class ModelManager implements Model {
     @Override
     public void setExpenses(Group group) {
         addressBook.setExpenses(group);
+        updateFilteredExpenseList(PREDICATE_SHOW_ALL_EXPENSES);
     }
 
     @Override

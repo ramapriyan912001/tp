@@ -30,6 +30,21 @@ public class Cost {
     }
 
     /**
+     * Constructs a {@code Cost}.
+     *
+     * @param cost A valid cost of type double.
+     */
+    public Cost(double cost) {
+        String costDoubleToString = String.valueOf(cost);
+        checkArgument(isValidCost(costDoubleToString), MESSAGE_CONSTRAINTS);
+        this.cost = cost;
+    }
+
+    public Double getCost() {
+        return cost;
+    }
+
+    /**
      * Sums two costs.
      *
      * @param c The other cost.
@@ -40,7 +55,7 @@ public class Cost {
         if (result < 0) {
             result = 0;
         }
-        return new Cost(String.format("%.2f", result));
+        return new Cost(result);
     }
 
     /**
@@ -54,7 +69,35 @@ public class Cost {
         if (result < 0) {
             result = 0;
         }
-        return new Cost(String.format("%.2f", result));
+        return new Cost(result);
+    }
+
+    /**
+     * Multiplies the cost by the inputted value c.
+     *
+     * @param c Value to multiply the cost by.
+     * @return Result of the multiplication.
+     */
+    public Cost multiply(double c) {
+        double result = cost * c;
+        if (result < 0) {
+            result = 0;
+        }
+        return new Cost(result);
+    }
+
+    /**
+     * Divides the cost by the inputted value c.
+     *
+     * @param c Value to divide the cost by.
+     * @return Result of the division.
+     */
+    public Cost divide(double c) {
+        double result = cost / c;
+        if (result < 0) {
+            result = 0;
+        }
+        return new Cost(result);
     }
 
     /**

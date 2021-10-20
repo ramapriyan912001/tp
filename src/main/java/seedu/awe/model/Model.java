@@ -1,10 +1,12 @@
 package seedu.awe.model;
 
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.awe.commons.core.GuiSettings;
+import seedu.awe.model.expense.Cost;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
@@ -19,6 +21,9 @@ public interface Model {
 
     /** {@code Predicate} that always evaluate to true */
     Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Expense> PREDICATE_SHOW_ALL_EXPENSES = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -77,10 +82,22 @@ public interface Model {
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the awe book.
+     * {@code target} must exist in the awe contact list.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the awe book.
      */
     void setPerson(Person target, Person editedPerson);
+
+    /** Replaces the transactionsummary list with a new list */
+    void setTransactionSummary(HashMap<Person, Cost> summary);
+
+    /**
+     * Replaces Person objects with updated Person objects within the {@code group}.
+     * {@code group} must exist in the awe group list.
+     *
+     * @param group Group object containing members to be updated.
+     */
+    void setAllMembersOfGroup(Group group);
+
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
