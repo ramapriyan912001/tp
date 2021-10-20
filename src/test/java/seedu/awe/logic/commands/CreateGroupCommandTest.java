@@ -159,7 +159,7 @@ public class CreateGroupCommandTest {
         public void setTransactionSummary(HashMap<Person, Cost> summary) {
             throw new AssertionError("This method should not be called.");
         }
-      
+
         @Override
         public void setAllMembersOfGroup(Group group) {
             throw new AssertionError("This method should not be called.");
