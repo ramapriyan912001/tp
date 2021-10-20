@@ -101,7 +101,7 @@ public class TypicalExpenses {
 
         for (Group group : getTypicalGroups()) {
             for (Expense expense : getTypicalExpenses(group)) {
-                group.addExpense(expense);
+                group = group.addExpense(expense);
             }
             ab.addGroup(group);
         }
