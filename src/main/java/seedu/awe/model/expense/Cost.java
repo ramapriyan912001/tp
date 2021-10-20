@@ -55,7 +55,7 @@ public class Cost {
         if (result < 0) {
             result = 0;
         }
-        return new Cost(String.format("%.2f", result));
+        return new Cost(result);
     }
 
     /**
@@ -69,7 +69,7 @@ public class Cost {
         if (result < 0) {
             result = 0;
         }
-        return new Cost(String.format("%.2f", result));
+        return new Cost(result);
     }
 
     /**
@@ -83,7 +83,7 @@ public class Cost {
         if (result < 0) {
             result = 0;
         }
-        return new Cost(String.format("%2.f", result));
+        return new Cost(result);
     }
 
     /**
@@ -97,7 +97,7 @@ public class Cost {
         if (result < 0) {
             result = 0;
         }
-        return new Cost(String.format("%.2f", result));
+        return new Cost(result);
     }
 
     /**

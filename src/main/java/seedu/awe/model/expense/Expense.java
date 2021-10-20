@@ -3,7 +3,9 @@ package seedu.awe.model.expense;
 import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -19,6 +21,7 @@ public class Expense {
     private final Cost cost;
     private final Description description;
     private final List<Person> included;
+    private final Map<Person, Cost> individualExpenses;
 
     /**
      * Constructs an {@code Expense}.
@@ -32,6 +35,7 @@ public class Expense {
         this.cost = cost;
         this.description = description;
         included = new ArrayList<>();
+        individualExpenses = new HashMap<>();
     }
 
     /**
@@ -47,10 +51,27 @@ public class Expense {
         this.cost = cost;
         this.description = description;
         this.included = included;
+        this.individualExpenses = new HashMap<>();
+        for (Person person : included) {
+            individualExpenses.put(person, new Cost(0));
+        }
+    }
+
+    public Expense(Person payer, Cost cost, Description description, List<Person> included,
+                   Map<Person, Cost> individualExpenses) {
+        this.payer = payer;
+        this.cost = cost;
+        this.description = description;
+        this.included = included;
+        this.individualExpenses = individualExpenses;
+    }
+
+    public Expense setIndividualExpenses(HashMap<Person, Cost> individualExpenses) {
+        return new Expense(payer, cost, description, included, individualExpenses);
     }
 
     public Expense setCost(Cost newCost) {
-        return new Expense(payer, newCost, description, included);
+        return new Expense(payer, newCost, description, included, individualExpenses);
     }
 
     public Person getPayer() {
@@ -69,10 +90,14 @@ public class Expense {
         return included;
     }
 
+    public Map<Person, Cost> getIndividualExpenses() {
+        return individualExpenses;
+    }
+
     public Expense setIncluded(List<Person> included) {
         List<Person> includedCopy = new ArrayList<>(this.included);
         includedCopy.addAll(included);
-        return new Expense(payer, cost, description, includedCopy);
+        return new Expense(payer, cost, description, includedCopy, individualExpenses);
     }
 
     /**

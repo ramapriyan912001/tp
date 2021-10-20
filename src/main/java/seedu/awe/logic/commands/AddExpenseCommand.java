@@ -122,6 +122,7 @@ public class AddExpenseCommand extends Command {
 
         parseSplitExpenses(groupMembers, paidByPayees, toSplit);
         expense = expense.setIncluded(groupMembers);
+        expense = expense.setIndividualExpenses(paidByPayees);
         Group newGroup = group.addExpenseWithIndivPayments(expense, paidByPayees);
         model.setGroup(group, newGroup);
         model.addExpense(expense, newGroup);

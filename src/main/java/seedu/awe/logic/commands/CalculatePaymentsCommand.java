@@ -156,6 +156,17 @@ public class CalculatePaymentsCommand extends Command {
         }
     }
 
+    private static List<Pair> removeZeroCostElements(List<Pair> pairs) {
+        List<Pair> newPairs = new ArrayList<>();
+        for (int i = 0; i < pairs.size(); i++) {
+            Double surplus = pairs.get(i).getSurplus();
+            if (surplus != 0) {
+                newPairs.add(pairs.get(i));
+            }
+        }
+        return newPairs;
+    }
+
     /**
      * Tabulates payments to make between all persons to balance payments and expenses.
      * @param pairs Name and Surplus/Deficit of Person.
@@ -166,6 +177,7 @@ public class CalculatePaymentsCommand extends Command {
         if (!checkSumIsZero(pairs)) {
             throw new CommandException("There appears to be a discrepancy within your payments.");
         }
+        pairs = removeZeroCostElements(pairs);
         List<Payment> payments = new ArrayList<>();
         while (!pairs.isEmpty()) {
             if (pairs.size() == 1) {

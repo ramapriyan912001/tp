@@ -7,6 +7,7 @@ import static seedu.awe.testutil.TypicalGroups.BALI;
 import static seedu.awe.testutil.TypicalPersons.BENSON;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,14 +36,16 @@ public class JsonAdaptedGroupTest {
     @Test
     public void toModelType_invalidGroupName_throwsIllegalValueException() {
         JsonAdaptedGroup group =
-                new JsonAdaptedGroup(INVALID_GROUP_NAME, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+                new JsonAdaptedGroup(INVALID_GROUP_NAME, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(),
+                        new ArrayList<>(), new ArrayList<>());
         String expectedMessage = GroupName.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, group::toModelType);
     }
 
     @Test
     public void toModelType_nullGroupName_throwsIllegalValueException() {
-        JsonAdaptedGroup group = new JsonAdaptedGroup(null, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        JsonAdaptedGroup group = new JsonAdaptedGroup(null, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(),
+                new ArrayList<>(), new ArrayList<>());
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, GroupName.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, group::toModelType);
     }
@@ -52,7 +55,8 @@ public class JsonAdaptedGroupTest {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedGroup group =
-                new JsonAdaptedGroup(VALID_NAME, VALID_MEMBERS, invalidTags, new ArrayList<>());
+                new JsonAdaptedGroup(VALID_NAME, VALID_MEMBERS, invalidTags, new ArrayList<>(),
+                        new ArrayList<>(), new ArrayList<>());
         assertThrows(IllegalValueException.class, group::toModelType);
     }
 }
