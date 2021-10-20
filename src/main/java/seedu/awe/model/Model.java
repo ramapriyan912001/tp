@@ -11,6 +11,7 @@ import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.person.Person;
+import seedu.awe.model.transactionsummary.TransactionSummary;
 
 /**
  * The API of the Model component.
@@ -89,6 +90,8 @@ public interface Model {
 
     /** Replaces the transactionsummary list with a new list */
     void setTransactionSummary(HashMap<Person, Cost> summary);
+
+    ObservableList<TransactionSummary> getTransactionSummary();
 
     /**
      * Replaces Person objects with updated Person objects within the {@code group}.
