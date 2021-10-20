@@ -177,6 +177,46 @@ Classes used by multiple components are in the `seedu.awe.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Create Group Feature
+
+The create group mechanism is facilitated by defining a Group model and adding a Unique Group List field to 
+`AddressBook`. The Group model contains a `GroupName` field containing the name of the group, an `ArrayList` of `Person`
+objects who are members of the Group, an `ArrayList` of `Expense` objects that keeps track of the expenditures of the 
+Group, a `HashMap` that contains details of how much each member has paid in total across the expenses, and a `HashMap`
+that contains details of the total expenditure incurred by each member across the trip.
+
+### Delete Group Feature
+
+The delete group mechanism is facilitated by maintaining the constraint that every `Group` has a unique `GroupName`.
+This allows the `AddressBook` class to easily retrieve the Group based on the name entered by the user and remove the group from the model.
+
+The following sequence operation shows how the deletegroup operation works.
+![Interactions Inside the Logic Component for the `deletegroup gn/GROUP_NAME` Command](images/DeleteGroupSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteGroupCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+#### Design considerations:
+
+**Aspect: User command for deletegroup:**
+
+* **Alternative 1 (current choice):** Delete based on `GroupName`
+    * Pros: Easy to implement.
+    * Pros: Difficult for user to make an erroneous command. 
+    * Cons: Requires imposition of constraint that group names are unique.
+    
+
+* **Alternative 2 (index based):** Delete based on index position in `ObservableList`
+    * Pros: Easy to implement.
+    * Cons: Unintuitive for user.
+    * Cons: Easy for user to make an erroneous command.
+    
+
+* **Justification**
+    * Group contains large mass of information such as multiple expenses, individual expenditures, and payments.
+    * This information is unrecoverable once deleted.
+    * As such, it is better to choose Alternative 1, as this makes it difficult for user to accidentally delete a group.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
