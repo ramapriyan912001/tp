@@ -13,7 +13,47 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
 * **New Feature**: Constructed the `creategroup` feature for AWE.
     * What it does: Allows user to create a new travel group with the command line interface.
     * Justification: This feature is crucial as the user should be able to create groups to record travel expenses.
-    * Highlights: This implementation added in a new command `creategroup` to create a new group. It creates a new travel group with the specified members and 
+    * Highlights: This implementation added in a new command `creategroup` to create a new group. It creates a
+      new travel group with the specified members.
+    * Contribution: Built the entire framework for this feature.
+
+* **New Feature**: Constructed the `groupaddcontact` feature for AWE.
+    * What it does: Allows user to add a person into an existing group with the command line interface.
+    * Justification: This feature is important as the user should be able to add members to travel groups after 
+      creating them. The prevents the need for deleting a re-creating a group to change membership.
+    * Highlights: This implementation added in a new command `groupaddcontact` to add a contact into a specified group.
+      It adds at least one new member into an existing travel group.
+    * Contribution: Built the entire framework for this feature.
+
+* **New Feature**: Constructed the `groupremovecontact` feature for AWE.
+    * What it does: Allows user to remove a person from an existing group with the command line interface.
+    * Justification: This feature is important as the user should be able to remove members from travel groups after
+      creating them. The prevents the need for deleting a re-creating a group to change membership.
+    * Highlights: This implementation added in a new command `groupremovecontact` to remove a contact from a specified
+      group. It removes at least one member from an existing travel group.
+    * Contribution: Built the entire framework for this feature.
+
+* **New Feature**: Constructed the `groupeditname` feature for AWE.
+    * What it does: Allows user to change the group name of an existing group with the command line interface.
+    * Justification: This feature is important as the user should be able to change a travel group's name.
+      The prevents the need for deleting a re-creating a group to change group name.
+    * Highlights: This implementation added in a new command `groupeditname` to edit a travel group's name.
+    * Contribution: Built the entire framework for this feature.
+  
+* **New Feature**: Constructed the `groupaddtag` feature for AWE.
+    * What it does: Allows user to add a tag into an existing group with the command line interface.
+    * Justification: This feature is important as the user should be able to add tags to travel groups after
+      creating them. The prevents the need for deleting a re-creating a group to change tags.
+    * Highlights: This implementation added in a new command `groupaddtag` to add a tag into a specified group.
+      It adds at least one new tag into an existing travel group.
+    * Contribution: Built the entire framework for this feature.
+
+* **New Feature**: Constructed the `groupremovetag` feature for AWE.
+    * What it does: Allows user to remove a tag from an existing group with the command line interface.
+    * Justification: This feature is important as the user should be able to remove tags from travel groups after
+      creating them. The prevents the need for deleting a re-creating a group to change tags.
+    * Highlights: This implementation added in a new command `groupremovetag` to remove a contact from a specified
+      group. It removes at least one tag from an existing travel group.
     * Contribution: Built the entire framework for this feature.
 
 * **New Feature**: Developed storage functionalities for `creategroup` and `deletegroup` feature.

@@ -82,13 +82,22 @@ public interface Model {
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the awe book.
+     * {@code target} must exist in the awe contact list.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the awe book.
      */
     void setPerson(Person target, Person editedPerson);
 
     /** Replaces the transactionsummary list with a new list */
     void setTransactionSummary(HashMap<Person, Cost> summary);
+
+    /**
+     * Replaces Person objects with updated Person objects within the {@code group}.
+     * {@code group} must exist in the awe group list.
+     *
+     * @param group Group object containing members to be updated.
+     */
+    void setAllMembersOfGroup(Group group);
+
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

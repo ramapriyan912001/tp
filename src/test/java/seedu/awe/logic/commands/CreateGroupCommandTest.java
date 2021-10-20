@@ -159,6 +159,11 @@ public class CreateGroupCommandTest {
         public void setTransactionSummary(HashMap<Person, Cost> summary) {
             throw new AssertionError("This method should not be called.");
         }
+      
+        @Override
+        public void setAllMembersOfGroup(Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public ObservableList<Person> getFilteredPersonList() {
@@ -275,6 +280,11 @@ public class CreateGroupCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public void setAllMembersOfGroup(Group group) {
+            requireNonNull(group);
         }
     }
 
