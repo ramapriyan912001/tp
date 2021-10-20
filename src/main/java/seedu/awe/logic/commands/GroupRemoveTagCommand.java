@@ -118,12 +118,12 @@ public class GroupRemoveTagCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        if (!(other instanceof GroupAddPersonCommand)) {
+        if (!(other instanceof GroupRemoveTagCommand)) {
             return false;
         }
-        GroupAddTagCommand otherCommand = (GroupAddTagCommand) other;
+        GroupRemoveTagCommand otherCommand = (GroupRemoveTagCommand) other;
         if (this.isValidCommand == otherCommand.getValidCommand()
-                && checkSameTags(otherCommand.getNewTags())
+                && checkSameTags(otherCommand.getTagsToBeRemoved())
                 && this.groupName.equals(otherCommand.getGroupName())) {
             return true;
         }

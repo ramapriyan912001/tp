@@ -1,6 +1,6 @@
 package seedu.awe.logic.parser;
 import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.awe.logic.commands.GroupAddPersonCommand.MESSAGE_ERROR;
+import static seedu.awe.logic.commands.GroupRemoveContactCommand.MESSAGE_ERROR;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_NAME;
 
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 import javafx.collections.ObservableList;
-import seedu.awe.logic.commands.GroupAddPersonCommand;
+import seedu.awe.logic.commands.GroupRemoveContactCommand;
 import seedu.awe.logic.parser.exceptions.ParseException;
 import seedu.awe.model.Model;
 import seedu.awe.model.ReadOnlyAddressBook;
@@ -17,88 +17,87 @@ import seedu.awe.model.group.GroupName;
 import seedu.awe.model.person.Name;
 import seedu.awe.model.person.Person;
 
-public class GroupAddPersonCommandParser implements Parser<GroupAddPersonCommand> {
-    private static final String BAD_FORMATTING = "\"groupaddperson command\" is not properly formatted";
+public class GroupRemoveContactCommandParser implements Parser<GroupRemoveContactCommand> {
+    private static final String BAD_FORMATTING = "\"groupremovecontact command\" is not properly formatted";
     private ObservableList<Person> allMembers;
-    private final ArrayList<Person> newMembersToAdd;
+    private final ArrayList<Person> membersToBeRemoved;
 
     /**
-     * Creates new GroupAddPersonCommandParser object.
+     * Creates new GroupRemoveContactCommandParser object.
      *
      * @param model Model object passed into constructor to provide list of contacts.
      */
-    public GroupAddPersonCommandParser(Model model) {
+    public GroupRemoveContactCommandParser(Model model) {
         ReadOnlyAddressBook addressBook = model.getAddressBook();
         this.allMembers = addressBook.getPersonList();
-        this.newMembersToAdd = new ArrayList<>();
+        this.membersToBeRemoved = new ArrayList<>();
     }
 
     /**
-     * Returns GroupAddPersonCommand based on user input.
+     * Returns GroupRemoveContactCommand based on user input.
      *
      * @param args User input into contact list.
-     * @return GroupAddPersonCommand object to represent command to be executed.
+     * @return GroupRemoveContactCommand object to represent command to be executed.
      * @throws ParseException If user input is incorrectly formatted.
      */
-    @Override
-    public GroupAddPersonCommand parse(String args) throws ParseException {
+    public GroupRemoveContactCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_GROUP_NAME, PREFIX_NAME);
 
         if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_GROUP_NAME, PREFIX_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    GroupAddPersonCommand.MESSAGE_USAGE));
+                    GroupRemoveContactCommand.MESSAGE_USAGE));
         }
 
         GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).get());
-        List<Name> newMemberNames = ParserUtil.parseMemberNames(argMultimap.getAllValues(PREFIX_NAME));
-        ArrayList<Person> newMembers = findNewMembers(newMemberNames);
+        List<Name> membersToBeRemovedNames = ParserUtil.parseMemberNames(argMultimap.getAllValues(PREFIX_NAME));
 
+        ArrayList<Person> membersToBeRemoved = findMembersToBeRemoved(membersToBeRemovedNames);
         boolean isValidCommand = true;
-        if (groupName.getName().equals(BAD_FORMATTING) || Objects.isNull(newMembers)) {
+        if (groupName.getName().equals(BAD_FORMATTING) || Objects.isNull(membersToBeRemoved)) {
             isValidCommand = false;
         }
 
-        return new GroupAddPersonCommand(groupName, newMembers, isValidCommand);
+        return new GroupRemoveContactCommand(groupName, membersToBeRemoved, isValidCommand);
     }
 
     /**
      * Returns list of members in the group.
      *
-     * @param newMemberNames List of names representing new members to be added into group.
+     * @param membersToBeRemovedNames List of names representing members to be removed from group.
      * @return ArrayList of Person objects representing members to be added to the group
      */
-    public ArrayList<Person> findNewMembers(List<Name> newMemberNames) throws ParseException {
+    public ArrayList<Person> findMembersToBeRemoved(List<Name> membersToBeRemovedNames) throws ParseException {
         try {
-            for (Name name : newMemberNames) {
-                addMemberIfExist(name);
+            for (Name name : membersToBeRemovedNames) {
+                addMemberToRemoveList(name);
             }
-            if (!newMemberNames.isEmpty() && newMembersToAdd.isEmpty()) {
+            if (!membersToBeRemovedNames.isEmpty() && membersToBeRemovedNames.isEmpty()) {
                 throw new ParseException(MESSAGE_ERROR);
             }
-            return newMembersToAdd;
+            return membersToBeRemoved;
         } catch (IndexOutOfBoundsException e) {
             throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
         }
     }
 
     /**
-     * Returns boolean object representing if member has been added into newMembersToAdd.
+     * Returns boolean object representing if member has been added into membersToBeRemoved.
      *
      * @param memberName Name object representing member whose presence is being checked for.
-     * @return boolean object representing if member has been added into newMembersToAdd.
+     * @return boolean object representing if member has been added into membersToBeRemoved.
      * @throws ParseException if the person does not exist in the contact list.
      */
-    public boolean addMemberIfExist(Name memberName) throws ParseException {
+    public boolean addMemberToRemoveList(Name memberName) throws ParseException {
         boolean added = false;
         Person memberFound = findMember(memberName, allMembers);
         if (!Objects.isNull(memberFound)) {
-            newMembersToAdd.add(memberFound);
+            membersToBeRemoved.add(memberFound);
             added = true;
         }
         if (!added) {
-            throw new ParseException(GroupAddPersonCommand.MESSAGE_ERROR);
+            throw new ParseException(GroupRemoveContactCommand.MESSAGE_ERROR);
         }
         return added;
     }

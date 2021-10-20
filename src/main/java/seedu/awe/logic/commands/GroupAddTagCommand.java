@@ -102,7 +102,7 @@ public class GroupAddTagCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        if (!(other instanceof GroupAddPersonCommand)) {
+        if (!(other instanceof GroupAddTagCommand)) {
             return false;
         }
         GroupAddTagCommand otherCommand = (GroupAddTagCommand) other;

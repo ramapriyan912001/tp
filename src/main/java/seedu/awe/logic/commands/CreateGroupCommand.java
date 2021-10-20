@@ -94,6 +94,7 @@ public class CreateGroupCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }
         model.addGroup(group);
+        model.setAllMembersOfGroup(group);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

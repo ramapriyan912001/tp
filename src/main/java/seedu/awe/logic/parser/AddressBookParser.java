@@ -19,10 +19,10 @@ import seedu.awe.logic.commands.ExitCommand;
 import seedu.awe.logic.commands.FindContactsCommand;
 import seedu.awe.logic.commands.FindExpensesCommand;
 import seedu.awe.logic.commands.FindGroupsCommand;
-import seedu.awe.logic.commands.GroupAddPersonCommand;
+import seedu.awe.logic.commands.GroupAddContactCommand;
 import seedu.awe.logic.commands.GroupAddTagCommand;
 import seedu.awe.logic.commands.GroupEditNameCommand;
-import seedu.awe.logic.commands.GroupRemovePersonCommand;
+import seedu.awe.logic.commands.GroupRemoveContactCommand;
 import seedu.awe.logic.commands.GroupRemoveTagCommand;
 import seedu.awe.logic.commands.HelpCommand;
 import seedu.awe.logic.commands.ListContactsCommand;
@@ -111,11 +111,11 @@ public class AddressBookParser {
         case AddExpenseCommand.COMMAND_WORD:
             return new AddExpenseCommandParser(model).parse(arguments);
 
-        case GroupAddPersonCommand.COMMAND_WORD:
-            return new GroupAddPersonCommandParser(model).parse(arguments);
+        case GroupAddContactCommand.COMMAND_WORD:
+            return new GroupAddContactCommandParser(model).parse(arguments);
 
-        case GroupRemovePersonCommand.COMMAND_WORD:
-            return new GroupRemovePersonCommandParser(model).parse(arguments);
+        case GroupRemoveContactCommand.COMMAND_WORD:
+            return new GroupRemoveContactCommandParser(model).parse(arguments);
 
         case GroupEditNameCommand.COMMAND_WORD:
             return new GroupEditNameCommandParser().parse(arguments);
