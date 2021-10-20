@@ -80,7 +80,7 @@ Around the World in $80 (AWE) is a **desktop app for managing contacts, optimize
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -208,7 +208,89 @@ Examples:
 * `findgroups London` returns `London` and `london trip`
 * `findgroups Taiwan Malaysia` returns `Taiwan` `Malaysia`<br>
   ![result for 'findcontacts Taiwan Malaysia'](images/findAlexDavidResult.png)
-  
+
+### Adding a contact to an existing group: `groupaddcontact`
+
+Add contact in contact list into an existing travel group.
+
+Format: `groupaddcontact gn/[GROUP_NAME] n/[CONTACT_NAME1] n/[OPTIONAL_CONTACT_NAME2] ...`
+
+* Group name in the user input must already be an existing group.
+* The search is case-sensitive. e.g `hans` will not match `Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Type in the full name of contacts to add.
+* Duplicate members in a group/user input will not be added.
+
+Examples:
+* `groupaddcontact gn/Bali n/Irfan Ibrahim` to add Irfan Ibrahim into the Bali travel group.
+* `groupaddcontact gn/Prague n/Bernice Yu n/David Li n/Alex Yeoh` to add Bernice Yu, David Li, and Alex Yeoh into the
+Prague travel group.
+
+### Removing a contact from an existing group: `groupremovecontact`
+
+Remove contact in contact list from an existing travel group.
+
+Format: `groupremovecontact gn/[GROUP_NAME] n/[CONTACT_NAME1] n/[OPTIONAL_CONTACT_NAME2] ...`
+
+* Group name in the user input must already be an existing group.
+* The search is case-sensitive. e.g `hans` will not match `Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Type in the full name of contacts to remove.
+* Members can only be removed if they are in the travel group.
+
+Examples:
+* `groupremovecontact gn/Bali n/Irfan Ibrahim` to remove Irfan Ibrahim from the Bali travel group.
+* `groupremovecontact gn/Prague n/Bernice Yu n/David Li n/Alex Yeoh` to remove Bernice Yu, David Li, and Alex Yeoh
+from the Prague travel group.
+
+### Adding a tag to an existing group: `groupaddtag`
+
+Add tag for an existing travel group.
+
+Format: `groupaddtag gn/[GROUP_NAME] t/[TAG1] t/[OPTIONAL_TAG2] ...`
+
+* Group name in the user input must already be an existing group.
+* The search is case-sensitive. e.g `bali` will not match `Bali`
+* Only full words will be matched e.g. `Bal` will not match `Bali`
+* Duplicate tags in a group/user input will not be added.
+
+Examples:
+* `groupaddtag gn/Bali t/Friends` to indicate that the Bali travel group is with friends.
+* `groupaddtag gn/Prague t/Family t/Cousins` to indicate that the Prague travel group is with family,
+more specifically, cousins.
+
+### Removing a tag from an existing group: `groupremovetag`
+
+Remove tag from an existing travel group.
+
+Format: `groupremovetag gn/[GROUP_NAME] t/[TAG1] t/[OPTIONAL_TAG2] ...`
+
+* Group name in the user input must already be an existing group.
+* Tag has to be in existing group before it can be removed.
+* The search is case-sensitive. e.g `bali` will not match `Bali`
+* Only full words will be matched e.g. `Bal` will not match `Bali`
+* Duplicate tags in a group/user input will not be removed.
+
+Examples:
+* `groupremovetag gn/Bali t/Friends` to remove the friends tag from the Bali travel group.
+* `groupremovetag gn/Prague t/Family t/Cousins` to the tags family and cousins from the Prague travel group.
+
+### Editing travel group name: `groupeditname`
+
+Edit group name for an existing travel group.
+
+Format: `groupeditname gn/[OLD_GROUP_NAME] gn/[NEW_GROUP_NAME]`
+
+* Group name in the user input must already be an existing group.
+* The search is case-sensitive. e.g `bali` will not match `Bali`
+* Only full words will be matched e.g. `Bal` will not match `Bali`
+
+Examples:
+* `groupeditname gn/Bali gn/Thailand` to change the group name from Bali to Thailand.
+* `groupeditname gn/Germany gn/Munich` to change the group name from Germany to Munich.
+
 ### Viewing a shared expense: `expenses`
 Shows a list containing all existing expenses within the specified travel group. Expenses are sorted from most recent to least recent.
 
