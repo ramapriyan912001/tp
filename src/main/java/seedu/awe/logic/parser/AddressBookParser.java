@@ -127,7 +127,7 @@ public class AddressBookParser {
 
         case GroupRemoveTagCommand.COMMAND_WORD:
             return new GroupRemoveTagCommandParser().parse(arguments);
-            
+
         case ListTransactionSummaryCommand.COMMAND_WORD:
             return new ListTransactionSummaryCommandParser().parse(arguments);
 
