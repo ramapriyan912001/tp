@@ -27,8 +27,6 @@ public class JsonAdaptedGroup {
     private final List<JsonAdaptedPerson> members = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedExpense> expenses = new ArrayList<>();
-    private final List<JsonAdaptedIndividualAmount> paidByPayers = new ArrayList<>();
-    private final List<JsonAdaptedIndividualAmount> paidByPayees = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedGroup} with the given group details.
@@ -37,9 +35,7 @@ public class JsonAdaptedGroup {
     public JsonAdaptedGroup(@JsonProperty("name") String groupName,
                             @JsonProperty("members") List<JsonAdaptedPerson> members,
                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                            @JsonProperty("expenses") List<JsonAdaptedExpense> expenses,
-                            @JsonProperty("paidByPayers") List<JsonAdaptedIndividualAmount> paidByPayers,
-                            @JsonProperty("paidByPayees") List<JsonAdaptedIndividualAmount> paidByPayees) {
+                            @JsonProperty("expenses") List<JsonAdaptedExpense> expenses) {
         this.groupName = groupName;
         if (members != null) {
             this.members.addAll(members);
@@ -49,12 +45,6 @@ public class JsonAdaptedGroup {
         }
         if (expenses != null) {
             this.expenses.addAll(expenses);
-        }
-        if (paidByPayers != null) {
-            this.paidByPayers.addAll(paidByPayers);
-        }
-        if (paidByPayees != null) {
-            this.paidByPayees.addAll(paidByPayees);
         }
     }
 
@@ -80,14 +70,6 @@ public class JsonAdaptedGroup {
                 .convertExpenseMapToListOfIndividualAmounts(paidByPayers);
         List<IndividualAmount> individualExpenseIncurred = StorageUtils
                 .convertExpenseMapToListOfIndividualAmounts(paidByPayees);
-        this.paidByPayers.addAll(individualAmountPaid
-                .stream()
-                .map(JsonAdaptedIndividualAmount::new)
-                .collect(Collectors.toList()));
-        this.paidByPayees.addAll(individualExpenseIncurred
-                .stream()
-                .map(JsonAdaptedIndividualAmount::new)
-                .collect(Collectors.toList()));
     }
 
     /**
@@ -105,9 +87,7 @@ public class JsonAdaptedGroup {
             groupTags.add(tag.toModelType());
         }
         final ArrayList<Expense> modelExpenses = new ArrayList<>();
-        for (JsonAdaptedExpense expense : expenses) {
-            modelExpenses.add(expense.toModelType());
-        }
+        modelExpenses.addAll(StorageUtils.convertAdaptedExpensesToExpenses(expenses));
 
         if (groupName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -120,11 +100,14 @@ public class JsonAdaptedGroup {
 
         final Set<Tag> modelTags = new HashSet<>(groupTags);
 
+
+
         Map<Person, Cost> paidByPayers = StorageUtils
-                .convertListOfJsonAdaptedIndividualAmountsToExpenseMap(this.paidByPayers);
+                .buildPayerMapFromListOfExpenses(modelExpenses, modelMembers);
 
         Map<Person, Cost> paidByPayees = StorageUtils
-                .convertListOfJsonAdaptedIndividualAmountsToExpenseMap(this.paidByPayees);
+                .buildIndividualExpenditureMapFromListOfExpenses(modelExpenses, modelMembers);
+
         return new Group(modelName, modelMembers, modelTags, modelExpenses, paidByPayers, paidByPayees);
     }
 

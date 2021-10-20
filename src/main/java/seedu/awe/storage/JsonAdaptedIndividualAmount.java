@@ -7,7 +7,7 @@ import seedu.awe.commons.exceptions.IllegalValueException;
 import seedu.awe.model.expense.IndividualAmount;
 import seedu.awe.model.person.Person;
 
-public class JsonAdaptedIndividualAmount {
+class JsonAdaptedIndividualAmount {
 
     private JsonAdaptedPerson person;
     private String expenditure;
