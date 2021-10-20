@@ -125,7 +125,7 @@ public class AddressBookParser {
 
         case CalculatePaymentsCommand.COMMAND_WORD:
             return new CalculatePaymentsCommandParser().parse(arguments);
-            
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

@@ -7,7 +7,6 @@ import static seedu.awe.testutil.TypicalGroups.BALI;
 import static seedu.awe.testutil.TypicalPersons.BENSON;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
