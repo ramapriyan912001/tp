@@ -7,7 +7,6 @@ import java.util.HashMap;
 import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.model.Model;
 import seedu.awe.model.expense.Cost;
-import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.person.Person;
 
