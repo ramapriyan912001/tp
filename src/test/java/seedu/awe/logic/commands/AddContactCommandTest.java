@@ -27,6 +27,7 @@ import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.group.exceptions.DuplicateGroupException;
 import seedu.awe.model.person.Person;
+import seedu.awe.model.transactionsummary.TransactionSummary;
 import seedu.awe.testutil.PersonBuilder;
 
 public class AddContactCommandTest {
@@ -226,6 +227,11 @@ public class AddContactCommandTest {
 
         @Override
         public void updateFilteredExpenseList(Predicate<Expense> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<TransactionSummary> getTransactionSummary() {
             throw new AssertionError("This method should not be called.");
         }
     }
