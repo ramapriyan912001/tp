@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -114,6 +115,26 @@ public class Group {
     }
 
     /**
+     * Creates new Group object with tags, expenses and paidByPayees hashmap.
+     *
+     * @param groupName String object representing name of the group.
+     * @param members ArrayList of Person objects representing list of members.
+     * @param tags Set of Tag objects to describe group.
+     * @param newExpenses List of expenses in the group.
+     * @param paidByPayers Maps people to their amounts paid
+     * @param paidByPayees Maps people to their expenses incurred.
+     */
+    public Group(GroupName groupName, ArrayList<Person> members, Set<Tag> tags, ArrayList<Expense> newExpenses,
+                 Map<Person, Cost> paidByPayers, Map<Person, Cost> paidByPayees) {
+        this.groupName = groupName;
+        this.members.addAll(members);
+        this.tags.addAll(tags);
+        this.expenses.addAll(newExpenses);
+        this.paidByPayers.putAll(paidByPayers);
+        this.paidByPayees.putAll(paidByPayees);
+    }
+
+    /**
      * Adds member to Group.
      *
      * @param member Person object representing member to be added to group.
@@ -211,7 +232,14 @@ public class Group {
     public Group addExpense(Expense expense) {
         ArrayList<Expense> newExpenses = new ArrayList<>(expenses);
         newExpenses.add(expense);
-        return new Group(groupName, members, tags, newExpenses);
+        Person payer = expense.getPayer();
+        Map<Person, Cost> individualExpenses = expense.getIndividualExpenses();
+        paidByPayers.computeIfPresent(payer, (key, val) -> val.add(this.paidByPayers.get(payer)));
+        for (Map.Entry<Person, Cost> entry : individualExpenses.entrySet()) {
+            Person payee = entry.getKey();
+            paidByPayees.computeIfPresent(payee, (key, val) -> val.add(this.paidByPayees.get(payee)));
+        }
+        return new Group(groupName, members, tags, newExpenses, paidByPayers, paidByPayees);
     }
 
     /**
@@ -230,7 +258,7 @@ public class Group {
                 paidByPayees.computeIfPresent(p, (key, val) -> val.add(this.paidByPayees.get(p)));
             }
         }
-        return new Group(groupName, members, tags, newExpenses, paidByPayees);
+        return new Group(groupName, members, tags, newExpenses, paidByPayers, paidByPayees);
     }
 
     /**
@@ -242,7 +270,14 @@ public class Group {
     public Group deleteExpense(Expense expense) {
         ArrayList<Expense> newExpenses = new ArrayList<>(expenses);
         newExpenses.remove(expense);
-        return new Group(groupName, members, tags, newExpenses);
+        Person payer = expense.getPayer();
+        Map<Person, Cost> individualExpenses = expense.getIndividualExpenses();
+        paidByPayers.computeIfPresent(payer, (key, val) -> val.subtract(this.paidByPayers.get(payer)));
+        for (Map.Entry<Person, Cost> entry : individualExpenses.entrySet()) {
+            Person payee = entry.getKey();
+            paidByPayees.computeIfPresent(payee, (key, val) -> val.subtract(this.paidByPayees.get(payee)));
+        }
+        return new Group(groupName, members, tags, newExpenses, paidByPayers, paidByPayees);
     }
 
     /**

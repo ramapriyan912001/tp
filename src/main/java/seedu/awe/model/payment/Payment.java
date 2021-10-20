@@ -25,7 +25,7 @@ public class Payment implements Comparable<Payment> {
 
     @Override
     public String toString() {
-        return String.format("%s pays $%.2f to %s.", payee.getName(), getCost(), payer.getName());
+        return String.format("%s pays $%.2f to %s.", payee.getName(), getCost().getCost(), payer.getName());
     }
 
     public Person getPayer() {

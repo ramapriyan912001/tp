@@ -93,11 +93,12 @@ public class AddExpenseCommand extends Command {
             return new CommandResult(MESSAGE_ALL_MEMBERS_EXCLUDED);
         }
 
-        return calculateExpense(group, finalCost, model);
+        return calculateExpense(group, expense.getPayer(), finalCost, model);
     }
 
-    private CommandResult calculateExpense(Group group, Cost finalCost, Model model) {
+    private CommandResult calculateExpense(Group group, Person payer, Cost finalCost, Model model) {
         HashMap<Person, Cost> paidByPayees = new HashMap<>();
+        Cost paidAmount = new Cost(finalCost.getCost());
         for (int i = 0; i < selfPayees.size(); i++) {
             Person currentPayer = selfPayees.get(i);
             Cost indivCost = selfCosts.get(i);
@@ -114,6 +115,13 @@ public class AddExpenseCommand extends Command {
                 paidByPayees.computeIfPresent(currentPayer, (key, val) -> val.add(indivCost));
             }
         }
+        HashMap<Person, Cost> paidByPayers = group.getPaidByPayers();
+        if (!paidByPayers.containsKey(payer)) {
+            paidByPayers.put(payer, paidAmount);
+        } else {
+            paidByPayers.computeIfPresent(payer, (key, val) -> val.add(paidAmount));
+        }
+
         if (finalCost.cost <= 0) {
             return new CommandResult(MESSAGE_COST_ZERO_OR_LESS);
         }
@@ -122,7 +130,10 @@ public class AddExpenseCommand extends Command {
 
         parseSplitExpenses(groupMembers, paidByPayees, toSplit);
         expense = expense.setIncluded(groupMembers);
+        expense = expense.setIndividualExpenses(paidByPayees);
         Group newGroup = group.addExpenseWithIndivPayments(expense, paidByPayees);
+        newGroup = new Group(newGroup.getGroupName(), newGroup.getMembers(),
+                newGroup.getTags(), newGroup.getExpenses(), paidByPayers, newGroup.getPaidByPayees());
         model.setGroup(group, newGroup);
         model.addExpense(expense, newGroup);
         return new CommandResult(String.format(MESSAGE_SUCCESS, expense));

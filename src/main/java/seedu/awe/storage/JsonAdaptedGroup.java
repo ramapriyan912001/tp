@@ -3,6 +3,7 @@ package seedu.awe.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -10,7 +11,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.awe.commons.exceptions.IllegalValueException;
+import seedu.awe.model.expense.Cost;
 import seedu.awe.model.expense.Expense;
+import seedu.awe.model.expense.IndividualAmount;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.person.Person;
@@ -24,6 +27,8 @@ public class JsonAdaptedGroup {
     private final List<JsonAdaptedPerson> members = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedExpense> expenses = new ArrayList<>();
+    private final List<JsonAdaptedIndividualAmount> paidByPayers = new ArrayList<>();
+    private final List<JsonAdaptedIndividualAmount> paidByPayees = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedGroup} with the given group details.
@@ -32,7 +37,9 @@ public class JsonAdaptedGroup {
     public JsonAdaptedGroup(@JsonProperty("name") String groupName,
                             @JsonProperty("members") List<JsonAdaptedPerson> members,
                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                            @JsonProperty("expenses") List<JsonAdaptedExpense> expenses) {
+                            @JsonProperty("expenses") List<JsonAdaptedExpense> expenses,
+                            @JsonProperty("paidByPayers") List<JsonAdaptedIndividualAmount> paidByPayers,
+                            @JsonProperty("paidByPayees") List<JsonAdaptedIndividualAmount> paidByPayees) {
         this.groupName = groupName;
         if (members != null) {
             this.members.addAll(members);
@@ -42,6 +49,12 @@ public class JsonAdaptedGroup {
         }
         if (expenses != null) {
             this.expenses.addAll(expenses);
+        }
+        if (paidByPayers != null) {
+            this.paidByPayers.addAll(paidByPayers);
+        }
+        if (paidByPayees != null) {
+            this.paidByPayees.addAll(paidByPayees);
         }
     }
 
@@ -60,6 +73,20 @@ public class JsonAdaptedGroup {
         expenses.addAll(source.getExpenses()
                 .stream()
                 .map(JsonAdaptedExpense::new)
+                .collect(Collectors.toList()));
+        Map<Person, Cost> paidByPayers = source.getPaidByPayers();
+        Map<Person, Cost> paidByPayees = source.getPaidByPayees();
+        List<IndividualAmount> individualAmountPaid = StorageUtils
+                .convertExpenseMapToListOfIndividualAmounts(paidByPayers);
+        List<IndividualAmount> individualExpenseIncurred = StorageUtils
+                .convertExpenseMapToListOfIndividualAmounts(paidByPayees);
+        this.paidByPayers.addAll(individualAmountPaid
+                .stream()
+                .map(JsonAdaptedIndividualAmount::new)
+                .collect(Collectors.toList()));
+        this.paidByPayees.addAll(individualExpenseIncurred
+                .stream()
+                .map(JsonAdaptedIndividualAmount::new)
                 .collect(Collectors.toList()));
     }
 
@@ -92,7 +119,13 @@ public class JsonAdaptedGroup {
         final GroupName modelName = new GroupName(groupName);
 
         final Set<Tag> modelTags = new HashSet<>(groupTags);
-        return new Group(modelName, modelMembers, modelTags, modelExpenses);
+
+        Map<Person, Cost> paidByPayers = StorageUtils
+                .convertListOfJsonAdaptedIndividualAmountsToExpenseMap(this.paidByPayers);
+
+        Map<Person, Cost> paidByPayees = StorageUtils
+                .convertListOfJsonAdaptedIndividualAmountsToExpenseMap(this.paidByPayees);
+        return new Group(modelName, modelMembers, modelTags, modelExpenses, paidByPayers, paidByPayees);
     }
 
 }
