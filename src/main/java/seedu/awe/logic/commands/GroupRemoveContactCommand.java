@@ -12,12 +12,12 @@ import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.person.Person;
 
-public class GroupRemovePersonCommand extends Command {
-    public static final String COMMAND_WORD = "groupremoveperson";
+public class GroupRemoveContactCommand extends Command {
+    public static final String COMMAND_WORD = "groupremovecontact";
     public static final String MESSAGE_SUCCESS = "Member(s) removed from group";
-    public static final String MESSAGE_ERROR = "Person(s) not removed from group."
+    public static final String MESSAGE_ERROR = "Contact(s) not removed from group."
                                                 + "Be sure to use the exact names of group members";
-    public static final String MESSAGE_USAGE = "groupremoveperson gn/[GROUPNAME] n/[NAME1] n/[OPTIONAL NAME2]";
+    public static final String MESSAGE_USAGE = "groupremovecontact gn/[GROUPNAME] n/[NAME1] n/[OPTIONAL NAME2]";
     public static final String MESSAGE_NONEXISTENT_GROUP = "Group %1$s does not exist.";
 
     private final GroupName groupName;
@@ -25,9 +25,9 @@ public class GroupRemovePersonCommand extends Command {
     private final boolean isValidCommand;
 
     /**
-     * Creates a GroupRemovePersonCommand to add the specified {@code Person}
+     * Creates a GroupRemoveContactCommand to add the specified {@code Person}
      */
-    public GroupRemovePersonCommand(GroupName groupName, ArrayList<Person> membersToBeRemoved, boolean isValidCommand) {
+    public GroupRemoveContactCommand(GroupName groupName, ArrayList<Person> membersToBeRemoved, boolean isValidCommand) {
         requireAllNonNull(groupName, membersToBeRemoved, isValidCommand);
         this.groupName = groupName;
         this.membersToBeRemoved = membersToBeRemoved;
@@ -56,7 +56,7 @@ public class GroupRemovePersonCommand extends Command {
     /**
      * Returns a boolean object representing if membersToBeRemoved contains the same Person objects as otherMembers.
      *
-     * @param otherMembers List of Person objects from another instance of GroupRemovePersonCommand.
+     * @param otherMembers List of Person objects from another instance of GroupRemoveContactCommand.
      * @return boolean object representing if membersToBeRemoved contains the same Person objects as otherMembers.
      */
     public boolean checkSameMembers(ArrayList<Person> otherMembers) {
@@ -108,10 +108,10 @@ public class GroupRemovePersonCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        if (!(other instanceof GroupAddPersonCommand)) {
+        if (!(other instanceof GroupAddContactCommand)) {
             return false;
         }
-        GroupAddPersonCommand otherCommand = (GroupAddPersonCommand) other;
+        GroupAddContactCommand otherCommand = (GroupAddContactCommand) other;
         if (this.isValidCommand == otherCommand.getValidCommand()
                 && checkSameMembers(otherCommand.getNewMembers())
                 && this.groupName.equals(otherCommand.getGroupName())) {

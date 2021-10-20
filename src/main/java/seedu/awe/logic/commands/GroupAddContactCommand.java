@@ -11,12 +11,12 @@ import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.person.Person;
 
-public class GroupAddPersonCommand extends Command {
-    public static final String COMMAND_WORD = "groupaddperson";
+public class GroupAddContactCommand extends Command {
+    public static final String COMMAND_WORD = "groupaddcontact";
     public static final String MESSAGE_SUCCESS = "New member(s) added to group";
-    public static final String MESSAGE_ERROR = "Person(s) not added. Be sure to use the exact names of group members";
+    public static final String MESSAGE_ERROR = "Contact(s) not added. Be sure to use the exact names of group members";
     public static final String MESSAGE_DUPLICATE_PERSON = "%1$s is already in the group";
-    public static final String MESSAGE_USAGE = "groupaddperson gn/[GROUPNAME] n/[NAME1] n/[OPTIONAL NAME2]";
+    public static final String MESSAGE_USAGE = "groupaddcontact gn/[GROUPNAME] n/[NAME1] n/[OPTIONAL NAME2]";
     public static final String MESSAGE_NONEXISTENT_GROUP = "Group %1$s does not exist.";
 
     private final GroupName groupName;
@@ -24,9 +24,9 @@ public class GroupAddPersonCommand extends Command {
     private final boolean isValidCommand;
 
     /**
-     * Creates a GroupAddPersonCommand to add the specified {@code Person}
+     * Creates a GroupAddContactCommand to add the specified {@code Person}
      */
-    public GroupAddPersonCommand(GroupName groupName, ArrayList<Person> newMembers, boolean isValidCommand) {
+    public GroupAddContactCommand(GroupName groupName, ArrayList<Person> newMembers, boolean isValidCommand) {
         requireAllNonNull(groupName, newMembers, isValidCommand);
         this.groupName = groupName;
         this.newMembers = newMembers;
@@ -51,7 +51,7 @@ public class GroupAddPersonCommand extends Command {
      * @param numberOfNonMatchingMembers int value to track the number of members in otherMembers
      *                                   that are not present in this.members.
      * @param member Person object that is being searched for in otherMembers.
-     * @param otherMembers List of Person objects from another instance of GroupAddPersonCommand.
+     * @param otherMembers List of Person objects from another instance of GroupAddContactCommand.
      * @return int object to track the number of members in otherMembers that are not present in this.newMembers.
      */
     public int checkForMember(int numberOfNonMatchingMembers, Person member, ArrayList<Person> otherMembers) {
@@ -67,7 +67,7 @@ public class GroupAddPersonCommand extends Command {
     /**
      * Returns a boolean object representing if this.newMembers contains the same Person objects as otherMembers.
      *
-     * @param otherMembers List of Person objects from another instance of GroupAddPersonCommand.
+     * @param otherMembers List of Person objects from another instance of GroupAddContactCommand.
      * @return boolean object representing if this.newMembers contains the same Person objects as otherMembers.
      */
     public boolean checkSameMembers(ArrayList<Person> otherMembers) {
@@ -104,10 +104,10 @@ public class GroupAddPersonCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        if (!(other instanceof GroupAddPersonCommand)) {
+        if (!(other instanceof GroupAddContactCommand)) {
             return false;
         }
-        GroupAddPersonCommand otherCommand = (GroupAddPersonCommand) other;
+        GroupAddContactCommand otherCommand = (GroupAddContactCommand) other;
         if (this.isValidCommand == otherCommand.getValidCommand()
                 && checkSameMembers(otherCommand.getNewMembers())
                 && this.groupName.equals(otherCommand.getGroupName())) {
