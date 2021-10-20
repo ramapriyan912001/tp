@@ -96,7 +96,8 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/ay2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ViewPanel`, `NavigationButtonPanel` etc. 
+All these, except for `GroupButtonListener` and `PersonButtonListner`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -106,6 +107,29 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+![Structure of the ViewPanel Component](images/UiViewPanelDiagram.png)
+
+The `ViewPanel` consist of the following parts:
+* `GroupListPanel`
+* `PersonListPanel`
+
+Each panel will display the corresponding list accordingly. The ViewPanel will only show up a single list panel at a time. 
+We have decided to opt for this way of implementation due to the following:
+* Able to make use of existing AB3 implementation of `PersonList`
+* Will not increase code complexity as compared to both list using the same panel.
+* Able to toggle easily with CLI commands
+
+In addition to using CLI command, we will also be implementing the toggling of list panel with the use of buttons.
+
+![Structure of the NavigationButton Component](images/UiNavigationButtonDiagram.png)
+
+The `NavigationButtonPanel` consist of the following parts:
+* GroupViewButton
+* PersonViewButton
+
+Click each button will show the respective list view in `ViewPanel`. The clicking of the button is handled by `EventHandler`.
+
 
 ### Logic component
 
@@ -256,11 +280,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
