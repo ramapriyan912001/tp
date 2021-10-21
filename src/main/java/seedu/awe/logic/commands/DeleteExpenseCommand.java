@@ -48,7 +48,7 @@ public class DeleteExpenseCommand extends Command {
         boolean isCurrentExpenseList = model.isCurrentExpenseList(group);
 
         List<Expense> expenseList;
-        if(isCurrentExpenseList) {
+        if (isCurrentExpenseList) {
             expenseList = model.getExpenses();
         } else {
             expenseList = group.getExpenses();

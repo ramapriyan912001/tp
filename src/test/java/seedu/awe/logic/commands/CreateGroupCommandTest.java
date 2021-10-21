@@ -256,6 +256,11 @@ public class CreateGroupCommandTest {
         public ObservableList<TransactionSummary> getTransactionSummary() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean isCurrentExpenseList(Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
