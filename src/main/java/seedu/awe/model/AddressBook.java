@@ -212,6 +212,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         return groups.getGroupByName(groupName);
     }
 
+    @Override
+    public void setPayments(List<Payment> payments) {
+        this.payments.clear();
+        this.payments.addAll(payments);
+    }
+
     /**
      * Checks if the current expense list in address book
      * belongs to the specified group.

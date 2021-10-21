@@ -36,6 +36,8 @@ public class ListTransactionSummaryCommand extends Command {
 
         model.setTransactionSummary(summary);
 
-        return new CommandResult(MESSAGE_SUCCESS, false, false, false, false, false, true);
+        return new CommandResult(MESSAGE_SUCCESS, false, false, false,
+                false, false, true,
+                false);
     }
 }

@@ -5,6 +5,7 @@ import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -16,6 +17,7 @@ import seedu.awe.model.expense.Cost;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
+import seedu.awe.model.payment.Payment;
 import seedu.awe.model.person.Person;
 import seedu.awe.model.transactionsummary.TransactionSummary;
 
@@ -31,6 +33,7 @@ public class ModelManager implements Model {
     private final FilteredList<Group> filteredGroups;
     private final FilteredList<Expense> expenses;
     private final FilteredList<TransactionSummary> transactionSummary;
+    private final FilteredList<Payment> payments;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -47,6 +50,7 @@ public class ModelManager implements Model {
         filteredGroups = new FilteredList<>(this.addressBook.getGroupList());
         expenses = new FilteredList<>(this.addressBook.getExpenseList());
         transactionSummary = new FilteredList<>(this.addressBook.getTransactionSummaryList());
+        payments = new FilteredList<>(this.addressBook.getPaymentList());
     }
 
     public ModelManager() {
@@ -208,7 +212,23 @@ public class ModelManager implements Model {
         return transactionSummary;
     }
 
+    //=========== Payment List Accessors =============================================================
+
+    @Override
+    public ObservableList<Payment> getPayments() {
+        return payments;
+    }
+
+    @Override
+    public void setPayments(List<Payment> payments) {
+        requireNonNull(payments);
+        addressBook.setPayments(payments);
+    }
+
+
     //=========== Filtered Group List Accessors =============================================================
+
+
 
     /**
      * Returns an unmodifiable view of the list of {@code Group} backed by the internal list of
