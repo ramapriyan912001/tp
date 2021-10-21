@@ -3,25 +3,28 @@ layout: page
 title: User Guide
 ---
 
-Around the World in $80 (AWE) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AWE can get your contact management tasks done faster than traditional GUI apps.
+Around the World in $80 (AWE) is a **desktop app for spiting expenses on trip, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AWE can get your contact management tasks done faster than traditional GUI apps.
+
+AWE promises to revolutionises the group-travel space. With AWE, bills can be split and monitored in a centralised manner that minimises the potential for disputes and maximises the efficiency of payment and recollection of debts.
+
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## 1. Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed in your Computer. 
 
-1. Download the latest `awe.jar` from here (Coming Soon!).
+2. Download the latest `awe.jar` from here (Coming Soon!).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your tp.
+3. Copy the file to the folder you want to use as the _home folder_ for your tp.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/AWEUi.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * **`contacts`** : The command `contacts` lists all contacts.
@@ -42,17 +45,19 @@ Around the World in $80 (AWE) is a **desktop app for managing contacts, optimize
 
    * **`deleteexpense`** : The command `deleteexpense gn/Bali i/1` removes the 1st expense (by one-based-index) from the list of expenses for the group named Bali.
 
+   * **`calculatepayments`** : The command `calculatepayments gn/Bali` provides a list of payments to be made between users to settle debts for the group named Bali.
+
    * **`clear`** : The command `clear` removes all expenses / contacts / groups.
 
    * **`editcontact`** : The command `editcontact 1 n/Thomas Betty` edits the name of the 1st person to be Thomas Betty and removes all existing tags.
 
    * **`exit`** : The command `exit` exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## 2. Features
 
 <div markdown="block" class="alert alert-info">
 
@@ -78,21 +83,15 @@ Around the World in $80 (AWE) is a **desktop app for managing contacts, optimize
 
 </div>
 
-### Viewing help : `help`
+### 2.1. Contacts
 
-Shows a message explaining how to access the help page.
-
-![help message](images/helpMessage.png)
-
-Format: `help`
-
-### Listing all contacts : `contacts`
+#### 2.1.1. Listing all contacts : `contacts`
 
 Shows a list of all contacts in address book.
 
 Format: `contacts`
 
-### Adding a person: `addcontact`
+#### 2.1.2. Adding a person: `addcontact`
 
 Adds a person to the address book.
 
@@ -106,7 +105,7 @@ Examples:
 * `addcontact n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `addcontact n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Editing a person : `editcontact`
+#### 2.1.3. Editing a person : `editcontact`
 
 Edits an existing person in the address book.
 
@@ -123,7 +122,7 @@ Examples:
 *  `editcontact 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `editcontact 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Deleting a person : `delete`
+#### 2.1.4. Deleting a person : `deletecontact`
 
 Deletes the specified person from the address book.
 
@@ -137,7 +136,7 @@ Examples:
 * `persons` followed by `deletecontact 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `deletecontact 1` deletes the 1st person in the results of the `find` command.
 
-### Locating persons by name: `findcontacts`
+#### 2.1.5. Locating a person by name: `findcontacts`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -155,13 +154,15 @@ Examples:
 * `findcontacts alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Listing all groups : `groups`
+### 2.2. Groups
+
+#### 2.2.1. Listing all groups : `groups`
 
 Shows a list of all groups in GroupPage.
 
 Format: `groups`
 
-### Creating a Travel Group: ```creategroup```
+#### 2.2.2. Creating a travel group: ```creategroup```
 Creates a group of people of your choice from your address book.
 Adds you as a member of the group by default.
 
@@ -178,7 +179,7 @@ Examples:
 * creategroup gn/Bali n/Jacob Tan n/Max Chia n/Julianne Tay
 * creategroup gn/London n/Justin Lee n/Raj Gopal n/Keith Chia
 
-### Deleting a Travel Group: `deletegroup`
+#### 2.2.3. Deleting a travel group: `deletegroup`
 Deletes a group from your groups.
 All the details from the group are lost once this action is completed.
 
@@ -191,7 +192,7 @@ Examples:
 * `deletegroup gn/Bali`
 * `deletegroup gn/London`
 
-### Locating group by name: `findgroups`
+#### 2.2.4. Locating group by name: `findgroups`
 
 Find groups whose names contain any of the given keywords.
 
@@ -209,7 +210,7 @@ Examples:
 * `findgroups Taiwan Malaysia` returns `Taiwan` `Malaysia`<br>
   ![result for 'findcontacts Taiwan Malaysia'](images/findAlexDavidResult.png)
 
-### Adding a contact to an existing group: `groupaddcontact`
+#### 2.2.5. Adding a contact to an existing group: `groupaddcontact`
 
 Add contact in contact list into an existing travel group.
 
@@ -227,7 +228,7 @@ Examples:
 * `groupaddcontact gn/Prague n/Bernice Yu n/David Li n/Alex Yeoh` to add Bernice Yu, David Li, and Alex Yeoh into the
 Prague travel group.
 
-### Removing a contact from an existing group: `groupremovecontact`
+#### 2.2.6. Removing a contact from an existing group: `groupremovecontact`
 
 Remove contact in contact list from an existing travel group.
 
@@ -245,7 +246,7 @@ Examples:
 * `groupremovecontact gn/Prague n/Bernice Yu n/David Li n/Alex Yeoh` to remove Bernice Yu, David Li, and Alex Yeoh
 from the Prague travel group.
 
-### Adding a tag to an existing group: `groupaddtag`
+#### 2.2.7. Adding a tag to an existing group: `groupaddtag`
 
 Add tag for an existing travel group.
 
@@ -261,7 +262,7 @@ Examples:
 * `groupaddtag gn/Prague t/Family t/Cousins` to indicate that the Prague travel group is with family,
 more specifically, cousins.
 
-### Removing a tag from an existing group: `groupremovetag`
+#### 2.2.8. Removing a tag from an existing group: `groupremovetag`
 
 Remove tag from an existing travel group.
 
@@ -277,7 +278,7 @@ Examples:
 * `groupremovetag gn/Bali t/Friends` to remove the friends tag from the Bali travel group.
 * `groupremovetag gn/Prague t/Family t/Cousins` to the tags family and cousins from the Prague travel group.
 
-### Editing travel group name: `groupeditname`
+#### 2.2.9. Editing travel group name: `groupeditname`
 
 Edit group name for an existing travel group.
 
@@ -291,18 +292,21 @@ Examples:
 * `groupeditname gn/Bali gn/Thailand` to change the group name from Bali to Thailand.
 * `groupeditname gn/Germany gn/Munich` to change the group name from Germany to Munich.
 
-### Viewing a shared expense: `expenses`
+### 2.3. Expenses
+
+### 2.3.1. Listing expenses of a specified group: `expenses`
+
 Shows a list containing all existing expenses within the specified travel group. Expenses are sorted from most recent to least recent.
 
-Format: `expenses INDEX`
+Format: `expenses gn/GROUP_NAME`
 
-* INDEX argument is mandatory.
-* INDEX must correspond to a valid index of an existing travel group.
+* GROUP_NAME argument is mandatory.
+* GROUP_NAME must correspond to the name of an existing travel group.
 
 Examples: 
-* `groups` followed by `expense 1` shows all the expenses of the 1st travel group in the group list.
+* `expenses gn/London` shows all the expenses of the group named London.
 
-### Adding a shared expense: `addexpense`
+#### 2.3.2. Adding a shared expense: `addexpense`
 Adds a shared expense to the specified travel group.
 The expense can be paid for and split among any number of contacts within the travel group.
 
@@ -321,7 +325,7 @@ Examples:
 * addexpense n/Tom gn/Date $/60 d/Big meal but Jerry wants to pay for his own Coke n/Jerry $/2
 * addexpense n/Keith gn/Movie night $/40 d/For movie but Kelly didn't watch ex/Kelly
 
-### Deleting a shared expense: `deleteexpense`
+#### 2.3.3. Deleting a shared expense: `deleteexpense`
 
 Deletes a shared expense from a travel group.
 This command deletes the expense for all members involved in the expense.
@@ -336,7 +340,7 @@ Examples:
 * `deleteexpense gn/Bali i/1`
 * `deleteexpense gn/London i/2`
 
-### Locating expenses by description: `findexpenses`
+#### 2.3.4. Locating a shared expense by description: `findexpenses`
 
 Finds expenses within the specified group which descriptions contain any of the given keywords.
 
@@ -353,11 +357,46 @@ Examples:
 * `findexpenses dinner gn/London` returns `dinner` and `Friday dinner`
 * `findexpenses lunch souvenirs` returns `lunch`, `souvenirs`<br>
 
-### Saving the data
+#### 2.3.5. Calculating payments to make: `calculatepayments`
+Uses the net spend of the user on the trip to tabulate a fast set of payments to settle the debts between members of the group.
+
+Format: `calculatepayments gn/GROUP_NAME`
+
+* GROUP_NAME is a mandatory field.
+* A group with GROUP_NAME as its name must exist.
+* Output e.g. [`John pays Mark $20.50`, `Sara pays Dev $15`]
+
+Examples:
+* `calculatepayments gn/Bali`
+* `calculatepayments gn/London`
+
+### 2.4. Miscellaneous
+
+#### 2.4.1. Viewing help : `help`
+
+Shows a message explaining how to access the help page.
+
+![help message](images/helpMessage.png)
+
+Format: `help`
+
+#### 2.4.2. Clearing all entries : `clear`
+
+Clears all entries from the AWE.
+
+Format: `clear`
+
+#### 2.4.3. Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+#### 2.4.4. Saving the data
 
 AWE data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+#### 2.4.5. Editing the data file
 
 AWE data are saved as a JSON file `[JAR file location]/data/awe.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -365,20 +404,7 @@ AWE data are saved as a JSON file `[JAR file location]/data/awe.json`. Advanced 
 If your changes to the data file makes its format invalid, AWE will discard all data and start with an empty data file at the next run.
 </div>
 
-### Clearing all entries : `clear`
-
-Clears all entries from the AWE.
-
-Format: `clear`
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
-
-## FAQ
+## 3. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AWE home folder.
@@ -387,13 +413,13 @@ Format: `exit`
 **A**: Open a command prompt in that folder and run the command `java -jar -ea AWE.jar`.
 
 **Q**: What do I do if I see `AWE.jar` cannot be opened because it is from an unidentified developer when I double click the jar file on a mac?<br>
-**A**: Go to ` System Preferences -> Security and Privacy -> General` and click on `Open anyways` as such
-![Mac Security Preference](images/MacSecurityPreference.png)<br>
+**A**: Go to `System Preferences -> Security and Privacy -> General` and click on `Open anyways` as such<br>
+![Mac Security Preference](images/MacSecurityPreference.png)
 <br>
 If your questions are not answered in the FAQ, check out the issue page on our GitHub linked [here](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues).
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## 4. Command summary
 
 Action | Format, Examples
 --------|------------------
@@ -407,6 +433,8 @@ Action | Format, Examples
 **Edit Contact** | `editcontact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find Contacts** | `findcontacts KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Find Groups** | `findgroups KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find Expenses** | `findexpenses KEYWORD [MORE_KEYWORDS] gn/GROUP_NAME`<br> e.g., `find dinner buffet gn/London`
+**Calculate Payments** | `calculatepayments gn/GROUP_NAME` <br> e.g., `calculatepayments gn/Bali` 
 **Help** | `help`
 **View Contacts** | `contacts`
 **View Groups** | `groups`

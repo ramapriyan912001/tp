@@ -213,6 +213,10 @@ public class MainWindow extends UiPart<Stage> {
                 viewPanel.toggleView(UiView.TRANSACTION_SUMMARY);
             }
 
+            if (commandResult.isShowPaymentsCommand()) {
+                viewPanel.toggleView(UiView.PAYMENT_PAGE);
+            }
+
             return commandResult;
         } catch (CommandException | ParseException | EmptyGroupException e) {
             logger.info("Invalid command: " + commandText);

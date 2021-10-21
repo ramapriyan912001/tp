@@ -6,7 +6,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.awe.model.transactionsummary.TransactionSummary;
 import seedu.awe.ui.UiPart;
-import seedu.awe.ui.expense.ExpenseCard;
 
 public class TransactionSummaryCard extends UiPart<Region> {
 
@@ -50,7 +49,7 @@ public class TransactionSummaryCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ExpenseCard)) {
+        if (!(other instanceof TransactionSummaryCard)) {
             return false;
         }
 

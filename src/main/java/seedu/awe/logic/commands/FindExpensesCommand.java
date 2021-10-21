@@ -55,7 +55,8 @@ public class FindExpensesCommand extends Command {
             model.updateFilteredExpenseList(predicate);
             return new CommandResult(
                     String.format(Messages.MESSAGE_EXPENSES_LISTED_OVERVIEW, model.getExpenses().size()),
-                    false, false, false, false, true, false);
+                    false, false, false, false,
+                    true, false, false);
         } catch (GroupNotFoundException e) {
             throw new CommandException(MESSAGE_GROUP_NOT_FOUND);
         }
