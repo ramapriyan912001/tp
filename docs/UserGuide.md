@@ -42,6 +42,8 @@ Around the World in $80 (AWE) is a **desktop app for managing contacts, optimize
 
    * **`deleteexpense`** : The command `deleteexpense gn/Bali i/1` removes the 1st expense (by one-based-index) from the list of expenses for the group named Bali.
 
+   * **`calculatepayments`** : The command `calculatepayments gn/Bali` provides a list of payments to be made between users to settle debts for the group named Bali.
+
    * **`clear`** : The command `clear` removes all expenses / contacts / groups.
 
    * **`editcontact`** : The command `editcontact 1 n/Thomas Betty` edits the name of the 1st person to be Thomas Betty and removes all existing tags.
@@ -353,6 +355,19 @@ Examples:
 * `findexpenses dinner gn/London` returns `dinner` and `Friday dinner`
 * `findexpenses lunch souvenirs` returns `lunch`, `souvenirs`<br>
 
+### Calculating payments to make: `calculatepayments`
+Uses the net spend of the user on the trip to tabulate a fast set of payments to settle the debts between members of the group.
+
+Format: `calculatepayments gn/GROUP_NAME`
+
+* GROUP_NAME is a mandatory field.
+* A group with GROUP_NAME as its name must exist.
+* Output e.g. [`John pays Mark $20.50`, `Sara pays Dev $15`]
+
+Examples:
+* `calculatepayments gn/Bali`
+* `calculatepayments gn/London`
+
 ### Saving the data
 
 AWE data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -407,6 +422,7 @@ Action | Format, Examples
 **Edit Contact** | `editcontact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find Contacts** | `findcontacts KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Find Groups** | `findgroups KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Calculate Payments** | `calculatepayments gn/GROUP_NAME` <br> e.g., `calculatepayments gn/Bali` 
 **Help** | `help`
 **View Contacts** | `contacts`
 **View Groups** | `groups`

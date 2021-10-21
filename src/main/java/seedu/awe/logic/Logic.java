@@ -11,6 +11,7 @@ import seedu.awe.model.ReadOnlyAddressBook;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.person.Person;
+import seedu.awe.model.transactionsummary.TransactionSummary;
 
 /**
  * API of the Logic component
@@ -41,6 +42,9 @@ public interface Logic {
 
     /** Returns the list of expenses. */
     ObservableList<Expense> getExpenses();
+
+    /** Returns the transaction summary as a list. */
+    ObservableList<TransactionSummary> getTransactionSummary();
 
     /**
      * Returns the user prefs' awe book file path.

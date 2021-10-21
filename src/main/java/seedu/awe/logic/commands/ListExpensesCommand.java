@@ -50,7 +50,7 @@ public class ListExpensesCommand extends Command {
             }
             model.setExpenses(group);
             model.updateFilteredExpenseList(PREDICATE_SHOW_ALL_EXPENSES);
-            return new CommandResult(MESSAGE_SUCCESS, false, false, false, false, true);
+            return new CommandResult(MESSAGE_SUCCESS, false, false, false, false, true, false);
         } catch (GroupNotFoundException e) {
             throw new CommandException(MESSAGE_GROUP_NOT_FOUND);
         }
