@@ -165,7 +165,8 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="600" />
+<img src="images/ModelClassDiagram.png" width="700" />
+<br>
 (Note: Implementation of Person, Group and Expense class diagram are referenced below.)
 
 The `Model` component,
