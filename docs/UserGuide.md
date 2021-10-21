@@ -123,7 +123,7 @@ Examples:
 *  `editcontact 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `editcontact 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Deleting a person : `delete`
+### Deleting a person : `deletecontact`
 
 Deletes the specified person from the address book.
 
@@ -387,8 +387,8 @@ Format: `exit`
 **A**: Open a command prompt in that folder and run the command `java -jar -ea AWE.jar`.
 
 **Q**: What do I do if I see `AWE.jar` cannot be opened because it is from an unidentified developer when I double click the jar file on a mac?<br>
-**A**: Go to ` System Preferences -> Security and Privacy -> General` and click on `Open anyways` as such
-![Mac Security Preference](images/MacSecurityPreference.png)<br>
+**A**: Go to `System Preferences -> Security and Privacy -> General` and click on `Open anyways` as such<br>
+![Mac Security Preference](images/MacSecurityPreference.png)
 <br>
 If your questions are not answered in the FAQ, check out the issue page on our GitHub linked [here](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues).
 --------------------------------------------------------------------------------------------------------------------
