@@ -387,8 +387,8 @@ Format: `exit`
 **A**: Open a command prompt in that folder and run the command `java -jar -ea AWE.jar`.
 
 **Q**: What do I do if I see `AWE.jar` cannot be opened because it is from an unidentified developer when I double click the jar file on a mac?<br>
-**A**: Go to ` System Preferences -> Security and Privacy -> General` and click on `Open anyways` as such
-![Mac Security Preference](images/MacSecurityPreference.png)<br>
+**A**: Go to `System Preferences -> Security and Privacy -> General` and click on `Open anyways` as such<br>
+![Mac Security Preference](images/MacSecurityPreference.png)
 <br>
 If your questions are not answered in the FAQ, check out the issue page on our GitHub linked [here](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues).
 --------------------------------------------------------------------------------------------------------------------
