@@ -96,8 +96,8 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/ay2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ViewPanel`, `NavigationButtonPanel` etc. 
-All these, except for `GroupButtonListener` and `PersonButtonListner`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ViewPanel`, `NavigationButton` etc. 
+All these, except for `GroupButtonListener` and `PersonButtonListner` in `NavigationButton`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -164,7 +164,6 @@ How the parsing works:
 **API** : [`Model.java`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
-
 
 The `Model` component,
 
@@ -290,6 +289,20 @@ The following sequence operation shows how the deletegroup operation works.
     * Group contains large mass of information such as multiple expenses, individual expenditures, and payments.
     * This information is unrecoverable once deleted.
     * As such, it is better to choose Alternative 1, as this makes it difficult for user to accidentally delete a group.
+
+### Find group feature
+
+The find group feature supports both single predicate and multi-predicate search. This allows the displayed view panel to show the entries related to the search keywords enterd by the user
+
+![Interactions Inside the Logic Component for the `findgroups` Command](images/FindGroupsSequenceDiagram.png)
+
+Step 1. When the `findgroups` command executes, the message is passed into `LogicManager` and parsed by `AddressBookParser`.
+Step 2. `FindGroupsCommandParser` is created and the arguments are parsed by it. The arguments are used to create `GroupContainsKeywordsPredicate` and `FindGroupsCommand` is returned to the `LogicManager`.
+Step 3. The `LogicManager` then calls `FindGroupCommand#execute(model)` method, which updated the `FilteredList<Group>` in `ModelManager`.
+Step 4. The GUI listens for updates in the `FilteredList<Group>` and updates the display accordingly.
+Step 5. `CommandResult` is returned to the `LogicManager`, which also switches the viewpanel to `GroupsListPanel` if needed.
+Step 6. The output from `CommandResult` is then displayed as an output for the user.
+
 
 ### \[Proposed\] Undo/redo feature
 
