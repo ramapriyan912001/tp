@@ -220,9 +220,9 @@ public class CalculatePaymentsCommand extends Command {
      * @return Payment to make.
      */
     public Payment calculatePayment(Pair deficitPair, Pair surplusPair) {
-        Person payer = deficitPair.getPerson();
+        Person payee = deficitPair.getPerson();
         double absoluteDeficit = Math.abs(deficitPair.getSurplus());
-        Person payee = surplusPair.getPerson();
+        Person payer = surplusPair.getPerson();
         double absoluteSurplus = Math.abs(surplusPair.getSurplus());
         Cost minimumAmount = new Cost(Math.min(absoluteDeficit, absoluteSurplus));
         return new Payment(payer, payee, minimumAmount);
