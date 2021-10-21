@@ -61,7 +61,7 @@ public class FindGroupsCommandTest {
         GroupContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindGroupsCommand command = new FindGroupsCommand(predicate);
         expectedModel.updateFilteredGroupList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel, true, false, false);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel, true, false, false, false, false);
         assertEquals(Collections.emptyList(), model.getFilteredGroupList());
     }
 
@@ -71,7 +71,7 @@ public class FindGroupsCommandTest {
         GroupContainsKeywordsPredicate predicate = preparePredicate("Bali India China");
         FindGroupsCommand command = new FindGroupsCommand(predicate);
         expectedModel.updateFilteredGroupList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel, true, false, false);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel, true, false, false, false, false);
         assertEquals(Arrays.asList(BALI, INDIA, CHINA), model.getFilteredGroupList());
     }
 

@@ -13,10 +13,11 @@ title: Developer Guide
    4. [Storage component](#storage-component)
    5. [Common classes](#common-classes)
 5. [Implementation](#implementation)
-   1. [Proposed Undo/Redo feature](#proposed-undoredo-feature)
-   2. [Proposed implementation](#proposed-implementation)
-   3. [Design considerations](#design-considerations)
-   4. [Proposed data archiving](#proposed-data-archiving)
+   1. [Create Group Feature](#create-group-feature)
+   2. [Delete Group Feature](#delete-group-feature)
+   3. [Proposed implementation](#proposed-implementation)
+   4. [Design considerations](#design-considerations)
+   5. [Proposed data archiving](#proposed-data-archiving)
 6. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 7. [Appendix: Requirements](#appendix-requirements)
    1. [Product Scope](#product-scope)
@@ -96,8 +97,8 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/ay2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ViewPanel`, `NavigationButtonPanel` etc. 
-All these, except for `GroupButtonListener` and `PersonButtonListner`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ViewPanel`, `NavigationButton` etc. 
+All these, except for `GroupButtonListener` and `PersonButtonListner` in `NavigationButton`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -165,7 +166,6 @@ How the parsing works:
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
-
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
@@ -209,13 +209,81 @@ objects who are members of the Group, an `ArrayList` of `Expense` objects that k
 Group, a `HashMap` that contains details of how much each member has paid in total across the expenses, and a `HashMap`
 that contains details of the total expenditure incurred by each member across the trip.
 
+The following activity diagram shows what happens when a user executes a `createGroup` command.
+
+![CreateGroupActivityDiagram](images/CreateGroupActivityDiagram.png)
+
+Given below is an example usage scenario and how the `creategroup` mechanism behaves at each step.
+
+Step 1. A valid `creategroup` command is given as user input. This prompts the `LogicManager` to run its execute()
+method.
+
+Step 2. The `CreateGroupCommandParser` parses the input and checks for presence of the relevant prefixes.
+It also checks that the group name is valid and all members specified are in the contact list.
+It returns a `CreateGroupCommand`.
+
+Step 3. `CreateGroupCommand` runs its execute() method which checks if a group with the same name has already been
+created. If not, the newly created group is added into the AWE model and all members within the group are updated in
+the model. Upon successful execution, `CommandResult` is returned.
+
+The following sequence operation shows how the `creategroup` operation works.
+![CreateGroupSequenceDiagram](images/CreateGroupSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `CreateGroupCommandParser`
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+#### Design considerations:
+
+**Aspect: User command for `creategroup`:**
+
+* **Alternative 1 (current choice):** Create Travel Group with specified members and tags.
+    * Pros: Intuitive for user to create a travel group with specified members and tags.
+    * Pros: Provides user with convenience of setting up a travel group with minimal commands.
+    * Cons: Harder to implement.
+    * Cons: Easier for user to make an erroneous command.
+
+
+* **Alternative 2 :** Create Travel Group only.
+    * Pros: Easy to implement.
+    * Pros: Command has single responsibility. Easy to remember the sole purpose of `creategroup` command.
+    * Cons: Unintuitive for user as travel group is created without any members or tags.
+    * Cons: Inconvenient for user to use multiple commands to set up a travel group.
+
+
+* **Justification**
+    * User will have at least one member in mind when creating a group.
+    * As such, it is only natural for the `creategroup` command to support addition of members and tags into the group
+      upon creation.
+    * This minimizes the number of commands a user has to make in setting up a functional Group.
+    * As such, it is better to choose Alternative 1, as this provides the user with a far better user experience.
+
+
 ### Delete Group Feature
 
 The delete group mechanism is facilitated by maintaining the constraint that every `Group` has a unique `GroupName`.
-This allows the `AddressBook` class to easily retrieve the Group based on the name entered by the user and remove the group from the model.
+This allows the `Model` class to easily retrieve the Group based on the name entered by the user and remove the group from the model.
 
-The following sequence operation shows how the deletegroup operation works.
-![Interactions Inside the Logic Component for the `deletegroup gn/GROUP_NAME` Command](images/DeleteGroupSequenceDiagram.png)
+The following activity diagram shows what happens when a user executes a `deletegroup` command.
+
+![DeleteGroupActivityDiagram](images/DeleteGroupActivityDiagram.png)
+
+Given below is an example usage scenario and how the `deletegroup` mechanism behaves at each step.
+
+Step 1. A valid `deletegroup` command is given as user input. This prompts the `LogicManager` to run its execute()
+method.
+
+Step 2. The `DeleteGroupCommandParser` parses the input and checks for presence of the relevant prefixes.
+It also checks that the group name is valid (does not have any non-alphanumeric characters).
+It returns a `DeleteGroupCommand`.
+
+Step 3. `DeleteGroupCommand` runs its execute() method which checks if a group with the same name has been
+created in the past. If so, this group is retrieved from the model. Subsequently, the group is removed from the addressbook.
+Upon successful execution, `CommandResult` is returned.
+
+
+The following sequence operation shows how the `deletegroup` operation works.
+![DeleteGroupSequenceDiagram](images/DeleteGroupSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteGroupCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -226,12 +294,14 @@ The following sequence operation shows how the deletegroup operation works.
 
 * **Alternative 1 (current choice):** Delete based on `GroupName`
     * Pros: Easy to implement.
-    * Pros: Difficult for user to make an erroneous command. 
+    * Pros: Difficult for user to make an erroneous command.
+    * Cons: Long user command.  
     * Cons: Requires imposition of constraint that group names are unique.
     
 
 * **Alternative 2 (index based):** Delete based on index position in `ObservableList`
     * Pros: Easy to implement.
+    * Pros: Short user command  
     * Cons: Unintuitive for user.
     * Cons: Easy for user to make an erroneous command.
     
@@ -240,6 +310,25 @@ The following sequence operation shows how the deletegroup operation works.
     * Group contains large mass of information such as multiple expenses, individual expenditures, and payments.
     * This information is unrecoverable once deleted.
     * As such, it is better to choose Alternative 1, as this makes it difficult for user to accidentally delete a group.
+
+### Find group feature
+
+The find group feature supports both single predicate and multi-predicate search. This allows the displayed view panel to show the entries related to the search keywords enterd by the user
+
+![Interactions Inside the Logic Component for the `findgroups` Command](images/FindGroupsSequenceDiagram.png)
+
+Step 1. When the `findgroups` command executes, the message is passed into `LogicManager` and parsed by `AddressBookParser`.
+
+Step 2. `FindGroupsCommandParser` is created and the arguments are parsed by it. The arguments are used to create `GroupContainsKeywordsPredicate` and `FindGroupsCommand` is returned to the `LogicManager`.
+
+Step 3. The `LogicManager` then calls `FindGroupCommand#execute(model)` method, which updated the `FilteredList<Group>` in `ModelManager`.
+
+Step 4. The GUI listens for updates in the `FilteredList<Group>` and updates the display accordingly.
+
+Step 5. `CommandResult` is returned to the `LogicManager`, which also switches the viewpanel to `GroupsListPanel` if needed.
+
+Step 6. The output from `CommandResult` is then displayed as an output for the user.
+
 
 ### \[Proposed\] Undo/redo feature
 
@@ -616,6 +705,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
       Use case ends.
 
+**Use case: Find Groups**
+
+*MSS*
+1. User request to find groups based on keywords.
+2. GroupsPage shows a list of groups that matches the search predicates.
+3. AWE displays a message with number of groups found
+
+    Use case ends
+    
+**Extension**
+* 2a. AWE can't find any groups that matches the keywords.
+    2a1. GroupsPage shows an empty page
+    
+    Use case continues
+
+
 **Use case: Add Expense**
 
 **Preconditions: User has selected a travel group**
@@ -737,6 +842,34 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+### Search for groups
+
+1. Search for groups in GroupPage
+    1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added)
+    
+    1. Test case: `findgroups London`
+       Expected: GroupList will list out 1 group with the name 'London'. 1 groups found shown in the status message.
+       
+    1. Test case: `findgroups London Singapore`
+       Expected: GroupList will list out 1 group with the name 'London'. 1 groups found shown in the status message.
+    
+    1. Test case: `findgroups Singapore`
+       Expected: GroupList will display a blank page. 0 groups found shown in status message.
+       
+2. Search for groups in ContactPage
+   1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added)
+   
+   1. Test case: `findgroups London`
+      Expected: GroupList displayed. GroupList will list out 1 group with the name 'London'. 1 groups found shown in the status message.
+      
+   1. Test case: `findgroups London Singapore`
+      Expected: GroupList displayed. GroupList will list out 1 group with the name 'London'. 1 groups found shown in the status message.
+   
+   1. Test case: `findgroups Singapore`
+      Expected: GroupList displayed. GroupList will display a blank page. 0 groups found shown in status message.
+    
+    
 
 ### Viewing expenses
 

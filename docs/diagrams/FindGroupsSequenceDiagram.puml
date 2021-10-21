@@ -1,0 +1,77 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindGroupsCommandParser" as FindGroupsCommandParser LOGIC_COLOR
+participant "d:FindGroupsCommand" as FindGroupsCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant ":GroupContainsKeywordsPredicate" as GroupContainsKeywordsPredicate LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("findgroups London")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("findgroups London")
+activate AddressBookParser
+
+create FindGroupsCommandParser
+AddressBookParser -> FindGroupsCommandParser
+activate FindGroupsCommandParser
+
+FindGroupsCommandParser --> AddressBookParser
+deactivate FindGroupsCommandParser
+
+AddressBookParser -> FindGroupsCommandParser : parse("London")
+activate FindGroupsCommandParser
+
+create GroupContainsKeywordsPredicate
+FindGroupsCommandParser -> GroupContainsKeywordsPredicate
+activate GroupContainsKeywordsPredicate
+
+GroupContainsKeywordsPredicate -> FindGroupsCommandParser : c
+deactivate GroupContainsKeywordsPredicate
+
+create FindGroupsCommand
+FindGroupsCommandParser -> FindGroupsCommand : c
+activate FindGroupsCommand
+
+FindGroupsCommand --> FindGroupsCommandParser : d
+deactivate FindGroupsCommand
+
+FindGroupsCommandParser --> AddressBookParser : d
+deactivate FindGroupsCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindGroupsCommandParser -[hidden]-> AddressBookParser
+destroy FindGroupsCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> FindGroupsCommand : execute()
+activate FindGroupsCommand
+
+FindGroupsCommand -> Model : updateFilteredGroupList(c)
+activate Model
+
+Model --> FindGroupsCommand
+deactivate Model
+
+create CommandResult
+FindGroupsCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindGroupsCommand
+deactivate CommandResult
+
+FindGroupsCommand --> LogicManager : result
+deactivate FindGroupsCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

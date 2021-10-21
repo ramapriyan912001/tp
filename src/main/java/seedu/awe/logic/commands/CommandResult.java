@@ -26,18 +26,27 @@ public class CommandResult {
     /** The application should show expenses */
     private final boolean isShowExpensesCommand;
 
+    /** The application should show transaction summary */
+    private final boolean isShowTransactionSummaryCommand;
+
+    /** The application should show payments to make */
+    private final boolean isShowPaymentsCommand;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean isHelpCommand, boolean isExitCommand,
                          boolean isShowGroupsCommand, boolean isShowContactsCommand,
-                                boolean isShowExpensesCommand) {
+                                boolean isShowExpensesCommand, boolean isShowTransactionSummaryCommand,
+                         boolean isShowPaymentsCommand) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.isHelpCommand = isHelpCommand;
         this.isExitCommand = isExitCommand;
         this.isShowGroupsCommand = isShowGroupsCommand;
         this.isShowContactsCommand = isShowContactsCommand;
         this.isShowExpensesCommand = isShowExpensesCommand;
+        this.isShowTransactionSummaryCommand = isShowTransactionSummaryCommand;
+        this.isShowPaymentsCommand = isShowPaymentsCommand;
     }
 
     /**
@@ -45,7 +54,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false, false, false);
+        this(feedbackToUser, false, false, false, false, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -72,6 +81,14 @@ public class CommandResult {
         return isShowExpensesCommand;
     }
 
+    public boolean isShowTransactionSummary() {
+        return isShowTransactionSummaryCommand;
+    }
+
+    public boolean isShowPaymentsCommand() {
+        return isShowPaymentsCommand;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -89,13 +106,16 @@ public class CommandResult {
                 && isExitCommand == otherCommandResult.isExitCommand
                 && isShowGroupsCommand == otherCommandResult.isShowGroupsCommand
                 && isShowContactsCommand == otherCommandResult.isShowContactsCommand
-                && isShowExpensesCommand == otherCommandResult.isShowExpensesCommand;
+                && isShowExpensesCommand == otherCommandResult.isShowExpensesCommand
+                && isShowTransactionSummaryCommand == otherCommandResult.isShowTransactionSummaryCommand
+                && isShowPaymentsCommand == otherCommandResult.isShowPaymentsCommand;
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(feedbackToUser, isHelpCommand, isExitCommand,
-                isShowGroupsCommand, isShowContactsCommand, isShowExpensesCommand);
+                isShowGroupsCommand, isShowContactsCommand, isShowExpensesCommand, isShowTransactionSummaryCommand,
+                isShowPaymentsCommand);
 
     }
 
