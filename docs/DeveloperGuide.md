@@ -13,10 +13,11 @@ title: Developer Guide
    4. [Storage component](#storage-component)
    5. [Common classes](#common-classes)
 5. [Implementation](#implementation)
-   1. [Proposed Undo/Redo feature](#proposed-undoredo-feature)
-   2. [Proposed implementation](#proposed-implementation)
-   3. [Design considerations](#design-considerations)
-   4. [Proposed data archiving](#proposed-data-archiving)
+   1. [Create Group Feature](#create-group-feature)
+   2. [Delete Group Feature](#delete-group-feature)
+   3. [Proposed implementation](#proposed-implementation)
+   4. [Design considerations](#design-considerations)
+   5. [Proposed data archiving](#proposed-data-archiving)
 6. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 7. [Appendix: Requirements](#appendix-requirements)
    1. [Product Scope](#product-scope)
@@ -261,10 +262,28 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 ### Delete Group Feature
 
 The delete group mechanism is facilitated by maintaining the constraint that every `Group` has a unique `GroupName`.
-This allows the `AddressBook` class to easily retrieve the Group based on the name entered by the user and remove the group from the model.
+This allows the `Model` class to easily retrieve the Group based on the name entered by the user and remove the group from the model.
 
-The following sequence operation shows how the deletegroup operation works.
-![Interactions Inside the Logic Component for the `deletegroup gn/GROUP_NAME` Command](images/DeleteGroupSequenceDiagram.png)
+The following activity diagram shows what happens when a user executes a `deletegroup` command.
+
+![DeleteGroupActivityDiagram](images/DeleteGroupActivityDiagram.png)
+
+Given below is an example usage scenario and how the `deletegroup` mechanism behaves at each step.
+
+Step 1. A valid `deletegroup` command is given as user input. This prompts the `LogicManager` to run its execute()
+method.
+
+Step 2. The `DeleteGroupCommandParser` parses the input and checks for presence of the relevant prefixes.
+It also checks that the group name is valid (does not have any non-alphanumeric characters).
+It returns a `DeleteGroupCommand`.
+
+Step 3. `DeleteGroupCommand` runs its execute() method which checks if a group with the same name has been
+created in the past. If so, this group is retrieved from the model. Subsequently, the group is removed from the addressbook.
+Upon successful execution, `CommandResult` is returned.
+
+
+The following sequence operation shows how the `deletegroup` operation works.
+![DeleteGroupSequenceDiagram](images/DeleteGroupSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteGroupCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -275,12 +294,14 @@ The following sequence operation shows how the deletegroup operation works.
 
 * **Alternative 1 (current choice):** Delete based on `GroupName`
     * Pros: Easy to implement.
-    * Pros: Difficult for user to make an erroneous command. 
+    * Pros: Difficult for user to make an erroneous command.
+    * Cons: Long user command.  
     * Cons: Requires imposition of constraint that group names are unique.
     
 
 * **Alternative 2 (index based):** Delete based on index position in `ObservableList`
     * Pros: Easy to implement.
+    * Pros: Short user command  
     * Cons: Unintuitive for user.
     * Cons: Easy for user to make an erroneous command.
     
