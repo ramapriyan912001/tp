@@ -2,6 +2,7 @@ package seedu.awe.model;
 
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -10,6 +11,7 @@ import seedu.awe.model.expense.Cost;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
+import seedu.awe.model.payment.Payment;
 import seedu.awe.model.person.Person;
 import seedu.awe.model.transactionsummary.TransactionSummary;
 
@@ -126,6 +128,8 @@ public interface Model {
     /** Returns boolean representing if a given group is in the model. */
     boolean hasGroup(Group group);
 
+    void setPayments(List<Payment> payments);
+
     /**
      * Returns an unmodifiable view of the list of {@code Group} backed by the internal list of
      * {@code versionedAddressBook}
@@ -173,4 +177,5 @@ public interface Model {
      */
     void deleteExpense(Expense expense, Group group);
 
+    ObservableList<Payment> getPayments();
 }

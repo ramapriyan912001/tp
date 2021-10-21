@@ -1,15 +1,14 @@
-package seedu.awe.ui.transactionsummary;
+package seedu.awe.ui.payment;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.awe.model.transactionsummary.TransactionSummary;
+import seedu.awe.model.payment.Payment;
 import seedu.awe.ui.UiPart;
 
-public class TransactionSummaryCard extends UiPart<Region> {
-
-    private static final String FXML = "TransactionSummaryListCard.fxml";
+public class PaymentCard extends UiPart<Region> {
+    private static final String FXML = "PaymentListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -19,26 +18,24 @@ public class TransactionSummaryCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final TransactionSummary transactionSummary;
+    public final Payment payment;
 
     @javafx.fxml.FXML
     private HBox cardPane;
-    @FXML
-    private Label payer;
+
     @FXML
     private Label id;
     @FXML
-    private Label cost;
+    private Label paymentText;
 
     /**
-     * Creates an {@code TransactionSummaryCard} with the given {@code TransactionSummary} and index to display.
+     * Creates an {@code Payment} with the given {@code Payment} and index to display.
      */
-    public TransactionSummaryCard(TransactionSummary transactionSummary, int displayedIndex) {
+    public PaymentCard(Payment payment, int displayedIndex) {
         super(FXML);
-        this.transactionSummary = transactionSummary;
+        this.payment = payment;
         id.setText(displayedIndex + ".");
-        payer.setText(transactionSummary.getPerson().getName().toString());
-        cost.setText(transactionSummary.getCost().toString());
+        paymentText.setText(payment.toString());
     }
 
     @Override
@@ -49,13 +46,13 @@ public class TransactionSummaryCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof TransactionSummaryCard)) {
+        if (!(other instanceof PaymentCard)) {
             return false;
         }
 
         // state check
-        TransactionSummaryCard card = (TransactionSummaryCard) other;
+        PaymentCard card = (PaymentCard) other;
         return id.getText().equals(card.id.getText())
-                   && transactionSummary.equals(card.transactionSummary);
+                && payment.equals(card.payment);
     }
 }

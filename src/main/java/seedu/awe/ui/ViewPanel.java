@@ -9,6 +9,7 @@ import seedu.awe.commons.core.LogsCenter;
 import seedu.awe.logic.Logic;
 import seedu.awe.ui.expense.ExpenseListPanel;
 import seedu.awe.ui.group.GroupListPanel;
+import seedu.awe.ui.payment.PaymentListPanel;
 import seedu.awe.ui.person.PersonListPanel;
 import seedu.awe.ui.transactionsummary.TransactionSummaryListPanel;
 
@@ -28,6 +29,7 @@ public class ViewPanel extends UiPart<Region> {
     private GroupListPanel groupListPanel;
     private ExpenseListPanel expenseListPanel;
     private TransactionSummaryListPanel transactionSummaryListPanel;
+    private PaymentListPanel paymentListPanel;
 
     @FXML
     private StackPane viewListPlaceholder;
@@ -54,12 +56,13 @@ public class ViewPanel extends UiPart<Region> {
         groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
         expenseListPanel = new ExpenseListPanel(logic.getExpenses());
         transactionSummaryListPanel = new TransactionSummaryListPanel(logic.getTransactionSummary());
+        paymentListPanel = new PaymentListPanel(logic.getPayments());
 
         toggleView(UiView.ADDRESS_BOOK);
     }
 
     /**
-     * Switches different view for AddressBook, GroupsPage and ExpensesPage.
+     * Switches different view for AddressBook, GroupsPage, ExpensesPage, TransactionSummary, and PaymentsPage.
      *
      * @param uiView Page to be changed
      */
@@ -74,6 +77,8 @@ public class ViewPanel extends UiPart<Region> {
             viewListPlaceholder.getChildren().add(expenseListPanel.getRoot());
         } else if (uiView == UiView.TRANSACTION_SUMMARY) {
             viewListPlaceholder.getChildren().add(transactionSummaryListPanel.getRoot());
+        } else if (uiView == UiView.PAYMENT_PAGE) {
+            viewListPlaceholder.getChildren().add(paymentListPanel.getRoot());
         } else {
             logger.warning("Toggle tab not found");
             throw new AssertionError("Toggle tab not found");
