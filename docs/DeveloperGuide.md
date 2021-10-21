@@ -90,6 +90,7 @@ The `UI` component,
 The `ViewPanel` consist of the following parts:
 * `GroupListPanel`
 * `PersonListPanel`
+* `ExpenseListPanel`
 
 Each panel will display the corresponding list accordingly. The ViewPanel will only show up a single list panel at a time. 
 We have decided to opt for this way of implementation due to the following:
@@ -105,8 +106,7 @@ The `NavigationButtonPanel` consist of the following parts:
 * GroupViewButton
 * PersonViewButton
 
-Click each button will show the respective list view in `ViewPanel`. The clicking of the button is handled by `EventHandler`.
-
+Clicking each button will show the respective list view in `ViewPanel`. The clicking of the button is handled by `EventHandler`.
 
 ### Logic component
 
@@ -313,6 +313,61 @@ Step 4. The GUI listens for updates in the `FilteredList<Group>` and updates the
 Step 5. `CommandResult` is returned to the `LogicManager`, which also switches the viewpanel to `GroupsListPanel` if needed.
 
 Step 6. The output from `CommandResult` is then displayed as an output for the user.
+
+### Find Expenses Feature
+
+The find expenses mechanism is facilitated by `Group`. Each group has a unique group name and also an expense list 
+required for finding expenses within a group.
+
+The following activity diagram shows what happens when a user executes a `findexpenses` command.
+
+![FindExpensesActivityDiagram](images/FindExpensesActivityDiagram.png)
+
+Given below is an example usage scenario and how the `findexpenses` mechanism behaves at each step.
+
+Step 1. The user executes a valid `findexpenses eat gn/London` command. This prompts the `LogicManager` 
+to run its execute() method.
+
+Step 2. The `FindExpensesCommandParser` parses the input and checks for presence of the group name prefix.
+It also checks that the group name is valid (does not have any non-alphanumeric characters). The arguments are 
+used to create `DescriptionContainsKeywordsPredicate` and `FindExpensesCommand` is returned to the `LogicManager`.
+
+Step 3. The `LogicManager` then calls `FindExpensesCommand#execute(model)` method, which updates the 
+`FilteredList<Expense>` in `ModelManager` using the predicate created in step 2.
+
+Step 4. The GUI listens for updates in the `FilteredList<Expense>` and updates the display accordingly.
+
+Step 5. `CommandResult` is returned to the `LogicManager`, which also switches the viewpanel to `ExpensesListPanel` if needed.
+
+Step 6. The output from `CommandResult` is then displayed as an output for the user.
+
+
+The following sequence operation shows how the `findexpenses` operation works.
+![FindExpensesSequenceDiagram](images/FindExpensesSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteGroupCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+#### Design considerations:
+
+**Aspect: User command for findexpenses:**
+
+* **Alternative 1 (current choice):** Find based on `GroupName`
+    * Pros: Easy to implement.
+    * Cons: Long user command if group name is long.
+    * Cons: Requires imposition of constraint that group names are unique.
+
+
+* **Alternative 2 (index based):** Find expenses in the group indicated by index position in `ObservableList`
+    * Pros: Short user command with just the index.
+    * Cons: User need to check for the right index of the group.
+    * Cons: Easy for user to make an erroneous command.
+
+
+* **Justification**
+    * Each group has a unique name and the implementation for finding a group based on the group name is simple. 
+    * Users may need a long time to find the index of a group if the list of groups is very long.
+    * Hence, finding expenses based on the specified group name is more appropriate.
 
 
 ### \[Proposed\] Undo/redo feature
@@ -662,7 +717,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
       Use case ends.
 
-**Use case: View expenses of a travel group**
+**Use case: List expenses of a travel group**
 
 **MSS**
 
@@ -680,15 +735,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
     Use case ends.
     
-* 3a. The given index is invalid.
+* 3a. The given group name is invalid.
     * 3a1. AWE displays an error.
     
       Use case ends.
       
 * 4a. AWE detect no expenses logged under the group.
-    * 4a1. AWE displays message about no transaction.
+    * 4a1. AWE displays an empty list.
     
       Use case ends.
+
+**Use case: Find expenses in a travel group**
+
+**MSS**
+
+1. User request to find expense(s) based on keyword(s) and group name.
+2. AWE shows a list of expenses in specified group that matches the keyword(s).
+
+**Extensions**
+
+* 2a. The specified group does not exist in AWE.
+    * 2a1. AWE shows a message saying that there is no such existing group.
+
+      Use case ends.
+
+* 2b. There are no expenses matching the search parameters.
+    * 2b1. AWE displays nothing in the expenses page.
+    * 2b2. AWE shows a message saying no expenses are found.
+
+      Use case ends.
+
 
 **Use case: Find Groups**
 
@@ -860,16 +936,18 @@ testers are expected to do more *exploratory* testing.
 
 1. Viewing all expenses of a travel group
 
-   1. Prerequisites: List all travel groups using the `groups` command. Multiple travel groups in the list.
+   1. Prerequisites: Have at least one group in the app.
 
-   1. Test case: `expenses 1`<br>
-      Expected: Expenses under the first travel group displayed. Details of the operation shown in the status message.
+   1. Test case: `expenses gn/London`<br>
+      Expected: Expenses under the group named London are displayed. Details of the operation shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No expenses displayed. Error details shown in the status message.
+   1. Test case: `expenses gn/Test`<br>
+      Expected: No expenses displayed as group does not exist. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `expenses`, `delete gn/`, `...`
       Expected: Similar to previous.
+      
+
 
 1. _{ more test cases …​ }_
 
