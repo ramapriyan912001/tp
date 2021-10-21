@@ -97,9 +97,15 @@ public class CalculatePaymentsCommand extends Command {
         List<Payment> payments = getPayments(group);
         model.setPayments(payments);
 
-        return new CommandResult(MESSAGE_SUCCESS, false, false, false,
-                false, false, false,
-                true);
+        if (payments.isEmpty()) {
+            return new CommandResult(MESSAGE_PAYMENTS_EMPTY, false, false, false,
+                    false, false, false,
+                    true);
+        } else {
+            return new CommandResult(MESSAGE_SUCCESS, false, false, false,
+                    false, false, false,
+                    true);
+        }
     }
 
     private static List<Pair> sortPairs(List<Pair> pairs) {
