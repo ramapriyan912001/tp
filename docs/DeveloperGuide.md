@@ -297,10 +297,15 @@ The find group feature supports both single predicate and multi-predicate search
 ![Interactions Inside the Logic Component for the `findgroups` Command](images/FindGroupsSequenceDiagram.png)
 
 Step 1. When the `findgroups` command executes, the message is passed into `LogicManager` and parsed by `AddressBookParser`.
+
 Step 2. `FindGroupsCommandParser` is created and the arguments are parsed by it. The arguments are used to create `GroupContainsKeywordsPredicate` and `FindGroupsCommand` is returned to the `LogicManager`.
+
 Step 3. The `LogicManager` then calls `FindGroupCommand#execute(model)` method, which updated the `FilteredList<Group>` in `ModelManager`.
+
 Step 4. The GUI listens for updates in the `FilteredList<Group>` and updates the display accordingly.
+
 Step 5. `CommandResult` is returned to the `LogicManager`, which also switches the viewpanel to `GroupsListPanel` if needed.
+
 Step 6. The output from `CommandResult` is then displayed as an output for the user.
 
 
@@ -679,6 +684,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
       Use case ends.
 
+**Use case: Find Groups**
+
+*MSS*
+1. User request to find groups based on keywords.
+2. GroupsPage shows a list of groups that matches the search predicates.
+3. AWE displays a message with number of groups found
+
+    Use case ends
+    
+**Extension**
+* 2a. AWE can't find any groups that matches the keywords.
+    2a1. GroupsPage shows an empty page
+    
+    Use case continues
+
+
 **Use case: Add Expense**
 
 **Preconditions: User has selected a travel group**
@@ -800,6 +821,34 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+### Search for groups
+
+1. Search for groups in GroupPage
+    1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added)
+    
+    1. Test case: `findgroups London`
+       Expected: GroupList will list out 1 group with the name 'London'. 1 groups found shown in the status message.
+       
+    1. Test case: `findgroups London Singapore`
+       Expected: GroupList will list out 1 group with the name 'London'. 1 groups found shown in the status message.
+    
+    1. Test case: `findgroups Singapore`
+       Expected: GroupList will display a blank page. 0 groups found shown in status message.
+       
+2. Search for groups in ContactPage
+   1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added)
+   
+   1. Test case: `findgroups London`
+      Expected: GroupList displayed. GroupList will list out 1 group with the name 'London'. 1 groups found shown in the status message.
+      
+   1. Test case: `findgroups London Singapore`
+      Expected: GroupList displayed. GroupList will list out 1 group with the name 'London'. 1 groups found shown in the status message.
+   
+   1. Test case: `findgroups Singapore`
+      Expected: GroupList displayed. GroupList will display a blank page. 0 groups found shown in status message.
+    
+    
 
 ### Viewing expenses
 
