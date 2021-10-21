@@ -314,6 +314,59 @@ Step 5. `CommandResult` is returned to the `LogicManager`, which also switches t
 
 Step 6. The output from `CommandResult` is then displayed as an output for the user.
 
+### Add expense feature
+
+The add expense mechanism is facilitated by defining an Expense model and adding an Expense List field to
+`AddressBook`. The Expense model contains a `Person` field containing the payer of the Expense, a `Cost` field
+containing the cost of the expense, a `List` of `Person` objects that keeps track of the people involved in the
+expense, a `HashMap` that contains details of how much each member has paid in total for the expense.
+
+The following activity diagram shows what happens when a user executes a `addexpense` command.
+
+![AddExpenseActivityDiagram](images/AddExpenseActivityDiagram.png)
+
+Given below is an example usage scenario and how the `addexpense` mechanism behaves at each step.
+
+Step 1. A valid `addexpense` command is given as user input. This prompts the `LogicManager` to run its execute()
+method.
+
+Step 2. The `AddExpenseCommandParser` parses the input and checks for presence of the relevant prefixes.
+It also checks that the group name is valid and all members specified are in the specified group.
+It returns a `AddExpenseCommand`.
+
+Step 3. `AddExpenseCommand` runs its execute() method which adds the newly created expense involving the into the
+relevant group members into the group and the group is updated in the AWE model.Upon successful execution,
+`CommandResult` is returned.
+
+The following sequence operation shows how the `addexpense` operation works.
+![AddExpenseSequenceDiagram](images/AddExpenseSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddExpenseCommandParser`
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+#### Design considerations:
+
+**Aspect: User command for `addexpense`:**
+
+* **Alternative 1 (current choice):** Create Expense with specified group and group members.
+    * Pros: Intuitive for user to create an expense with specified group and group members via their names.
+    * Pros: Provides user with convenience of creating an expense with minimal input.
+    * Cons: Harder to implement.
+    * Cons: Easier for user to make an erroneous command.
+
+
+* **Alternative 2 (index based):** Create Expense with based on index position in `ObservableList`.
+    * Pros: Easy to implement.
+    * Cons: Inconvenient for user to add an expense as they have to check again the index of both the person and group.
+    * Cons: Easy for user to make an erroneous command.
+
+* **Justification**
+    * Each person has a unique name and the implementation for adding an expense based on a person's and group's 
+      name is simple.
+    * Users may need a long time to find the index of a person or group if the list of either is very long.
+    * Hence, adding expenses based on the specified person and group name is more appropriate.
+
 ### Find Expenses Feature
 
 The find expenses mechanism is facilitated by `Group`. Each group has a unique group name and also an expense list 
@@ -784,7 +837,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: Add Expense**
 
-**Preconditions: User has selected a travel group**
+**Preconditions: User has is a member of the specified travel group**
 
 **MSS**
 
