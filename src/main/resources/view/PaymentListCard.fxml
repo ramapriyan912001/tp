@@ -24,10 +24,8 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="payer" text="\$first" styleClass="cell_big_label" />
+                <Label fx:id="paymentText" text="\$first" styleClass="cell_big_label" />
             </HBox>
-            <Label fx:id="amount" styleClass="cell_small_label" text="\$amount" />
-            <Label fx:id="payee" styleClass="cell_small_label" text="\$payee" />
         </VBox>
     </GridPane>
 </HBox>

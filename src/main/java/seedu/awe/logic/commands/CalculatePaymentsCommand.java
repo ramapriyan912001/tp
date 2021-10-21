@@ -133,7 +133,6 @@ public class CalculatePaymentsCommand extends Command {
      */
     public List<Payment> getPayments(Group group) throws CommandException {
         List<Pair> namesAndSurplusesList = getNamesAndSurplusesList(group);
-        namesAndSurplusesList = sortPairs(namesAndSurplusesList);
         List<Payment> payments = calculatePayments(namesAndSurplusesList);
         return payments;
     }
@@ -185,6 +184,7 @@ public class CalculatePaymentsCommand extends Command {
         pairs = removeZeroCostElements(pairs);
         List<Payment> payments = new ArrayList<>();
         while (!pairs.isEmpty()) {
+            pairs = sortPairs(pairs);
             if (pairs.size() == 1) {
                 throw new CommandException("There appears to be a discrepancy within your payments.");
             }
@@ -198,8 +198,16 @@ public class CalculatePaymentsCommand extends Command {
                 pairs.remove(pairs.size() - 1);
             } else if (smallerPair.get().equals(pairWithHighestSurplus)) {
                 pairs.remove(pairs.size() - 1);
+                Double newSurplus = pairWithLowestSurplus.getSurplus() + pairWithHighestSurplus.getSurplus();
+                Pair newPairWithLowestSurplus = new Pair(newSurplus, pairWithLowestSurplus.getPerson());
+                pairs.remove(0);
+                pairs.add(0, newPairWithLowestSurplus);
             } else if (smallerPair.get().equals(pairWithLowestSurplus)) {
                 pairs.remove(0);
+                Double newSurplus = pairWithHighestSurplus.getSurplus() + pairWithLowestSurplus.getSurplus();
+                Pair newPairWithHighestSurplus = new Pair(newSurplus, pairWithHighestSurplus.getPerson());
+                pairs.remove(pairs.size() - 1);
+                pairs.add(newPairWithHighestSurplus);
             }
         }
         return payments;
