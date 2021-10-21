@@ -85,13 +85,13 @@ AWE promises to revolutionises the group-travel space. With AWE, bills can be sp
 
 ### 2.1. Contacts
 
-### 2.1.1. Listing all contacts : `contacts`
+#### 2.1.1. Listing all contacts : `contacts`
 
 Shows a list of all contacts in address book.
 
 Format: `contacts`
 
-### 2.1.2. Adding a person: `addcontact`
+#### 2.1.2. Adding a person: `addcontact`
 
 Adds a person to the address book.
 
@@ -105,7 +105,7 @@ Examples:
 * `addcontact n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `addcontact n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### 2.1.3. Editing a person : `editcontact`
+#### 2.1.3. Editing a person : `editcontact`
 
 Edits an existing person in the address book.
 
@@ -122,7 +122,7 @@ Examples:
 *  `editcontact 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `editcontact 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### 2.1.4. Deleting a person : `deletecontact`
+#### 2.1.4. Deleting a person : `deletecontact`
 
 Deletes the specified person from the address book.
 
@@ -136,7 +136,7 @@ Examples:
 * `persons` followed by `deletecontact 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `deletecontact 1` deletes the 1st person in the results of the `find` command.
 
-### 2.1.5. Locating a person by name: `findcontacts`
+#### 2.1.5. Locating a person by name: `findcontacts`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -156,13 +156,13 @@ Examples:
 
 ### 2.2. Groups
 
-### 2.2.1. Listing all groups : `groups`
+#### 2.2.1. Listing all groups : `groups`
 
 Shows a list of all groups in GroupPage.
 
 Format: `groups`
 
-### 2.2.2. Creating a travel group: ```creategroup```
+#### 2.2.2. Creating a travel group: ```creategroup```
 Creates a group of people of your choice from your address book.
 Adds you as a member of the group by default.
 
@@ -179,7 +179,7 @@ Examples:
 * creategroup gn/Bali n/Jacob Tan n/Max Chia n/Julianne Tay
 * creategroup gn/London n/Justin Lee n/Raj Gopal n/Keith Chia
 
-### 2.2.3. Deleting a travel group: `deletegroup`
+#### 2.2.3. Deleting a travel group: `deletegroup`
 Deletes a group from your groups.
 All the details from the group are lost once this action is completed.
 
@@ -192,7 +192,7 @@ Examples:
 * `deletegroup gn/Bali`
 * `deletegroup gn/London`
 
-### 2.2.4. Locating group by name: `findgroups`
+#### 2.2.4. Locating group by name: `findgroups`
 
 Find groups whose names contain any of the given keywords.
 
@@ -210,7 +210,7 @@ Examples:
 * `findgroups Taiwan Malaysia` returns `Taiwan` `Malaysia`<br>
   ![result for 'findcontacts Taiwan Malaysia'](images/findAlexDavidResult.png)
 
-### 2.2.5. Adding a contact to an existing group: `groupaddcontact`
+#### 2.2.5. Adding a contact to an existing group: `groupaddcontact`
 
 Add contact in contact list into an existing travel group.
 
@@ -228,7 +228,7 @@ Examples:
 * `groupaddcontact gn/Prague n/Bernice Yu n/David Li n/Alex Yeoh` to add Bernice Yu, David Li, and Alex Yeoh into the
 Prague travel group.
 
-### 2.2.6. Removing a contact from an existing group: `groupremovecontact`
+#### 2.2.6. Removing a contact from an existing group: `groupremovecontact`
 
 Remove contact in contact list from an existing travel group.
 
@@ -246,7 +246,7 @@ Examples:
 * `groupremovecontact gn/Prague n/Bernice Yu n/David Li n/Alex Yeoh` to remove Bernice Yu, David Li, and Alex Yeoh
 from the Prague travel group.
 
-### 2.2.7. Adding a tag to an existing group: `groupaddtag`
+#### 2.2.7. Adding a tag to an existing group: `groupaddtag`
 
 Add tag for an existing travel group.
 
@@ -262,7 +262,7 @@ Examples:
 * `groupaddtag gn/Prague t/Family t/Cousins` to indicate that the Prague travel group is with family,
 more specifically, cousins.
 
-### 2.2.8. Removing a tag from an existing group: `groupremovetag`
+#### 2.2.8. Removing a tag from an existing group: `groupremovetag`
 
 Remove tag from an existing travel group.
 
@@ -278,7 +278,7 @@ Examples:
 * `groupremovetag gn/Bali t/Friends` to remove the friends tag from the Bali travel group.
 * `groupremovetag gn/Prague t/Family t/Cousins` to the tags family and cousins from the Prague travel group.
 
-### 2.2.9. Editing travel group name: `groupeditname`
+#### 2.2.9. Editing travel group name: `groupeditname`
 
 Edit group name for an existing travel group.
 
@@ -295,6 +295,7 @@ Examples:
 ### 2.3. Expenses
 
 ### 2.3.1. Listing expenses of a specified group: `expenses`
+
 Shows a list containing all existing expenses within the specified travel group. Expenses are sorted from most recent to least recent.
 
 Format: `expenses gn/GROUP_NAME`
@@ -305,7 +306,7 @@ Format: `expenses gn/GROUP_NAME`
 Examples: 
 * `expenses gn/London` shows all the expenses of the group named London.
 
-### 2.3.2. Adding a shared expense: `addexpense`
+#### 2.3.2. Adding a shared expense: `addexpense`
 Adds a shared expense to the specified travel group.
 The expense can be paid for and split among any number of contacts within the travel group.
 
@@ -324,7 +325,7 @@ Examples:
 * addexpense n/Tom gn/Date $/60 d/Big meal but Jerry wants to pay for his own Coke n/Jerry $/2
 * addexpense n/Keith gn/Movie night $/40 d/For movie but Kelly didn't watch ex/Kelly
 
-### 2.3.3. Deleting a shared expense: `deleteexpense`
+#### 2.3.3. Deleting a shared expense: `deleteexpense`
 
 Deletes a shared expense from a travel group.
 This command deletes the expense for all members involved in the expense.
@@ -339,7 +340,7 @@ Examples:
 * `deleteexpense gn/Bali i/1`
 * `deleteexpense gn/London i/2`
 
-### 2.3.4. Locating a shared expense by description: `findexpenses`
+#### 2.3.4. Locating a shared expense by description: `findexpenses`
 
 Finds expenses within the specified group which descriptions contain any of the given keywords.
 
@@ -356,7 +357,7 @@ Examples:
 * `findexpenses dinner gn/London` returns `dinner` and `Friday dinner`
 * `findexpenses lunch souvenirs` returns `lunch`, `souvenirs`<br>
 
-### 2.3.5. Calculating payments to make: `calculatepayments`
+#### 2.3.5. Calculating payments to make: `calculatepayments`
 Uses the net spend of the user on the trip to tabulate a fast set of payments to settle the debts between members of the group.
 
 Format: `calculatepayments gn/GROUP_NAME`
@@ -379,23 +380,23 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-### 2.4.2. Clearing all entries : `clear`
+#### 2.4.2. Clearing all entries : `clear`
 
 Clears all entries from the AWE.
 
 Format: `clear`
 
-### 2.4.3. Exiting the program : `exit`
+#### 2.4.3. Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### 2.4.4. Saving the data
+#### 2.4.4. Saving the data
 
 AWE data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### 2.4.5. Editing the data file
+#### 2.4.5. Editing the data file
 
 AWE data are saved as a JSON file `[JAR file location]/data/awe.json`. Advanced users are welcome to update data directly by editing that data file.
 
