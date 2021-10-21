@@ -3,9 +3,12 @@ layout: page
 title: User Guide
 ---
 
-Around the World in $80 (AWE) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AWE can get your contact management tasks done faster than traditional GUI apps.
+Around the World in $80 (AWE) is a **desktop app for spiting expenses on trip, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AWE can get your contact management tasks done faster than traditional GUI apps.
 
-Table of Contents
+AWE promises to revolutionises the group-travel space. With AWE, bills can be split and monitored in a centralised manner that minimises the potential for disputes and maximises the efficiency of payment and recollection of debts.
+
+
+* Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
