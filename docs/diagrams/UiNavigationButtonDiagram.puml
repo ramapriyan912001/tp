@@ -1,0 +1,35 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+
+package NavigationButton <<Rectangle>>{
+Class "{abstract}\nUiPart" as UiPart
+Class NavigationButtonPanel
+Class GroupViewButton
+Class PersonViewButton
+Class PersonButtonListener
+Class GroupButtonListener
+}
+
+package ViewPanel <<Rectangle>> {
+Class HiddenLogic #FFFFFF
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside --> NavigationButtonPanel
+
+GroupViewButton *--> "1" GroupButtonListener
+PersonViewButton *--> "1" PersonButtonListener
+
+NavigationButtonPanel *--> "1" GroupViewButton
+NavigationButtonPanel *--> "1" PersonViewButton
+
+PersonButtonListener -right-> ViewPanel
+GroupButtonListener -left-> ViewPanel
+
+NavigationButtonPanel --|> UiPart
+GroupViewButton --|> UiPart
+PersonViewButton --|> UiPart
+@enduml

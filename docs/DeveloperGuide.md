@@ -96,7 +96,8 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/ay2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ViewPanel`, `NavigationButtonPanel` etc. 
+All these, except for `GroupButtonListener` and `PersonButtonListner`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -106,6 +107,29 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+![Structure of the ViewPanel Component](images/UiViewPanelDiagram.png)
+
+The `ViewPanel` consist of the following parts:
+* `GroupListPanel`
+* `PersonListPanel`
+
+Each panel will display the corresponding list accordingly. The ViewPanel will only show up a single list panel at a time. 
+We have decided to opt for this way of implementation due to the following:
+* Able to make use of existing AB3 implementation of `PersonList`
+* Will not increase code complexity as compared to both list using the same panel.
+* Able to toggle easily with CLI commands
+
+In addition to using CLI command, we will also be implementing the toggling of list panel with the use of buttons.
+
+![Structure of the NavigationButton Component](images/UiNavigationButtonDiagram.png)
+
+The `NavigationButtonPanel` consist of the following parts:
+* GroupViewButton
+* PersonViewButton
+
+Click each button will show the respective list view in `ViewPanel`. The clicking of the button is handled by `EventHandler`.
+
 
 ### Logic component
 
@@ -184,6 +208,56 @@ The create group mechanism is facilitated by defining a Group model and adding a
 objects who are members of the Group, an `ArrayList` of `Expense` objects that keeps track of the expenditures of the 
 Group, a `HashMap` that contains details of how much each member has paid in total across the expenses, and a `HashMap`
 that contains details of the total expenditure incurred by each member across the trip.
+
+The following activity diagram shows what happens when a user executes a `createGroup` command.
+
+![CreateGroupActivityDiagram](images/CreateGroupActivityDiagram.png)
+
+Given below is an example usage scenario and how the `creategroup` mechanism behaves at each step.
+
+Step 1. A valid `creategroup` command is given as user input. This prompts the `LogicManager` to run its execute()
+method.
+
+Step 2. The `CreateGroupCommandParser` parses the input and checks for presence of the relevant prefixes.
+It also checks that the group name is valid and all members specified are in the contact list.
+It returns a `CreateGroupCommand`.
+
+Step 3. `CreateGroupCommand` runs its execute() method which checks if a group with the same name has already been
+created. If not, the newly created group is added into the AWE model and all members within the group are updated in
+the model. Upon successful execution, `CommandResult` is returned.
+
+The following sequence operation shows how the `creategroup` operation works.
+![CreateGroupSequenceDiagram](images/CreateGroupSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `CreateGroupCommandParser`
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+#### Design considerations:
+
+**Aspect: User command for `creategroup`:**
+
+* **Alternative 1 (current choice):** Create Travel Group with specified members and tags.
+    * Pros: Intuitive for user to create a travel group with specified members and tags.
+    * Pros: Provides user with convenience of setting up a travel group with minimal commands.
+    * Cons: Harder to implement.
+    * Cons: Easier for user to make an erroneous command.
+
+
+* **Alternative 2 :** Create Travel Group only.
+    * Pros: Easy to implement.
+    * Pros: Command has single responsibility. Easy to remember the sole purpose of `creategroup` command.
+    * Cons: Unintuitive for user as travel group is created without any members or tags.
+    * Cons: Inconvenient for user to use multiple commands to set up a travel group.
+
+
+* **Justification**
+    * User will have at least one member in mind when creating a group.
+    * As such, it is only natural for the `creategroup` command to support addition of members and tags into the group
+      upon creation.
+    * This minimizes the number of commands a user has to make in setting up a functional Group.
+    * As such, it is better to choose Alternative 1, as this provides the user with a far better user experience.
+
 
 ### Delete Group Feature
 
@@ -298,11 +372,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
