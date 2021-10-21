@@ -209,6 +209,56 @@ objects who are members of the Group, an `ArrayList` of `Expense` objects that k
 Group, a `HashMap` that contains details of how much each member has paid in total across the expenses, and a `HashMap`
 that contains details of the total expenditure incurred by each member across the trip.
 
+The following activity diagram shows what happens when a user executes a `createGroup` command.
+
+![CreateGroupActivityDiagram](images/CreateGroupActivityDiagram.png)
+
+Given below is an example usage scenario and how the `creategroup` mechanism behaves at each step.
+
+Step 1. A valid `creategroup` command is given as user input. This prompts the `LogicManager` to run its execute()
+method.
+
+Step 2. The `CreateGroupCommandParser` parses the input and checks for presence of the relevant prefixes.
+It also checks that the group name is valid and all members specified are in the contact list.
+It returns a `CreateGroupCommand`.
+
+Step 3. `CreateGroupCommand` runs its execute() method which checks if a group with the same name has already been
+created. If not, the newly created group is added into the AWE model and all members within the group are updated in
+the model. Upon successful execution, `CommandResult` is returned.
+
+The following sequence operation shows how the `creategroup` operation works.
+![CreateGroupSequenceDiagram](images/CreateGroupSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `CreateGroupCommandParser`
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+#### Design considerations:
+
+**Aspect: User command for `creategroup`:**
+
+* **Alternative 1 (current choice):** Create Travel Group with specified members and tags.
+    * Pros: Intuitive for user to create a travel group with specified members and tags.
+    * Pros: Provides user with convenience of setting up a travel group with minimal commands.
+    * Cons: Harder to implement.
+    * Cons: Easier for user to make an erroneous command.
+
+
+* **Alternative 2 :** Create Travel Group only.
+    * Pros: Easy to implement.
+    * Pros: Command has single responsibility. Easy to remember the sole purpose of `creategroup` command.
+    * Cons: Unintuitive for user as travel group is created without any members or tags.
+    * Cons: Inconvenient for user to use multiple commands to set up a travel group.
+
+
+* **Justification**
+    * User will have at least one member in mind when creating a group.
+    * As such, it is only natural for the `creategroup` command to support addition of members and tags into the group
+      upon creation.
+    * This minimizes the number of commands a user has to make in setting up a functional Group.
+    * As such, it is better to choose Alternative 1, as this provides the user with a far better user experience.
+
+
 ### Delete Group Feature
 
 The delete group mechanism is facilitated by maintaining the constraint that every `Group` has a unique `GroupName`.
