@@ -310,7 +310,7 @@ Examples:
 Adds a shared expense to the specified travel group.
 The expense can be paid for and split among any number of contacts within the travel group.
 
-Format: `addexpense n/PAYER_NAME gn/GROUP_NAME $/TOTAL AMOUNT PAID d/DESCRIPTION n/[PAYEE WHO MADE A PERSONAL PAYMENT] $/[PAYEE'S PERSONAL PAYMENT TO EXCLUDE FROM TOTAL AMOUNT] ex/[PERSON TO EXCLUDE FROM EXPENSE]`
+Format: `addexpense n/PAYER_NAME gn/GROUP_NAME $/TOTAL_AMOUNT_PAID d/DESCRIPTION n/[PAYEE_WHO_MADE_A_PERSONAL_PAYMENT] $/[PAYEE'S_PERSONAL_PAYMENT_TO_EXCLUDE_FROM_TOTAL_AMOUNT] ex/[PERSON_TO_EXCLUDE_FROM_EXPENSE]`
 
 * There should be at least one PAYER_NAME in the command.
 * PAYER_NAME must be immediately followed by the GROUP NAME.
