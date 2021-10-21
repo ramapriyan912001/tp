@@ -2,33 +2,8 @@
 layout: page
 title: Developer Guide
 ---
-## Table of Contents
-1. [Acknowledgements](#acknowledgements)
-2. [Setting up, getting started](#setting-up-getting-started)
-3. [Design](#design)
-4. [Architecture](#architecture)
-   1. [UI component](#ui-component)
-   2. [Logic component](#logic-component)
-   3. [Model component](#model-component)
-   4. [Storage component](#storage-component)
-   5. [Common classes](#common-classes)
-5. [Implementation](#implementation)
-   1. [Create Group Feature](#create-group-feature)
-   2. [Delete Group Feature](#delete-group-feature)
-   3. [Proposed implementation](#proposed-implementation)
-   4. [Design considerations](#design-considerations)
-   5. [Proposed data archiving](#proposed-data-archiving)
-6. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
-7. [Appendix: Requirements](#appendix-requirements)
-   1. [Product Scope](#product-scope)
-   2. [User stories](#user-stories)
-   3. [Use cases](#use-cases)
-   4. [Non-functional requirements](#non-functional-requirements)
-   5. [Glossary](#glossary)
-8. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
-   1. [Launch and shutdown](#launch-and-shutdown)
-   2. [Deleting a person](#deleting-a-person)
-   3. [Saving data](#saving-data)
+* Table of Contents
+{:toc}
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
@@ -96,6 +71,7 @@ The sections below give more details of each component.
 The **API** of this component is specified in [`Ui.java`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
+(Note: Implementation of NavigationButton and ViewPanel class diagram are referenced below.)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ViewPanel`, `NavigationButton` etc. 
 All these, except for `GroupButtonListener` and `PersonButtonListner` in `NavigationButton`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
@@ -109,7 +85,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
-![Structure of the ViewPanel Component](images/UiViewPanelDiagram.png)
+<img src="images/UiViewPanelDiagram.png" width="450" />
 
 The `ViewPanel` consist of the following parts:
 * `GroupListPanel`
@@ -124,7 +100,7 @@ We have decided to opt for this way of implementation due to the following:
 
 In addition to using CLI command, we will also be implementing the toggling of list panel with the use of buttons.
 
-![Structure of the NavigationButton Component](images/UiNavigationButtonDiagram.png)
+<img src="images/UiNavigationButtonDiagram.png" width="450" />
 
 The `NavigationButtonPanel` consist of the following parts:
 * GroupViewButton
@@ -148,7 +124,7 @@ How the `Logic` component works:
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+<img src="images/DeleteSequenceDiagram.png" width="600" />
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -164,14 +140,23 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="700" />
+<br>
+(Note: Implementation of Person, Group and Expense class diagram are referenced below.)
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data
+    * all `Person` objects (which are contained in a `UniquePersonList` object).
+    * all `Group` objects (which are contained in a `UniqueGroupList` object).
+    * all `Expense` objects (which are contained in a `ExpenseList` object).
+* stores the currently 'selected' `Person`/`Group`/`Expense` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+
+<img src="images/PersonClassDiagram.png" width="450" />
+<img src="images/ExpenseClassDiagram.png" width="350" />
+<img src="images/GroupClassDiagram.png" width="450" />
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
