@@ -45,7 +45,14 @@ public class DeleteExpenseCommand extends Command {
         requireNonNull(model);
 
         Group group = model.getGroupByName(groupName);
-        List<Expense> expenseList = group.getExpenses();
+        boolean isCurrentExpenseList = model.isCurrentExpenseList(group);
+
+        List<Expense> expenseList;
+        if(isCurrentExpenseList) {
+            expenseList = model.getExpenses();
+        } else {
+            expenseList = group.getExpenses();
+        }
 
         if (index.getZeroBased() >= expenseList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
