@@ -293,16 +293,16 @@ Examples:
 * `groupeditname gn/Bali gn/Thailand` to change the group name from Bali to Thailand.
 * `groupeditname gn/Germany gn/Munich` to change the group name from Germany to Munich.
 
-### Viewing a shared expense: `expenses`
+### Listing expenses within a group: `expenses`
 Shows a list containing all existing expenses within the specified travel group. Expenses are sorted from most recent to least recent.
 
-Format: `expenses INDEX`
+Format: `expenses gn/GROUP_NAME`
 
-* INDEX argument is mandatory.
-* INDEX must correspond to a valid index of an existing travel group.
+* GROUP_NAME argument is mandatory.
+* GROUP_NAME must correspond to the name of an existing travel group.
 
 Examples: 
-* `groups` followed by `expense 1` shows all the expenses of the 1st travel group in the group list.
+* `expenses gn/London` shows all the expenses of the group named London.
 
 ### Adding a shared expense: `addexpense`
 Adds a shared expense to the specified travel group.
@@ -422,6 +422,7 @@ Action | Format, Examples
 **Edit Contact** | `editcontact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find Contacts** | `findcontacts KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Find Groups** | `findgroups KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find Expenses** | `findexpenses KEYWORD [MORE_KEYWORDS] gn/GROUP_NAME`<br> e.g., `find dinner buffet gn/London`
 **Calculate Payments** | `calculatepayments gn/GROUP_NAME` <br> e.g., `calculatepayments gn/Bali` 
 **Help** | `help`
 **View Contacts** | `contacts`
