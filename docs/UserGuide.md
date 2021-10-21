@@ -6,39 +6,7 @@ title: User Guide
 Around the World in $80 (AWE) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AWE can get your contact management tasks done faster than traditional GUI apps.
 
 Table of Contents
-
-1. [Quick Start](#1-quick-start)
-2. [Features](#2-features)
-   1. [Contacts](#21-contacts)
-      1. [Listing all contacts](#211-listing-all-contacts--contacts)
-      2. [Adding a person](#212-adding-a-person-addcontact)
-      3. [Editing a person](#213-editing-a-person--editcontact)
-      4. [Deleting a person](#214-deleting-a-person--deletecontact)
-      5. [Locating a person by name](#215-locating-a-person-by-name-findcontacts)
-   2. [Groups](#22-groups)
-      1. [Listing All Groups](#221-listing-all-groups--groups)
-      2. [Creating a travel group](#222-creating-a-travel-group-creategroup)
-      3. [Deleting a travel group](#223-deleting-a-travel-group-deletegroup)
-      4. [Locating a group by name](#224-locating-group-by-name-findgroups)
-      5. [Adding a contact to an existing group](#225-adding-a-contact-to-an-existing-group-groupaddcontact)
-      6. [Removing a contact from an existing group](#226-removing-a-contact-from-an-existing-group-groupremovecontact)
-      7. [Adding a tag to an existing group](#227-adding-a-tag-to-an-existing-group-groupaddtag)
-      8. [Removing a tag from an existing group](#228-removing-a-tag-from-an-existing-group-groupremovetag)
-      9. [Editing travel group name](#229-editing-travel-group-name-groupeditname)
-   3. [Expenses](#23-expenses)
-      1. [Viewing a shared expense](#231-viewing-a-shared-expense-expenses)
-      2. [Adding a shared expense](#232-adding-a-shared-expense-addexpense)
-      3. [Deleting a shared expense](#233-deleting-a-shared-expense-deleteexpense)
-      4. [Locating a shared expense by description](#234-locating-a-shared-expense-by-description-findexpenses)
-      5. [Calculating payments to make](#235-calculating-payments-to-make-calculatepayments)
-   4. [Miscellaneous](#24-miscellaneous)
-      1. [Viewing help](#241-viewing-help--help)
-      2. [Clearing all entries](#242-clearing-all-entries--clear)
-      3. [Exiting the program](#243-exiting-the-program--exit)
-      4. [Saving the data file](#244-saving-the-data)
-      5. [Editing the data file](#245-editing-the-data-file)
-3. [FAQ](#3-faq)
-4. [Command Summary](#4-command-summary)
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 

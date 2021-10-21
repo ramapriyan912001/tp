@@ -3,32 +3,7 @@ layout: page
 title: Developer Guide
 ---
 ## Table of Contents
-1. [Acknowledgements](#acknowledgements)
-2. [Setting up, getting started](#setting-up-getting-started)
-3. [Design](#design)
-4. [Architecture](#architecture)
-   1. [UI component](#ui-component)
-   2. [Logic component](#logic-component)
-   3. [Model component](#model-component)
-   4. [Storage component](#storage-component)
-   5. [Common classes](#common-classes)
-5. [Implementation](#implementation)
-   1. [Create Group Feature](#create-group-feature)
-   2. [Delete Group Feature](#delete-group-feature)
-   3. [Proposed implementation](#proposed-implementation)
-   4. [Design considerations](#design-considerations)
-   5. [Proposed data archiving](#proposed-data-archiving)
-6. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
-7. [Appendix: Requirements](#appendix-requirements)
-   1. [Product Scope](#product-scope)
-   2. [User stories](#user-stories)
-   3. [Use cases](#use-cases)
-   4. [Non-functional requirements](#non-functional-requirements)
-   5. [Glossary](#glossary)
-8. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
-   1. [Launch and shutdown](#launch-and-shutdown)
-   2. [Deleting a person](#deleting-a-person)
-   3. [Saving data](#saving-data)
+{:toc}
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
