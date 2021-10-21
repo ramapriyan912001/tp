@@ -57,7 +57,8 @@ public class DeleteExpenseCommand extends Command {
         model.deleteExpense(expenseToDelete, newGroup);
         String expenseToDeleteDescriptionString = expenseToDelete.getDescription().getFullDescription();
         return new CommandResult(String.format(MESSAGE_SUCCESS, expenseToDeleteDescriptionString), false,
-                false, false, false, true);
+                false, false, false, true,
+                false, false);
     }
 
     @Override

@@ -127,6 +127,11 @@ public class AddressBookTest {
             return null;
             //TODO: WRITE MODEL STUB FOR UNIQUEGROUPLIST.
         }
+
+        @Override
+        public void setPayments(List<Payment> payments) {
+           // EMPTY METHOD
+        }
     }
 
 }

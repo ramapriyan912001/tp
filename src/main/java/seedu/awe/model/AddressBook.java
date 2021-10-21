@@ -110,6 +110,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         return this.persons;
     }
 
+    public ObservableList<TransactionSummary> getTransactionSummaryList() {
+        return this.transactionSummary.asUnmodifiableObservableList();
+    }
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -206,6 +210,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     public Group getGroupByName(GroupName groupName) {
         requireNonNull(groupName);
         return groups.getGroupByName(groupName);
+    }
+
+    @Override
+    public void setPayments(List<Payment> payments) {
+        this.payments.clear();
+        this.payments.addAll(payments);
     }
 
     /**

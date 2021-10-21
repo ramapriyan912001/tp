@@ -1,5 +1,7 @@
 package seedu.awe.model;
 
+import java.util.List;
+
 import javafx.collections.ObservableList;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
@@ -31,4 +33,6 @@ public interface ReadOnlyAddressBook {
     ObservableList<Payment> getPaymentList();
 
     Group getGroupByName(GroupName groupName);
+
+    void setPayments(List<Payment> payments);
 }
