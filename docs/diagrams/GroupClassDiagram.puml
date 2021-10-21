@@ -1,0 +1,31 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Group <<Rectangle>>{
+    Class Group
+    Class GroupName
+}
+
+Package Tag <<Rectangle>>{
+Class Tag
+}
+
+Package Person <<Rectangle>>{
+}
+
+Package Expense <<Rectangle>>{
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside --> Group
+
+Group *--> GroupName
+Group *--> "*" Tag
+Group --> "1..* members" Person
+Group --> "*" Expense
+
+
+@enduml
