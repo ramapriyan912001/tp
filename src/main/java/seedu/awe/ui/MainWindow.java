@@ -15,8 +15,8 @@ import seedu.awe.commons.core.LogsCenter;
 import seedu.awe.logic.Logic;
 import seedu.awe.logic.commands.CommandResult;
 import seedu.awe.logic.commands.exceptions.CommandException;
+import seedu.awe.logic.parser.exceptions.EmptyGroupException;
 import seedu.awe.logic.parser.exceptions.ParseException;
-
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -124,7 +124,6 @@ public class MainWindow extends UiPart<Stage> {
         viewPanel = new ViewPanel(logic);
         viewPanelPlaceholder.getChildren().add(viewPanel.getRoot());
 
-
         navigationButtonPanel = new NavigationButtonPanel(viewPanel);
         navigationButtonPlaceholder.getChildren().add(navigationButtonPanel.getRoot());
 
@@ -192,7 +191,6 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
-
             }
 
             if (commandResult.isExit()) {
@@ -207,8 +205,12 @@ public class MainWindow extends UiPart<Stage> {
                 viewPanel.toggleView(UiView.GROUP_PAGE);
             }
 
+            if (commandResult.isShowExpenses()) {
+                viewPanel.toggleView(UiView.EXPENSE_PAGE);
+            }
+
             return commandResult;
-        } catch (CommandException | ParseException e) {
+        } catch (CommandException | ParseException | EmptyGroupException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;

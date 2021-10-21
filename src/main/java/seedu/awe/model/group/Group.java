@@ -1,13 +1,20 @@
 package seedu.awe.model.group;
 
+import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
+import seedu.awe.model.expense.Cost;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.person.Person;
 import seedu.awe.model.tag.Tag;
+
 
 public class Group {
     //TODO: WRITE MESSAGE CONSTRAINTS MESSAGE
@@ -15,6 +22,8 @@ public class Group {
     private final ArrayList<Person> members = new ArrayList<>();
     private final Set<Tag> tags = new HashSet<>();
     private final ArrayList<Expense> expenses = new ArrayList<>();
+    private final HashMap<Person, Cost> paidByPayers = new HashMap<>();
+    private final HashMap<Person, Cost> paidByPayees = new HashMap<>();
 
     /**
      * Creates new Group object.
@@ -26,6 +35,8 @@ public class Group {
         this.groupName = groupName;
         for (Person member : members) {
             this.addMember(member);
+            paidByPayers.put(member, new Cost(0));
+            paidByPayees.put(member, new Cost(0));
         }
     }
 
@@ -40,12 +51,14 @@ public class Group {
         this.groupName = groupName;
         for (Person member : members) {
             this.addMember(member);
+            paidByPayers.put(member, new Cost(0));
+            paidByPayees.put(member, new Cost(0));
         }
         this.tags.addAll(tags);
     }
 
     /**
-     * Creates new Group object with tags.
+     * Creates new Group object with tags and expenses.
      *
      * @param groupName String object representing name of the group.
      * @param members ArrayList of Person objects representing list of members.
@@ -56,11 +69,61 @@ public class Group {
         this.groupName = groupName;
         for (Person member : members) {
             this.addMember(member);
+            paidByPayers.put(member, new Cost(0));
+            paidByPayees.put(member, new Cost(0));
         }
         this.tags.addAll(tags);
         for (Expense expense : expenses) {
+            Person payer = expense.getPayer();
+            Cost cost = expense.getCost();
             this.expenses.add(expense);
+            paidByPayers.merge(payer, cost, (original, toAdd) -> original.add(toAdd));
         }
+    }
+
+    /**
+     * Creates new Group object with tags, expenses and paidByPayees hashmap.
+     *
+     * @param groupName String object representing name of the group.
+     * @param members ArrayList of Person objects representing list of members.
+     * @param tags Set of Tag objects to describe group.
+     * @param expenses List of expenses in the group.
+     */
+    public Group(GroupName groupName, ArrayList<Person> members, Set<Tag> tags,
+                 ArrayList<Expense> expenses, HashMap<Person, Cost> paidByPayees) {
+        this.groupName = groupName;
+        for (Person member : members) {
+            this.addMember(member);
+            paidByPayers.put(member, new Cost(0));
+        }
+        this.tags.addAll(tags);
+        for (Expense expense : expenses) {
+            Person payer = expense.getPayer();
+            Cost cost = expense.getCost();
+            this.expenses.add(expense);
+            paidByPayers.merge(payer, cost, (original, val) -> original.add(val));
+        }
+        this.paidByPayees.putAll(paidByPayees);
+    }
+
+    /**
+     * Creates new Group object with tags, expenses and paidByPayees hashmap.
+     *
+     * @param groupName String object representing name of the group.
+     * @param members ArrayList of Person objects representing list of members.
+     * @param tags Set of Tag objects to describe group.
+     * @param newExpenses List of expenses in the group.
+     * @param paidByPayers Maps people to their amounts paid
+     * @param paidByPayees Maps people to their expenses incurred.
+     */
+    public Group(GroupName groupName, ArrayList<Person> members, Set<Tag> tags, ArrayList<Expense> newExpenses,
+                 Map<Person, Cost> paidByPayers, Map<Person, Cost> paidByPayees) {
+        this.groupName = groupName;
+        this.members.addAll(members);
+        this.tags.addAll(tags);
+        this.expenses.addAll(newExpenses);
+        this.paidByPayers.putAll(paidByPayers);
+        this.paidByPayees.putAll(paidByPayees);
     }
 
     /**
@@ -70,6 +133,8 @@ public class Group {
      */
     public void addMember(Person member) {
         this.members.add(member);
+        paidByPayers.put(member, new Cost(0));
+        paidByPayees.put(member, new Cost(0));
     }
 
     /**
@@ -87,6 +152,14 @@ public class Group {
 
     public ArrayList<Person> getMembers() {
         return members;
+    }
+
+    public HashMap<Person, Cost> getPaidByPayees() {
+        return paidByPayees;
+    }
+
+    public HashMap<Person, Cost> getPaidByPayers() {
+        return paidByPayers;
     }
 
     /**
@@ -129,7 +202,6 @@ public class Group {
                && this.groupName.equals(otherGroup.getGroupName());
     }
 
-
     @Override
     public boolean equals (Object otherGroup) {
         if (this == otherGroup) {
@@ -152,7 +224,106 @@ public class Group {
     public Group addExpense(Expense expense) {
         ArrayList<Expense> newExpenses = new ArrayList<>(expenses);
         newExpenses.add(expense);
-        return new Group(groupName, members, tags, newExpenses);
+        Person payer = expense.getPayer();
+        Map<Person, Cost> individualExpenses = expense.getIndividualExpenses();
+        paidByPayers.computeIfPresent(payer, (key, val) -> val.add(this.paidByPayers.get(payer)));
+        for (Map.Entry<Person, Cost> entry : individualExpenses.entrySet()) {
+            Person payee = entry.getKey();
+            paidByPayees.computeIfPresent(payee, (key, val) -> val.add(this.paidByPayees.get(payee)));
+        }
+        return new Group(groupName, members, tags, newExpenses, paidByPayers, paidByPayees);
+    }
+
+    /**
+     * Adds an expense into the group.
+     *
+     * @param expense to be added to the group.
+     * @return A new group with the expense added to it.
+     */
+    public Group addExpenseWithIndivPayments(Expense expense, HashMap<Person, Cost> paidByPayees) {
+        ArrayList<Expense> newExpenses = new ArrayList<>(expenses);
+        newExpenses.add(expense);
+        for (Person p : this.paidByPayees.keySet()) {
+            paidByPayees.merge(p, this.paidByPayees.get(p), (original, toAdd) -> original.add(toAdd));
+        }
+        return new Group(groupName, members, tags, newExpenses, paidByPayers, paidByPayees);
+    }
+
+    /**
+     * Removes an expense from the group.
+     *
+     * @param expense to be removed from the group.
+     * @return A new group with the expense removed from it.
+     */
+    public Group deleteExpense(Expense expense) {
+        ArrayList<Expense> newExpenses = new ArrayList<>(expenses);
+        newExpenses.remove(expense);
+        Person payer = expense.getPayer();
+        Map<Person, Cost> individualExpenses = expense.getIndividualExpenses();
+        paidByPayers.computeIfPresent(payer, (key, val) -> val.subtract(this.paidByPayers.get(payer)));
+        for (Map.Entry<Person, Cost> entry : individualExpenses.entrySet()) {
+            Person payee = entry.getKey();
+            paidByPayees.computeIfPresent(payee, (key, val) -> val.subtract(this.paidByPayees.get(payee)));
+        }
+        return new Group(groupName, members, tags, newExpenses, paidByPayers, paidByPayees);
+    }
+
+    /**
+     * Replaces the person {@code target} with {@code editedPerson}.
+     * @param target Person to edit
+     * @param editedPerson Person with updated details
+     * @return Group with new person
+     */
+    public Optional<Group> updatePerson(Person target, Person editedPerson) {
+        requireAllNonNull(target, editedPerson);
+
+        boolean isUpdated = false;
+
+        ArrayList<Person> updatedMembers = members;
+        int index = members.indexOf(target);
+        if (index != -1) {
+            updatedMembers.set(index, editedPerson);
+            isUpdated = true;
+        }
+
+        Optional<ArrayList<Expense>> updatedExpensesOptional = updateExpense(target, editedPerson);
+
+        if (updatedExpensesOptional.isPresent()) {
+            isUpdated = true;
+        }
+
+        if (isUpdated) {
+            ArrayList<Expense> updatedExpense = updatedExpensesOptional.orElse(expenses);
+            return Optional.of(new Group(groupName, updatedMembers, tags, updatedExpense));
+        } else {
+            return Optional.ofNullable(null);
+        }
+    }
+
+    /**
+     * Replaces the person {@code target} with {@code editedPerson}.
+     * Only called by {@code updatePerson}.
+     */
+    private Optional<ArrayList<Expense>> updateExpense(Person target, Person editedPerson) {
+        requireAllNonNull(target, editedPerson);
+
+        ArrayList<Expense> updatedExpenses = new ArrayList<>(expenses);
+        boolean isUpdated = false;
+
+        for (int i = 0; i < updatedExpenses.size(); i++) {
+            Expense expense = updatedExpenses.get(i);
+            Optional<Expense> updatedExpense = expense.updatePerson(target, editedPerson);
+            if (updatedExpense.isPresent()) {
+                updatedExpenses.set(i, updatedExpense.get());
+                isUpdated = true;
+            }
+        }
+
+        if (!isUpdated) {
+            updatedExpenses = null;
+        }
+
+        return Optional.ofNullable(updatedExpenses);
     }
 
     @Override

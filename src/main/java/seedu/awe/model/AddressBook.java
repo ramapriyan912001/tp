@@ -3,15 +3,24 @@ package seedu.awe.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
+import seedu.awe.model.expense.Cost;
 import seedu.awe.model.expense.Expense;
+import seedu.awe.model.expense.ExpenseList;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.group.UniqueGroupList;
+import seedu.awe.model.payment.Payment;
+import seedu.awe.model.payment.PaymentList;
 import seedu.awe.model.person.Person;
 import seedu.awe.model.person.UniquePersonList;
+import seedu.awe.model.transactionsummary.TransactionSummary;
+import seedu.awe.model.transactionsummary.TransactionSummaryList;
 
 /**
  * Wraps all data at the awe-book level
@@ -21,6 +30,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final UniqueGroupList groups;
+    private final ExpenseList expenses;
+    private final PaymentList payments;
+    private final TransactionSummaryList transactionSummary;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -32,6 +44,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         groups = new UniqueGroupList();
+        expenses = new ExpenseList();
+        payments = new PaymentList();
+        transactionSummary = new TransactionSummaryList();
     }
 
     public AddressBook() {}
@@ -66,9 +81,33 @@ public class AddressBook implements ReadOnlyAddressBook {
         groups.setGroup(group, newGroup);
     }
 
-    public ArrayList<Expense> getExpenses(Group group) {
-        Group groupToListExpenses = groups.getGroupByName(group.getGroupName());
-        return groupToListExpenses.getExpenses();
+    /**
+     * Replaces the contents of the expenses list with the given group's
+     * expenses.
+     *
+     * @param group Group that contains all new expenses.
+     */
+    public void setExpenses(Group group) {
+        expenses.clear();
+        expenses.addAll(group.getExpenses());
+        expenses.setGroup(group);
+    }
+
+    public ObservableList<Expense> getExpenseList() {
+        return expenses.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Payment> getPaymentList() {
+        return payments.asUnmodifiableObservableList();
+    }
+
+    public UniqueGroupList getGroups() {
+        return this.groups;
+    }
+
+    public UniquePersonList getPersons() {
+        return this.persons;
     }
 
     /**
@@ -108,6 +147,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedPerson);
 
         persons.setPerson(target, editedPerson);
+        groups.updatePerson(target, editedPerson);
     }
 
     /**
@@ -166,6 +206,56 @@ public class AddressBook implements ReadOnlyAddressBook {
     public Group getGroupByName(GroupName groupName) {
         requireNonNull(groupName);
         return groups.getGroupByName(groupName);
+    }
+
+    /**
+     * Checks if the current expense list in address book
+     * belongs to the specified group.
+     *
+     * @param group The group to check if the expense list belongs to.
+     * @return true if the expense list belongs to the group.
+     */
+    public boolean isCurrentExpenseList(Group group) {
+        Optional<Group> current = expenses.getGroup();
+        boolean isCurrentGroup = current.isPresent() && current.get().equals(group);
+        return isCurrentGroup;
+    }
+
+    public void setTransactionSummary(HashMap<Person, Cost> summary) {
+        List<TransactionSummary> toSet = new ArrayList<>();
+        for (Map.Entry<Person, Cost> e: summary.entrySet()) {
+            toSet.add(new TransactionSummary(e.getKey(), e.getValue()));
+        }
+
+        this.transactionSummary.set(toSet);
+    }
+
+    /**
+     * Adds expense to the current expense list if it belongs to the
+     * specified group.
+     *
+     * @param expense The expense to add.
+     * @param group The group which the expense belongs to.
+     */
+    public void addExpense(Expense expense, Group group) {
+        boolean isCurrentGroup = isCurrentExpenseList(group);
+        if (isCurrentGroup) {
+            expenses.add(expense);
+        }
+    }
+
+    /**
+     * Deletes the specified expense in the current list if it belongs to the
+     * specified group.
+     *
+     * @param expense The expense to remove.
+     * @param group The group which the expense belongs to.
+     */
+    public void deleteExpense(Expense expense, Group group) {
+        boolean isCurrentGroup = isCurrentExpenseList(group);
+        if (isCurrentGroup) {
+            expenses.remove(expense);
+        }
     }
 
     @Override

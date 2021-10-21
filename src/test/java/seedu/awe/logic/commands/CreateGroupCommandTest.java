@@ -9,6 +9,8 @@ import static seedu.awe.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -20,6 +22,7 @@ import seedu.awe.model.AddressBook;
 import seedu.awe.model.Model;
 import seedu.awe.model.ReadOnlyAddressBook;
 import seedu.awe.model.ReadOnlyUserPrefs;
+import seedu.awe.model.expense.Cost;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
@@ -33,7 +36,7 @@ public class CreateGroupCommandTest {
     @Test
     public void constructor_nullGroup_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () ->
-                new CreateGroupCommand(null, null, true));
+                new CreateGroupCommand(null, null, true, new HashSet<>()));
     }
 
     @Test
@@ -44,7 +47,7 @@ public class CreateGroupCommandTest {
         ArrayList<Person> members = builder.getValidMembers();
         Group groupAdded = new Group(bali, members);
 
-        CommandResult commandResult = new CreateGroupCommand(bali, members, true).execute(modelStub);
+        CommandResult commandResult = new CreateGroupCommand(bali, members, true, new HashSet<>()).execute(modelStub);
 
         assertEquals(CreateGroupCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(groupAdded), modelStub.groupsAdded);
@@ -56,7 +59,7 @@ public class CreateGroupCommandTest {
         GroupBuilder builder = new GroupBuilder();
         GroupName bali = builder.getValidGroupName();
         ArrayList<Person> members = builder.getValidMembers();
-        CreateGroupCommand createGroupCommand = new CreateGroupCommand(bali, members, true);
+        CreateGroupCommand createGroupCommand = new CreateGroupCommand(bali, members, true, new HashSet<>());
         ModelStub modelStub = new ModelStubWithGroup(validGroup);
 
         assertThrows(CommandException.class, CreateGroupCommand.MESSAGE_DUPLICATE_GROUP, () ->
@@ -68,8 +71,10 @@ public class CreateGroupCommandTest {
         GroupName bali = new GroupName("Bali");
         GroupName oslo = new GroupName("Oslo");
         ArrayList<Person> members = new GroupBuilder().getValidMembers();
-        CreateGroupCommand createBaliCommand = new CreateGroupCommand(bali, members, true);
-        CreateGroupCommand createOsloCommand = new CreateGroupCommand(oslo, members, true);
+        CreateGroupCommand createBaliCommand = new CreateGroupCommand(bali, members, true,
+                new HashSet<>());
+        CreateGroupCommand createOsloCommand = new CreateGroupCommand(oslo, members, true,
+                new HashSet<>());
 
 
         // same object -> returns true
@@ -151,6 +156,16 @@ public class CreateGroupCommandTest {
         }
 
         @Override
+        public void setTransactionSummary(HashMap<Person, Cost> summary) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setAllMembersOfGroup(Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -200,13 +215,34 @@ public class CreateGroupCommandTest {
         }
 
         @Override
-        public ArrayList<Expense> getExpenses(Group group) {
+        public void addExpense(Expense expense, Group group) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void deleteExpense(Expense expense, Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Expense> getExpenses() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setExpenses(Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredExpenseList(Predicate<Expense> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single group.
      */
     private class ModelStubWithGroup extends ModelStub {
         private final Group group;
@@ -244,6 +280,11 @@ public class CreateGroupCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public void setAllMembersOfGroup(Group group) {
+            requireNonNull(group);
         }
     }
 
