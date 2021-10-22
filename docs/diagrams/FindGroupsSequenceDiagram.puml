@@ -34,29 +34,29 @@ create GroupContainsKeywordsPredicate
 FindGroupsCommandParser -> GroupContainsKeywordsPredicate
 activate GroupContainsKeywordsPredicate
 
-GroupContainsKeywordsPredicate -> FindGroupsCommandParser : c
+GroupContainsKeywordsPredicate -> FindGroupsCommandParser : predicate
 deactivate GroupContainsKeywordsPredicate
 
 create FindGroupsCommand
-FindGroupsCommandParser -> FindGroupsCommand : c
+FindGroupsCommandParser -> FindGroupsCommand : predicate
 activate FindGroupsCommand
 
-FindGroupsCommand --> FindGroupsCommandParser : d
+FindGroupsCommand --> FindGroupsCommandParser : command
 deactivate FindGroupsCommand
 
-FindGroupsCommandParser --> AddressBookParser : d
+FindGroupsCommandParser --> AddressBookParser : command
 deactivate FindGroupsCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 FindGroupsCommandParser -[hidden]-> AddressBookParser
 destroy FindGroupsCommandParser
 
-AddressBookParser --> LogicManager : d
+AddressBookParser --> LogicManager : command
 deactivate AddressBookParser
 
 LogicManager -> FindGroupsCommand : execute()
 activate FindGroupsCommand
 
-FindGroupsCommand -> Model : updateFilteredGroupList(c)
+FindGroupsCommand -> Model : updateFilteredGroupList(predicate)
 activate Model
 
 Model --> FindGroupsCommand
@@ -66,11 +66,15 @@ create CommandResult
 FindGroupsCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> FindGroupsCommand
+CommandResult --> FindGroupsCommand : result
 deactivate CommandResult
 
 FindGroupsCommand --> LogicManager : result
 deactivate FindGroupsCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindGroupsCommand -[hidden]-> AddressBookParser
+destroy FindGroupsCommand
+
 
 [<--LogicManager
 deactivate LogicManager
