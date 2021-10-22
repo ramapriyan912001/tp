@@ -198,7 +198,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isShowContacts()) {
-                viewPanel.toggleView(UiView.ADDRESS_BOOK);
+                viewPanel.toggleView(UiView.CONTACT_PAGE);
             }
 
             if (commandResult.isShowGroups()) {
