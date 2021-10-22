@@ -4,9 +4,12 @@ import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.awe.commons.core.LogsCenter;
 import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.model.Model;
+import seedu.awe.model.ModelManager;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.person.Person;
@@ -21,6 +24,7 @@ public class CreateGroupCommand extends Command {
     public static final String MESSAGE_EMPTY_GROUP = "Group requires at least 1 member. \n%1$s\n%s";
     public static final String MESSAGE_INVALID_NAMES = "None of the names are in your contact book.";
 
+    private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     private final ArrayList<Person> members;
     private final GroupName groupName;
     private final boolean isValidCommand;
@@ -94,6 +98,8 @@ public class CreateGroupCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }
         model.addGroup(group);
+        model.setAllMembersOfGroup(group);
+        logger.fine("Created group \"" + group.getGroupName() + "\"");
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

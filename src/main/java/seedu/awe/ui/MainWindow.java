@@ -15,6 +15,7 @@ import seedu.awe.commons.core.LogsCenter;
 import seedu.awe.logic.Logic;
 import seedu.awe.logic.commands.CommandResult;
 import seedu.awe.logic.commands.exceptions.CommandException;
+import seedu.awe.logic.parser.exceptions.EmptyGroupException;
 import seedu.awe.logic.parser.exceptions.ParseException;
 
 /**
@@ -197,7 +198,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isShowContacts()) {
-                viewPanel.toggleView(UiView.ADDRESS_BOOK);
+                viewPanel.toggleView(UiView.CONTACT_PAGE);
             }
 
             if (commandResult.isShowGroups()) {
@@ -208,8 +209,16 @@ public class MainWindow extends UiPart<Stage> {
                 viewPanel.toggleView(UiView.EXPENSE_PAGE);
             }
 
+            if (commandResult.isShowTransactionSummary()) {
+                viewPanel.toggleView(UiView.TRANSACTION_SUMMARY);
+            }
+
+            if (commandResult.isShowPaymentsCommand()) {
+                viewPanel.toggleView(UiView.PAYMENT_PAGE);
+            }
+
             return commandResult;
-        } catch (CommandException | ParseException e) {
+        } catch (CommandException | ParseException | EmptyGroupException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;

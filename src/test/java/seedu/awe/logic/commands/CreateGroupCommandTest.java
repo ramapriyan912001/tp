@@ -9,7 +9,9 @@ import static seedu.awe.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -21,11 +23,14 @@ import seedu.awe.model.AddressBook;
 import seedu.awe.model.Model;
 import seedu.awe.model.ReadOnlyAddressBook;
 import seedu.awe.model.ReadOnlyUserPrefs;
+import seedu.awe.model.expense.Cost;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.group.exceptions.DuplicateGroupException;
+import seedu.awe.model.payment.Payment;
 import seedu.awe.model.person.Person;
+import seedu.awe.model.transactionsummary.TransactionSummary;
 import seedu.awe.testutil.GroupBuilder;
 
 public class CreateGroupCommandTest {
@@ -154,6 +159,16 @@ public class CreateGroupCommandTest {
         }
 
         @Override
+        public void setTransactionSummary(HashMap<Person, Cost> summary) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setAllMembersOfGroup(Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -171,6 +186,11 @@ public class CreateGroupCommandTest {
         @Override
         public boolean hasGroup(Group group) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setPayments(List<Payment> payments) {
+
         }
 
         /**
@@ -213,6 +233,11 @@ public class CreateGroupCommandTest {
         }
 
         @Override
+        public ObservableList<Payment> getPayments() {
+            return null;
+        }
+
+        @Override
         public ObservableList<Expense> getExpenses() {
             throw new AssertionError("This method should not be called.");
         }
@@ -222,6 +247,20 @@ public class CreateGroupCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void updateFilteredExpenseList(Predicate<Expense> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<TransactionSummary> getTransactionSummary() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isCurrentExpenseList(Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -263,6 +302,11 @@ public class CreateGroupCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public void setAllMembersOfGroup(Group group) {
+            requireNonNull(group);
         }
     }
 

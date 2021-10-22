@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,10 +13,13 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.awe.commons.core.GuiSettings;
 import seedu.awe.commons.core.LogsCenter;
+import seedu.awe.model.expense.Cost;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
+import seedu.awe.model.payment.Payment;
 import seedu.awe.model.person.Person;
+import seedu.awe.model.transactionsummary.TransactionSummary;
 
 /**
  * Represents the in-memory model of the awe book data.
@@ -26,7 +31,9 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Group> filteredGroups;
-    private final FilteredList<Expense> expenses;
+    private final FilteredList<Expense> filteredExpenses;
+    private final FilteredList<TransactionSummary> transactionSummary;
+    private final FilteredList<Payment> payments;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -41,7 +48,9 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredGroups = new FilteredList<>(this.addressBook.getGroupList());
-        expenses = new FilteredList<>(this.addressBook.getExpenseList());
+        filteredExpenses = new FilteredList<>(this.addressBook.getExpenseList());
+        transactionSummary = new FilteredList<>(this.addressBook.getTransactionSummaryList());
+        payments = new FilteredList<>(this.addressBook.getPaymentList());
     }
 
     public ModelManager() {
@@ -121,6 +130,15 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public void setAllMembersOfGroup(Group group) {
+        requireNonNull(group);
+
+        for (Person member : group.getMembers()) {
+            addressBook.setPerson(member, member);
+        }
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -181,8 +199,36 @@ public class ModelManager implements Model {
         addressBook.setGroup(group, newGroup);
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
+    //=========== TransactionSummary List Accessors =============================================================
+
+    @Override
+    public void setTransactionSummary(HashMap<Person, Cost> summary) {
+        requireNonNull(summary);
+        addressBook.setTransactionSummary(summary);
+    }
+
+    @Override
+    public ObservableList<TransactionSummary> getTransactionSummary() {
+        return transactionSummary;
+    }
+
+    //=========== Payment List Accessors =============================================================
+
+    @Override
+    public ObservableList<Payment> getPayments() {
+        return payments;
+    }
+
+    @Override
+    public void setPayments(List<Payment> payments) {
+        requireNonNull(payments);
+        addressBook.setPayments(payments);
+    }
+
 
     //=========== Filtered Group List Accessors =============================================================
+
+
 
     /**
      * Returns an unmodifiable view of the list of {@code Group} backed by the internal list of
@@ -205,7 +251,7 @@ public class ModelManager implements Model {
         return addressBook.getGroupByName(groupName);
     }
 
-    //=========== Expenses ================================================================================
+    //=========== Expenses List Accessors ===================================================================
 
     /**
      * Adds expense into expense list in address book, if
@@ -218,6 +264,7 @@ public class ModelManager implements Model {
     @Override
     public void addExpense(Expense expense, Group group) {
         addressBook.addExpense(expense, group);
+        updateFilteredExpenseList(PREDICATE_SHOW_ALL_EXPENSES);
     }
 
     /**
@@ -234,6 +281,16 @@ public class ModelManager implements Model {
 
     //=========== Filtered Expense List Accessors =============================================================
 
+    /** Checks if the current expense list belongs to the
+     * specified group.
+     *
+     * @return true if expense list belongs to the group.
+     */
+    @Override
+    public boolean isCurrentExpenseList(Group group) {
+        return addressBook.isCurrentExpenseList(group);
+    }
+
     /**
      * Returns the current list of expenses.
      *
@@ -241,12 +298,19 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Expense> getExpenses() {
-        return expenses;
+        return filteredExpenses;
+    }
+
+    @Override
+    public void updateFilteredExpenseList(Predicate<Expense> predicate) {
+        requireNonNull(predicate);
+        filteredExpenses.setPredicate(predicate);
     }
 
     @Override
     public void setExpenses(Group group) {
         addressBook.setExpenses(group);
+        updateFilteredExpenseList(PREDICATE_SHOW_ALL_EXPENSES);
     }
 
     @Override

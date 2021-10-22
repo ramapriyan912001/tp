@@ -2,32 +2,8 @@
 layout: page
 title: Developer Guide
 ---
-## Table of Contents
-1. [Acknowledgements](#acknowledgements)
-2. [Setting up, getting started](#setting-up-getting-started)
-3. [Design](#design)
-4. [Architecture](#architecture)
-   1. [UI component](#ui-component)
-   2. [Logic component](#logic-component)
-   3. [Model component](#model-component)
-   4. [Storage component](#storage-component)
-   5. [Common classes](#common-classes)
-5. [Implementation](#implementation)
-   1. [Proposed Undo/Redo feature](#proposed-undoredo-feature)
-   2. [Proposed implementation](#proposed-implementation)
-   3. [Design considerations](#design-considerations)
-   4. [Proposed data archiving](#proposed-data-archiving)
-6. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
-7. [Appendix: Requirements](#appendix-requirements)
-   1. [Product Scope](#product-scope)
-   2. [User stories](#user-stories)
-   3. [Use cases](#use-cases)
-   4. [Non-functional requirements](#non-functional-requirements)
-   5. [Glossary](#glossary)
-8. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
-   1. [Launch and shutdown](#launch-and-shutdown)
-   2. [Deleting a person](#deleting-a-person)
-   3. [Saving data](#saving-data)
+* Table of Contents
+{:toc}
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
@@ -46,7 +22,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -59,7 +35,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -92,13 +68,15 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
+(Note: Implementation of NavigationButton and ViewPanel class diagram are referenced below.)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ViewPanel`, `NavigationButton` etc. 
+All these, except for `GroupButtonListener` and `PersonButtonListner` in `NavigationButton`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -107,9 +85,32 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
+<img src="images/UiViewPanelDiagram.png" width="450" />
+
+The `ViewPanel` consist of the following parts:
+* `GroupListPanel`
+* `PersonListPanel`
+* `ExpenseListPanel`
+
+Each panel will display the corresponding list accordingly. The ViewPanel will only show up a single list panel at a time. 
+We have decided to opt for this way of implementation due to the following:
+* Able to make use of existing AB3 implementation of `PersonList`
+* Will not increase code complexity as compared to both list using the same panel.
+* Able to toggle easily with CLI commands
+
+In addition to using CLI command, we will also be implementing the toggling of list panel with the use of buttons.
+
+<img src="images/UiNavigationButtonDiagram.png" width="450" />
+
+The `NavigationButtonPanel` consist of the following parts:
+* GroupViewButton
+* PersonViewButton
+
+Clicking each button will show the respective list view in `ViewPanel`. The clicking of the button is handled by `EventHandler`.
+
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -123,7 +124,7 @@ How the `Logic` component works:
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+<img src="images/DeleteSequenceDiagram.png" width="600" />
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -137,17 +138,25 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
-
+<img src="images/ModelClassDiagram.png" width="700" />
+<br>
+(Note: Implementation of Person, Group and Expense class diagram are referenced below.)
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data
+    * all `Person` objects (which are contained in a `UniquePersonList` object).
+    * all `Group` objects (which are contained in a `UniqueGroupList` object).
+    * all `Expense` objects (which are contained in a `ExpenseList` object).
+* stores the currently 'selected' `Person`/`Group`/`Expense` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+
+<img src="images/PersonClassDiagram.png" width="450" />
+<img src="images/ExpenseClassDiagram.png" width="350" />
+<img src="images/GroupClassDiagram.png" width="450" />
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
@@ -158,7 +167,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -176,6 +185,243 @@ Classes used by multiple components are in the `seedu.awe.commons` package.
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Create Group Feature
+
+The create group mechanism is facilitated by defining a Group model and adding a Unique Group List field to 
+`AddressBook`. The Group model contains a `GroupName` field containing the name of the group, an `ArrayList` of `Person`
+objects who are members of the Group, an `ArrayList` of `Expense` objects that keeps track of the expenditures of the 
+Group, a `HashMap` that contains details of how much each member has paid in total across the expenses, and a `HashMap`
+that contains details of the total expenditure incurred by each member across the trip.
+
+The following activity diagram shows what happens when a user executes a `createGroup` command.
+
+![CreateGroupActivityDiagram](images/CreateGroupActivityDiagram.png)
+
+Given below is an example usage scenario and how the `creategroup` mechanism behaves at each step.
+
+Step 1. A valid `creategroup` command is given as user input. This prompts the `LogicManager` to run its execute()
+method.
+
+Step 2. The `CreateGroupCommandParser` parses the input and checks for presence of the relevant prefixes.
+It also checks that the group name is valid and all members specified are in the contact list.
+It returns a `CreateGroupCommand`.
+
+Step 3. `CreateGroupCommand` runs its execute() method which checks if a group with the same name has already been
+created. If not, the newly created group is added into the AWE model and all members within the group are updated in
+the model. Upon successful execution, `CommandResult` is returned.
+
+The following sequence operation shows how the `creategroup` operation works.
+![CreateGroupSequenceDiagram](images/CreateGroupSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `CreateGroupCommandParser`
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+#### Design considerations:
+
+**Aspect: User command for `creategroup`:**
+
+* **Alternative 1 (current choice):** Create Travel Group with specified members and tags.
+    * Pros: Intuitive for user to create a travel group with specified members and tags.
+    * Pros: Provides user with convenience of setting up a travel group with minimal commands.
+    * Cons: Harder to implement.
+    * Cons: Easier for user to make an erroneous command.
+
+
+* **Alternative 2 :** Create Travel Group only.
+    * Pros: Easy to implement.
+    * Pros: Command has single responsibility. Easy to remember the sole purpose of `creategroup` command.
+    * Cons: Unintuitive for user as travel group is created without any members or tags.
+    * Cons: Inconvenient for user to use multiple commands to set up a travel group.
+
+
+* **Justification**
+    * User will have at least one member in mind when creating a group.
+    * As such, it is only natural for the `creategroup` command to support addition of members and tags into the group
+      upon creation.
+    * This minimizes the number of commands a user has to make in setting up a functional Group.
+    * As such, it is better to choose Alternative 1, as this provides the user with a far better user experience.
+
+
+### Delete Group Feature
+
+The delete group mechanism is facilitated by maintaining the constraint that every `Group` has a unique `GroupName`.
+This allows the `Model` class to easily retrieve the Group based on the name entered by the user and remove the group from the model.
+
+The following activity diagram shows what happens when a user executes a `deletegroup` command.
+
+![DeleteGroupActivityDiagram](images/DeleteGroupActivityDiagram.png)
+
+Given below is an example usage scenario and how the `deletegroup` mechanism behaves at each step.
+
+Step 1. A valid `deletegroup` command is given as user input. This prompts the `LogicManager` to run its execute()
+method.
+
+Step 2. The `DeleteGroupCommandParser` parses the input and checks for presence of the relevant prefixes.
+It also checks that the group name is valid (does not have any non-alphanumeric characters).
+It returns a `DeleteGroupCommand`.
+
+Step 3. `DeleteGroupCommand` runs its execute() method which checks if a group with the same name has been
+created in the past. If so, this group is retrieved from the model. Subsequently, the group is removed from the addressbook.
+Upon successful execution, `CommandResult` is returned.
+
+
+The following sequence operation shows how the `deletegroup` operation works.
+![DeleteGroupSequenceDiagram](images/DeleteGroupSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteGroupCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+#### Design considerations:
+
+**Aspect: User command for deletegroup:**
+
+* **Alternative 1 (current choice):** Delete based on `GroupName`
+    * Pros: Easy to implement.
+    * Pros: Difficult for user to make an erroneous command.
+    * Cons: Long user command.  
+    * Cons: Requires imposition of constraint that group names are unique.
+    
+
+* **Alternative 2 (index based):** Delete based on index position in `ObservableList`
+    * Pros: Easy to implement.
+    * Pros: Short user command  
+    * Cons: Unintuitive for user.
+    * Cons: Easy for user to make an erroneous command.
+    
+
+* **Justification**
+    * Group contains large mass of information such as multiple expenses, individual expenditures, and payments.
+    * This information is unrecoverable once deleted.
+    * As such, it is better to choose Alternative 1, as this makes it difficult for user to accidentally delete a group.
+
+### Find group feature
+
+The find group feature supports both single predicate and multi-predicate search. This allows the displayed view panel to show the entries related to the search keywords enterd by the user
+
+![Interactions Inside the Logic Component for the `findgroups` Command](images/FindGroupsSequenceDiagram.png)
+
+Step 1. When the `findgroups` command executes, the message is passed into `LogicManager` and parsed by `AddressBookParser`.
+
+Step 2. `FindGroupsCommandParser` is created and the arguments are parsed by it. The arguments are used to create `GroupContainsKeywordsPredicate` and `FindGroupsCommand` is returned to the `LogicManager`.
+
+Step 3. The `LogicManager` then calls `FindGroupCommand#execute(model)` method, which updated the `FilteredList<Group>` in `ModelManager`.
+
+Step 4. The GUI listens for updates in the `FilteredList<Group>` and updates the display accordingly.
+
+Step 5. `CommandResult` is returned to the `LogicManager`, which also switches the viewpanel to `GroupsListPanel` if needed.
+
+Step 6. The output from `CommandResult` is then displayed as an output for the user.
+
+### Add expense feature
+
+The add expense mechanism is facilitated by defining an Expense model and adding an Expense List field to
+`AddressBook`. The Expense model contains a `Person` field containing the payer of the Expense, a `Cost` field
+containing the cost of the expense, a `List` of `Person` objects that keeps track of the people involved in the
+expense, a `HashMap` that contains details of how much each member has paid in total for the expense.
+
+The following activity diagram shows what happens when a user executes a `addexpense` command.
+
+![AddExpenseActivityDiagram](images/AddExpenseActivityDiagram.png)
+
+Given below is an example usage scenario and how the `addexpense` mechanism behaves at each step.
+
+Step 1. A valid `addexpense` command is given as user input. This prompts the `LogicManager` to run its execute()
+method.
+
+Step 2. The `AddExpenseCommandParser` parses the input and checks for presence of the relevant prefixes.
+It also checks that the group name is valid and all members specified are in the specified group.
+It returns a `AddExpenseCommand`.
+
+Step 3. `AddExpenseCommand` runs its execute() method which adds the newly created expense involving the into the
+relevant group members into the group and the group is updated in the AWE model.Upon successful execution,
+`CommandResult` is returned.
+
+The following sequence operation shows how the `addexpense` operation works.
+![AddExpenseSequenceDiagram](images/AddExpenseSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddExpenseCommandParser`
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+#### Design considerations:
+
+**Aspect: User command for `addexpense`:**
+
+* **Alternative 1 (current choice):** Create Expense with specified group and group members.
+    * Pros: Intuitive for user to create an expense with specified group and group members via their names.
+    * Pros: Provides user with convenience of creating an expense with minimal input.
+    * Cons: Harder to implement.
+    * Cons: Easier for user to make an erroneous command.
+
+
+* **Alternative 2 (index based):** Create Expense with based on index position in `ObservableList`.
+    * Pros: Easy to implement.
+    * Cons: Inconvenient for user to add an expense as they have to check again the index of both the person and group.
+    * Cons: Easy for user to make an erroneous command.
+
+* **Justification**
+    * Each person has a unique name and the implementation for adding an expense based on a person's and group's 
+      name is simple.
+    * Users may need a long time to find the index of a person or group if the list of either is very long.
+    * Hence, adding expenses based on the specified person and group name is more appropriate.
+
+### Find Expenses Feature
+
+The find expenses mechanism is facilitated by `Group`. Each group has a unique group name and also an expense list 
+required for finding expenses within a group.
+
+The following activity diagram shows what happens when a user executes a `findexpenses` command.
+
+![FindExpensesActivityDiagram](images/FindExpensesActivityDiagram.png)
+
+Given below is an example usage scenario and how the `findexpenses` mechanism behaves at each step.
+
+Step 1. The user executes a valid `findexpenses eat gn/London` command. This prompts the `LogicManager` 
+to run its execute() method.
+
+Step 2. The `FindExpensesCommandParser` parses the input and checks for presence of the group name prefix.
+It also checks that the group name is valid (does not have any non-alphanumeric characters). The arguments are 
+used to create `DescriptionContainsKeywordsPredicate` and `FindExpensesCommand` is returned to the `LogicManager`.
+
+Step 3. The `LogicManager` then calls `FindExpensesCommand#execute(model)` method, which updates the 
+`FilteredList<Expense>` in `ModelManager` using the predicate created in step 2.
+
+Step 4. The GUI listens for updates in the `FilteredList<Expense>` and updates the display accordingly.
+
+Step 5. `CommandResult` is returned to the `LogicManager`, which also switches the viewpanel to `ExpensesListPanel` if needed.
+
+Step 6. The output from `CommandResult` is then displayed as an output for the user.
+
+
+The following sequence operation shows how the `findexpenses` operation works.
+![FindExpensesSequenceDiagram](images/FindExpensesSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteGroupCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+#### Design considerations:
+
+**Aspect: User command for findexpenses:**
+
+* **Alternative 1 (current choice):** Find based on `GroupName`
+    * Pros: Easy to implement.
+    * Cons: Long user command if group name is long.
+    * Cons: Requires imposition of constraint that group names are unique.
+
+
+* **Alternative 2 (index based):** Find expenses in the group indicated by index position in `ObservableList`
+    * Pros: Short user command with just the index.
+    * Cons: User need to check for the right index of the group.
+    * Cons: Easy for user to make an erroneous command.
+
+
+* **Justification**
+    * Each group has a unique name and the implementation for finding a group based on the group name is simple. 
+    * Users may need a long time to find the index of a group if the list of groups is very long.
+    * Hence, finding expenses based on the specified group name is more appropriate.
+
 
 ### \[Proposed\] Undo/redo feature
 
@@ -256,11 +502,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -529,7 +770,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
       Use case ends.
 
-**Use case: View expenses of a travel group**
+**Use case: List expenses of a travel group**
 
 **MSS**
 
@@ -547,19 +788,56 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
     Use case ends.
     
-* 3a. The given index is invalid.
+* 3a. The given group name is invalid.
     * 3a1. AWE displays an error.
     
       Use case ends.
       
 * 4a. AWE detect no expenses logged under the group.
-    * 4a1. AWE displays message about no transaction.
+    * 4a1. AWE displays an empty list.
     
       Use case ends.
 
+**Use case: Find expenses in a travel group**
+
+**MSS**
+
+1. User request to find expense(s) based on keyword(s) and group name.
+2. AWE shows a list of expenses in specified group that matches the keyword(s).
+
+**Extensions**
+
+* 2a. The specified group does not exist in AWE.
+    * 2a1. AWE shows a message saying that there is no such existing group.
+
+      Use case ends.
+
+* 2b. There are no expenses matching the search parameters.
+    * 2b1. AWE displays nothing in the expenses page.
+    * 2b2. AWE shows a message saying no expenses are found.
+
+      Use case ends.
+
+
+**Use case: Find Groups**
+
+*MSS*
+1. User request to find groups based on keywords.
+2. GroupsPage shows a list of groups that matches the search predicates.
+3. AWE displays a message with number of groups found
+
+    Use case ends
+    
+**Extension**
+* 2a. AWE can't find any groups that matches the keywords.
+    2a1. GroupsPage shows an empty page
+    
+    Use case continues
+
+
 **Use case: Add Expense**
 
-**Preconditions: User has selected a travel group**
+**Preconditions: User has is a member of the specified travel group**
 
 **MSS**
 
@@ -679,20 +957,50 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Search for groups
+
+1. Search for groups in GroupPage
+    1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added)
+    
+    1. Test case: `findgroups London`
+       Expected: GroupList will list out 1 group with the name 'London'. 1 groups found shown in the status message.
+       
+    1. Test case: `findgroups London Singapore`
+       Expected: GroupList will list out 1 group with the name 'London'. 1 groups found shown in the status message.
+    
+    1. Test case: `findgroups Singapore`
+       Expected: GroupList will display a blank page. 0 groups found shown in status message.
+       
+2. Search for groups in ContactPage
+   1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added)
+   
+   1. Test case: `findgroups London`
+      Expected: GroupList displayed. GroupList will list out 1 group with the name 'London'. 1 groups found shown in the status message.
+      
+   1. Test case: `findgroups London Singapore`
+      Expected: GroupList displayed. GroupList will list out 1 group with the name 'London'. 1 groups found shown in the status message.
+   
+   1. Test case: `findgroups Singapore`
+      Expected: GroupList displayed. GroupList will display a blank page. 0 groups found shown in status message.
+    
+    
+
 ### Viewing expenses
 
 1. Viewing all expenses of a travel group
 
-   1. Prerequisites: List all travel groups using the `groups` command. Multiple travel groups in the list.
+   1. Prerequisites: Have at least one group in the app.
 
-   1. Test case: `expenses 1`<br>
-      Expected: Expenses under the first travel group displayed. Details of the operation shown in the status message.
+   1. Test case: `expenses gn/London`<br>
+      Expected: Expenses under the group named London are displayed. Details of the operation shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No expenses displayed. Error details shown in the status message.
+   1. Test case: `expenses gn/Test`<br>
+      Expected: No expenses displayed as group does not exist. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `expenses`, `delete gn/`, `...`
       Expected: Similar to previous.
+      
+
 
 1. _{ more test cases …​ }_
 

@@ -21,6 +21,7 @@ import javafx.collections.ObservableList;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
+import seedu.awe.model.payment.Payment;
 import seedu.awe.model.person.Person;
 import seedu.awe.model.person.exceptions.DuplicatePersonException;
 import seedu.awe.testutil.PersonBuilder;
@@ -92,6 +93,7 @@ public class AddressBookTest {
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<Expense> expenses = FXCollections.observableArrayList();
+        private final ObservableList<Payment> payments = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
@@ -107,6 +109,11 @@ public class AddressBookTest {
             return expenses;
         }
 
+        @Override
+        public ObservableList<Payment> getPaymentList() {
+            return payments;
+        }
+
         /**
          * //TODO
          */
@@ -119,6 +126,11 @@ public class AddressBookTest {
         public Group getGroupByName(GroupName groupName) {
             return null;
             //TODO: WRITE MODEL STUB FOR UNIQUEGROUPLIST.
+        }
+
+        @Override
+        public void setPayments(List<Payment> payments) {
+           // EMPTY METHOD
         }
     }
 

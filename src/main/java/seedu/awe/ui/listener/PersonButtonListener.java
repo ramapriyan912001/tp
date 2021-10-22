@@ -21,6 +21,6 @@ public class PersonButtonListener implements EventHandler<ActionEvent> {
      */
     @Override
     public void handle(ActionEvent event) {
-        viewPanel.toggleView(UiView.ADDRESS_BOOK);
+        viewPanel.toggleView(UiView.CONTACT_PAGE);
     }
 }
