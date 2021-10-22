@@ -366,6 +366,11 @@ public class AddExpenseCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public boolean isCurrentExpenseList(Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**
