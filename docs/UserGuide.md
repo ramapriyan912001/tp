@@ -220,7 +220,7 @@ Examples:
 
 Add contact in contact list into an existing travel group.
 
-Format: `groupaddcontact gn/[GROUP_NAME] n/[CONTACT_NAME1] n/[OPTIONAL_CONTACT_NAME2] ...`
+Format: `groupaddcontact gn/GROUP_NAME n/CONTACT_NAME1 [n/CONTACT_NAME2] ...`
 
 * Group name in the user input must already be an existing group.
 * The search is case-sensitive. e.g `hans` will not match `Hans`
@@ -238,7 +238,7 @@ Prague travel group.
 
 Remove contact in contact list from an existing travel group.
 
-Format: `groupremovecontact gn/[GROUP_NAME] n/[CONTACT_NAME1] n/[OPTIONAL_CONTACT_NAME2] ...`
+Format: `groupremovecontact gn/GROUP_NAME n/CONTACT_NAME [n/CONTACT_NAME] ...`
 
 * Group name in the user input must already be an existing group.
 * The search is case-sensitive. e.g `hans` will not match `Hans`
@@ -256,7 +256,7 @@ from the Prague travel group.
 
 Add tag for an existing travel group.
 
-Format: `groupaddtag gn/[GROUP_NAME] t/[TAG1] t/[OPTIONAL_TAG2] ...`
+Format: `groupaddtag gn/GROUP_NAME t/TAG [t/TAG2] ...`
 
 * Group name in the user input must already be an existing group.
 * The search is case-sensitive. e.g `bali` will not match `Bali`
@@ -272,7 +272,7 @@ more specifically, cousins.
 
 Remove tag from an existing travel group.
 
-Format: `groupremovetag gn/[GROUP_NAME] t/[TAG1] t/[OPTIONAL_TAG2] ...`
+Format: `groupremovetag gn/GROUP_NAME t/TAG [t/TAG2] ...`
 
 * Group name in the user input must already be an existing group.
 * Tag has to be in existing group before it can be removed.
@@ -288,7 +288,7 @@ Examples:
 
 Edit group name for an existing travel group.
 
-Format: `groupeditname gn/[OLD_GROUP_NAME] gn/[NEW_GROUP_NAME]`
+Format: `groupeditname gn/OLD_GROUP_NAME gn/NEW_GROUP_NAME`
 
 * Group name in the user input must already be an existing group.
 * The search is case-sensitive. e.g `bali` will not match `Bali`
@@ -316,14 +316,14 @@ Examples:
 Adds a shared expense to the specified travel group.
 The expense can be paid for and split among any number of contacts within the travel group.
 
-Format: `addexpense n/PAYER_NAME gn/GROUP_NAME $/TOTAL_AMOUNT_PAID d/DESCRIPTION n/[PAYEE_WHO_MADE_A_PERSONAL_PAYMENT] $/[PAYEE'S_PERSONAL_PAYMENT_TO_EXCLUDE_FROM_TOTAL_AMOUNT] ex/[PERSON_TO_EXCLUDE_FROM_EXPENSE]`
+Format: `addexpense n/PAYER_NAME gn/GROUP_NAME $/TOTAL_AMOUNT_PAID d/DESCRIPTION [n/PAYEE_WHO_MADE_A_PERSONAL_PAYMENT] [$/PAYEE'S_PERSONAL_PAYMENT_TO_EXCLUDE_FROM_TOTAL_AMOUNT] [ex/PERSON_TO_EXCLUDE_FROM_EXPENSE]`
 
 * There should be at least one PAYER_NAME in the command.
 * PAYER_NAME must be immediately followed by the GROUP NAME.
 * By default, all members of the group will be included in the expense.
 * The names are required to be in the address book.
 * The names are required to be in the specified group.
-* Each expense is a class with a unique ID.
+* DESCRIPTION of the expense does not need to be unique.
 * Each personal payment has to be a name immediately followed by the amount of the personal payment.
 
 Examples:
@@ -350,7 +350,7 @@ Examples:
 
 Finds expenses within the specified group which descriptions contain any of the given keywords.
 
-Format: `findexpenses KEYWORD [MORE_KEYWORDS] gn/GROUP_NAME`
+Format: `findexpenses KEYWORD [MORE_KEYWORDS] [gn/GROUP_NAME]`
 
 * The search is case-insensitive. e.g `dinner` will match `Dinner`
 * The order of the keywords does not matter. e.g. `Dinner Transportation` will match `Transportation Dinner`
