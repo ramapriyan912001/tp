@@ -58,7 +58,7 @@ public class ViewPanel extends UiPart<Region> {
         transactionSummaryListPanel = new TransactionSummaryListPanel(logic.getTransactionSummary());
         paymentListPanel = new PaymentListPanel(logic.getPayments());
 
-        toggleView(UiView.ADDRESS_BOOK);
+        toggleView(UiView.CONTACT_PAGE);
     }
 
     /**
@@ -69,7 +69,7 @@ public class ViewPanel extends UiPart<Region> {
     public void toggleView(UiView uiView) {
         viewListPlaceholder.getChildren().clear();
 
-        if (uiView == UiView.ADDRESS_BOOK) {
+        if (uiView == UiView.CONTACT_PAGE) {
             viewListPlaceholder.getChildren().add(personListPanel.getRoot());
         } else if (uiView == UiView.GROUP_PAGE) {
             viewListPlaceholder.getChildren().add(groupListPanel.getRoot());
