@@ -44,6 +44,8 @@ AWE promises to revolutionises the group-travel space. With AWE, bills can be sp
    * **`addexpense`** : The command `addexpense n/Alex Yeoh gn/Bali $/50 d/drinks` adds an expense paid for by `Alex Yeoh` into the group `Bali` of `$50` for `drinks`.
 
    * **`deleteexpense`** : The command `deleteexpense gn/Bali i/1` removes the 1st expense (by one-based-index) from the list of expenses for the group named Bali.
+   
+   * **`transactionsummary `** : The command `transactionsummary  gn/Bali` provides a list of spending made by each user in the group named Bali.
 
    * **`calculatepayments`** : The command `calculatepayments gn/Bali` provides a list of payments to be made between users to settle debts for the group named Bali.
 
@@ -210,6 +212,10 @@ Examples:
 * `findgroups Taiwan Malaysia` returns `Taiwan` `Malaysia`<br>
   ![result for 'findcontacts Taiwan Malaysia'](images/findAlexDavidResult.png)
 
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:** You can search for multiple groups by entering more keywords.</div>
+
 #### 2.2.5. Adding a contact to an existing group: `groupaddcontact`
 
 Add contact in contact list into an existing travel group.
@@ -357,7 +363,20 @@ Examples:
 * `findexpenses dinner gn/London` returns `dinner` and `Friday dinner`
 * `findexpenses lunch souvenirs` returns `lunch`, `souvenirs`<br>
 
-#### 2.3.5. Calculating payments to make: `calculatepayments`
+#### 2.3.5 Calculating total spending of each user: `transactionsummary`
+Displays a list of spending for each users in the group.
+
+Format: `transactionsummary gn/GROUP_NAME`
+
+* GROUP_NAME is a mandatory field.
+* A group with GROUP_NAME as its name must exist.
+
+Examples:
+* `transactionsummary gn/Bali`
+* `transactionsummary gn/London`
+
+
+#### 2.3.6. Calculating payments to make: `calculatepayments`
 Uses the net spend of the user on the trip to tabulate a fast set of payments to settle the debts between members of the group.
 
 Format: `calculatepayments gn/GROUP_NAME`
