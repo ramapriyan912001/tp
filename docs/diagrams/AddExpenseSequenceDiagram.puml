@@ -3,7 +3,7 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AweParser" as AweParser LOGIC_COLOR
 participant ":AddExpenseCommandParser" as AddExpenseCommandParser LOGIC_COLOR
 participant "addExpenseCommand:AddExpenseCommand" as AddExpenseCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
@@ -16,17 +16,17 @@ end box
 [-> LogicManager : execute("addexpense n/Alex Yeoh gn/Bali $/50 d/Happy hour n/Bernice Yu $/10 ex/Charlie Tan")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("addexpense n/Alex Yeoh gn/Bali $/50 d/Happy hour n/Bernice Yu $/10 ex/Charlie Tan")
-activate AddressBookParser
+LogicManager -> AweParser : parseCommand("addexpense n/Alex Yeoh gn/Bali $/50 d/Happy hour n/Bernice Yu $/10 ex/Charlie Tan")
+activate AweParser
 
 create AddExpenseCommandParser
-AddressBookParser -> AddExpenseCommandParser
+AweParser -> AddExpenseCommandParser
 activate AddExpenseCommandParser
 
-AddExpenseCommandParser --> AddressBookParser
+AddExpenseCommandParser --> AweParser
 deactivate AddExpenseCommandParser
 
-AddressBookParser -> AddExpenseCommandParser : parse("n/Alex Yeoh gn/Bali $/50 d/Happy hour n/Bernice Yu $/10 ex/Charlie Tan")
+AweParser -> AddExpenseCommandParser : parse("n/Alex Yeoh gn/Bali $/50 d/Happy hour n/Bernice Yu $/10 ex/Charlie Tan")
 activate AddExpenseCommandParser
 
 create AddExpenseCommand
@@ -36,14 +36,14 @@ activate AddExpenseCommand
 AddExpenseCommand --> AddExpenseCommandParser : addExpenseCommand
 deactivate AddExpenseCommand
 
-AddExpenseCommandParser --> AddressBookParser : addExpenseCommand
+AddExpenseCommandParser --> AweParser : addExpenseCommand
 deactivate AddExpenseCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-AddExpenseCommandParser -[hidden]-> AddressBookParser
+AddExpenseCommandParser -[hidden]-> AweParser
 destroy AddExpenseCommandParser
 
-AddressBookParser --> LogicManager : addExpenseCommand
-deactivate AddressBookParser
+AweParser --> LogicManager : addExpenseCommand
+deactivate AweParser
 
 LogicManager -> AddExpenseCommand : execute()
 activate AddExpenseCommand

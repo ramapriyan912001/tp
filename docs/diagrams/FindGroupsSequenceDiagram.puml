@@ -3,7 +3,7 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AweParser" as AweParser LOGIC_COLOR
 participant ":FindGroupsCommandParser" as FindGroupsCommandParser LOGIC_COLOR
 participant "d:FindGroupsCommand" as FindGroupsCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
@@ -17,17 +17,17 @@ end box
 [-> LogicManager : execute("findgroups London")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("findgroups London")
-activate AddressBookParser
+LogicManager -> AweParser : parseCommand("findgroups London")
+activate AweParser
 
 create FindGroupsCommandParser
-AddressBookParser -> FindGroupsCommandParser
+AweParser -> FindGroupsCommandParser
 activate FindGroupsCommandParser
 
-FindGroupsCommandParser --> AddressBookParser
+FindGroupsCommandParser --> AweParser
 deactivate FindGroupsCommandParser
 
-AddressBookParser -> FindGroupsCommandParser : parse("London")
+AweParser -> FindGroupsCommandParser : parse("London")
 activate FindGroupsCommandParser
 
 create GroupContainsKeywordsPredicate
@@ -44,14 +44,14 @@ activate FindGroupsCommand
 FindGroupsCommand --> FindGroupsCommandParser : command
 deactivate FindGroupsCommand
 
-FindGroupsCommandParser --> AddressBookParser : command
+FindGroupsCommandParser --> AweParser : command
 deactivate FindGroupsCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-FindGroupsCommandParser -[hidden]-> AddressBookParser
+FindGroupsCommandParser -[hidden]-> AweParser
 destroy FindGroupsCommandParser
 
-AddressBookParser --> LogicManager : command
-deactivate AddressBookParser
+AweParser --> LogicManager : command
+deactivate AweParser
 
 LogicManager -> FindGroupsCommand : execute()
 activate FindGroupsCommand
@@ -72,7 +72,7 @@ deactivate CommandResult
 FindGroupsCommand --> LogicManager : result
 deactivate FindGroupsCommand
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-FindGroupsCommand -[hidden]-> AddressBookParser
+FindGroupsCommand -[hidden]-> AweParser
 destroy FindGroupsCommand
 
 

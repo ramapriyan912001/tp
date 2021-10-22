@@ -36,7 +36,7 @@ import seedu.awe.model.Model;
 /**
  * Parses user input.
  */
-public class AddressBookParser {
+public class AweParser {
 
     /**
      * Used for initial separation of command word and args.
@@ -44,8 +44,8 @@ public class AddressBookParser {
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private Model model;
 
-    public AddressBookParser() {}
-    public AddressBookParser(Model model) {
+    public AweParser() {}
+    public AweParser(Model model) {
         this.model = model;
     }
     /**
