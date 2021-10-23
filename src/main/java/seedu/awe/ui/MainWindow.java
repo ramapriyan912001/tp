@@ -26,6 +26,8 @@ public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
 
+    public static UiView viewEnum = UiView.CONTACT_PAGE;
+
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
@@ -198,23 +200,28 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isShowContacts()) {
-                viewPanel.toggleView(UiView.CONTACT_PAGE);
+                viewEnum = UiView.CONTACT_PAGE;
+                viewPanel.toggleView(viewEnum);
             }
 
             if (commandResult.isShowGroups()) {
-                viewPanel.toggleView(UiView.GROUP_PAGE);
+                viewEnum = UiView.GROUP_PAGE;
+                viewPanel.toggleView(viewEnum);
             }
 
             if (commandResult.isShowExpenses()) {
-                viewPanel.toggleView(UiView.EXPENSE_PAGE);
+                viewEnum = UiView.EXPENSE_PAGE;
+                viewPanel.toggleView(viewEnum);
             }
 
             if (commandResult.isShowTransactionSummary()) {
-                viewPanel.toggleView(UiView.TRANSACTION_SUMMARY);
+                viewEnum = UiView.TRANSACTION_SUMMARY;
+                viewPanel.toggleView(viewEnum);
             }
 
             if (commandResult.isShowPaymentsCommand()) {
-                viewPanel.toggleView(UiView.PAYMENT_PAGE);
+                viewEnum = UiView.PAYMENT_PAGE;
+                viewPanel.toggleView(viewEnum);
             }
 
             return commandResult;
