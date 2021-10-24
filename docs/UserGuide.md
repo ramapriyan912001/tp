@@ -33,7 +33,7 @@ AWE promises to revolutionises the group-travel space. With AWE, bills can be sp
 
    * **`expenses`** : The command `expenses` lists all expenses in a particular group.
      
-   * **`addcontact`** : The command `addcontact n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` adds a contact named `John Doe` to the Address Book.
+   * **`addcontact`** : The command `addcontact n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` adds a contact named `John Doe` to AWE.
 
    * **`deletecontact`** : The command `deletecontact 3` removes the 3rd contact shown in the current list.
 
@@ -89,13 +89,13 @@ AWE promises to revolutionises the group-travel space. With AWE, bills can be sp
 
 #### 2.1.1. Listing all contacts : `contacts`
 
-Shows a list of all contacts in address book.
+Shows a list of all contacts in AWE.
 
 Format: `contacts`
 
 #### 2.1.2. Adding a person: `addcontact`
 
-Adds a person to the address book.
+Adds a person to AWE.
 
 Format: `addcontact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -109,7 +109,7 @@ Examples:
 
 #### 2.1.3. Editing a person : `editcontact`
 
-Edits an existing person in the address book.
+Edits an existing person in AWE.
 
 Format: `editcontact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -126,7 +126,7 @@ Examples:
 
 #### 2.1.4. Deleting a person : `deletecontact`
 
-Deletes the specified person from the address book.
+Deletes the specified person from AWE.
 
 Format: `deletecontact INDEX`
 
@@ -135,7 +135,7 @@ Format: `deletecontact INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `persons` followed by `deletecontact 2` deletes the 2nd person in the address book.
+* `persons` followed by `deletecontact 2` deletes the 2nd person in AWE.
 * `find Betsy` followed by `deletecontact 1` deletes the 1st person in the results of the `find` command.
 
 #### 2.1.5. Locating a person by name: `findcontacts`
@@ -165,7 +165,7 @@ Shows a list of all groups in GroupPage.
 Format: `groups`
 
 #### 2.2.2. Creating a travel group: ```creategroup```
-Creates a group of people of your choice from your address book.
+Creates a group of people of your choice from AWE.
 Adds you as a member of the group by default.
 
 Format: `creategroup gn/GROUP_NAME n/NAME1 [n/NAME2] [n/NAME3]...[t/TAG1]`
@@ -173,7 +173,7 @@ Format: `creategroup gn/GROUP_NAME n/NAME1 [n/NAME2] [n/NAME3]...[t/TAG1]`
 * GROUP_NAME is a mandatory field.
 * A group with the same name as GROUP_NAME cannot exist for the creation of a group through this command. 
 * At least one NAME is necessary.
-* The names are required to be in the address book and should match contact names exactly.
+* The names are required to be in AWE and should match contact names exactly.
 * Tags cannot have whitespace and special characters other than alphanumeric characters.
 * Tags are optional.
 
@@ -220,7 +220,7 @@ Examples:
 
 Add contact in contact list into an existing travel group.
 
-Format: `groupaddcontact gn/[GROUP_NAME] n/[CONTACT_NAME1] n/[OPTIONAL_CONTACT_NAME2] ...`
+Format: `groupaddcontact gn/GROUP_NAME n/CONTACT_NAME1 [n/CONTACT_NAME2] ...`
 
 * Group name in the user input must already be an existing group.
 * The search is case-sensitive. e.g `hans` will not match `Hans`
@@ -238,7 +238,7 @@ Prague travel group.
 
 Remove contact in contact list from an existing travel group.
 
-Format: `groupremovecontact gn/[GROUP_NAME] n/[CONTACT_NAME1] n/[OPTIONAL_CONTACT_NAME2] ...`
+Format: `groupremovecontact gn/GROUP_NAME n/CONTACT_NAME [n/CONTACT_NAME] ...`
 
 * Group name in the user input must already be an existing group.
 * The search is case-sensitive. e.g `hans` will not match `Hans`
@@ -256,7 +256,7 @@ from the Prague travel group.
 
 Add tag for an existing travel group.
 
-Format: `groupaddtag gn/[GROUP_NAME] t/[TAG1] t/[OPTIONAL_TAG2] ...`
+Format: `groupaddtag gn/GROUP_NAME t/TAG [t/TAG2] ...`
 
 * Group name in the user input must already be an existing group.
 * The search is case-sensitive. e.g `bali` will not match `Bali`
@@ -272,7 +272,7 @@ more specifically, cousins.
 
 Remove tag from an existing travel group.
 
-Format: `groupremovetag gn/[GROUP_NAME] t/[TAG1] t/[OPTIONAL_TAG2] ...`
+Format: `groupremovetag gn/GROUP_NAME t/TAG [t/TAG2] ...`
 
 * Group name in the user input must already be an existing group.
 * Tag has to be in existing group before it can be removed.
@@ -288,7 +288,7 @@ Examples:
 
 Edit group name for an existing travel group.
 
-Format: `groupeditname gn/[OLD_GROUP_NAME] gn/[NEW_GROUP_NAME]`
+Format: `groupeditname gn/OLD_GROUP_NAME gn/NEW_GROUP_NAME`
 
 * Group name in the user input must already be an existing group.
 * The search is case-sensitive. e.g `bali` will not match `Bali`
@@ -316,14 +316,14 @@ Examples:
 Adds a shared expense to the specified travel group.
 The expense can be paid for and split among any number of contacts within the travel group.
 
-Format: `addexpense n/PAYER_NAME gn/GROUP_NAME $/TOTAL_AMOUNT_PAID d/DESCRIPTION n/[PAYEE_WHO_MADE_A_PERSONAL_PAYMENT] $/[PAYEE'S_PERSONAL_PAYMENT_TO_EXCLUDE_FROM_TOTAL_AMOUNT] ex/[PERSON_TO_EXCLUDE_FROM_EXPENSE]`
+Format: `addexpense n/PAYER_NAME gn/GROUP_NAME $/TOTAL_AMOUNT_PAID d/DESCRIPTION [n/PAYEE_WHO_MADE_A_PERSONAL_PAYMENT] [$/PAYEE'S_PERSONAL_PAYMENT_TO_EXCLUDE_FROM_TOTAL_AMOUNT] [ex/PERSON_TO_EXCLUDE_FROM_EXPENSE]`
 
 * There should be at least one PAYER_NAME in the command.
 * PAYER_NAME must be immediately followed by the GROUP NAME.
 * By default, all members of the group will be included in the expense.
-* The names are required to be in the address book.
+* The names are required to be in AWE.
 * The names are required to be in the specified group.
-* Each expense is a class with a unique ID.
+* DESCRIPTION of the expense does not need to be unique.
 * Each personal payment has to be a name immediately followed by the amount of the personal payment.
 
 Examples:
@@ -350,7 +350,7 @@ Examples:
 
 Finds expenses within the specified group which descriptions contain any of the given keywords.
 
-Format: `findexpenses KEYWORD [MORE_KEYWORDS] gn/GROUP_NAME`
+Format: `findexpenses KEYWORD [MORE_KEYWORDS] [gn/GROUP_NAME]`
 
 * The search is case-insensitive. e.g `dinner` will match `Dinner`
 * The order of the keywords does not matter. e.g. `Dinner Transportation` will match `Transportation Dinner`
@@ -401,7 +401,7 @@ Format: `help`
 
 #### 2.4.2. Clearing all entries : `clear`
 
-Clears all entries from the AWE.
+Clears all entries from AWE.
 
 Format: `clear`
 

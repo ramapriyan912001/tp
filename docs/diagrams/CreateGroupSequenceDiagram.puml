@@ -3,7 +3,7 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AweParser" as AweParser LOGIC_COLOR
 participant ":CreateGroupCommandParser" as CreateGroupCommandParser LOGIC_COLOR
 participant "createGroupCommand:CreateGroupCommand" as CreateGroupCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
@@ -16,17 +16,17 @@ end box
 [-> LogicManager : execute("creategroup gn/GROUP_NAME n/NAME")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("creategroup gn/GROUP_NAME n/NAME")
-activate AddressBookParser
+LogicManager -> AweParser : parseCommand("creategroup gn/GROUP_NAME n/NAME")
+activate AweParser
 
 create CreateGroupCommandParser
-AddressBookParser -> CreateGroupCommandParser
+AweParser -> CreateGroupCommandParser
 activate CreateGroupCommandParser
 
-CreateGroupCommandParser --> AddressBookParser
+CreateGroupCommandParser --> AweParser
 deactivate CreateGroupCommandParser
 
-AddressBookParser -> CreateGroupCommandParser : parse("gn/GROUP_NAME")
+AweParser -> CreateGroupCommandParser : parse("gn/GROUP_NAME")
 activate CreateGroupCommandParser
 
 create CreateGroupCommand
@@ -36,14 +36,14 @@ activate CreateGroupCommand
 CreateGroupCommand --> CreateGroupCommandParser : createGroupCommand
 deactivate CreateGroupCommand
 
-CreateGroupCommandParser --> AddressBookParser : createGroupCommand
+CreateGroupCommandParser --> AweParser : createGroupCommand
 deactivate CreateGroupCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-CreateGroupCommandParser -[hidden]-> AddressBookParser
+CreateGroupCommandParser -[hidden]-> AweParser
 destroy CreateGroupCommandParser
 
-AddressBookParser --> LogicManager : createGroupCommand
-deactivate AddressBookParser
+AweParser --> LogicManager : createGroupCommand
+deactivate AweParser
 
 LogicManager -> CreateGroupCommand : execute()
 activate CreateGroupCommand

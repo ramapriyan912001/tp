@@ -31,9 +31,9 @@ import seedu.awe.testutil.EditPersonDescriptorBuilder;
 import seedu.awe.testutil.PersonBuilder;
 import seedu.awe.testutil.PersonUtil;
 
-public class AddressBookParserTest {
+public class AweParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final AweParser parser = new AweParser();
 
     @Test
     public void parseCommand_addContact() throws Exception {

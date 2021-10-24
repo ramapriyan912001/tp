@@ -23,10 +23,12 @@ import seedu.awe.logic.parser.exceptions.ParseException;
  * a menu bar and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Stage> {
+    private static UiView viewEnum = UiView.CONTACT_PAGE;
 
     private static final String FXML = "MainWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
+
 
     private Stage primaryStage;
     private Logic logic;
@@ -85,6 +87,10 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+    }
+
+    public static UiView getViewEnum() {
+        return viewEnum;
     }
 
     /**
@@ -198,23 +204,28 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isShowContacts()) {
-                viewPanel.toggleView(UiView.CONTACT_PAGE);
+                viewEnum = UiView.CONTACT_PAGE;
+                viewPanel.toggleView(viewEnum);
             }
 
             if (commandResult.isShowGroups()) {
-                viewPanel.toggleView(UiView.GROUP_PAGE);
+                viewEnum = UiView.GROUP_PAGE;
+                viewPanel.toggleView(viewEnum);
             }
 
             if (commandResult.isShowExpenses()) {
-                viewPanel.toggleView(UiView.EXPENSE_PAGE);
+                viewEnum = UiView.EXPENSE_PAGE;
+                viewPanel.toggleView(viewEnum);
             }
 
             if (commandResult.isShowTransactionSummary()) {
-                viewPanel.toggleView(UiView.TRANSACTION_SUMMARY);
+                viewEnum = UiView.TRANSACTION_SUMMARY;
+                viewPanel.toggleView(viewEnum);
             }
 
             if (commandResult.isShowPaymentsCommand()) {
-                viewPanel.toggleView(UiView.PAYMENT_PAGE);
+                viewEnum = UiView.PAYMENT_PAGE;
+                viewPanel.toggleView(viewEnum);
             }
 
             return commandResult;

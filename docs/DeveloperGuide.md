@@ -8,7 +8,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -73,7 +73,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/ay2
 ![Structure of the UI Component](images/UiClassDiagram.png)
 (Note: Implementation of NavigationButton and ViewPanel class diagram are referenced below.)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ViewPanel`, `NavigationButton` etc. 
+The UI consists of a `MainWindow` that is made up of parts e.g. `CommandBox`, `ResultDisplay`, `ViewPanel`, `NavigationButton` etc. 
 All these, except for `GroupButtonListener` and `PersonButtonListner` in `NavigationButton`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
@@ -298,21 +298,32 @@ The following sequence operation shows how the `deletegroup` operation works.
 
 ### Find group feature
 
-The find group feature supports both single predicate and multi-predicate search. This allows the displayed view panel to show the entries related to the search keywords enterd by the user
+The find group feature supports both single keyword and multi keyword search. This allows the displayed view panel to show the entries related to the search keywords entered by the user.
 
-![Interactions Inside the Logic Component for the `findgroups` Command](images/FindGroupsSequenceDiagram.png)
+The following activity diagram shows what happens when a user executes a `findgroups` command:
 
-Step 1. When the `findgroups` command executes, the message is passed into `LogicManager` and parsed by `AddressBookParser`.
+<img src="images/FindGroupsActivityDiagram.png" width="350" />
+
+Given below is an example usage scenario and how the `findgroup` operation behaves at each step:
+
+Assuming the programs only have the initial data when the user first starts the app, the `FilteredList` should contain only 2 groups - London and Bali.
+
+Step 1. When the user executes `findgroups London` command, the message is passed into `LogicManager` and parsed by `AddressBookParser`.
 
 Step 2. `FindGroupsCommandParser` is created and the arguments are parsed by it. The arguments are used to create `GroupContainsKeywordsPredicate` and `FindGroupsCommand` is returned to the `LogicManager`.
 
-Step 3. The `LogicManager` then calls `FindGroupCommand#execute(model)` method, which updated the `FilteredList<Group>` in `ModelManager`.
+Step 3. The `LogicManager` then calls `FindGroupCommand#execute(model)` method, which updated the `FilteredList<Group>` in `ModelManager`. Thereafter, the `FilteredList<Group>` should contains only London.
 
-Step 4. The GUI listens for updates in the `FilteredList<Group>` and updates the display accordingly.
+Step 4. The GUI listens for updates in the `FilteredList<Group>` and updates the display to display London only.
 
-Step 5. `CommandResult` is returned to the `LogicManager`, which also switches the viewpanel to `GroupsListPanel` if needed.
+Step 5. `CommandResult` is returned to the `LogicManager`, which also switches the view panel to `GroupsListPanel` if needed. See UI implementation below for more details of switching view panel.
 
 Step 6. The output from `CommandResult` is then displayed as an output for the user.
+
+The following sequence diagram shows how the `findgroups` operation works:
+
+<img src="images/FindGroupsSequenceDiagram.png" width="600" />
+
 
 ### Add expense feature
 
@@ -421,6 +432,55 @@ The following sequence operation shows how the `findexpenses` operation works.
     * Each group has a unique name and the implementation for finding a group based on the group name is simple. 
     * Users may need a long time to find the index of a group if the list of groups is very long.
     * Hence, finding expenses based on the specified group name is more appropriate.
+
+
+### UI Display
+AWE has multiple lists / views to display such as for `groups`, `contacts` and `expenses`.
+
+The display, called view panel, will only be able to show up 1 view at a time depending on the command. The challenge would be to get it to display the correct one.
+
+To achieve the toggling between each view panels, we implemented the following:
+* An enumeration `UiView` to contain the following `CONTACT_PAGE`, `GROUP_PAGE`, `EXPENSE_PAGE`, `TRANSACTION_SUMMARY`, `PAYMENT_PAGE`. Each enum represents a different view.
+* `CommandResult` was given 6 more boolean fields, each representing a different view as well.
+* `MainWindow` checks for the 6 boolean fields in `CommandResult` and passes `UiView` to `ViewPanel` for toggling the view.
+
+The following activity diagram shows how the `MainWindow` checks and sends the `UiView` to `ViewPanel`.
+<img src="images/UiTogglingActivityDiagram.png" width="500" />
+
+#### Proposed Implementation
+**Aspect: Navigating between different view**
+
+* **Alternative 1**: Make use of JavaFx's tab
+    * Pros: Easy to implement.
+    * Cons: Unable to fully customised the layout. Have to use the standard JavaFx's tab layout.
+  
+* **Alternative 2 (current choice)**: Replacing the child of the view panel node<br>
+    (Refer to [JavaFx tutorial](https://se-education.org/guides/tutorials/javaFxPart1.html) for more information about JavaFx)
+    * Pros: More customisable in terms of layout.
+    * Pros: Able to make use of existing codes.
+    * Cons: More classes to implement to handle the toggling between views.
+    
+* **Justification**
+    * We want to place the command result display below the buttons according to our [wireframe](https://www.figma.com/file/VwuDOdHr7CSyDUWb4Kwkmx/CS2103T-tP?node-id=0%3A1).
+    * Using JavaFx's tab will not let us customise the layout as such.
+    * Hence, replacing the child of a view panel is more appropriate.
+    
+### Ui Navigation Buttons
+To improve the usability of AWE, buttons are implemented into the Ui to allow switching of view easily.
+
+However, only 2 views can be toggled by the buttons - Contacts page and Groups page.
+
+To achieve this, the following is implemented:
+* 2 buttons (`GroupViewButton` and `ContactViewButton`) for the user to click.
+* Event listener for each button - `GroupButtonListener` and `ContactButtonListener`. The event listener works by calling `ViewPanel#toggleView` when the button is clicked.
+
+Given below is an example usage scenario and how the button mechanism behaves at each step. In this example, the button used is `GroupViewButton` but it can also be replaced with `ContactViewButton`.
+
+Step 1. When `GroupViewButton` is initiated, an event listener `GroupButtonListener` is created and used.
+
+Step 2. Once the user clicks on `GroupViewButton`, the event listener will trigger and the `GroupButtonListener#handle` will run. This calls `ViewPanel#toggleView` and passes `UiView.GROUP_PAGE` as parameters. 
+
+Step 3. `ViewPanel` will change the child of itself to `ContactListPanel` (Refer to [JavaFx tutorial](https://se-education.org/guides/tutorials/javaFxPart1.html) for more information about JavaFx). Hence, GUI will update to show contact page
 
 
 ### \[Proposed\] Undo/redo feature
