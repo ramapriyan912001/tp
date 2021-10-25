@@ -121,7 +121,7 @@ public class CalculatePaymentsCommand extends Command {
     public List<Pair> getNamesAndSurplusesList(Group group) {
         List<Pair> namesAndSurpluses = new ArrayList<>();
         Map<Person, Cost> amountsPaid = group.getPaidByPayers();
-        Map<Person, Cost> expensesIncurred = group.getPaidByPayees();
+        Map<Person, Cost> expensesIncurred = group.getSplitExpenses();
         for (Person person: group.getMembers()) {
             Cost amountPaid = amountsPaid.get(person);
             Cost expenseIncurred = expensesIncurred.get(person);
