@@ -100,7 +100,7 @@ public class AddExpenseCommand extends Command {
         return calculateExpense(group, model);
     }
 
-    private CommandResult calculateExpense(Group group, Model model) throws CommandException{
+    private CommandResult calculateExpense(Group group, Model model) throws CommandException {
         HashMap<Person, Cost> individualPayement = new HashMap<>();
         Cost leftoverExpenseAfterIndividualExpense = totalCost;
         for (int i = 0; i < selfPayees.size(); i++) {
