@@ -100,15 +100,13 @@ public class JsonAdaptedGroup {
 
         final Set<Tag> modelTags = new HashSet<>(groupTags);
 
+        Group group = new Group(modelName, modelMembers, modelTags, modelExpenses);
 
+        for (Expense expense: modelExpenses) {
+            group = group.addExpense(expense);
+        }
 
-        Map<Person, Cost> paidByPayers = StorageUtils
-                .buildPayerMapFromListOfExpenses(modelExpenses, modelMembers);
-
-        Map<Person, Cost> paidByPayees = StorageUtils
-                .buildIndividualExpenditureMapFromListOfExpenses(modelExpenses, modelMembers);
-
-        return new Group(modelName, modelMembers, modelTags, modelExpenses, paidByPayers, paidByPayees);
+        return group;
     }
 
 }

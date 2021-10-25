@@ -100,6 +100,14 @@ public class AddExpenseCommand extends Command {
         return calculateExpense(group, model);
     }
 
+    /**
+     * Process data from user and checks for errors. Data is then passed into createExpense method.
+     *
+     * @param group Group for the expense.
+     * @param model Model for AWE.
+     * @return Return the result for creating an expense.
+     * @throws CommandException if any of the person input by the user does not belong to the group
+     */
     private CommandResult calculateExpense(Group group, Model model) throws CommandException {
         HashMap<Person, Cost> individualPayment = new HashMap<>();
 
@@ -125,6 +133,15 @@ public class AddExpenseCommand extends Command {
         return createExpense(model, group, groupMembers, individualPayment);
     }
 
+    /**
+     * Creates an expense class based on data passed in. Created expense is then added into the model.
+     *
+     * @param model Model for AWE
+     * @param group Group for the expense.
+     * @param groupMembers List of person that is included in the expense.
+     * @param individualPayement Individual expenses of the user (if any)
+     * @return
+     */
     private CommandResult createExpense(Model model, Group group, List<Person> groupMembers,
                                         HashMap<Person, Cost> individualPayement) {
         Expense newExpense = new Expense(payer, totalCost, description, groupMembers, individualPayement);
@@ -136,6 +153,12 @@ public class AddExpenseCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, newExpense));
     }
 
+    /**
+     * Gets a list of person that is included in the expense. Excluded person is not included in the list.
+     *
+     * @param members All members of the group.
+     * @return A list of Person in the group that is involved in the expense.
+     */
     private ArrayList<Person> removeExcludedFromGroup(ArrayList<Person> members) {
         ArrayList<Person> groupMembers = new ArrayList<>(members);
         for (Person toExclude : excluded) {
