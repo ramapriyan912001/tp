@@ -3,13 +3,42 @@ layout: page
 title: User Guide
 ---
 
-Around the World in $80 (AWE) is a **desktop app for spiting expenses on trip, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AWE can get your contact management tasks done faster than traditional GUI apps.
+Around the World in $80 (AWE) is a desktop app for keeping track of spending and expenditure during travels, splitting expenses with travel-mates, and facilitating easy recollection of debts at the end of every trip. 
+AWE is the world's only bespoke app designed for group travel.
 
-AWE promises to revolutionises the group-travel space. With AWE, bills can be split and monitored in a centralised manner that minimises the potential for disputes and maximises the efficiency of payment and recollection of debts.
+The app promises to revolutionise the group-travel space. With AWE, bills can be split and monitored in a centralised manner that minimises the potential for disputes and maximises the efficiency of payment and recollection of debts.
 
+AWE's vision is a more interconnected world where relationships are more easily built and maintained.
+Our mission is to accomplish through a user-centric approach that seeks to provide the user with what they need, at the tip of their fingertips.
+This document marks the first step towards the accomplishment of that mission, and the beginning of your journey around the world.
 
 * Table of Contents
 {:toc}
+
+--------------------------------------------------------------------------------------------------------------------
+
+## 1. About the Document
+
+The purpose of this document is to make sure that you, the user, have a pleasant and intuitive experience when using our app.
+In line with our user-centric approach, the guide is structured to ensure that the knowledge of the workings of our app is easily accessible.
+The document serves as a guide for users to understand the way to use our app to extract maximum satisfaction.
+
+**To accomplish this, we have taken the following steps**
+* We provide you with a glossary of contents to explain away some vocabulary that you might find confusing, so that you can focus on exploring AWE to the full extent of its functionalities.
+* We provide you with the tools to be able to read this guide with little need for re-referencing previous sections.
+
+### 1.1 Glossary
+
+Term | Explanation
+--------|------------------
+**Command Line Interface (CLI)** | The Command Line Interface, or CLI for short, is the user interface on which AWE is based. This means that most of AWE's functionality is unlocked by the typing of inputs by the user, rather than the clicking of a mouse or the selection of options via a menu.
+**Command** | Commands are the user inputs that trigger the specific features of the app. Commands are often denoted in highlighted letters. For instance, to create a group, the `creategroup` command is utilised. 
+**Parameter** | A Parameter refers to a specific detail required for a command. For instance, adding a person within an app would require a details such as the person's name. In this case, the name is a parameter of this command. Parameters are often denoted in the guide in highlighted uppercase letters, for eg. `NAME`.
+
+### Final Word
+AWE's primary asset is its speed. Unlike traditional Graphic User Interfaces (GUIs) which rely on slow actions such as mouse clicking and selection of options from long menus, with its CLI, AWE offers users the benefit of speed.
+For those who type fast, the app will be faster than most mainstream contact management apps.
+For those who are not as fast, familiarity with the commands over time will allow you to harness the full capabilities of AWE.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -43,7 +72,7 @@ AWE promises to revolutionises the group-travel space. With AWE, bills can be sp
    
    * **`addexpense`** : The command `addexpense n/Alex Yeoh gn/Bali $/50 d/drinks` adds an expense paid for by `Alex Yeoh` into the group `Bali` of `$50` for `drinks`.
 
-   * **`deleteexpense`** : The command `deleteexpense gn/Bali i/1` removes the 1st expense (by one-based-index) from the list of expenses for the group named Bali.
+   * **`deleteexpense`** : The command `deleteexpense 1` removes the 1st expense (by one-based-index) from the list of expenses visible to the user.
    
    * **`transactionsummary `** : The command `transactionsummary  gn/Bali` provides a list of spending made by each user in the group named Bali.
 
@@ -336,15 +365,15 @@ Examples:
 Deletes a shared expense from a travel group.
 This command deletes the expense for all members involved in the expense.
 
-Format: `deleteexpense gn/GROUP_NAME i/INDEX`
+Format: `deleteexpense INDEX`
 
-* GROUP_NAME argument is mandatory.
 * INDEX argument is mandatory.
-* INDEX has to be between 1 and the length of the list of expenses for the group with name GROUP_NAME.
+* INDEX has to be between 1 and the length of the list of expenses visible to the user on the screen.
+* Since the command deletes the expense based on the list visible to the user, it is necessary for the user to be viewing a list of expenses when utilising this command. This means that the user must have entered a `findexpenses` or `expenses` command just prior to entering the `deleteexpense` command. 
 
 Examples:
-* `deleteexpense gn/Bali i/1`
-* `deleteexpense gn/London i/2`
+* `deleteexpense 1`
+* `deleteexpense 2`
 
 #### 2.3.4. Locating a shared expense by description: `findexpenses`
 
@@ -387,7 +416,8 @@ Format: `calculatepayments gn/GROUP_NAME`
 
 Examples:
 * `calculatepayments gn/Bali`
-* `calculatepayments gn/London`
+* `calculatepayments gn/London`<br>
+  ![result for 'findcontacts Taiwan Malaysia'](images/CALCULATEPAYMENTSUI.png)
 
 ### 2.4. Miscellaneous
 

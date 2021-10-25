@@ -1,0 +1,69 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AweParser" as AweParser LOGIC_COLOR
+participant ":DeleteGroupCommandParser" as DeleteGroupCommandParser LOGIC_COLOR
+participant "d:DeleteGroupCommand" as DeleteGroupCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("deletegroup gn/GROUP_NAME")
+activate LogicManager
+
+LogicManager -> AweParser : parseCommand("deletegroup gn/GROUP_NAME")
+activate AweParser
+
+create DeleteGroupCommandParser
+AweParser -> DeleteGroupCommandParser
+activate DeleteGroupCommandParser
+
+DeleteGroupCommandParser --> AweParser
+deactivate DeleteGroupCommandParser
+
+AweParser -> DeleteGroupCommandParser : parse("gn/GROUP_NAME")
+activate DeleteGroupCommandParser
+
+create DeleteGroupCommand
+DeleteGroupCommandParser -> DeleteGroupCommand
+activate DeleteGroupCommand
+
+DeleteGroupCommand --> DeleteGroupCommandParser : d
+deactivate DeleteGroupCommand
+
+DeleteGroupCommandParser --> AweParser : d
+deactivate DeleteGroupCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteGroupCommandParser -[hidden]-> AweParser
+destroy DeleteGroupCommandParser
+
+AweParser --> LogicManager : d
+deactivate AweParser
+
+LogicManager -> DeleteGroupCommand : execute()
+activate DeleteGroupCommand
+
+DeleteGroupCommand -> Model : deleteGroup(g:Group)
+activate Model
+
+Model --> DeleteGroupCommand
+deactivate Model
+
+create CommandResult
+DeleteGroupCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteGroupCommand
+deactivate CommandResult
+
+DeleteGroupCommand --> LogicManager : result
+deactivate DeleteGroupCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
