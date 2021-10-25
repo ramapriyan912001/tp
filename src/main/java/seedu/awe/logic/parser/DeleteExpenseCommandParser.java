@@ -1,6 +1,7 @@
 package seedu.awe.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.awe.commons.core.Messages.MESSAGE_DELETEEXPENSECOMMAND_USAGE;
 import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.awe.commons.core.index.Index;
@@ -17,7 +18,7 @@ public class DeleteExpenseCommandParser implements Parser<DeleteExpenseCommand> 
             return new DeleteExpenseCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteExpenseCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_DELETEEXPENSECOMMAND_USAGE), pe);
         }
     }
 
