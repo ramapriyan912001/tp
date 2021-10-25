@@ -19,6 +19,7 @@ import seedu.awe.logic.commands.EditContactCommand;
 import seedu.awe.logic.commands.FindContactsCommand;
 import seedu.awe.logic.commands.FindExpensesCommand;
 import seedu.awe.logic.commands.FindGroupsCommand;
+import seedu.awe.logic.commands.HelpCommand;
 import seedu.awe.logic.commands.ListExpensesCommand;
 
 /**
@@ -35,6 +36,9 @@ public class Messages {
     public static final String MESSAGE_EXPENSES_LISTED_OVERVIEW = "%1$d expenses listed!";
 
     //messages for contact related commands
+    public static final String MESSAGE_LISTCONTACTSCOMMAND_SUCCESS = "Listed all contacts";
+
+
     public static final String MESSAGE_ADDCONTACTCOMMAND_USAGE = AddContactCommand.COMMAND_WORD
             + ": Adds a person to the awe book. "
             + "Parameters: "
@@ -215,6 +219,12 @@ public class Messages {
 
 
     public static final String MESSAGE_EXITCOMMAND_ACKNOWLEDGEMENT = "Exiting Address Book as requested ...";
+
+
+    public static final String MESSAGE_HELPCOMMAND_USAGE = HelpCommand.COMMAND_WORD
+            + ": Shows program usage instructions.\n"
+            + "Example: " + HelpCommand.COMMAND_WORD;
+    public static final String MESSAGE_HELPCOMMAND_SHOWING_HELP = "Opened help window.";
 
 
 
