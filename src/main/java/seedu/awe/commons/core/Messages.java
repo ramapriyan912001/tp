@@ -15,6 +15,7 @@ import seedu.awe.logic.commands.CalculatePaymentsCommand;
 import seedu.awe.logic.commands.DeleteContactCommand;
 import seedu.awe.logic.commands.DeleteExpenseCommand;
 import seedu.awe.logic.commands.DeleteGroupCommand;
+import seedu.awe.logic.commands.EditContactCommand;
 import seedu.awe.logic.commands.FindExpensesCommand;
 import seedu.awe.logic.commands.ListExpensesCommand;
 
@@ -55,8 +56,26 @@ public class Messages {
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + DeleteContactCommand.COMMAND_WORD + " 1";
-
     public static final String MESSAGE_DELETECONTACTCOMMAND_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+
+
+    public static final String MESSAGE_EDITCONTACTCOMMAND_USAGE = EditContactCommand.COMMAND_WORD
+            + ": Edits the details of the person identified "
+            + "by the index number used in the displayed person list. "
+            + "Existing values will be overwritten by the input values.\n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Example: " + EditContactCommand.COMMAND_WORD + " 1 "
+            + PREFIX_PHONE + "91234567 "
+            + PREFIX_EMAIL + "johndoe@example.com";
+    public static final String MESSAGE_EDITCONTACTCOMMAND_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDITCONTACTCOMMAND_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_EDITCONTACTCOMMAND_DUPLICATE_PERSON =
+            "This person already exists in the awe book.";
 
 
     //messages for group related commands
@@ -131,6 +150,9 @@ public class Messages {
 
     //messages for miscellaneous commands
     public static final String MESSAGE_CLEARCOMMAND_SUCCESS = "Address book has been cleared!";
+
+
+    public static final String MESSAGE_EXITCOMMAND_ACKNOWLEDGEMENT = "Exiting Address Book as requested ...";
 
 
 
