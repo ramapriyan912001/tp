@@ -124,11 +124,24 @@ public class Messages {
             "groupaddcontact gn/[GROUPNAME] n/[NAME1] n/[OPTIONAL NAME2]";
 
 
+    public static final String MESSAGE_GROUPREMOVECONTACT_SUCCESS = "Member(s) removed from group";
+    public static final String MESSAGE_GROUPREMOVECONTACT_ERROR = "Contact(s) not removed from group."
+            + "Be sure to use the exact names of group members";
+    public static final String MESSAGE_GROUPREMOVECONTACT_USAGE =
+            "groupremovecontact gn/[GROUPNAME] n/[NAME1] n/[OPTIONAL NAME2]";
+
 
     public static final String MESSAGE_GROUPADDTAGCOMMAND_SUCCESS = "New tag(s) added to group";
     public static final String MESSAGE_GROUPADDTAGCOMMAND_DUPLICATE_TAG = "%1$s is already in the group";
     public static final String MESSAGE_GROUPADDTAGCOMMAND_USAGE =
             "groupaddtag gn/[GROUPNAME] n/[TAG1] n/[OPTIONAL TAG2]";
+
+
+    public static final String MESSAGE_GROUPREMOVETAG_SUCCESS = "Tag(s) removed from group";
+    public static final String MESSAGE_GROUPREMOVETAG_ERROR =
+            "Tag(s) not removed from group. Make sure to use exact tag names.";
+    public static final String MESSAGE_GROUPREMOVETAG_NONEXISTENT_TAG = "The tag \"%1$s\" is not found in the group.";
+    public static final String MESSAGE_GROUPREMOVETAG_USAGE = "groupaddtag gn/[GROUPNAME] n/[TAG1] n/[OPTIONAL TAG2]";
 
 
     public static final String MESSAGE_GROUPEDITNAMECOMMAND_SUCCESS = "Group name changed to %1$s";
