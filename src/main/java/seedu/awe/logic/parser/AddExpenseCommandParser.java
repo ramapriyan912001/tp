@@ -71,7 +71,7 @@ public class AddExpenseCommandParser implements Parser<AddExpenseCommand> {
         Person payer = getPayer(names);
 
         if (payer == null) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExpenseCommand.MESSAGE_USAGE));
+            throw new ParseException(AddExpenseCommand.MESSAGE_NOT_PART_OF_GROUP);
         }
 
         Cost totalCost = getTotalCost(costs);

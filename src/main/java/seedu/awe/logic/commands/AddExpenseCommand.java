@@ -84,39 +84,39 @@ public class AddExpenseCommand extends Command {
         Group group = model.getGroupByName(groupName);
 
         if (!group.isPartOfGroup(payer)) {
-            return new CommandResult(MESSAGE_NOT_PART_OF_GROUP);
+            throw new CommandException(MESSAGE_NOT_PART_OF_GROUP);
         }
 
         for (Person exclude : excluded) {
             if (!group.isPartOfGroup(exclude)) {
-                return new CommandResult(MESSAGE_NOT_PART_OF_GROUP);
+                throw new CommandException(MESSAGE_NOT_PART_OF_GROUP);
             }
         }
 
         if (group.getMembers().size() == excluded.size()) {
-            return new CommandResult(MESSAGE_ALL_MEMBERS_EXCLUDED);
+            throw new CommandException(MESSAGE_ALL_MEMBERS_EXCLUDED);
         }
 
         return calculateExpense(group, model);
     }
 
-    private CommandResult calculateExpense(Group group, Model model) {
+    private CommandResult calculateExpense(Group group, Model model) throws CommandException{
         HashMap<Person, Cost> individualPayement = new HashMap<>();
         Cost leftoverExpenseAfterIndividualExpense = totalCost;
         for (int i = 0; i < selfPayees.size(); i++) {
             Person currentPayer = selfPayees.get(i);
             if (excluded.contains(currentPayer)) {
-                return new CommandResult(MESSAGE_CANNOT_ADD_EXCLUDED_MEMBER);
+                throw new CommandException(MESSAGE_CANNOT_ADD_EXCLUDED_MEMBER);
             }
             if (currentPayer == null || !group.isPartOfGroup(currentPayer)) {
-                return new CommandResult(MESSAGE_NOT_PART_OF_GROUP);
+                throw new CommandException(MESSAGE_NOT_PART_OF_GROUP);
             }
             individualPayement.merge(currentPayer, selfCosts.get(i), (original, toAdd) -> original.add(toAdd));
             leftoverExpenseAfterIndividualExpense = leftoverExpenseAfterIndividualExpense.subtract(selfCosts.get(i));
         }
 
         if (leftoverExpenseAfterIndividualExpense.cost <= 0) {
-            return new CommandResult(MESSAGE_COST_ZERO_OR_LESS);
+            throw new CommandException(MESSAGE_COST_ZERO_OR_LESS);
         }
 
         ArrayList<Person> groupMembers = removeExcludedFromGroup(group.getMembers());
@@ -131,6 +131,7 @@ public class AddExpenseCommand extends Command {
         Group newGroup = group.addExpense(newExpense);
         model.setGroup(group, newGroup);
         model.addExpense(newExpense, newGroup);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, newExpense));
     }
 

@@ -237,20 +237,20 @@ public class Group {
     public Group deleteExpense(Expense expense) {
         ArrayList<Expense> newExpenses = new ArrayList<>(expenses);
 
-        Map<Person, Cost> paidByPayees = new HashMap<>();
-        paidByPayees.putAll(this.splitExpenses);
+        Map<Person, Cost> splitExpenses = new HashMap<>();
+        splitExpenses.putAll(this.splitExpenses);
 
         Map<Person, Cost> paidByPayers = new HashMap<>();
         paidByPayers.putAll(this.paidByPayers);
 
         newExpenses.remove(expense);
-        paidByPayees.computeIfPresent(expense.getPayer(), (key, val) -> val.subtract(expense.getCost()));
+        paidByPayers.computeIfPresent(expense.getPayer(), (key, val) -> val.subtract(expense.getCost()));
 
         Map<Person, Cost> individualExpenses = expense.getSplitExpenses();
         for (Map.Entry<Person, Cost> entry : individualExpenses.entrySet()) {
-            paidByPayees.computeIfPresent(entry.getKey(), (key, val) -> val.subtract(entry.getValue()));
+            splitExpenses.computeIfPresent(entry.getKey(), (key, val) -> val.subtract(entry.getValue()));
         }
-        return new Group(groupName, members, tags, newExpenses, paidByPayers, paidByPayees);
+        return new Group(groupName, members, tags, newExpenses, paidByPayers, splitExpenses);
     }
 
     /**
