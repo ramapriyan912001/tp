@@ -12,6 +12,7 @@ import static seedu.awe.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.awe.logic.commands.AddContactCommand;
 import seedu.awe.logic.commands.AddExpenseCommand;
 import seedu.awe.logic.commands.CalculatePaymentsCommand;
+import seedu.awe.logic.commands.DeleteContactCommand;
 import seedu.awe.logic.commands.FindExpensesCommand;
 import seedu.awe.logic.commands.ListExpensesCommand;
 
@@ -84,6 +85,25 @@ public class Messages {
 
 
     public static final String MESSAGE_CLEARCOMMAND_SUCCESS = "Address book has been cleared!";
+
+
+    public static final String MESSAGE_CREATEGROUPCOMMAND_SUCCESS = "New group created";
+    public static final String MESSAGE_CREATEGROUPCOMMAND_ERROR =
+            "Group not created. Be sure to use the exact names of group members";
+    public static final String MESSAGE_CREATEGROUPCOMMAND_DUPLICATE_GROUP = "This group already exists";
+    public static final String MESSAGE_CREATEGROUPCOMMAND_USAGE =
+            "creategroup gn/GROUPNAME n/NAME1 n/[OPTIONAL NAME2]...";
+    public static final String MESSAGE_CREATEGROUPCOMMAND_EMPTY_GROUP = "Group requires at least 1 member. \n%1$s\n%s";
+    public static final String MESSAGE_CREATEGROUPCOMMAND_INVALID_NAMES = "None of the names are in your contact book.";
+
+
+    public static final String MESSAGE_DELETECONTACTCOMMAND_USAGE = DeleteContactCommand.COMMAND_WORD
+            + ": Deletes the person identified by the index number used in the displayed person list.\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: " + DeleteContactCommand.COMMAND_WORD + " 1";
+
+    public static final String MESSAGE_DELETECONTACTCOMMAND_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+
 
     public static final String MESSAGE_EXPENSE_CANNOT_BE_DELETED = "Expense cannot be deleted unless you are viewing "
             + "the expenses of a group. "

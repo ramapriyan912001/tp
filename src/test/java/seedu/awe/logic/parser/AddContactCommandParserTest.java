@@ -42,7 +42,7 @@ import seedu.awe.model.tag.Tag;
 import seedu.awe.testutil.PersonBuilder;
 
 public class AddContactCommandParserTest {
-    private AddCommandParser parser = new AddCommandParser();
+    private AddContactCommandParser parser = new AddContactCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
