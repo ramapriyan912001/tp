@@ -162,7 +162,7 @@ public class CalculatePaymentsCommand extends Command {
         double p1AbsoluteSurplus = Math.abs(p1.getSurplus());
         double p2AbsoluteSurplus = Math.abs(p2.getSurplus());
         double marginOfError = 0.01;
-        double difference = p1AbsoluteSurplus - p2AbsoluteSurplus;
+        double difference = Math.abs(p1AbsoluteSurplus - p2AbsoluteSurplus);
         if (difference < marginOfError) {
             return Optional.empty();
         } else if (p1AbsoluteSurplus < p2AbsoluteSurplus) {
@@ -210,13 +210,13 @@ public class CalculatePaymentsCommand extends Command {
                 pairs.remove(pairs.size() - 1);
             } else if (smallerPair.get().equals(pairWithHighestSurplus)) {
                 pairs.remove(pairs.size() - 1);
-                Double newSurplus = pairWithLowestSurplus.getSurplus() + pairWithHighestSurplus.getSurplus();
+                double newSurplus = pairWithLowestSurplus.getSurplus() + pairWithHighestSurplus.getSurplus();
                 Pair newPairWithLowestSurplus = new Pair(newSurplus, pairWithLowestSurplus.getPerson());
                 pairs.remove(0);
                 pairs.add(0, newPairWithLowestSurplus);
             } else if (smallerPair.get().equals(pairWithLowestSurplus)) {
                 pairs.remove(0);
-                Double newSurplus = pairWithHighestSurplus.getSurplus() + pairWithLowestSurplus.getSurplus();
+                double newSurplus = pairWithHighestSurplus.getSurplus() + pairWithLowestSurplus.getSurplus();
                 Pair newPairWithHighestSurplus = new Pair(newSurplus, pairWithHighestSurplus.getPerson());
                 pairs.remove(pairs.size() - 1);
                 pairs.add(newPairWithHighestSurplus);
