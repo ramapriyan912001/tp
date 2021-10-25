@@ -434,6 +434,126 @@ The following sequence operation shows how the `findexpenses` operation works.
     * Hence, finding expenses based on the specified group name is more appropriate.
 
 
+### Delete Expense Feature
+
+The delete expense mechanism is facilitated by the addition of an `ExpenseList` field within the `AddressBook` object maintained by the model.
+Each `Expense` belongs to a `Group` object, also maintained within the `AddressBook`.
+Deletion of an expense must be accompanied by deletion of the expense from the `Group` object to which it belongs.
+The command allows the user to delete an expense based on the index position of the expense in the page viewed by the user.
+This means that the user is constrained to only being permitted to delete expenses when they are viewing a list of expenses; that is, after they enter the `findexpenses` or `expenses` command.
+
+The following activity diagram shows what happens when a user executes a `deleteexpense` command.
+
+![DeleteExpenseActivityDiagram](images/DeleteExpenseActivityDiagram.png)
+
+Given below is an example usage scenario and how the `deleteexpense` mechanism behaves at each step.
+
+Step 1. A valid `deleteexpense` command is given as user input. This prompts the `LogicManager` to run its execute()
+method.
+
+Step 2. The `DeleteExpenseCommandParser` parses the input and checks for presence of the `INDEX` input.
+It returns a `DeleteExpenseCommand`.
+
+Step 3. `DeleteExpenseCommand` runs its execute() method which checks if a group with the `GROUP_NAME` entered by the user has been
+created in the past. If so, this group is retrieved from the model. The `Expense` object is retrieved from the
+
+Step 4: Subsequently, the expense is removed from the group to which it belongs, present in the `AddressBook`.
+Upon successful execution, `CommandResult` is returned.
+
+
+The following sequence operation shows how the `deleteexpense` operation works.
+![DeleteExpenseSequenceDiagram](images/DeleteExpenseSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteExpenseCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+#### Design considerations
+
+**Aspect: User command for deletegroup:**
+
+* **Alternative 1 (current choice):** Delete based on index position in `ObservableList`
+    * Pros: Easy to implement.
+    * Pros: Short user command.
+    * Cons: Less intuitive for user.
+    * Cons: Easy for user to make an erroneous command.
+
+* **Alternative 2 (description based):** Delete based on `description`
+    * Pros: Easy to implement.
+    * Pros: Difficult for user to make an erroneous command.
+    * Cons: Long user command.
+    * Cons: Requires imposition of constraint that expense description names are unique.
+
+
+* **Justification**
+    * Expenses, unlike Groups, do not contain a large volume of information.
+    * This information is unrecoverable once deleted.
+    * However, the damage to a user as a result of an error is not significant. The user can re-enter the details with a single command.
+    * Therefore, the need to protect the user from erroneous decisions is not significant.
+    * Furthermore, many expenses are likely to have similar descriptions. Constraining users to using unique descriptions for expenses is likely to compromise the user experience.
+    * As such, it is better to choose Alternative 1, as this allows the user to quickly delete expenses, and not compromise on the flexibility of the user.
+
+### Calculate Payments Feature
+
+The purpose of this feature is to provide users with a simple set of transactions that would allow all debts within the group to be settled.
+The calculate payments UI mechanism is facilitated by the addition of a `PaymentList` field of `Payment` objects, present within the `AddressBook` object maintained by the model.
+The functionality of this feature is facilitated by the fact that group objects maintain two hashmaps
+* `paidByPayers`, which maintains how much each member of the group has paid during the course of the trip.
+* `splitExpenses`, which maintains how much expenditure each member of the group has incurred throughout the trip.
+The invariant maintained is that the sum of all payments made (values within `paidByPayers`) should equal the total expenditures incurred by the group (values within `splitExpenses`).
+
+
+The following activity diagram shows what happens when a user executes a `calculatepayments` command.
+
+![CalculatePaymentsActivityDiagram](images/CalculatePaymentsActivityDiagram.png)
+
+Given below is an example usage scenario and how the `calculatepayments` mechanism behaves at each step.
+
+Step 1. A valid `deleteexpense` command is given as user input. This prompts the `LogicManager` to run its execute()
+method.
+
+Step 2. The `CalculatePaymentsCommandParser` parses the input and checks for presence of the `GROUP_NAME` and `INDEX` prefixes.
+It checks that the `GROUP_NAME` is valid (does not have any non-alphanumeric characters), and that the index is within the bounds of the length of expenses seen by the user.
+It returns a `CalculatePaymentsCommand`.
+
+Step 3. `CalculatePaymentsCommand` runs its execute() method which checks if a group with the `GROUP_NAME` entered by the user has been
+created in the past. If so, this group is retrieved from the model. The `Expense` object is retrieved from the
+
+Step 4: Subsequently, the expense is removed from the group to which it belongs, present in the `AddressBook`.
+Upon successful execution, `CommandResult` is returned.
+
+
+The following sequence operation shows how the `calculatepayments` operation works.
+![DeleteExpenseSequenceDiagram](images/CalculatePaymentsSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `CalculatePaymentsCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+#### Design considerations
+
+**Aspect: User command for deletegroup:**
+
+* **Alternative 1 (current choice):** Delete based on index position in `ObservableList`
+    * Pros: Easy to implement.
+    * Pros: Short user command.
+    * Cons: Less intuitive for user.
+    * Cons: Easy for user to make an erroneous command.
+
+* **Alternative 2 (description based):** Delete based on `description`
+    * Pros: Easy to implement.
+    * Pros: Difficult for user to make an erroneous command.
+    * Cons: Long user command.
+    * Cons: Requires imposition of constraint that expense description names are unique.
+
+
+* **Justification**
+    * Expenses, unlike Groups, do not contain a large volume of information.
+    * This information is unrecoverable once deleted.
+    * However, the damage to a user as a result of an error is not significant. The user can re-enter the details with a single command.
+    * Therefore, the need to protect the user from erroneous decisions is not significant.
+    * Furthermore, many expenses are likely to have similar descriptions. Constraining users to using unique descriptions for expenses is likely to compromise the user experience.
+    * As such, it is better to choose Alternative 1, as this allows the user to quickly delete expenses, and not compromise on the flexibility of the user.
+
+
 ### UI Display
 AWE has multiple lists / views to display such as for `groups`, `contacts` and `expenses`.
 
