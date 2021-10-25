@@ -18,6 +18,7 @@ import seedu.awe.logic.commands.DeleteGroupCommand;
 import seedu.awe.logic.commands.EditContactCommand;
 import seedu.awe.logic.commands.FindContactsCommand;
 import seedu.awe.logic.commands.FindExpensesCommand;
+import seedu.awe.logic.commands.FindGroupsCommand;
 import seedu.awe.logic.commands.ListExpensesCommand;
 
 /**
@@ -106,6 +107,22 @@ public class Messages {
     public static final String MESSAGE_DELETEGROUPCOMMAND_SUCCESS = "Group %s with %d member(s) deleted";
     public static final String MESSAGE_DELETEGROUPCOMMAND_GROUP_DOES_NOT_EXIST =
             "This group does not exist in the awe book";
+
+
+    public static final String MESSAGE_FINDGROUPSCOMMAND_USAGE = FindGroupsCommand.COMMAND_WORD
+            + ": Finds all groups whose names contain any of "
+            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+            + "Example: " + FindGroupsCommand.COMMAND_WORD + " london";
+
+
+    public static final String MESSAGE_GROUPADDCONTACTCOMMAND_SUCCESS = "New member(s) added to group";
+    public static final String MESSAGE_GROUPADDCONTACTCOMMAND_ERROR =
+            "Contact(s) not added. Be sure to use the exact names of group members";
+    public static final String MESSAGE_GROUPADDCONTACTCOMMAND_DUPLICATE_PERSON = "%1$s is already in the group";
+    public static final String MESSAGE_GROUPADDCONTACTCOMMAND_USAGE =
+            "groupaddcontact gn/[GROUPNAME] n/[NAME1] n/[OPTIONAL NAME2]";
+    public static final String MESSAGE_GROUPADDCONTACTCOMMAND_NONEXISTENT_GROUP = "Group %1$s does not exist.";
 
 
     //messages for expenses related commands
