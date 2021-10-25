@@ -101,7 +101,8 @@ public class AddExpenseCommand extends Command {
     }
 
     private CommandResult calculateExpense(Group group, Model model) throws CommandException {
-        HashMap<Person, Cost> individualPayement = new HashMap<>();
+        HashMap<Person, Cost> individualPayment = new HashMap<>();
+
         Cost leftoverExpenseAfterIndividualExpense = totalCost;
         for (int i = 0; i < selfPayees.size(); i++) {
             Person currentPayer = selfPayees.get(i);
@@ -111,7 +112,7 @@ public class AddExpenseCommand extends Command {
             if (currentPayer == null || !group.isPartOfGroup(currentPayer)) {
                 throw new CommandException(MESSAGE_NOT_PART_OF_GROUP);
             }
-            individualPayement.merge(currentPayer, selfCosts.get(i), (original, toAdd) -> original.add(toAdd));
+            individualPayment.merge(currentPayer, selfCosts.get(i), (original, toAdd) -> original.add(toAdd));
             leftoverExpenseAfterIndividualExpense = leftoverExpenseAfterIndividualExpense.subtract(selfCosts.get(i));
         }
 
@@ -121,7 +122,7 @@ public class AddExpenseCommand extends Command {
 
         ArrayList<Person> groupMembers = removeExcludedFromGroup(group.getMembers());
 
-        return createExpense(model, group, groupMembers, individualPayement);
+        return createExpense(model, group, groupMembers, individualPayment);
     }
 
     private CommandResult createExpense(Model model, Group group, List<Person> groupMembers,
