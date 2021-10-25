@@ -3,7 +3,7 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AweParser" as AweParser LOGIC_COLOR
 participant ":DeleteGroupCommandParser" as DeleteGroupCommandParser LOGIC_COLOR
 participant "d:DeleteGroupCommand" as DeleteGroupCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
@@ -16,17 +16,17 @@ end box
 [-> LogicManager : execute("deletegroup gn/GROUP_NAME")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("deletegroup gn/GROUP_NAME")
-activate AddressBookParser
+LogicManager -> AweParser : parseCommand("deletegroup gn/GROUP_NAME")
+activate AweParser
 
 create DeleteGroupCommandParser
-AddressBookParser -> DeleteGroupCommandParser
+AweParser -> DeleteGroupCommandParser
 activate DeleteGroupCommandParser
 
-DeleteGroupCommandParser --> AddressBookParser
+DeleteGroupCommandParser --> AweParser
 deactivate DeleteGroupCommandParser
 
-AddressBookParser -> DeleteGroupCommandParser : parse("gn/GROUP_NAME")
+AweParser -> DeleteGroupCommandParser : parse("gn/GROUP_NAME")
 activate DeleteGroupCommandParser
 
 create DeleteGroupCommand
@@ -36,14 +36,14 @@ activate DeleteGroupCommand
 DeleteGroupCommand --> DeleteGroupCommandParser : d
 deactivate DeleteGroupCommand
 
-DeleteGroupCommandParser --> AddressBookParser : d
+DeleteGroupCommandParser --> AweParser : d
 deactivate DeleteGroupCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteGroupCommandParser -[hidden]-> AddressBookParser
+DeleteGroupCommandParser -[hidden]-> AweParser
 destroy DeleteGroupCommandParser
 
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
+AweParser --> LogicManager : d
+deactivate AweParser
 
 LogicManager -> DeleteGroupCommand : execute()
 activate DeleteGroupCommand

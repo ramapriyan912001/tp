@@ -1,0 +1,77 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AweParser" as AweParser LOGIC_COLOR
+participant ":FindExpensesCommandParser" as FindExpensesCommandParser LOGIC_COLOR
+participant "d:FindExpensesCommand" as FindExpensesCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant ":DescriptionContainsKeywordsPredicate" as DescriptionContainsKeywordsPredicate LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("findexpenses dinner gn/London")
+activate LogicManager
+
+LogicManager -> AweParser : parseCommand("findexpenses dinner gn/London")
+activate AweParser
+
+create FindExpensesCommandParser
+AweParser -> FindExpensesCommandParser
+activate FindExpensesCommandParser
+
+FindExpensesCommandParser --> AweParser
+deactivate FindGroupsCommandParser
+
+AweParser -> FindExpensesCommandParser : parse("dinner gn/London")
+activate FindExpensesCommandParser
+
+create DescriptionContainsKeywordsPredicate
+FindExpensesCommandParser ->DescriptionContainsKeywordsPredicate
+activate DescriptionContainsKeywordsPredicate
+
+DescriptionContainsKeywordsPredicate -> FindExpensesCommandParser : c
+deactivate DescriptionContainsKeywordsPredicate
+
+create FindExpensesCommand
+FindExpensesCommandParser -> FindExpensesCommand : c
+activate FindExpensesCommand
+
+FindExpensesCommand --> FindExpensesCommandParser : d
+deactivate FindExpensesCommand
+
+FindExpensesCommandParser --> AweParser : d
+deactivate FindExpensesCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindExpensesCommandParser -[hidden]-> AweParser
+destroy FindExpensesCommandParser
+
+AweParser --> LogicManager : d
+deactivate AweParser
+
+LogicManager -> FindExpensesCommand : execute()
+activate FindExpensesCommand
+
+FindExpensesCommand -> Model : updateFilteredExpenseList(c)
+activate Model
+
+Model --> FindExpensesCommand
+deactivate Model
+
+create CommandResult
+FindExpensesCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindExpensesCommand
+deactivate CommandResult
+
+FindExpensesCommand --> LogicManager : result
+deactivate FindExpensesCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

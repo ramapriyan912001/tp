@@ -14,41 +14,49 @@ Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
-
-
 Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
+Class UniqueGroupList
+Class ExpenseList
+
+Package Person <<Rectangle>>{
+}
+
+Package Group <<Rectangle>>{
+}
+
+Package Expense <<Rectangle>>{
+}
 
 }
+
+
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+AddressBook ..|> ReadOnlyAddressBook
 
-ModelManager .up.|> Model
-Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
-ModelManager -right-> "1" UserPrefs
-UserPrefs .up.|> ReadOnlyUserPrefs
+ModelManager ..|> Model
+Model ..> ReadOnlyUserPrefs
+Model ..> ReadOnlyAddressBook
+ModelManager --> "1" AddressBook
+ModelManager --> "1" UserPrefs
+UserPrefs ..|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+AddressBook *--> "1" UniqueGroupList
+UniqueGroupList -right-> "~* all" Group
+Group --> "1..* members" Person
+
+AddressBook *--> "1" ExpenseList
+ExpenseList --> "~* all" Expense
+Expense ---> "1 payer" Person
+Expense -right--> "1..* involved" Person
+
 
 ModelManager -->"~* filtered" Person
+ModelManager -->"~* filtered" Group
+ModelManager -->"~* filtered" Expense
 @enduml

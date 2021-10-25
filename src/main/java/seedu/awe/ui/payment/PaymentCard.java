@@ -26,11 +26,7 @@ public class PaymentCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label payer;
-    @FXML
-    private Label payee;
-    @FXML
-    private Label amount;
+    private Label paymentText;
 
     /**
      * Creates an {@code Payment} with the given {@code Payment} and index to display.
@@ -39,9 +35,7 @@ public class PaymentCard extends UiPart<Region> {
         super(FXML);
         this.payment = payment;
         id.setText(displayedIndex + ".");
-        payer.setText(payment.getPayer().getName().toString());
-        payee.setText(payment.getPayee().getName().toString());
-        amount.setText(payment.getCost().toString());
+        paymentText.setText(payment.toString());
     }
 
     @Override

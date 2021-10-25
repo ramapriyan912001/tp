@@ -1,0 +1,26 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Expense <<Rectangle>>{
+    Class Expense
+    Class Cost
+    Class Description
+
+}
+
+Package Person <<Rectangle>>{
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside --> Expense
+
+Expense *--> Cost
+Expense *--> Description
+Expense -right-> "1 payer" Person
+Expense --> "1..* involved" Person
+
+
+@enduml

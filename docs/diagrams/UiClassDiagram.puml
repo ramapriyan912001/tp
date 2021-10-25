@@ -11,22 +11,12 @@ Class UiManager
 Class MainWindow
 Class HelpWindow
 Class ResultDisplay
-Class ViewPanel
-Class GroupListPanel
-Class GroupCard
-Class PersonListPanel
-Class PersonCard
-Class NavigationButtonPanel
-Class GroupViewButton
-Class PersonViewButton
 Class StatusBarFooter
 Class CommandBox
-Class GroupButtonListener
-Class PersonButtonListener
+package NavigationButton <<Rectangle>> {
 }
-
-package Model <<Rectangle>> {
-Class HiddenModel #FFFFFF
+package ViewPanel <<Rectangle>> {
+}
 }
 
 package Logic <<Rectangle>> {
@@ -41,46 +31,23 @@ UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" StatusBarFooter
-MainWindow *-down--> "1" ViewPanel
-MainWindow *-down-->  "1" NavigationButtonPanel
+MainWindow *-down-> "1" NavigationButton
+MainWindow *-down-> "1" ViewPanel
 MainWindow --> "0..1" HelpWindow
-
-NavigationButtonPanel *-up-> "1" GroupViewButton
-NavigationButtonPanel *-up-> "1" PersonViewButton
-
-GroupViewButton *-up-> "1" GroupButtonListener
-PersonViewButton *-up-> "1" PersonButtonListener
-
-ViewPanel *-down-> "1" PersonListPanel
-ViewPanel *-down-> "1" GroupListPanel
-
-PersonListPanel -down-> "*" PersonCard
-GroupListPanel -down-> "*" GroupCard
-
-PersonButtonListener --> "1" ViewPanel
-GroupButtonListener --> "1" ViewPanel
 
 MainWindow -left-|> UiPart
 
+NavigationButton -left-> ViewPanel
+
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
-ViewPanel --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
-GroupListPanel --|> UiPart
-GroupCard --|> UiPart
-NavigationButtonPanel --|> UiPart
-GroupViewButton --|> UiPart
-PersonViewButton --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
-PersonCard ..> Model
-GroupCard ...> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
-PersonListPanel -[hidden]left- HelpWindow
+
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter

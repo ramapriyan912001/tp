@@ -65,7 +65,7 @@ public class JsonAdaptedGroup {
                 .map(JsonAdaptedExpense::new)
                 .collect(Collectors.toList()));
         Map<Person, Cost> paidByPayers = source.getPaidByPayers();
-        Map<Person, Cost> paidByPayees = source.getPaidByPayees();
+        Map<Person, Cost> paidByPayees = source.getSplitExpenses();
         List<IndividualAmount> individualAmountPaid = StorageUtils
                 .convertExpenseMapToListOfIndividualAmounts(paidByPayers);
         List<IndividualAmount> individualExpenseIncurred = StorageUtils

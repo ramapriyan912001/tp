@@ -22,7 +22,12 @@ public class CalculatePaymentsCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Payments to be made between group members are listed.";
     public static final String COMMAND_WORD = "calculatepayments";
-    public static final String MESSAGE_USAGE = "calculatepayments " + PREFIX_GROUP_NAME + "GROUPNAME";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Calculates the payments to be made between group members to settle debts.\n"
+            + "Parameters: "
+            + PREFIX_GROUP_NAME + "GROUP_NAME\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_GROUP_NAME + "Bali";
     public static final String MESSAGE_PAYMENTS_EMPTY = "There are no payments to be made!";
     public static final String MESSAGE_GROUP_NOT_FOUND = "The specified group does not exists.";
 
@@ -97,9 +102,15 @@ public class CalculatePaymentsCommand extends Command {
         List<Payment> payments = getPayments(group);
         model.setPayments(payments);
 
-        return new CommandResult(MESSAGE_SUCCESS, false, false, false,
-                false, false, false,
-                true);
+        if (payments.isEmpty()) {
+            return new CommandResult(MESSAGE_PAYMENTS_EMPTY, false, false, false,
+                    false, false, false,
+                    true);
+        } else {
+            return new CommandResult(MESSAGE_SUCCESS, false, false, false,
+                    false, false, false,
+                    true);
+        }
     }
 
     private static List<Pair> sortPairs(List<Pair> pairs) {
@@ -115,7 +126,7 @@ public class CalculatePaymentsCommand extends Command {
     public List<Pair> getNamesAndSurplusesList(Group group) {
         List<Pair> namesAndSurpluses = new ArrayList<>();
         Map<Person, Cost> amountsPaid = group.getPaidByPayers();
-        Map<Person, Cost> expensesIncurred = group.getPaidByPayees();
+        Map<Person, Cost> expensesIncurred = group.getSplitExpenses();
         for (Person person: group.getMembers()) {
             Cost amountPaid = amountsPaid.get(person);
             Cost expenseIncurred = expensesIncurred.get(person);
@@ -133,7 +144,6 @@ public class CalculatePaymentsCommand extends Command {
      */
     public List<Payment> getPayments(Group group) throws CommandException {
         List<Pair> namesAndSurplusesList = getNamesAndSurplusesList(group);
-        namesAndSurplusesList = sortPairs(namesAndSurplusesList);
         List<Payment> payments = calculatePayments(namesAndSurplusesList);
         return payments;
     }
@@ -185,6 +195,7 @@ public class CalculatePaymentsCommand extends Command {
         pairs = removeZeroCostElements(pairs);
         List<Payment> payments = new ArrayList<>();
         while (!pairs.isEmpty()) {
+            pairs = sortPairs(pairs);
             if (pairs.size() == 1) {
                 throw new CommandException("There appears to be a discrepancy within your payments.");
             }
@@ -198,8 +209,16 @@ public class CalculatePaymentsCommand extends Command {
                 pairs.remove(pairs.size() - 1);
             } else if (smallerPair.get().equals(pairWithHighestSurplus)) {
                 pairs.remove(pairs.size() - 1);
+                Double newSurplus = pairWithLowestSurplus.getSurplus() + pairWithHighestSurplus.getSurplus();
+                Pair newPairWithLowestSurplus = new Pair(newSurplus, pairWithLowestSurplus.getPerson());
+                pairs.remove(0);
+                pairs.add(0, newPairWithLowestSurplus);
             } else if (smallerPair.get().equals(pairWithLowestSurplus)) {
                 pairs.remove(0);
+                Double newSurplus = pairWithHighestSurplus.getSurplus() + pairWithLowestSurplus.getSurplus();
+                Pair newPairWithHighestSurplus = new Pair(newSurplus, pairWithHighestSurplus.getPerson());
+                pairs.remove(pairs.size() - 1);
+                pairs.add(newPairWithHighestSurplus);
             }
         }
         return payments;
@@ -212,9 +231,9 @@ public class CalculatePaymentsCommand extends Command {
      * @return Payment to make.
      */
     public Payment calculatePayment(Pair deficitPair, Pair surplusPair) {
-        Person payer = deficitPair.getPerson();
+        Person payee = deficitPair.getPerson();
         double absoluteDeficit = Math.abs(deficitPair.getSurplus());
-        Person payee = surplusPair.getPerson();
+        Person payer = surplusPair.getPerson();
         double absoluteSurplus = Math.abs(surplusPair.getSurplus());
         Cost minimumAmount = new Cost(Math.min(absoluteDeficit, absoluteSurplus));
         return new Payment(payer, payee, minimumAmount);
