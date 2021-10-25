@@ -11,6 +11,8 @@ Class GroupListPanel
 Class GroupCard
 Class PersonListPanel
 Class PersonCard
+Class ExpenseListPanel
+Class ExpenseCard
 }
 
 package Model <<Rectangle>> {
@@ -22,17 +24,22 @@ HiddenOutside --> ViewPanel
 
 ViewPanel *-down-> "1" PersonListPanel
 ViewPanel *-down-> "1" GroupListPanel
+ViewPanel *-down-> "1" ExpenseListPanel
 
 PersonListPanel -down-> "*" PersonCard
 GroupListPanel -down-> "*" GroupCard
+ExpenseListPanel -down-> "*" ExpenseCard
 
 ViewPanel --|> UiPart
 PersonListPanel --|> UiPart
 PersonCard --|> UiPart
 GroupListPanel --|> UiPart
 GroupCard --|> UiPart
+ExpenseListPanel --|> UiPart
+ExpenseCard --|> UiPart
 
 PersonCard .right.> Model
 GroupCard .left.> Model
+ExpenseCard .> Model
 
 @enduml
