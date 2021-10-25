@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.awe.commons.core.GuiSettings;
 import seedu.awe.commons.core.LogsCenter;
+import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.model.expense.Cost;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
@@ -102,6 +103,12 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
+    }
+
+    @Override
+    public Group getActiveGroupFromAddressBook() throws CommandException {
+        return addressBook.getGroupFromExpenseList().orElseThrow(() ->
+                new CommandException("Sorry! The operation could not be completed!"));
     }
 
     //=========== Person ================================================================================
