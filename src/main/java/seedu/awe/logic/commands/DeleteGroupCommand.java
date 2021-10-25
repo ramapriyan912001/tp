@@ -12,7 +12,9 @@ public class DeleteGroupCommand extends Command {
     public static final String COMMAND_WORD = "deletegroup";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": deletes a group from the awe book. "
             + "Parameters: "
-            + PREFIX_GROUP_NAME + "GROUP_NAME ";
+            + PREFIX_GROUP_NAME + "GROUP_NAME\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_GROUP_NAME + "Bali";
     public static final String MESSAGE_SUCCESS = "Group %s with %d member(s) deleted";
     public static final String MESSAGE_GROUP_DOES_NOT_EXIST = "This group does not exist in the awe book";
 

@@ -22,7 +22,12 @@ public class CalculatePaymentsCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Payments to be made between group members are listed.";
     public static final String COMMAND_WORD = "calculatepayments";
-    public static final String MESSAGE_USAGE = "calculatepayments " + PREFIX_GROUP_NAME + "GROUPNAME";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Calculates the payments to be made between group members to settle debts.\n"
+            + "Parameters: "
+            + PREFIX_GROUP_NAME + "GROUP_NAME\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_GROUP_NAME + "Bali";
     public static final String MESSAGE_PAYMENTS_EMPTY = "There are no payments to be made!";
     public static final String MESSAGE_GROUP_NOT_FOUND = "The specified group does not exists.";
 
