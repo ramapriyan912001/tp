@@ -92,6 +92,9 @@ public class Messages {
 
 
     //messages for group related commands
+    public static final String MESSAGE_LISTGROUPSCOMMAND_SUCCESS = "Listed all groups";
+
+
     public static final String MESSAGE_CREATEGROUPCOMMAND_SUCCESS = "New group created";
     public static final String MESSAGE_CREATEGROUPCOMMAND_ERROR =
             "Group not created. Be sure to use the exact names of group members";
@@ -156,6 +159,14 @@ public class Messages {
     public static final String MESSAGE_NONEXISTENT_GROUP = "Group %1$s does not exist.";
 
     //messages for expenses related commands
+    public static final String MESSAGE_LISTEXPENSESCOMMAND_USAGE = ListExpensesCommand.COMMAND_WORD
+            + ": Lists expenses of a group. "
+            + "Parameters: "
+            + PREFIX_GROUP_NAME + "GROUP NAME ";
+    public static final String MESSAGE_LISTEXPENSESCOMMAND_SUCCESS = "Listed all expenses";
+    public static final String MESSAGE_LISTEXPENSESCOMMAND_GROUP_NOT_FOUND = "The specified group does not exist.";
+
+
     public static final String MESSAGE_ADDEXPENSECOMMAND_USAGE = AddExpenseCommand.COMMAND_WORD
             + ": Adds an expense to a group. "
             + "Parameters: "
@@ -214,6 +225,14 @@ public class Messages {
     public static final String MESSAGE_CALCULATEPAYMENTSCOMMAND_GROUP_NOT_FOUND =
             "The specified group does not exists.";
 
+
+    public static final String MESSAGE_LISTTRANSACTIONSUMMARYCOMMAND_USAGE = "transactionsummary gn/GROUP_NAME";
+    public static final String MESSAGE_LISTTRANSACTIONSUMMARYCOMMAND_GROUP_NOT_FOUND =
+            "The specified group does not exists.";
+    public static final String MESSAGE_LISTTRANSACTIONSUMMARYCOMMAND_SUCCESS =
+            "Expenses for individual group members are listed.";
+
+
     //messages for miscellaneous commands
     public static final String MESSAGE_CLEARCOMMAND_SUCCESS = "Address book has been cleared!";
 
@@ -225,13 +244,5 @@ public class Messages {
             + ": Shows program usage instructions.\n"
             + "Example: " + HelpCommand.COMMAND_WORD;
     public static final String MESSAGE_HELPCOMMAND_SHOWING_HELP = "Opened help window.";
-
-
-
-
-
-
-
-
 
 }
