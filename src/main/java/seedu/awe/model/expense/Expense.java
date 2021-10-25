@@ -36,18 +36,12 @@ public class Expense {
      * @param included Persons to be included into paying the expense.
      */
     public Expense(Person payer, Cost cost, Description description, List<Person> included) {
-        this.payer = payer;
-        this.cost = cost;
-        this.description = description;
-        this.included = included;
-        this.individualExpenses = new HashMap<>();
-        this.splitExpenses = new HashMap<>();
-
-        calculateSplitExpense();
+        this(payer, cost, description, included, new HashMap<>());
     }
 
     /**
      * Constructs an {@code Expense}.
+     *
      * @param payer of expense.
      * @param cost of expense.
      * @param description of expense.
