@@ -21,7 +21,7 @@ public class DeleteExpenseCommand extends Command {
             + ": Deletes the expense identified by the index number used in the displayed expense list.\n"
             + "Parameters: INDEX (must be a positive integer) within range of index numbers seen on screen.\n"
             + "Example: " + COMMAND_WORD + " 1";
-    private static final String MESSAGE_SUCCESS = "Expense %s successfully deleted!";
+    public static final String MESSAGE_SUCCESS = "Expense %s successfully deleted!";
     private Index index;
 
     /**
