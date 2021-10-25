@@ -122,8 +122,21 @@ public class Messages {
     public static final String MESSAGE_GROUPADDCONTACTCOMMAND_DUPLICATE_PERSON = "%1$s is already in the group";
     public static final String MESSAGE_GROUPADDCONTACTCOMMAND_USAGE =
             "groupaddcontact gn/[GROUPNAME] n/[NAME1] n/[OPTIONAL NAME2]";
-    public static final String MESSAGE_GROUPADDCONTACTCOMMAND_NONEXISTENT_GROUP = "Group %1$s does not exist.";
 
+
+
+    public static final String MESSAGE_GROUPADDTAGCOMMAND_SUCCESS = "New tag(s) added to group";
+    public static final String MESSAGE_GROUPADDTAGCOMMAND_DUPLICATE_TAG = "%1$s is already in the group";
+    public static final String MESSAGE_GROUPADDTAGCOMMAND_USAGE =
+            "groupaddtag gn/[GROUPNAME] n/[TAG1] n/[OPTIONAL TAG2]";
+
+
+    public static final String MESSAGE_GROUPEDITNAMECOMMAND_SUCCESS = "Group name changed to %1$s";
+    public static final String MESSAGE_GROUPEDITNAMECOMMAND_ERROR = "Group name not changed.";
+    public static final String MESSAGE_GROUPEDITNAMECOMMAND_USAGE = "groupeditname gn/[OLDGROUPNAME] gn/[NEWGROUPNAME]";
+
+
+    public static final String MESSAGE_NONEXISTENT_GROUP = "Group %1$s does not exist.";
 
     //messages for expenses related commands
     public static final String MESSAGE_ADDEXPENSECOMMAND_USAGE = AddExpenseCommand.COMMAND_WORD

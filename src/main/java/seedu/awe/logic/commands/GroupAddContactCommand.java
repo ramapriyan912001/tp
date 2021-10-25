@@ -2,8 +2,8 @@ package seedu.awe.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.awe.commons.core.Messages.MESSAGE_GROUPADDCONTACTCOMMAND_DUPLICATE_PERSON;
 import static seedu.awe.commons.core.Messages.MESSAGE_GROUPADDCONTACTCOMMAND_ERROR;
-import static seedu.awe.commons.core.Messages.MESSAGE_GROUPADDCONTACTCOMMAND_NONEXISTENT_GROUP;
 import static seedu.awe.commons.core.Messages.MESSAGE_GROUPADDCONTACTCOMMAND_SUCCESS;
+import static seedu.awe.commons.core.Messages.MESSAGE_NONEXISTENT_GROUP;
 import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
@@ -86,7 +86,7 @@ public class GroupAddContactCommand extends Command {
 
         Group oldGroup = model.getGroupByName(groupName);
         if (Objects.isNull(oldGroup)) {
-            throw new CommandException(String.format(MESSAGE_GROUPADDCONTACTCOMMAND_NONEXISTENT_GROUP, groupName));
+            throw new CommandException(String.format(MESSAGE_NONEXISTENT_GROUP, groupName));
         }
         ArrayList<Person> membersFromOldGroup = oldGroup.getMembers();
         for (Person member : newMembers) {
