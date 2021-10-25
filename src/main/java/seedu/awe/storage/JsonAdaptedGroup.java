@@ -86,8 +86,10 @@ public class JsonAdaptedGroup {
         for (JsonAdaptedTag tag : tags) {
             groupTags.add(tag.toModelType());
         }
+
         final ArrayList<Expense> modelExpenses = new ArrayList<>();
-        modelExpenses.addAll(StorageUtils.convertAdaptedExpensesToExpenses(expenses));
+        final ArrayList<Expense> intermediaryExpenses = new ArrayList<>();
+        intermediaryExpenses.addAll(StorageUtils.convertAdaptedExpensesToExpenses(expenses));
 
         if (groupName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -102,7 +104,7 @@ public class JsonAdaptedGroup {
 
         Group group = new Group(modelName, modelMembers, modelTags, modelExpenses);
 
-        for (Expense expense: modelExpenses) {
+        for (Expense expense: intermediaryExpenses) {
             group = group.addExpense(expense);
         }
 
