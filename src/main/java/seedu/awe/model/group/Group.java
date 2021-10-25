@@ -259,11 +259,13 @@ public class Group {
         ArrayList<Expense> newExpenses = new ArrayList<>(expenses);
         newExpenses.remove(expense);
         Person payer = expense.getPayer();
+        final Cost cost = expense.getCost();
         Map<Person, Cost> individualExpenses = expense.getIndividualExpenses();
-        paidByPayers.computeIfPresent(payer, (key, val) -> val.subtract(this.paidByPayers.get(payer)));
+        paidByPayers.computeIfPresent(payer, (key, val) -> val.subtract(cost));
         for (Map.Entry<Person, Cost> entry : individualExpenses.entrySet()) {
             Person payee = entry.getKey();
-            paidByPayees.computeIfPresent(payee, (key, val) -> val.subtract(this.paidByPayees.get(payee)));
+            Cost payeeCost = entry.getValue();
+            paidByPayees.computeIfPresent(payee, (key, val) -> val.subtract(payeeCost));
         }
         return new Group(groupName, members, tags, newExpenses, paidByPayers, paidByPayees);
     }
