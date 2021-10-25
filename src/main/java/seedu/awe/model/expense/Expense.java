@@ -41,7 +41,7 @@ public class Expense {
 
     /**
      * Constructs an {@code Expense}.
-     * 
+     *
      * @param payer of expense.
      * @param cost of expense.
      * @param description of expense.
