@@ -217,13 +217,13 @@ public class Group {
 
         Person payer = expense.getPayer();
         Cost payerPaidAmount = expense.getCost();
-        paidByPayers.merge(payer, payerPaidAmount, (original, toAdd) -> original.add(toAdd));
+        paidByPayers.computeIfPresent(payer, (key, val) -> val.add(payerPaidAmount));
 
         Map<Person, Cost> individualExpenses = expense.getSplitExpenses();
         for (Map.Entry<Person, Cost> entry : individualExpenses.entrySet()) {
             Person payee = entry.getKey();
             Cost payeeExpense = entry.getValue();
-            splitExpenses.merge(payee, payeeExpense, (original, toAdd) -> original.add(toAdd));
+            splitExpenses.computeIfPresent(payee, (key, val) -> val.add(payeeExpense));
         }
         return new Group(groupName, members, tags, newExpenses, paidByPayers, splitExpenses);
     }
