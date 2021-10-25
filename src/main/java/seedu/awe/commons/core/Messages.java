@@ -1,4 +1,16 @@
 package seedu.awe.commons.core;
+import static seedu.awe.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.awe.logic.parser.CliSyntax.PREFIX_COST;
+import static seedu.awe.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.awe.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.awe.logic.parser.CliSyntax.PREFIX_EXCLUDE;
+import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
+import static seedu.awe.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.awe.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.awe.logic.parser.CliSyntax.PREFIX_TAG;
+
+import seedu.awe.logic.commands.AddContactCommand;
+import seedu.awe.logic.commands.AddExpenseCommand;
 
 /**
  * Container for user visible messages.
@@ -13,4 +25,55 @@ public class Messages {
     public static final String MESSAGE_GROUPS_LISTED_OVERVIEW = "%1$d groups listed!";
     public static final String MESSAGE_EXPENSES_LISTED_OVERVIEW = "%1$d expenses listed!";
 
+    public static final String MESSAGE_ADDCONTACTCOMMAND_USAGE = AddContactCommand.COMMAND_WORD
+            + ": Adds a person to the awe book. "
+            + "Parameters: "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_PHONE + "PHONE "
+            + PREFIX_EMAIL + "EMAIL "
+            + PREFIX_ADDRESS + "ADDRESS "
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Example: " + AddContactCommand.COMMAND_WORD + " "
+            + PREFIX_NAME + "John Doe "
+            + PREFIX_PHONE + "98765432 "
+            + PREFIX_EMAIL + "johnd@example.com "
+            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
+            + PREFIX_TAG + "friends "
+            + PREFIX_TAG + "owesMoney";
+
+    public static final String MESSAGE_ADDCONTACTCOMMAND_SUCCESS = "New person added: %1$s";
+    public static final String MESSAGE_ADDCONTACTCOMMAND_DUPLICATE = "This person already exists in the awe book";
+
+    public static final String MESSAGE_ADDEXPENSECOMMAND_USAGE = AddExpenseCommand.COMMAND_WORD
+            + ": Adds an expense to a group. "
+            + "Parameters: "
+            + PREFIX_NAME + "PAYER NAME "
+            + PREFIX_GROUP_NAME + "GROUP NAME "
+            + PREFIX_COST + "COST "
+            + PREFIX_DESCRIPTION + "DESCRIPTION "
+            + "[" + PREFIX_NAME + "PAYEE NAME" + "] "
+            + "[" + PREFIX_COST + "PAYEE EXPENSE" + "]"
+            + "[" + PREFIX_EXCLUDE + "EXCLUDED PERSON" + "]";
+
+    public static final String MESSAGE_ADDEXPENSECOMMAND_SUCCESS = "Expense added!";
+    public static final String MESSAGE_ADDEXPENSECOMMAND_NOT_PART_OF_GROUP =
+            "The person isn't part of the specified group!";
+    public static final String MESSAGE_ADDEXPENSECOMMAND_ALL_MEMBERS_EXCLUDED =
+            "You can't exclude every member of the group!";
+    public static final String MESSAGE_ADDEXPENSECOMMAND_COST_ZERO_OR_LESS =
+            "The cost of this expense is zero or less!";
+    public static final String MESSAGE_ADDEXPENSECOMMAND_CANNOT_ADD_EXCLUDED_MEMBER =
+            "You tried to add an expense for an excluded member!";
+
+    public static final String MESSAGE_CALCULATEPAYMENTSCOMMAND_SUCCESS =
+            "Payments to be made between group members are listed.";
+
+    public static final String MESSAGE_CALCULATEPAYMENTSCOMMAND_USAGE =
+            "calculatepayments " + PREFIX_GROUP_NAME + "GROUPNAME";
+    public static final String MESSAGE_CALCULATEPAYMENTSCOMMAND_PAYMENTS_EMPTY =
+            "There are no payments to be made!";
+    public static final String MESSAGE_CALCULATEPAYMENTSCOMMAND_GROUP_NOT_FOUND =
+            "The specified group does not exists.";
+
+    public static final String MESSAGE_CLEARCOMMAND_SUCCESS = "Address book has been cleared!";
 }

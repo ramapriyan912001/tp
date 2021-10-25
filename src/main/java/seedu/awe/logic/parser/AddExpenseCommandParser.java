@@ -1,6 +1,7 @@
 package seedu.awe.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_USAGE;
 import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_COST;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
@@ -56,7 +57,7 @@ public class AddExpenseCommandParser implements Parser<AddExpenseCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_GROUP_NAME, PREFIX_COST, PREFIX_DESCRIPTION)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExpenseCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_ADDEXPENSECOMMAND_USAGE));
         }
 
         List<Name> names = ParserUtil.parseNames(argMultimap.getAllValues(PREFIX_NAME));
@@ -66,13 +67,13 @@ public class AddExpenseCommandParser implements Parser<AddExpenseCommand> {
         List<Name> excludedNames = ParserUtil.parseExcluded(argMultimap.getAllValues(PREFIX_EXCLUDE));
 
         if (names.size() != costs.size()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExpenseCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_ADDEXPENSECOMMAND_USAGE));
         }
 
         Person payer = getPayer(names);
 
         if (payer == null) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExpenseCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_ADDEXPENSECOMMAND_USAGE));
         }
 
         Cost totalCost = getTotalCost(costs);

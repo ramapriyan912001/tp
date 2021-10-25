@@ -1,12 +1,12 @@
 package seedu.awe.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_ALL_MEMBERS_EXCLUDED;
+import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_CANNOT_ADD_EXCLUDED_MEMBER;
+import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_COST_ZERO_OR_LESS;
+import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_NOT_PART_OF_GROUP;
+import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_SUCCESS;
 import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.awe.logic.parser.CliSyntax.PREFIX_COST;
-import static seedu.awe.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.awe.logic.parser.CliSyntax.PREFIX_EXCLUDE;
-import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
-import static seedu.awe.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,22 +27,6 @@ import seedu.awe.model.person.Person;
 public class AddExpenseCommand extends Command {
 
     public static final String COMMAND_WORD = "addexpense";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an expense to a group. "
-            + "Parameters: "
-            + PREFIX_NAME + "PAYER NAME "
-            + PREFIX_GROUP_NAME + "GROUP NAME "
-            + PREFIX_COST + "COST "
-            + PREFIX_DESCRIPTION + "DESCRIPTION "
-            + "[" + PREFIX_NAME + "PAYEE NAME" + "] "
-            + "[" + PREFIX_COST + "PAYEE EXPENSE" + "]"
-            + "[" + PREFIX_EXCLUDE + "EXCLUDED PERSON" + "]";
-
-    public static final String MESSAGE_SUCCESS = "Expense added!";
-    public static final String MESSAGE_NOT_PART_OF_GROUP = "The person isn't part of the specified group!";
-    public static final String MESSAGE_ALL_MEMBERS_EXCLUDED = "You can't exclude every member of the group!";
-    public static final String MESSAGE_COST_ZERO_OR_LESS = "The cost of this expense is zero or less!";
-    public static final String MESSAGE_CANNOT_ADD_EXCLUDED_MEMBER = "You tried to add an expense"
-            + "for an excluded member!";
 
     private Expense expense;
     private final GroupName groupName;
@@ -80,17 +64,17 @@ public class AddExpenseCommand extends Command {
         Cost finalCost = expense.getCost();
 
         if (!group.isPartOfGroup(expense.getPayer())) {
-            return new CommandResult(MESSAGE_NOT_PART_OF_GROUP);
+            return new CommandResult(MESSAGE_ADDEXPENSECOMMAND_NOT_PART_OF_GROUP);
         }
 
         for (Person exclude : excluded) {
             if (!group.isPartOfGroup(exclude)) {
-                return new CommandResult(MESSAGE_NOT_PART_OF_GROUP);
+                return new CommandResult(MESSAGE_ADDEXPENSECOMMAND_NOT_PART_OF_GROUP);
             }
         }
 
         if (group.getMembers().size() == excluded.size()) {
-            return new CommandResult(MESSAGE_ALL_MEMBERS_EXCLUDED);
+            return new CommandResult(MESSAGE_ADDEXPENSECOMMAND_ALL_MEMBERS_EXCLUDED);
         }
 
         return calculateExpense(group, expense.getPayer(), finalCost, model);
@@ -103,10 +87,10 @@ public class AddExpenseCommand extends Command {
             Person currentPayer = selfPayees.get(i);
             Cost indivCost = selfCosts.get(i);
             if (excluded.contains(currentPayer)) {
-                return new CommandResult(MESSAGE_CANNOT_ADD_EXCLUDED_MEMBER);
+                return new CommandResult(MESSAGE_ADDEXPENSECOMMAND_CANNOT_ADD_EXCLUDED_MEMBER);
             }
             if (currentPayer == null || !group.isPartOfGroup(currentPayer)) {
-                return new CommandResult(MESSAGE_NOT_PART_OF_GROUP);
+                return new CommandResult(MESSAGE_ADDEXPENSECOMMAND_NOT_PART_OF_GROUP);
             }
 
             finalCost = finalCost.subtract(indivCost);
@@ -116,7 +100,7 @@ public class AddExpenseCommand extends Command {
         paidByPayers.merge(payer, paidAmount, (original, toAdd) -> original.add(paidAmount));
 
         if (finalCost.cost <= 0) {
-            return new CommandResult(MESSAGE_COST_ZERO_OR_LESS);
+            return new CommandResult(MESSAGE_ADDEXPENSECOMMAND_COST_ZERO_OR_LESS);
         }
         ArrayList<Person> groupMembers = removeExcludedFromGroup(group.getMembers());
         Cost toSplit = finalCost.divide(groupMembers.size());
@@ -129,7 +113,7 @@ public class AddExpenseCommand extends Command {
                 newGroup.getTags(), newGroup.getExpenses(), paidByPayers, newGroup.getPaidByPayees());
         model.setGroup(group, newGroup);
         model.addExpense(expense, newGroup);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, expense));
+        return new CommandResult(String.format(MESSAGE_ADDEXPENSECOMMAND_SUCCESS, expense));
     }
 
     private ArrayList<Person> removeExcludedFromGroup(ArrayList<Person> members) {
