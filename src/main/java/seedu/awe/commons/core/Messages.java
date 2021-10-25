@@ -16,6 +16,7 @@ import seedu.awe.logic.commands.DeleteContactCommand;
 import seedu.awe.logic.commands.DeleteExpenseCommand;
 import seedu.awe.logic.commands.DeleteGroupCommand;
 import seedu.awe.logic.commands.EditContactCommand;
+import seedu.awe.logic.commands.FindContactsCommand;
 import seedu.awe.logic.commands.FindExpensesCommand;
 import seedu.awe.logic.commands.ListExpensesCommand;
 
@@ -78,6 +79,13 @@ public class Messages {
             "This person already exists in the awe book.";
 
 
+    public static final String MESSAGE_FINDCONTACTSCOMMAND_USAGE = FindContactsCommand.COMMAND_WORD
+            + ": Finds all persons whose names contain any of "
+            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+            + "Example: " + FindContactsCommand.COMMAND_WORD + " alice bob charlie";
+
+
     //messages for group related commands
     public static final String MESSAGE_CREATEGROUPCOMMAND_SUCCESS = "New group created";
     public static final String MESSAGE_CREATEGROUPCOMMAND_ERROR =
@@ -132,6 +140,17 @@ public class Messages {
                     + "the expenses of a group. "
                     + "To delete an expense, first enter the " + FindExpensesCommand.COMMAND_WORD + " or "
                     + ListExpensesCommand.COMMAND_WORD + " command.";
+
+
+    public static final String MESSAGE_FINDEXPENSESCOMMAND_USAGE = FindExpensesCommand.COMMAND_WORD
+            + ": Finds all expenses within the specified group "
+            + "which description contains any of the specified keywords (case-insensitive) and displays them as a"
+            + "list with index numbers.\n"
+            + "Parameters:"
+            + "KEYWORD [MORE_KEYWORDS]...\n"
+            + PREFIX_GROUP_NAME + " GROUP NAME"
+            + " Example: " + FindExpensesCommand.COMMAND_WORD + "pizza pasta " + PREFIX_GROUP_NAME + " london";
+    public static final String MESSAGE_FINDEXPENSESCOMMAND_GROUP_NOT_FOUND = "The specified group does not exists.";
 
 
     //messages for calculatepayment related commands
