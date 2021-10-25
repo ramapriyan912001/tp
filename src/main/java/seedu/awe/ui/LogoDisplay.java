@@ -5,8 +5,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 
-import static java.util.Objects.requireNonNull;
-
+/**
+ * The logo of AWE to be displayed in the MainWindow.
+ */
 public class LogoDisplay extends UiPart<Region> {
 
     private static final String FXML = "LogoDisplay.fxml";
@@ -14,6 +15,10 @@ public class LogoDisplay extends UiPart<Region> {
     @FXML
     private ImageView logoDisplay;
 
+    /**
+     * Constructor for LogoDisplay.
+     * @param url The location of the logo to be displayed.
+     */
     public LogoDisplay(String url) {
         super(FXML);
         Image image = new Image(url);
