@@ -134,6 +134,11 @@ public class AddContactCommandTest {
         }
 
         @Override
+        public Group getActiveGroupFromAddressBook() throws CommandException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }

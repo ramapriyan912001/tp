@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.awe.commons.core.GuiSettings;
+import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.model.AddressBook;
 import seedu.awe.model.Model;
 import seedu.awe.model.ReadOnlyAddressBook;
@@ -249,6 +250,11 @@ public class AddExpenseCommandTest {
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Group getActiveGroupFromAddressBook() throws CommandException {
             throw new AssertionError("This method should not be called.");
         }
 
