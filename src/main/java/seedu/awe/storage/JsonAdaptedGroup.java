@@ -13,7 +13,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.awe.commons.exceptions.IllegalValueException;
 import seedu.awe.model.expense.Cost;
 import seedu.awe.model.expense.Expense;
-import seedu.awe.model.expense.IndividualAmount;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.person.Person;
