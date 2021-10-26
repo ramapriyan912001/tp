@@ -3,7 +3,7 @@ package seedu.awe.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.awe.commons.core.Messages.MESSAGE_DELETEGROUPCOMMAND_GROUP_DOES_NOT_EXIST;
 import static seedu.awe.commons.core.Messages.MESSAGE_DELETEGROUPCOMMAND_SUCCESS;
-import static seedu.awe.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.awe.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 
 import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.model.Model;
@@ -46,7 +46,7 @@ public class DeleteGroupCommand extends Command {
         model.setAllMembersOfGroup(groupFromInternalList);
         int numberOfMembers = groupFromInternalList.getMembers().size();
         String groupName = groupFromInternalList.getGroupName().getName();
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         return new CommandResult(String.format(MESSAGE_DELETEGROUPCOMMAND_SUCCESS, groupName, numberOfMembers));
     }
 
