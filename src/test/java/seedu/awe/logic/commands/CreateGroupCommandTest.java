@@ -52,7 +52,8 @@ public class CreateGroupCommandTest {
         ArrayList<Person> members = builder.getValidMembers();
         Group groupAdded = new Group(bali, members);
 
-        CommandResult commandResult = new CreateGroupCommand(bali, members, true, new HashSet<>()).execute(modelStub);
+        CommandResult commandResult = new CreateGroupCommand(bali, members, true, new HashSet<>())
+                .execute(modelStub);
 
         assertEquals(MESSAGE_CREATEGROUPCOMMAND_SUCCESS, commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(groupAdded), modelStub.groupsAdded);
@@ -211,7 +212,6 @@ public class CreateGroupCommandTest {
 
         @Override
         public void updateFilteredGroupList(Predicate<Group> predicate) {
-            throw new AssertionError("This method should not be called.");
         }
 
         @Override
