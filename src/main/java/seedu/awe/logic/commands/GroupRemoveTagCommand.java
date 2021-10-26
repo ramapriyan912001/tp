@@ -1,5 +1,9 @@
 package seedu.awe.logic.commands;
 import static java.util.Objects.requireNonNull;
+import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVETAG_ERROR;
+import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVETAG_NONEXISTENT_TAG;
+import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVETAG_SUCCESS;
+import static seedu.awe.commons.core.Messages.MESSAGE_NONEXISTENT_GROUP;
 import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashSet;
@@ -14,11 +18,6 @@ import seedu.awe.model.tag.Tag;
 
 public class GroupRemoveTagCommand extends Command {
     public static final String COMMAND_WORD = "groupremovetag";
-    public static final String MESSAGE_SUCCESS = "Tag(s) removed from group";
-    public static final String MESSAGE_ERROR = "Tag(s) not removed from group. Make sure to use exact tag names.";
-    public static final String MESSAGE_NONEXISTENT_TAG = "The tag \"%1$s\" is not found in the group.";
-    public static final String MESSAGE_USAGE = "groupaddtag gn/[GROUPNAME] n/[TAG1] n/[OPTIONAL TAG2]";
-    public static final String MESSAGE_NONEXISTENT_GROUP = "Group %1$s does not exist.";
 
     private final GroupName groupName;
     private final Set<Tag> tagsToBeRemoved;
@@ -92,7 +91,9 @@ public class GroupRemoveTagCommand extends Command {
         for (Tag tagToBeRemoved : tagsToBeRemoved) {
             boolean tagToBeRemovedIsPresent = remainingTags.remove(tagToBeRemoved);
             if (!tagToBeRemovedIsPresent) {
-                throw new CommandException(String.format(MESSAGE_NONEXISTENT_TAG, tagToBeRemoved.getTagName()));
+                throw new CommandException(
+                        String.format(MESSAGE_GROUPREMOVETAG_NONEXISTENT_TAG, tagToBeRemoved.getTagName())
+                );
             }
         }
         return remainingTags;
@@ -102,7 +103,7 @@ public class GroupRemoveTagCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (!isValidCommand) {
-            throw new CommandException(MESSAGE_ERROR);
+            throw new CommandException(MESSAGE_GROUPREMOVETAG_ERROR);
         }
 
         Group oldGroup = model.getGroupByName(groupName);
@@ -113,7 +114,7 @@ public class GroupRemoveTagCommand extends Command {
         Set<Tag> remainingTags = removeTags(tagsFromOldGroup, tagsToBeRemoved);
         Group newGroup = new Group(groupName, oldGroup.getMembers(), remainingTags);
         model.setGroup(oldGroup, newGroup);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_GROUPREMOVETAG_SUCCESS);
     }
 
     @Override

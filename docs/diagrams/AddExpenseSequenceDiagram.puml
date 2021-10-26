@@ -13,10 +13,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("addexpense n/Alex Yeoh gn/Bali $/50 d/Happy hour n/Bernice Yu $/10 ex/Charlie Tan")
+[-> LogicManager : execute("addexpense n/Alex Yeoh gn/Bali $/50 d/Food")
 activate LogicManager
 
-LogicManager -> AweParser : parseCommand("addexpense n/Alex Yeoh gn/Bali $/50 d/Happy hour n/Bernice Yu $/10 ex/Charlie Tan")
+LogicManager -> AweParser : parseCommand("addexpense n/Alex Yeoh gn/Bali $/50 d/Food")
 activate AweParser
 
 create AddExpenseCommandParser
@@ -26,7 +26,7 @@ activate AddExpenseCommandParser
 AddExpenseCommandParser --> AweParser
 deactivate AddExpenseCommandParser
 
-AweParser -> AddExpenseCommandParser : parse("n/Alex Yeoh gn/Bali $/50 d/Happy hour n/Bernice Yu $/10 ex/Charlie Tan")
+AweParser -> AddExpenseCommandParser : parse("n/Alex Yeoh gn/Bali $/50 d/Food")
 activate AddExpenseCommandParser
 
 create AddExpenseCommand
