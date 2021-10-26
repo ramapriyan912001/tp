@@ -126,7 +126,7 @@ public class CalculatePaymentsCommand extends Command {
     public List<Pair> getNamesAndSurplusesList(Group group) {
         List<Pair> namesAndSurpluses = new ArrayList<>();
         Map<Person, Cost> amountsPaid = group.getPaidByPayers();
-        Map<Person, Cost> expensesIncurred = group.getPaidByPayees();
+        Map<Person, Cost> expensesIncurred = group.getSplitExpenses();
         for (Person person: group.getMembers()) {
             Cost amountPaid = amountsPaid.get(person);
             Cost expenseIncurred = expensesIncurred.get(person);
@@ -157,17 +157,18 @@ public class CalculatePaymentsCommand extends Command {
         return Math.abs(total) < marginOfError;
     }
 
-
     private static Optional<Pair> getSmallerPair(Pair p1, Pair p2) {
         requireAllNonNull(p1, p2);
         double p1AbsoluteSurplus = Math.abs(p1.getSurplus());
         double p2AbsoluteSurplus = Math.abs(p2.getSurplus());
-        if (p1AbsoluteSurplus < p2AbsoluteSurplus) {
-            return Optional.ofNullable(p1);
-        } else if (p1AbsoluteSurplus > p2AbsoluteSurplus) {
-            return Optional.ofNullable(p2);
-        } else {
+        double marginOfError = 0.01;
+        double difference = Math.abs(p1AbsoluteSurplus - p2AbsoluteSurplus);
+        if (difference < marginOfError) {
             return Optional.empty();
+        } else if (p1AbsoluteSurplus < p2AbsoluteSurplus) {
+            return Optional.ofNullable(p1);
+        } else {
+            return Optional.ofNullable(p2);
         }
     }
 
@@ -209,13 +210,13 @@ public class CalculatePaymentsCommand extends Command {
                 pairs.remove(pairs.size() - 1);
             } else if (smallerPair.get().equals(pairWithHighestSurplus)) {
                 pairs.remove(pairs.size() - 1);
-                Double newSurplus = pairWithLowestSurplus.getSurplus() + pairWithHighestSurplus.getSurplus();
+                double newSurplus = pairWithLowestSurplus.getSurplus() + pairWithHighestSurplus.getSurplus();
                 Pair newPairWithLowestSurplus = new Pair(newSurplus, pairWithLowestSurplus.getPerson());
                 pairs.remove(0);
                 pairs.add(0, newPairWithLowestSurplus);
             } else if (smallerPair.get().equals(pairWithLowestSurplus)) {
                 pairs.remove(0);
-                Double newSurplus = pairWithHighestSurplus.getSurplus() + pairWithLowestSurplus.getSurplus();
+                double newSurplus = pairWithHighestSurplus.getSurplus() + pairWithLowestSurplus.getSurplus();
                 Pair newPairWithHighestSurplus = new Pair(newSurplus, pairWithHighestSurplus.getPerson());
                 pairs.remove(pairs.size() - 1);
                 pairs.add(newPairWithHighestSurplus);

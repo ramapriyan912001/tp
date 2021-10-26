@@ -19,7 +19,6 @@ import seedu.awe.model.Model;
 import seedu.awe.model.ReadOnlyAddressBook;
 import seedu.awe.model.expense.Cost;
 import seedu.awe.model.expense.Description;
-import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.person.Name;
 import seedu.awe.model.person.Person;
@@ -72,16 +71,14 @@ public class AddExpenseCommandParser implements Parser<AddExpenseCommand> {
         Person payer = getPayer(names);
 
         if (payer == null) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExpenseCommand.MESSAGE_USAGE));
+            throw new ParseException(AddExpenseCommand.MESSAGE_NOT_PART_OF_GROUP);
         }
 
         Cost totalCost = getTotalCost(costs);
         ArrayList<Person> namesAsPersons = namesToPerson(names);
         List<Person> toExclude = findExcluded(excludedNames);
 
-        Expense expense = new Expense(payer, totalCost, description);
-
-        return new AddExpenseCommand(expense, groupName, namesAsPersons, costs, toExclude);
+        return new AddExpenseCommand(payer, totalCost, description, groupName, namesAsPersons, costs, toExclude);
     }
 
     private List<Person> findExcluded(List<Name> toExclude) {

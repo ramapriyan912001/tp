@@ -32,7 +32,7 @@ public class ListTransactionSummaryCommand extends Command {
         }
 
         Group group = model.getAddressBook().getGroupByName(this.group.getGroupName());
-        HashMap<Person, Cost> summary = group.getPaidByPayees();
+        HashMap<Person, Cost> summary = group.getSplitExpenses();
 
         model.setTransactionSummary(summary);
 
