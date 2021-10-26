@@ -434,6 +434,151 @@ The following sequence operation shows how the `findexpenses` operation works.
     * Hence, finding expenses based on the specified group name is more appropriate.
 
 
+### Delete Expense Feature
+
+The delete expense mechanism is facilitated by the addition of an `ExpenseList` field within the `AddressBook` object maintained by the model.
+Each `Expense` belongs to a `Group` object, also maintained within the `AddressBook`.
+Deletion of an expense must be accompanied by deletion of the expense from the `Group` object to which it belongs.
+The command allows the user to delete an expense based on the index position of the expense in the page viewed by the user.
+This means that the user is constrained to only being permitted to delete expenses when they are viewing a list of expenses; that is, after they enter the `findexpenses` or `expenses` command.
+
+The following activity diagram shows what happens when a user executes a `deleteexpense` command.
+
+![DeleteExpenseActivityDiagram](images/DeleteExpenseActivityDiagram.png)
+
+Given below is an example usage scenario and how the `deleteexpense` mechanism behaves at each step.
+
+Step 1. A valid `deleteexpense` command is given as user input. This prompts the `LogicManager` to run its execute()
+method.
+
+Step 2. The `DeleteExpenseCommandParser` parses the input and checks for presence of the `INDEX` input.
+It returns a `DeleteExpenseCommand`.
+
+Step 3. `DeleteExpenseCommand` runs its execute() method which checks if the `INDEX` entered is within the range of the size of the list of expneses seen by the user.
+If so, the `Expense` at the `INDEX` position is deleted from the `ExpenseList`. The `ObservableList` within `ExpenseList` is updated, meaniing the UI updates and the user can see the new list of expenses, without the deleted expense.
+
+Step 4. The `Group` to which this expense belongs is retrieved from the `ExpenseList`.
+The expense is subsequently deleted from the `expenses` field present in the `Group` object.
+The updated `Group` is then placed back into the `GroupList` within the `AddressBook`.
+
+Step 5: Upon successful execution, `CommandResult` is returned.
+
+
+The following sequence operation shows how the `deleteexpense` operation works.
+![DeleteExpenseSequenceDiagram](images/DeleteExpenseSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteExpenseCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+#### Design considerations
+
+**Aspect: User command for deleteexpense:**
+
+* **Alternative 1 (current choice):** Delete based on index position in `ObservableList`
+    * Pros: Easy to implement.
+    * Pros: Short user command.
+    * Cons: Less intuitive for user.
+    * Cons: Easy for user to make an erroneous command.
+
+* **Alternative 2 (description based):** Delete based on `description`
+    * Pros: Easy to implement.
+    * Pros: Difficult for user to make an erroneous command.
+    * Cons: Long user command.
+    * Cons: Requires imposition of constraint that expense description names are unique.
+
+
+* **Justification**
+    * Expenses, unlike Groups, do not contain a large volume of information.
+    * This information is unrecoverable once deleted.
+    * However, the damage to a user as a result of an error is not significant. The user can re-enter the details with a single command.
+    * Therefore, the need to protect the user from erroneous decisions is not significant.
+    * Furthermore, many expenses are likely to have similar descriptions. Constraining users to using unique descriptions for expenses is likely to compromise the user experience.
+    * As such, it is better to choose Alternative 1, as this allows the user to quickly delete expenses, and not compromise on the flexibility of the user.
+
+### Calculate Payments Feature
+
+The purpose of this feature is to provide users with a simple set of transactions that would allow all debts within the group to be settled.
+The UI mechanism is facilitated by the addition of a `PaymentList` field of `Payment` objects, present within the `AddressBook` object maintained by the model.
+The functionality of this feature is facilitated by the fact that group objects maintain two hashmaps: -
+* `paidByPayers`, which maintains how much each member of the group has paid (total payments) during the course of the trip.
+* `splitExpenses`, which maintains how much expenditure each member of the group has incurred (total expenditure) during the course of the trip.
+These maps allow calculations with respect to how much each individual is owed, and how much each individual owes.
+  
+#### The Algorithm
+The invariant maintained is that the sum of all payments made (values within `paidByPayers`) should equal the total expenditures incurred by the group (values within `splitExpenses`).
+Define surplus as the net amount each individual is owed by others. This ultimately means that some members have negative surplus, and some have positive surplus.
+The goal is to ensure that the deficits balance the surpluses with the minimum number of transactions.
+To assist with the tracking of each individual and their surplus, an inner `Pair` class was created with a `Person` field and a primitive double field for the surplus.
+
+* Initialise an empty list of Pairs. Iterate through the `members` of the group and retrieve each individual's total payments and total expenditures.
+
+* Calculate the surplus of each individual by subtracting their total expenditures from their total payments.
+Initialise a `Pair` object with the `Person` object of the individual, and their surplus. Add this pair to the list.
+  
+* Remove all `Pairs` with a surplus of `0.0` from the list.
+
+* Initialise an empty list of `Payment` objects.
+
+* Iterate until the list is empty and perform the following steps.
+  * Sort the list in ascending order of surplus. This means that those who owe more are placed in the earlier part of the list and those who are owed more are placed towards the end of the `Pair` list.
+  * Retrieve the first `Pair` and last `Pair` in the list. It is invariant that the first pair will have negative surplus and the last pair will have positive surplus.
+  * Check to see which pair has a smaller magnitude. Define this value to be `SMALL_VAL`.
+  * Create a `Payment` object with a `Cost` of `SMALL_VAL`, and payer and payee as the two individuals within the first pair and last pair retrieved respectively. Add this `Payment` object to the list of `Payment` objects.
+  * If the pairs do not have equal magnitude, remove the pair with the surplus value of smaller magnitude from the list. Calculate the new surplus value of the other pair to be the sum of the surpluses of both pairs. Update the other pair with this new surplus value and place it back into the list.
+  * If the pairs do have equal magnitude, remove both pairs from the list.
+  
+* Return the list of `Payment` objects.
+  
+
+The following activity diagram shows what happens when a user executes a `calculatepayments` command.
+
+![CalculatePaymentsActivityDiagram](images/CalculatePaymentsActivityDiagram.png)
+
+Given below is an example usage scenario and how the `calculatepayments` mechanism behaves at each step.
+
+Step 1. A valid `calculatepayments` command is given as user input. This prompts the `LogicManager` to run its execute()
+method.
+
+Step 2. The `CalculatePaymentsCommandParser` parses the input and checks for presence of the `GROUP_NAME` prefix.
+It checks that the `GROUP_NAME` is valid (does not have any non-alphanumeric characters).
+It returns a `CalculatePaymentsCommand`.
+
+Step 3. `CalculatePaymentsCommand` runs its execute() method which checks if a group with the `GROUP_NAME` entered by the user has been
+created in the past. If so, this group is retrieved from the model.
+
+Step 4. Subsequently, the **Algorithm** is used to tabulate a list of `Payment` objects.
+
+Step 5. The `PaymentList` field is updated with the generated list of payments, triggering a change in the UI to show the user the list of payments.
+
+Step 6. Upon successful execution, `CommandResult` is returned.
+
+
+The following sequence operation shows how the `calculatepayments` operation works.
+![DeleteExpenseSequenceDiagram](images/CalculatePaymentsSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `CalculatePaymentsCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+#### Design considerations
+
+**Aspect: Algorithm utilised for calculatepayments:**
+
+* **Alternative 1 (current choice):** Prioritise settling of bigger debts 
+    * Pros: Easy to implement.
+    * Pros: Smaller number of transactions.
+    * Cons: Larger value transactions.
+
+* **Alternative 2:** Prioritise settling of smaller debts
+    * Pros: Smaller value transactions.
+    * Cons: Greater number of transactions.
+    * Cons: More difficult to implement.
+
+* **Justification**
+    * The size of the transaction matters less to the user than the volume of transactions.
+    * Moreover, an easier implementation reduces the possibility of bugs.
+    * As such, we chose to prioritise the settling of bigger debts in our algorithm.
+  
+
 ### UI Display
 AWE has multiple lists / views to display such as for `groups`, `contacts` and `expenses`.
 

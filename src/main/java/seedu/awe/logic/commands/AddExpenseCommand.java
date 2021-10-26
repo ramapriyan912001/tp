@@ -15,6 +15,7 @@ import java.util.List;
 import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.model.Model;
 import seedu.awe.model.expense.Cost;
+import seedu.awe.model.expense.Description;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
@@ -28,7 +29,9 @@ public class AddExpenseCommand extends Command {
 
     public static final String COMMAND_WORD = "addexpense";
 
-    private Expense expense;
+    private final Person payer;
+    private final Cost totalCost;
+    private final Description description;
     private final GroupName groupName;
     private final List<Person> selfPayees;
     private final List<Cost> selfCosts;
@@ -37,19 +40,21 @@ public class AddExpenseCommand extends Command {
     /**
      * Creates a AddExpenseCommand from the specified Person {@code Index} for the specified {@code Group}
      *
-     * @param expense Expense to be added.
+     * @param payer Person paying for the expense.
+     * @param totalCost Total amount of money paid for the expense.
+     * @param description Description for the expense
      * @param groupName Name of group to add expense to.
      * @param selfPayees List of persons to exclude from the expense.
      * @param selfCosts List of costs to exclude from the expense.
+     * @param excluded Person excluded from the expense.
      */
-    public AddExpenseCommand(Expense expense, GroupName groupName,
+    public AddExpenseCommand(Person payer, Cost totalCost, Description description, GroupName groupName,
                              List<Person> selfPayees, List<Cost> selfCosts, List<Person> excluded) {
-        requireNonNull(expense);
-        requireNonNull(groupName);
-        requireAllNonNull(selfPayees);
-        requireAllNonNull(selfCosts);
+        requireAllNonNull(payer, totalCost, description, groupName, selfPayees, selfCosts, excluded);
 
-        this.expense = expense;
+        this.payer = payer;
+        this.totalCost = totalCost;
+        this.description = description;
         this.groupName = groupName;
         this.selfPayees = selfPayees;
         this.selfCosts = selfCosts;
@@ -61,61 +66,84 @@ public class AddExpenseCommand extends Command {
         requireNonNull(model);
 
         Group group = model.getGroupByName(groupName);
-        Cost finalCost = expense.getCost();
 
-        if (!group.isPartOfGroup(expense.getPayer())) {
-            return new CommandResult(MESSAGE_ADDEXPENSECOMMAND_NOT_PART_OF_GROUP);
+        if (!group.isPartOfGroup(payer)) {
+            throw new CommandException(MESSAGE_ADDEXPENSECOMMAND_NOT_PART_OF_GROUP);
         }
 
         for (Person exclude : excluded) {
             if (!group.isPartOfGroup(exclude)) {
-                return new CommandResult(MESSAGE_ADDEXPENSECOMMAND_NOT_PART_OF_GROUP);
+                throw new CommandException(MESSAGE_ADDEXPENSECOMMAND_NOT_PART_OF_GROUP);
             }
         }
 
         if (group.getMembers().size() == excluded.size()) {
-            return new CommandResult(MESSAGE_ADDEXPENSECOMMAND_ALL_MEMBERS_EXCLUDED);
+            throw new CommandException(MESSAGE_ADDEXPENSECOMMAND_ALL_MEMBERS_EXCLUDED);
         }
 
-        return calculateExpense(group, expense.getPayer(), finalCost, model);
+        return calculateExpense(group, model);
     }
 
-    private CommandResult calculateExpense(Group group, Person payer, Cost finalCost, Model model) {
-        HashMap<Person, Cost> paidByPayees = new HashMap<>();
-        Cost paidAmount = new Cost(finalCost.getCost());
+    /**
+     * Process data from user and checks for errors. Data is then passed into createExpense method.
+     *
+     * @param group Group for the expense.
+     * @param model Model for AWE.
+     * @return Return the result for creating an expense.
+     * @throws CommandException if any of the person input by the user does not belong to the group
+     */
+    private CommandResult calculateExpense(Group group, Model model) throws CommandException {
+        HashMap<Person, Cost> individualPayment = new HashMap<>();
+
+        Cost leftoverExpenseAfterIndividualExpense = totalCost;
         for (int i = 0; i < selfPayees.size(); i++) {
             Person currentPayer = selfPayees.get(i);
-            Cost indivCost = selfCosts.get(i);
             if (excluded.contains(currentPayer)) {
-                return new CommandResult(MESSAGE_ADDEXPENSECOMMAND_CANNOT_ADD_EXCLUDED_MEMBER);
+                throw new CommandException(MESSAGE_ADDEXPENSECOMMAND_CANNOT_ADD_EXCLUDED_MEMBER);
             }
             if (currentPayer == null || !group.isPartOfGroup(currentPayer)) {
-                return new CommandResult(MESSAGE_ADDEXPENSECOMMAND_NOT_PART_OF_GROUP);
+                throw new CommandException(MESSAGE_ADDEXPENSECOMMAND_NOT_PART_OF_GROUP);
             }
-
-            finalCost = finalCost.subtract(indivCost);
-            paidByPayees.merge(currentPayer, indivCost, (original, toAdd) -> original.add(toAdd));
+            individualPayment.merge(currentPayer, selfCosts.get(i), (original, toAdd) -> original.add(toAdd));
+            leftoverExpenseAfterIndividualExpense = leftoverExpenseAfterIndividualExpense.subtract(selfCosts.get(i));
         }
-        HashMap<Person, Cost> paidByPayers = group.getPaidByPayers();
-        paidByPayers.merge(payer, paidAmount, (original, toAdd) -> original.add(paidAmount));
 
-        if (finalCost.cost <= 0) {
-            return new CommandResult(MESSAGE_ADDEXPENSECOMMAND_COST_ZERO_OR_LESS);
+        if (leftoverExpenseAfterIndividualExpense.cost <= 0) {
+            throw new CommandException(MESSAGE_ADDEXPENSECOMMAND_COST_ZERO_OR_LESS);
         }
+
         ArrayList<Person> groupMembers = removeExcludedFromGroup(group.getMembers());
-        Cost toSplit = finalCost.divide(groupMembers.size());
 
-        parseSplitExpenses(groupMembers, paidByPayees, toSplit);
-        expense = expense.setIncluded(groupMembers);
-        expense = expense.setIndividualExpenses(paidByPayees);
-        Group newGroup = group.addExpenseWithIndivPayments(expense, paidByPayees);
-        newGroup = new Group(newGroup.getGroupName(), newGroup.getMembers(),
-                newGroup.getTags(), newGroup.getExpenses(), paidByPayers, newGroup.getPaidByPayees());
-        model.setGroup(group, newGroup);
-        model.addExpense(expense, newGroup);
-        return new CommandResult(String.format(MESSAGE_ADDEXPENSECOMMAND_SUCCESS, expense));
+        return createExpense(model, group, groupMembers, individualPayment);
     }
 
+    /**
+     * Creates an expense class based on data passed in. Created expense is then added into the model.
+     *
+     * @param model Model for AWE
+     * @param group Group for the expense.
+     * @param groupMembers List of person that is included in the expense.
+     * @param individualPayement Individual expenses of the user (if any)
+     * @return
+     */
+    private CommandResult createExpense(Model model, Group group, List<Person> groupMembers,
+                                        HashMap<Person, Cost> individualPayement) {
+        Expense newExpense = new Expense(payer, totalCost, description, groupMembers, individualPayement);
+
+        Group newGroup = group.addExpense(newExpense);
+        model.setGroup(group, newGroup);
+
+        model.addExpense(newExpense, newGroup);
+
+        return new CommandResult(String.format(MESSAGE_ADDEXPENSECOMMAND_SUCCESS, newExpense));
+    }
+
+    /**
+     * Gets a list of person that is included in the expense. Excluded person is not included in the list.
+     *
+     * @param members All members of the group.
+     * @return A list of Person in the group that is involved in the expense.
+     */
     private ArrayList<Person> removeExcludedFromGroup(ArrayList<Person> members) {
         ArrayList<Person> groupMembers = new ArrayList<>(members);
         for (Person toExclude : excluded) {
@@ -124,15 +152,8 @@ public class AddExpenseCommand extends Command {
         return groupMembers;
     }
 
-    private void parseSplitExpenses(ArrayList<Person> groupMembers, HashMap<Person, Cost> paidByPayees, Cost toSplit) {
-        for (int i = 0; i < groupMembers.size(); i++) {
-            Person currentPayer = groupMembers.get(i);
-            paidByPayees.merge(currentPayer, toSplit, (original, toAdd) -> original.add(toAdd));
-        }
-    }
-
-    public Expense getExpense() {
-        return expense;
+    public Cost getTotalCost() {
+        return totalCost;
     }
 
     @Override
@@ -143,7 +164,9 @@ public class AddExpenseCommand extends Command {
             return false;
         } else {
             AddExpenseCommand otherCommand = (AddExpenseCommand) other;
-            return expense.equals(otherCommand.expense)
+            return payer.equals(otherCommand.payer)
+                    && totalCost.equals(otherCommand.totalCost)
+                    && description.equals(otherCommand.description)
                     && groupName.equals(otherCommand.groupName);
         }
     }
