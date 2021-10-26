@@ -5,6 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_ALL_MEMBERS_EXCLUDED;
+import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_COST_ZERO_OR_LESS;
+import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_NOT_PART_OF_GROUP;
+import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_SUCCESS;
 import static seedu.awe.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -59,7 +63,7 @@ public class AddExpenseCommandTest {
                 validExpense.getDescription(), groupName, new ArrayList<>(),
                 new ArrayList<>(), new ArrayList<>()).execute(modelStub);
 
-        assertEquals(String.format(AddExpenseCommand.MESSAGE_SUCCESS, validPerson),
+        assertEquals(String.format(MESSAGE_ADDEXPENSECOMMAND_SUCCESS, validPerson),
                 commandResult.getFeedbackToUser());
     }
 
@@ -78,7 +82,7 @@ public class AddExpenseCommandTest {
                     new ArrayList<>()).execute(modelStub);
             fail(COMMAND_FAIL_FAILED_MESSAGE);
         } catch (CommandException commandException) {
-            assertEquals(String.format(AddExpenseCommand.MESSAGE_NOT_PART_OF_GROUP, validPerson),
+            assertEquals(String.format(MESSAGE_ADDEXPENSECOMMAND_NOT_PART_OF_GROUP, validPerson),
                     commandException.getMessage());
         }
     }
@@ -99,7 +103,7 @@ public class AddExpenseCommandTest {
                     new ArrayList<>(Arrays.asList(validPerson))).execute(modelStub);
             fail(COMMAND_FAIL_FAILED_MESSAGE);
         } catch (CommandException commandException) {
-            assertEquals(String.format(AddExpenseCommand.MESSAGE_ALL_MEMBERS_EXCLUDED, validPerson),
+            assertEquals(String.format(MESSAGE_ADDEXPENSECOMMAND_ALL_MEMBERS_EXCLUDED, validPerson),
                     commandException.getMessage());
         }
     }
@@ -124,7 +128,7 @@ public class AddExpenseCommandTest {
                     new ArrayList<>(Arrays.asList(validPersonNotInGroup))).execute(modelStub);
             fail(COMMAND_FAIL_FAILED_MESSAGE);
         } catch (CommandException commandException) {
-            assertEquals(String.format(AddExpenseCommand.MESSAGE_NOT_PART_OF_GROUP, validPerson),
+            assertEquals(String.format(MESSAGE_ADDEXPENSECOMMAND_NOT_PART_OF_GROUP, validPerson),
                     commandException.getMessage());
         }
     }
@@ -145,7 +149,7 @@ public class AddExpenseCommandTest {
                     new ArrayList<>()).execute(modelStub);
             fail(COMMAND_FAIL_FAILED_MESSAGE);
         } catch (CommandException commandException) {
-            assertEquals(String.format(AddExpenseCommand.MESSAGE_COST_ZERO_OR_LESS, validPerson),
+            assertEquals(String.format(MESSAGE_ADDEXPENSECOMMAND_COST_ZERO_OR_LESS, validPerson),
                     commandException.getMessage());
         }
     }
@@ -194,12 +198,9 @@ public class AddExpenseCommandTest {
                     Arrays.asList(costOfSelfPayment), new ArrayList<>()).execute(modelStub);
             fail(COMMAND_FAIL_FAILED_MESSAGE);
         } catch (CommandException exception) {
-            assertEquals(String.format(seedu.awe.logic.commands.AddExpenseCommand.MESSAGE_NOT_PART_OF_GROUP,
+            assertEquals(String.format(MESSAGE_ADDEXPENSECOMMAND_NOT_PART_OF_GROUP,
                     validPerson), exception.getMessage());
         }
-
-
-
     }
 
     @Test

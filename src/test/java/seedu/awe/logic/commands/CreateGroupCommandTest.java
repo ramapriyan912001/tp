@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.awe.commons.core.Messages.MESSAGE_CREATEGROUPCOMMAND_DUPLICATE_GROUP;
+import static seedu.awe.commons.core.Messages.MESSAGE_CREATEGROUPCOMMAND_SUCCESS;
 import static seedu.awe.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -52,7 +54,7 @@ public class CreateGroupCommandTest {
 
         CommandResult commandResult = new CreateGroupCommand(bali, members, true, new HashSet<>()).execute(modelStub);
 
-        assertEquals(CreateGroupCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
+        assertEquals(MESSAGE_CREATEGROUPCOMMAND_SUCCESS, commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(groupAdded), modelStub.groupsAdded);
     }
 
@@ -65,7 +67,7 @@ public class CreateGroupCommandTest {
         CreateGroupCommand createGroupCommand = new CreateGroupCommand(bali, members, true, new HashSet<>());
         ModelStub modelStub = new ModelStubWithGroup(validGroup);
 
-        assertThrows(CommandException.class, CreateGroupCommand.MESSAGE_DUPLICATE_GROUP, () ->
+        assertThrows(CommandException.class, MESSAGE_CREATEGROUPCOMMAND_DUPLICATE_GROUP, () ->
                         createGroupCommand.execute(modelStub));
     }
 

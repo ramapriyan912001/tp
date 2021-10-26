@@ -1,8 +1,10 @@
 package seedu.awe.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.awe.commons.core.Messages.MESSAGE_CALCULATEPAYMENTSCOMMAND_GROUP_NOT_FOUND;
+import static seedu.awe.commons.core.Messages.MESSAGE_CALCULATEPAYMENTSCOMMAND_PAYMENTS_EMPTY;
+import static seedu.awe.commons.core.Messages.MESSAGE_CALCULATEPAYMENTSCOMMAND_SUCCESS;
 import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -19,17 +21,7 @@ import seedu.awe.model.payment.Payment;
 import seedu.awe.model.person.Person;
 
 public class CalculatePaymentsCommand extends Command {
-
-    public static final String MESSAGE_SUCCESS = "Payments to be made between group members are listed.";
     public static final String COMMAND_WORD = "calculatepayments";
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Calculates the payments to be made between group members to settle debts.\n"
-            + "Parameters: "
-            + PREFIX_GROUP_NAME + "GROUP_NAME\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_GROUP_NAME + "Bali";
-    public static final String MESSAGE_PAYMENTS_EMPTY = "There are no payments to be made!";
-    public static final String MESSAGE_GROUP_NOT_FOUND = "The specified group does not exists.";
 
     private final Group group;
 
@@ -95,7 +87,7 @@ public class CalculatePaymentsCommand extends Command {
         requireNonNull(group);
 
         if (!model.hasGroup(group)) {
-            throw new CommandException(MESSAGE_GROUP_NOT_FOUND);
+            throw new CommandException(MESSAGE_CALCULATEPAYMENTSCOMMAND_GROUP_NOT_FOUND);
         }
 
         Group group = model.getAddressBook().getGroupByName(this.group.getGroupName());
@@ -103,11 +95,11 @@ public class CalculatePaymentsCommand extends Command {
         model.setPayments(payments);
 
         if (payments.isEmpty()) {
-            return new CommandResult(MESSAGE_PAYMENTS_EMPTY, false, false, false,
+            return new CommandResult(MESSAGE_CALCULATEPAYMENTSCOMMAND_PAYMENTS_EMPTY, false, false, false,
                     false, false, false,
                     true);
         } else {
-            return new CommandResult(MESSAGE_SUCCESS, false, false, false,
+            return new CommandResult(MESSAGE_CALCULATEPAYMENTSCOMMAND_SUCCESS, false, false, false,
                     false, false, false,
                     true);
         }
