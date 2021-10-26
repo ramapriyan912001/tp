@@ -13,7 +13,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.awe.commons.exceptions.IllegalValueException;
 import seedu.awe.model.expense.Cost;
 import seedu.awe.model.expense.Expense;
-import seedu.awe.model.expense.IndividualAmount;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.person.Person;
@@ -64,12 +63,6 @@ public class JsonAdaptedGroup {
                 .stream()
                 .map(JsonAdaptedExpense::new)
                 .collect(Collectors.toList()));
-        Map<Person, Cost> paidByPayers = source.getPaidByPayers();
-        Map<Person, Cost> paidByPayees = source.getPaidByPayees();
-        List<IndividualAmount> individualAmountPaid = StorageUtils
-                .convertExpenseMapToListOfIndividualAmounts(paidByPayers);
-        List<IndividualAmount> individualExpenseIncurred = StorageUtils
-                .convertExpenseMapToListOfIndividualAmounts(paidByPayees);
     }
 
     /**
