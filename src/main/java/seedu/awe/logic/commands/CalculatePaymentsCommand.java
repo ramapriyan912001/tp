@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.model.Model;
@@ -135,7 +134,7 @@ public class CalculatePaymentsCommand extends Command {
                 .keySet()));
 
         for (Person person: members) {
-            Cost amountPaid = amountsPaid.getOrDefault(person, new Cost(0.0))
+            Cost amountPaid = amountsPaid.getOrDefault(person, new Cost(0.0));
             Cost expenseIncurred = expensesIncurred.getOrDefault(person, new Cost(0.0));
             double surplus = amountPaid.getCost() - expenseIncurred.getCost();
             Pair nameSurplusPair = new Pair(surplus, person);
