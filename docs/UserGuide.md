@@ -505,7 +505,7 @@ Action | Format, Examples
 **Edit Group Name** | `groupeditname gn/OLD_GROUP_NAME gn/NEW_GROUP_NAME` <br> e.g., `groupedittag gn/Bali gn/Hanoi`
 **View Expense** | `expense INDEX` <br> e.g., `expense 2`
 **Add Expense** | `add expense add expense /des DESCRIPTION /by PAYER_NAME1 AMOUNT PAID BY NAME 1 /for PAYEE_NAME1 PAYEE_NAME 2` <br> e.g., `add expense /des Koi /by Jake 20.00 /for Justin, Raj, Keith`
-**Delete Expense** | `deleteexpense gn/GROUP_NAME i/INDEX` <br> e.g., `deleteexpense gn/Bali i/1`
+**Delete Expense** | `deleteexpense INDEX` <br> e.g., `deleteexpense 1`
 **Find Expenses** | `findexpenses KEYWORD [MORE_KEYWORDS] gn/GROUP_NAME`<br> e.g., `find dinner buffet gn/London`
 **Clear** | `clear`
 **Calculate Spending** | `transactionsummary gn/GROUP_NAME` <br> e.g., `transactionsummary gn/Bali` 
@@ -513,7 +513,7 @@ Action | Format, Examples
 **Help** | `help`
 
 ## 6. Final Word
-AWE hopes to revolutionise the group-travel spacethrough its effecting handling of shared expenses on a centralised
-platform to maximise the efficiency of payment and recollection of debts. Our team is resolved to delivering a seamless 
-experience for potential users. As such, do drop us an email at awe80contact@gmail.com if you discover any bugs with the
-application.
+AWE hopes to revolutionise the group-travel space through its effective handling of shared expenses on a centralised
+platform to maximise the efficiency of payment and recollection of debts. Our team is committed to delivering a seamless 
+experience for potential users. We are always looking to improve. As such, do drop us an email at awe80contact@gmail.com
+if you discover any bugs while using the application.
