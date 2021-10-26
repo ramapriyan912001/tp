@@ -30,8 +30,9 @@ public class DeleteGroupCommandTest {
         Group groupToDelete = BALI;
         DeleteGroupCommand deleteGroupCommand = new DeleteGroupCommand(groupToDelete);
 
-        CommandResult commandResult = new CommandResult(String.format(MESSAGE_DELETEGROUPCOMMAND_SUCCESS, groupToDelete.getGroupName(),
-                groupToDelete.getMembers().size()), false, false, true, false, false, false, false);
+        CommandResult commandResult = new CommandResult(String.format(MESSAGE_DELETEGROUPCOMMAND_SUCCESS,
+                groupToDelete.getGroupName(), groupToDelete.getMembers().size()), false, false,
+                true, false, false, false, false);
 
         assertCommandSuccess(deleteGroupCommand, model, commandResult, model);
     }
