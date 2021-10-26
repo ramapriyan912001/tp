@@ -1,6 +1,9 @@
 package seedu.awe.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVECONTACT_ERROR;
+import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVECONTACT_SUCCESS;
+import static seedu.awe.commons.core.Messages.MESSAGE_NONEXISTENT_GROUP;
 import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
@@ -14,11 +17,6 @@ import seedu.awe.model.person.Person;
 
 public class GroupRemoveContactCommand extends Command {
     public static final String COMMAND_WORD = "groupremovecontact";
-    public static final String MESSAGE_SUCCESS = "Member(s) removed from group";
-    public static final String MESSAGE_ERROR = "Contact(s) not removed from group."
-                                                + "Be sure to use the exact names of group members";
-    public static final String MESSAGE_USAGE = "groupremovecontact gn/[GROUPNAME] n/[NAME1] n/[OPTIONAL NAME2]";
-    public static final String MESSAGE_NONEXISTENT_GROUP = "Group %1$s does not exist.";
 
     private final GroupName groupName;
     private final ArrayList<Person> membersToBeRemoved;
@@ -83,7 +81,7 @@ public class GroupRemoveContactCommand extends Command {
         for (Person memberToBeRemoved : membersToBeRemoved) {
             boolean memberToBeRemovedIsPresent = remainingMembers.remove(memberToBeRemoved);
             if (!memberToBeRemovedIsPresent) {
-                throw new CommandException(MESSAGE_ERROR);
+                throw new CommandException(MESSAGE_GROUPREMOVECONTACT_ERROR);
             }
         }
         return remainingMembers;
@@ -93,7 +91,7 @@ public class GroupRemoveContactCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (!isValidCommand) {
-            throw new CommandException(MESSAGE_ERROR);
+            throw new CommandException(MESSAGE_GROUPREMOVECONTACT_ERROR);
         }
 
         Group oldGroup = model.getGroupByName(groupName);
@@ -105,7 +103,7 @@ public class GroupRemoveContactCommand extends Command {
         Group newGroup = new Group(groupName, remainingMembers, oldGroup.getTags());
         model.setGroup(oldGroup, newGroup);
         model.setAllMembersOfGroup(oldGroup);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_GROUPREMOVECONTACT_SUCCESS);
     }
 
     @Override

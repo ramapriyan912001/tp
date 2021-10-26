@@ -2,7 +2,7 @@
 package seedu.awe.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
+import static seedu.awe.commons.core.Messages.MESSAGE_FINDEXPENSESCOMMAND_GROUP_NOT_FOUND;
 
 import seedu.awe.commons.core.Messages;
 import seedu.awe.logic.commands.exceptions.CommandException;
@@ -19,16 +19,6 @@ import seedu.awe.model.group.exceptions.GroupNotFoundException;
 public class FindExpensesCommand extends Command {
 
     public static final String COMMAND_WORD = "findexpenses";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all expenses within the specified group "
-            + "which description contains any of the specified keywords (case-insensitive) and displays them as a"
-            + "list with index numbers.\n"
-            + "Parameters:"
-            + "KEYWORD [MORE_KEYWORDS]...\n"
-            + PREFIX_GROUP_NAME + " GROUP NAME"
-            + " Example: " + COMMAND_WORD + "pizza pasta " + PREFIX_GROUP_NAME + " london";
-
-    public static final String MESSAGE_GROUP_NOT_FOUND = "The specified group does not exists.";
 
     private final GroupName groupName;
     private final DescriptionContainsKeywordsPredicate predicate;
@@ -58,7 +48,7 @@ public class FindExpensesCommand extends Command {
                     false, false, false, false,
                     true, false, false);
         } catch (GroupNotFoundException e) {
-            throw new CommandException(MESSAGE_GROUP_NOT_FOUND);
+            throw new CommandException(MESSAGE_FINDEXPENSESCOMMAND_GROUP_NOT_FOUND);
         }
 
     }

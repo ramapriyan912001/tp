@@ -1,5 +1,6 @@
 package seedu.awe.logic.parser;
 
+import static seedu.awe.commons.core.Messages.MESSAGE_DELETEGROUPCOMMAND_USAGE;
 import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.awe.logic.commands.CommandTestUtil.GROUPNAME_DESC_BALI;
 import static seedu.awe.logic.commands.CommandTestUtil.GROUPNAME_DESC_OSLO;
@@ -62,7 +63,7 @@ public class DeleteGroupCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteGroupCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_DELETEGROUPCOMMAND_USAGE);
 
         resetParser();
         // missing group prefix
@@ -76,7 +77,7 @@ public class DeleteGroupCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteGroupCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_DELETEGROUPCOMMAND_USAGE);
         resetParser();
         // invalid group name
         assertParseFailure(parser, INVALID_GROUP_NAME_DESC, GroupName.MESSAGE_CONSTRAINTS);

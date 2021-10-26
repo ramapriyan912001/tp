@@ -1,8 +1,10 @@
 package seedu.awe.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.awe.commons.core.Messages.MESSAGE_CALCULATEPAYMENTSCOMMAND_GROUP_NOT_FOUND;
+import static seedu.awe.commons.core.Messages.MESSAGE_CALCULATEPAYMENTSCOMMAND_PAYMENTS_EMPTY;
+import static seedu.awe.commons.core.Messages.MESSAGE_CALCULATEPAYMENTSCOMMAND_SUCCESS;
 import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -19,17 +21,7 @@ import seedu.awe.model.payment.Payment;
 import seedu.awe.model.person.Person;
 
 public class CalculatePaymentsCommand extends Command {
-
-    public static final String MESSAGE_SUCCESS = "Payments to be made between group members are listed.";
     public static final String COMMAND_WORD = "calculatepayments";
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Calculates the payments to be made between group members to settle debts.\n"
-            + "Parameters: "
-            + PREFIX_GROUP_NAME + "GROUP_NAME\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_GROUP_NAME + "Bali";
-    public static final String MESSAGE_PAYMENTS_EMPTY = "There are no payments to be made!";
-    public static final String MESSAGE_GROUP_NOT_FOUND = "The specified group does not exists.";
 
     private final Group group;
 
@@ -95,7 +87,7 @@ public class CalculatePaymentsCommand extends Command {
         requireNonNull(group);
 
         if (!model.hasGroup(group)) {
-            throw new CommandException(MESSAGE_GROUP_NOT_FOUND);
+            throw new CommandException(MESSAGE_CALCULATEPAYMENTSCOMMAND_GROUP_NOT_FOUND);
         }
 
         Group group = model.getAddressBook().getGroupByName(this.group.getGroupName());
@@ -103,11 +95,11 @@ public class CalculatePaymentsCommand extends Command {
         model.setPayments(payments);
 
         if (payments.isEmpty()) {
-            return new CommandResult(MESSAGE_PAYMENTS_EMPTY, false, false, false,
+            return new CommandResult(MESSAGE_CALCULATEPAYMENTSCOMMAND_PAYMENTS_EMPTY, false, false, false,
                     false, false, false,
                     true);
         } else {
-            return new CommandResult(MESSAGE_SUCCESS, false, false, false,
+            return new CommandResult(MESSAGE_CALCULATEPAYMENTSCOMMAND_SUCCESS, false, false, false,
                     false, false, false,
                     true);
         }
@@ -126,10 +118,16 @@ public class CalculatePaymentsCommand extends Command {
     public List<Pair> getNamesAndSurplusesList(Group group) {
         List<Pair> namesAndSurpluses = new ArrayList<>();
         Map<Person, Cost> amountsPaid = group.getPaidByPayers();
-        Map<Person, Cost> expensesIncurred = group.getPaidByPayees();
-        for (Person person: group.getMembers()) {
-            Cost amountPaid = amountsPaid.get(person);
-            Cost expenseIncurred = expensesIncurred.get(person);
+        Map<Person, Cost> expensesIncurred = group.getSplitExpenses();
+        List<Person> members = new ArrayList<>();
+        members.addAll(new ArrayList<>(amountsPaid
+                .keySet()));
+        members.addAll(new ArrayList<>(expensesIncurred
+                .keySet()));
+
+        for (Person person: members) {
+            Cost amountPaid = amountsPaid.getOrDefault(person, new Cost(0.0));
+            Cost expenseIncurred = expensesIncurred.getOrDefault(person, new Cost(0.0));
             double surplus = amountPaid.getCost() - expenseIncurred.getCost();
             Pair nameSurplusPair = new Pair(surplus, person);
             namesAndSurpluses.add(nameSurplusPair);
@@ -157,17 +155,18 @@ public class CalculatePaymentsCommand extends Command {
         return Math.abs(total) < marginOfError;
     }
 
-
     private static Optional<Pair> getSmallerPair(Pair p1, Pair p2) {
         requireAllNonNull(p1, p2);
         double p1AbsoluteSurplus = Math.abs(p1.getSurplus());
         double p2AbsoluteSurplus = Math.abs(p2.getSurplus());
-        if (p1AbsoluteSurplus < p2AbsoluteSurplus) {
-            return Optional.ofNullable(p1);
-        } else if (p1AbsoluteSurplus > p2AbsoluteSurplus) {
-            return Optional.ofNullable(p2);
-        } else {
+        double marginOfError = 0.01;
+        double difference = Math.abs(p1AbsoluteSurplus - p2AbsoluteSurplus);
+        if (difference < marginOfError) {
             return Optional.empty();
+        } else if (p1AbsoluteSurplus < p2AbsoluteSurplus) {
+            return Optional.ofNullable(p1);
+        } else {
+            return Optional.ofNullable(p2);
         }
     }
 
@@ -209,13 +208,13 @@ public class CalculatePaymentsCommand extends Command {
                 pairs.remove(pairs.size() - 1);
             } else if (smallerPair.get().equals(pairWithHighestSurplus)) {
                 pairs.remove(pairs.size() - 1);
-                Double newSurplus = pairWithLowestSurplus.getSurplus() + pairWithHighestSurplus.getSurplus();
+                double newSurplus = pairWithLowestSurplus.getSurplus() + pairWithHighestSurplus.getSurplus();
                 Pair newPairWithLowestSurplus = new Pair(newSurplus, pairWithLowestSurplus.getPerson());
                 pairs.remove(0);
                 pairs.add(0, newPairWithLowestSurplus);
             } else if (smallerPair.get().equals(pairWithLowestSurplus)) {
                 pairs.remove(0);
-                Double newSurplus = pairWithHighestSurplus.getSurplus() + pairWithLowestSurplus.getSurplus();
+                double newSurplus = pairWithHighestSurplus.getSurplus() + pairWithLowestSurplus.getSurplus();
                 Pair newPairWithHighestSurplus = new Pair(newSurplus, pairWithHighestSurplus.getPerson());
                 pairs.remove(pairs.size() - 1);
                 pairs.add(newPairWithHighestSurplus);
@@ -237,24 +236,5 @@ public class CalculatePaymentsCommand extends Command {
         double absoluteSurplus = Math.abs(surplusPair.getSurplus());
         Cost minimumAmount = new Cost(Math.min(absoluteDeficit, absoluteSurplus));
         return new Payment(payer, payee, minimumAmount);
-    }
-
-    /**
-     * Converts the set of payments into user-friendly text.
-     * @param payments List of payments
-     * @return Readable string
-     */
-    public String makePaymentsString(List<Payment> payments) {
-        if (payments.isEmpty()) {
-            return MESSAGE_PAYMENTS_EMPTY;
-        }
-        StringBuilder stringBuilder = new StringBuilder();
-        payments.sort(Payment.getPaymentComparator());
-        for (int i = 0; i < payments.size() - 1; i++) {
-            stringBuilder.append(payments.get(i));
-            stringBuilder.append("\n");
-        }
-        stringBuilder.append(payments.get(payments.size() - 1));
-        return stringBuilder.toString();
     }
 }
