@@ -127,9 +127,15 @@ public class CalculatePaymentsCommand extends Command {
         List<Pair> namesAndSurpluses = new ArrayList<>();
         Map<Person, Cost> amountsPaid = group.getPaidByPayers();
         Map<Person, Cost> expensesIncurred = group.getSplitExpenses();
-        for (Person person: group.getMembers()) {
-            Cost amountPaid = amountsPaid.get(person);
-            Cost expenseIncurred = expensesIncurred.get(person);
+        List<Person> members = new ArrayList<>();
+        members.addAll(new ArrayList<>(amountsPaid
+                .keySet()));
+        members.addAll(new ArrayList<>(expensesIncurred
+                .keySet()));
+
+        for (Person person: members) {
+            Cost amountPaid = amountsPaid.getOrDefault(person, new Cost(0.0));
+            Cost expenseIncurred = expensesIncurred.getOrDefault(person, new Cost(0.0));
             double surplus = amountPaid.getCost() - expenseIncurred.getCost();
             Pair nameSurplusPair = new Pair(surplus, person);
             namesAndSurpluses.add(nameSurplusPair);
@@ -238,24 +244,5 @@ public class CalculatePaymentsCommand extends Command {
         double absoluteSurplus = Math.abs(surplusPair.getSurplus());
         Cost minimumAmount = new Cost(Math.min(absoluteDeficit, absoluteSurplus));
         return new Payment(payer, payee, minimumAmount);
-    }
-
-    /**
-     * Converts the set of payments into user-friendly text.
-     * @param payments List of payments
-     * @return Readable string
-     */
-    public String makePaymentsString(List<Payment> payments) {
-        if (payments.isEmpty()) {
-            return MESSAGE_PAYMENTS_EMPTY;
-        }
-        StringBuilder stringBuilder = new StringBuilder();
-        payments.sort(Payment.getPaymentComparator());
-        for (int i = 0; i < payments.size() - 1; i++) {
-            stringBuilder.append(payments.get(i));
-            stringBuilder.append("\n");
-        }
-        stringBuilder.append(payments.get(payments.size() - 1));
-        return stringBuilder.toString();
     }
 }
