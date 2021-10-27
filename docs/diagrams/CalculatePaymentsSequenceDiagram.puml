@@ -4,8 +4,7 @@
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AweParser" as AweParser LOGIC_COLOR
-participant ":DeleteGroupCommandParser" as DeleteGroupCommandParser LOGIC_COLOR
-participant "d:DeleteGroupCommand" as DeleteGroupCommand LOGIC_COLOR
+participant ":CalculatePaymentsCommand" as CalculatePaymentsCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -13,56 +12,45 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("deletegroup gn/GROUP_NAME")
+[-> LogicManager : execute("calculatepayments gn/Bali")
 activate LogicManager
 
-LogicManager -> AweParser : parseCommand("deletegroup gn/GROUP_NAME")
+LogicManager -> AweParser : parseCommand("calculatepayments gn/Bali")
 activate AweParser
 
-create DeleteGroupCommandParser
-AweParser -> DeleteGroupCommandParser
-activate DeleteGroupCommandParser
+/'Clarify with tutor if there is a need to display CalculatePaymentsCommandParser class within the ref'/
+ref over AweParser, CalculatePaymentsCommand:get calculatePaymentsCommand
+create CalculatePaymentsCommand
+AweParser -> CalculatePaymentsCommand
 
-DeleteGroupCommandParser --> AweParser
-deactivate DeleteGroupCommandParser
 
-AweParser -> DeleteGroupCommandParser : parse("gn/GROUP_NAME")
-activate DeleteGroupCommandParser
-
-create DeleteGroupCommand
-DeleteGroupCommandParser -> DeleteGroupCommand
-activate DeleteGroupCommand
-
-DeleteGroupCommand --> DeleteGroupCommandParser : d
-deactivate DeleteGroupCommand
-
-DeleteGroupCommandParser --> AweParser : d
-deactivate DeleteGroupCommandParser
-'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteGroupCommandParser -[hidden]-> AweParser
-destroy DeleteGroupCommandParser
-
-AweParser --> LogicManager : d
+AweParser --> LogicManager : calculatePaymentsCommand
 deactivate AweParser
 
-LogicManager -> DeleteGroupCommand : execute()
-activate DeleteGroupCommand
+LogicManager -> CalculatePaymentsCommand : execute()
+activate CalculatePaymentsCommand
 
-DeleteGroupCommand -> Model : deleteGroup(g:Group)
+CalculatePaymentsCommand -> Model : getGroupByName(GroupName("Bali"))
 activate Model
+Model --> CalculatePaymentsCommand : group
+deactivate Model
 
-Model --> DeleteGroupCommand
+CalculatePaymentsCommand -> CalculatePaymentsCommand : payments:getPayments(group)
+
+CalculatePaymentsCommand -> Model : setPayments(payments)
+activate Model
+Model --> CalculatePaymentsCommand
 deactivate Model
 
 create CommandResult
-DeleteGroupCommand -> CommandResult
+CalculatePaymentsCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteGroupCommand
+CommandResult --> CalculatePaymentsCommand : result
 deactivate CommandResult
 
-DeleteGroupCommand --> LogicManager : result
-deactivate DeleteGroupCommand
+CalculatePaymentsCommand --> LogicManager : result
+deactivate CalculatePaymentsCommand
 
 [<--LogicManager
 deactivate LogicManager

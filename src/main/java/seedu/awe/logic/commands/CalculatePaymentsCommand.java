@@ -90,7 +90,7 @@ public class CalculatePaymentsCommand extends Command {
             throw new CommandException(MESSAGE_CALCULATEPAYMENTSCOMMAND_GROUP_NOT_FOUND);
         }
 
-        Group group = model.getAddressBook().getGroupByName(this.group.getGroupName());
+        Group group = model.getGroupByName(this.group.getGroupName());
         List<Payment> payments = getPayments(group);
         model.setPayments(payments);
 
@@ -124,13 +124,15 @@ public class CalculatePaymentsCommand extends Command {
                 .keySet()));
         members.addAll(new ArrayList<>(expensesIncurred
                 .keySet()));
-
+        double marginOfError = 0.01;
         for (Person person: members) {
             Cost amountPaid = amountsPaid.getOrDefault(person, new Cost(0.0));
             Cost expenseIncurred = expensesIncurred.getOrDefault(person, new Cost(0.0));
             double surplus = amountPaid.getCost() - expenseIncurred.getCost();
-            Pair nameSurplusPair = new Pair(surplus, person);
-            namesAndSurpluses.add(nameSurplusPair);
+            if (surplus >= marginOfError) {
+                Pair nameSurplusPair = new Pair(surplus, person);
+                namesAndSurpluses.add(nameSurplusPair);
+            }
         }
         return namesAndSurpluses;
     }

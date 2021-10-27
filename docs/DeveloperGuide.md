@@ -297,6 +297,26 @@ The following sequence operation shows how the `deletegroup` operation works.
     * This information is unrecoverable once deleted.
     * As such, it is better to choose Alternative 1, as this makes it difficult for user to accidentally delete a group.
 
+**Aspect: Internal delete mechanism:**
+
+* **Alternative 1 (current choice):** Retrieve group from list and delete
+  * Pros: Easy to implement.
+  * Pros: Easier to modify in future.
+  * Cons: Extra step of retrieval leads to slower execution.
+  
+
+* **Alternative 2 (name based):** Delete based on `GroupName`
+  * Pros: Easy to implement.
+  * Pros: Process is completed faster.
+  * Cons: Might cause issues in case of future modifications.
+  
+
+* **Justification**
+  * Retrieving the group and subsequently deleting the group is a slower process.
+  * However, the alternative implementation relies on the uniqueness of the `GroupName` field of `Group` objects.
+  * Should we modify or remove the constraint, the alternative implementation would require significant alterations.
+  * To make the feature more extendable, we choose alternative 1.
+
 ### Find group feature
 
 The find group feature supports both single keyword and multi keyword search. This allows the displayed view panel to show the entries related to the search keywords entered by the user.
@@ -511,24 +531,26 @@ Define surplus as the net amount each individual is owed by others. This ultimat
 The goal is to ensure that the deficits balance the surpluses with the minimum number of transactions.
 To assist with the tracking of each individual and their surplus, an inner `Pair` class was created with a `Person` field and a primitive double field for the surplus.
 
-* Initialise an empty list of Pairs. Iterate through the `members` of the group and retrieve each individual's total payments and total expenditures.
+* Initialise an empty list of Pairs and an empty list of `Payment` objects.
+
+* Iterate through the `members` of the group and retrieve each individual's total payments and total expenditures.
 
 * Calculate the surplus of each individual by subtracting their total expenditures from their total payments.
-Initialise a `Pair` object with the `Person` object of the individual, and their surplus. Add this pair to the list.
-  
-* Remove all `Pairs` with a surplus of `0.0` from the list.
-
-* Initialise an empty list of `Payment` objects.
+Initialise a `Pair` object with the `Person` object of the individual, and their surplus. Add this pair to the list if the surplus is not 0.
 
 * Iterate until the list is empty and perform the following steps.
   * Sort the list in ascending order of surplus. This means that those who owe more are placed in the earlier part of the list and those who are owed more are placed towards the end of the `Pair` list.
   * Retrieve the first `Pair` and last `Pair` in the list. It is invariant that the first pair will have negative surplus and the last pair will have positive surplus.
   * Check to see which pair has a smaller magnitude. Define this value to be `SMALL_VAL`.
-  * Create a `Payment` object with a `Cost` of `SMALL_VAL`, and payer and payee as the two individuals within the first pair and last pair retrieved respectively. Add this `Payment` object to the list of `Payment` objects.
+  * Create a `Payment` object with a `Cost` of `SMALL_VAL`, and payee and payer as the two individuals within the first pair and last pair retrieved respectively. Add this `Payment` object to the list of `Payment` objects.
   * If the pairs do not have equal magnitude, remove the pair with the surplus value of smaller magnitude from the list. Calculate the new surplus value of the other pair to be the sum of the surpluses of both pairs. Update the other pair with this new surplus value and place it back into the list.
   * If the pairs do have equal magnitude, remove both pairs from the list.
   
 * Return the list of `Payment` objects.
+
+The following diagram shows the flow of the algorithm.
+
+![CalculatePaymentsAlgorithmDiagram](images/CalculatePaymentsCommandAlgorithmDiagram.png)
   
 
 The following activity diagram shows what happens when a user executes a `calculatepayments` command.
