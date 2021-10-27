@@ -13,13 +13,14 @@ import java.util.Set;
 import seedu.awe.model.expense.Cost;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.person.Person;
+import seedu.awe.model.person.exceptions.DuplicatePersonException;
 import seedu.awe.model.tag.Tag;
 
 
 public class Group {
     //TODO: WRITE MESSAGE CONSTRAINTS MESSAGE
     private final GroupName groupName;
-    private final ArrayList<Person> members = new ArrayList<>();
+    private final ArrayList<Person> members;
     private final Set<Tag> tags = new HashSet<>();
     private final ArrayList<Expense> expenses = new ArrayList<>();
     private final HashMap<Person, Cost> paidByPayers = new HashMap<>();
@@ -33,8 +34,8 @@ public class Group {
      */
     public Group(GroupName groupName, ArrayList<Person> members) {
         this.groupName = groupName;
+        this.members = new ArrayList<>(members);
         for (Person member : members) {
-            this.addMember(member);
             paidByPayers.put(member, new Cost(0));
             splitExpenses.put(member, new Cost(0));
         }
@@ -49,8 +50,8 @@ public class Group {
      */
     public Group(GroupName groupName, ArrayList<Person> members, Set<Tag> tags) {
         this.groupName = groupName;
+        this.members = new ArrayList<>(members);
         for (Person member : members) {
-            this.addMember(member);
             paidByPayers.put(member, new Cost(0));
             splitExpenses.put(member, new Cost(0));
         }
@@ -121,10 +122,24 @@ public class Group {
      *
      * @param member Person object representing member to be added to group.
      */
-    public void addMember(Person member) {
-        this.members.add(member);
+    public Group addMember(Person member) throws DuplicatePersonException {
+        if (this.members.contains(member)) {
+            throw new DuplicatePersonException();
+        }
+
+        ArrayList<Person> members = new ArrayList<>(this.members);
+        members.add(member);
+
+        Map<Person, Cost> paidByPayer = new HashMap<>();
+        paidByPayer.putAll(this.paidByPayers);
         paidByPayers.put(member, new Cost(0));
+
+
+        Map<Person, Cost> splitExpenses = new HashMap<>();
+        splitExpenses.putAll(this.splitExpenses);
         splitExpenses.put(member, new Cost(0));
+
+        return new Group(groupName, members, tags, expenses, paidByPayers, splitExpenses);
     }
 
     /**
