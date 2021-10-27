@@ -157,6 +157,21 @@ public class Group {
     }
 
     /**
+     * Remove tag from the group and return a new group without the tag.
+     *
+     * @param tag Tag to be removed.
+     * @return Update group without the tag.
+     */
+    public Group removeTag(Tag tag) {
+        requireNonNull(tag);
+
+        Set<Tag> tags = new HashSet<>(this.tags);
+        tags.remove(tag);
+
+        return new Group(groupName, members, tags, expenses, paidByPayers, splitExpenses);
+    }
+
+    /**
      * Edits the group name.
      *
      * @param groupName GroupName to be set.
