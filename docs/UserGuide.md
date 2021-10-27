@@ -15,10 +15,13 @@ Our mission is to accomplish through a user-centric approach that seeks to provi
 tip of their fingertips. This document marks the first step towards the accomplishment of that mission, and the
 beginning of your journey around the world.
 
-## Table of Contents
-{:toc}
-
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+<p style="font-size: 1.75rem; margin-top: 60px; color: #e46c0a; font-weight:400; margin-bottom: 15px;">Table of Contents</p>
+* Table of Contents
+{:toc}
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 1. About the Document
 
@@ -35,6 +38,8 @@ can focus on exploring AWE to the full extent of its functionalities.
 Section 1 provides readers with a brief overview of how to use this document. Section 2 details the setting up of AWE
 and Section 3 documents the main features of AWE. If you still face problems using AWE, refer to our FAQ in Section 4. 
 For a summary of all the commands available, refer to Section 5.
+
+<div style="page-break-after: always;"></div>
 
 ### 1.1 Glossary
 
@@ -55,6 +60,7 @@ to locate which words belong to which category of input.
 
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 2. Quick start
 AWE's primary asset is its speed. Unlike traditional Graphic User Interfaces (GUIs) which rely on slow actions such as mouse clicking and selection of options from long menus, with its CLI, AWE offers users the benefit of speed.
@@ -68,7 +74,9 @@ For those who are not as fast, familiarity with the commands over time will allo
 3. Copy the file to the folder you want to use as the _home folder_ for your tp.
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/AWEUi.png)
+   ![Ui](images/AweUi.png)
+   
+<div style="page-break-after: always;"></div>
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -104,6 +112,7 @@ For those who are not as fast, familiarity with the commands over time will allo
 6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 3. Features
 
@@ -130,6 +139,9 @@ For those who are not as fast, familiarity with the commands over time will allo
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
+
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### 3.1. Contacts
 
@@ -201,6 +213,9 @@ Examples:
 * `findcontacts John` returns `john` and `John Doe`
 * `findcontacts alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### 3.2. Groups
 
@@ -344,6 +359,9 @@ Examples:
 * `groupeditname gn/Bali gn/Thailand` to change the group name from Bali to Thailand.
 * `groupeditname gn/Germany gn/Munich` to change the group name from Germany to Munich.
 
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ### 3.3. Expenses
 
 ### 3.3.1. Listing expenses of a specified group: `expenses`
@@ -436,6 +454,9 @@ Examples:
 * `calculatepayments gn/London`<br>
   ![result for 'findcontacts Taiwan Malaysia'](images/CALCULATEPAYMENTSUI.png)
 
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ### 3.4. Miscellaneous
 
 #### 3.4.1. Viewing help : `help`
@@ -470,6 +491,9 @@ AWE data are saved as a JSON file `[JAR file location]/data/awe.json`. Advanced 
 If your changes to the data file makes its format invalid, AWE will discard all data and start with an empty data file at the next run.
 </div>
 
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ## 4. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -483,34 +507,60 @@ If your changes to the data file makes its format invalid, AWE will discard all 
 ![Mac Security Preference](images/MacSecurityPreference.png)
 <br>
 If your questions are not answered in the FAQ, check out the issue page on our GitHub linked [here](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues).
+
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 5. Command summary
+
+### 5.1 Contacts commands
 
 Action | Format, Examples
 --------|------------------
 **View Contacts** | `contacts`
 **Add Contact** | `addcontact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Edit Contact** | `editcontact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Delete Contact** | `deletecontact INDEX`<br> e.g., `delete 3`
+**Edit Contact** | `editcontact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find Contacts** | `findcontacts KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+
+<div style="page-break-after: always;"></div>
+
+### 5.2 Groups commands
+
+Action | Format, Examples
+--------|------------------
 **View Groups** | `groups`
 **Create Group** | `creategroup gn/GROUP_NAME n/NAME1 n/NAME2 n/NAME3...t/TAG1` <br> e.g., `creategroup gn/Bali n/Jacob Tan n/Max Chia n/Julianne Tay t/friends`
 **Delete Group** | `deletegroup gn/GROUP_NAME` <br> e.g., `deletegroup gn/Vienna`
-**Find Groups** | `findgroups KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Add Contact to Group** | `groupaddcontact gn/GROUP_NAME n/NAME1 [n/MORE_NAMES]` <br> e.g., `groupaddcontact gn/Bali n/Jacob Tan`
-**Remove Contact from Group** | `groupremovecontact gn/GROUP_NAME n/NAME1 [n/MORE_NAMES]` <br> e.g., `groupremovecontact gn/Bali n/Jacob Tan`
 **Add Tags to Group** | `groupaddtag gn/GROUP_NAME n/TAG1 [n/MORE_TAGS]` <br> e.g., `groupaddtag gn/Bali n/friends`
-**Remove Tags from Group** | `groupremovetag gn/GROUP_NAME n/TAG1 [n/MORE_TAGS]` <br> e.g., `groupremovetag gn/Bali n/friends`
 **Edit Group Name** | `groupeditname gn/OLD_GROUP_NAME gn/NEW_GROUP_NAME` <br> e.g., `groupedittag gn/Bali gn/Hanoi`
+**Remove Tags from Group** | `groupremovetag gn/GROUP_NAME n/TAG1 [n/MORE_TAGS]` <br> e.g., `groupremovetag gn/Bali n/friends`
+**Remove Contact from Group** | `groupremovecontact gn/GROUP_NAME n/NAME1 [n/MORE_NAMES]` <br> e.g., `groupremovecontact gn/Bali n/Jacob Tan`
+**Find Groups** | `findgroups KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+
+<div style="page-break-after: always;"></div>
+
+### 5.3 Expense commands
+
+Action | Format, Examples
+--------|------------------
 **View Expense** | `expense INDEX` <br> e.g., `expense 2`
 **Add Expense** | `add expense add expense /des DESCRIPTION /by PAYER_NAME1 AMOUNT PAID BY NAME 1 /for PAYEE_NAME1 PAYEE_NAME 2` <br> e.g., `add expense /des Koi /by Jake 20.00 /for Justin, Raj, Keith`
 **Delete Expense** | `deleteexpense INDEX` <br> e.g., `deleteexpense 1`
 **Find Expenses** | `findexpenses KEYWORD [MORE_KEYWORDS] gn/GROUP_NAME`<br> e.g., `find dinner buffet gn/London`
-**Clear** | `clear`
 **Calculate Spending** | `transactionsummary gn/GROUP_NAME` <br> e.g., `transactionsummary gn/Bali` 
 **Calculate Payments** | `calculatepayments gn/GROUP_NAME` <br> e.g., `calculatepayments gn/Bali` 
+
+### 5.4 Miscellaneous Commands
+Action | Format, Examples
+--------|------------------
+**Clear** | `clear`
 **Help** | `help`
+
+
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 6. Final Word
 AWE hopes to revolutionise the group-travel space through its effective handling of shared expenses on a centralised
