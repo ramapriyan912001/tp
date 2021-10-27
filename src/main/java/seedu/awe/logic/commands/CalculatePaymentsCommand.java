@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.model.Model;
@@ -120,11 +121,16 @@ public class CalculatePaymentsCommand extends Command {
         Map<Person, Cost> amountsPaid = group.getPaidByPayers();
         Map<Person, Cost> expensesIncurred = group.getSplitExpenses();
         List<Person> members = new ArrayList<>();
-        members.addAll(new ArrayList<>(amountsPaid
-                .keySet()));
-        members.addAll(new ArrayList<>(expensesIncurred
-                .keySet()));
-
+        for (Person person : amountsPaid.keySet()) {
+            if (!members.contains(person)) {
+                members.add(person);
+            }
+        }
+        for (Person person : expensesIncurred.keySet()) {
+            if (!members.contains(person)) {
+                members.add(person);
+            }
+        }
         for (Person person: members) {
             Cost amountPaid = amountsPaid.getOrDefault(person, new Cost(0.0));
             Cost expenseIncurred = expensesIncurred.getOrDefault(person, new Cost(0.0));
