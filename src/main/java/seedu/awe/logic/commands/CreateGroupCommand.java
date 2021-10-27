@@ -4,6 +4,7 @@ import static seedu.awe.commons.core.Messages.MESSAGE_CREATEGROUPCOMMAND_DUPLICA
 import static seedu.awe.commons.core.Messages.MESSAGE_CREATEGROUPCOMMAND_ERROR;
 import static seedu.awe.commons.core.Messages.MESSAGE_CREATEGROUPCOMMAND_SUCCESS;
 import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.awe.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -97,7 +98,8 @@ public class CreateGroupCommand extends Command {
         model.addGroup(group);
         model.setAllMembersOfGroup(group);
         logger.fine("Created group \"" + group.getGroupName() + "\"");
-        return new CommandResult(MESSAGE_CREATEGROUPCOMMAND_SUCCESS);
+        model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        return new CommandResult(MESSAGE_CREATEGROUPCOMMAND_SUCCESS, false, false, true, false, false, false, false);
     }
 
     @Override
