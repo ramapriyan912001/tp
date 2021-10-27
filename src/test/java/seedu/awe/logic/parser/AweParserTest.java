@@ -2,6 +2,7 @@ package seedu.awe.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.awe.commons.core.Messages.MESSAGE_HELPCOMMAND_USAGE;
 import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.awe.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.awe.testutil.Assert.assertThrows;
@@ -100,7 +101,7 @@ public class AweParserTest {
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_HELPCOMMAND_USAGE), ()
             -> parser.parseCommand(""));
     }
 

@@ -1,5 +1,6 @@
 package seedu.awe.logic.parser;
 
+import static seedu.awe.commons.core.Messages.MESSAGE_HELPCOMMAND_USAGE;
 import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.awe.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
@@ -58,7 +59,7 @@ public class AweParser {
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_HELPCOMMAND_USAGE));
         }
 
         final String commandWord = matcher.group("commandWord");
@@ -66,13 +67,13 @@ public class AweParser {
         switch (commandWord) {
 
         case AddContactCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+            return new AddContactCommandParser().parse(arguments);
 
         case EditContactCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
         case DeleteContactCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+            return new DeleteContactCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
