@@ -187,7 +187,7 @@ public class AddContactCommandTest {
 
         @Override
         public void setPayments(List<Payment> payments) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         /**
@@ -257,6 +257,11 @@ public class AddContactCommandTest {
         @Override
         public boolean isCurrentExpenseList(Group group) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Expense getExpense(int index) {
+            return null;
         }
     }
 

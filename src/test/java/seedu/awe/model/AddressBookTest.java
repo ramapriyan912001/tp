@@ -137,7 +137,7 @@ public class AddressBookTest {
 
         @Override
         public void setPayments(List<Payment> payments) {
-           // EMPTY METHOD
+
         }
     }
 

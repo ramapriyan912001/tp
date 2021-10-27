@@ -24,6 +24,7 @@ public class UiManager implements Ui {
 
     private Logic logic;
     private MainWindow mainWindow;
+    private boolean isDataError;
 
     /**
      * Creates a {@code UiManager} with the given {@code Logic}.
@@ -31,6 +32,11 @@ public class UiManager implements Ui {
     public UiManager(Logic logic) {
         super();
         this.logic = logic;
+    }
+
+    @Override
+    public void setIsDataError(boolean isDataError) {
+        this.isDataError = isDataError;
     }
 
     @Override
@@ -42,7 +48,7 @@ public class UiManager implements Ui {
 
         try {
             mainWindow = new MainWindow(primaryStage, logic);
-            mainWindow.show(); //This should be called before creating other UI parts
+            mainWindow.show(isDataError);
             mainWindow.fillInnerParts();
 
         } catch (Throwable e) {

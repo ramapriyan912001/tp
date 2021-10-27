@@ -55,7 +55,7 @@ public class AddExpenseCommandTest {
         Person validPerson = new PersonBuilder().build();
         Group validGroup = new GroupBuilder().build();
         Expense validExpense = new ExpenseBuilder().build();
-        validGroup.addMember(validPerson);
+        validGroup = validGroup.addMember(validPerson);
         modelStub.addGroup(validGroup);
         GroupName groupName = validGroup.getGroupName();
 
@@ -93,7 +93,7 @@ public class AddExpenseCommandTest {
         Person validPerson = new PersonBuilder().build();
         Group validGroup = new GroupBuilder().build();
         Expense validExpense = new ExpenseBuilder().build();
-        validGroup.addMember(validPerson);
+        validGroup = validGroup.addMember(validPerson);
         modelStub.addGroup(validGroup);
         GroupName groupName = validGroup.getGroupName();
 
@@ -139,7 +139,7 @@ public class AddExpenseCommandTest {
         Person validPerson = new PersonBuilder().build();
         Group validGroup = new GroupBuilder().build();
         Expense validExpense = new ExpenseBuilder().withCost("0").build();
-        validGroup.addMember(validPerson);
+        validGroup = validGroup.addMember(validPerson);
         modelStub.addGroup(validGroup);
         GroupName groupName = validGroup.getGroupName();
 
@@ -161,8 +161,8 @@ public class AddExpenseCommandTest {
         Person validSelfPayee = new PersonBuilder().withName("nic").build();
         Group validGroup = new GroupBuilder().build();
         Expense validExpense = new ExpenseBuilder().build();
-        validGroup.addMember(validPerson);
-        validGroup.addMember(validSelfPayee);
+        validGroup = validGroup.addMember(validPerson);
+        validGroup = validGroup.addMember(validSelfPayee);
         modelStub.addGroup(validGroup);
         GroupName groupName = validGroup.getGroupName();
         Cost costOfSelfPayment = new Cost("30");
@@ -332,7 +332,7 @@ public class AddExpenseCommandTest {
 
         @Override
         public void setPayments(List<Payment> payments) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         /**
@@ -402,6 +402,11 @@ public class AddExpenseCommandTest {
         @Override
         public boolean isCurrentExpenseList(Group group) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Expense getExpense(int index) {
+            return null;
         }
 
     }
