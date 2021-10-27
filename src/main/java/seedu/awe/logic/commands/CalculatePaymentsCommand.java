@@ -120,7 +120,6 @@ public class CalculatePaymentsCommand extends Command {
         Map<Person, Cost> amountsPaid = group.getPaidByPayers();
         Map<Person, Cost> expensesIncurred = group.getSplitExpenses();
         List<Person> members = new ArrayList<>();
-
         for (Person person : amountsPaid.keySet()) {
             if (!members.contains(person)) {
                 members.add(person);
@@ -131,7 +130,6 @@ public class CalculatePaymentsCommand extends Command {
                 members.add(person);
             }
         }
-      
         double marginOfError = 0.01;
         for (Person person: members) {
             Cost amountPaid = amountsPaid.getOrDefault(person, new Cost(0.0));
