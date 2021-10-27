@@ -27,6 +27,8 @@ public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
 
+    private static final String url = "images/awelogo.png";
+
     private final Logger logger = LogsCenter.getLogger(getClass());
 
 
@@ -34,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
+    private LogoDisplay logoDisplay;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -61,6 +64,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane navigationButtonPlaceholder;
+
+    @FXML
+    private StackPane logoDisplayPlaceholder;
 
 
     /**
@@ -130,6 +136,9 @@ public class MainWindow extends UiPart<Stage> {
         viewPanel = new ViewPanel(logic);
         viewPanelPlaceholder.getChildren().add(viewPanel.getRoot());
 
+        logoDisplay = new LogoDisplay(url);
+        logoDisplayPlaceholder.getChildren().add(logoDisplay.getRoot());
+
         navigationButtonPanel = new NavigationButtonPanel(viewPanel);
         navigationButtonPlaceholder.getChildren().add(navigationButtonPanel.getRoot());
 
@@ -167,8 +176,11 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    void show() {
+    void show(boolean isDataError) {
         primaryStage.show();
+        if (isDataError) {
+            helpWindow.show();
+        }
     }
 
     /**

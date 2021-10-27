@@ -1,5 +1,6 @@
 package seedu.awe.logic.parser;
 
+import static seedu.awe.commons.core.Messages.MESSAGE_FINDEXPENSESCOMMAND_USAGE;
 import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 
@@ -39,7 +40,7 @@ public class FindExpensesCommandParser implements Parser<FindExpensesCommand> {
         boolean isKeywordPresent = !trimmedArgs.startsWith("gn/");
         if (trimmedArgs.isEmpty() || !isKeywordPresent) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindExpensesCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_FINDEXPENSESCOMMAND_USAGE));
         }
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_GROUP_NAME);
@@ -49,7 +50,7 @@ public class FindExpensesCommandParser implements Parser<FindExpensesCommand> {
             groupName = ParserUtil.parseGroupName((argMultimap.getValue(PREFIX_GROUP_NAME)).get());
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    FindExpensesCommand.MESSAGE_USAGE), ive);
+                    MESSAGE_FINDEXPENSESCOMMAND_USAGE), ive);
         }
 
         String[] descriptionKeywords = extractKeywords(trimmedArgs);
