@@ -1,5 +1,6 @@
 package seedu.awe.model.group;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
@@ -13,13 +14,14 @@ import java.util.Set;
 import seedu.awe.model.expense.Cost;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.person.Person;
+import seedu.awe.model.person.exceptions.DuplicatePersonException;
 import seedu.awe.model.tag.Tag;
 
 
 public class Group {
     //TODO: WRITE MESSAGE CONSTRAINTS MESSAGE
     private final GroupName groupName;
-    private final ArrayList<Person> members = new ArrayList<>();
+    private final ArrayList<Person> members;
     private final Set<Tag> tags = new HashSet<>();
     private final ArrayList<Expense> expenses = new ArrayList<>();
     private final HashMap<Person, Cost> paidByPayers = new HashMap<>();
@@ -33,8 +35,8 @@ public class Group {
      */
     public Group(GroupName groupName, ArrayList<Person> members) {
         this.groupName = groupName;
+        this.members = new ArrayList<>(members);
         for (Person member : members) {
-            this.addMember(member);
             paidByPayers.put(member, new Cost(0));
             splitExpenses.put(member, new Cost(0));
         }
@@ -49,8 +51,8 @@ public class Group {
      */
     public Group(GroupName groupName, ArrayList<Person> members, Set<Tag> tags) {
         this.groupName = groupName;
+        this.members = new ArrayList<>(members);
         for (Person member : members) {
-            this.addMember(member);
             paidByPayers.put(member, new Cost(0));
             splitExpenses.put(member, new Cost(0));
         }
@@ -121,19 +123,64 @@ public class Group {
      *
      * @param member Person object representing member to be added to group.
      */
-    public void addMember(Person member) {
-        this.members.add(member);
+    public Group addMember(Person member) throws DuplicatePersonException {
+        if (this.members.contains(member)) {
+            throw new DuplicatePersonException();
+        }
+
+        ArrayList<Person> members = new ArrayList<>(this.members);
+        members.add(member);
+
+        Map<Person, Cost> paidByPayer = new HashMap<>();
+        paidByPayer.putAll(this.paidByPayers);
         paidByPayers.put(member, new Cost(0));
+
+
+        Map<Person, Cost> splitExpenses = new HashMap<>();
+        splitExpenses.putAll(this.splitExpenses);
         splitExpenses.put(member, new Cost(0));
+
+        return new Group(groupName, members, tags, expenses, paidByPayers, splitExpenses);
+    }
+
+    /**
+     * Add tags to the group and return a new group with the added tags.
+     *
+     * @param tag Tags to be added.
+     * @return Updated group
+     */
+    public Group addTag(Set<Tag> tag) {
+        Set<Tag> tags = new HashSet<>(this.tags);
+        tags.addAll(tag);
+
+        return new Group(groupName, members, tags, expenses, paidByPayers, splitExpenses);
+    }
+
+    /**
+     * Edits the group name.
+     *
+     * @param groupName GroupName to be set.
+     * @return Return new Group with groupName updated.
+     */
+    public Group editName(GroupName groupName) {
+        requireNonNull(groupName);
+
+        return new Group(groupName, members, tags, expenses, paidByPayers, splitExpenses);
     }
 
     /**
      * Removes member from Group.
      *
      * @param member Person object representing member to be removed from group.
+     * @return Group with member removed.
      */
-    public void removeMember(Person member) {
-        this.members.remove(member);
+    public Group removeMember(Person member) {
+        requireNonNull(member);
+
+        ArrayList<Person> members = new ArrayList<>(this.members);
+        members.remove(member);
+
+        return new Group(groupName, members, tags, expenses, paidByPayers, splitExpenses);
     }
 
     public GroupName getGroupName() {

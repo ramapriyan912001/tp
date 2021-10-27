@@ -7,7 +7,7 @@ start
 
 if () then ([model contains Group (based on GroupName)])
     :Retrieve Group from model;
-    :Remove Group from model;
+    :Utilise **Algorithm** to Calculate Payments;
 else ([else])
 endif
 stop

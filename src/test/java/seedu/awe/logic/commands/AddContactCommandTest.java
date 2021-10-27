@@ -258,6 +258,11 @@ public class AddContactCommandTest {
         public boolean isCurrentExpenseList(Group group) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public Expense getExpense(int index) {
+            return null;
+        }
     }
 
     /**

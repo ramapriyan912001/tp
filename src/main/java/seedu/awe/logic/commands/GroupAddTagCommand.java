@@ -87,14 +87,14 @@ public class GroupAddTagCommand extends Command {
         if (Objects.isNull(oldGroup)) {
             throw new CommandException(String.format(MESSAGE_NONEXISTENT_GROUP, groupName));
         }
+
         Set<Tag> tagsFromOldGroup = oldGroup.getTags();
         for (Tag tag : newTags) {
             if (tagsFromOldGroup.contains(tag)) {
                 throw new CommandException(String.format(MESSAGE_GROUPADDTAGCOMMAND_DUPLICATE_TAG, tag.getTagName()));
             }
         }
-        newTags.addAll(tagsFromOldGroup);
-        Group newGroup = new Group(groupName, oldGroup.getMembers(), newTags);
+        Group newGroup = oldGroup.addTag(newTags);
         model.setGroup(oldGroup, newGroup);
         return new CommandResult(MESSAGE_GROUPADDTAGCOMMAND_SUCCESS);
     }

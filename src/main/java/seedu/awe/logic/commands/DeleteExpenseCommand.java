@@ -49,7 +49,7 @@ public class DeleteExpenseCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
         }
 
-        Expense expenseToDelete = expenseList.get(index.getZeroBased());
+        Expense expenseToDelete = model.getExpense(index.getZeroBased());
         Group group = model.getActiveGroupFromAddressBook();
         Group newGroup = group.deleteExpense(expenseToDelete);
         model.setGroup(group, newGroup);
