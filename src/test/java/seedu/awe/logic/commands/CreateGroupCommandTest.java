@@ -198,8 +198,9 @@ public class CreateGroupCommandTest {
 
         @Override
         public void setPayments(List<Payment> payments) {
-
+            throw new AssertionError("This method should not be called.");
         }
+
 
         /**
          * Returns an unmodifiable view of the list of {@code Group} backed by the internal list of

@@ -143,6 +143,12 @@ public class CalculatePaymentsCommand extends Command {
     private List<Payment> getPayments(Group group) throws CommandException {
         List<Pair> namesAndSurplusesList = getNamesAndSurplusesList(group);
         List<Payment> payments = calculatePayments(namesAndSurplusesList);
+        payments.sort(new Comparator<Payment>() {
+            @Override
+            public int compare(Payment payment, Payment t1) {
+                return payment.compareTo(t1);
+            }
+        });
         return payments;
     }
 

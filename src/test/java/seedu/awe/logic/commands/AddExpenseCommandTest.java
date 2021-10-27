@@ -332,7 +332,7 @@ public class AddExpenseCommandTest {
 
         @Override
         public void setPayments(List<Payment> payments) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         /**
