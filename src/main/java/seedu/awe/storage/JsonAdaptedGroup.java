@@ -79,8 +79,8 @@ public class JsonAdaptedGroup {
         }
 
         final ArrayList<Expense> modelExpenses = new ArrayList<>();
-        final ArrayList<Expense> intermediaryExpenses = new ArrayList<>();
-        intermediaryExpenses.addAll(StorageUtil.convertAdaptedExpensesToExpenses(expenses));
+
+        modelExpenses.addAll(StorageUtils.convertAdaptedExpensesToExpenses(expenses));
 
         if (groupName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,

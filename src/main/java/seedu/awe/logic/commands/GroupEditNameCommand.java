@@ -54,7 +54,7 @@ public class GroupEditNameCommand extends Command {
         if (Objects.isNull(oldGroup)) {
             throw new CommandException(String.format(MESSAGE_NONEXISTENT_GROUP, oldGroupName));
         }
-        Group newGroup = new Group(newGroupName, oldGroup.getMembers(), oldGroup.getTags());
+        Group newGroup = oldGroup.editName(newGroupName);
         model.setGroup(oldGroup, newGroup);
         model.setAllMembersOfGroup(newGroup);
         return new CommandResult(String.format(MESSAGE_GROUPEDITNAMECOMMAND_SUCCESS, newGroupName));
