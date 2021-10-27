@@ -74,7 +74,7 @@ For those who are not as fast, familiarity with the commands over time will allo
 3. Copy the file to the folder you want to use as the _home folder_ for your tp.
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/AWEUi.png)
+   ![Ui](images/AweUi.png)
    
 <div style="page-break-after: always;"></div>
 
