@@ -15,6 +15,7 @@ import static seedu.awe.testutil.TypicalGroups.BALI;
 import static seedu.awe.testutil.TypicalGroups.OSLO;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.awe.logic.commands.CalculatePaymentsCommand;
 import seedu.awe.logic.parser.exceptions.ParseException;
 import seedu.awe.model.group.GroupName;

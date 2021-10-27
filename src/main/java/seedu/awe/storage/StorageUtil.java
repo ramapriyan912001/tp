@@ -1,5 +1,7 @@
 package seedu.awe.storage;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,8 +12,6 @@ import seedu.awe.model.expense.Cost;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.expense.IndividualAmount;
 import seedu.awe.model.person.Person;
-
-import static java.util.Objects.requireNonNull;
 
 public class StorageUtil {
 
