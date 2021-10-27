@@ -15,11 +15,13 @@ Our mission is to accomplish through a user-centric approach that seeks to provi
 tip of their fingertips. This document marks the first step towards the accomplishment of that mission, and the
 beginning of your journey around the world.
 
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 ## Table of Contents
 * Table of Contents
 {:toc}
-
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 1. About the Document
 
@@ -56,6 +58,7 @@ to locate which words belong to which category of input.
 
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 2. Quick start
 AWE's primary asset is its speed. Unlike traditional Graphic User Interfaces (GUIs) which rely on slow actions such as mouse clicking and selection of options from long menus, with its CLI, AWE offers users the benefit of speed.
@@ -105,6 +108,7 @@ For those who are not as fast, familiarity with the commands over time will allo
 6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 3. Features
 
@@ -131,6 +135,9 @@ For those who are not as fast, familiarity with the commands over time will allo
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
+
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### 3.1. Contacts
 
@@ -202,6 +209,9 @@ Examples:
 * `findcontacts John` returns `john` and `John Doe`
 * `findcontacts alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### 3.2. Groups
 
@@ -345,6 +355,9 @@ Examples:
 * `groupeditname gn/Bali gn/Thailand` to change the group name from Bali to Thailand.
 * `groupeditname gn/Germany gn/Munich` to change the group name from Germany to Munich.
 
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ### 3.3. Expenses
 
 ### 3.3.1. Listing expenses of a specified group: `expenses`
@@ -471,6 +484,9 @@ AWE data are saved as a JSON file `[JAR file location]/data/awe.json`. Advanced 
 If your changes to the data file makes its format invalid, AWE will discard all data and start with an empty data file at the next run.
 </div>
 
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ## 4. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -484,7 +500,9 @@ If your changes to the data file makes its format invalid, AWE will discard all 
 ![Mac Security Preference](images/MacSecurityPreference.png)
 <br>
 If your questions are not answered in the FAQ, check out the issue page on our GitHub linked [here](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues).
+
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 5. Command summary
 
@@ -512,6 +530,9 @@ Action | Format, Examples
 **Calculate Spending** | `transactionsummary gn/GROUP_NAME` <br> e.g., `transactionsummary gn/Bali` 
 **Calculate Payments** | `calculatepayments gn/GROUP_NAME` <br> e.g., `calculatepayments gn/Bali` 
 **Help** | `help`
+
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 6. Final Word
 AWE hopes to revolutionise the group-travel space through its effective handling of shared expenses on a centralised
