@@ -11,7 +11,9 @@ import seedu.awe.model.expense.Expense;
 import seedu.awe.model.expense.IndividualAmount;
 import seedu.awe.model.person.Person;
 
-public class StorageUtils {
+import static java.util.Objects.requireNonNull;
+
+public class StorageUtil {
 
     /**
      * Convert a map of expenses between people and costs to a list of jsonAdaptedIndividualAmounts
@@ -19,6 +21,7 @@ public class StorageUtils {
      * @return
      */
     public static List<IndividualAmount> convertExpenseMapToListOfIndividualAmounts(Map<Person, Cost> expenseMap) {
+        requireNonNull(expenseMap);
         List<IndividualAmount> individualAmounts = new ArrayList<>();
         for (Person person : expenseMap.keySet()) {
             IndividualAmount individualAmount = new IndividualAmount(person,
@@ -36,6 +39,7 @@ public class StorageUtils {
      */
     public static Map<Person, Cost> convertListOfJsonAdaptedIndividualAmountsToExpenseMap(
             List<JsonAdaptedIndividualAmount> jsonAdaptedIndividualAmounts) throws IllegalValueException {
+        requireNonNull(jsonAdaptedIndividualAmounts);
         Map<Person, Cost> expenseMap = new HashMap<>();
         for (JsonAdaptedIndividualAmount jsonAdaptedIndividualAmount : jsonAdaptedIndividualAmounts) {
             IndividualAmount individualAmount = jsonAdaptedIndividualAmount.toModelType();
@@ -55,6 +59,7 @@ public class StorageUtils {
     public static List<Expense> convertAdaptedExpensesToExpenses(
             List<JsonAdaptedExpense> adaptedExpenses
     ) throws IllegalValueException {
+        requireNonNull(adaptedExpenses);
         List<Expense> expenses = new ArrayList<>();
         for (JsonAdaptedExpense expense : adaptedExpenses) {
             expenses.add(expense.toModelType());
