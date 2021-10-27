@@ -36,8 +36,13 @@ Model -> DeleteGroupCommand : group
 
 deactivate Model
 
+DeleteGroupCommand -> Model : deleteGroup(group)
+activate Model
+Model --> DeleteGroupCommand
+deactivate Model
+
 create CommandResult
-DeleteGroupCommand -> CommandResult : deleteGroup(group)
+DeleteGroupCommand -> CommandResult
 activate CommandResult
 
 CommandResult --> DeleteGroupCommand : result
