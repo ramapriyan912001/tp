@@ -16,6 +16,7 @@ tip of their fingertips. This document marks the first step towards the accompli
 beginning of your journey around the world.
 
 ## Table of Contents
+* Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
