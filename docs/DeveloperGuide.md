@@ -547,6 +547,10 @@ Initialise a `Pair` object with the `Person` object of the individual, and their
   * If the pairs do have equal magnitude, remove both pairs from the list.
   
 * Return the list of `Payment` objects.
+
+The following diagram shows the flow of the algorithm.
+
+![CalculatePaymentsAlgorithmDiagram](images/CalculatePaymentsCommandAlgorithmDiagram.png)
   
 
 The following activity diagram shows what happens when a user executes a `calculatepayments` command.
