@@ -297,6 +297,26 @@ The following sequence operation shows how the `deletegroup` operation works.
     * This information is unrecoverable once deleted.
     * As such, it is better to choose Alternative 1, as this makes it difficult for user to accidentally delete a group.
 
+**Aspect: Internal delete mechanism:**
+
+* **Alternative 1 (current choice):** Retrieve group from list and delete
+  * Pros: Easy to implement.
+  * Pros: Easier to modify in future.
+  * Cons: Extra step of retrieval leads to slower execution.
+  
+
+* **Alternative 2 (name based):** Delete based on `GroupName`
+  * Pros: Easy to implement.
+  * Pros: Process is completed faster.
+  * Cons: Might cause issues in case of future modifications.
+  
+
+* **Justification**
+  * Retrieving the group and subsequently deleting the group is a slower process.
+  * However, the alternative implementation relies on the uniqueness of the `GroupName` field of `Group` objects.
+  * Should we modify or remove the constraint, the alternative implementation would require significant alterations.
+  * To make the feature more extendable, we choose alternative 1.
+
 ### Find group feature
 
 The find group feature supports both single keyword and multi keyword search. This allows the displayed view panel to show the entries related to the search keywords entered by the user.
