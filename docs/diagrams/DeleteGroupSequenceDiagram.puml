@@ -4,8 +4,7 @@
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AweParser" as AweParser LOGIC_COLOR
-participant ":DeleteGroupCommandParser" as DeleteGroupCommandParser LOGIC_COLOR
-participant "d:DeleteGroupCommand" as DeleteGroupCommand LOGIC_COLOR
+participant ":DeleteGroupCommand" as DeleteGroupCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -13,52 +12,35 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("deletegroup gn/GROUP_NAME")
+[-> LogicManager : execute("deletegroup gn/Bali")
 activate LogicManager
 
-LogicManager -> AweParser : parseCommand("deletegroup gn/GROUP_NAME")
+LogicManager -> AweParser : parseCommand("deletegroup gn/Bali")
 activate AweParser
 
-create DeleteGroupCommandParser
-AweParser -> DeleteGroupCommandParser
-activate DeleteGroupCommandParser
-
-DeleteGroupCommandParser --> AweParser
-deactivate DeleteGroupCommandParser
-
-AweParser -> DeleteGroupCommandParser : parse("gn/GROUP_NAME")
-activate DeleteGroupCommandParser
-
+/'Clarify with tutor if there is a need to display DeleteGroupCommandParser class within the ref'/
+ref over AweParser, DeleteGroupCommand:get deleteGroupCommand
 create DeleteGroupCommand
-DeleteGroupCommandParser -> DeleteGroupCommand
-activate DeleteGroupCommand
+AweParser -> DeleteGroupCommand
 
-DeleteGroupCommand --> DeleteGroupCommandParser : d
-deactivate DeleteGroupCommand
 
-DeleteGroupCommandParser --> AweParser : d
-deactivate DeleteGroupCommandParser
-'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteGroupCommandParser -[hidden]-> AweParser
-destroy DeleteGroupCommandParser
-
-AweParser --> LogicManager : d
+AweParser --> LogicManager : deleteGroupCommand
 deactivate AweParser
 
 LogicManager -> DeleteGroupCommand : execute()
 activate DeleteGroupCommand
 
-DeleteGroupCommand -> Model : deleteGroup(g:Group)
+DeleteGroupCommand -> Model : getGroupByName(new GroupName("Bali"))
 activate Model
+Model -> DeleteGroupCommand : group
 
-Model --> DeleteGroupCommand
 deactivate Model
 
 create CommandResult
-DeleteGroupCommand -> CommandResult
+DeleteGroupCommand -> CommandResult : deleteGroup(group)
 activate CommandResult
 
-CommandResult --> DeleteGroupCommand
+CommandResult --> DeleteGroupCommand : result
 deactivate CommandResult
 
 DeleteGroupCommand --> LogicManager : result
