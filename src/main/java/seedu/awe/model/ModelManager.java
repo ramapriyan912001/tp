@@ -309,6 +309,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Expense getExpense(int index) {
+        return filteredExpenses.get(index);
+    }
+
+
+
+    @Override
     public void updateFilteredExpenseList(Predicate<Expense> predicate) {
         requireNonNull(predicate);
         filteredExpenses.setPredicate(predicate);

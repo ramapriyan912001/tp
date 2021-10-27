@@ -176,8 +176,11 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    void show() {
+    void show(boolean isDataError) {
         primaryStage.show();
+        if (isDataError) {
+            helpWindow.show();
+        }
     }
 
     /**

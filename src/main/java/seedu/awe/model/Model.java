@@ -167,6 +167,8 @@ public interface Model {
 
     boolean isCurrentExpenseList(Group group);
 
+    Expense getExpense(int index);
+
     /**
      * Updates the filter of the filtered expense list to filter by the given {@code predicate}.
      *

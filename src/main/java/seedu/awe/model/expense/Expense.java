@@ -110,7 +110,8 @@ public class Expense {
 
         Person payer = this.payer;
         List<Person> included = new ArrayList<>(this.included);
-        Map<Person, Cost> individualExpenses = Map.copyOf(this.individualExpenses);
+        Map<Person, Cost> individualExpenses = new HashMap<>();
+        individualExpenses.putAll(this.individualExpenses);
         boolean isModified = false;
 
         if (payer.equals(target)) {

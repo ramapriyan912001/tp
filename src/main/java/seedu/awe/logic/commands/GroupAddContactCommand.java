@@ -14,6 +14,7 @@ import seedu.awe.model.Model;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.person.Person;
+import seedu.awe.model.person.exceptions.DuplicatePersonException;
 
 public class GroupAddContactCommand extends Command {
     public static final String COMMAND_WORD = "groupaddcontact";
@@ -88,16 +89,17 @@ public class GroupAddContactCommand extends Command {
         if (Objects.isNull(oldGroup)) {
             throw new CommandException(String.format(MESSAGE_NONEXISTENT_GROUP, groupName));
         }
-        ArrayList<Person> membersFromOldGroup = oldGroup.getMembers();
-        for (Person member : newMembers) {
-            if (membersFromOldGroup.contains(member)) {
+
+        Group newGroup = oldGroup;
+        for (Person member: newMembers) {
+            try {
+                newGroup = newGroup.addMember(member);
+            } catch (DuplicatePersonException exception) {
                 throw new CommandException(
-                        String.format(MESSAGE_GROUPADDCONTACTCOMMAND_DUPLICATE_PERSON, member.getName())
-                );
+                        String.format(MESSAGE_GROUPADDCONTACTCOMMAND_DUPLICATE_PERSON, member.getName()));
             }
         }
-        newMembers.addAll(membersFromOldGroup);
-        Group newGroup = new Group(groupName, newMembers, oldGroup.getTags());
+
         model.setGroup(oldGroup, newGroup);
         model.setAllMembersOfGroup(newGroup);
         return new CommandResult(MESSAGE_GROUPADDCONTACTCOMMAND_SUCCESS);
