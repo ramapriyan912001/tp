@@ -143,6 +143,19 @@ public class Group {
     }
 
     /**
+     * Add tags to the group and return a new group with the added tags.
+     *
+     * @param tag Tags to be added.
+     * @return Updated group
+     */
+    public Group addTag(Set<Tag> tag) {
+        Set<Tag> tags = new HashSet<>(this.tags);
+        tags.addAll(tag);
+
+        return new Group(groupName, members, tags, expenses, paidByPayers, splitExpenses);
+    }
+
+    /**
      * Removes member from Group.
      *
      * @param member Person object representing member to be removed from group.
