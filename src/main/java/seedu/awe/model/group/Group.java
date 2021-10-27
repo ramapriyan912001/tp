@@ -172,9 +172,15 @@ public class Group {
      * Removes member from Group.
      *
      * @param member Person object representing member to be removed from group.
+     * @return Group with member removed.
      */
-    public void removeMember(Person member) {
-        this.members.remove(member);
+    public Group removeMember(Person member) {
+        requireNonNull(member);
+
+        ArrayList<Person> members = new ArrayList<>(this.members);
+        members.remove(member);
+
+        return new Group(groupName, members, tags, expenses, paidByPayers, splitExpenses);
     }
 
     public GroupName getGroupName() {

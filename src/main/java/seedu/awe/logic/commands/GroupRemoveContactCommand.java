@@ -68,23 +68,22 @@ public class GroupRemoveContactCommand extends Command {
     }
 
     /**
-     * Returns List of Person objects representing the remaining members after removing a given list of members.
+     * Checks if the list of person to be remove is contained in the original list.
      *
      * @param membersFromOldGroup List of Person objects representing original members in a group.
      * @param membersToBeRemoved List of Person objects representing members to be removed from a group.
-     * @return List of Person objects representing the remaining members after removing a given list of members
-     * @throws CommandException If member to be removed is not present in the List of original members.
+     * @return Whether the list to remove person is valid
      */
-    public ArrayList<Person> removeMembers(ArrayList<Person> membersFromOldGroup,
-                                           ArrayList<Person> membersToBeRemoved) throws CommandException {
+    public boolean checkRemoveMembers(ArrayList<Person> membersFromOldGroup,
+                                           ArrayList<Person> membersToBeRemoved) {
         ArrayList<Person> remainingMembers = new ArrayList<>(membersFromOldGroup);
         for (Person memberToBeRemoved : membersToBeRemoved) {
             boolean memberToBeRemovedIsPresent = remainingMembers.remove(memberToBeRemoved);
             if (!memberToBeRemovedIsPresent) {
-                throw new CommandException(MESSAGE_GROUPREMOVECONTACT_ERROR);
+                return false;
             }
         }
-        return remainingMembers;
+        return true;
     }
 
     @Override
@@ -98,9 +97,17 @@ public class GroupRemoveContactCommand extends Command {
         if (Objects.isNull(oldGroup)) {
             throw new CommandException(String.format(MESSAGE_NONEXISTENT_GROUP, groupName));
         }
+
         ArrayList<Person> membersFromOldGroup = oldGroup.getMembers();
-        ArrayList<Person> remainingMembers = removeMembers(membersFromOldGroup, membersToBeRemoved);
-        Group newGroup = new Group(groupName, remainingMembers, oldGroup.getTags());
+        if (!checkRemoveMembers(membersFromOldGroup, membersToBeRemoved)) {
+            throw new CommandException(MESSAGE_GROUPREMOVECONTACT_ERROR);
+        }
+
+        Group newGroup = oldGroup;
+        for (Person member: membersToBeRemoved) {
+            newGroup = newGroup.removeMember(member);
+        }
+
         model.setGroup(oldGroup, newGroup);
         model.setAllMembersOfGroup(oldGroup);
         return new CommandResult(MESSAGE_GROUPREMOVECONTACT_SUCCESS);
