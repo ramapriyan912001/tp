@@ -1,5 +1,6 @@
 package seedu.awe.model.group;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
@@ -151,6 +152,18 @@ public class Group {
     public Group addTag(Set<Tag> tag) {
         Set<Tag> tags = new HashSet<>(this.tags);
         tags.addAll(tag);
+
+        return new Group(groupName, members, tags, expenses, paidByPayers, splitExpenses);
+    }
+
+    /**
+     * Edits the group name.
+     *
+     * @param groupName GroupName to be set.
+     * @return Return new Group with groupName updated.
+     */
+    public Group editName(GroupName groupName) {
+        requireNonNull(groupName);
 
         return new Group(groupName, members, tags, expenses, paidByPayers, splitExpenses);
     }
