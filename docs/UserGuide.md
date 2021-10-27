@@ -39,6 +39,8 @@ Section 1 provides readers with a brief overview of how to use this document. Se
 and Section 3 documents the main features of AWE. If you still face problems using AWE, refer to our FAQ in Section 4. 
 For a summary of all the commands available, refer to Section 5.
 
+<div style="page-break-after: always;"></div>
+
 ### 1.1 Glossary
 
 Term | Explanation
@@ -73,6 +75,8 @@ For those who are not as fast, familiarity with the commands over time will allo
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/AWEUi.png)
+   
+<div style="page-break-after: always;"></div>
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -450,6 +454,9 @@ Examples:
 * `calculatepayments gn/London`<br>
   ![result for 'findcontacts Taiwan Malaysia'](images/CALCULATEPAYMENTSUI.png)
 
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ### 3.4. Miscellaneous
 
 #### 3.4.1. Viewing help : `help`
@@ -516,6 +523,8 @@ Action | Format, Examples
 **Edit Contact** | `editcontact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find Contacts** | `findcontacts KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 
+<div style="page-break-after: always;"></div>
+
 ### 5.2 Groups commands
 
 Action | Format, Examples
@@ -529,6 +538,8 @@ Action | Format, Examples
 **Remove Tags from Group** | `groupremovetag gn/GROUP_NAME n/TAG1 [n/MORE_TAGS]` <br> e.g., `groupremovetag gn/Bali n/friends`
 **Remove Contact from Group** | `groupremovecontact gn/GROUP_NAME n/NAME1 [n/MORE_NAMES]` <br> e.g., `groupremovecontact gn/Bali n/Jacob Tan`
 **Find Groups** | `findgroups KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+
+<div style="page-break-after: always;"></div>
 
 ### 5.3 Expense commands
 
