@@ -76,6 +76,7 @@ public class DeleteExpenseCommandTest {
 
     @Test
     public void execute_inValidViewPage_throwsCommandException() {
+        MainWindow.setViewEnum(UiView.CONTACT_PAGE);
         ModelStubWithExpense modelStub = new ModelStubWithExpense();
         DeleteExpenseCommand deleteExpenseCommand = new DeleteExpenseCommand(INDEX_FIRST_EXPENSE);
         assertThrows(CommandException.class,

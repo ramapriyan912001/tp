@@ -67,7 +67,7 @@ public class FindExpensesCommandTest {
 
     @Test
     public void execute_multipleKeywords_multipleExpensesFound() {
-        String expectedMessage = String.format(MESSAGE_EXPENSES_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(MESSAGE_EXPENSES_LISTED_OVERVIEW, 2);
         DescriptionContainsKeywordsPredicate predicate = preparePredicate("Souvenirs Buffet");
         FindExpensesCommand command = new FindExpensesCommand(new GroupName("Bali"), predicate);
         expectedModel.setExpenses(expectedModel.getGroupByName(new GroupName("Bali")));
