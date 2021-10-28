@@ -135,7 +135,7 @@ public class CalculatePaymentsCommand extends Command {
             Cost amountPaid = amountsPaid.getOrDefault(person, new Cost(0.0));
             Cost expenseIncurred = expensesIncurred.getOrDefault(person, new Cost(0.0));
             double surplus = amountPaid.getCost() - expenseIncurred.getCost();
-            if (surplus >= marginOfError) {
+            if (Math.abs(surplus) >= marginOfError) {
                 Pair nameSurplusPair = new Pair(surplus, person);
                 namesAndSurpluses.add(nameSurplusPair);
             }
