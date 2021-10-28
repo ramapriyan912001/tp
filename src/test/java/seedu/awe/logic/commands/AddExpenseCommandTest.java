@@ -10,6 +10,8 @@ import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_COST_ZER
 import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_NOT_PART_OF_GROUP;
 import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_SUCCESS;
 import static seedu.awe.testutil.Assert.assertThrows;
+import static seedu.awe.testutil.TypicalPersons.ALICE;
+import static seedu.awe.testutil.TypicalPersons.BOB;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -205,8 +207,8 @@ public class AddExpenseCommandTest {
 
     @Test
     public void equals() {
-        Expense alicePayer = new ExpenseBuilder().withName("Alice").build();
-        Expense bobPayer = new ExpenseBuilder().withName("Bob").build();
+        Expense alicePayer = new ExpenseBuilder().withPayer(ALICE).build();
+        Expense bobPayer = new ExpenseBuilder().withPayer(BOB).build();
         GroupName groupName = new GroupName("arcade");
         AddExpenseCommand addAlicePayerCommand = new AddExpenseCommand(alicePayer.getPayer(), alicePayer.getCost(),
                 alicePayer.getDescription(), groupName, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());

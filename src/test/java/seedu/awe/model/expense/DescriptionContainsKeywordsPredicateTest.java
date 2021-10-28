@@ -2,6 +2,7 @@ package seedu.awe.model.expense;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.awe.testutil.TypicalPersons.ALICE;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -58,11 +59,11 @@ public class DescriptionContainsKeywordsPredicateTest {
 
         // Mixed-case keywords
         predicate = new DescriptionContainsKeywordsPredicate(Arrays.asList("diNNer", "holidaY"));
-        assertTrue(predicate.test(new ExpenseBuilder().withName("Dinner Holiday").build()));
+        assertTrue(predicate.test(new ExpenseBuilder().withDescription("Dinner Holiday").build()));
     }
 
     @Test
-    public void test_nameDoesNotContainKeywords_returnsFalse() {
+    public void test_descriptionDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         DescriptionContainsKeywordsPredicate predicate = new DescriptionContainsKeywordsPredicate(
                 Collections.emptyList());
@@ -70,12 +71,12 @@ public class DescriptionContainsKeywordsPredicateTest {
 
         // Non-matching keyword
         predicate = new DescriptionContainsKeywordsPredicate(Arrays.asList("Lunch"));
-        assertFalse(predicate.test(new ExpenseBuilder().withName("Buffet Dinner").build()));
+        assertFalse(predicate.test(new ExpenseBuilder().withDescription("Buffet Dinner").build()));
 
         // Keywords match cost and payer but does not match description
         predicate = new DescriptionContainsKeywordsPredicate(Arrays.asList("100", "Alice", "lunch"));
         assertFalse(predicate.test(new ExpenseBuilder().withDescription("Buffet").withCost("100")
-                .withName("Alice").build()));
+                .withPayer(ALICE).build()));
     }
 }
 
