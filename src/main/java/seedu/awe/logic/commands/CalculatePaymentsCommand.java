@@ -90,7 +90,7 @@ public class CalculatePaymentsCommand extends Command {
             throw new CommandException(MESSAGE_CALCULATEPAYMENTSCOMMAND_GROUP_NOT_FOUND);
         }
 
-        Group group = model.getAddressBook().getGroupByName(this.group.getGroupName());
+        Group group = model.getGroupByName(this.group.getGroupName());
         List<Payment> payments = getPayments(group);
         model.setPayments(payments);
 
@@ -115,22 +115,30 @@ public class CalculatePaymentsCommand extends Command {
         return pairs;
     }
 
-    public List<Pair> getNamesAndSurplusesList(Group group) {
+    private List<Pair> getNamesAndSurplusesList(Group group) {
         List<Pair> namesAndSurpluses = new ArrayList<>();
         Map<Person, Cost> amountsPaid = group.getPaidByPayers();
         Map<Person, Cost> expensesIncurred = group.getSplitExpenses();
         List<Person> members = new ArrayList<>();
-        members.addAll(new ArrayList<>(amountsPaid
-                .keySet()));
-        members.addAll(new ArrayList<>(expensesIncurred
-                .keySet()));
-
+        for (Person person : amountsPaid.keySet()) {
+            if (!members.contains(person)) {
+                members.add(person);
+            }
+        }
+        for (Person person : expensesIncurred.keySet()) {
+            if (!members.contains(person)) {
+                members.add(person);
+            }
+        }
+        double marginOfError = 0.01;
         for (Person person: members) {
             Cost amountPaid = amountsPaid.getOrDefault(person, new Cost(0.0));
             Cost expenseIncurred = expensesIncurred.getOrDefault(person, new Cost(0.0));
             double surplus = amountPaid.getCost() - expenseIncurred.getCost();
-            Pair nameSurplusPair = new Pair(surplus, person);
-            namesAndSurpluses.add(nameSurplusPair);
+            if (surplus >= marginOfError) {
+                Pair nameSurplusPair = new Pair(surplus, person);
+                namesAndSurpluses.add(nameSurplusPair);
+            }
         }
         return namesAndSurpluses;
     }
@@ -140,9 +148,15 @@ public class CalculatePaymentsCommand extends Command {
      * @param group group for which payments are to be calculated
      * @return List of payments to make.
      */
-    public List<Payment> getPayments(Group group) throws CommandException {
+    private List<Payment> getPayments(Group group) throws CommandException {
         List<Pair> namesAndSurplusesList = getNamesAndSurplusesList(group);
         List<Payment> payments = calculatePayments(namesAndSurplusesList);
+        payments.sort(new Comparator<Payment>() {
+            @Override
+            public int compare(Payment payment, Payment t1) {
+                return payment.compareTo(t1);
+            }
+        });
         return payments;
     }
 
@@ -187,7 +201,7 @@ public class CalculatePaymentsCommand extends Command {
      * @return List of payments to balance payments and expenses.
      * @throws CommandException thrown if a discrepancy in payments is observed.
      */
-    public List<Payment> calculatePayments(List<Pair> pairs) throws CommandException {
+    private List<Payment> calculatePayments(List<Pair> pairs) throws CommandException {
         if (!checkSumIsZero(pairs)) {
             throw new CommandException("There appears to be a discrepancy within your payments.");
         }
@@ -229,12 +243,25 @@ public class CalculatePaymentsCommand extends Command {
      * @param surplusPair Name and Amount pair for person receiving amount.
      * @return Payment to make.
      */
-    public Payment calculatePayment(Pair deficitPair, Pair surplusPair) {
+    private Payment calculatePayment(Pair deficitPair, Pair surplusPair) {
         Person payee = deficitPair.getPerson();
         double absoluteDeficit = Math.abs(deficitPair.getSurplus());
         Person payer = surplusPair.getPerson();
         double absoluteSurplus = Math.abs(surplusPair.getSurplus());
         Cost minimumAmount = new Cost(Math.min(absoluteDeficit, absoluteSurplus));
         return new Payment(payer, payee, minimumAmount);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        } else if (!(other instanceof CalculatePaymentsCommand)) {
+            return false;
+        }
+
+        CalculatePaymentsCommand calculatePaymentsCommand = (CalculatePaymentsCommand) other;
+
+        return this.group.equals(calculatePaymentsCommand.group);
     }
 }
