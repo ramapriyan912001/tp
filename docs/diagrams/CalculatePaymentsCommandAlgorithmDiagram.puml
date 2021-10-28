@@ -25,6 +25,5 @@ Payer is Person from last pair;
     :Remove both pairs from list;
     endif
 endwhile
-
 stop
 @enduml
