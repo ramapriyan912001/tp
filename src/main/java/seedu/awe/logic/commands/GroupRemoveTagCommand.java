@@ -109,10 +109,10 @@ public class GroupRemoveTagCommand extends Command {
             throw new CommandException(String.format(MESSAGE_NONEXISTENT_GROUP, groupName));
         }
         Set<Tag> tagsFromOldGroup = oldGroup.getTags();
-        Optional<Tag> tagThatIsNotInTheGroup = checkRemoveTags(tagsFromOldGroup, tagsToBeRemoved);
-        if (tagThatIsNotInTheGroup.isPresent()) {
+        Optional<Tag> tagNotInTheGroup = checkRemoveTags(tagsFromOldGroup, tagsToBeRemoved);
+        if (tagNotInTheGroup.isPresent()) {
             throw new CommandException(
-                    String.format(MESSAGE_GROUPREMOVETAG_NONEXISTENT_TAG, tagThatIsNotInTheGroup.get().getTagName())
+                    String.format(MESSAGE_GROUPREMOVETAG_NONEXISTENT_TAG, tagNotInTheGroup.get().getTagName())
             );
         }
 
