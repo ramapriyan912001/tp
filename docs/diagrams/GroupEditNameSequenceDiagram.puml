@@ -1,0 +1,73 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AweParser" as AweParser LOGIC_COLOR
+participant ":GroupEditNameCommand" as GroupEditNameCommand LOGIC_COLOR
+participant "oldGroup:Group" as Group LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("groupeditname gn/Bali gn/Czech")
+activate LogicManager
+
+LogicManager -> AweParser : parseCommand("groupeditname gn/Bali gn/Czech")
+activate AweParser
+
+/'Clarify with tutor if there is a need to display GroupEditNameCommandParser class within the ref'/
+note right
+Same as CreateGroupCommand
+ref frame except with
+GroupEditNameCommand
+and GroupEditNameCommandParser
+end note
+group sd get groupEditNameCommand
+create GroupEditNameCommand
+AweParser -> GroupEditNameCommand
+activate GroupEditNameCommand
+GroupEditNameCommand --> AweParser
+deactivate GroupEditNameCommand
+end group
+
+
+
+
+AweParser --> LogicManager : groupEditNameCommand
+deactivate AweParser
+
+LogicManager -> GroupEditNameCommand : execute()
+activate GroupEditNameCommand
+
+GroupEditNameCommand -> Group : editName(newGroupName)
+activate Group
+Group --> GroupEditNameCommand : newGroup
+deactivate Group
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+Group -[hidden]-> AweParser
+destroy Group
+
+GroupEditNameCommand -> Model : setGroup(oldGroup, newGroup)
+activate Model
+
+Model --> GroupEditNameCommand
+deactivate Model
+
+create CommandResult
+GroupEditNameCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> GroupEditNameCommand : result
+deactivate CommandResult
+
+GroupEditNameCommand --> LogicManager : result
+deactivate GroupEditNameCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

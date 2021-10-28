@@ -19,9 +19,20 @@ LogicManager -> AweParser : parseCommand("creategroup gn/Bali n/Tom")
 activate AweParser
 
 /'Clarify with tutor if there is a need to display CreateGroupCommandParser class within the ref'/
-ref over AweParser, CreateGroupCommand:get createGroupCommand
+note right
+Refer to ref frame for
+details on creation of
+the CreateGroupCommand object
+end note
+group sd get createGroupCommand
 create CreateGroupCommand
 AweParser -> CreateGroupCommand
+activate CreateGroupCommand
+CreateGroupCommand --> AweParser
+deactivate CreateGroupCommand
+end group
+
+
 
 
 AweParser --> LogicManager : createGroupCommand
@@ -30,7 +41,7 @@ deactivate AweParser
 LogicManager -> CreateGroupCommand : execute()
 activate CreateGroupCommand
 
-CreateGroupCommand -> Model : CreateGroup(g:Group)
+CreateGroupCommand -> Model : addGroup(g:Group)
 activate Model
 
 Model --> CreateGroupCommand

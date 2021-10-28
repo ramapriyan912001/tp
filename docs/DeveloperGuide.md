@@ -219,6 +219,8 @@ The following sequence operation shows how the `creategroup` operation works.
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
+![CreateGroupRef](images/CreateGroupRef.png)
+
 #### Design considerations:
 
 **Aspect: User command for `creategroup`:**
@@ -316,6 +318,22 @@ The following sequence operation shows how the `deletegroup` operation works.
   * However, the alternative implementation relies on the uniqueness of the `GroupName` field of `Group` objects.
   * Should we modify or remove the constraint, the alternative implementation would require significant alterations.
   * To make the feature more extendable, we choose alternative 1.
+
+### Group Add Contact Feature
+![GroupAddContactSequenceDiagram](images/GroupAddContactSequenceDiagram.png)
+
+
+### Group Remove Contact Feature
+![GroupRemoveContactSequenceDiagram](images/GroupRemoveContactSequenceDiagram.png)
+
+### Group Add Tag Feature
+![GroupAddTagSequenceDiagram](images/GroupAddTagSequenceDiagram.png)
+
+### Group Remove Tag Feature
+![GroupRemoveTagSequenceDiagram](images/GroupRemoveTagSequenceDiagram.png)
+
+### Group Edit Name Feature
+![GroupEditNameSequenceDiagram](images/GroupEditNameSequenceDiagram.png)
 
 ### Find group feature
 

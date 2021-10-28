@@ -1,0 +1,77 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AweParser" as AweParser LOGIC_COLOR
+participant ":GroupRemoveTagCommand" as GroupRemoveTagCommand LOGIC_COLOR
+participant "newGroup:Group" as Group LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("groupremovetag gn/Bali t/3day")
+activate LogicManager
+
+LogicManager -> AweParser : parseCommand("groupremovetag gn/Bali t/3day")
+activate AweParser
+
+/'Clarify with tutor if there is a need to display GroupRemoveTagCommandParser class within the ref'/
+note right
+Same as CreateGroupCommand
+ref frame except with
+GroupRemoveTagCommand
+and GroupRemoveTagCommandParser
+end note
+
+group sd get groupRemoveTagCommand
+    create GroupRemoveTagCommand
+    AweParser -> GroupRemoveTagCommand
+    activate GroupRemoveTagCommand
+    GroupRemoveTagCommand --> AweParser
+    deactivate GroupRemoveTagCommand
+end group
+
+
+
+
+AweParser --> LogicManager : groupRemoveTagCommand
+deactivate AweParser
+
+LogicManager -> GroupRemoveTagCommand : execute()
+
+loop for every tag to be removed
+    activate GroupRemoveTagCommand
+    GroupRemoveTagCommand -> Group : removeTag(tag)
+    activate Group
+    Group --> GroupRemoveTagCommand : newGroup
+    deactivate Group
+end
+
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+Group -[hidden]-> AweParser
+destroy Group
+
+GroupRemoveTagCommand -> Model : setGroup(oldGroup, newGroup)
+activate Model
+
+Model --> GroupRemoveTagCommand
+deactivate Model
+
+create CommandResult
+GroupRemoveTagCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> GroupRemoveTagCommand : result
+deactivate CommandResult
+
+GroupRemoveTagCommand --> LogicManager : result
+deactivate GroupRemoveTagCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
