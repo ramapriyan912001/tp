@@ -40,8 +40,6 @@ import seedu.awe.model.transactionsummary.TransactionSummary;
 import seedu.awe.ui.MainWindow;
 import seedu.awe.ui.UiView;
 
-
-
 public class DeleteExpenseCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
