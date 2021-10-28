@@ -99,6 +99,10 @@ public class MainWindow extends UiPart<Stage> {
         return viewEnum;
     }
 
+    public static void setViewEnum(UiView uiView) {
+        viewEnum = uiView;
+    }
+
     /**
      * Sets the accelerator of a MenuItem.
      * @param keyCombination the KeyCombination value of the accelerator
