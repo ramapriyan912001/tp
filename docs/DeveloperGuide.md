@@ -219,6 +219,8 @@ The following sequence operation shows how the `creategroup` operation works.
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
+![CreateGroupRef](images/CreateGroupRef.png)
+
 #### Design considerations:
 
 **Aspect: User command for `creategroup`:**
@@ -316,6 +318,22 @@ The following sequence operation shows how the `deletegroup` operation works.
   * However, the alternative implementation relies on the uniqueness of the `GroupName` field of `Group` objects.
   * Should we modify or remove the constraint, the alternative implementation would require significant alterations.
   * To make the feature more extendable, we choose alternative 1.
+
+### Group Add Contact Feature
+![GroupAddContactSequenceDiagram](images/GroupAddContactSequenceDiagram.png)
+
+
+### Group Remove Contact Feature
+![GroupRemoveContactSequenceDiagram](images/GroupRemoveContactSequenceDiagram.png)
+
+### Group Add Tag Feature
+![GroupAddTagSequenceDiagram](images/GroupAddTagSequenceDiagram.png)
+
+### Group Remove Tag Feature
+![GroupRemoveTagSequenceDiagram](images/GroupRemoveTagSequenceDiagram.png)
+
+### Group Edit Name Feature
+![GroupEditNameSequenceDiagram](images/GroupEditNameSequenceDiagram.png)
 
 ### Find group feature
 
@@ -605,14 +623,15 @@ The following sequence operation shows how the `calculatepayments` operation wor
 ### UI Display
 AWE has multiple lists / views to display such as for `groups`, `contacts` and `expenses`.
 
-The display, called view panel, will only be able to show up 1 view at a time depending on the command. The challenge would be to get it to display the correct one.
+The display, called view panel, will only be able to show up 1 view at a time depending on the command. It is of upmost importance to get it to display the correct view.
 
 To achieve the toggling between each view panels, we implemented the following:
 * An enumeration `UiView` to contain the following `CONTACT_PAGE`, `GROUP_PAGE`, `EXPENSE_PAGE`, `TRANSACTION_SUMMARY`, `PAYMENT_PAGE`. Each enum represents a different view.
 * `CommandResult` was given 6 more boolean fields, each representing a different view as well.
 * `MainWindow` checks for the 6 boolean fields in `CommandResult` and passes `UiView` to `ViewPanel` for toggling the view.
 
-The following activity diagram shows how the `MainWindow` checks and sends the `UiView` to `ViewPanel`.
+The following activity diagram shows how the `MainWindow` checks and sends the `UiView` to `ViewPanel`. 
+<br>
 <img src="images/UiTogglingActivityDiagram.png" width="500" />
 
 #### Proposed Implementation
@@ -636,7 +655,7 @@ The following activity diagram shows how the `MainWindow` checks and sends the `
 ### Ui Navigation Buttons
 To improve the usability of AWE, buttons are implemented into the Ui to allow switching of view easily.
 
-However, only 2 views can be toggled by the buttons - Contacts page and Groups page.
+However, only 2 main views can be toggled by the buttons - Contacts page and Groups page.
 
 To achieve this, the following is implemented:
 * 2 buttons (`GroupViewButton` and `ContactViewButton`) for the user to click.

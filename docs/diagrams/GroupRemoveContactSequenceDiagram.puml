@@ -1,0 +1,77 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AweParser" as AweParser LOGIC_COLOR
+participant ":GroupRemoveContactCommand" as GroupRemoveContactCommand LOGIC_COLOR
+participant "oldGroup:Group" as Group LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("groupremovecontact gn/Bali n/Tom")
+activate LogicManager
+
+LogicManager -> AweParser : parseCommand("groupremovecontact gn/Bali n/Tom")
+activate AweParser
+
+/'Clarify with tutor if there is a need to display GroupRemoveContactCommandParser class within the ref'/
+note right
+Same as CreateGroupCommand
+ref frame except with
+GroupRemoveContactCommand
+and GroupRemoveContactCommandParser
+end note
+
+group sd get groupRemoveContactCommand
+    create GroupRemoveContactCommand
+    AweParser -> GroupRemoveContactCommand
+    activate GroupRemoveContactCommand
+    GroupRemoveContactCommand --> AweParser
+    deactivate GroupRemoveContactCommand
+end group
+
+
+
+
+AweParser --> LogicManager : groupRemoveContactCommand
+deactivate AweParser
+
+LogicManager -> GroupRemoveContactCommand : execute()
+
+loop for every member to be removed
+    activate GroupRemoveContactCommand
+    GroupRemoveContactCommand -> Group : removeMember(member)
+    activate Group
+    Group --> GroupRemoveContactCommand : newGroup
+    deactivate Group
+end
+
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+Group -[hidden]-> AweParser
+destroy Group
+
+GroupRemoveContactCommand -> Model : setGroup(oldGroup, newGroup)
+activate Model
+
+Model --> GroupRemoveContactCommand
+deactivate Model
+
+create CommandResult
+GroupRemoveContactCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> GroupRemoveContactCommand : result
+deactivate CommandResult
+
+GroupRemoveContactCommand --> LogicManager : result
+deactivate GroupRemoveContactCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
