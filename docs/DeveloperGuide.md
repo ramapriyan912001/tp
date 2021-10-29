@@ -92,6 +92,7 @@ The `ViewPanel` consist of the following parts:
 * `GroupListPanel`
 * `PersonListPanel`
 * `ExpenseListPanel`
+* `PaymentListPanel`
 
 Each panel will display the corresponding list accordingly. The ViewPanel will only show up a single list panel at a time. 
 We have decided to opt for this way of implementation due to the following:
@@ -151,13 +152,15 @@ The `Model` component,
     * all `Person` objects (which are contained in a `UniquePersonList` object).
     * all `Group` objects (which are contained in a `UniqueGroupList` object).
     * all `Expense` objects (which are contained in a `ExpenseList` object).
-* stores the currently 'selected' `Person`/`Group`/`Expense` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+    * all `Payment` objects (which are contained in a `PaymentList` object).
+* stores the currently 'selected' `Person`/`Group`/`Expense/Payment` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <img src="images/PersonClassDiagram.png" width="450" />
 <img src="images/ExpenseClassDiagram.png" width="350" />
 <img src="images/GroupClassDiagram.png" width="450" />
+<img src="images/PaymentClassDiagram.png" width="450" />
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
