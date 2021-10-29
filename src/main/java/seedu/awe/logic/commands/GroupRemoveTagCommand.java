@@ -8,6 +8,7 @@ import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.awe.logic.commands.exceptions.CommandException;
@@ -79,24 +80,21 @@ public class GroupRemoveTagCommand extends Command {
     }
 
     /**
-     * Returns Set of Tag objects representing the remaining tags after removing a given set of tags.
+     * Checks if the set of tags stored in the group has the tags to be removed
      *
      * @param tagsFromOldGroup Set of Tag objects representing original tags in a group.
      * @param tagsToBeRemoved Set of Tag objects representing tags to be removed from a group.
-     * @return Set of Tag objects representing the remaining tags after removing a given set of tags
-     * @throws CommandException If tag to be removed is not present in the set of original tags.
+     * @return whether the tagsToBeRemoved is contains in the original group
      */
-    public Set<Tag> removeTags(Set<Tag> tagsFromOldGroup, Set<Tag> tagsToBeRemoved) throws CommandException {
+    public Optional<Tag> checkRemoveTags(Set<Tag> tagsFromOldGroup, Set<Tag> tagsToBeRemoved) {
         Set<Tag> remainingTags = new HashSet<>(tagsFromOldGroup);
         for (Tag tagToBeRemoved : tagsToBeRemoved) {
             boolean tagToBeRemovedIsPresent = remainingTags.remove(tagToBeRemoved);
             if (!tagToBeRemovedIsPresent) {
-                throw new CommandException(
-                        String.format(MESSAGE_GROUPREMOVETAG_NONEXISTENT_TAG, tagToBeRemoved.getTagName())
-                );
+                return Optional.of(tagToBeRemoved);
             }
         }
-        return remainingTags;
+        return Optional.empty();
     }
 
     @Override
@@ -111,8 +109,18 @@ public class GroupRemoveTagCommand extends Command {
             throw new CommandException(String.format(MESSAGE_NONEXISTENT_GROUP, groupName));
         }
         Set<Tag> tagsFromOldGroup = oldGroup.getTags();
-        Set<Tag> remainingTags = removeTags(tagsFromOldGroup, tagsToBeRemoved);
-        Group newGroup = new Group(groupName, oldGroup.getMembers(), remainingTags);
+        Optional<Tag> tagNotInTheGroup = checkRemoveTags(tagsFromOldGroup, tagsToBeRemoved);
+        if (tagNotInTheGroup.isPresent()) {
+            throw new CommandException(
+                    String.format(MESSAGE_GROUPREMOVETAG_NONEXISTENT_TAG, tagNotInTheGroup.get().getTagName())
+            );
+        }
+
+        Group newGroup = oldGroup;
+        for (Tag tag: tagsToBeRemoved) {
+            newGroup = newGroup.removeTag(tag);
+        }
+
         model.setGroup(oldGroup, newGroup);
         return new CommandResult(MESSAGE_GROUPREMOVETAG_SUCCESS);
     }

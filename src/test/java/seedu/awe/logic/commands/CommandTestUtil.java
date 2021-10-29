@@ -18,6 +18,8 @@ import seedu.awe.commons.core.index.Index;
 import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.model.AddressBook;
 import seedu.awe.model.Model;
+import seedu.awe.model.expense.DescriptionContainsKeywordsPredicate;
+import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.exceptions.DuplicateGroupException;
 import seedu.awe.model.person.NameContainsKeywordsPredicate;
 import seedu.awe.model.person.Person;
@@ -134,9 +136,9 @@ public class CommandTestUtil {
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
                                             Model expectedModel, boolean showGroups, boolean showContacts,
                                             boolean showExpenses, boolean showTransactionSummary,
-                                            boolean showPayemnts) {
+                                            boolean showPayments) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false,
-                false, showGroups, showContacts, showExpenses, showTransactionSummary, showPayemnts);
+                false, showGroups, showContacts, showExpenses, showTransactionSummary, showPayments);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 
@@ -168,6 +170,18 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the expense at the given {@code targetIndex} in the
+     * {@code model}'s awe book.
+     */
+    public static void showExpenseAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getExpenses().size());
+
+        Expense expense = model.getExpenses().get(targetIndex.getZeroBased());
+        final String[] splitDescription = expense.getDescription().getFullDescription().split("\\s+");
+        model.updateFilteredExpenseList(new DescriptionContainsKeywordsPredicate(Arrays.asList(splitDescription[0])));
     }
 
 }

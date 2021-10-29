@@ -91,12 +91,12 @@ public class GroupAddContactCommand extends Command {
         }
 
         Group newGroup = oldGroup;
-        for (Person member: newMembers) {
+        for (Person newMember: newMembers) {
             try {
-                newGroup = newGroup.addMember(member);
+                newGroup = newGroup.addMember(newMember);
             } catch (DuplicatePersonException exception) {
                 throw new CommandException(
-                        String.format(MESSAGE_GROUPADDCONTACTCOMMAND_DUPLICATE_PERSON, member.getName()));
+                        String.format(MESSAGE_GROUPADDCONTACTCOMMAND_DUPLICATE_PERSON, newMember.getName()));
             }
         }
 

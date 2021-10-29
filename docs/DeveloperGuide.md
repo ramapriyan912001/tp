@@ -92,6 +92,7 @@ The `ViewPanel` consist of the following parts:
 * `GroupListPanel`
 * `PersonListPanel`
 * `ExpenseListPanel`
+* `PaymentListPanel`
 
 Each panel will display the corresponding list accordingly. The ViewPanel will only show up a single list panel at a time. 
 We have decided to opt for this way of implementation due to the following:
@@ -151,13 +152,15 @@ The `Model` component,
     * all `Person` objects (which are contained in a `UniquePersonList` object).
     * all `Group` objects (which are contained in a `UniqueGroupList` object).
     * all `Expense` objects (which are contained in a `ExpenseList` object).
-* stores the currently 'selected' `Person`/`Group`/`Expense` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+    * all `Payment` objects (which are contained in a `PaymentList` object).
+* stores the currently 'selected' `Person`/`Group`/`Expense`/`Payment` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <img src="images/PersonClassDiagram.png" width="450" />
 <img src="images/ExpenseClassDiagram.png" width="350" />
 <img src="images/GroupClassDiagram.png" width="450" />
+<img src="images/PaymentClassDiagram.png" width="450" />
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
@@ -218,6 +221,8 @@ The following sequence operation shows how the `creategroup` operation works.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `CreateGroupCommandParser`
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
+![CreateGroupRef](images/CreateGroupRef.png)
 
 #### Design considerations:
 
@@ -316,6 +321,22 @@ The following sequence operation shows how the `deletegroup` operation works.
   * However, the alternative implementation relies on the uniqueness of the `GroupName` field of `Group` objects.
   * Should we modify or remove the constraint, the alternative implementation would require significant alterations.
   * To make the feature more extendable, we choose alternative 1.
+
+### Group Add Contact Feature
+![GroupAddContactSequenceDiagram](images/GroupAddContactSequenceDiagram.png)
+
+
+### Group Remove Contact Feature
+![GroupRemoveContactSequenceDiagram](images/GroupRemoveContactSequenceDiagram.png)
+
+### Group Add Tag Feature
+![GroupAddTagSequenceDiagram](images/GroupAddTagSequenceDiagram.png)
+
+### Group Remove Tag Feature
+![GroupRemoveTagSequenceDiagram](images/GroupRemoveTagSequenceDiagram.png)
+
+### Group Edit Name Feature
+![GroupEditNameSequenceDiagram](images/GroupEditNameSequenceDiagram.png)
 
 ### Find group feature
 
@@ -605,14 +626,15 @@ The following sequence operation shows how the `calculatepayments` operation wor
 ### UI Display
 AWE has multiple lists / views to display such as for `groups`, `contacts` and `expenses`.
 
-The display, called view panel, will only be able to show up 1 view at a time depending on the command. The challenge would be to get it to display the correct one.
+The display, called view panel, will only be able to show up 1 view at a time depending on the command. It is of upmost importance to get it to display the correct view.
 
 To achieve the toggling between each view panels, we implemented the following:
 * An enumeration `UiView` to contain the following `CONTACT_PAGE`, `GROUP_PAGE`, `EXPENSE_PAGE`, `TRANSACTION_SUMMARY`, `PAYMENT_PAGE`. Each enum represents a different view.
 * `CommandResult` was given 6 more boolean fields, each representing a different view as well.
 * `MainWindow` checks for the 6 boolean fields in `CommandResult` and passes `UiView` to `ViewPanel` for toggling the view.
 
-The following activity diagram shows how the `MainWindow` checks and sends the `UiView` to `ViewPanel`.
+The following activity diagram shows how the `MainWindow` checks and sends the `UiView` to `ViewPanel`. 
+<br>
 <img src="images/UiTogglingActivityDiagram.png" width="500" />
 
 #### Proposed Implementation
@@ -636,7 +658,7 @@ The following activity diagram shows how the `MainWindow` checks and sends the `
 ### Ui Navigation Buttons
 To improve the usability of AWE, buttons are implemented into the Ui to allow switching of view easily.
 
-However, only 2 views can be toggled by the buttons - Contacts page and Groups page.
+However, only 2 main views can be toggled by the buttons - Contacts page and Groups page.
 
 To achieve this, the following is implemented:
 * 2 buttons (`GroupViewButton` and `ContactViewButton`) for the user to click.
@@ -972,15 +994,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User chooses to delete a group.
-2. User enters delete group command into CLI along with group name.
+1. User requests to delete group with a specific name.
+2. AWE deletes group with specified group name.
+3. AWE shows updated list of groups.
 3. AWE displays confirmation message.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. AWE detects group name that is not in address book.
+* 2a. AWE detects group name that contains non-alphanumeric characters.
+  * 2a1. AWE displays message to remind User to type in a group name that contains only alphanumeric characters.
+
+    Use case ends.
+
+* 2b. AWE detects group name that is not in address book.
     * 2a1. AWE displays message to remind User to type in name of a group inside the addressbook.
 
       Use case ends.    
@@ -1090,26 +1118,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: Delete a shared expense**
 
+**Preconditions: User's last entered command is either `findexpenses` or `expenses`, i.e. the user is viewing an expense list.**
+
 **MSS**
 
-1. User requests to list expenses for a travel group.
-2. AWE lists all expenses. 
-3. User requests to delete an expense at a specific index in the list.
-4. AWE deletes the specified expense. 
+1. User requests to delete an expense from list of expenses viewed by its position on screen.
+2. AWE deletes the specified expense.
+3. AWE shows updated list of expenses.
+4. AWE displays confirmation message.
 
    Use case ends. 
 
 **Extensions**
 
-* 2a. The expense list is empty.
+* 2a. The given index is not within range 1 to length of list of expenses on screen.
 
-  Use case ends.
+    * 2a1. AWE shows an error message saying index is invalid.
 
-* 3a. The given index is invalid.
+      Use case ends.
+  
+* 2b. User is not viewing a list of expenses when entering command.
 
-    * 3a1. AWE shows an error message.
-
-      Use case resumes at step 2.
+    * 2b1. AWE shows an error message asking user to enter `findexpenses` or `expenses` command first.
+  
+      Use case ends.
 
 **Use case: Clear AddressBook of all entries**
 
@@ -1119,6 +1151,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. All entries are deleted from AddressBook.
 
    Use case ends.
+
+**Use case: Calculate payments**
+
+**MSS**
+
+1. User requests to calculate and show payments to be made for a specified group.
+2. AWE calculate payments for the specified group.
+3. AWE shows list of payments.
+4. AWE displays confirmation message.
+
+   Use case ends.
+
+**Extensions**
+
+* 2b. AWE detects group name that is not in address book.
+  
+  * 2a1. AWE displays message to remind User to type in name of a group inside the addressbook.
+
+    Use case ends.
+
+* 2b. There are no payments to be made.
+
+  * 2b1. AWE shows an empty list of payments.
+  * 2b2. AWE displays a confirmation message stating that there are no payments to be made.
+    
+    Use case ends.
 
 ### Non-Functional Requirements
 

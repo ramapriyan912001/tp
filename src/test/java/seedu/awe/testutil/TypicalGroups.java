@@ -1,5 +1,8 @@
 package seedu.awe.testutil;
 
+import static seedu.awe.testutil.TypicalExpenses.DINNER;
+import static seedu.awe.testutil.TypicalExpenses.HOLIDAY;
+import static seedu.awe.testutil.TypicalExpenses.SOUVENIRS;
 import static seedu.awe.testutil.TypicalPersons.ALICE;
 import static seedu.awe.testutil.TypicalPersons.AMY;
 import static seedu.awe.testutil.TypicalPersons.BENSON;
@@ -17,7 +20,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.awe.model.AddressBook;
+import seedu.awe.model.expense.Cost;
+import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
+import seedu.awe.model.payment.Payment;
 import seedu.awe.model.person.Person;
 
 /**
@@ -66,6 +72,48 @@ public class TypicalGroups {
     public static final Group VIENNA_NOT_IN_GROUPS = new GroupBuilder().withGroupName("Vienna")
             .withMembers(BENSON, IDA, FIONA)
             .withTags("friends").build();
+
+    public static final Group BALI_WITH_EXPENSES = new GroupBuilder().withGroupName("Bali")
+            .withMembers(ALICE, BOB, AMY)
+            .withExpense(new Expense(HOLIDAY.getPayer(), HOLIDAY.getCost(), HOLIDAY.getDescription(),
+                    BALI.getMembers()))
+            .withExpense(new Expense(SOUVENIRS.getPayer(), SOUVENIRS.getCost(), SOUVENIRS.getDescription(),
+                    BALI.getMembers()))
+            .build();
+
+    public static final Group RIO_WITH_EXPENSES_INVALID = new GroupBuilder().withGroupName("Rio")
+            .withMembers(ALICE, BOB, AMY)
+            .withExpenses(HOLIDAY, SOUVENIRS)
+            .build();
+
+    public static final List<Payment> BALI_WITH_EXPENSES_PAYMENTS = List.of(
+            new Payment(ALICE, AMY, new Cost(400.00)), new Payment(ALICE, BOB, new Cost(200))
+    );
+
+    public static final Group AMSTERDAM_WITH_EXPENSES = new GroupBuilder().withGroupName("Amsterdam")
+            .withMembers(HOON, IDA, ELLE)
+            .withExpenses(new Expense(DINNER.getPayer(), DINNER.getCost(), DINNER.getDescription(),
+                    AMSTERDAM.getMembers()))
+            .build();
+
+    public static final Group PERU_WITH_EXPENSES_INVALID = new GroupBuilder().withGroupName("Peru")
+            .withMembers(HOON, IDA, ELLE)
+            .withExpenses(DINNER)
+            .build();
+
+    public static final List<Payment> AMSTERDAM_WITH_EXPENSES_PAYMENTS = List.of(
+            new Payment(ELLE, HOON, new Cost(166.67)), new Payment(ELLE, IDA, new Cost(166.67))
+    );
+
+    public static final Group COLOMBO_WITH_EXPENSES = new GroupBuilder().withGroupName("Colombo")
+            .withMembers(ALICE, BOB, AMY)
+            .withExpenses(HOLIDAY, SOUVENIRS)
+            .build();
+
+    public static final Group BUDAPEST_WITH_EXPENSES = new GroupBuilder().withGroupName("Budapest")
+            .withMembers(HOON, IDA, ELLE)
+            .withExpenses(DINNER)
+            .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

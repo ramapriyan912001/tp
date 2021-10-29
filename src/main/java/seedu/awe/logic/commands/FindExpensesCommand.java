@@ -10,7 +10,6 @@ import seedu.awe.model.Model;
 import seedu.awe.model.expense.DescriptionContainsKeywordsPredicate;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
-import seedu.awe.model.group.exceptions.GroupNotFoundException;
 
 /**
  * Finds and lists all expenses in a group whose description contains any of the argument keywords.
@@ -38,19 +37,17 @@ public class FindExpensesCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
-        try {
-            Group group = model.getGroupByName(groupName);
-            model.setExpenses(group);
-            model.updateFilteredExpenseList(predicate);
-            return new CommandResult(
-                    String.format(Messages.MESSAGE_EXPENSES_LISTED_OVERVIEW, model.getExpenses().size()),
-                    false, false, false, false,
-                    true, false, false);
-        } catch (GroupNotFoundException e) {
+        Group group = model.getGroupByName(groupName);
+        if (group == null) {
             throw new CommandException(MESSAGE_FINDEXPENSESCOMMAND_GROUP_NOT_FOUND);
         }
 
+        model.setExpenses(group);
+        model.updateFilteredExpenseList(predicate);
+        return new CommandResult(
+            String.format(Messages.MESSAGE_EXPENSES_LISTED_OVERVIEW, model.getExpenses().size()),
+            false, false, false, false,
+            true, false, false);
     }
 
     @Override

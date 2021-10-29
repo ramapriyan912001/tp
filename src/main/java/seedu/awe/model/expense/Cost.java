@@ -116,7 +116,7 @@ public class Cost {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Cost // instanceof handles nulls
-                && cost.equals(((Cost) other).cost)); // state check
+                && Math.abs(cost - ((Cost) other).getCost()) < 0.01);
     }
 
     @Override

@@ -224,6 +224,8 @@ public class Messages {
             "There are no payments to be made!";
     public static final String MESSAGE_CALCULATEPAYMENTSCOMMAND_GROUP_NOT_FOUND =
             "The specified group does not exists.";
+    public static final String MESSAGE_CALCULATEPAYMENTSCOMMAND_PAYMENT_DISCREPANCY =
+            "There appears to be a discrepancy within your payments.";
 
 
     public static final String MESSAGE_LISTTRANSACTIONSUMMARYCOMMAND_USAGE = "transactionsummary gn/GROUP_NAME";
