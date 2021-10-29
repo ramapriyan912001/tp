@@ -17,7 +17,7 @@ import static seedu.awe.testutil.TypicalGroups.BALI_WITH_EXPENSES;
 import static seedu.awe.testutil.TypicalGroups.BALI_WITH_EXPENSES_PAYMENTS;
 import static seedu.awe.testutil.TypicalGroups.CHINA;
 import static seedu.awe.testutil.TypicalGroups.COLOMBO_WITH_EXPENSES;
-import static seedu.awe.testutil.TypicalGroups.OSLO;
+import static seedu.awe.testutil.TypicalGroups.LONDON;
 import static seedu.awe.testutil.TypicalGroups.PERU_WITH_EXPENSES_INVALID;
 import static seedu.awe.testutil.TypicalGroups.RIO_WITH_EXPENSES_INVALID;
 
@@ -82,16 +82,15 @@ public class CalculatePaymentsCommandTest {
     @Test
     public void execute_emptyGroup_returnsCommandResult() throws CommandException {
         resetModel();
-        CommandResult expectedCommandResultOslo = new CommandResult(MESSAGE_CALCULATEPAYMENTSCOMMAND_PAYMENTS_EMPTY,
+        CommandResult expectedCommandResultLondon = new CommandResult(MESSAGE_CALCULATEPAYMENTSCOMMAND_PAYMENTS_EMPTY,
                 false, false, false, false, false, false, true);
-        assertCommandSuccess(new CalculatePaymentsCommand(OSLO), model, expectedCommandResultOslo, model);
+        assertCommandSuccess(new CalculatePaymentsCommand(LONDON), model, expectedCommandResultLondon, model);
 
         CommandResult expectedCommandResultChina = new CommandResult(MESSAGE_CALCULATEPAYMENTSCOMMAND_PAYMENTS_EMPTY,
                 false, false, false, false, false, false, true);
         assertCommandSuccess(new CalculatePaymentsCommand(CHINA), model,
                 expectedCommandResultChina, model);
     }
-
 
     @Test
     public void getPayments_groupExpenseSumNotZero_throwsException() throws CommandException {
