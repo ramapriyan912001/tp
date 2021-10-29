@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.awe.commons.core.Messages.MESSAGE_EXPENSES_LISTED_OVERVIEW;
 import static seedu.awe.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.awe.testutil.TypicalExpenses.BUFFET;
+import static seedu.awe.testutil.TypicalExpenses.SOUVENIRS;
 import static seedu.awe.testutil.TypicalExpenses.getTypicalAddressBook;
 import static seedu.awe.testutil.TypicalGroups.BALI;
 
@@ -17,6 +19,7 @@ import seedu.awe.model.Model;
 import seedu.awe.model.ModelManager;
 import seedu.awe.model.UserPrefs;
 import seedu.awe.model.expense.DescriptionContainsKeywordsPredicate;
+import seedu.awe.model.group.GroupName;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindExpensesCommand}.
@@ -62,18 +65,16 @@ public class FindExpensesCommandTest {
         assertEquals(Collections.emptyList(), model.getExpenses());
     }
 
-    /*
     @Test
     public void execute_multipleKeywords_multipleExpensesFound() {
-        String expectedMessage = String.format(MESSAGE_EXPENSES_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(MESSAGE_EXPENSES_LISTED_OVERVIEW, 2);
         DescriptionContainsKeywordsPredicate predicate = preparePredicate("Souvenirs Buffet");
         FindExpensesCommand command = new FindExpensesCommand(new GroupName("Bali"), predicate);
         expectedModel.setExpenses(expectedModel.getGroupByName(new GroupName("Bali")));
         expectedModel.updateFilteredExpenseList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel, false, false, true);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel, false, false, true, false, false);
         assertEquals(Arrays.asList(BUFFET, SOUVENIRS), model.getExpenses());
     }
-     */
 
     /**
      * Parses {@code userInput} into a {@code DescriptionContainsKeywordsPredicate}.
