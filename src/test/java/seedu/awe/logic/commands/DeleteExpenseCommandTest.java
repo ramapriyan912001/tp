@@ -147,7 +147,7 @@ public class DeleteExpenseCommandTest {
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different expense -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
     }
 
