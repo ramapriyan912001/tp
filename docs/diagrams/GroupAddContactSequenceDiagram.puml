@@ -1,0 +1,74 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AweParser" as AweParser LOGIC_COLOR
+participant ":GroupAddContactCommand" as GroupAddContactCommand LOGIC_COLOR
+participant "newGroup:Group" as Group LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("groupaddcontact gn/Bali n/Tom")
+activate LogicManager
+
+LogicManager -> AweParser : parseCommand("groupaddcontact gn/Bali n/Tom")
+activate AweParser
+
+/'Clarify with tutor if there is a need to display GroupAddContactCommandParser class within the ref'/
+note right
+Same as CreateGroupCommand
+ref frame except with
+GroupAddContactCommand
+and GroupAddContactCommandParser
+end note
+group sd get groupAddContactCommand
+create GroupAddContactCommand
+AweParser -> GroupAddContactCommand
+activate GroupAddContactCommand
+GroupAddContactCommand --> AweParser
+deactivate GroupAddContactCommand
+end group
+
+
+
+
+AweParser --> LogicManager : groupAddContactCommand
+deactivate AweParser
+
+LogicManager -> GroupAddContactCommand : execute()
+activate GroupAddContactCommand
+
+loop for every member to be added
+    GroupAddContactCommand -> Group : addMember(newMember)
+    activate Group
+    Group --> GroupAddContactCommand : newGroup
+    deactivate Group
+end
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+Group -[hidden]-> AweParser
+destroy Group
+
+GroupAddContactCommand -> Model : setGroup(oldGroup, newGroup)
+activate Model
+
+Model --> GroupAddContactCommand
+deactivate Model
+
+create CommandResult
+GroupAddContactCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> GroupAddContactCommand : result
+deactivate CommandResult
+
+GroupAddContactCommand --> LogicManager : result
+deactivate GroupAddContactCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
