@@ -92,6 +92,7 @@ public class CalculatePaymentsCommandTest {
                 expectedCommandResultChina, model);
     }
 
+
     @Test
     public void getPayments_groupExpenseSumNotZero_throwsException() throws CommandException {
         resetModel();
