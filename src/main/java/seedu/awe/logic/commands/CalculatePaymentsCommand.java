@@ -3,6 +3,7 @@ package seedu.awe.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.awe.commons.core.Messages.MESSAGE_CALCULATEPAYMENTSCOMMAND_GROUP_NOT_FOUND;
 import static seedu.awe.commons.core.Messages.MESSAGE_CALCULATEPAYMENTSCOMMAND_PAYMENTS_EMPTY;
+import static seedu.awe.commons.core.Messages.MESSAGE_CALCULATEPAYMENTSCOMMAND_PAYMENT_DISCREPANCY;
 import static seedu.awe.commons.core.Messages.MESSAGE_CALCULATEPAYMENTSCOMMAND_SUCCESS;
 import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -25,7 +26,12 @@ public class CalculatePaymentsCommand extends Command {
 
     private final Group group;
 
+    /**
+     * Constructor for command.
+     * @param group group for which payments are to be calculated.
+     */
     public CalculatePaymentsCommand(Group group) {
+        requireNonNull(group);
         this.group = group;
     }
 
@@ -84,7 +90,7 @@ public class CalculatePaymentsCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(group);
+        requireAllNonNull(group, model);
 
         if (!model.hasGroup(group)) {
             throw new CommandException(MESSAGE_CALCULATEPAYMENTSCOMMAND_GROUP_NOT_FOUND);
@@ -148,7 +154,7 @@ public class CalculatePaymentsCommand extends Command {
      * @param group group for which payments are to be calculated
      * @return List of payments to make.
      */
-    private List<Payment> getPayments(Group group) throws CommandException {
+    public List<Payment> getPayments(Group group) throws CommandException {
         List<Pair> namesAndSurplusesList = getNamesAndSurplusesList(group);
         List<Payment> payments = calculatePayments(namesAndSurplusesList);
         payments.sort(new Comparator<Payment>() {
@@ -203,14 +209,14 @@ public class CalculatePaymentsCommand extends Command {
      */
     private List<Payment> calculatePayments(List<Pair> pairs) throws CommandException {
         if (!checkSumIsZero(pairs)) {
-            throw new CommandException("There appears to be a discrepancy within your payments.");
+            throw new CommandException(MESSAGE_CALCULATEPAYMENTSCOMMAND_PAYMENT_DISCREPANCY);
         }
         pairs = removeZeroCostElements(pairs);
         List<Payment> payments = new ArrayList<>();
         while (!pairs.isEmpty()) {
             pairs = sortPairs(pairs);
             if (pairs.size() == 1) {
-                throw new CommandException("There appears to be a discrepancy within your payments.");
+                throw new CommandException(MESSAGE_CALCULATEPAYMENTSCOMMAND_PAYMENT_DISCREPANCY);
             }
             Pair pairWithLowestSurplus = pairs.get(0);
             Pair pairWithHighestSurplus = pairs.get(pairs.size() - 1);

@@ -1,9 +1,11 @@
 package seedu.awe.testutil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.person.Person;
@@ -20,6 +22,7 @@ public class GroupBuilder {
     private GroupName groupName;
     private final ArrayList<Person> members = new ArrayList<>();
     private Set<Tag> tags = new HashSet<>();
+    private ArrayList<Expense> expenses = new ArrayList<>();
 
     /**
      * Creates a {@code GroupBuilder} with the default details.
@@ -75,7 +78,7 @@ public class GroupBuilder {
     }
 
     public Group build() {
-        return new Group(this.groupName, this.members, this.tags);
+        return new Group(this.groupName, this.members, this.tags, this.expenses);
     }
 
     /**
@@ -101,4 +104,25 @@ public class GroupBuilder {
         return members;
     }
 
+    /**
+     * Adds Expenses.
+     * @param expenses expenses to be added
+     * @return Updated GroupBuilder object
+     */
+    public GroupBuilder withExpenses(Expense ...expenses) {
+        this.expenses = new ArrayList<>();
+        this.expenses.addAll(Arrays.asList(expenses));
+        return this;
+    }
+
+    /**
+     * Adds Expense.
+     * @param expense expense to be added
+     * @return Updated GroupBuilder object
+     */
+    public GroupBuilder withExpense(Expense expense) {
+        expenses = new ArrayList<>(expenses);
+        expenses.add(expense);
+        return this;
+    }
 }

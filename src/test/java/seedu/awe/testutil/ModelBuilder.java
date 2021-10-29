@@ -1,7 +1,7 @@
 package seedu.awe.testutil;
 
-import static seedu.awe.testutil.TypicalGroups.AMSTERDAM;
-import static seedu.awe.testutil.TypicalGroups.BALI;
+import static seedu.awe.testutil.TypicalGroups.AMSTERDAM_WITH_EXPENSES;
+import static seedu.awe.testutil.TypicalGroups.BALI_WITH_EXPENSES;
 import static seedu.awe.testutil.TypicalGroups.CHINA;
 import static seedu.awe.testutil.TypicalGroups.DUBAI;
 import static seedu.awe.testutil.TypicalGroups.HELSINKI;
@@ -10,6 +10,8 @@ import static seedu.awe.testutil.TypicalGroups.LONDON;
 import static seedu.awe.testutil.TypicalGroups.MALIBU;
 import static seedu.awe.testutil.TypicalGroups.OSLO;
 import static seedu.awe.testutil.TypicalGroups.PARIS;
+import static seedu.awe.testutil.TypicalGroups.PERU_WITH_EXPENSES_INVALID;
+import static seedu.awe.testutil.TypicalGroups.RIO_WITH_EXPENSES_INVALID;
 import static seedu.awe.testutil.TypicalPersons.ALICE;
 import static seedu.awe.testutil.TypicalPersons.AMY;
 import static seedu.awe.testutil.TypicalPersons.BENSON;
@@ -111,8 +113,10 @@ public class ModelBuilder {
      * @param addressBook AddressBook object to be used for testing purposes.
      */
     public void addTypicalGroups(AddressBook addressBook) throws DuplicateGroupException {
-        addressBook.addGroup(AMSTERDAM);
-        addressBook.addGroup(BALI);
+        addressBook.addGroup(AMSTERDAM_WITH_EXPENSES);
+        addressBook.addGroup(BALI_WITH_EXPENSES);
+        addressBook.addGroup(PERU_WITH_EXPENSES_INVALID);
+        addressBook.addGroup(RIO_WITH_EXPENSES_INVALID);
         addressBook.addGroup(INDIA);
         addressBook.addGroup(LONDON);
         addressBook.addGroup(DUBAI);
