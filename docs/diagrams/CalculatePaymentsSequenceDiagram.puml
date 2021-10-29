@@ -18,11 +18,18 @@ activate LogicManager
 LogicManager -> AweParser : parseCommand("calculatepayments gn/Bali")
 activate AweParser
 
-/'Clarify with tutor if there is a need to display CalculatePaymentsCommandParser class within the ref'/
-ref over AweParser, CalculatePaymentsCommand:get calculatePaymentsCommand
+note right
+Refer to ref frame for
+details on creation of
+the CalculatePaymentsCommand object
+end note
+group sd get calculatePaymentsCommand
 create CalculatePaymentsCommand
 AweParser -> CalculatePaymentsCommand
-
+activate CalculatePaymentsCommand
+CalculatePaymentsCommand --> AweParser
+deactivate CalculatePaymentsCommand
+end group
 
 AweParser --> LogicManager : calculatePaymentsCommand
 deactivate AweParser
