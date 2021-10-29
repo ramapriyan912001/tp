@@ -994,15 +994,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User chooses to delete a group.
-2. User enters delete group command into CLI along with group name.
+1. User requests to delete group with a specific name.
+2. AWE deletes group with specified group name.
+3. AWE shows updated list of groups.
 3. AWE displays confirmation message.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. AWE detects group name that is not in address book.
+* 2a. AWE detects group name that contains non-alphanumeric characters.
+  * 2a1. AWE displays message to remind User to type in a group name that contains only alphanumeric characters.
+
+    Use case ends.
+
+* 2b. AWE detects group name that is not in address book.
     * 2a1. AWE displays message to remind User to type in name of a group inside the addressbook.
 
       Use case ends.    
@@ -1112,26 +1118,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: Delete a shared expense**
 
+**Preconditions: User's last entered command is either `findexpenses` or `expenses`, i.e. the user is viewing an expense list.**
+
 **MSS**
 
-1. User requests to list expenses for a travel group.
-2. AWE lists all expenses. 
-3. User requests to delete an expense at a specific index in the list.
-4. AWE deletes the specified expense. 
+1. User requests to delete an expense from list of expenses viewed by its position on screen.
+2. AWE deletes the specified expense.
+3. AWE shows updated list of expenses.
+4. AWE displays confirmation message.
 
    Use case ends. 
 
 **Extensions**
 
-* 2a. The expense list is empty.
+* 2a. The given index is not within range 1 to length of list of expenses on screen.
 
-  Use case ends.
+    * 2a1. AWE shows an error message saying index is invalid.
 
-* 3a. The given index is invalid.
+      Use case ends.
+  
+* 2b. User is not viewing a list of expenses when entering command.
 
-    * 3a1. AWE shows an error message.
-
-      Use case resumes at step 2.
+    * 2b1. AWE shows an error message asking user to enter `findexpenses` or `expenses` command first.
+  
+      Use case ends.
 
 **Use case: Clear AddressBook of all entries**
 
@@ -1141,6 +1151,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. All entries are deleted from AddressBook.
 
    Use case ends.
+
+**Use case: Calculate payments**
+
+**MSS**
+
+1. User requests to calculate and show payments to be made for a specified group.
+2. AWE calculate payments for the specified group.
+3. AWE shows list of payments.
+4. AWE displays confirmation message.
+
+   Use case ends.
+
+**Extensions**
+
+* 2b. AWE detects group name that is not in address book.
+  
+  * 2a1. AWE displays message to remind User to type in name of a group inside the addressbook.
+
+    Use case ends.
+
+* 2b. There are no payments to be made.
+
+  * 2b1. AWE shows an empty list of payments.
+  * 2b2. AWE displays a confirmation message stating that there are no payments to be made.
+    
+    Use case ends.
 
 ### Non-Functional Requirements
 
