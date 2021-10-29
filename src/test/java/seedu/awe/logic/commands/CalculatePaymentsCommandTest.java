@@ -3,7 +3,6 @@ package seedu.awe.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.awe.commons.core.Messages.MESSAGE_CALCULATEPAYMENTSCOMMAND_GROUP_NOT_FOUND;
-import static seedu.awe.commons.core.Messages.MESSAGE_CALCULATEPAYMENTSCOMMAND_PAYMENTS_EMPTY;
 import static seedu.awe.commons.core.Messages.MESSAGE_CALCULATEPAYMENTSCOMMAND_PAYMENT_DISCREPANCY;
 import static seedu.awe.commons.core.Messages.MESSAGE_CALCULATEPAYMENTSCOMMAND_SUCCESS;
 import static seedu.awe.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -15,9 +14,7 @@ import static seedu.awe.testutil.TypicalGroups.AMSTERDAM_WITH_EXPENSES_PAYMENTS;
 import static seedu.awe.testutil.TypicalGroups.BALI;
 import static seedu.awe.testutil.TypicalGroups.BALI_WITH_EXPENSES;
 import static seedu.awe.testutil.TypicalGroups.BALI_WITH_EXPENSES_PAYMENTS;
-import static seedu.awe.testutil.TypicalGroups.CHINA;
 import static seedu.awe.testutil.TypicalGroups.COLOMBO_WITH_EXPENSES;
-import static seedu.awe.testutil.TypicalGroups.LONDON;
 import static seedu.awe.testutil.TypicalGroups.PERU_WITH_EXPENSES_INVALID;
 import static seedu.awe.testutil.TypicalGroups.RIO_WITH_EXPENSES_INVALID;
 
