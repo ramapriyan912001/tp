@@ -18,11 +18,18 @@ activate LogicManager
 LogicManager -> AweParser : parseCommand("deletegroup gn/Bali")
 activate AweParser
 
-/'Clarify with tutor if there is a need to display DeleteGroupCommandParser class within the ref'/
-ref over AweParser, DeleteGroupCommand:get deleteGroupCommand
+note right
+Refer to ref frame for
+details on creation of
+the DeleteGroupCommand object
+end note
+group sd get deleteGroupCommand
 create DeleteGroupCommand
 AweParser -> DeleteGroupCommand
-
+activate DeleteGroupCommand
+DeleteGroupCommand --> AweParser
+deactivate DeleteGroupCommand
+end group
 
 AweParser --> LogicManager : deleteGroupCommand
 deactivate AweParser

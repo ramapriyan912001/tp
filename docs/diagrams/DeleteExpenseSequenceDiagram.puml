@@ -19,11 +19,18 @@ activate LogicManager
 LogicManager -> AweParser : parseCommand("deleteexpense 1")
 activate AweParser
 
-/'Clarify with tutor if there is a need to display DeleteExpenseCommandParser class within the ref'/
-ref over AweParser, DeleteExpenseCommand:get deleteExpenseCommand
+note right
+Refer to ref frame for
+details on creation of
+the DeleteExpenseCommand object
+end note
+group sd get deleteExpenseCommand
 create DeleteExpenseCommand
 AweParser -> DeleteExpenseCommand
-
+activate DeleteExpenseCommand
+DeleteExpenseCommand --> AweParser
+deactivate DeleteExpenseCommand
+end group
 
 AweParser --> LogicManager : deleteExpenseCommand
 deactivate AweParser
