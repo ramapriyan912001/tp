@@ -80,19 +80,6 @@ public class CalculatePaymentsCommandTest {
     }
 
     @Test
-    public void execute_emptyGroup_returnsCommandResult() {
-        resetModel();
-        CommandResult expectedCommandResultLondon = new CommandResult(MESSAGE_CALCULATEPAYMENTSCOMMAND_PAYMENTS_EMPTY,
-                false, false, false, false, false, false, true);
-        assertCommandSuccess(new CalculatePaymentsCommand(LONDON), model, expectedCommandResultLondon, model);
-
-        CommandResult expectedCommandResultChina = new CommandResult(MESSAGE_CALCULATEPAYMENTSCOMMAND_PAYMENTS_EMPTY,
-                false, false, false, false, false, false, true);
-        assertCommandSuccess(new CalculatePaymentsCommand(CHINA), model,
-                expectedCommandResultChina, model);
-    }
-
-    @Test
     public void getPayments_groupExpenseSumNotZero_throwsException() {
         resetModel();
         assertCommandFailure(new CalculatePaymentsCommand(RIO_WITH_EXPENSES_INVALID), model,
