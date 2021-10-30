@@ -516,48 +516,48 @@ If your questions are not answered in the FAQ, check out the issue page on our G
 
 ### 5.1 Contacts commands
 
-Action | Format, Examples
---------|------------------
-**View Contacts** | `contacts`
-**Add Contact** | `addcontact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Delete Contact** | `deletecontact INDEX`<br> e.g., `delete 3`
-**Edit Contact** | `editcontact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find Contacts** | `findcontacts KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+|Action | Format, Examples|
+|--------|------------------|
+|**View Contacts** | `contacts`|
+|**Add Contact** | `addcontact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`|
+|**Delete Contact** | `deletecontact INDEX`<br> e.g., `delete 3`|
+|**Edit Contact** | `editcontact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`|
+|**Find Contacts** | `findcontacts KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`|
 
 <div style="page-break-after: always;"></div>
 
 ### 5.2 Groups commands
 
-Action | Format, Examples
---------|------------------
-**View Groups** | `groups`
-**Create Group** | `creategroup gn/GROUP_NAME n/NAME1 n/NAME2 n/NAME3...t/TAG1` <br> e.g., `creategroup gn/Bali n/Jacob Tan n/Max Chia n/Julianne Tay t/friends`
-**Delete Group** | `deletegroup gn/GROUP_NAME` <br> e.g., `deletegroup gn/Vienna`
-**Add Contact to Group** | `groupaddcontact gn/GROUP_NAME n/NAME1 [n/MORE_NAMES]` <br> e.g., `groupaddcontact gn/Bali n/Jacob Tan`
-**Add Tags to Group** | `groupaddtag gn/GROUP_NAME n/TAG1 [n/MORE_TAGS]` <br> e.g., `groupaddtag gn/Bali n/friends`
-**Edit Group Name** | `groupeditname gn/OLD_GROUP_NAME gn/NEW_GROUP_NAME` <br> e.g., `groupedittag gn/Bali gn/Hanoi`
-**Remove Tags from Group** | `groupremovetag gn/GROUP_NAME n/TAG1 [n/MORE_TAGS]` <br> e.g., `groupremovetag gn/Bali n/friends`
-**Remove Contact from Group** | `groupremovecontact gn/GROUP_NAME n/NAME1 [n/MORE_NAMES]` <br> e.g., `groupremovecontact gn/Bali n/Jacob Tan`
-**Find Groups** | `findgroups KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+|Action | Format, Examples|
+|--------|------------------|
+|**View Groups** | `groups`|
+|**Create Group** | `creategroup gn/GROUP_NAME n/NAME1 n/NAME2 n/NAME3...t/TAG1` <br> e.g., `creategroup gn/Bali n/Jacob Tan n/Max Chia n/Julianne Tay t/friends`|
+|**Delete Group** | `deletegroup gn/GROUP_NAME` <br> e.g., `deletegroup gn/Vienna`|
+|**Add Contact to Group** | `groupaddcontact gn/GROUP_NAME n/NAME1 [n/MORE_NAMES]` <br> e.g., `groupaddcontact gn/Bali n/Jacob Tan`|
+|**Add Tags to Group** | `groupaddtag gn/GROUP_NAME n/TAG1 [n/MORE_TAGS]` <br> e.g., `groupaddtag gn/Bali n/friends`|
+|**Edit Group Name** | `groupeditname gn/OLD_GROUP_NAME gn/NEW_GROUP_NAME` <br> e.g., `groupedittag gn/Bali gn/Hanoi`|
+|**Remove Tags from Group** | `groupremovetag gn/GROUP_NAME n/TAG1 [n/MORE_TAGS]` <br> e.g., `groupremovetag gn/Bali n/friends`|
+|**Remove Contact from Group** | `groupremovecontact gn/GROUP_NAME n/NAME1 [n/MORE_NAMES]` <br> e.g., `groupremovecontact gn/Bali n/Jacob Tan`|
+|**Find Groups** | `findgroups KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 
 <div style="page-break-after: always;"></div>
 
 ### 5.3 Expense commands
 
-Action | Format, Examples
---------|------------------
-**View Expense** | `expense INDEX` <br> e.g., `expense 2`
-**Add Expense** | `add expense add expense /des DESCRIPTION /by PAYER_NAME1 AMOUNT PAID BY NAME 1 /for PAYEE_NAME1 PAYEE_NAME 2` <br> e.g., `add expense /des Koi /by Jake 20.00 /for Justin, Raj, Keith`
-**Delete Expense** | `deleteexpense INDEX` <br> e.g., `deleteexpense 1`
-**Find Expenses** | `findexpenses KEYWORD [MORE_KEYWORDS] gn/GROUP_NAME`<br> e.g., `find dinner buffet gn/London`
-**Calculate Spending** | `transactionsummary gn/GROUP_NAME` <br> e.g., `transactionsummary gn/Bali` 
-**Calculate Payments** | `calculatepayments gn/GROUP_NAME` <br> e.g., `calculatepayments gn/Bali` 
+|Action | Format, Examples|
+|--------|------------------|
+|**View Expense** | `expense INDEX` <br> e.g., `expense 2`|
+|**Add Expense** | `add expense add expense /des DESCRIPTION /by PAYER_NAME1 AMOUNT PAID BY NAME 1 /for PAYEE_NAME1 PAYEE_NAME 2` <br> e.g., `add expense /des Koi /by Jake 20.00 /for Justin, Raj, Keith`|
+|**Delete Expense** | `deleteexpense INDEX` <br> e.g., `deleteexpense 1`|
+|**Find Expenses** | `findexpenses KEYWORD [MORE_KEYWORDS] gn/GROUP_NAME`<br> e.g., `find dinner buffet gn/London`|
+|**Calculate Spending** | `transactionsummary gn/GROUP_NAME` <br> e.g., `transactionsummary gn/Bali` |
+|**Calculate Payments** | `calculatepayments gn/GROUP_NAME` <br> e.g., `calculatepayments gn/Bali` |
 
 ### 5.4 Miscellaneous Commands
-Action | Format, Examples
---------|------------------
-**Clear** | `clear`
-**Help** | `help` 
+|Action | Format, Examples|
+|--------|------------------|
+|**Clear** | `clear`|
+|**Help** | `help` |
 
 
 --------------------------------------------------------------------------------------------------------------------
