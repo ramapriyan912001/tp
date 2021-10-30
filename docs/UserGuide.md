@@ -364,7 +364,7 @@ Examples:
 
 ### 3.3. Expenses
 
-### 3.3.1. Listing expenses of a specified group: `expenses`
+#### 3.3.1. Listing expenses of a specified group: `expenses`
 
 Shows a list containing all existing expenses within the specified travel group. Expenses are sorted from most recent to least recent.
 
