@@ -15,6 +15,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 import seedu.awe.logic.commands.exceptions.CommandException;
+import seedu.awe.logic.commands.helper.Pair;
 import seedu.awe.model.Model;
 import seedu.awe.model.expense.Cost;
 import seedu.awe.model.group.Group;
@@ -33,59 +34,6 @@ public class CalculatePaymentsCommand extends Command {
     public CalculatePaymentsCommand(Group group) {
         requireNonNull(group);
         this.group = group;
-    }
-
-    private class Pair implements Comparable<Pair> {
-
-        private double surplus;
-        private Person person;
-
-        Pair(double surplus, Person person) {
-            this.surplus = surplus;
-            this.person = person;
-        }
-
-        double getSurplus() {
-            return surplus;
-        }
-
-        Person getPerson() {
-            return person;
-        }
-
-        @Override
-        public boolean equals(Object other) {
-            if (other == this) {
-                return true;
-            }
-
-            if (!(other instanceof Pair)) { // instanceof handles nulls
-                return false;
-            }
-
-            Pair otherPayment = (Pair) other;
-
-            boolean isSamePerson = person.equals(otherPayment.getPerson());
-            boolean isSameSurplus = surplus == otherPayment.getSurplus();
-
-            return isSamePerson && isSameSurplus;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(surplus, person);
-        }
-
-        @Override
-        public int compareTo(Pair p2) {
-            if (this.getSurplus() < p2.getSurplus()) {
-                return -1;
-            } else if (this.getSurplus() > p2.getSurplus()) {
-                return 1;
-            } else {
-                return 0;
-            }
-        }
     }
 
     @Override
