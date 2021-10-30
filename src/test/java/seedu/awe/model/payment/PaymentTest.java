@@ -1,6 +1,8 @@
 package seedu.awe.model.payment;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.awe.testutil.Assert.assertThrows;
 import static seedu.awe.testutil.TypicalPayments.ALICE_BOB_COST;
 import static seedu.awe.testutil.TypicalPayments.ALICE_BOB_PAYMENT;
@@ -12,6 +14,8 @@ import static seedu.awe.testutil.TypicalPersons.CARL;
 import static seedu.awe.testutil.TypicalPersons.DANIEL;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.awe.model.expense.Cost;
 
 
 public class PaymentTest {
@@ -48,4 +52,20 @@ public class PaymentTest {
     public void nullCost_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Payment(ALICE, BOB, null));
     }
+
+    @Test
+    public void toString_test() {
+        assertEquals(new Payment(ALICE, BOB, new Cost(10.0)).toString(),
+                "Bob Choo pays $10.00 to Alice Pauline.");
+    }
+
+    @Test
+    public void equals() {
+        Payment aliceBobPayment = new Payment(ALICE, BOB, new Cost(10.0));
+        assertTrue(aliceBobPayment.equals(new Payment(ALICE, BOB, new Cost(10.0))));
+        assertTrue(aliceBobPayment.equals(aliceBobPayment));
+        assertFalse(aliceBobPayment.equals(10.0));
+        assertFalse(aliceBobPayment.equals(new Payment(BOB, ALICE, new Cost(10.0))));
+    }
+
 }
