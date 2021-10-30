@@ -2,13 +2,18 @@ package seedu.awe.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.awe.commons.core.Messages.MESSAGE_DELETEEXPENSECOMMAND_CANNOT_BE_DELETED;
 import static seedu.awe.commons.core.Messages.MESSAGE_DELETEEXPENSECOMMAND_SUCCESS;
 import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX;
+import static seedu.awe.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.awe.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.awe.logic.commands.CommandTestUtil.showExpenseAtIndex;
 import static seedu.awe.testutil.Assert.assertThrows;
 import static seedu.awe.testutil.TypicalExpenses.getTypicalAddressBook;
 import static seedu.awe.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
+import static seedu.awe.testutil.TypicalIndexes.INDEX_SECOND_EXPENSE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -21,6 +26,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.awe.commons.core.GuiSettings;
+import seedu.awe.commons.core.Messages;
 import seedu.awe.commons.core.index.Index;
 import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.model.Model;
@@ -83,26 +89,68 @@ public class DeleteExpenseCommandTest {
                 MESSAGE_DELETEEXPENSECOMMAND_CANNOT_BE_DELETED, () -> deleteExpenseCommand.execute(modelStub));
     }
 
-    /*@Test
-    public void execute_validIndexFilteredList_success() {
+    @Test
+    public void execute_validIndexFilteredList_success() throws Exception {
         MainWindow.setViewEnum(UiView.EXPENSE_PAGE);
+        model.setExpenses(model.getGroupByName(new GroupName("Bali")));
+        showExpenseAtIndex(model, INDEX_FIRST_EXPENSE);
 
-        ModelStubWithExpense modelStub = new ModelStubWithExpense();
-        showExpenseAtIndex(modelStub, INDEX_FIRST_EXPENSE);
-
-        Expense expenseToDelete = modelStub.getExpenses().get(INDEX_FIRST_EXPENSE.getZeroBased());
+        Expense expenseToDelete = model.getExpenses().get(INDEX_FIRST_EXPENSE.getZeroBased());
         DeleteExpenseCommand deleteExpenseCommand = new DeleteExpenseCommand(INDEX_FIRST_EXPENSE);
 
-        String expectedMessage = String.format(MESSAGE_DELETEEXPENSECOMMAND_SUCCESS,
-            expenseToDelete.getDescription().getFullDescription());
-        System.out.println(expectedMessage);
-
-        ModelStubWithExpense expectedModel = new ModelStubWithExpense();
-        expectedModel.deleteExpense(expenseToDelete, expectedModel.getActiveGroupFromAddressBook());
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModel.setExpenses(expectedModel.getGroupByName(new GroupName("Bali")));
+        Group group = expectedModel.getGroupByName(new GroupName("Bali"));
+        Group newGroup = group.deleteExpense(expenseToDelete);
+        expectedModel.setGroup(group, newGroup);
+        expectedModel.deleteExpense(expenseToDelete, newGroup);
         showNoExpense(expectedModel);
+        String expectedFeedback = String.format(MESSAGE_DELETEEXPENSECOMMAND_SUCCESS,
+                expenseToDelete.getDescription().getFullDescription());
+        CommandResult expectedCommandResult = new CommandResult(expectedFeedback, false,
+            false, false, false,
+            true, false, false);
 
-        assertCommandSuccess(deleteExpenseCommand, modelStub, expectedMessage, expectedModel);
-    }*/
+        assertCommandSuccess(deleteExpenseCommand, model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_invalidIndexFilteredList_throwsCommandException() {
+        MainWindow.setViewEnum(UiView.EXPENSE_PAGE);
+        model.setExpenses(model.getGroupByName(new GroupName("Bali")));
+        showExpenseAtIndex(model, INDEX_FIRST_EXPENSE);
+
+        Index outOfBoundIndex = INDEX_SECOND_EXPENSE;
+        // ensures that outOfBoundIndex is still in bounds of awe book list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getExpenseList().size());
+
+        DeleteExpenseCommand deleteExpenseCommand = new DeleteExpenseCommand(outOfBoundIndex);
+
+        assertCommandFailure(deleteExpenseCommand, model, Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void equals() {
+        DeleteExpenseCommand deleteFirstCommand = new DeleteExpenseCommand(INDEX_FIRST_EXPENSE);
+        DeleteExpenseCommand deleteSecondCommand = new DeleteExpenseCommand(INDEX_SECOND_EXPENSE);
+
+        // same object -> returns true
+        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
+
+        // same values -> returns true
+        DeleteExpenseCommand deleteFirstCommandCopy = new DeleteExpenseCommand(INDEX_FIRST_EXPENSE);
+        assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(deleteFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(deleteFirstCommand.equals(null));
+
+        // different expense -> returns false
+        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+    }
+
 
     /**
      * Updates {@code model}'s filtered expense list to show no expenses.
@@ -316,7 +364,7 @@ public class DeleteExpenseCommandTest {
 
         @Override
         public Expense getExpense(int index) {
-            return expenses.asUnmodifiableObservableList().get(index);
+            return filteredExpensesList.get(index);
         }
 
         @Override
@@ -337,7 +385,7 @@ public class DeleteExpenseCommandTest {
 
         @Override
         public void setGroup(Group group, Group newGroup) {
-
+            this.group = newGroup;
         }
 
         @Override
