@@ -236,7 +236,7 @@ public class Messages {
 
 
     //messages for miscellaneous commands
-    public static final String MESSAGE_CLEARCOMMAND_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_CLEARALLDATACOMMAND_SUCCESS = "Address book has been cleared!";
 
 
     public static final String MESSAGE_EXITCOMMAND_ACKNOWLEDGEMENT = "Exiting Address Book as requested ...";
