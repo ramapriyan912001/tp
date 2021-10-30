@@ -206,6 +206,12 @@ public class Messages {
                     + "To delete a contact, first enter the " + FindContactsCommand.COMMAND_WORD + " or "
                     + ListContactsCommand.COMMAND_WORD + " command.";
 
+    public static final String MESSAGE_EDITCONTACTCOMMAND_CANNOT_BE_EDITED =
+            "Contact cannot be edited unless you are viewing "
+                    + "the contacts of your addressbook. "
+                    + "To edit a contact, first enter the " + FindContactsCommand.COMMAND_WORD + " or "
+                    + ListContactsCommand.COMMAND_WORD + " command.";
+
 
     public static final String MESSAGE_FINDEXPENSESCOMMAND_USAGE = FindExpensesCommand.COMMAND_WORD
             + ": Finds all expenses within the specified group "
