@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Predicate;
@@ -224,6 +225,23 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Payment> getPayments() {
         return payments;
+    }
+
+    @Override
+    public void deletePersonFromGroups(Person person) {
+        List<Group> groupList = new ArrayList<>();
+        List<Group> groups = addressBook.getGroupList();
+        for (int i = 0; i < groups.size(); i++) {
+            if (groups.get(i).isPartOfGroup(person)) {
+                groupList.add(groups.get(i));
+            }
+        }
+
+        for (int j = 0; j < groupList.size(); j++) {
+            Group group = groupList.get(j);
+            Group newGroup = group.removeMember(person);
+            setGroup(group, newGroup);
+        }
     }
 
     @Override

@@ -186,4 +186,6 @@ public interface Model {
     void deleteExpense(Expense expense, Group group);
 
     ObservableList<Payment> getPayments();
+
+    void deletePersonFromGroups(Person person);
 }
