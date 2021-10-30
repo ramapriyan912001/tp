@@ -240,7 +240,11 @@ public class ModelManager implements Model {
         for (int j = 0; j < groupList.size(); j++) {
             Group group = groupList.get(j);
             Group newGroup = group.removeMember(person);
-            setGroup(group, newGroup);
+            if (newGroup.getMembers().isEmpty()) {
+                deleteGroup(group);
+            } else {
+                setGroup(group, newGroup);
+            }
         }
     }
 
