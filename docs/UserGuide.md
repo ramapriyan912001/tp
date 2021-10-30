@@ -555,8 +555,8 @@ Action | Format, Examples
 ### 5.4 Miscellaneous Commands
 Action | Format, Examples
 --------|------------------
-**Clear** | `clear`
-**Help** | `help`
+**Clear** | `clear` <br>
+**Help** | `help` <br>
 
 
 --------------------------------------------------------------------------------------------------------------------
