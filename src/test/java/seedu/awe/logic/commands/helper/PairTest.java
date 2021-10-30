@@ -1,8 +1,5 @@
 package seedu.awe.logic.commands.helper;
 
-import org.junit.jupiter.api.Test;
-import seedu.awe.logic.commands.CalculatePaymentsCommand;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -10,6 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.awe.testutil.TypicalGroups.BALI_WITH_EXPENSES;
 import static seedu.awe.testutil.TypicalPersons.ALICE;
 import static seedu.awe.testutil.TypicalPersons.BOB;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.awe.logic.commands.CalculatePaymentsCommand;
 
 public class PairTest {
 

@@ -2,7 +2,6 @@ package seedu.awe.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.awe.commons.core.Messages.MESSAGE_CALCULATEPAYMENTSCOMMAND_GROUP_NOT_FOUND;
 import static seedu.awe.commons.core.Messages.MESSAGE_CALCULATEPAYMENTSCOMMAND_PAYMENTS_EMPTY;
 import static seedu.awe.commons.core.Messages.MESSAGE_CALCULATEPAYMENTSCOMMAND_PAYMENT_DISCREPANCY;
@@ -23,7 +22,6 @@ import static seedu.awe.testutil.TypicalGroups.MALIBU;
 import static seedu.awe.testutil.TypicalGroups.PERU_WITH_EXPENSES_INVALID;
 import static seedu.awe.testutil.TypicalGroups.RIO_WITH_EXPENSES_INVALID;
 import static seedu.awe.testutil.TypicalGroups.SANTIAGO_WITH_EXPENSES;
-import static seedu.awe.testutil.TypicalPersons.ALICE;
 
 import org.junit.jupiter.api.Test;
 

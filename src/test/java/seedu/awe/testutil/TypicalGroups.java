@@ -18,7 +18,6 @@ import static seedu.awe.testutil.TypicalPersons.IDA;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import seedu.awe.model.AddressBook;
 import seedu.awe.model.expense.Cost;

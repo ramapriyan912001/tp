@@ -1,16 +1,21 @@
 package seedu.awe.logic.commands.helper;
 
-import seedu.awe.model.person.Person;
+import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
-import static java.util.Objects.requireNonNull;
+import seedu.awe.model.person.Person;
 
 public class Pair implements Comparable<Pair> {
 
     private double surplus;
     private Person person;
 
+    /**
+     * Pair helper class for calculatepayments class
+     * @param surplus double
+     * @param person person
+     */
     public Pair(double surplus, Person person) {
         requireNonNull(person);
         this.surplus = surplus;
