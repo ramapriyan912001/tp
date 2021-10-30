@@ -191,6 +191,7 @@ Format: `deletecontact INDEX`
 
 * Deletes the person at the specified `INDEX`.
 * Deletes the person from any groups of which the person was a member. 
+* If the contact was the only member of a group, that group will now be deleted.  
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * Since the command deletes the contact based on the list visible to the user, it is necessary for the user to be viewing a list of contacts when utilising this command. This means that the user must have entered a `findcontacts` or `contacts` command just prior to entering the `deletecontact` command.
