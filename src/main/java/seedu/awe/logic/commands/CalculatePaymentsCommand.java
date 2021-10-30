@@ -215,9 +215,6 @@ public class CalculatePaymentsCommand extends Command {
         List<Payment> payments = new ArrayList<>();
         while (!pairs.isEmpty()) {
             pairs = sortPairs(pairs);
-            if (pairs.size() == 1) {
-                throw new CommandException(MESSAGE_CALCULATEPAYMENTSCOMMAND_PAYMENT_DISCREPANCY);
-            }
             Pair pairWithLowestSurplus = pairs.get(0);
             Pair pairWithHighestSurplus = pairs.get(pairs.size() - 1);
             Payment paymentToAdd = calculatePayment(pairWithLowestSurplus, pairWithHighestSurplus);
