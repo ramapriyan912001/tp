@@ -554,11 +554,14 @@ If your questions are not answered in the FAQ, check out the issue page on our G
 |**Calculate Payments** | `calculatepayments gn/GROUP_NAME` <br> e.g., `calculatepayments gn/Bali` |
 
 ### 5.4 Miscellaneous Commands
+
 |Action | Format, Examples|
 |--------|------------------|
 |**Clear** | `clear`|
 |**Help** | `help` |
 
+
+--------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 ## 6. Final Word
