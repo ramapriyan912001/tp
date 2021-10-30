@@ -274,8 +274,8 @@ Examples:
   ![result for 'findcontacts Taiwan Malaysia'](images/findAlexDavidResult.png)
 
 <div markdown="span" class="alert alert-primary">
-
-:bulb: **Tip:** You can search for multiple groups by entering more keywords.</div>
+:bulb: **Tip:** You can search for multiple groups by entering more keywords.
+</div>
 
 #### 3.2.5. Adding a contact to an existing group: `groupaddcontact`
 
@@ -487,7 +487,8 @@ AWE data are saved in the hard disk automatically after any command that changes
 
 AWE data are saved as a JSON file `[JAR file location]/data/awe.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">
+:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AWE will discard all data and start with an empty data file at the next run.
 </div>
 
@@ -555,8 +556,8 @@ Action | Format, Examples
 ### 5.4 Miscellaneous Commands
 Action | Format, Examples
 --------|------------------
-**Clear** | `clear` <br>
-**Help** | `help` <br>
+**Clear** | `clear`
+**Help** | `help` 
 
 
 --------------------------------------------------------------------------------------------------------------------
