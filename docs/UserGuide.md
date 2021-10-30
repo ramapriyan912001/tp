@@ -558,9 +558,7 @@ If your questions are not answered in the FAQ, check out the issue page on our G
 |--------|------------------|
 |**Clear** | `clear`|
 |**Help** | `help` |
-|
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 ## 6. Final Word
