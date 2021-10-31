@@ -35,9 +35,9 @@ The document serves as a guide for users to understand the way to use our app to
 can focus on exploring AWE to the full extent of its functionalities.
 * We provide you with the tools to be able to read this guide with little need for re-referencing previous sections.
 
-Section 1 provides readers with a brief overview of how to use this document. Section 2 details the setting up of AWE
-and Section 3 documents the main features of AWE. If you still face problems using AWE, refer to our FAQ in Section 4. 
-For a summary of all the commands available, refer to Section 5.
+[Section 1](# 1. About the Document) provides readers with a brief overview of how to use this document. [Section 2](# 2. Quick start) details the setting up of AWE
+and [Section 3](# 3. Features) documents the main features of AWE. If you still face problems using AWE, refer to our FAQ in [Section 4](# 4. FAQ). 
+For a summary of all the commands available, refer to [Section 5](# 5. Command summary).
 
 <div style="page-break-after: always;"></div>
 
@@ -112,6 +112,8 @@ For those who are not as fast, familiarity with the commands over time will allo
 
 6. Refer to the [Features](#features) below for details of each command.
 
+[Click here to return to table of contents](#tableofcontents)
+<br>
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
@@ -141,6 +143,8 @@ For those who are not as fast, familiarity with the commands over time will allo
 
 </div>
 
+[Click here to return to table of contents](#tableofcontents)
+<br>
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
@@ -215,6 +219,8 @@ Examples:
 * `findcontacts alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+[Click here to return to table of contents](#tableofcontents)
+<br>
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
@@ -360,6 +366,8 @@ Examples:
 * `groupeditname gn/Bali gn/Thailand` to change the group name from Bali to Thailand.
 * `groupeditname gn/Germany gn/Munich` to change the group name from Germany to Munich.
 
+[Click here to return to table of contents](#tableofcontents)
+<br>
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
@@ -455,6 +463,8 @@ Examples:
 * `calculatepayments gn/London`<br>
   ![result for 'findcontacts Taiwan Malaysia'](images/CALCULATEPAYMENTSUI.png)
 
+[Click here to return to table of contents](#tableofcontents)
+<br>
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
@@ -492,6 +502,8 @@ AWE data are saved as a JSON file `[JAR file location]/data/awe.json`. Advanced 
 If your changes to the data file makes its format invalid, AWE will discard all data and start with an empty data file at the next run.
 </div>
 
+[Click here to return to table of contents](#tableofcontents)
+<br>
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
@@ -509,6 +521,8 @@ If your changes to the data file makes its format invalid, AWE will discard all 
 <br>
 If your questions are not answered in the FAQ, check out the issue page on our GitHub linked [here](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues).
 
+[Click here to return to table of contents](#tableofcontents)
+<br>
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
@@ -559,7 +573,8 @@ Action | Format, Examples
 **Clear** | `clear`
 **Help** | `help`
 
-
+[Click here to return to table of contents](#tableofcontents)
+<br>
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
@@ -568,3 +583,6 @@ AWE hopes to revolutionise the group-travel space through its effective handling
 platform to maximise the efficiency of payment and recollection of debts. Our team is committed to delivering a seamless 
 experience for potential users. We are always looking to improve. As such, do drop us an email at awe80contact@gmail.com
 if you discover any bugs while using the application.
+
+[Click here to return to table of contents](#tableofcontents)
+<br>
