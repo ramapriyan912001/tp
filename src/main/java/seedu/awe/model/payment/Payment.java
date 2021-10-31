@@ -73,9 +73,9 @@ public class Payment implements Comparable<Payment> {
     @Override
     public int compareTo(Payment otherPayment) {
         String payeeName = this.getPayee().getName().getFullName();
-        String otherPayeeName = this.getPayee().getName().getFullName();
+        String otherPayeeName = otherPayment.getPayee().getName().getFullName();
         String payerName = this.getPayer().getName().getFullName();
-        String otherPayerName = this.getPayer().getName().getFullName();
+        String otherPayerName = otherPayment.getPayer().getName().getFullName();
 
         if (payerName.compareTo(otherPayerName) == -1) {
             return -1;
