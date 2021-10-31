@@ -48,7 +48,7 @@ Term | Explanation
 **Command Line Interface (CLI)** | The Command Line Interface, or CLI for short, is the user interface on which AWE is based. This means that most of AWE's functionality is unlocked by the typing of inputs by the user, rather than the clicking of a mouse or the selection of options via a menu.
 **Graphical User Interface (GUI)** | The Graphical User Interface, or GUI for short, is a user interface which supports all of its features through the clicking of a mouse or the selection of options via a menu. It does not require users to type in commands.
 **Command** | Commands are the user inputs that trigger the specific features of the app. Commands are often denoted in highlighted letters. For instance, to create a group, the `creategroup` command is utilised. 
-**Parameter** | A Parameter refers to a specific detail required for a command. For instance, adding a person within an app would require a details such as the person's name. In this case, the name is a parameter of this command. Parameters are often denoted in the guide in highlighted uppercase letters, for eg. `NAME`.
+**Parameter** | A Parameter refers to a specific detail required for a command. For instance, adding a contact within an app would require a details such as the contact's name. In this case, the name is a parameter of this command. Parameters are often denoted in the guide in highlighted uppercase letters, for eg. `NAME`.
 
 ### 1.2 Format of commands
 If you wish to jump straight into using our features, refer to Section 5 for the summary of commands.
@@ -107,7 +107,7 @@ For those who are not as fast, familiarity with the commands over time will allo
 
    * **`clear`** : The command `clear` removes all expenses / contacts / groups.
 
-   * **`editcontact`** : The command `editcontact 1 n/Thomas Betty` edits the name of the 1st person to be Thomas Betty and removes all existing tags.
+   * **`editcontact`** : The command `editcontact 1 n/Thomas Betty` edits the name of the 1st contact to be Thomas Betty and removes all existing tags.
 
    * **`exit`** : The command `exit` exits the app.
 
@@ -159,54 +159,57 @@ Shows a list of all contacts in AWE.
 
 Format: `contacts`
 
-#### 3.1.2. Adding a person: `addcontact`
+#### 3.1.2. Adding a contact: `addcontact`
 
-Adds a person to AWE.
+Adds a contact to AWE.
 
 Format: `addcontact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
+* Duplicate contacts cannot be added into AWE
+* Contacts are duplicate if they have the same name
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A contact can have any number of tags (including 0)
 </div>
 
 Examples:
 * `addcontact n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `addcontact n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-#### 3.1.3. Editing a person : `editcontact`
+#### 3.1.3. Editing a contact : `editcontact`
 
-Edits an existing person in AWE.
+Edits an existing contact in AWE.
 
 Format: `editcontact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* When editing tags, the existing tags of the contact will be removed i.e adding of tags is not cumulative.
+* You can remove all the contact’s tags by typing `t/` without
     specifying any tags after it.
 
 Examples:
-*  `editcontact 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `editcontact 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `editcontact 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
+*  `editcontact 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
 
-#### 3.1.4. Deleting a person : `deletecontact`
+#### 3.1.4. Deleting a contact : `deletecontact`
 
-Deletes the specified person from AWE.
+Deletes the specified contact from AWE.
 
 Format: `deletecontact INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the contact at the specified `INDEX`.
+* The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `contacts` to display a list of all contacts, followed by `deletecontact 2` deletes the 2nd person in AWE.
-* `findcontacts Betsy` to find all contacts with the name Betsy, followed by `deletecontact 1` deletes the 1st person in the results of the `findcontacts` command.
+* `contacts` to display a list of all contacts, followed by `deletecontact 2` deletes the 2nd contact in AWE.
+* `findcontacts Betsy` to find all contacts with the name Betsy, followed by `deletecontact 1` deletes the 1st contact in the results of the `findcontacts` command.
 
-#### 3.1.5. Locating a person by name: `findcontacts`
+#### 3.1.5. Locating a contact by name: `findcontacts`
 
-Finds persons whose names contain any of the given keywords.
+Finds contacts whose names contain any of the given keywords.
 
 Format: `findcontacts KEYWORD [MORE_KEYWORDS]`
 
@@ -214,7 +217,7 @@ Format: `findcontacts KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* contacts matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -402,7 +405,7 @@ Format: `addexpense n/PAYER_NAME gn/GROUP_NAME $/TOTAL_AMOUNT_PAID d/DESCRIPTION
 * The names are required to be in AWE.
 * The names are required to be in the specified group.
 * DESCRIPTION of the expense does not need to be unique.
-* Each personal payment has to be a name immediately followed by the amount of the personal payment.
+* Each contactal payment has to be a name immediately followed by the amount of the personal payment.
 
 Examples:
 * `addexpense n/Nic gn/Catch up $/50 d/Movie and dinner`
