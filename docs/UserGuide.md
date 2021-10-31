@@ -278,7 +278,7 @@ Format: `findgroups KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `findgroups London` returns `London` and `london trip`
 * `findgroups Taiwan Malaysia` returns `Taiwan` `Malaysia`<br>
-  ![result for 'findcontacts Taiwan Malaysia'](images/findAlexDavidResult.png)
+  ![result for 'findcontacts Taiwan Malaysia'](images/findGroupMalaysiaTaiwanResult.png)
 
 <div markdown="span" class="alert alert-primary">
 
