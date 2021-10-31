@@ -2,6 +2,7 @@ package seedu.awe.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.awe.commons.core.Messages.MESSAGE_EDITCONTACTCOMMAND_CANNOT_BE_EDITED;
 import static seedu.awe.commons.core.Messages.MESSAGE_EDITCONTACTCOMMAND_DUPLICATE_PERSON;
 import static seedu.awe.commons.core.Messages.MESSAGE_EDITCONTACTCOMMAND_EDIT_PERSON_SUCCESS;
 import static seedu.awe.logic.commands.CommandTestUtil.DESC_AMY;
@@ -28,6 +29,8 @@ import seedu.awe.model.UserPrefs;
 import seedu.awe.model.person.Person;
 import seedu.awe.testutil.EditPersonDescriptorBuilder;
 import seedu.awe.testutil.PersonBuilder;
+import seedu.awe.ui.MainWindow;
+import seedu.awe.ui.UiView;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -37,7 +40,20 @@ public class EditContactCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
+    public void execute_notOnContactsPage_failure() {
+        MainWindow.setViewEnum(UiView.EXPENSE_PAGE);
+        Person editedPerson = new PersonBuilder().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
+        EditContactCommand editContactCommand = new EditContactCommand(INDEX_FIRST_PERSON, descriptor);
+
+        String expectedMessage = MESSAGE_EDITCONTACTCOMMAND_CANNOT_BE_EDITED;
+
+        assertCommandFailure(editContactCommand, model, expectedMessage);
+    }
+
+    @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
+        MainWindow.setViewEnum(UiView.CONTACT_PAGE);
         Person editedPerson = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditContactCommand editContactCommand = new EditContactCommand(INDEX_FIRST_PERSON, descriptor);
@@ -52,6 +68,7 @@ public class EditContactCommandTest {
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
+        MainWindow.setViewEnum(UiView.CONTACT_PAGE);
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
         Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
 
@@ -73,6 +90,7 @@ public class EditContactCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
+        MainWindow.setViewEnum(UiView.CONTACT_PAGE);
         EditContactCommand editContactCommand = new EditContactCommand(INDEX_FIRST_PERSON, new EditPersonDescriptor());
         Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
@@ -85,6 +103,7 @@ public class EditContactCommandTest {
 
     @Test
     public void execute_filteredList_success() {
+        MainWindow.setViewEnum(UiView.CONTACT_PAGE);
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -102,6 +121,7 @@ public class EditContactCommandTest {
 
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
+        MainWindow.setViewEnum(UiView.CONTACT_PAGE);
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
         EditContactCommand editContactCommand = new EditContactCommand(INDEX_SECOND_PERSON, descriptor);
@@ -111,6 +131,7 @@ public class EditContactCommandTest {
 
     @Test
     public void execute_duplicatePersonFilteredList_failure() {
+        MainWindow.setViewEnum(UiView.CONTACT_PAGE);
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         // edit person in filtered list into a duplicate in awe book
@@ -123,6 +144,7 @@ public class EditContactCommandTest {
 
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
+        MainWindow.setViewEnum(UiView.CONTACT_PAGE);
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditContactCommand editContactCommand = new EditContactCommand(outOfBoundIndex, descriptor);
@@ -136,6 +158,7 @@ public class EditContactCommandTest {
      */
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
+        MainWindow.setViewEnum(UiView.CONTACT_PAGE);
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of awe book list
@@ -149,6 +172,7 @@ public class EditContactCommandTest {
 
     @Test
     public void equals() {
+        MainWindow.setViewEnum(UiView.CONTACT_PAGE);
         final EditContactCommand standardCommand = new EditContactCommand(INDEX_FIRST_PERSON, DESC_AMY);
 
         // same values -> returns true
@@ -163,7 +187,7 @@ public class EditContactCommandTest {
         assertFalse(standardCommand.equals(null));
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        assertFalse(standardCommand.equals(new ClearAllDataCommand()));
 
         // different index -> returns false
         assertFalse(standardCommand.equals(new EditContactCommand(INDEX_SECOND_PERSON, DESC_AMY)));

@@ -603,6 +603,8 @@ The following sequence operation shows how the `calculatepayments` operation wor
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `CalculatePaymentsCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
+**Note: When a `Person` is deleted from contacts or removed from the group, the functioning of this command does not change. The deleted person may still be part of the list of payments depending on the expenses they had previously.**
+
 #### Design considerations
 
 **Aspect: Algorithm utilised for calculatepayments:**
@@ -730,7 +732,7 @@ Step 5. The user then decides to execute the command `contacts`. Commands that d
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clearalldata`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -872,6 +874,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: Edit a person**
 
+**Preconditions: User's last entered command is either `findcontacts` or `contacts`, i.e. the user is viewing an contacts list.**
+
 **MSS**
 
 1. User requests to list persons
@@ -888,17 +892,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2b. The given index is invalid.
 
-    * 3a1. AWE shows an error message.
+    * 2b1. AWE shows an error message.
+
+      Use case resumes at step 2.
+
+* 2c. The given information has an invalid format.
+
+    * 2c1. AWE shows an error message.
 
       Use case resumes at step 2.
 
-* 4a. The given information has an invalid format.
+* 2d. User is not viewing a list of contacts when entering command.
 
-    * 4a1. AWE shows an error message.
+  * 2d1. AWE shows an error message asking user to enter `findcontacts` or `contacts` command first.
 
-      Use case resumes at step 2.
+    Use case ends.
     
 **Use case: List all persons**
 
@@ -943,12 +953,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: Delete a person**
 
+**Preconditions: User's last entered command is either `findcontacts` or `contacts`, i.e. the user is viewing an contacts list.**
+
 **MSS**
 
-1. User requests to list persons
-2. AWE shows a list of persons
-3. User requests to delete a specific person in the list
-4. AWE deletes the person
+1. User requests to list persons.
+2. AWE shows a list of persons.
+3. User requests to delete a specific person in the list.
+4. AWE deletes the person.
+5. AWE removes the person from groups of which the person was a member.
+6. AWE displays confirmation message.
 
     Use case ends.
 
@@ -958,9 +972,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2b. The given index is invalid.
 
-    * 3a1. AWE shows an error message.
+    * 2b1. AWE shows an error message.
+
+* 2c. User is not viewing a list of contacts when entering command.
+
+  * 2c1. AWE shows an error message asking user to enter `findcontacts` or `contacts` command first.
+
+    Use case ends.
     
 **Use case: Create Travel Group**
 
@@ -1137,7 +1157,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User enters clear command.
+1. User enters clearalldata command.
 2. All entries are deleted from AddressBook.
 
    Use case ends.

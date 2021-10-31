@@ -18,8 +18,10 @@ import static seedu.awe.testutil.TypicalGroups.BALI_WITH_EXPENSES_PAYMENTS;
 import static seedu.awe.testutil.TypicalGroups.CHINA;
 import static seedu.awe.testutil.TypicalGroups.COLOMBO_WITH_EXPENSES;
 import static seedu.awe.testutil.TypicalGroups.INDIA;
+import static seedu.awe.testutil.TypicalGroups.MALIBU;
 import static seedu.awe.testutil.TypicalGroups.PERU_WITH_EXPENSES_INVALID;
 import static seedu.awe.testutil.TypicalGroups.RIO_WITH_EXPENSES_INVALID;
+import static seedu.awe.testutil.TypicalGroups.SANTIAGO_WITH_EXPENSES;
 
 import org.junit.jupiter.api.Test;
 
@@ -48,6 +50,8 @@ public class CalculatePaymentsCommandTest {
 
         assertEquals(new CalculatePaymentsCommand(BALI), new CalculatePaymentsCommand(BALI));
         assertEquals(new CalculatePaymentsCommand(BALI_WITH_EXPENSES), new CalculatePaymentsCommand(BALI));
+        CalculatePaymentsCommand calculatePaymentsCommand = new CalculatePaymentsCommand(BALI_WITH_EXPENSES);
+        assertEquals(calculatePaymentsCommand, calculatePaymentsCommand);
     }
 
     @Test
@@ -69,14 +73,28 @@ public class CalculatePaymentsCommandTest {
     @Test
     public void execute_validInput_returnsCommandResult() {
         resetModel();
+        // More deficit members than surplus members, multiple expenses
         CommandResult expectedCommandResultBali = new CommandResult(MESSAGE_CALCULATEPAYMENTSCOMMAND_SUCCESS, false,
                 false, false, false, false, false, true);
         assertCommandSuccess(new CalculatePaymentsCommand(BALI_WITH_EXPENSES), model, expectedCommandResultBali, model);
 
+        // More deficit members than surplus members, one expense.
         CommandResult expectedCommandResultAmsterdam = new CommandResult(MESSAGE_CALCULATEPAYMENTSCOMMAND_SUCCESS,
                 false, false, false, false, false, false, true);
         assertCommandSuccess(new CalculatePaymentsCommand(AMSTERDAM_WITH_EXPENSES), model,
                 expectedCommandResultAmsterdam, model);
+
+        // More surplus members than deficit members
+        CommandResult expectedCommandResultMalibu = new CommandResult(MESSAGE_CALCULATEPAYMENTSCOMMAND_SUCCESS,
+                false, false, false, false, false, false, true);
+        assertCommandSuccess(new CalculatePaymentsCommand(MALIBU), model,
+                expectedCommandResultMalibu, model);
+
+        // Pair of members with equal deficit and surplus
+        CommandResult expectedCommandResultSantiago = new CommandResult(MESSAGE_CALCULATEPAYMENTSCOMMAND_SUCCESS,
+                false, false, false, false, false, false, true);
+        assertCommandSuccess(new CalculatePaymentsCommand(SANTIAGO_WITH_EXPENSES), model,
+                expectedCommandResultSantiago, model);
     }
 
     @Test
@@ -116,5 +134,4 @@ public class CalculatePaymentsCommandTest {
         assertNotEquals(BALI_WITH_EXPENSES_PAYMENTS, new CalculatePaymentsCommand(AMSTERDAM_WITH_EXPENSES)
                 .getPayments(AMSTERDAM_WITH_EXPENSES));
     }
-
 }

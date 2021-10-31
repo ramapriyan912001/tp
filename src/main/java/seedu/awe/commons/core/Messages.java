@@ -18,6 +18,7 @@ import seedu.awe.logic.commands.FindContactsCommand;
 import seedu.awe.logic.commands.FindExpensesCommand;
 import seedu.awe.logic.commands.FindGroupsCommand;
 import seedu.awe.logic.commands.HelpCommand;
+import seedu.awe.logic.commands.ListContactsCommand;
 import seedu.awe.logic.commands.ListExpensesCommand;
 
 /**
@@ -190,6 +191,18 @@ public class Messages {
                     + "To delete an expense, first enter the " + FindExpensesCommand.COMMAND_WORD + " or "
                     + ListExpensesCommand.COMMAND_WORD + " command.";
 
+    public static final String MESSAGE_DELETECONTACTCOMMAND_CANNOT_BE_DELETED =
+            "Contact cannot be deleted unless you are viewing "
+                    + "the contacts of your addressbook. "
+                    + "To delete a contact, first enter the " + FindContactsCommand.COMMAND_WORD + " or "
+                    + ListContactsCommand.COMMAND_WORD + " command.";
+
+    public static final String MESSAGE_EDITCONTACTCOMMAND_CANNOT_BE_EDITED =
+            "Contact cannot be edited unless you are viewing "
+                    + "the contacts of your addressbook. "
+                    + "To edit a contact, first enter the " + FindContactsCommand.COMMAND_WORD + " or "
+                    + ListContactsCommand.COMMAND_WORD + " command.";
+
 
     public static final String MESSAGE_FINDEXPENSESCOMMAND_USAGE = FindExpensesCommand.COMMAND_WORD
             + ": Finds all expenses within the specified group "
@@ -227,11 +240,9 @@ public class Messages {
 
 
     //messages for miscellaneous commands
-    public static final String MESSAGE_CLEARCOMMAND_SUCCESS = "AWE book has been cleared!";
-
+    public static final String MESSAGE_CLEARALLDATACOMMAND_SUCCESS = "AWE book has been cleared!";
 
     public static final String MESSAGE_EXITCOMMAND_ACKNOWLEDGEMENT = "Exiting AWE Book as requested ...";
-
 
     public static final String MESSAGE_HELPCOMMAND_USAGE = HelpCommand.COMMAND_WORD
             + ": Shows program usage instructions.\n"

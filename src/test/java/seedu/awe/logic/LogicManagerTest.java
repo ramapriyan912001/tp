@@ -30,6 +30,8 @@ import seedu.awe.storage.JsonAddressBookStorage;
 import seedu.awe.storage.JsonUserPrefsStorage;
 import seedu.awe.storage.StorageManager;
 import seedu.awe.testutil.PersonBuilder;
+import seedu.awe.ui.MainWindow;
+import seedu.awe.ui.UiView;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -58,6 +60,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "deletecontact 9";
+        MainWindow.setViewEnum(UiView.CONTACT_PAGE);
         assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
