@@ -173,6 +173,7 @@ Format: `editcontact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…�
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
+* Since the command edits the contact based on the list visible to the user, it is necessary for the user to be viewing a list of contacts when utilising this command. This means that the user must have entered a `findcontacts` or `contacts` command just prior to entering the `editcontact` command.  
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
@@ -189,8 +190,11 @@ Deletes the specified person from AWE.
 Format: `deletecontact INDEX`
 
 * Deletes the person at the specified `INDEX`.
+* Deletes the person from any groups of which the person was a member. 
+* If the contact was the only member of a group, that group will now be deleted.  
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* Since the command deletes the contact based on the list visible to the user, it is necessary for the user to be viewing a list of contacts when utilising this command. This means that the user must have entered a `findcontacts` or `contacts` command just prior to entering the `deletecontact` command.
 
 Examples:
 * `persons` followed by `deletecontact 2` deletes the 2nd person in AWE.
@@ -453,6 +457,8 @@ Examples:
 * `calculatepayments gn/Bali`
 * `calculatepayments gn/London`<br>
   ![result for 'findcontacts Taiwan Malaysia'](images/CALCULATEPAYMENTSUI.png)
+
+**Note: When a `Person` is deleted from contacts or removed from the group, the functioning of this command does not change. The deleted person may still be part of the list of payments depending on the expenses they had previously.**
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
