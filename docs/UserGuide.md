@@ -501,6 +501,8 @@ Clears all entries from AWE.
 
 Format: `clearalldata`
 
+* After clearing of data, `contacts` page will be shown
+
 #### 3.4.3. Exiting the program : `exit`
 
 Exits the program.
