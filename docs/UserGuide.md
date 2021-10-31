@@ -86,7 +86,7 @@ For those who are not as fast, familiarity with the commands over time will allo
    
    * **`groups`** : The command `groups` lists all groups.
 
-   * **`expenses`** : The command `expenses` lists all expenses in a particular group.
+   * **`expenses`** : The command `expenses gn/London` lists all expenses in the preloaded group `London`.
      
    * **`addcontact`** : The command `addcontact n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` adds a contact named `John Doe` to AWE.
 
