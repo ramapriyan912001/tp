@@ -1,6 +1,7 @@
 package seedu.awe.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.awe.commons.core.Messages.MESSAGE_EDITCONTACTCOMMAND_CANNOT_BE_EDITED;
 import static seedu.awe.commons.core.Messages.MESSAGE_EDITCONTACTCOMMAND_DUPLICATE_PERSON;
 import static seedu.awe.commons.core.Messages.MESSAGE_EDITCONTACTCOMMAND_EDIT_PERSON_SUCCESS;
 import static seedu.awe.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -22,6 +23,8 @@ import seedu.awe.model.person.Name;
 import seedu.awe.model.person.Person;
 import seedu.awe.model.person.Phone;
 import seedu.awe.model.tag.Tag;
+import seedu.awe.ui.MainWindow;
+import seedu.awe.ui.UiView;
 
 /**
  * Edits the details of an existing person in the awe book.
@@ -57,6 +60,10 @@ public class EditContactCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (MainWindow.getViewEnum() != UiView.CONTACT_PAGE) {
+            throw new CommandException(MESSAGE_EDITCONTACTCOMMAND_CANNOT_BE_EDITED);
+        }
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);

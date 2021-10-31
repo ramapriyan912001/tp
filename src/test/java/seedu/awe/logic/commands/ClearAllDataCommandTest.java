@@ -1,6 +1,6 @@
 package seedu.awe.logic.commands;
 
-import static seedu.awe.commons.core.Messages.MESSAGE_CLEARCOMMAND_SUCCESS;
+import static seedu.awe.commons.core.Messages.MESSAGE_CLEARALLDATACOMMAND_SUCCESS;
 import static seedu.awe.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.awe.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -11,14 +11,14 @@ import seedu.awe.model.Model;
 import seedu.awe.model.ModelManager;
 import seedu.awe.model.UserPrefs;
 
-public class ClearCommandTest {
+public class ClearAllDataCommandTest {
 
     @Test
     public void execute_emptyAddressBook_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
-        assertCommandSuccess(new ClearCommand(), model, MESSAGE_CLEARCOMMAND_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearAllDataCommand(), model, MESSAGE_CLEARALLDATACOMMAND_SUCCESS, expectedModel);
     }
 
     @Test
@@ -27,7 +27,7 @@ public class ClearCommandTest {
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.setAddressBook(new AddressBook());
 
-        assertCommandSuccess(new ClearCommand(), model, MESSAGE_CLEARCOMMAND_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearAllDataCommand(), model, MESSAGE_CLEARALLDATACOMMAND_SUCCESS, expectedModel);
     }
 
 }
