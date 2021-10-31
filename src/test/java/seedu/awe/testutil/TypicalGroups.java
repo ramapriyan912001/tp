@@ -21,6 +21,7 @@ import java.util.List;
 
 import seedu.awe.model.AddressBook;
 import seedu.awe.model.expense.Cost;
+import seedu.awe.model.expense.Description;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.payment.Payment;
@@ -89,6 +90,23 @@ public class TypicalGroups {
     public static final List<Payment> BALI_WITH_EXPENSES_PAYMENTS = List.of(
             new Payment(ALICE, AMY, new Cost(400.00)), new Payment(ALICE, BOB, new Cost(200))
     );
+
+    public static final Expense TEST1 = new Expense(ALICE, new Cost(1000.00), new Description("test1"), List.of(ELLE));
+    public static final Expense TEST2 = new Expense(HOON, new Cost(1000.00), new Description("test2"), List.of(ELLE));
+
+    public static final Group MALIBU_WITH_EXPENSES = new GroupBuilder()
+            .withGroupName(MALIBU.getGroupName().getName())
+            .withMembers(ALICE, ELLE, HOON)
+            .withExpenses(TEST1, TEST2)
+            .build();
+
+    public static final Expense TEST3 = new Expense(AMY, new Cost(1000.00), new Description("test1"), List.of(HOON));
+
+    public static final Group SANTIAGO_WITH_EXPENSES = new GroupBuilder()
+            .withGroupName("Santiago")
+            .withMembers(AMY, HOON)
+            .withExpense(TEST3)
+            .build();
 
     public static final Group AMSTERDAM_WITH_EXPENSES = new GroupBuilder().withGroupName("Amsterdam")
             .withMembers(HOON, IDA, ELLE)
