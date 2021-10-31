@@ -594,7 +594,7 @@ Action | Format, Examples
 ## 6. Final Word
 AWE hopes to revolutionise the group-travel space through its effective handling of shared expenses on a centralised
 platform to maximise the efficiency of payment and recollection of debts. Our team is committed to delivering a seamless 
-experience for potential users. We are always looking to improve. As such, do drop us an email at awe80contact@gmail.com
+experience for potential users. We are always looking to improve. As such, do drop us an email at <a href = "mailto: awe80contact@gmail.com">awe80contact@gmail.com</a>
 if you discover any bugs while using the application.
 
 <br>
