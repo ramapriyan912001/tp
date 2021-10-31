@@ -105,7 +105,7 @@ For those who are not as fast, familiarity with the commands over time will allo
 
    * **`calculatepayments`** : The command `calculatepayments gn/Bali` provides a list of payments to be made between users to settle debts for the group named Bali.
 
-   * **`clear`** : The command `clear` removes all expenses / contacts / groups.
+   * **`clearalldata`** : The command `clearalldata` removes all expenses / contacts / groups.
 
    * **`editcontact`** : The command `editcontact 1 n/Thomas Betty` edits the name of the 1st person to be Thomas Betty and removes all existing tags.
 
@@ -140,7 +140,7 @@ For those who are not as fast, familiarity with the commands over time will allo
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clearalldata`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
@@ -181,6 +181,7 @@ Format: `editcontact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…�
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
+* Since the command edits the contact based on the list visible to the user, it is necessary for the user to be viewing a list of contacts when utilising this command. This means that the user must have entered a `findcontacts` or `contacts` command just prior to entering the `editcontact` command.  
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
@@ -197,8 +198,11 @@ Deletes the specified person from AWE.
 Format: `deletecontact INDEX`
 
 * Deletes the person at the specified `INDEX`.
+* Deletes the person from any groups of which the person was a member. 
+* If the contact was the only member of a group, that group will now be deleted.  
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* Since the command deletes the contact based on the list visible to the user, it is necessary for the user to be viewing a list of contacts when utilising this command. This means that the user must have entered a `findcontacts` or `contacts` command just prior to entering the `deletecontact` command.
 
 Examples:
 * `contacts` to display a list of all contacts, followed by `deletecontact 2` deletes the 2nd person in AWE.
@@ -467,10 +471,14 @@ Examples:
 * `calculatepayments gn/Bali`
 * `calculatepayments gn/London`<br>
   ![result for 'findcontacts Taiwan Malaysia'](images/CALCULATEPAYMENTSUI.png)
+  
+**Note: When a `Person` is deleted from contacts or removed from the group, the functioning of this command does not change. The deleted person may still be part of the list of payments depending on the expenses they had previously.**
+
 
 <br>
 [Click here to return to table of contents](#tableofcontents)
 <br>
+
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
@@ -484,11 +492,11 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-#### 3.4.2. Clearing all entries : `clear`
+#### 3.4.2. Clearing all entries : `clearalldata`
 
 Clears all entries from AWE.
 
-Format: `clear`
+Format: `clearalldata`
 
 #### 3.4.3. Exiting the program : `exit`
 
@@ -582,8 +590,8 @@ Action | Format, Examples
 
 Action | Format, Examples
 --------|------------------
-**Clear** | `clear`
-**Help** | `help` 
+**Clear Data** | `clearalldata`
+**Help** | `help`
 
 <br>
 [Click here to return to table of contents](#tableofcontents)
