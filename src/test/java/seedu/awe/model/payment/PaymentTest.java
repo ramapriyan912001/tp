@@ -78,6 +78,7 @@ public class PaymentTest {
         assertFalse(aliceBobPayment.equals(new Payment(ALICE, CARL, new Cost(20.0))));
         assertFalse(aliceBobPayment.equals(new Payment(CARL, BOB, new Cost(10.0))));
         assertFalse(aliceBobPayment.equals(new Payment(CARL, BOB, new Cost(20.0))));
+        assertFalse(aliceBobPayment.equals(new Payment(ALICE, BOB, new Cost(20.0))));
     }
 
     @Test
