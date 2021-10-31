@@ -281,8 +281,8 @@ Examples:
   ![result for 'findcontacts Taiwan Malaysia'](images/findGroupMalaysiaTaiwanResult.png)
 
 <div markdown="span" class="alert alert-primary">
-
-:bulb: **Tip:** You can search for multiple groups by entering more keywords.</div>
+:bulb: **Tip:** You can search for multiple groups by entering more keywords.
+</div>
 
 #### 3.2.5. Adding a contact to an existing group: `groupaddcontact`
 
@@ -373,7 +373,7 @@ Examples:
 
 ### 3.3. Expenses
 
-### 3.3.1. Listing expenses of a specified group: `expenses`
+#### 3.3.1. Listing expenses of a specified group: `expenses`
 
 Shows a list containing all existing expenses within the specified travel group. Expenses are sorted from most recent to least recent.
 
@@ -498,7 +498,8 @@ AWE data are saved in the hard disk automatically after any command that changes
 
 AWE data are saved as a JSON file `[JAR file location]/data/awe.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">
+:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AWE will discard all data and start with an empty data file at the next run.
 </div>
 
@@ -538,9 +539,11 @@ Action | Format, Examples
 **Edit Contact** | `editcontact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find Contacts** | `findcontacts KEYWORD [MORE_KEYWORDS]`<br> e.g., `findcontacts James Jake`
 
+
 <div style="page-break-after: always;"></div>
 
 ### 5.2 Groups commands
+
 
 Action | Format, Examples
 --------|------------------
@@ -568,10 +571,11 @@ Action | Format, Examples
 **Calculate Payments** | `calculatepayments gn/GROUP_NAME` <br> e.g., `calculatepayments gn/Bali` 
 
 ### 5.4 Miscellaneous Commands
+
 Action | Format, Examples
 --------|------------------
 **Clear** | `clear`
-**Help** | `help`
+**Help** | `help` 
 
 [Click here to return to table of contents](#tableofcontents)
 <br>
