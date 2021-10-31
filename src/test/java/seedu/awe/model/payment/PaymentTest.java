@@ -17,15 +17,13 @@ import static seedu.awe.testutil.TypicalPersons.BOB;
 import static seedu.awe.testutil.TypicalPersons.CARL;
 import static seedu.awe.testutil.TypicalPersons.DANIEL;
 
-import org.junit.jupiter.api.Test;
-
-import seedu.awe.model.expense.Cost;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.PriorityQueue;
 
+import org.junit.jupiter.api.Test;
+
+import seedu.awe.model.expense.Cost;
 
 public class PaymentTest {
 
@@ -86,7 +84,7 @@ public class PaymentTest {
     }
 
     @Test
-    public void comparator_Test() {
+    public void comparator_test() {
         List<Payment> payments = new ArrayList<>();
         payments.add(ALICE_CARL_PAYMENT);
         payments.add(AMY_ELLE_PAYMENT);
