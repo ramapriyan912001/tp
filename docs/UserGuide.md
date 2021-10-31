@@ -198,8 +198,8 @@ Format: `deletecontact INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `persons` followed by `deletecontact 2` deletes the 2nd person in AWE.
-* `find Betsy` followed by `deletecontact 1` deletes the 1st person in the results of the `find` command.
+* `contacts` to display a list of all contacts, followed by `deletecontact 2` deletes the 2nd person in AWE.
+* `findcontacts Betsy` to find all contacts with the name Betsy, followed by `deletecontact 1` deletes the 1st person in the results of the `findcontacts` command.
 
 #### 3.1.5. Locating a person by name: `findcontacts`
 
@@ -423,7 +423,7 @@ Examples:
 
 Finds expenses within the specified group which descriptions contain any of the given keywords.
 
-Format: `findexpenses KEYWORD [MORE_KEYWORDS] [gn/GROUP_NAME]`
+Format: `findexpenses KEYWORD [MORE_KEYWORDS] gn/GROUP_NAME`
 
 * The search is case-insensitive. e.g `dinner` will match `Dinner`
 * The order of the keywords does not matter. e.g. `Dinner Transportation` will match `Transportation Dinner`
@@ -433,8 +433,8 @@ Format: `findexpenses KEYWORD [MORE_KEYWORDS] [gn/GROUP_NAME]`
   e.g. `Dinner Transportation` will return `Friday dinner`, `Transportation tickets`
 
 Examples:
-* `findexpenses dinner gn/London` returns `dinner` and `Friday dinner`
-* `findexpenses lunch souvenirs` returns `lunch`, `souvenirs`<br>
+* `findexpenses dinner gn/London` returns `dinner` and `Friday dinner` in the group `London`
+* `findexpenses lunch souvenirs gn/London` returns `lunch`, `souvenirs`in the group `London`<br>
 
 #### 3.3.5 Calculating total spending of each user: `transactionsummary`
 Displays a list of spending for each users in the group.
@@ -536,7 +536,7 @@ Action | Format, Examples
 **Add Contact** | `addcontact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Delete Contact** | `deletecontact INDEX`<br> e.g., `delete 3`
 **Edit Contact** | `editcontact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find Contacts** | `findcontacts KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find Contacts** | `findcontacts KEYWORD [MORE_KEYWORDS]`<br> e.g., `findcontacts James Jake`
 
 <div style="page-break-after: always;"></div>
 
@@ -552,7 +552,7 @@ Action | Format, Examples
 **Edit Group Name** | `groupeditname gn/OLD_GROUP_NAME gn/NEW_GROUP_NAME` <br> e.g., `groupedittag gn/Bali gn/Hanoi`
 **Remove Tags from Group** | `groupremovetag gn/GROUP_NAME n/TAG1 [n/MORE_TAGS]` <br> e.g., `groupremovetag gn/Bali n/friends`
 **Remove Contact from Group** | `groupremovecontact gn/GROUP_NAME n/NAME1 [n/MORE_NAMES]` <br> e.g., `groupremovecontact gn/Bali n/Jacob Tan`
-**Find Groups** | `findgroups KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find Groups** | `findgroups KEYWORD [MORE_KEYWORDS]`<br> e.g., `findgroups James Jake`
 
 <div style="page-break-after: always;"></div>
 
@@ -563,7 +563,7 @@ Action | Format, Examples
 **View Expense** | `expense INDEX` <br> e.g., `expense 2`
 **Add Expense** | `add expense add expense /des DESCRIPTION /by PAYER_NAME1 AMOUNT PAID BY NAME 1 /for PAYEE_NAME1 PAYEE_NAME 2` <br> e.g., `add expense /des Koi /by Jake 20.00 /for Justin, Raj, Keith`
 **Delete Expense** | `deleteexpense INDEX` <br> e.g., `deleteexpense 1`
-**Find Expenses** | `findexpenses KEYWORD [MORE_KEYWORDS] gn/GROUP_NAME`<br> e.g., `find dinner buffet gn/London`
+**Find Expenses** | `findexpenses KEYWORD [MORE_KEYWORDS] gn/GROUP_NAME`<br> e.g., `findexpenses dinner buffet gn/London`
 **Calculate Spending** | `transactionsummary gn/GROUP_NAME` <br> e.g., `transactionsummary gn/Bali` 
 **Calculate Payments** | `calculatepayments gn/GROUP_NAME` <br> e.g., `calculatepayments gn/Bali` 
 
