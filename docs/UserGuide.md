@@ -58,6 +58,7 @@ Here are some pointers to take note of.
 3. You will notice that our commands require you to use characters such as `e/`, `t/`, etc. This is allows our programme
 to locate which words belong to which category of input.
 
+<br>
 [Click here to return to table of contents](#tableofcontents)
 <br>
 --------------------------------------------------------------------------------------------------------------------
@@ -112,6 +113,7 @@ For those who are not as fast, familiarity with the commands over time will allo
 
 6. Refer to the [Features](#features) below for details of each command.
 
+<br>
 [Click here to return to table of contents](#tableofcontents)
 <br>
 --------------------------------------------------------------------------------------------------------------------
@@ -143,6 +145,7 @@ For those who are not as fast, familiarity with the commands over time will allo
 
 </div>
 
+<br>
 [Click here to return to table of contents](#tableofcontents)
 <br>
 --------------------------------------------------------------------------------------------------------------------
@@ -219,6 +222,7 @@ Examples:
 * `findcontacts alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+<br>
 [Click here to return to table of contents](#tableofcontents)
 <br>
 --------------------------------------------------------------------------------------------------------------------
@@ -366,6 +370,7 @@ Examples:
 * `groupeditname gn/Bali gn/Thailand` to change the group name from Bali to Thailand.
 * `groupeditname gn/Germany gn/Munich` to change the group name from Germany to Munich.
 
+<br>
 [Click here to return to table of contents](#tableofcontents)
 <br>
 --------------------------------------------------------------------------------------------------------------------
@@ -463,6 +468,7 @@ Examples:
 * `calculatepayments gn/London`<br>
   ![result for 'findcontacts Taiwan Malaysia'](images/CALCULATEPAYMENTSUI.png)
 
+<br>
 [Click here to return to table of contents](#tableofcontents)
 <br>
 --------------------------------------------------------------------------------------------------------------------
@@ -503,6 +509,7 @@ AWE data are saved as a JSON file `[JAR file location]/data/awe.json`. Advanced 
 If your changes to the data file makes its format invalid, AWE will discard all data and start with an empty data file at the next run.
 </div>
 
+<br>
 [Click here to return to table of contents](#tableofcontents)
 <br>
 --------------------------------------------------------------------------------------------------------------------
@@ -522,6 +529,7 @@ If your changes to the data file makes its format invalid, AWE will discard all 
 <br>
 If your questions are not answered in the FAQ, check out the issue page on our GitHub linked [here](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues).
 
+<br>
 [Click here to return to table of contents](#tableofcontents)
 <br>
 --------------------------------------------------------------------------------------------------------------------
@@ -577,6 +585,7 @@ Action | Format, Examples
 **Clear** | `clear`
 **Help** | `help` 
 
+<br>
 [Click here to return to table of contents](#tableofcontents)
 <br>
 --------------------------------------------------------------------------------------------------------------------
@@ -588,5 +597,6 @@ platform to maximise the efficiency of payment and recollection of debts. Our te
 experience for potential users. We are always looking to improve. As such, do drop us an email at awe80contact@gmail.com
 if you discover any bugs while using the application.
 
+<br>
 [Click here to return to table of contents](#tableofcontents)
 <br>
