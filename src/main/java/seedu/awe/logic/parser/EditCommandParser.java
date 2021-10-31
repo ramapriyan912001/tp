@@ -4,8 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.awe.commons.core.Messages.MESSAGE_EDITCONTACTCOMMAND_NOT_EDITED;
 import static seedu.awe.commons.core.Messages.MESSAGE_EDITCONTACTCOMMAND_USAGE;
 import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.awe.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.awe.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_TAG;
@@ -34,7 +32,7 @@ public class EditCommandParser implements Parser<EditContactCommand> {
     public EditContactCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_TAG);
 
         Index index;
 
@@ -51,12 +49,6 @@ public class EditCommandParser implements Parser<EditContactCommand> {
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
             editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
-        }
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
-        }
-        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 

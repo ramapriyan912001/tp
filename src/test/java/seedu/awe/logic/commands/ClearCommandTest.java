@@ -18,7 +18,10 @@ public class ClearCommandTest {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
-        assertCommandSuccess(new ClearCommand(), model, MESSAGE_CLEARCOMMAND_SUCCESS, expectedModel);
+        CommandResult commandResult = new CommandResult(MESSAGE_CLEARCOMMAND_SUCCESS,
+                false, false, false, true, false, false, false);
+
+        assertCommandSuccess(new ClearCommand(), model, commandResult, expectedModel);
     }
 
     @Test
@@ -27,7 +30,10 @@ public class ClearCommandTest {
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.setAddressBook(new AddressBook());
 
-        assertCommandSuccess(new ClearCommand(), model, MESSAGE_CLEARCOMMAND_SUCCESS, expectedModel);
+        CommandResult commandResult = new CommandResult(MESSAGE_CLEARCOMMAND_SUCCESS,
+                false, false, false, true, false, false, false);
+
+        assertCommandSuccess(new ClearCommand(), model, commandResult, expectedModel);
     }
 
 }

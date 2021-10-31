@@ -1,8 +1,6 @@
 package seedu.awe.commons.core;
-import static seedu.awe.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_COST;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.awe.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_EXCLUDE;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_NAME;
@@ -44,14 +42,10 @@ public class Messages {
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + AddContactCommand.COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
     public static final String MESSAGE_ADDCONTACTCOMMAND_SUCCESS = "New person added: %1$s";
@@ -72,12 +66,9 @@ public class Messages {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + EditContactCommand.COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_PHONE + "91234567 ";
     public static final String MESSAGE_EDITCONTACTCOMMAND_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_EDITCONTACTCOMMAND_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_EDITCONTACTCOMMAND_DUPLICATE_PERSON =
@@ -236,10 +227,10 @@ public class Messages {
 
 
     //messages for miscellaneous commands
-    public static final String MESSAGE_CLEARCOMMAND_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_CLEARCOMMAND_SUCCESS = "AWE book has been cleared!";
 
 
-    public static final String MESSAGE_EXITCOMMAND_ACKNOWLEDGEMENT = "Exiting Address Book as requested ...";
+    public static final String MESSAGE_EXITCOMMAND_ACKNOWLEDGEMENT = "Exiting AWE Book as requested ...";
 
 
     public static final String MESSAGE_HELPCOMMAND_USAGE = HelpCommand.COMMAND_WORD

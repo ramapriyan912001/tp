@@ -35,7 +35,8 @@ public class DeleteContactCommand extends Command {
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETECONTACTCOMMAND_DELETE_PERSON_SUCCESS, personToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETECONTACTCOMMAND_DELETE_PERSON_SUCCESS, personToDelete),
+                false, false, false, true, false, false, false);
     }
 
     @Override

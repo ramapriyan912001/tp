@@ -3,10 +3,7 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "tagged": [ "friends" ]
-  }, {
-    "name": "Alice Pauline",
-    "phone": "94351253"
-  } ],
+  }],
   "groups": [
     {
       "name": "Dubai",
@@ -14,7 +11,11 @@
         {
           "name": "Alice Pauline",
           "phone": "94351253"
-        },
+        }
+      ]
+    }, {
+      "name": "Dubai",
+      "members": [
         {
           "name": "Alice Pauline",
           "phone": "94351253"

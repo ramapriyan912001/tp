@@ -848,35 +848,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User chooses to add a person to the AddressBook.
-2. User enters add command into CLI along with person name, phone number, email, and address, and tags if applicable.
+2. User enters add command into CLI along with person name, phone number, and tags if applicable.
 3. AWE displays confirmation message.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. AWE detects invalid command format that does not contain all 4 parameter identifiers ("n/", "p/", "e/", "a/").
+* 2a. AWE detects invalid command format that does not contain all 2 parameter identifiers ("n/", "p/").
     * 2a1. AWE returns invalid command format error and displays ```add``` command format and example.
 
       Use case ends.
 
-* 2b. Command contains 4 parameter identifiers but name is blank.
+* 2b. Command contains 2 parameters identifiers but name is blank.
     * 2b1. AWE reminds user that names should only contain alphanumeric characters and should not be blank.
 
       Use case ends.
 
-* 2c. Command contains 4 parameter identifiers but phone number is less than 3 digits or not a number.
+* 2c. Command contains 2 parameters identifiers but phone number is less than 3 digits or not a number.
     * 2c1. AWE reminds user that phone numbers should only contain numbers and be at least 3 digits long.
-
-      Use case ends.
-
-* 2d. Command contains 4 parameter identifiers but email is blank or does not contain domain.
-    * 2d1. AWE reminds user of format of email input.
-
-      Use case ends.
-
-* 2e. Command contains 4 parameter identifiers but address is blank.
-    * 2e1. AWE reminds user that address can take any values and should not be blank.
 
       Use case ends.
 

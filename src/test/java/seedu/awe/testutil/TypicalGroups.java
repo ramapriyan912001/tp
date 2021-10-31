@@ -102,7 +102,7 @@ public class TypicalGroups {
             .build();
 
     public static final List<Payment> AMSTERDAM_WITH_EXPENSES_PAYMENTS = List.of(
-            new Payment(ELLE, HOON, new Cost(166.67)), new Payment(ELLE, IDA, new Cost(166.67))
+            new Payment(ELLE, IDA, new Cost(166.67)), new Payment(ELLE, HOON, new Cost(166.67))
     );
 
     public static final Group COLOMBO_WITH_EXPENSES = new GroupBuilder().withGroupName("Colombo")
