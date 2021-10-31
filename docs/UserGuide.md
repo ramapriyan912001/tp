@@ -70,7 +70,7 @@ For those who are not as fast, familiarity with the commands over time will allo
 
 1. Ensure you have Java `11` or above installed in your Computer. 
 
-2. Download the latest `awe.jar` from here (Coming Soon!).
+2. Download the latest `awe.jar` from [here](https://github.com/AY2122S1-CS2103T-F13-1/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your tp.
 
