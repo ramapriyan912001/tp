@@ -16,7 +16,7 @@ tip of their fingertips. This document marks the first step towards the accompli
 beginning of your journey around the world.
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;" name="tableofcontents"></div>
+<div style="page-break-after: always;" id="tableofcontents"></div>
 <p style="font-size: 1.75rem; margin-top: 60px; color: #e46c0a; font-weight:400; margin-bottom: 15px;">Table of Contents</p>
 * Table of Contents
 {:toc}
@@ -59,6 +59,7 @@ Here are some pointers to take note of.
 to locate which words belong to which category of input.
 
 [Click here to return to table of contents](#tableofcontents)
+<br>
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
