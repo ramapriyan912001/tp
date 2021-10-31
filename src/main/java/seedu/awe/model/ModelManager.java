@@ -123,6 +123,7 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        deletePersonFromGroups(target);
     }
 
     @Override
@@ -227,16 +228,8 @@ public class ModelManager implements Model {
         return payments;
     }
 
-    @Override
-    public void deletePersonFromGroups(Person person) {
-        List<Group> groupList = new ArrayList<>();
-        List<Group> groups = addressBook.getGroupList();
-        for (int i = 0; i < groups.size(); i++) {
-            if (groups.get(i).isPartOfGroup(person)) {
-                groupList.add(groups.get(i));
-            }
-        }
-
+    private void deletePersonFromGroups(Person person) {
+        List<Group> groupList = getGroupsOfPerson(person);
         for (int j = 0; j < groupList.size(); j++) {
             Group group = groupList.get(j);
             Group newGroup = group.removeMember(person);
@@ -246,6 +239,18 @@ public class ModelManager implements Model {
                 setGroup(group, newGroup);
             }
         }
+    }
+
+    private List<Group> getGroupsOfPerson(Person person) {
+        List<Group> groupList = new ArrayList<>();
+        List<Group> groups = addressBook.getGroupList();
+        for (int i = 0; i < groups.size(); i++) {
+            Group group = groups.get(i);
+            if (group.isPartOfGroup(person)) {
+                groupList.add(group);
+            }
+        }
+        return groupList;
     }
 
     @Override

@@ -235,11 +235,6 @@ public class AddContactCommandTest {
         }
 
         @Override
-        public void deletePersonFromGroups(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public ObservableList<Expense> getExpenses() {
             throw new AssertionError("This method should not be called.");
         }
