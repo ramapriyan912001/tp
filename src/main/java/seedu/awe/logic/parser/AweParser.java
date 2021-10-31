@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 import seedu.awe.logic.commands.AddContactCommand;
 import seedu.awe.logic.commands.AddExpenseCommand;
 import seedu.awe.logic.commands.CalculatePaymentsCommand;
-import seedu.awe.logic.commands.ClearCommand;
+import seedu.awe.logic.commands.ClearAllDataCommand;
 import seedu.awe.logic.commands.Command;
 import seedu.awe.logic.commands.CreateGroupCommand;
 import seedu.awe.logic.commands.DeleteContactCommand;
@@ -75,8 +75,8 @@ public class AweParser {
         case DeleteContactCommand.COMMAND_WORD:
             return new DeleteContactCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+        case ClearAllDataCommand.COMMAND_WORD:
+            return new ClearAllDataCommand();
 
         case FindContactsCommand.COMMAND_WORD:
             return new FindContactsCommandParser().parse(arguments);
