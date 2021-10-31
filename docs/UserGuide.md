@@ -68,7 +68,7 @@ AWE's primary asset is its speed. Unlike traditional Graphic User Interfaces (GU
 For those who type fast, the app will be faster than most mainstream contact management apps.
 For those who are not as fast, familiarity with the commands over time will allow you to harness the full capabilities of AWE.
 
-1. Ensure you have Java `11` or above installed in your Computer. 
+1. Ensure you have Java `11` or above installed in your Computer. Follow [this guide](https://www.codejava.net/java-se/download-and-install-java-11-openjdk-and-oracle-jdk) to install it.
 
 2. Download the latest `awe.jar` from [here](https://github.com/AY2122S1-CS2103T-F13-1/tp/releases).
 
