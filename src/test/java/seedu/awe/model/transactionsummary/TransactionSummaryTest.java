@@ -117,4 +117,10 @@ public class TransactionSummaryTest {
             i++;
         }
     }
+
+    @Test
+    public void toStringTest() {
+        String expectedString = "Alice Pauline spent $20.00.";
+        assertEquals(expectedString, ALICE_TRANSACTION_SUMMARY.toString());
+    }
 }

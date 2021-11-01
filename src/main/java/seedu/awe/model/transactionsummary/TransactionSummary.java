@@ -25,7 +25,7 @@ public class TransactionSummary implements Comparable<TransactionSummary> {
 
     @Override
     public String toString() {
-        return String.format("%s spent $%0.2f.", person.getName(), getCost());
+        return String.format("%s spent $%.2f.", person.getName(), getCost().cost);
     }
 
     public Person getPerson() {

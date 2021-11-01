@@ -20,6 +20,12 @@ public class NameTest {
     }
 
     @Test
+    public void constructor_tooLongName_throwsIllegalArgumentException() {
+        String invalidName = "123456789012345678901234567890123456789012345678901";
+        assertThrows(IllegalArgumentException.class, () -> new Name(invalidName));
+    }
+
+    @Test
     public void isValidName() {
         // null name
         assertThrows(NullPointerException.class, () -> Name.isValidGroupName(null));
