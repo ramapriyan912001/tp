@@ -37,4 +37,24 @@ public class NameTest {
         assertTrue(Name.isValidGroupName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidGroupName("David Roger Jackson Ray Jr 2nd")); // long names
     }
+
+    @Test
+    public void equals() {
+        Name name = new Name("John");
+
+        // same instance -> true
+        assertTrue(name.equals(name));
+
+        // null -> false
+        assertFalse(name.equals(null));
+
+        // String is passed in -> false
+        assertFalse(name.equals("John"));
+
+        // different name -> return false
+        assertFalse(name.equals(new Name("Amy")));
+
+        // different case -> return false
+        assertFalse(name.equals(new Name("john")));
+    }
 }

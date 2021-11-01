@@ -8,12 +8,16 @@ import static seedu.awe.testutil.Assert.assertThrows;
 import static seedu.awe.testutil.TypicalPersons.ALICE;
 import static seedu.awe.testutil.TypicalPersons.BOB;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.awe.model.person.exceptions.DuplicatePersonException;
 import seedu.awe.model.person.exceptions.PersonNotFoundException;
 import seedu.awe.testutil.PersonBuilder;
@@ -165,5 +169,55 @@ public class UniquePersonListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniquePersonList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void iterator() {
+        // Empty List
+        assertFalse(uniquePersonList.iterator().hasNext());
+
+        // Contains 1 Person
+        uniquePersonList.add(ALICE);
+        Iterator<Person> uniquePersonListIterator = uniquePersonList.iterator();
+
+        ObservableList<Person> singlePersonObservableList = FXCollections.observableArrayList(ALICE);
+        Iterator<Person> singlePersonObservableListIterator = singlePersonObservableList.iterator();
+
+        assertEquals(singlePersonObservableListIterator.next(), uniquePersonListIterator.next());
+        assertFalse(uniquePersonListIterator.hasNext());
+
+        // Contains > 1 Person
+        uniquePersonList.add(BOB);
+        uniquePersonListIterator = uniquePersonList.iterator();
+
+        ObservableList<Person> multiplePersonObservableList = FXCollections.observableArrayList(ALICE, BOB);
+        Iterator<Person> multiplePersonObservableListIterator = multiplePersonObservableList.iterator();
+
+        assertEquals(multiplePersonObservableListIterator.next(), uniquePersonListIterator.next());
+        assertEquals(multiplePersonObservableListIterator.next(), uniquePersonListIterator.next());
+        assertFalse(uniquePersonListIterator.hasNext());
+    }
+
+    @Test
+    public void equals() {
+        // same instance -> true
+        assertTrue(uniquePersonList.equals(uniquePersonList));
+
+        // null -> false
+        assertFalse(uniquePersonList.equals(null));
+
+        // list is passed in -> false
+        assertFalse(uniquePersonList.equals(new ArrayList<>()));
+
+        // different person -> return false
+        UniquePersonList containExtraPerson = new UniquePersonList();
+        containExtraPerson.add(ALICE);
+
+        assertFalse(uniquePersonList.equals(containExtraPerson));
+
+        // contain same amount of person
+        uniquePersonList.add(ALICE);
+
+        assertTrue(uniquePersonList.equals(containExtraPerson));
     }
 }
