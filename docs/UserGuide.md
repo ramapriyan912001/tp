@@ -167,6 +167,7 @@ Format: `addcontact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 * Duplicate contacts cannot be added into AWE
 * Contacts are duplicate if they have the same name
+* NAME are case-sensitive, "Hans" and "hans" will be treated as 2 separate person. Refer to [FAQ](#4faq) for the rational behind this.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A contact can have any number of tags (including 0)
@@ -251,6 +252,7 @@ Format: `creategroup gn/GROUP_NAME n/NAME1 [n/NAME2] [n/NAME3]...[t/TAG1]`
 
 * GROUP_NAME is a mandatory field.
 * A group with the same name as GROUP_NAME cannot exist for the creation of a group through this command. 
+* GROUP_NAME are case-sensitive, "Japan" and "japan" will be treated as 2 separate groups. Refer to [FAQ](#4faq) for the rational behind this.
 * At least one NAME is necessary.
 * The names are required to be in AWE and should match contact names exactly.
 * Tags cannot have whitespace and special characters other than alphanumeric characters.
@@ -529,6 +531,13 @@ If your changes to the data file makes its format invalid, AWE will discard all 
 <div style="page-break-after: always;"></div>
 
 ## 4. FAQ
+**Q**: Why are NAME case-sensitive?
+**A**: Since common names are quite usual, we have decided to allow the addition of 2 contacts such as "jun jie" and "Jun Jie" in order to keep track of their numbers. 
+Furthermore, since AWE deals with overseas travels, quite a number of travellers might get a new overseas number when they are travelling. This will allow users to keep track of both
+their local and overseas local separately. Deleting the number after returning from the trip will be easier as well. In both cases, users can distinguish the 2 contacts with similar names using tags.
+
+**Q**: Why are GROUP_NAME case-sensitive?
+**A**: Similar to the above question, a user might travel to the same destination more than once. This will allow the addition of each individual trips.
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AWE home folder.
