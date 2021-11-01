@@ -34,8 +34,11 @@ public class AddContactCommandIntegrationTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(validPerson);
 
-        assertCommandSuccess(new AddContactCommand(validPerson), model,
-                String.format(MESSAGE_ADDCONTACTCOMMAND_SUCCESS, validPerson), expectedModel);
+        CommandResult commandResult = new CommandResult(String.format(MESSAGE_ADDCONTACTCOMMAND_SUCCESS, validPerson),
+                false, false, false, true, false, false, false);
+
+
+        assertCommandSuccess(new AddContactCommand(validPerson), model, commandResult, expectedModel);
     }
 
     @Test

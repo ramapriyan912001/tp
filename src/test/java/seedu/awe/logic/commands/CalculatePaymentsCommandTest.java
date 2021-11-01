@@ -125,13 +125,11 @@ public class CalculatePaymentsCommandTest {
     @Test
     public void getPayments_validGroupExpenses_returnsPaymentList() throws CommandException {
         resetModel();
-        assertEquals(BALI_WITH_EXPENSES_PAYMENTS, new CalculatePaymentsCommand(BALI_WITH_EXPENSES).getPayments(
-                BALI_WITH_EXPENSES
-        ));
+        assertEquals(BALI_WITH_EXPENSES_PAYMENTS, new CalculatePaymentsCommand(BALI_WITH_EXPENSES)
+                .getPayments(BALI_WITH_EXPENSES));
 
-        assertEquals(AMSTERDAM_WITH_EXPENSES_PAYMENTS, new CalculatePaymentsCommand(AMSTERDAM_WITH_EXPENSES).getPayments
-                (AMSTERDAM_WITH_EXPENSES
-        ));
+        assertEquals(AMSTERDAM_WITH_EXPENSES_PAYMENTS, new CalculatePaymentsCommand(AMSTERDAM_WITH_EXPENSES)
+                .getPayments(AMSTERDAM_WITH_EXPENSES));
 
         assertNotEquals(BALI_WITH_EXPENSES_PAYMENTS, new CalculatePaymentsCommand(AMSTERDAM_WITH_EXPENSES)
                 .getPayments(AMSTERDAM_WITH_EXPENSES));

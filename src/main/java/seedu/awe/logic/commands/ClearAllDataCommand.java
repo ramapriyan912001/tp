@@ -17,6 +17,7 @@ public class ClearAllDataCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setAddressBook(new AddressBook());
-        return new CommandResult(MESSAGE_CLEARALLDATACOMMAND_SUCCESS);
+        return new CommandResult(MESSAGE_CLEARALLDATACOMMAND_SUCCESS,
+                false, false, false, true, false, false, false);
     }
 }

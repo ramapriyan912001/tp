@@ -89,11 +89,11 @@ For those who are not as fast, familiarity with the commands over time will allo
 
    * **`expenses`** : The command `expenses gn/London` lists all expenses in the preloaded group `London`.
      
-   * **`addcontact`** : The command `addcontact n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` adds a contact named `John Doe` to AWE.
+   * **`addcontact`** : The command `addcontact n/John Doe p/98765432` adds a contact named `John Doe` to AWE.
 
    * **`deletecontact`** : The command `deletecontact 3` removes the 3rd contact shown in the current list.
 
-   * **`creategroup`** : The command `creategroup gn/Bali n/John Doe n/Jane Doe t/friends` creates a group named Bali containing members `John Doe` and `Jane Doe`, with the tag `friends`.
+   * **`creategroup`** : The command `creategroup gn/Bali n/John Doe n/Alex Yeoh t/friends` creates a group named Bali containing members `John Doe` and `Alex Yeoh`, with the tag `friends`.
 
    * **`deletegroup`** : The command `deletegroup gn/Bali` removes the group named Bali.
    
@@ -134,7 +134,7 @@ For those who are not as fast, familiarity with the commands over time will allo
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* Parameters can be in any order.<br>
+* Parameters can be in any order other than `addexpenses`. Look at [`addexoense`](#332-adding-a-shared-expense-addexpense) for more details regarding it. <br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
@@ -142,6 +142,8 @@ For those who are not as fast, familiarity with the commands over time will allo
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clearalldata`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  
+* Except `findexpenses`, `findgroups`, `findcontacts`, parameters are case-sensitive.
 
 </div>
 
@@ -163,7 +165,9 @@ Format: `contacts`
 
 Adds a contact to AWE.
 
-Format: `addcontact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `addcontact n/NAME p/PHONE_NUMBER [t/TAG]…​`
+
+* Contact list will be displayed after the command succeeded.
 
 * Duplicate contacts cannot be added into AWE
 * Contacts are duplicate if they have the same name
@@ -174,26 +178,26 @@ A contact can have any number of tags (including 0)
 </div>
 
 Examples:
-* `addcontact n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `addcontact n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `addcontact n/John Doe p/98765432`
+* `addcontact n/Betsy Crowe t/friend p/1234567 t/criminal`
 
 #### 3.1.3. Editing a contact : `editcontact`
 
 Edits an existing contact in AWE.
 
-Format: `editcontact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `editcontact INDEX [n/NAME] [p/PHONE] [t/TAG]…​`
 
 * Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Since the command edits the contact based on the list visible to the user, it is necessary for the user to be viewing a list of contacts when utilising this command. This means that the user must have entered a `findcontacts` or `contacts` command just prior to entering the `editcontact` command.  
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the contact will be removed i.e adding of tags is not cumulative.
-* You can remove all the contact’s tags by typing `t/` without
-    specifying any tags after it.
+* You can remove all the contact’s tags by typing `t/` without specifying any tags after it.
 
 Examples:
-*  `editcontact 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
+*  `editcontact 1 p/91234567` Edits the phone number of the 1st contact to be `91234567`.
 *  `editcontact 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
+
 
 #### 3.1.4. Deleting a contact : `deletecontact`
 
@@ -206,7 +210,7 @@ Format: `deletecontact INDEX`
 * If the contact was the only member of a group, that group will now be deleted.  
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* Since the command deletes the contact based on the list visible to the user, it is necessary for the user to be viewing a list of contacts when utilising this command. This means that the user must have entered a `findcontacts` or `contacts` command just prior to entering the `deletecontact` command.
+* Contact list will be displayed after the command succeeded.
 
 Examples:
 * `contacts` to display a list of all contacts, followed by `deletecontact 2` deletes the 2nd contact in AWE.
@@ -224,6 +228,7 @@ Format: `findcontacts KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * contacts matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Contact list will be displayed after the command succeeded.
 
 Examples:
 * `findcontacts John` returns `john` and `John Doe`
@@ -257,6 +262,7 @@ Format: `creategroup gn/GROUP_NAME n/NAME1 [n/NAME2] [n/NAME3]...[t/TAG1]`
 * The names are required to be in AWE and should match contact names exactly.
 * Tags cannot have whitespace and special characters other than alphanumeric characters.
 * Tags are optional.
+* Group list will be displayed after the command succeeded.
 
 Examples:
 * `creategroup gn/Bali n/Jacob Tan n/Max Chia n/Julianne Tay`
@@ -270,6 +276,7 @@ Format: `deletegroup gn/GROUP_NAME`
 
 * GROUP_NAME is a mandatory field.
 * A group with GROUP_NAME as its name must exist.
+* Group list will be displayed after the command succeeded.
 
 Examples:
 * `deletegroup gn/Bali`
@@ -287,6 +294,7 @@ Format: `findgroups KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g. `London` will not match `Lond`
 * Groups matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Taiwan Malaysia` will return `Taiwan`, `Malaysia`
+* Group list will be displayed after the command succeeded.
 
 Examples:
 * `findgroups London` returns `London` and `london trip`
@@ -309,6 +317,7 @@ Format: `groupaddcontact gn/GROUP_NAME n/CONTACT_NAME1 [n/CONTACT_NAME2] ...`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Type in the full name of contacts to add.
 * Duplicate members in a group/user input will not be added.
+* Group list will not be displayed after the command succeeded.
 
 Examples:
 * `groupaddcontact gn/Bali n/Irfan Ibrahim` to add Irfan Ibrahim into the Bali travel group.
@@ -327,6 +336,7 @@ Format: `groupremovecontact gn/GROUP_NAME n/CONTACT_NAME [n/CONTACT_NAME] ...`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Type in the full name of contacts to remove.
 * Members can only be removed if they are in the travel group.
+* Group list will not be displayed after the command succeeded.
 
 Examples:
 * `groupremovecontact gn/Bali n/Irfan Ibrahim` to remove Irfan Ibrahim from the Bali travel group.
@@ -343,6 +353,7 @@ Format: `groupaddtag gn/GROUP_NAME t/TAG [t/TAG2] ...`
 * The search is case-sensitive. e.g `bali` will not match `Bali`
 * Only full words will be matched e.g. `Bal` will not match `Bali`
 * Duplicate tags in a group/user input will not be added.
+* Group list will not be displayed after the command succeeded.
 
 Examples:
 * `groupaddtag gn/Bali t/Friends` to indicate that the Bali travel group is with friends.
@@ -360,6 +371,7 @@ Format: `groupremovetag gn/GROUP_NAME t/TAG [t/TAG2] ...`
 * The search is case-sensitive. e.g `bali` will not match `Bali`
 * Only full words will be matched e.g. `Bal` will not match `Bali`
 * Duplicate tags in a group/user input will not be removed.
+* Group list will not be displayed after the command succeeded.
 
 Examples:
 * `groupremovetag gn/Bali t/Friends` to remove the friends tag from the Bali travel group.
@@ -374,6 +386,7 @@ Format: `groupeditname gn/OLD_GROUP_NAME gn/NEW_GROUP_NAME`
 * Group name in the user input must already be an existing group.
 * The search is case-sensitive. e.g `bali` will not match `Bali`
 * Only full words will be matched e.g. `Bal` will not match `Bali`
+* Group list will not be displayed after the command succeeded.
 
 Examples:
 * `groupeditname gn/Bali gn/Thailand` to change the group name from Bali to Thailand.
@@ -411,7 +424,8 @@ Format: `addexpense n/PAYER_NAME gn/GROUP_NAME $/TOTAL_AMOUNT_PAID d/DESCRIPTION
 * The names are required to be in AWE.
 * The names are required to be in the specified group.
 * DESCRIPTION of the expense does not need to be unique.
-* Each contactal payment has to be a name immediately followed by the amount of the personal payment.
+* Each personal payment has to be a name immediately followed by the amount of the personal payment.
+* Expense list of the group will not be displayed after the command succeeded.
 
 Examples:
 * `addexpense n/Nic gn/Catch up $/50 d/Movie and dinner`
@@ -428,6 +442,7 @@ Format: `deleteexpense INDEX`
 * INDEX argument is mandatory.
 * INDEX has to be between 1 and the length of the list of expenses visible to the user on the screen.
 * Since the command deletes the expense based on the list visible to the user, it is necessary for the user to be viewing a list of expenses when utilising this command. This means that the user must have entered a `findexpenses` or `expenses` command just prior to entering the `deleteexpense` command. 
+* Expense list of the group will remain to be displayed after the command succeeded.
 
 Examples:
 * `deleteexpense 1`
@@ -445,13 +460,14 @@ Format: `findexpenses KEYWORD [MORE_KEYWORDS] gn/GROUP_NAME`
 * Only full words will be matched e.g. `Dinner` will not match `Dinners`
 * Expenses matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Dinner Transportation` will return `Friday dinner`, `Transportation tickets`
+* Expense list of the group will be displayed after the command succeeded.
 
 Examples:
 * `findexpenses dinner gn/London` returns `dinner` and `Friday dinner` in the group `London`
 * `findexpenses lunch souvenirs gn/London` returns `lunch`, `souvenirs`in the group `London`<br>
 
 #### 3.3.5 Calculating total spending of each user: `transactionsummary`
-Displays a list of spending for each users in the group.
+Displays a list of individual spending for each users in the group.
 
 Format: `transactionsummary gn/GROUP_NAME`
 
@@ -564,9 +580,9 @@ If your questions are not answered in the FAQ, check out the issue page on our G
 Action | Format, Examples
 --------|------------------
 **View Contacts** | `contacts`
-**Add Contact** | `addcontact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add Contact** | `addcontact n/NAME p/PHONE_NUMBER [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 t/friend t/colleague`
 **Delete Contact** | `deletecontact INDEX`<br> e.g., `delete 3`
-**Edit Contact** | `editcontact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit Contact** | `editcontact INDEX [n/NAME] [p/PHONE_NUMBER] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee`
 **Find Contacts** | `findcontacts KEYWORD [MORE_KEYWORDS]`<br> e.g., `findcontacts James Jake`
 
 

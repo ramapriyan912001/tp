@@ -99,7 +99,8 @@ public class CreateGroupCommand extends Command {
         model.setAllMembersOfGroup(group);
         logger.fine("Created group \"" + group.getGroupName() + "\"");
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
-        return new CommandResult(MESSAGE_CREATEGROUPCOMMAND_SUCCESS, false, false, true, false, false, false, false);
+        return new CommandResult(MESSAGE_CREATEGROUPCOMMAND_SUCCESS,
+                false, false, true, false, false, false, false);
     }
 
     @Override

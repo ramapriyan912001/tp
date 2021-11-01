@@ -18,7 +18,11 @@ public class ClearAllDataCommandTest {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
-        assertCommandSuccess(new ClearAllDataCommand(), model, MESSAGE_CLEARALLDATACOMMAND_SUCCESS, expectedModel);
+        CommandResult commandResult = new CommandResult(MESSAGE_CLEARALLDATACOMMAND_SUCCESS,
+                false, false, false, true, false, false, false);
+
+        assertCommandSuccess(new ClearAllDataCommand(), model, commandResult, expectedModel);
+
     }
 
     @Test
@@ -27,7 +31,11 @@ public class ClearAllDataCommandTest {
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.setAddressBook(new AddressBook());
 
-        assertCommandSuccess(new ClearAllDataCommand(), model, MESSAGE_CLEARALLDATACOMMAND_SUCCESS, expectedModel);
+        CommandResult commandResult = new CommandResult(MESSAGE_CLEARALLDATACOMMAND_SUCCESS,
+                false, false, false, true, false, false, false);
+
+        assertCommandSuccess(new ClearAllDataCommand(), model, commandResult, expectedModel);
+
     }
 
 }
