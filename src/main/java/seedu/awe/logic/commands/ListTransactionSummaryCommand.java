@@ -17,7 +17,13 @@ public class ListTransactionSummaryCommand extends Command {
 
     private final Group group;
 
+    /**
+     * Constructor for ListTransactionSummaryCommand
+     *
+     * @param group Group to show transaction summary
+     */
     public ListTransactionSummaryCommand(Group group) {
+        requireNonNull(group);
         this.group = group;
     }
 
@@ -37,5 +43,18 @@ public class ListTransactionSummaryCommand extends Command {
         return new CommandResult(MESSAGE_LISTTRANSACTIONSUMMARYCOMMAND_SUCCESS, false, false,
                 false, false, false,
                 true, false);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof ListTransactionSummaryCommand)) { // instanceof handles nulls
+            return false;
+        }
+
+        return group.equals(((ListTransactionSummaryCommand) other).group); // state check
     }
 }

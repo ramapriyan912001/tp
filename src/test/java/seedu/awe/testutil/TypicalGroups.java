@@ -26,6 +26,7 @@ import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.payment.Payment;
 import seedu.awe.model.person.Person;
+import seedu.awe.model.transactionsummary.TransactionSummary;
 
 /**
  * A utility class containing a list of {@code Group} objects to be used in tests.
@@ -89,6 +90,12 @@ public class TypicalGroups {
 
     public static final List<Payment> BALI_WITH_EXPENSES_PAYMENTS = List.of(
             new Payment(ALICE, AMY, new Cost(400.00)), new Payment(ALICE, BOB, new Cost(200))
+    );
+
+    public static final List<TransactionSummary> BALI_WITH_TRANSACTION_SUMMARIES = List.of(
+            new TransactionSummary(ALICE, new Cost(400)),
+            new TransactionSummary(BOB, new Cost(400)),
+            new TransactionSummary(AMY, new Cost(400))
     );
 
     public static final Expense TEST1 = new Expense(ALICE, new Cost(1000.00), new Description("test1"), List.of(ELLE));
