@@ -8,12 +8,16 @@ import static seedu.awe.testutil.Assert.assertThrows;
 import static seedu.awe.testutil.TypicalPersons.ALICE;
 import static seedu.awe.testutil.TypicalPersons.BOB;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.junit.jupiter.api.Test;
-
 import seedu.awe.model.person.exceptions.DuplicatePersonException;
 import seedu.awe.model.person.exceptions.PersonNotFoundException;
 import seedu.awe.testutil.PersonBuilder;
