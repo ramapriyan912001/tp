@@ -31,6 +31,8 @@ public class GroupNameTest {
         assertFalse(Name.isValidGroupName(" ")); // spaces only
         assertFalse(Name.isValidGroupName("^")); // only non-alphanumeric characters
         assertFalse(Name.isValidGroupName("bali*")); // contains non-alphanumeric characters
+        assertFalse(Name.isValidGroupName("123456789012345678901234567"
+                + "890123456789012345678901")); // contains > 50 characters
 
         // valid name
         assertTrue(Name.isValidGroupName("hong kong")); // alphabets only
@@ -38,5 +40,7 @@ public class GroupNameTest {
         assertTrue(Name.isValidGroupName("budapest 2nd time")); // alphanumeric characters
         assertTrue(Name.isValidGroupName("Capital Bangkok")); // with capital letters
         assertTrue(Name.isValidGroupName("The Grand Canyon and Niagara Falls")); // long names
+        assertTrue(Name.isValidGroupName("123456789012345678901234567"
+                + "89012345678901234567890")); // contains 50 characters
     }
 }

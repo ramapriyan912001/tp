@@ -1,6 +1,8 @@
 package seedu.awe;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Paths;
 import java.util.Collections;
@@ -35,6 +37,23 @@ public class AppParametersTest {
         parametersStub.namedParameters.put("config", "a\0");
         expected.setConfigPath(null);
         assertEquals(expected, AppParameters.parse(parametersStub));
+    }
+
+    @Test
+    public void equals() {
+        // Same object -> true
+        assertTrue(expected.equals(expected));
+
+        // null object -> false
+        assertFalse(expected.equals(null));
+
+        // other objects passed in
+        assertFalse(expected.equals("hello"));
+
+        // Another instance passed in
+        assertTrue(expected.equals(new AppParameters()));
+        assertEquals(expected, new AppParameters());
+
     }
 
     private static class ParametersStub extends Application.Parameters {

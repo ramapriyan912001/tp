@@ -1,6 +1,6 @@
 package seedu.awe.logic.parser;
 
-import static seedu.awe.commons.core.Messages.MESSAGE_FINDCONTACTSCOMMAND_USAGE;
+import static seedu.awe.commons.core.Messages.MESSAGE_FINDGROUPSCOMMAND_USAGE;
 import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
@@ -23,7 +23,7 @@ public class FindGroupsCommandParser implements Parser<FindGroupsCommand> {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_FINDCONTACTSCOMMAND_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_FINDGROUPSCOMMAND_USAGE));
         }
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
