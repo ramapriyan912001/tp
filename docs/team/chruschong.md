@@ -59,7 +59,7 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
 * **New Feature**: Developed storage functionalities for `creategroup` and `deletegroup` feature.
   * What it does: Allows group data to be saved upon creation or deletion of group.
   * Justification: This feature is crucial as the changes to travel groups should be automatically saved.
-  * Highlights: This implementation ensures that the most up-to-date group data is saved into `/data/addressbook.json` with each command.
+  * Highlights: This implementation ensures that the most up-to-date group data is saved into `/data/awe.json` with each command.
   * Contribution: Pieced together the basic framework provided by [@ramapriyan912001](https://github.com/ramapriyan912001) to develop fully functional storage abilities for `creategroup` and `deletegroup`.
   
 ### Others
