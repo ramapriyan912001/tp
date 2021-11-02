@@ -1,14 +1,15 @@
 package seedu.awe.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.awe.logic.commands.GroupEditNameCommand;
-import seedu.awe.model.group.GroupName;
-
 import static seedu.awe.commons.core.Messages.MESSAGE_GROUPEDITNAMECOMMAND_USAGE;
 import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.awe.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.awe.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.awe.logic.commands.GroupEditNameCommand;
+import seedu.awe.model.group.GroupName;
 
 public class GroupEditNameCommandParserTest {
     private static final String TAG_EMPTY = " " + PREFIX_GROUP_NAME;

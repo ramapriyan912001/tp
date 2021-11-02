@@ -1,0 +1,18 @@
+{
+  "persons": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "tagged": [ "friends" ]
+  }],
+  "groups": [
+    {
+      "name": "Japan",
+      "members": [
+        {
+          "name": "Alice Pauline",
+          "phone": "94351253"
+        }
+      ]
+    }
+  ]
+}
