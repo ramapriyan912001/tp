@@ -135,7 +135,7 @@ public class Messages {
     public static final String MESSAGE_GROUPADDTAGCOMMAND_SUCCESS = "New tag(s) added to group\n";
     public static final String MESSAGE_GROUPADDTAGCOMMAND_DUPLICATE_TAG = "%1$s is already in the group\n";
     public static final String MESSAGE_GROUPADDTAGCOMMAND_USAGE =
-            "groupaddtag gn/[GROUPNAME] n/[TAG1] n/[OPTIONAL TAG2]...\n";
+            "groupaddtag gn/[GROUPNAME] t/[TAG1] t/[OPTIONAL TAG2]...\n";
 
 
     public static final String MESSAGE_GROUPREMOVETAG_SUCCESS = "Tag(s) removed from group\n";
