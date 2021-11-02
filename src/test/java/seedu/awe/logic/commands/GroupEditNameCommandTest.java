@@ -57,7 +57,7 @@ public class GroupEditNameCommandTest {
     public void execute_invalidCommand_failure() {
         GroupEditNameCommand groupEditNameCommand = new GroupEditNameCommand(BALI_GROUP_NAME, JAPAN_GROUP_NAME, false);
 
-        String expectedMessage = Messages.MESSAGE_GROUPEDITNAMECOMMAND_ERROR + "\n"
+        String expectedMessage = Messages.MESSAGE_GROUPEDITNAMECOMMAND_ERROR
                 + Messages.MESSAGE_GROUPEDITNAMECOMMAND_USAGE;
 
         assertCommandFailure(groupEditNameCommand, model, expectedMessage);

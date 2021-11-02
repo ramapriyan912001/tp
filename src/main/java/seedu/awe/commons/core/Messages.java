@@ -105,49 +105,53 @@ public class Messages {
             + PREFIX_GROUP_NAME + "GROUP_NAME\n"
             + "Example: " + DeleteGroupCommand.COMMAND_WORD + " "
             + PREFIX_GROUP_NAME + "Bali";
-    public static final String MESSAGE_DELETEGROUPCOMMAND_SUCCESS = "Group %s with %d member(s) deleted";
+    public static final String MESSAGE_DELETEGROUPCOMMAND_SUCCESS = "Group %s with %d member(s) deleted\n";
     public static final String MESSAGE_DELETEGROUPCOMMAND_GROUP_DOES_NOT_EXIST =
-            "This group does not exist in the awe book";
+            "This group does not exist in the awe book\n";
 
 
     public static final String MESSAGE_FINDGROUPSCOMMAND_USAGE = FindGroupsCommand.COMMAND_WORD
             + ": Finds all groups whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + FindGroupsCommand.COMMAND_WORD + " london";
+            + "Example: " + FindGroupsCommand.COMMAND_WORD + " london\n";
 
 
-    public static final String MESSAGE_GROUPADDCONTACTCOMMAND_SUCCESS = "New member(s) added to group";
+    public static final String MESSAGE_GROUPADDCONTACTCOMMAND_SUCCESS = "New member(s) added to group\n";
     public static final String MESSAGE_GROUPADDCONTACTCOMMAND_ERROR =
-            "Contact(s) not added. Be sure to use the exact names of group members";
-    public static final String MESSAGE_GROUPADDCONTACTCOMMAND_DUPLICATE_PERSON = "%1$s is already in the group";
+            "Contact(s) not added. Be sure to use the exact names of group members\n";
+    public static final String MESSAGE_GROUPADDCONTACTCOMMAND_DUPLICATE_PERSON = "%1$s is already in the group\n";
     public static final String MESSAGE_GROUPADDCONTACTCOMMAND_USAGE =
-            "groupaddcontact gn/[GROUPNAME] n/[NAME1] n/[OPTIONAL NAME2]";
+            "groupaddcontact gn/[GROUPNAME] n/[NAME1] n/[OPTIONAL NAME2]...\n";
 
 
-    public static final String MESSAGE_GROUPREMOVECONTACT_SUCCESS = "Member(s) removed from group";
-    public static final String MESSAGE_GROUPREMOVECONTACT_ERROR = "Contact(s) not removed from group."
-            + "Be sure to use the exact names of group members";
+    public static final String MESSAGE_GROUPREMOVECONTACT_SUCCESS = "Member(s) removed from group\n";
+    public static final String MESSAGE_GROUPREMOVECONTACT_ERROR = "Contact(s) not removed from group.\n"
+            + "Be sure to use the exact names of group members\n";
     public static final String MESSAGE_GROUPREMOVECONTACT_USAGE =
-            "groupremovecontact gn/[GROUPNAME] n/[NAME1] n/[OPTIONAL NAME2]";
+            "groupremovecontact gn/[GROUPNAME] n/[NAME1] n/[OPTIONAL NAME2]...\n";
 
 
-    public static final String MESSAGE_GROUPADDTAGCOMMAND_SUCCESS = "New tag(s) added to group";
-    public static final String MESSAGE_GROUPADDTAGCOMMAND_DUPLICATE_TAG = "%1$s is already in the group";
+    public static final String MESSAGE_GROUPADDTAGCOMMAND_SUCCESS = "New tag(s) added to group\n";
+    public static final String MESSAGE_GROUPADDTAGCOMMAND_DUPLICATE_TAG = "%1$s is already in the group\n";
     public static final String MESSAGE_GROUPADDTAGCOMMAND_USAGE =
-            "groupaddtag gn/[GROUPNAME] n/[TAG1] n/[OPTIONAL TAG2]";
+            "groupaddtag gn/[GROUPNAME] n/[TAG1] n/[OPTIONAL TAG2]...\n";
 
 
-    public static final String MESSAGE_GROUPREMOVETAG_SUCCESS = "Tag(s) removed from group";
+    public static final String MESSAGE_GROUPREMOVETAG_SUCCESS = "Tag(s) removed from group\n";
     public static final String MESSAGE_GROUPREMOVETAG_ERROR =
-            "Tag(s) not removed from group. Make sure to use exact tag names.";
-    public static final String MESSAGE_GROUPREMOVETAG_NONEXISTENT_TAG = "The tag \"%1$s\" is not found in the group.";
-    public static final String MESSAGE_GROUPREMOVETAG_USAGE = "groupaddtag gn/[GROUPNAME] n/[TAG1] n/[OPTIONAL TAG2]";
+            "Tag(s) not removed from group. Make sure to use exact tag names.\n";
+    public static final String MESSAGE_GROUPREMOVETAG_NONEXISTENT_TAG = "The tag \"%1$s\" is not found in the group.\n";
+    public static final String MESSAGE_GROUPREMOVETAG_USAGE =
+            "groupaddtag gn/[GROUPNAME] n/[TAG1] n/[OPTIONAL TAG2]...\n";
 
 
-    public static final String MESSAGE_GROUPEDITNAMECOMMAND_SUCCESS = "Group name changed to %1$s";
-    public static final String MESSAGE_GROUPEDITNAMECOMMAND_ERROR = "Group name not changed.";
-    public static final String MESSAGE_GROUPEDITNAMECOMMAND_USAGE = "groupeditname gn/[OLDGROUPNAME] gn/[NEWGROUPNAME]";
+    public static final String MESSAGE_GROUPEDITNAMECOMMAND_SUCCESS = "Group name changed to %1$s\n";
+    public static final String MESSAGE_GROUPEDITNAMECOMMAND_ERROR = "Group name not changed.\n";
+    public static final String MESSAGE_GROUPEDITNAMECOMMAND_EXISTING_GROUP =
+            "Group name %1$s already exists in AWE. Please use a different name.";
+    public static final String MESSAGE_GROUPEDITNAMECOMMAND_USAGE =
+            "groupeditname gn/[OLDGROUPNAME] gn/[NEWGROUPNAME]\n";
 
 
     public static final String MESSAGE_NONEXISTENT_GROUP = "Group %1$s does not exist.";
