@@ -7,8 +7,12 @@ import static seedu.awe.commons.util.AppUtil.checkArgument;
 public class Cost {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Cost should only contain numeric characters without spaces up to only 2 decimal places, "
-                    + "and it should not be blank";
+            "Cost should only contain numeric characters without spaces, should not be negative numbers, "
+                    + "should only contain at most two decimal places otherwise the cost will be rounded off"
+                    + "to the nearest two decimal places, "
+                    + "and it should not be blank!";
+
+    public static final double MAX_COST = 10000000;
 
     /*
      * The first character of the address must not be a whitespace,
@@ -25,8 +29,13 @@ public class Cost {
      */
     public Cost(String cost) {
         requireNonNull(cost);
-        checkArgument(isValidCost(cost), MESSAGE_CONSTRAINTS);
-        this.cost = Double.parseDouble(cost);
+        double costAsDouble = Double.parseDouble(cost);;
+        String costDoubleToString = String.format("%.2f", costAsDouble);;
+        checkArgument(isValidCost(costDoubleToString), MESSAGE_CONSTRAINTS);
+        if (costAsDouble > 10000000) {
+            costAsDouble = 10000000;
+        }
+        this.cost = costAsDouble;
     }
 
     /**
@@ -35,7 +44,11 @@ public class Cost {
      * @param cost A valid cost of type double.
      */
     public Cost(double cost) {
-        String costDoubleToString = String.valueOf(cost);
+        requireNonNull(cost);
+        if (cost > MAX_COST) {
+            cost = MAX_COST;
+        }
+        String costDoubleToString = String.format("%.2f", cost);;
         checkArgument(isValidCost(costDoubleToString), MESSAGE_CONSTRAINTS);
         this.cost = cost;
     }
@@ -54,6 +67,8 @@ public class Cost {
         double result = cost + c.cost;
         if (result < 0) {
             result = 0;
+        } else if (result > MAX_COST) {
+            result = MAX_COST;
         }
         return new Cost(result);
     }
@@ -104,12 +119,14 @@ public class Cost {
      * Returns true if a given string is a valid cost.
      */
     public static boolean isValidCost(String test) {
-        return test.matches(VALIDATION_REGEX);
+        double costAsDouble = Double.parseDouble(test);
+        String costDoubleToString = String.format("%.2f", costAsDouble);
+        return costDoubleToString.matches(VALIDATION_REGEX);
     }
 
     @Override
     public String toString() {
-        return String.format("%.2f", cost);
+        return "$" + String.format("%.2f", cost);
     }
 
     @Override

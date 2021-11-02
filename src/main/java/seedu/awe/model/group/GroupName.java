@@ -5,8 +5,8 @@ import static seedu.awe.commons.util.AppUtil.checkArgument;
 
 public class GroupName {
     public static final String MESSAGE_CONSTRAINTS =
-            "Group Names should be 50 characters or lesser, only contain alphanumeric characters "
-                    + "and spaces, and it should not be blank";
+            "Group Names should only contain alphanumeric characters and spaces, "
+                    + "should be 50 characters or less and it should not be blank";
 
     /*
      * The first character of the awe must not be a whitespace,
@@ -34,7 +34,11 @@ public class GroupName {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidGroupName(String test) {
+<<<<<<< Updated upstream
         return test.matches(VALIDATION_REGEX) && test.length() <= MAX_LENGTH;
+=======
+        return test.matches(VALIDATION_REGEX) && test.length() <= 50;
+>>>>>>> Stashed changes
     }
 
     /**

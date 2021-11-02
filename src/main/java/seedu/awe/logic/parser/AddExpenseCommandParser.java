@@ -72,9 +72,9 @@ public class AddExpenseCommandParser implements Parser<AddExpenseCommand> {
 
         Person payer = getPayer(names);
 
-        if (payer == null) {
-            throw new ParseException(MESSAGE_ADDEXPENSECOMMAND_NOT_PART_OF_GROUP);
-        }
+//        if (payer == null) {
+//            throw new ParseException(MESSAGE_ADDEXPENSECOMMAND_NOT_PART_OF_GROUP);
+//        }
 
         Cost totalCost = getTotalCost(costs);
         ArrayList<Person> namesAsPersons = namesToPerson(names);
