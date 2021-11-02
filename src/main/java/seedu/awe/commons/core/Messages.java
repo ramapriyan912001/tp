@@ -118,7 +118,7 @@ public class Messages {
 
 
     public static final String MESSAGE_GROUPADDCONTACTCOMMAND_SUCCESS = "New member(s) added to group\n";
-    public static final String MESSAGE_GROUPADDCONTACTCOMMAND_ERROR =
+    public static final String MESSAGE_GROUPADDCONTACTCOMMAND_NONEXISTENT_PERSON =
             "Contact(s) not added. Be sure to use the exact names of group members\n";
     public static final String MESSAGE_GROUPADDCONTACTCOMMAND_DUPLICATE_PERSON = "%1$s is already in the group\n";
     public static final String MESSAGE_GROUPADDCONTACTCOMMAND_USAGE =
@@ -126,7 +126,7 @@ public class Messages {
 
 
     public static final String MESSAGE_GROUPREMOVECONTACT_SUCCESS = "Member(s) removed from group\n";
-    public static final String MESSAGE_GROUPREMOVECONTACT_ERROR = "Contact(s) not removed from group.\n"
+    public static final String MESSAGE_GROUPREMOVECONTACT_NONEXISTENT_PERSON = "Contact(s) not removed from group.\n"
             + "Be sure to use the exact names of group members\n";
     public static final String MESSAGE_GROUPREMOVECONTACT_USAGE =
             "groupremovecontact gn/[GROUPNAME] n/[NAME1] n/[OPTIONAL NAME2]...\n";

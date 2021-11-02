@@ -1,7 +1,7 @@
 package seedu.awe.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.awe.commons.core.Messages.MESSAGE_GROUPADDCONTACTCOMMAND_DUPLICATE_PERSON;
-import static seedu.awe.commons.core.Messages.MESSAGE_GROUPADDCONTACTCOMMAND_ERROR;
+import static seedu.awe.commons.core.Messages.MESSAGE_GROUPADDCONTACTCOMMAND_NONEXISTENT_PERSON;
 import static seedu.awe.commons.core.Messages.MESSAGE_GROUPADDCONTACTCOMMAND_SUCCESS;
 import static seedu.awe.commons.core.Messages.MESSAGE_NONEXISTENT_GROUP;
 import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
@@ -81,15 +81,13 @@ public class GroupAddContactCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (!isValidCommand) {
-            throw new CommandException(MESSAGE_GROUPADDCONTACTCOMMAND_ERROR);
-        }
-
         Group oldGroup = model.getGroupByName(groupName);
         if (Objects.isNull(oldGroup)) {
             throw new CommandException(String.format(MESSAGE_NONEXISTENT_GROUP, groupName));
         }
-
+        if (!isValidCommand) {
+            throw new CommandException(MESSAGE_GROUPADDCONTACTCOMMAND_NONEXISTENT_PERSON);
+        }
         Group newGroup = oldGroup;
         for (Person newMember: newMembers) {
             try {

@@ -10,8 +10,8 @@ import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
-import javafx.collections.ObservableList;
 import seedu.awe.logic.commands.exceptions.CommandException;
+import seedu.awe.logic.parser.ParserUtil;
 import seedu.awe.model.Model;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
@@ -55,7 +55,7 @@ public class GroupEditNameCommand extends Command {
         if (Objects.isNull(oldGroup)) {
             throw new CommandException(String.format(MESSAGE_NONEXISTENT_GROUP, oldGroupName));
         }
-        if (findExistingGroupName(newGroupName, model.getAddressBook().getGroupList())) {
+        if (ParserUtil.findExistingGroupName(newGroupName, model.getAddressBook().getGroupList())) {
             throw new CommandException(
                     String.format(MESSAGE_GROUPEDITNAMECOMMAND_EXISTING_GROUP, newGroupName.getName()));
         }
@@ -75,21 +75,6 @@ public class GroupEditNameCommand extends Command {
                 && this.oldGroupName.equals(otherCommand.getOldGroupName())
                 && this.newGroupName.equals(otherCommand.getNewGroupName())) {
             return true;
-        }
-        return false;
-    }
-
-    /**
-     * Returns boolean object representing whether a group exists within AWE with the same name as newGroupName.
-     * @param newGroupName GroupName object that will be set as the new group name.
-     * @param groupObservableList ObservableList of groups currently in AWE.
-     * @return boolean object representing whether a group exists within AWE with the same name as newGroupName.
-     */
-    private boolean findExistingGroupName(GroupName newGroupName, ObservableList<Group> groupObservableList) {
-        for (Group group : groupObservableList) {
-            if (group.getGroupName().equals(newGroupName)) {
-                return true;
-            }
         }
         return false;
     }

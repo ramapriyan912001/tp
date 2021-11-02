@@ -1,7 +1,7 @@
 package seedu.awe.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVECONTACT_ERROR;
+import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVECONTACT_NONEXISTENT_PERSON;
 import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVECONTACT_SUCCESS;
 import static seedu.awe.commons.core.Messages.MESSAGE_NONEXISTENT_GROUP;
 import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
@@ -90,7 +90,7 @@ public class GroupRemoveContactCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (!isValidCommand) {
-            throw new CommandException(MESSAGE_GROUPREMOVECONTACT_ERROR);
+            throw new CommandException(MESSAGE_NONEXISTENT_GROUP);
         }
 
         Group oldGroup = model.getGroupByName(groupName);
@@ -100,7 +100,7 @@ public class GroupRemoveContactCommand extends Command {
 
         ArrayList<Person> membersFromOldGroup = oldGroup.getMembers();
         if (!checkRemoveMembers(membersFromOldGroup, membersToBeRemoved)) {
-            throw new CommandException(MESSAGE_GROUPREMOVECONTACT_ERROR);
+            throw new CommandException(MESSAGE_GROUPREMOVECONTACT_NONEXISTENT_PERSON);
         }
 
         Group newGroup = oldGroup;
