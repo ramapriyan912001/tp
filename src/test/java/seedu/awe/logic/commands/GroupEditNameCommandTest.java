@@ -21,6 +21,7 @@ import seedu.awe.testutil.GroupBuilder;
 public class GroupEditNameCommandTest {
     private static final GroupName BALI_GROUP_NAME = new GroupName("Bali");
     private static final GroupName JAPAN_GROUP_NAME = new GroupName("Japan");
+    private static final GroupName TAIWAN_GROUP_NAME = new GroupName("Taiwan");
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -100,9 +101,19 @@ public class GroupEditNameCommandTest {
                 new GroupEditNameCommand(BALI_GROUP_NAME, JAPAN_GROUP_NAME, true);
         Assertions.assertTrue(groupEditNameCommand.equals(groupEditNameCommandToCheck));
 
-        // Difference instance with different details -> false
-        GroupEditNameCommand groupEditNameCommandDifferentDetails =
-                new GroupEditNameCommand(JAPAN_GROUP_NAME, BALI_GROUP_NAME, true);
-        Assertions.assertFalse(groupEditNameCommand.equals(groupEditNameCommandDifferentDetails));
+        // Different instance with different oldGroup -> false
+        GroupEditNameCommand groupEditNameCommandDifferentOldGroup =
+                new GroupEditNameCommand(BALI_GROUP_NAME, TAIWAN_GROUP_NAME, true);
+        Assertions.assertFalse(groupEditNameCommand.equals(groupEditNameCommandDifferentOldGroup));
+
+        // Different instance with different oldGroup -> false
+        GroupEditNameCommand groupEditNameCommandDifferentNewGroup =
+                new GroupEditNameCommand(TAIWAN_GROUP_NAME, JAPAN_GROUP_NAME, true);
+        Assertions.assertFalse(groupEditNameCommand.equals(groupEditNameCommandDifferentNewGroup));
+
+        // Different isValid command -> false
+        GroupEditNameCommand groupEditNameCommandDifferentIsValid =
+                new GroupEditNameCommand(BALI_GROUP_NAME, JAPAN_GROUP_NAME, false);
+        Assertions.assertTrue(groupEditNameCommand.equals(groupEditNameCommandDifferentIsValid));
     }
 }
