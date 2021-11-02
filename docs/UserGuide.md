@@ -172,6 +172,9 @@ Format: `addcontact n/NAME p/PHONE_NUMBER [t/TAG]…​`
 * Duplicate contacts cannot be added into AWE
 * Contacts are duplicate if they have the same name
 * NAME are case-sensitive, "Hans" and "hans" will be treated as 2 separate person. Refer to [FAQ](#4faq) for the rational behind this.
+* NAME are up to 50 characters only.
+* PHONE_NUMBER should have between 3 and 16 numbers.
+* Contact list will be displayed after the command succeeded.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A contact can have any number of tags (including 0)
@@ -193,6 +196,8 @@ Format: `editcontact INDEX [n/NAME] [p/PHONE] [t/TAG]…​`
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the contact will be removed i.e adding of tags is not cumulative.
 * You can remove all the contact’s tags by typing `t/` without specifying any tags after it.
+* NAME are up to 50 characters only.
+* PHONE_NUMBER should have between 3 and 16 numbers
 
 Examples:
 *  `editcontact 1 p/91234567` Edits the phone number of the 1st contact to be `91234567`.
@@ -256,6 +261,7 @@ Adds you as a member of the group by default.
 Format: `creategroup gn/GROUP_NAME n/NAME1 [n/NAME2] [n/NAME3]...[t/TAG1]`
 
 * GROUP_NAME is a mandatory field.
+* GROUP_NAME are up to 50 characters only.
 * A group with the same name as GROUP_NAME cannot exist for the creation of a group through this command. 
 * GROUP_NAME are case-sensitive, "Japan" and "japan" will be treated as 2 separate groups. Refer to [FAQ](#4faq) for the rational behind this.
 * At least one NAME is necessary.
@@ -411,6 +417,8 @@ Format: `expenses gn/GROUP_NAME`
 
 Examples: 
 * `expenses gn/London` shows all the expenses of the group named London.
+![result for 'expenses gn/London](images/ShowExpenseResult.png)
+
 
 #### 3.3.2. Adding a shared expense: `addexpense`
 Adds a shared expense to the specified travel group.
@@ -477,7 +485,7 @@ Format: `transactionsummary gn/GROUP_NAME`
 Examples:
 * `transactionsummary gn/Bali`
 * `transactionsummary gn/London`
-
+![result for 'transactionsummary gn/London](images/TransactionSummaryResult.png)
 
 #### 3.3.6. Calculating payments to make: `calculatepayments`
 Uses the net spend of the user on the trip to tabulate a fast set of payments to settle the debts between members of the group.
@@ -491,7 +499,7 @@ Format: `calculatepayments gn/GROUP_NAME`
 Examples:
 * `calculatepayments gn/Bali`
 * `calculatepayments gn/London`<br>
-  ![result for 'findcontacts Taiwan Malaysia'](images/CALCULATEPAYMENTSUI.png)
+  ![result for 'calculatepayments gn/London'](images/CalculatePaymentResult.png)
   
 **Note: When a `Person` is deleted from contacts or removed from the group, the functioning of this command does not change. The deleted person may still be part of the list of payments depending on the expenses they had previously.**
 
