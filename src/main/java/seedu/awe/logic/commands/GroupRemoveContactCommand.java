@@ -1,9 +1,9 @@
 package seedu.awe.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVECONTACT_GROUP_DELETED;
-import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVECONTACT_NONEXISTENT_PERSON;
-import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVECONTACT_SUCCESS;
+import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVECONTACTCOMMAND_GROUP_DELETED;
+import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVECONTACTCOMMAND_NONEXISTENT_PERSON;
+import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVECONTACTCOMMAND_SUCCESS;
 import static seedu.awe.commons.core.Messages.MESSAGE_NONEXISTENT_GROUP;
 import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -97,7 +97,7 @@ public class GroupRemoveContactCommand extends Command {
 
         ArrayList<Person> membersFromOldGroup = oldGroup.getMembers();
         if (!checkRemoveMembers(membersFromOldGroup, membersToBeRemoved)) {
-            throw new CommandException(MESSAGE_GROUPREMOVECONTACT_NONEXISTENT_PERSON);
+            throw new CommandException(MESSAGE_GROUPREMOVECONTACTCOMMAND_NONEXISTENT_PERSON);
         }
 
         Group newGroup = oldGroup;
@@ -107,12 +107,13 @@ public class GroupRemoveContactCommand extends Command {
         if (newGroup.getMembers().size() == 0) {
             model.deleteGroup(oldGroup);
             model.setAllMembersOfGroup(oldGroup);
-            return new CommandResult(MESSAGE_GROUPREMOVECONTACT_SUCCESS
-                    + String.format(MESSAGE_GROUPREMOVECONTACT_GROUP_DELETED, oldGroup.getGroupName().getName()));
+            return new CommandResult(MESSAGE_GROUPREMOVECONTACTCOMMAND_SUCCESS
+                    + String.format(MESSAGE_GROUPREMOVECONTACTCOMMAND_GROUP_DELETED,
+                    oldGroup.getGroupName().getName()));
         } else {
             model.setGroup(oldGroup, newGroup);
             model.setAllMembersOfGroup(oldGroup);
-            return new CommandResult(MESSAGE_GROUPREMOVECONTACT_SUCCESS);
+            return new CommandResult(MESSAGE_GROUPREMOVECONTACTCOMMAND_SUCCESS);
         }
     }
 

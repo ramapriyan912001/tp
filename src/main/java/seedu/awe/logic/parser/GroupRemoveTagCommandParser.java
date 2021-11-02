@@ -1,5 +1,5 @@
 package seedu.awe.logic.parser;
-import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVETAG_USAGE;
+import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVETAGCOMMAND_USAGE;
 import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_TAG;
@@ -28,7 +28,7 @@ public class GroupRemoveTagCommandParser implements Parser<GroupRemoveTagCommand
         if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_GROUP_NAME, PREFIX_TAG)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    MESSAGE_GROUPREMOVETAG_USAGE));
+                    MESSAGE_GROUPREMOVETAGCOMMAND_USAGE));
         }
 
         GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).get());

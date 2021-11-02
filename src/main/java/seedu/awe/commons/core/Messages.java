@@ -125,12 +125,12 @@ public class Messages {
             "groupaddcontact gn/[GROUPNAME] n/[NAME1] n/[OPTIONAL NAME2]...\n";
 
 
-    public static final String MESSAGE_GROUPREMOVECONTACT_SUCCESS = "Member(s) removed from group\n";
-    public static final String MESSAGE_GROUPREMOVECONTACT_NONEXISTENT_PERSON = "Contact(s) not removed from group.\n"
-            + "Be sure to use the exact names of group members\n";
-    public static final String MESSAGE_GROUPREMOVECONTACT_USAGE =
+    public static final String MESSAGE_GROUPREMOVECONTACTCOMMAND_SUCCESS = "Member(s) removed from group\n";
+    public static final String MESSAGE_GROUPREMOVECONTACTCOMMAND_NONEXISTENT_PERSON =
+            "Contact(s) not removed from group.\n Be sure to use the exact names of group members\n";
+    public static final String MESSAGE_GROUPREMOVECONTACTCOMMAND_USAGE =
             "groupremovecontact gn/[GROUPNAME] n/[NAME1] n/[OPTIONAL NAME2]...\n";
-    public static final String MESSAGE_GROUPREMOVECONTACT_GROUP_DELETED =
+    public static final String MESSAGE_GROUPREMOVECONTACTCOMMAND_GROUP_DELETED =
             "Group %1$s deleted as it contains 0 members\n";
 
 
@@ -140,11 +140,12 @@ public class Messages {
             "groupaddtag gn/[GROUPNAME] t/[TAG1] t/[OPTIONAL TAG2]...\n";
 
 
-    public static final String MESSAGE_GROUPREMOVETAG_SUCCESS = "Tag(s) removed from group\n";
-    public static final String MESSAGE_GROUPREMOVETAG_ERROR =
+    public static final String MESSAGE_GROUPREMOVETAGCOMMAND_SUCCESS = "Tag(s) removed from group\n";
+    public static final String MESSAGE_GROUPREMOVETAGCOMMAND_ERROR =
             "Tag(s) not removed from group. Make sure to use exact tag names.\n";
-    public static final String MESSAGE_GROUPREMOVETAG_NONEXISTENT_TAG = "The tag \"%1$s\" is not found in the group.\n";
-    public static final String MESSAGE_GROUPREMOVETAG_USAGE =
+    public static final String MESSAGE_GROUPREMOVETAGCOMMAND_NONEXISTENT_TAG =
+            "The tag \"%1$s\" is not found in the group.\n";
+    public static final String MESSAGE_GROUPREMOVETAGCOMMAND_USAGE =
             "groupaddtag gn/[GROUPNAME] n/[TAG1] n/[OPTIONAL TAG2]...\n";
 
 

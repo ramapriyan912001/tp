@@ -1,6 +1,6 @@
 package seedu.awe.logic.parser;
-import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVECONTACT_NONEXISTENT_PERSON;
-import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVECONTACT_USAGE;
+import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVECONTACTCOMMAND_NONEXISTENT_PERSON;
+import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVECONTACTCOMMAND_USAGE;
 import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.awe.commons.core.Messages.MESSAGE_NONEXISTENT_GROUP;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
@@ -51,7 +51,7 @@ public class GroupRemoveContactCommandParser implements Parser<GroupRemoveContac
         if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_GROUP_NAME, PREFIX_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    MESSAGE_GROUPREMOVECONTACT_USAGE));
+                    MESSAGE_GROUPREMOVECONTACTCOMMAND_USAGE));
         }
 
         GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).get());
@@ -83,7 +83,7 @@ public class GroupRemoveContactCommandParser implements Parser<GroupRemoveContac
                 addMemberToRemoveList(name);
             }
             if (!membersToBeRemovedNames.isEmpty() && membersToBeRemovedNames.isEmpty()) {
-                throw new ParseException(MESSAGE_GROUPREMOVECONTACT_NONEXISTENT_PERSON);
+                throw new ParseException(MESSAGE_GROUPREMOVECONTACTCOMMAND_NONEXISTENT_PERSON);
             }
             return membersToBeRemoved;
         } catch (IndexOutOfBoundsException e) {
@@ -106,7 +106,7 @@ public class GroupRemoveContactCommandParser implements Parser<GroupRemoveContac
             added = true;
         }
         if (!added) {
-            throw new ParseException(MESSAGE_GROUPREMOVECONTACT_NONEXISTENT_PERSON);
+            throw new ParseException(MESSAGE_GROUPREMOVECONTACTCOMMAND_NONEXISTENT_PERSON);
         }
         return added;
     }
