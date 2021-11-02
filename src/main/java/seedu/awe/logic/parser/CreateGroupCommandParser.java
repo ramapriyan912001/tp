@@ -27,7 +27,6 @@ import seedu.awe.model.person.Person;
 import seedu.awe.model.tag.Tag;
 
 public class CreateGroupCommandParser implements Parser<CreateGroupCommand> {
-    private static final String BAD_FORMATTING = "\"creategroup command\" is not properly formatted";
     private ObservableList<Person> allMembers;
     private final ArrayList<Person> toBeAddedToGroup;
 
@@ -64,7 +63,7 @@ public class CreateGroupCommandParser implements Parser<CreateGroupCommand> {
         ArrayList<Person> members = findGroupMembers(memberNames);
 
         boolean isValidCommand = true;
-        if (groupName.getName().equals(BAD_FORMATTING) || Objects.isNull(members)) {
+        if (Objects.isNull(members)) {
             isValidCommand = false;
         }
 

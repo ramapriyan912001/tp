@@ -31,41 +31,27 @@ public class GroupEditNameCommandTest {
     public void constructor_nullGroup_throwsNullPointerException() {
         // old group name null
         assertThrows(NullPointerException.class, () ->
-                new GroupEditNameCommand(null, new GroupName("Bali"), true));
+                new GroupEditNameCommand(null, new GroupName("Bali")));
 
         // new group name null
         assertThrows(NullPointerException.class, () ->
-                new GroupEditNameCommand(new GroupName("Bali"), null, true));
+                new GroupEditNameCommand(new GroupName("Bali"), null));
     }
 
     @Test
     public void getters_validConstructor_success() {
-        GroupEditNameCommand groupEditNameCommand = new GroupEditNameCommand(BALI_GROUP_NAME, JAPAN_GROUP_NAME, true);
+        GroupEditNameCommand groupEditNameCommand = new GroupEditNameCommand(BALI_GROUP_NAME, JAPAN_GROUP_NAME);
 
         // getOldGroupName
         assertEquals(groupEditNameCommand.getOldGroupName(), BALI_GROUP_NAME);
 
         // getNewGroupName
         assertEquals(groupEditNameCommand.getNewGroupName(), JAPAN_GROUP_NAME);
-
-        // getValidCommand
-        assertTrue(groupEditNameCommand.getValidCommand());
-    }
-
-
-    @Test
-    public void execute_invalidCommand_failure() {
-        GroupEditNameCommand groupEditNameCommand = new GroupEditNameCommand(BALI_GROUP_NAME, JAPAN_GROUP_NAME, false);
-
-        String expectedMessage = Messages.MESSAGE_GROUPEDITNAMECOMMAND_ERROR
-                + Messages.MESSAGE_GROUPEDITNAMECOMMAND_USAGE;
-
-        assertCommandFailure(groupEditNameCommand, model, expectedMessage);
     }
 
     @Test
     public void execute_noGroupFound_failure() {
-        GroupEditNameCommand groupEditNameCommand = new GroupEditNameCommand(JAPAN_GROUP_NAME, BALI_GROUP_NAME, true);
+        GroupEditNameCommand groupEditNameCommand = new GroupEditNameCommand(JAPAN_GROUP_NAME, BALI_GROUP_NAME);
 
         String expectedMessage = String.format(Messages.MESSAGE_NONEXISTENT_GROUP, JAPAN_GROUP_NAME);
 
@@ -74,7 +60,7 @@ public class GroupEditNameCommandTest {
 
     @Test
     public void execute_validInputs_success() {
-        GroupEditNameCommand groupEditNameCommand = new GroupEditNameCommand(BALI_GROUP_NAME, JAPAN_GROUP_NAME, true);
+        GroupEditNameCommand groupEditNameCommand = new GroupEditNameCommand(BALI_GROUP_NAME, JAPAN_GROUP_NAME);
 
         CommandResult expectedCommandResult = new CommandResult(
                 String.format(Messages.MESSAGE_GROUPEDITNAMECOMMAND_SUCCESS, JAPAN_GROUP_NAME));
@@ -88,7 +74,7 @@ public class GroupEditNameCommandTest {
 
     @Test
     public void equals() {
-        GroupEditNameCommand groupEditNameCommand = new GroupEditNameCommand(BALI_GROUP_NAME, JAPAN_GROUP_NAME, true);
+        GroupEditNameCommand groupEditNameCommand = new GroupEditNameCommand(BALI_GROUP_NAME, JAPAN_GROUP_NAME);
         // null input -> false
         assertFalse(groupEditNameCommand.equals(null));
 
@@ -100,22 +86,17 @@ public class GroupEditNameCommandTest {
 
         // Different instance but same details -> true
         GroupEditNameCommand groupEditNameCommandToCheck =
-                new GroupEditNameCommand(BALI_GROUP_NAME, JAPAN_GROUP_NAME, true);
+                new GroupEditNameCommand(BALI_GROUP_NAME, JAPAN_GROUP_NAME);
         assertTrue(groupEditNameCommand.equals(groupEditNameCommandToCheck));
 
         // Different instance with different oldGroup -> false
         GroupEditNameCommand groupEditNameCommandDifferentOldGroup =
-                new GroupEditNameCommand(BALI_GROUP_NAME, TAIWAN_GROUP_NAME, true);
+                new GroupEditNameCommand(BALI_GROUP_NAME, TAIWAN_GROUP_NAME);
         assertFalse(groupEditNameCommand.equals(groupEditNameCommandDifferentOldGroup));
 
         // Different instance with different oldGroup -> false
         GroupEditNameCommand groupEditNameCommandDifferentNewGroup =
-                new GroupEditNameCommand(TAIWAN_GROUP_NAME, JAPAN_GROUP_NAME, true);
+                new GroupEditNameCommand(TAIWAN_GROUP_NAME, JAPAN_GROUP_NAME);
         assertFalse(groupEditNameCommand.equals(groupEditNameCommandDifferentNewGroup));
-
-        // Different isValid command -> false
-        GroupEditNameCommand groupEditNameCommandDifferentIsValid =
-                new GroupEditNameCommand(BALI_GROUP_NAME, JAPAN_GROUP_NAME, false);
-        assertFalse(groupEditNameCommand.equals(groupEditNameCommandDifferentIsValid));
     }
 }

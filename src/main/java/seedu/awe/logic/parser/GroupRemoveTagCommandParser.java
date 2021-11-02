@@ -13,8 +13,6 @@ import seedu.awe.model.group.GroupName;
 import seedu.awe.model.tag.Tag;
 
 public class GroupRemoveTagCommandParser implements Parser<GroupRemoveTagCommand> {
-    private static final String BAD_FORMATTING = "\"groupremovetag command\" is not properly formatted";
-
     /**
      * Returns GroupRemoveTagCommand based on user input.
      *
@@ -37,7 +35,7 @@ public class GroupRemoveTagCommandParser implements Parser<GroupRemoveTagCommand
         Set<Tag> tagsToBeRemoved = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         boolean isValidCommand = true;
-        if (groupName.getName().equals(BAD_FORMATTING) || Objects.isNull(tagsToBeRemoved)) {
+        if (Objects.isNull(tagsToBeRemoved)) {
             isValidCommand = false;
         }
 

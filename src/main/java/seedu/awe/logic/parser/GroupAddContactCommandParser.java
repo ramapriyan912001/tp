@@ -21,7 +21,6 @@ import seedu.awe.model.person.Name;
 import seedu.awe.model.person.Person;
 
 public class GroupAddContactCommandParser implements Parser<GroupAddContactCommand> {
-    private static final String BAD_FORMATTING = "\"groupaddcontact command\" is not properly formatted";
     private ObservableList<Person> allMembers;
     private ObservableList<Group>allGroups;
     private final ArrayList<Person> newMembersToAdd;

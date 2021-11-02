@@ -21,7 +21,6 @@ import seedu.awe.model.person.Name;
 import seedu.awe.model.person.Person;
 
 public class GroupRemoveContactCommandParser implements Parser<GroupRemoveContactCommand> {
-    private static final String BAD_FORMATTING = "\"groupremovecontact command\" is not properly formatted";
     private ObservableList<Person> allMembers;
     private ObservableList<Group> allGroups;
     private final ArrayList<Person> membersToBeRemoved;
@@ -65,7 +64,7 @@ public class GroupRemoveContactCommandParser implements Parser<GroupRemoveContac
 
         ArrayList<Person> membersToBeRemoved = findMembersToBeRemoved(membersToBeRemovedNames);
         boolean isValidCommand = true;
-        if (groupName.getName().equals(BAD_FORMATTING) || Objects.isNull(membersToBeRemoved)) {
+        if (Objects.isNull(membersToBeRemoved)) {
             isValidCommand = false;
         }
 
