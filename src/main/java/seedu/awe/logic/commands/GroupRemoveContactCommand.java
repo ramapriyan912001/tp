@@ -1,13 +1,13 @@
 package seedu.awe.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVECONTACT_ERROR;
-import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVECONTACT_SUCCESS;
+import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVECONTACTCOMMAND_GROUP_DELETED;
+import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVECONTACTCOMMAND_NONEXISTENT_PERSON;
+import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVECONTACTCOMMAND_SUCCESS;
 import static seedu.awe.commons.core.Messages.MESSAGE_NONEXISTENT_GROUP;
 import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.model.Model;
@@ -90,27 +90,31 @@ public class GroupRemoveContactCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (!isValidCommand) {
-            throw new CommandException(MESSAGE_GROUPREMOVECONTACT_ERROR);
+            throw new CommandException(MESSAGE_NONEXISTENT_GROUP);
         }
 
         Group oldGroup = model.getGroupByName(groupName);
-        if (Objects.isNull(oldGroup)) {
-            throw new CommandException(String.format(MESSAGE_NONEXISTENT_GROUP, groupName));
-        }
 
         ArrayList<Person> membersFromOldGroup = oldGroup.getMembers();
         if (!checkRemoveMembers(membersFromOldGroup, membersToBeRemoved)) {
-            throw new CommandException(MESSAGE_GROUPREMOVECONTACT_ERROR);
+            throw new CommandException(MESSAGE_GROUPREMOVECONTACTCOMMAND_NONEXISTENT_PERSON);
         }
 
         Group newGroup = oldGroup;
         for (Person member: membersToBeRemoved) {
             newGroup = newGroup.removeMember(member);
         }
-
-        model.setGroup(oldGroup, newGroup);
-        model.setAllMembersOfGroup(oldGroup);
-        return new CommandResult(MESSAGE_GROUPREMOVECONTACT_SUCCESS);
+        if (newGroup.getMembers().size() == 0) {
+            model.deleteGroup(oldGroup);
+            model.setAllMembersOfGroup(oldGroup);
+            return new CommandResult(MESSAGE_GROUPREMOVECONTACTCOMMAND_SUCCESS
+                    + String.format(MESSAGE_GROUPREMOVECONTACTCOMMAND_GROUP_DELETED,
+                    oldGroup.getGroupName().getName()));
+        } else {
+            model.setGroup(oldGroup, newGroup);
+            model.setAllMembersOfGroup(oldGroup);
+            return new CommandResult(MESSAGE_GROUPREMOVECONTACTCOMMAND_SUCCESS);
+        }
     }
 
     @Override

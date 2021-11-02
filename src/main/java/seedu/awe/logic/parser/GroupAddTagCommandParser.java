@@ -13,8 +13,6 @@ import seedu.awe.model.group.GroupName;
 import seedu.awe.model.tag.Tag;
 
 public class GroupAddTagCommandParser implements Parser<GroupAddTagCommand> {
-    private static final String BAD_FORMATTING = "\"groupaddtag command\" is not properly formatted";
-
     /**
      * Returns GroupAddTagCommand based on user input.
      *
@@ -37,7 +35,7 @@ public class GroupAddTagCommandParser implements Parser<GroupAddTagCommand> {
         Set<Tag> newTagNames = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         boolean isValidCommand = true;
-        if (groupName.getName().equals(BAD_FORMATTING) || Objects.isNull(newTagNames)) {
+        if (Objects.isNull(newTagNames)) {
             isValidCommand = false;
         }
 

@@ -54,7 +54,7 @@ public class GroupEditNameCommandParserTest {
     @Test
     public void parse_validGroupName_success() {
         GroupEditNameCommand expectedCommand = new GroupEditNameCommand(new GroupName("Japan"),
-                new GroupName("Malaysia"), true);
+                new GroupName("Malaysia"));
         assertParseSuccess(parser, " gn/Japan gn/Malaysia", expectedCommand);
     }
 }

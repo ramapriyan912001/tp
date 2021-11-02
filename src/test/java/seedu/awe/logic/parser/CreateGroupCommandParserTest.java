@@ -116,9 +116,9 @@ public class CreateGroupCommandParserTest {
         // invalid names returns EmptyGroupException
         String userInput = GROUPNAME_DESC_BALI + INVALID_NAME_DESC + INVALID_NAME_DESC_ONE + INVALID_NAME_DESC_TWO;
         assertThrows(EmptyGroupException.class,
-                String.format(MESSAGE_CREATEGROUPCOMMAND_EMPTY_GROUP, MESSAGE_CREATEGROUPCOMMAND_INVALID_NAMES), () ->
-                        parser.parse(userInput));
-
+                MESSAGE_CREATEGROUPCOMMAND_EMPTY_GROUP
+                        + MESSAGE_CREATEGROUPCOMMAND_INVALID_NAMES
+                        + MESSAGE_CREATEGROUPCOMMAND_USAGE, () -> parser.parse(userInput));
         resetParser();
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + GROUPNAME_DESC_BALI
@@ -166,9 +166,9 @@ public class CreateGroupCommandParserTest {
         //Throws EmptyGroupException.
         resetParser();
         ArrayList<Name> emptyMembersToFind = new ArrayList<>();
-        String exceptionMessage = String.format(MESSAGE_CREATEGROUPCOMMAND_EMPTY_GROUP,
-                MESSAGE_CREATEGROUPCOMMAND_INVALID_NAMES,
-                MESSAGE_CREATEGROUPCOMMAND_USAGE);
+        String exceptionMessage = MESSAGE_CREATEGROUPCOMMAND_EMPTY_GROUP
+                + MESSAGE_CREATEGROUPCOMMAND_INVALID_NAMES
+                + MESSAGE_CREATEGROUPCOMMAND_USAGE;
         assertThrows(EmptyGroupException.class, exceptionMessage, () ->
                 parser.findGroupMembers(emptyMembersToFind));
     }
