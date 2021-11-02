@@ -171,7 +171,7 @@ Format: `addcontact n/NAME p/PHONE_NUMBER [t/TAG]…​`
 
 * Duplicate contacts cannot be added into AWE
 * Contacts are duplicate if they have the same name
-* NAME are case-sensitive, "Hans" and "hans" will be treated as 2 separate person. Refer to [FAQ](#4faq) for the rational behind this.
+* NAME are case-sensitive, "Hans" and "hans" will be treated as 2 separate person. Refer to [FAQ](#4faq) for the rationale behind this.
 * NAME are up to 50 characters only.
 * PHONE_NUMBER should have between 3 and 16 numbers.
 * Contact list will be displayed after the command succeeded.
@@ -263,7 +263,7 @@ Format: `creategroup gn/GROUP_NAME n/NAME1 [n/NAME2] [n/NAME3]...[t/TAG1]`
 * GROUP_NAME is a mandatory field.
 * GROUP_NAME are up to 50 characters only.
 * A group with the same name as GROUP_NAME cannot exist for the creation of a group through this command. 
-* GROUP_NAME are case-sensitive, "Japan" and "japan" will be treated as 2 separate groups. Refer to [FAQ](#4faq) for the rational behind this.
+* GROUP_NAME are case-sensitive, "Japan" and "japan" will be treated as 2 separate groups. Refer to [FAQ](#4faq) for the rationale behind this.
 * At least one NAME is necessary.
 * The names are required to be in AWE and should match contact names exactly.
 * Tags cannot have whitespace and special characters other than alphanumeric characters.
@@ -555,13 +555,19 @@ If your changes to the data file makes its format invalid, AWE will discard all 
 <div style="page-break-after: always;"></div>
 
 ## 4. FAQ
-**Q**: Why are NAME case-sensitive?
-**A**: Since common names are quite usual, we have decided to allow the addition of 2 contacts such as "jun jie" and "Jun Jie" in order to keep track of their numbers. 
+**Q**: Why is NAME case-sensitive?
+**A**: Since identical names are very common in many cultures, we have decided to allow the addition of 2 contacts such as "jun jie" and "Jun Jie" in order to keep track of their numbers. 
 Furthermore, since AWE deals with overseas travels, quite a number of travellers might get a new overseas number when they are travelling. This will allow users to keep track of both
 their local and overseas local separately. Deleting the number after returning from the trip will be easier as well. In both cases, users can distinguish the 2 contacts with similar names using tags.
+This is also consistent with most mobile-phones, wherein contact names are case sensitive.
+To address the overseas number use case, for our next release, we are considering providing users with the ability to input more than one phone number when adding a contact.
 
-**Q**: Why are GROUP_NAME case-sensitive?
-**A**: Similar to the above question, a user might travel to the same destination more than once. This will allow the addition of each individual trips.
+**Q**: Why is GROUP_NAME case-sensitive?
+**A**: Similar to the above question, a user might travel to the same destination more than once. 
+This will allow the addition of each individual trips.
+To address, this use case, we are considering requiring a DATE_TIME parameter when creating a group. 
+We did not do so for this release due to concerns that two separate groups of users might be on a trip at the same location in the same time frame.
+In this case, users might be unable to create two groups, even though the use case would merit such an action.
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AWE home folder.
