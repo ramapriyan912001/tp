@@ -7,11 +7,12 @@ import static seedu.awe.testutil.TypicalGroups.DUBAI;
 import static seedu.awe.testutil.TypicalGroups.HELSINKI;
 import static seedu.awe.testutil.TypicalGroups.INDIA;
 import static seedu.awe.testutil.TypicalGroups.LONDON;
-import static seedu.awe.testutil.TypicalGroups.MALIBU;
+import static seedu.awe.testutil.TypicalGroups.MALIBU_WITH_EXPENSES;
 import static seedu.awe.testutil.TypicalGroups.OSLO;
 import static seedu.awe.testutil.TypicalGroups.PARIS;
 import static seedu.awe.testutil.TypicalGroups.PERU_WITH_EXPENSES_INVALID;
 import static seedu.awe.testutil.TypicalGroups.RIO_WITH_EXPENSES_INVALID;
+import static seedu.awe.testutil.TypicalGroups.SANTIAGO_WITH_EXPENSES;
 import static seedu.awe.testutil.TypicalPersons.ALICE;
 import static seedu.awe.testutil.TypicalPersons.AMY;
 import static seedu.awe.testutil.TypicalPersons.BENSON;
@@ -122,7 +123,8 @@ public class ModelBuilder {
         addressBook.addGroup(DUBAI);
         addressBook.addGroup(PARIS);
         addressBook.addGroup(CHINA);
-        addressBook.addGroup(MALIBU);
+        addressBook.addGroup(MALIBU_WITH_EXPENSES);
+        addressBook.addGroup(SANTIAGO_WITH_EXPENSES);
         addressBook.addGroup(HELSINKI);
         addressBook.addGroup(OSLO);
     }

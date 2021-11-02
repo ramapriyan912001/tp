@@ -31,10 +31,28 @@ public class PhoneTest {
         assertFalse(Phone.isValidPhone("phone")); // non-numeric
         assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
         assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
+        assertFalse(Phone.isValidPhone("12345678901234567")); // long phone numbers > 16 digits
 
         // valid phone numbers
         assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
         assertTrue(Phone.isValidPhone("93121534"));
-        assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
+        assertTrue(Phone.isValidPhone("1234567890123456")); // exactly 16 numbers
+    }
+
+    @Test
+    public void equals() {
+        Phone phone = new Phone("12345678");
+
+        // same instance -> true
+        assertTrue(phone.equals(phone));
+
+        // null -> false
+        assertFalse(phone.equals(null));
+
+        // integer is passed in -> false
+        assertFalse(phone.equals(12345678));
+
+        // different name -> return false
+        assertFalse(phone.equals(new Phone("87654321")));
     }
 }

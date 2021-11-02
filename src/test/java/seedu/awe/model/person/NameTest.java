@@ -20,6 +20,12 @@ public class NameTest {
     }
 
     @Test
+    public void constructor_tooLongName_throwsIllegalArgumentException() {
+        String invalidName = "123456789012345678901234567890123456789012345678901";
+        assertThrows(IllegalArgumentException.class, () -> new Name(invalidName));
+    }
+
+    @Test
     public void isValidName() {
         // null name
         assertThrows(NullPointerException.class, () -> Name.isValidGroupName(null));
@@ -29,6 +35,8 @@ public class NameTest {
         assertFalse(Name.isValidGroupName(" ")); // spaces only
         assertFalse(Name.isValidGroupName("^")); // only non-alphanumeric characters
         assertFalse(Name.isValidGroupName("peter*")); // contains non-alphanumeric characters
+        assertFalse(Name.isValidGroupName("123456789012345678901234567"
+                + "890123456789012345678901")); // contains more than 50 characters
 
         // valid name
         assertTrue(Name.isValidGroupName("peter jack")); // alphabets only
@@ -36,5 +44,27 @@ public class NameTest {
         assertTrue(Name.isValidGroupName("peter the 2nd")); // alphanumeric characters
         assertTrue(Name.isValidGroupName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidGroupName("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(Name.isValidGroupName("123456789012345678901234567"
+                + "89012345678901234567890")); // contains exactly 50 characters
+    }
+
+    @Test
+    public void equals() {
+        Name name = new Name("John");
+
+        // same instance -> true
+        assertTrue(name.equals(name));
+
+        // null -> false
+        assertFalse(name.equals(null));
+
+        // String is passed in -> false
+        assertFalse(name.equals("John"));
+
+        // different name -> return false
+        assertFalse(name.equals(new Name("Amy")));
+
+        // different case -> return false
+        assertFalse(name.equals(new Name("john")));
     }
 }

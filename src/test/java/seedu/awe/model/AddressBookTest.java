@@ -2,10 +2,11 @@ package seedu.awe.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.awe.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.awe.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.awe.testutil.Assert.assertThrows;
+import static seedu.awe.testutil.TypicalGroups.DUBAI;
 import static seedu.awe.testutil.TypicalPersons.ALICE;
 import static seedu.awe.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -23,8 +24,10 @@ import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
+import seedu.awe.model.group.UniqueGroupList;
 import seedu.awe.model.payment.Payment;
 import seedu.awe.model.person.Person;
+import seedu.awe.model.person.UniquePersonList;
 import seedu.awe.model.person.exceptions.DuplicatePersonException;
 import seedu.awe.testutil.PersonBuilder;
 
@@ -52,7 +55,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newPersons);
@@ -79,7 +82,7 @@ public class AddressBookTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasPerson(editedAlice));
     }
@@ -87,6 +90,40 @@ public class AddressBookTest {
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    }
+
+    @Test
+    public void getPersons_returnsPersonList() {
+        assertEquals(addressBook.getPersons(), new UniquePersonList());
+        addressBook.addPerson(ALICE);
+        UniquePersonList personList = new UniquePersonList();
+        personList.add(ALICE);
+        assertEquals(addressBook.getPersons(), personList);
+    }
+
+    @Test
+    public void getGroups_returnsGroupList() {
+        assertEquals(addressBook.getGroups(), new UniqueGroupList());
+        addressBook.addGroup(DUBAI);
+        UniqueGroupList groupList = new UniqueGroupList();
+        groupList.add(DUBAI);
+        assertEquals(addressBook.getGroups(), groupList);
+    }
+
+    @Test
+    public void equals() {
+        assertEquals(addressBook, addressBook);
+        assertNotEquals(addressBook, new ModelManager());
+    }
+
+    @Test
+    public void hashcode() {
+        assertEquals(addressBook.hashCode(), addressBook.hashCode());
+        int oldCode = addressBook.hashCode();
+        addressBook.addPerson(ALICE);
+        int newCode = addressBook.hashCode();
+        assertEquals(addressBook.hashCode(), addressBook.hashCode());
+        assertNotEquals(oldCode, newCode);
     }
 
     /**
@@ -121,9 +158,6 @@ public class AddressBookTest {
             return payments;
         }
 
-        /**
-         * //TODO
-         */
         @Override
         public ObservableList<Group> getGroupList() {
             return null;
@@ -132,7 +166,6 @@ public class AddressBookTest {
         @Override
         public Group getGroupByName(GroupName groupName) {
             return null;
-            //TODO: WRITE MODEL STUB FOR UNIQUEGROUPLIST.
         }
 
         @Override

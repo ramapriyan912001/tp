@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.awe.logic.commands.AddContactCommand;
-import seedu.awe.logic.commands.ClearCommand;
+import seedu.awe.logic.commands.ClearAllDataCommand;
 import seedu.awe.logic.commands.DeleteContactCommand;
 import seedu.awe.logic.commands.EditContactCommand;
 import seedu.awe.logic.commands.EditContactCommand.EditPersonDescriptor;
@@ -88,9 +88,9 @@ public class AweParserTest {
     }
 
     @Test
-    public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+    public void parseCommand_clearAllData() throws Exception {
+        assertTrue(parser.parseCommand(ClearAllDataCommand.COMMAND_WORD) instanceof ClearAllDataCommand);
+        assertTrue(parser.parseCommand(ClearAllDataCommand.COMMAND_WORD + " 3") instanceof ClearAllDataCommand);
     }
 
     @Test

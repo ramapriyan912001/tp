@@ -90,7 +90,7 @@ The `UI` component,
 
 The `ViewPanel` consist of the following parts:
 * `GroupListPanel`
-* `PersonListPanel`
+* `ContactListPanel`
 * `ExpenseListPanel`
 * `PaymentListPanel`
 
@@ -106,7 +106,7 @@ In addition to using CLI command, we will also be implementing the toggling of l
 
 The `NavigationButtonPanel` consist of the following parts:
 * GroupViewButton
-* PersonViewButton
+* ContactViewButton
 
 Clicking each button will show the respective list view in `ViewPanel`. The clicking of the button is handled by `EventHandler`.
 
@@ -121,7 +121,7 @@ Here's a (partial) class diagram of the `Logic` component:
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
+1. The command can communicate with the `Model` when it is executed (e.g. to add a contact).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
@@ -603,6 +603,8 @@ The following sequence operation shows how the `calculatepayments` operation wor
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `CalculatePaymentsCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
+**Note: When a `Person` is deleted from contacts or removed from the group, the functioning of this command does not change. The deleted person may still be part of the list of payments depending on the expenses they had previously.**
+
 #### Design considerations
 
 **Aspect: Algorithm utilised for calculatepayments:**
@@ -730,7 +732,7 @@ Step 5. The user then decides to execute the command `contacts`. Commands that d
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clearalldata`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -848,44 +850,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User chooses to add a person to the AddressBook.
-2. User enters add command into CLI along with person name, phone number, email, and address, and tags if applicable.
+2. User enters add command into CLI along with person name, phone number, and tags if applicable.
 3. AWE displays confirmation message.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. AWE detects invalid command format that does not contain all 4 parameter identifiers ("n/", "p/", "e/", "a/").
+* 2a. AWE detects invalid command format that does not contain all 2 parameter identifiers ("n/", "p/").
     * 2a1. AWE returns invalid command format error and displays ```add``` command format and example.
 
       Use case ends.
 
-* 2b. Command contains 4 parameter identifiers but name is blank.
+* 2b. Command contains 2 parameters identifiers but name is blank.
     * 2b1. AWE reminds user that names should only contain alphanumeric characters and should not be blank.
 
       Use case ends.
 
-* 2c. Command contains 4 parameter identifiers but phone number is less than 3 digits or not a number.
+* 2c. Command contains 2 parameters identifiers but phone number is less than 3 digits or not a number.
     * 2c1. AWE reminds user that phone numbers should only contain numbers and be at least 3 digits long.
-
-      Use case ends.
-
-* 2d. Command contains 4 parameter identifiers but email is blank or does not contain domain.
-    * 2d1. AWE reminds user of format of email input.
-
-      Use case ends.
-
-* 2e. Command contains 4 parameter identifiers but address is blank.
-    * 2e1. AWE reminds user that address can take any values and should not be blank.
 
       Use case ends.
 
 **Use case: Edit a person**
 
+**Preconditions: User's last entered command is either `findcontacts` or `contacts`, i.e. the user is viewing an contacts list.**
+
 **MSS**
 
-1. User requests to list persons
-2. AWE shows a list of persons
+1. User requests to list contacts
+2. AWE shows a list of contacts
 3. User requests to edit a specific person in the list
 4. User enters edited information
 5. AWE edits the person
@@ -898,30 +892,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2b. The given index is invalid.
 
-    * 3a1. AWE shows an error message.
+    * 2b1. AWE shows an error message.
+
+      Use case resumes at step 2.
+
+* 2c. The given information has an invalid format.
+
+    * 2c1. AWE shows an error message.
 
       Use case resumes at step 2.
 
-* 4a. The given information has an invalid format.
+* 2d. User is not viewing a list of contacts when entering command.
 
-    * 4a1. AWE shows an error message.
+  * 2d1. AWE shows an error message asking user to enter `findcontacts` or `contacts` command first.
 
-      Use case resumes at step 2.
+    Use case ends.
     
-**Use case: List all persons**
+**Use case: List all contacts**
 
 **MSS**
 
-1. User requests to list persons.
-2. AWE shows list of persons. 
+1. User requests to list contacts.
+2. AWE shows list of contacts. 
 
    Use case ends. 
 
 **Extensions**
 
-* 2a. There are no persons to be listed.
+* 2a. There are no contacts to be listed.
     * 2a1. AWE does not display any contacts.
       
       Use case ends.
@@ -934,7 +934,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User request to find person based on keyword(s).
-2. AWE shows a list of persons that matches the keyword(s).
+2. AWE shows a list of contacts that matches the keyword(s).
 
 **Extensions**
 
@@ -953,12 +953,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: Delete a person**
 
+**Preconditions: User's last entered command is either `findcontacts` or `contacts`, i.e. the user is viewing an contacts list.**
+
 **MSS**
 
-1. User requests to list persons
-2. AWE shows a list of persons
-3. User requests to delete a specific person in the list
-4. AWE deletes the person
+1. User requests to list persons.
+2. AWE shows a list of persons.
+3. User requests to delete a specific person in the list.
+4. AWE deletes the person.
+5. AWE removes the person from groups of which the person was a member.
+6. AWE displays confirmation message.
 
     Use case ends.
 
@@ -968,9 +972,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2b. The given index is invalid.
 
-    * 3a1. AWE shows an error message.
+    * 2b1. AWE shows an error message.
+
+* 2c. User is not viewing a list of contacts when entering command.
+
+  * 2c1. AWE shows an error message asking user to enter `findcontacts` or `contacts` command first.
+
+    Use case ends.
     
 **Use case: Create Travel Group**
 
@@ -1147,7 +1157,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User enters clear command.
+1. User enters clearalldata command.
 2. All entries are deleted from AddressBook.
 
    Use case ends.
@@ -1181,10 +1191,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Should be able to hold up to 100 groups without a noticeable sluggishness in performance for typical usage.
-5.  Layout between persons and groups should be intuitive and easy to understand and navigate.
+5.  Layout between contacts and groups should be intuitive and easy to understand and navigate.
 6.  Usage of `$` should be standardized for money.
 
 *{More to be added}*
@@ -1228,15 +1238,15 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting a person while all contacts are being shown
 
-   1. Prerequisites: List all persons using the `contacts` command. Multiple persons in the list.
+   1. Prerequisites: List all contacts using the `contacts` command. Multiple contacts in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.

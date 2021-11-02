@@ -34,7 +34,8 @@ public class AddContactCommand extends Command {
         }
 
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_ADDCONTACTCOMMAND_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_ADDCONTACTCOMMAND_SUCCESS, toAdd),
+                false, false, false, true, false, false, false);
     }
 
     @Override

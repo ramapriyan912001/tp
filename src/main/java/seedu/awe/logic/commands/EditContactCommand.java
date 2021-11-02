@@ -1,6 +1,7 @@
 package seedu.awe.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.awe.commons.core.Messages.MESSAGE_EDITCONTACTCOMMAND_CANNOT_BE_EDITED;
 import static seedu.awe.commons.core.Messages.MESSAGE_EDITCONTACTCOMMAND_DUPLICATE_PERSON;
 import static seedu.awe.commons.core.Messages.MESSAGE_EDITCONTACTCOMMAND_EDIT_PERSON_SUCCESS;
 import static seedu.awe.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -16,12 +17,12 @@ import seedu.awe.commons.core.index.Index;
 import seedu.awe.commons.util.CollectionUtil;
 import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.model.Model;
-import seedu.awe.model.person.Address;
-import seedu.awe.model.person.Email;
 import seedu.awe.model.person.Name;
 import seedu.awe.model.person.Person;
 import seedu.awe.model.person.Phone;
 import seedu.awe.model.tag.Tag;
+import seedu.awe.ui.MainWindow;
+import seedu.awe.ui.UiView;
 
 /**
  * Edits the details of an existing person in the awe book.
@@ -58,6 +59,10 @@ public class EditContactCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
+        if (MainWindow.getViewEnum() != UiView.CONTACT_PAGE) {
+            throw new CommandException(MESSAGE_EDITCONTACTCOMMAND_CANNOT_BE_EDITED);
+        }
+
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
@@ -83,11 +88,9 @@ public class EditContactCommand extends Command {
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedTags);
     }
 
     @Override
@@ -115,8 +118,6 @@ public class EditContactCommand extends Command {
     public static class EditPersonDescriptor {
         private Name name;
         private Phone phone;
-        private Email email;
-        private Address address;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -128,8 +129,6 @@ public class EditContactCommand extends Command {
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
-            setEmail(toCopy.email);
-            setAddress(toCopy.address);
             setTags(toCopy.tags);
         }
 
@@ -137,7 +136,7 @@ public class EditContactCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, tags);
         }
 
         public void setName(Name name) {
@@ -154,22 +153,6 @@ public class EditContactCommand extends Command {
 
         public Optional<Phone> getPhone() {
             return Optional.ofNullable(phone);
-        }
-
-        public void setEmail(Email email) {
-            this.email = email;
-        }
-
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
-        }
-
-        public void setAddress(Address address) {
-            this.address = address;
-        }
-
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
         }
 
         /**
@@ -206,8 +189,6 @@ public class EditContactCommand extends Command {
 
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
-                    && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags());
         }
     }

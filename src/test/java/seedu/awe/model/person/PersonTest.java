@@ -1,18 +1,26 @@
 package seedu.awe.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.awe.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.awe.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.awe.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.awe.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.awe.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.awe.testutil.Assert.assertThrows;
+import static seedu.awe.testutil.TypicalGroups.BALI;
+import static seedu.awe.testutil.TypicalGroups.DOHA;
+import static seedu.awe.testutil.TypicalGroups.INDIA;
+import static seedu.awe.testutil.TypicalGroups.OSLO;
 import static seedu.awe.testutil.TypicalPersons.ALICE;
 import static seedu.awe.testutil.TypicalPersons.BOB;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.awe.model.group.Group;
 import seedu.awe.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -32,8 +40,8 @@ public class PersonTest {
         assertFalse(ALICE.isSamePerson(null));
 
         // same name, all other attributes different -> returns true
-        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB)
+                .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -48,6 +56,62 @@ public class PersonTest {
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSamePerson(editedBob));
+    }
+
+    @Test
+    public void getPersonGroups_personInAGroup_success() {
+        ObservableList<Group> groups = FXCollections.observableArrayList(BALI, OSLO);
+
+        ArrayList<Group> expectedList = new ArrayList<>();
+        expectedList.add(BALI);
+
+        assertEquals(expectedList, ALICE.getPersonGroups(groups));
+    }
+
+    @Test
+    public void getPersonGroups_personInMultipleGroup_success() {
+        ObservableList<Group> groups = FXCollections.observableArrayList(BALI, OSLO, DOHA);
+
+        ArrayList<Group> expectedList = new ArrayList<>();
+        expectedList.add(BALI);
+        expectedList.add(DOHA);
+
+        assertEquals(expectedList, ALICE.getPersonGroups(groups));
+    }
+    @Test
+    public void getPersonGroups_personNotInGroup_success() {
+        ObservableList<Group> groups = FXCollections.observableArrayList(INDIA, OSLO);
+
+        ArrayList<Group> expectedList = new ArrayList<>();
+
+        assertEquals(expectedList, ALICE.getPersonGroups(groups));
+    }
+
+    @Test
+    public void getGroupName_personInAGroup_success() {
+        ObservableList<Group> groups = FXCollections.observableArrayList(BALI, OSLO);
+
+        String expectedResult = BALI.getGroupName().getName();
+
+        assertEquals(expectedResult, ALICE.getGroupsName(groups));
+    }
+
+    @Test
+    public void getGroupName_personInMultipleGroup_success() {
+        ObservableList<Group> groups = FXCollections.observableArrayList(BALI, OSLO, DOHA);
+
+        String expectedResult = String.format("%s, %s", BALI.getGroupName().getName(), DOHA.getGroupName().getName());
+
+        assertEquals(expectedResult, ALICE.getGroupsName(groups));
+    }
+
+    @Test
+    public void getGroupName_personNotInGroup_success() {
+        ObservableList<Group> groups = FXCollections.observableArrayList(INDIA, OSLO);
+
+        String expectedResult = "";
+
+        assertEquals(expectedResult, ALICE.getGroupsName(groups));
     }
 
     @Test
@@ -74,14 +138,6 @@ public class PersonTest {
 
         // different phone -> returns false
         editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
-
-        // different email -> returns false
-        editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
-
-        // different awe -> returns false
-        editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false

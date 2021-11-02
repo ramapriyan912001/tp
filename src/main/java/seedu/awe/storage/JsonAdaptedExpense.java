@@ -13,7 +13,6 @@ import seedu.awe.model.expense.Cost;
 import seedu.awe.model.expense.Description;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.expense.IndividualAmount;
-import seedu.awe.model.person.Address;
 import seedu.awe.model.person.Person;
 
 public class JsonAdaptedExpense {
@@ -77,7 +76,7 @@ public class JsonAdaptedExpense {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Cost.class.getSimpleName()));
         }
         if (!Cost.isValidCost(cost)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Cost.MESSAGE_CONSTRAINTS);
         }
         final Cost modelCost = new Cost(cost);
 
@@ -86,7 +85,7 @@ public class JsonAdaptedExpense {
                     Description.class.getSimpleName()));
         }
         if (!Description.isValidDescription(description)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
         }
 
         final ArrayList<Person> modelIncluded = new ArrayList<>();

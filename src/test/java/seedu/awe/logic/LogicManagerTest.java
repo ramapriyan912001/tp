@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.awe.commons.core.Messages.MESSAGE_LISTCONTACTSCOMMAND_SUCCESS;
 import static seedu.awe.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.awe.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.awe.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.awe.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.awe.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.awe.testutil.Assert.assertThrows;
@@ -32,6 +30,8 @@ import seedu.awe.storage.JsonAddressBookStorage;
 import seedu.awe.storage.JsonUserPrefsStorage;
 import seedu.awe.storage.StorageManager;
 import seedu.awe.testutil.PersonBuilder;
+import seedu.awe.ui.MainWindow;
+import seedu.awe.ui.UiView;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -45,7 +45,7 @@ public class LogicManagerTest {
     @BeforeEach
     public void setUp() {
         JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+                new JsonAddressBookStorage(temporaryFolder.resolve("awe.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
@@ -60,6 +60,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "deletecontact 9";
+        MainWindow.setViewEnum(UiView.CONTACT_PAGE);
         assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
@@ -73,15 +74,14 @@ public class LogicManagerTest {
     public void execute_storageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
         JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+                new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAwe.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddContactCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY;
+        String addCommand = AddContactCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY;
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);

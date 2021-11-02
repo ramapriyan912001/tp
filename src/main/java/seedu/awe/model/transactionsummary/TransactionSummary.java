@@ -1,5 +1,7 @@
 package seedu.awe.model.transactionsummary;
 
+import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Objects;
 
 import seedu.awe.model.expense.Cost;
@@ -16,13 +18,14 @@ public class TransactionSummary implements Comparable<TransactionSummary> {
      * @param cost amount spent
      */
     public TransactionSummary(Person person, Cost cost) {
+        requireAllNonNull(person, cost);
         this.person = person;
         this.cost = cost;
     }
 
     @Override
     public String toString() {
-        return String.format("%s spent $%0.2f.", person.getName(), getCost());
+        return String.format("%s spent $%.2f.", person.getName(), getCost().cost);
     }
 
     public Person getPerson() {
