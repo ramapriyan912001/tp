@@ -164,6 +164,6 @@ public class TypicalGroups {
     }
 
     public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, BOB, AMY, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }

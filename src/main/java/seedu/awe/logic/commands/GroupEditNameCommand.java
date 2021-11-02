@@ -25,7 +25,7 @@ public class GroupEditNameCommand extends Command {
      * Creates a GroupEditNameCommand to edit the specified {@code GroupName}
      */
     public GroupEditNameCommand(GroupName oldGroupName, GroupName newGroupName, boolean isValidCommand) {
-        requireAllNonNull(newGroupName, isValidCommand);
+        requireAllNonNull(oldGroupName, newGroupName, isValidCommand);
         this.oldGroupName = oldGroupName;
         this.newGroupName = newGroupName;
         this.isValidCommand = isValidCommand;
