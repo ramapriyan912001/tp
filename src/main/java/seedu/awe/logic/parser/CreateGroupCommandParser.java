@@ -92,10 +92,9 @@ public class CreateGroupCommandParser implements Parser<CreateGroupCommand> {
         } catch (IndexOutOfBoundsException e) {
             throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
         } catch (EmptyGroupException err) {
-            throw new EmptyGroupException(
-                    String.format(MESSAGE_CREATEGROUPCOMMAND_EMPTY_GROUP,
-                            MESSAGE_CREATEGROUPCOMMAND_INVALID_NAMES,
-                            MESSAGE_CREATEGROUPCOMMAND_USAGE));
+            throw new EmptyGroupException(MESSAGE_CREATEGROUPCOMMAND_EMPTY_GROUP
+                            + MESSAGE_CREATEGROUPCOMMAND_INVALID_NAMES
+                            + MESSAGE_CREATEGROUPCOMMAND_USAGE);
         }
     }
 

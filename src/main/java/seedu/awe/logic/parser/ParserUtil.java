@@ -3,6 +3,7 @@ package seedu.awe.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.awe.commons.core.Messages.MESSAGE_CREATEGROUPCOMMAND_EMPTY_GROUP;
 import static seedu.awe.commons.core.Messages.MESSAGE_CREATEGROUPCOMMAND_INVALID_NAMES;
+import static seedu.awe.commons.core.Messages.MESSAGE_CREATEGROUPCOMMAND_USAGE;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -150,10 +151,8 @@ public class ParserUtil {
             isValid = true;
         }
         if (invalidCount == names.size()) {
-            throw new EmptyGroupException(
-                    String.format(MESSAGE_CREATEGROUPCOMMAND_EMPTY_GROUP,
-                            MESSAGE_CREATEGROUPCOMMAND_INVALID_NAMES,
-                            MESSAGE_CREATEGROUPCOMMAND_INVALID_NAMES));
+            throw new EmptyGroupException(MESSAGE_CREATEGROUPCOMMAND_EMPTY_GROUP
+                    + MESSAGE_CREATEGROUPCOMMAND_INVALID_NAMES + MESSAGE_CREATEGROUPCOMMAND_USAGE);
         }
         memberNameList.addAll(memberNameSet);
         return memberNameList;
