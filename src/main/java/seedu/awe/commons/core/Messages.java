@@ -20,6 +20,7 @@ import seedu.awe.logic.commands.FindGroupsCommand;
 import seedu.awe.logic.commands.HelpCommand;
 import seedu.awe.logic.commands.ListContactsCommand;
 import seedu.awe.logic.commands.ListExpensesCommand;
+import seedu.awe.model.expense.Cost;
 
 /**
  * Container for user visible messages.
@@ -167,7 +168,7 @@ public class Messages {
             + PREFIX_COST + "COST "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + "[" + PREFIX_NAME + "PAYEE NAME" + "] "
-            + "[" + PREFIX_COST + "PAYEE EXPENSE" + "]"
+            + "[" + PREFIX_COST + "PAYEE EXPENSE" + "] "
             + "[" + PREFIX_EXCLUDE + "EXCLUDED PERSON" + "]";
     public static final String MESSAGE_ADDEXPENSECOMMAND_SUCCESS = "Expense added!";
     public static final String MESSAGE_ADDEXPENSECOMMAND_NOT_PART_OF_GROUP =
@@ -178,6 +179,10 @@ public class Messages {
             "The cost of this expense is zero or less!";
     public static final String MESSAGE_ADDEXPENSECOMMAND_CANNOT_ADD_EXCLUDED_MEMBER =
             "You tried to add an expense for an excluded member!";
+    public static final String MESSAGE_ADDEXPENSECOMMAND_GROUP_DOES_NOT_EXIST =
+            "The group you specified doesn't exist!";
+    public static final String MESSAGE_ADDEXPENSECOMMAND_COST_MORE_THAN_MAX =
+            "Please enter a cost less than " + String.format("%.2f", Cost.MAX_COST) + "!";
 
 
     public static final String MESSAGE_DELETEEXPENSECOMMAND_USAGE = DeleteExpenseCommand.COMMAND_WORD

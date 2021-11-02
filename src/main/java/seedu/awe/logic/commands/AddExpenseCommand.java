@@ -3,7 +3,9 @@ package seedu.awe.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_ALL_MEMBERS_EXCLUDED;
 import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_CANNOT_ADD_EXCLUDED_MEMBER;
+import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_COST_MORE_THAN_MAX;
 import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_COST_ZERO_OR_LESS;
+import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_GROUP_DOES_NOT_EXIST;
 import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_NOT_PART_OF_GROUP;
 import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_SUCCESS;
 import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
@@ -50,7 +52,7 @@ public class AddExpenseCommand extends Command {
      */
     public AddExpenseCommand(Person payer, Cost totalCost, Description description, GroupName groupName,
                              List<Person> selfPayees, List<Cost> selfCosts, List<Person> excluded) {
-        requireAllNonNull(payer, totalCost, description, groupName, selfPayees, selfCosts, excluded);
+        requireAllNonNull(totalCost, description, groupName, selfPayees, selfCosts, excluded);
 
         this.payer = payer;
         this.totalCost = totalCost;
@@ -67,8 +69,16 @@ public class AddExpenseCommand extends Command {
 
         Group group = model.getGroupByName(groupName);
 
+        if (group == null) {
+            throw new CommandException(MESSAGE_ADDEXPENSECOMMAND_GROUP_DOES_NOT_EXIST);
+        }
+
         if (!group.isPartOfGroup(payer)) {
             throw new CommandException(MESSAGE_ADDEXPENSECOMMAND_NOT_PART_OF_GROUP);
+        }
+
+        if (totalCost.getCost() > Cost.MAX_COST) {
+            throw new CommandException(MESSAGE_ADDEXPENSECOMMAND_COST_MORE_THAN_MAX);
         }
 
         for (Person exclude : excluded) {
