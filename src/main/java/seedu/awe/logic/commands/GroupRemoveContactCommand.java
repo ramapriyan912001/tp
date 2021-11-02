@@ -1,13 +1,13 @@
 package seedu.awe.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVECONTACT_GROUP_DELETED;
 import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVECONTACT_NONEXISTENT_PERSON;
 import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVECONTACT_SUCCESS;
 import static seedu.awe.commons.core.Messages.MESSAGE_NONEXISTENT_GROUP;
 import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.model.Model;
@@ -94,9 +94,6 @@ public class GroupRemoveContactCommand extends Command {
         }
 
         Group oldGroup = model.getGroupByName(groupName);
-        if (Objects.isNull(oldGroup)) {
-            throw new CommandException(String.format(MESSAGE_NONEXISTENT_GROUP, groupName));
-        }
 
         ArrayList<Person> membersFromOldGroup = oldGroup.getMembers();
         if (!checkRemoveMembers(membersFromOldGroup, membersToBeRemoved)) {
@@ -107,10 +104,16 @@ public class GroupRemoveContactCommand extends Command {
         for (Person member: membersToBeRemoved) {
             newGroup = newGroup.removeMember(member);
         }
-
-        model.setGroup(oldGroup, newGroup);
-        model.setAllMembersOfGroup(oldGroup);
-        return new CommandResult(MESSAGE_GROUPREMOVECONTACT_SUCCESS);
+        if (newGroup.getMembers().size() == 0) {
+            model.deleteGroup(oldGroup);
+            model.setAllMembersOfGroup(oldGroup);
+            return new CommandResult(MESSAGE_GROUPREMOVECONTACT_SUCCESS
+                    + String.format(MESSAGE_GROUPREMOVECONTACT_GROUP_DELETED, oldGroup.getGroupName().getName()));
+        } else {
+            model.setGroup(oldGroup, newGroup);
+            model.setAllMembersOfGroup(oldGroup);
+            return new CommandResult(MESSAGE_GROUPREMOVECONTACT_SUCCESS);
+        }
     }
 
     @Override

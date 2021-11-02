@@ -130,6 +130,8 @@ public class Messages {
             + "Be sure to use the exact names of group members\n";
     public static final String MESSAGE_GROUPREMOVECONTACT_USAGE =
             "groupremovecontact gn/[GROUPNAME] n/[NAME1] n/[OPTIONAL NAME2]...\n";
+    public static final String MESSAGE_GROUPREMOVECONTACT_GROUP_DELETED =
+            "Group %1$s deleted as it contains 0 members\n";
 
 
     public static final String MESSAGE_GROUPADDTAGCOMMAND_SUCCESS = "New tag(s) added to group\n";
