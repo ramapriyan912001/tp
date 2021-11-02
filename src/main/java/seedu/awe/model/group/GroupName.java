@@ -34,11 +34,7 @@ public class GroupName {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidGroupName(String test) {
-<<<<<<< Updated upstream
         return test.matches(VALIDATION_REGEX) && test.length() <= MAX_LENGTH;
-=======
-        return test.matches(VALIDATION_REGEX) && test.length() <= 50;
->>>>>>> Stashed changes
     }
 
     /**

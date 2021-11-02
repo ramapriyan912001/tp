@@ -1,15 +1,23 @@
 package seedu.awe.logic.parser;
 
-import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_NOT_PART_OF_GROUP;
+import static java.util.Objects.requireNonNull;
 import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_USAGE;
 import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.awe.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.awe.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.awe.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.function.Predicate;
+
+import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
-import org.junit.jupiter.api.Test;
 import seedu.awe.commons.core.GuiSettings;
 import seedu.awe.logic.commands.AddExpenseCommand;
-import seedu.awe.logic.commands.DeleteContactCommand;
 import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.model.AddressBook;
 import seedu.awe.model.Model;
@@ -27,17 +35,6 @@ import seedu.awe.model.transactionsummary.TransactionSummary;
 import seedu.awe.testutil.ExpenseBuilder;
 import seedu.awe.testutil.GroupBuilder;
 import seedu.awe.testutil.PersonBuilder;
-
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.function.Predicate;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.awe.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.awe.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 public class AddExpenseCommandParserTest {
     private Person validPerson = new PersonBuilder().build();
