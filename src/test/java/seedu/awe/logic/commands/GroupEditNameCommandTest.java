@@ -1,12 +1,14 @@
 package seedu.awe.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.awe.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.awe.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.awe.testutil.Assert.assertThrows;
 import static seedu.awe.testutil.TypicalGroups.BALI;
 import static seedu.awe.testutil.TypicalGroups.getTypicalAddressBook;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import seedu.awe.commons.core.Messages;
@@ -41,13 +43,13 @@ public class GroupEditNameCommandTest {
         GroupEditNameCommand groupEditNameCommand = new GroupEditNameCommand(BALI_GROUP_NAME, JAPAN_GROUP_NAME, true);
 
         // getOldGroupName
-        Assertions.assertEquals(groupEditNameCommand.getOldGroupName(), BALI_GROUP_NAME);
+        assertEquals(groupEditNameCommand.getOldGroupName(), BALI_GROUP_NAME);
 
         // getNewGroupName
-        Assertions.assertEquals(groupEditNameCommand.getNewGroupName(), JAPAN_GROUP_NAME);
+        assertEquals(groupEditNameCommand.getNewGroupName(), JAPAN_GROUP_NAME);
 
         // getValidCommand
-        Assertions.assertTrue(groupEditNameCommand.getValidCommand());
+        assertTrue(groupEditNameCommand.getValidCommand());
     }
 
 
@@ -88,32 +90,32 @@ public class GroupEditNameCommandTest {
     public void equals() {
         GroupEditNameCommand groupEditNameCommand = new GroupEditNameCommand(BALI_GROUP_NAME, JAPAN_GROUP_NAME, true);
         // null input -> false
-        Assertions.assertFalse(groupEditNameCommand.equals(null));
+        assertFalse(groupEditNameCommand.equals(null));
 
         // Not same class -> false
-        Assertions.assertFalse(groupEditNameCommand.equals(new ListContactsCommand()));
+        assertFalse(groupEditNameCommand.equals(new ListContactsCommand()));
 
         // Same instance -> true
-        Assertions.assertTrue(groupEditNameCommand.equals(groupEditNameCommand));
+        assertTrue(groupEditNameCommand.equals(groupEditNameCommand));
 
         // Different instance but same details -> true
         GroupEditNameCommand groupEditNameCommandToCheck =
                 new GroupEditNameCommand(BALI_GROUP_NAME, JAPAN_GROUP_NAME, true);
-        Assertions.assertTrue(groupEditNameCommand.equals(groupEditNameCommandToCheck));
+        assertTrue(groupEditNameCommand.equals(groupEditNameCommandToCheck));
 
         // Different instance with different oldGroup -> false
         GroupEditNameCommand groupEditNameCommandDifferentOldGroup =
                 new GroupEditNameCommand(BALI_GROUP_NAME, TAIWAN_GROUP_NAME, true);
-        Assertions.assertFalse(groupEditNameCommand.equals(groupEditNameCommandDifferentOldGroup));
+        assertFalse(groupEditNameCommand.equals(groupEditNameCommandDifferentOldGroup));
 
         // Different instance with different oldGroup -> false
         GroupEditNameCommand groupEditNameCommandDifferentNewGroup =
                 new GroupEditNameCommand(TAIWAN_GROUP_NAME, JAPAN_GROUP_NAME, true);
-        Assertions.assertFalse(groupEditNameCommand.equals(groupEditNameCommandDifferentNewGroup));
+        assertFalse(groupEditNameCommand.equals(groupEditNameCommandDifferentNewGroup));
 
         // Different isValid command -> false
         GroupEditNameCommand groupEditNameCommandDifferentIsValid =
                 new GroupEditNameCommand(BALI_GROUP_NAME, JAPAN_GROUP_NAME, false);
-        Assertions.assertTrue(groupEditNameCommand.equals(groupEditNameCommandDifferentIsValid));
+        assertFalse(groupEditNameCommand.equals(groupEditNameCommandDifferentIsValid));
     }
 }
