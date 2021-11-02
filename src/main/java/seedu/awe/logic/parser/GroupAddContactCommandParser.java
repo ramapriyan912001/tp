@@ -1,7 +1,8 @@
 package seedu.awe.logic.parser;
-import static seedu.awe.commons.core.Messages.MESSAGE_GROUPADDCONTACTCOMMAND_ERROR;
+import static seedu.awe.commons.core.Messages.MESSAGE_GROUPADDCONTACTCOMMAND_NONEXISTENT_PERSON;
 import static seedu.awe.commons.core.Messages.MESSAGE_GROUPADDCONTACTCOMMAND_USAGE;
 import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.awe.commons.core.Messages.MESSAGE_NONEXISTENT_GROUP;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_NAME;
 
@@ -14,13 +15,14 @@ import seedu.awe.logic.commands.GroupAddContactCommand;
 import seedu.awe.logic.parser.exceptions.ParseException;
 import seedu.awe.model.Model;
 import seedu.awe.model.ReadOnlyAddressBook;
+import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.person.Name;
 import seedu.awe.model.person.Person;
 
 public class GroupAddContactCommandParser implements Parser<GroupAddContactCommand> {
-    private static final String BAD_FORMATTING = "\"groupaddcontact command\" is not properly formatted";
     private ObservableList<Person> allMembers;
+    private ObservableList<Group>allGroups;
     private final ArrayList<Person> newMembersToAdd;
 
     /**
@@ -31,6 +33,7 @@ public class GroupAddContactCommandParser implements Parser<GroupAddContactComma
     public GroupAddContactCommandParser(Model model) {
         ReadOnlyAddressBook addressBook = model.getAddressBook();
         this.allMembers = addressBook.getPersonList();
+        this.allGroups = addressBook.getGroupList();
         this.newMembersToAdd = new ArrayList<>();
     }
 
@@ -53,11 +56,14 @@ public class GroupAddContactCommandParser implements Parser<GroupAddContactComma
         }
 
         GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).get());
+        if (!ParserUtil.findExistingGroupName(groupName, allGroups)) {
+            throw new ParseException(String.format(MESSAGE_NONEXISTENT_GROUP, groupName));
+        }
         List<Name> newMemberNames = ParserUtil.parseMemberNames(argMultimap.getAllValues(PREFIX_NAME));
         ArrayList<Person> newMembers = findNewMembers(newMemberNames);
 
         boolean isValidCommand = true;
-        if (groupName.getName().equals(BAD_FORMATTING) || Objects.isNull(newMembers)) {
+        if (Objects.isNull(newMembers)) {
             isValidCommand = false;
         }
 
@@ -76,7 +82,7 @@ public class GroupAddContactCommandParser implements Parser<GroupAddContactComma
                 addMemberIfExist(name);
             }
             if (!newMemberNames.isEmpty() && newMembersToAdd.isEmpty()) {
-                throw new ParseException(MESSAGE_GROUPADDCONTACTCOMMAND_ERROR);
+                throw new ParseException(MESSAGE_GROUPADDCONTACTCOMMAND_NONEXISTENT_PERSON);
             }
             return newMembersToAdd;
         } catch (IndexOutOfBoundsException e) {
@@ -99,7 +105,7 @@ public class GroupAddContactCommandParser implements Parser<GroupAddContactComma
             added = true;
         }
         if (!added) {
-            throw new ParseException(MESSAGE_GROUPADDCONTACTCOMMAND_ERROR);
+            throw new ParseException(MESSAGE_GROUPADDCONTACTCOMMAND_NONEXISTENT_PERSON);
         }
         return added;
     }

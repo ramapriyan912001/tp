@@ -11,8 +11,6 @@ import seedu.awe.logic.parser.exceptions.ParseException;
 import seedu.awe.model.group.GroupName;
 
 public class GroupEditNameCommandParser implements Parser<GroupEditNameCommand> {
-    private static final String BAD_FORMATTING = "\"groupeditname command\" is not properly formatted";
-
     /**
      * Returns GroupEditNameCommand based on user input.
      *
@@ -48,11 +46,6 @@ public class GroupEditNameCommandParser implements Parser<GroupEditNameCommand> 
                     MESSAGE_GROUPEDITNAMECOMMAND_USAGE));
         }
 
-        boolean isValidCommand = true;
-        if (newGroupName.getName().equals(BAD_FORMATTING)) {
-            isValidCommand = false;
-        }
-
-        return new GroupEditNameCommand(oldGroupName, newGroupName, isValidCommand);
+        return new GroupEditNameCommand(oldGroupName, newGroupName);
     }
 }

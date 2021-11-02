@@ -13,7 +13,7 @@ import seedu.awe.ui.UiPart;
 public class ExpenseCard extends UiPart<Region> {
 
     private static final String FXML = "ExpenseListCard.fxml";
-    private static final String EXPENSE_COST = "Cost: $";
+    private static final String EXPENSE_COST = "Cost: ";
     private static final String EXPENSE_PAYER = "Payer: ";
 
     /**

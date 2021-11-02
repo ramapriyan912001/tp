@@ -1,0 +1,22 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package IndividualAmount <<Rectangle>>{
+    Class IndividualAmount
+    Class Person
+    Class Cost
+}
+
+Package Person <<Rectangle>>{
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside --> IndividualAmount
+
+IndividualAmount *--> "1" Person
+IndividualAmount *--> Cost
+
+@enduml

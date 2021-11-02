@@ -1,8 +1,8 @@
 package seedu.awe.logic.commands;
 import static java.util.Objects.requireNonNull;
-import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVETAG_ERROR;
-import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVETAG_NONEXISTENT_TAG;
-import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVETAG_SUCCESS;
+import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVETAGCOMMAND_ERROR;
+import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVETAGCOMMAND_NONEXISTENT_TAG;
+import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVETAGCOMMAND_SUCCESS;
 import static seedu.awe.commons.core.Messages.MESSAGE_NONEXISTENT_GROUP;
 import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -101,7 +101,7 @@ public class GroupRemoveTagCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (!isValidCommand) {
-            throw new CommandException(MESSAGE_GROUPREMOVETAG_ERROR);
+            throw new CommandException(MESSAGE_GROUPREMOVETAGCOMMAND_ERROR);
         }
 
         Group oldGroup = model.getGroupByName(groupName);
@@ -112,7 +112,7 @@ public class GroupRemoveTagCommand extends Command {
         Optional<Tag> tagNotInTheGroup = checkRemoveTags(tagsFromOldGroup, tagsToBeRemoved);
         if (tagNotInTheGroup.isPresent()) {
             throw new CommandException(
-                    String.format(MESSAGE_GROUPREMOVETAG_NONEXISTENT_TAG, tagNotInTheGroup.get().getTagName())
+                    String.format(MESSAGE_GROUPREMOVETAGCOMMAND_NONEXISTENT_TAG, tagNotInTheGroup.get().getTagName())
             );
         }
 
@@ -122,7 +122,7 @@ public class GroupRemoveTagCommand extends Command {
         }
 
         model.setGroup(oldGroup, newGroup);
-        return new CommandResult(MESSAGE_GROUPREMOVETAG_SUCCESS);
+        return new CommandResult(MESSAGE_GROUPREMOVETAGCOMMAND_SUCCESS);
     }
 
     @Override

@@ -1,7 +1,8 @@
 package seedu.awe.logic.parser;
-import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVECONTACT_ERROR;
-import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVECONTACT_USAGE;
+import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVECONTACTCOMMAND_NONEXISTENT_PERSON;
+import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVECONTACTCOMMAND_USAGE;
 import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.awe.commons.core.Messages.MESSAGE_NONEXISTENT_GROUP;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_NAME;
 
@@ -14,13 +15,14 @@ import seedu.awe.logic.commands.GroupRemoveContactCommand;
 import seedu.awe.logic.parser.exceptions.ParseException;
 import seedu.awe.model.Model;
 import seedu.awe.model.ReadOnlyAddressBook;
+import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.person.Name;
 import seedu.awe.model.person.Person;
 
 public class GroupRemoveContactCommandParser implements Parser<GroupRemoveContactCommand> {
-    private static final String BAD_FORMATTING = "\"groupremovecontact command\" is not properly formatted";
     private ObservableList<Person> allMembers;
+    private ObservableList<Group> allGroups;
     private final ArrayList<Person> membersToBeRemoved;
 
     /**
@@ -31,6 +33,7 @@ public class GroupRemoveContactCommandParser implements Parser<GroupRemoveContac
     public GroupRemoveContactCommandParser(Model model) {
         ReadOnlyAddressBook addressBook = model.getAddressBook();
         this.allMembers = addressBook.getPersonList();
+        this.allGroups = addressBook.getGroupList();
         this.membersToBeRemoved = new ArrayList<>();
     }
 
@@ -48,15 +51,20 @@ public class GroupRemoveContactCommandParser implements Parser<GroupRemoveContac
         if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_GROUP_NAME, PREFIX_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    MESSAGE_GROUPREMOVECONTACT_USAGE));
+                    MESSAGE_GROUPREMOVECONTACTCOMMAND_USAGE));
         }
 
         GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).get());
+
+        if (!ParserUtil.findExistingGroupName(groupName, allGroups)) {
+            throw new ParseException(String.format(MESSAGE_NONEXISTENT_GROUP, groupName));
+        }
+
         List<Name> membersToBeRemovedNames = ParserUtil.parseMemberNames(argMultimap.getAllValues(PREFIX_NAME));
 
         ArrayList<Person> membersToBeRemoved = findMembersToBeRemoved(membersToBeRemovedNames);
         boolean isValidCommand = true;
-        if (groupName.getName().equals(BAD_FORMATTING) || Objects.isNull(membersToBeRemoved)) {
+        if (Objects.isNull(membersToBeRemoved)) {
             isValidCommand = false;
         }
 
@@ -75,7 +83,7 @@ public class GroupRemoveContactCommandParser implements Parser<GroupRemoveContac
                 addMemberToRemoveList(name);
             }
             if (!membersToBeRemovedNames.isEmpty() && membersToBeRemovedNames.isEmpty()) {
-                throw new ParseException(MESSAGE_GROUPREMOVECONTACT_ERROR);
+                throw new ParseException(MESSAGE_GROUPREMOVECONTACTCOMMAND_NONEXISTENT_PERSON);
             }
             return membersToBeRemoved;
         } catch (IndexOutOfBoundsException e) {
@@ -98,7 +106,7 @@ public class GroupRemoveContactCommandParser implements Parser<GroupRemoveContac
             added = true;
         }
         if (!added) {
-            throw new ParseException(MESSAGE_GROUPREMOVECONTACT_ERROR);
+            throw new ParseException(MESSAGE_GROUPREMOVECONTACTCOMMAND_NONEXISTENT_PERSON);
         }
         return added;
     }

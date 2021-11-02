@@ -1107,23 +1107,53 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to add an expense to the active travel group
+1. User requests to add an expense to the specified travel group
 2. AWE displays confirmation message.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. AWE detects that there are no travel groups active.
+* 1a. AWE detects that the specified travel group does not exist.
 
-    * 1a1. AWE informs user that no travel groups are active.
+    * 1a1. AWE informs user that the specified travel group does not exist.
   
       Use case ends.
 
 * 1b. AWE detects that inputted command is an incorrect format.
 
-    * 1b1. AWE informs user that expense was not added and reminds the user of the correct format/
+    * 1b1. AWE informs user that expense was not added and reminds the user of the correct format.
 
+      Use case ends.
+  
+* 1c. AWE detects that the cost inputted into the expense is more than ten million.
+
+    * 1c1. AWE inform user that the cost of the expense has to be less than ten million.
+  
+      Use case ends.
+  
+* 1d. AWE detects that the payer is not part of the specified travel group.
+
+    * 1d1. AWE informs user that the payer has to be a part of the specified travel group.
+  
+      Use case ends.
+  
+* 1e. AWE detects that individual payer are not part of the specified travel group.
+
+    * 1e1. AWE informs user that the individual payer has to be part of the specified travel group.
+  
+      Use case ends.
+  
+* 1f. AWE detects that the excluded member is not part of the specified travel group.
+
+    * 1f1. AWE informs user that the excluded member has to be part of the specified travel group.
+  
+      Use case ends.
+  
+* 1g. AWE detects that all members in the specified travel group are excluded from the expense.
+
+    * 1g1. AWE informs user that they cannot exclude all members in the travel group from the expense.
+  
       Use case ends.
 
 **Use case: Delete a shared expense**

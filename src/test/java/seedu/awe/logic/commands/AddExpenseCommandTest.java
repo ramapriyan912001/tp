@@ -206,6 +206,11 @@ public class AddExpenseCommandTest {
     }
 
     @Test
+    public void execute_withExcludedMembersNotInGroup_throwsCommandException() throws Exception {
+
+    }
+
+    @Test
     public void equals() {
         Expense alicePayer = new ExpenseBuilder().withPayer(ALICE).build();
         Expense bobPayer = new ExpenseBuilder().withPayer(BOB).build();

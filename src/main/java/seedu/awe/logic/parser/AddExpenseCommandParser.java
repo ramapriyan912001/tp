@@ -1,7 +1,6 @@
 package seedu.awe.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_NOT_PART_OF_GROUP;
 import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_USAGE;
 import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_COST;
@@ -71,10 +70,6 @@ public class AddExpenseCommandParser implements Parser<AddExpenseCommand> {
         }
 
         Person payer = getPayer(names);
-
-        if (payer == null) {
-            throw new ParseException(MESSAGE_ADDEXPENSECOMMAND_NOT_PART_OF_GROUP);
-        }
 
         Cost totalCost = getTotalCost(costs);
         ArrayList<Person> namesAsPersons = namesToPerson(names);
