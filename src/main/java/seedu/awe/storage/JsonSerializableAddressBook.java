@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.awe.commons.exceptions.IllegalValueException;
 import seedu.awe.model.AddressBook;
 import seedu.awe.model.ReadOnlyAddressBook;
+import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.person.Person;
 
@@ -22,6 +23,8 @@ class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_GROUP = "Groups list contains duplicate group(s).";
+    public static final String MESSAGE_INVALID_GROUP_MEMBER = "Group member(s) not found in persons list.";
+    public static final String MESSAGE_INVALID_EXPENSE_PAYER = "The payer of the expense is not found in persons list.";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedGroup> groups = new ArrayList<>();
@@ -47,6 +50,35 @@ class JsonSerializableAddressBook {
     }
 
     /**
+     * Checks if the members in the group are inside list of persons.
+     *
+     * @param group The group to check if members are valid.
+     * @param addressBook The address book containing list of persons.
+     */
+    public boolean areValidMembers(Group group, AddressBook addressBook) {
+        for (Person person : group.getMembers()) {
+            if (!addressBook.hasPerson(person)) {
+                return false;
+            }
+        } return true;
+    }
+
+    /**
+     * Checks if the payers of the expenses are valid persons.
+     *
+     * @param group The group to check if members are valid.
+     * @param addressBook The address book containing the list of persons.
+     */
+    public boolean areValidExpenses(Group group, AddressBook addressBook) {
+        for (Expense expense : group.getExpenses()) {
+            Person payer = expense.getPayer();
+            if (!addressBook.hasPerson(payer)) {
+                return false;
+            }
+        } return true;
+    }
+
+    /**
      * Converts this awe book into the model's {@code AddressBook} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
@@ -60,15 +92,19 @@ class JsonSerializableAddressBook {
             }
             addressBook.addPerson(person);
         }
-
         for (JsonAdaptedGroup jsonAdaptedGroup : groups) {
             Group group = jsonAdaptedGroup.toModelType();
             if (addressBook.hasGroup(group)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_GROUP);
             }
+            if (!areValidMembers(group, addressBook)) {
+                throw new IllegalValueException(MESSAGE_INVALID_GROUP_MEMBER);
+            }
+            if (!areValidExpenses(group, addressBook)) {
+                throw new IllegalValueException(MESSAGE_INVALID_EXPENSE_PAYER);
+            }
             addressBook.addGroup(group);
         }
-
         return addressBook;
     }
 

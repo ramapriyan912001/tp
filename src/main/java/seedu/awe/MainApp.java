@@ -1,5 +1,7 @@
 package seedu.awe;
 
+import static seedu.awe.model.util.SampleDataUtil.getSampleAddressBook;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
@@ -15,7 +17,6 @@ import seedu.awe.commons.util.ConfigUtil;
 import seedu.awe.commons.util.StringUtil;
 import seedu.awe.logic.Logic;
 import seedu.awe.logic.LogicManager;
-import seedu.awe.model.AddressBook;
 import seedu.awe.model.Model;
 import seedu.awe.model.ModelManager;
 import seedu.awe.model.ReadOnlyAddressBook;
@@ -71,8 +72,8 @@ public class MainApp extends Application {
 
     /**
      * Returns a {@code ModelManager} with the data from {@code storage}'s awe book and {@code userPrefs}. <br>
-     * The data from the sample awe book will be used instead if {@code storage}'s awe book is not found,
-     * or an empty awe book will be used instead if errors occur when reading {@code storage}'s awe book.
+     * The data from the sample awe book will be used instead if {@code storage}'s awe book is not found or
+     * if errors occur when reading {@code storage}'s awe book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
@@ -80,19 +81,18 @@ public class MainApp extends Application {
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+                logger.info("Data file not found. Will be starting with a sample AWE book.");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+            logger.warning("Data file not in the correct format. Will be starting with a sample AWE book.");
             isDataError = true;
-            initialData = new AddressBook();
+            initialData = getSampleAddressBook();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with a sample AWE book.");
             isDataError = true;
-            initialData = new AddressBook();
+            initialData = getSampleAddressBook();
         }
-
         return new ModelManager(initialData, userPrefs);
     }
 
