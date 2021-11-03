@@ -1,5 +1,5 @@
 package seedu.awe.logic.parser;
-import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVETAG_USAGE;
+import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVETAGCOMMAND_USAGE;
 import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_TAG;
@@ -13,8 +13,6 @@ import seedu.awe.model.group.GroupName;
 import seedu.awe.model.tag.Tag;
 
 public class GroupRemoveTagCommandParser implements Parser<GroupRemoveTagCommand> {
-    private static final String BAD_FORMATTING = "\"groupremovetag command\" is not properly formatted";
-
     /**
      * Returns GroupRemoveTagCommand based on user input.
      *
@@ -30,14 +28,14 @@ public class GroupRemoveTagCommandParser implements Parser<GroupRemoveTagCommand
         if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_GROUP_NAME, PREFIX_TAG)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    MESSAGE_GROUPREMOVETAG_USAGE));
+                    MESSAGE_GROUPREMOVETAGCOMMAND_USAGE));
         }
 
         GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).get());
         Set<Tag> tagsToBeRemoved = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         boolean isValidCommand = true;
-        if (groupName.getName().equals(BAD_FORMATTING) || Objects.isNull(tagsToBeRemoved)) {
+        if (Objects.isNull(tagsToBeRemoved)) {
             isValidCommand = false;
         }
 

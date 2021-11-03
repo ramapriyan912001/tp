@@ -2,6 +2,7 @@ package seedu.awe.logic.parser;
 
 import static seedu.awe.commons.core.Messages.MESSAGE_GROUPEDITNAMECOMMAND_USAGE;
 import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.awe.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.awe.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.awe.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -30,6 +31,9 @@ public class GroupEditNameCommandParserTest {
 
         // empty gn tag
         assertParseFailure(parser, TAG_EMPTY, MESSAGE_GROUP_NAME_INVALID);
+
+        // preambleEmpty
+        assertParseFailure(parser, PREAMBLE_NON_EMPTY, MESSAGE_INVALID_FORMAT);
     }
 
     @Test
@@ -50,7 +54,7 @@ public class GroupEditNameCommandParserTest {
     @Test
     public void parse_validGroupName_success() {
         GroupEditNameCommand expectedCommand = new GroupEditNameCommand(new GroupName("Japan"),
-                new GroupName("Malaysia"), true);
+                new GroupName("Malaysia"));
         assertParseSuccess(parser, " gn/Japan gn/Malaysia", expectedCommand);
     }
 }

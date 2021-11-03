@@ -123,6 +123,20 @@ For those who are not as fast, familiarity with the commands over time will allo
 
 <div markdown="block" class="alert alert-info">
 
+**Breakdown of command abbreviations:** <br>
+
+* `d/`: Description
+
+* `gn/`: Group Name
+
+* `n/`: Name
+
+* `p/`: Phone number
+
+* `t/`: Tag
+
+* `$/`: Cost
+
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
@@ -143,7 +157,7 @@ For those who are not as fast, familiarity with the commands over time will allo
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clearalldata`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
   
-* Except `findexpenses`, `findgroups`, `findcontacts`, parameters are case-sensitive.
+* Except `findexpenses`, `findgroups`, `findcontacts`, parameters for other commands are case-sensitive.
 
 </div>
 
@@ -171,7 +185,7 @@ Format: `addcontact n/NAME p/PHONE_NUMBER [t/TAG]…​`
 
 * Duplicate contacts cannot be added into AWE
 * Contacts are duplicate if they have the same name
-* NAME are case-sensitive, "Hans" and "hans" will be treated as 2 separate person. Refer to [FAQ](#4faq) for the rational behind this.
+* NAME are case-sensitive, "Hans" and "hans" will be treated as 2 separate person. Refer to [FAQ](#4faq) for the rationale behind this.
 * NAME are up to 50 characters only.
 * PHONE_NUMBER should have between 3 and 16 numbers.
 * Contact list will be displayed after the command succeeded.
@@ -263,7 +277,7 @@ Format: `creategroup gn/GROUP_NAME n/NAME1 [n/NAME2] [n/NAME3]...[t/TAG1]`
 * GROUP_NAME is a mandatory field.
 * GROUP_NAME are up to 50 characters only.
 * A group with the same name as GROUP_NAME cannot exist for the creation of a group through this command. 
-* GROUP_NAME are case-sensitive, "Japan" and "japan" will be treated as 2 separate groups. Refer to [FAQ](#4faq) for the rational behind this.
+* GROUP_NAME are case-sensitive, "Japan" and "japan" will be treated as 2 separate groups. Refer to [FAQ](#4faq) for the rationale behind this.
 * At least one NAME is necessary.
 * The names are required to be in AWE and should match contact names exactly.
 * Tags cannot have whitespace and special characters other than alphanumeric characters.
@@ -426,12 +440,15 @@ The expense can be paid for and split among any number of contacts within the tr
 
 Format: `addexpense n/PAYER_NAME gn/GROUP_NAME $/TOTAL_AMOUNT_PAID d/DESCRIPTION [n/PAYEE_WHO_MADE_A_PERSONAL_PAYMENT] [$/PAYEE'S_PERSONAL_PAYMENT_TO_EXCLUDE_FROM_TOTAL_AMOUNT] [ex/PERSON_TO_EXCLUDE_FROM_EXPENSE]`
 
-* There should be at least one PAYER_NAME in the command.
+* There should be only one PAYER_NAME in the command.
 * PAYER_NAME must be immediately followed by the GROUP NAME.
 * By default, all members of the group will be included in the expense.
 * The names are required to be in AWE.
 * The names are required to be in the specified group.
-* DESCRIPTION of the expense does not need to be unique.
+* COST has a limit of ten million and any addition or entering of COST more than ten million will result in it defaulting to a cost of ten million.
+* COST should only have a maximum of two decimal places, otherwise the COST will be rounded off to the nearest two decimal places.
+* COST should not be negative.
+* DESCRIPTION does not need to be unique.
 * Each personal payment has to be a name immediately followed by the amount of the personal payment.
 * Expense list of the group will not be displayed after the command succeeded.
 
@@ -439,6 +456,7 @@ Examples:
 * `addexpense n/Nic gn/Catch up $/50 d/Movie and dinner`
 * `addexpense n/Tom gn/Date $/60 d/Big meal but Jerry wants to pay for his own Coke n/Jerry $/2`
 * `addexpense n/Keith gn/Movie night $/40 d/For movie but Kelly didn't watch ex/Kelly`
+* `addexpense n/Jerry gn/Catch up $/50 d/dinner n/Tom $/20 ex/Ryan`
 
 #### 3.3.3. Deleting a shared expense: `deleteexpense`
 
@@ -475,7 +493,7 @@ Examples:
 * `findexpenses lunch souvenirs gn/London` returns `lunch`, `souvenirs`in the group `London`<br>
 
 #### 3.3.5 Calculating total spending of each user: `transactionsummary`
-Displays a list of individual spending for each users in the group.
+Displays a list of individual spending for each user in the group.
 
 Format: `transactionsummary gn/GROUP_NAME`
 
@@ -555,16 +573,22 @@ If your changes to the data file makes its format invalid, AWE will discard all 
 <div style="page-break-after: always;"></div>
 
 ## 4. FAQ
-**Q**: Why are NAME case-sensitive?
-**A**: Since common names are quite usual, we have decided to allow the addition of 2 contacts such as "jun jie" and "Jun Jie" in order to keep track of their numbers. 
+**Q**: Why is NAME case-sensitive?
+**A**: Since identical names are very common in many cultures, we have decided to allow the addition of 2 contacts such as "jun jie" and "Jun Jie" in order to keep track of their numbers. 
 Furthermore, since AWE deals with overseas travels, quite a number of travellers might get a new overseas number when they are travelling. This will allow users to keep track of both
 their local and overseas local separately. Deleting the number after returning from the trip will be easier as well. In both cases, users can distinguish the 2 contacts with similar names using tags.
+This is also consistent with most mobile-phones, wherein contact names are case sensitive.
+To address the overseas number use case, for our next release, we are considering providing users with the ability to input more than one phone number when adding a contact.
 
-**Q**: Why are GROUP_NAME case-sensitive?
-**A**: Similar to the above question, a user might travel to the same destination more than once. This will allow the addition of each individual trips.
+**Q**: Why is GROUP_NAME case-sensitive?
+**A**: Similar to the above question, a user might travel to the same destination more than once. 
+This will allow the addition of each individual trips.
+To address, this use case, we are considering requiring a DATE_TIME parameter when creating a group. 
+We did not do so for this release due to concerns that two separate groups of users might be on a trip at the same location in the same time frame.
+In this case, users might be unable to create two groups, even though the use case would merit such an action.
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AWE home folder.
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Install AWE on the other computer and replace the empty data file it creates with the data file used by the AWE on your previous computer.
 
 **Q**: What if the Jar file does not open properly when I double click on it?<br>
 **A**: Open a command prompt in that folder and run the command `java -jar -ea AWE.jar`.
@@ -618,7 +642,7 @@ Action | Format, Examples
 Action | Format, Examples
 --------|------------------
 **View Expense** | `expense INDEX` <br> e.g., `expense 2`
-**Add Expense** | `add expense add expense /des DESCRIPTION /by PAYER_NAME1 AMOUNT PAID BY NAME 1 /for PAYEE_NAME1 PAYEE_NAME 2` <br> e.g., `add expense /des Koi /by Jake 20.00 /for Justin, Raj, Keith`
+**Add Expense** | `addexpense n/PAYER_NAME gn/GROUP_NAME $/TOTAL_AMOUNT_PAID d/DESCRIPTION [n/PAYEE_WHO_MADE_A_PERSONAL_PAYMENT] [$/PAYEE'S_PERSONAL_PAYMENT_TO_EXCLUDE_FROM_TOTAL_AMOUNT] [ex/PERSON_TO_EXCLUDE_FROM_EXPENSE]` <br> e.g., `addexpense n/Alex Yeoh gn/London $/50 d/Dinner n/Bernice Yu $/2 ex/David Li`
 **Delete Expense** | `deleteexpense INDEX` <br> e.g., `deleteexpense 1`
 **Find Expenses** | `findexpenses KEYWORD [MORE_KEYWORDS] gn/GROUP_NAME`<br> e.g., `findexpenses dinner buffet gn/London`
 **Calculate Spending** | `transactionsummary gn/GROUP_NAME` <br> e.g., `transactionsummary gn/Bali` 

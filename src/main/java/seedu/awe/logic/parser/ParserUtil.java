@@ -3,6 +3,7 @@ package seedu.awe.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.awe.commons.core.Messages.MESSAGE_CREATEGROUPCOMMAND_EMPTY_GROUP;
 import static seedu.awe.commons.core.Messages.MESSAGE_CREATEGROUPCOMMAND_INVALID_NAMES;
+import static seedu.awe.commons.core.Messages.MESSAGE_CREATEGROUPCOMMAND_USAGE;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,12 +12,14 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import javafx.collections.ObservableList;
 import seedu.awe.commons.core.index.Index;
 import seedu.awe.commons.util.StringUtil;
 import seedu.awe.logic.parser.exceptions.EmptyGroupException;
 import seedu.awe.logic.parser.exceptions.ParseException;
 import seedu.awe.model.expense.Cost;
 import seedu.awe.model.expense.Description;
+import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.person.Name;
 import seedu.awe.model.person.Phone;
@@ -150,10 +153,8 @@ public class ParserUtil {
             isValid = true;
         }
         if (invalidCount == names.size()) {
-            throw new EmptyGroupException(
-                    String.format(MESSAGE_CREATEGROUPCOMMAND_EMPTY_GROUP,
-                            MESSAGE_CREATEGROUPCOMMAND_INVALID_NAMES,
-                            MESSAGE_CREATEGROUPCOMMAND_INVALID_NAMES));
+            throw new EmptyGroupException(MESSAGE_CREATEGROUPCOMMAND_EMPTY_GROUP
+                    + MESSAGE_CREATEGROUPCOMMAND_INVALID_NAMES + MESSAGE_CREATEGROUPCOMMAND_USAGE);
         }
         memberNameList.addAll(memberNameSet);
         return memberNameList;
@@ -234,5 +235,20 @@ public class ParserUtil {
             excludedList.add(parseName(excludedName));
         }
         return excludedList;
+    }
+
+    /**
+     * Returns boolean object representing whether a group exists within AWE with the same name as groupName.
+     * @param groupName GroupName object that is being checked.
+     * @param groupObservableList ObservableList of groups currently in AWE.
+     * @return boolean object representing whether a group exists within AWE with the same name as groupName.
+     */
+    public static boolean findExistingGroupName(GroupName groupName, ObservableList<Group> groupObservableList) {
+        for (Group group : groupObservableList) {
+            if (group.getGroupName().equals(groupName)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
