@@ -24,6 +24,7 @@ public class GroupEditNameCommandTest {
     private static final GroupName BALI_GROUP_NAME = new GroupName("Bali");
     private static final GroupName JAPAN_GROUP_NAME = new GroupName("Japan");
     private static final GroupName TAIWAN_GROUP_NAME = new GroupName("Taiwan");
+    private static final GroupName LONDON_GROUP_NAME = new GroupName("London");
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -54,6 +55,24 @@ public class GroupEditNameCommandTest {
         GroupEditNameCommand groupEditNameCommand = new GroupEditNameCommand(JAPAN_GROUP_NAME, BALI_GROUP_NAME);
 
         String expectedMessage = String.format(Messages.MESSAGE_NONEXISTENT_GROUP, JAPAN_GROUP_NAME);
+
+        assertCommandFailure(groupEditNameCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_changeToSameName_failure() {
+        GroupEditNameCommand groupEditNameCommand = new GroupEditNameCommand(BALI_GROUP_NAME, BALI_GROUP_NAME);
+
+        String expectedMessage = String.format(Messages.MESSAGE_GROUPEDITNAMECOMMAND_EXISTING_GROUP, BALI_GROUP_NAME);
+
+        assertCommandFailure(groupEditNameCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_changeToExistingName_failure() {
+        GroupEditNameCommand groupEditNameCommand = new GroupEditNameCommand(BALI_GROUP_NAME, LONDON_GROUP_NAME);
+
+        String expectedMessage = String.format(Messages.MESSAGE_GROUPEDITNAMECOMMAND_EXISTING_GROUP, LONDON_GROUP_NAME);
 
         assertCommandFailure(groupEditNameCommand, model, expectedMessage);
     }
