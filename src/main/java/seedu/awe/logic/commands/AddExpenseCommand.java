@@ -52,7 +52,7 @@ public class AddExpenseCommand extends Command {
      */
     public AddExpenseCommand(Person payer, Cost totalCost, Description description, GroupName groupName,
                              List<Person> selfPayees, List<Cost> selfCosts, List<Person> excluded) {
-        requireAllNonNull(totalCost, description, groupName, selfPayees, selfCosts, excluded);
+        requireAllNonNull(payer, totalCost, description, groupName, selfPayees, selfCosts, excluded);
 
         this.payer = payer;
         this.totalCost = totalCost;
