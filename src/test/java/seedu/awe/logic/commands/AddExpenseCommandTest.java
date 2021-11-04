@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_ALL_MEMBERS_EXCLUDED;
 import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_CANNOT_ADD_EXCLUDED_MEMBER;
+import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_COST_MORE_THAN_MAX;
 import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_COST_ZERO_OR_LESS;
 import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_GROUP_DOES_NOT_EXIST;
 import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_NOT_PART_OF_GROUP;
@@ -32,6 +33,7 @@ import seedu.awe.model.Model;
 import seedu.awe.model.ReadOnlyAddressBook;
 import seedu.awe.model.ReadOnlyUserPrefs;
 import seedu.awe.model.expense.Cost;
+import seedu.awe.model.expense.Description;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
@@ -141,7 +143,7 @@ public class AddExpenseCommandTest {
         Group validGroup = new GroupBuilder().build();
         Expense validExpense = new ExpenseBuilder().build();
 
-        validGroup.addMember(validPerson);
+        validGroup = validGroup.addMember(validPerson);
         modelStub.addGroup(validGroup);
         GroupName groupName = validGroup.getGroupName();
 
@@ -173,6 +175,30 @@ public class AddExpenseCommandTest {
             fail(COMMAND_FAIL_FAILED_MESSAGE);
         } catch (CommandException commandException) {
             assertEquals(String.format(MESSAGE_ADDEXPENSECOMMAND_COST_ZERO_OR_LESS, validPerson),
+                    commandException.getMessage());
+        }
+    }
+
+    @Test
+    public void execute_expenseCostOverMax_throwsCommandException() throws Exception {
+        ModelStubAcceptingExpenseAdded modelStub = new ModelStubAcceptingExpenseAdded();
+        Person validPerson = new PersonBuilder().build();
+        Group validGroup = new GroupBuilder().build();
+        Expense validExpense = new ExpenseBuilder().withCost("50").build();
+        Expense maxExpense = new ExpenseBuilder().withCost("1000000000").build();
+        validGroup = validGroup.addMember(validPerson);
+        validGroup = validGroup.addExpense(maxExpense);
+        modelStub.addGroup(validGroup);
+        modelStub.addExpense(maxExpense, validGroup);
+        GroupName groupName = validGroup.getGroupName();
+
+        try {
+            CommandResult commandResult = new AddExpenseCommand(validExpense.getPayer(), validExpense.getCost(),
+                    validExpense.getDescription(), groupName, new ArrayList<>(), new ArrayList<>(),
+                    new ArrayList<>()).execute(modelStub);
+            fail(COMMAND_FAIL_FAILED_MESSAGE);
+        } catch (CommandException commandException) {
+            assertEquals(String.format(MESSAGE_ADDEXPENSECOMMAND_COST_MORE_THAN_MAX),
                     commandException.getMessage());
         }
     }
@@ -210,7 +236,7 @@ public class AddExpenseCommandTest {
         Person validSelfPayee = new PersonBuilder().withName("nic").build();
         Group validGroup = new GroupBuilder().build();
         Expense validExpense = new ExpenseBuilder().build();
-        validGroup.addMember(validPerson);
+        validGroup = validGroup.addMember(validPerson);
         modelStub.addGroup(validGroup);
         GroupName groupName = validGroup.getGroupName();
         Cost costOfSelfPayment = new Cost("30");
@@ -294,6 +320,27 @@ public class AddExpenseCommandTest {
 
         // different person -> returns false
         assertFalse(addAlicePayerCommand.equals(addBobPayerCommand));
+
+        // different identifying data
+        AddExpenseCommand addAlicePayerCommandDifferentPayer =
+                new AddExpenseCommand(bobPayer.getPayer(), alicePayer.getCost(),
+                alicePayer.getDescription(), groupName, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        AddExpenseCommand addAlicePayerCommandDifferentCost =
+                new AddExpenseCommand(alicePayer.getPayer(), new Cost(1),
+                        alicePayer.getDescription(), groupName, new ArrayList<>(),
+                        new ArrayList<>(), new ArrayList<>());
+        AddExpenseCommand addAlicePayerCommandDifferentDescription =
+                new AddExpenseCommand(alicePayer.getPayer(), alicePayer.getCost(),
+                        new Description("ok"), groupName, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        AddExpenseCommand addAlicePayerCommandDifferentGroupName =
+                new AddExpenseCommand(alicePayer.getPayer(), alicePayer.getCost(),
+                        bobPayer.getDescription(), new GroupName("not arcade"),
+                        new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+
+        assertFalse(addAlicePayerCommand.equals(addAlicePayerCommandDifferentPayer));
+        assertFalse(addAlicePayerCommand.equals(addAlicePayerCommandDifferentCost));
+        assertFalse(addAlicePayerCommand.equals(addAlicePayerCommandDifferentDescription));
+        assertFalse(addAlicePayerCommand.equals(addAlicePayerCommandDifferentGroupName));
     }
 
     /**
