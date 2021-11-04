@@ -61,7 +61,7 @@ Here are some pointers to take note of.
 to locate which words belong to which category of input.
 
 <p align="center">
-    [Click here to return to table of contents](#tableofcontents)
+    <a href="#tableofcontents">Click here to return to table of contents</a>
 </p>
 
 <div style="page-break-after: always;"></div>
