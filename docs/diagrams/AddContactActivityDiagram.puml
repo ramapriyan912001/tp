@@ -1,0 +1,20 @@
+@startuml
+start
+:User executes command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([command is valid])
+    :New person created with relevant phone number and tags;
+
+    if () then ([person not in model])
+        :Add new person to model;
+
+    else ([else])
+    endif
+
+else([else])
+endif
+stop
+@enduml
