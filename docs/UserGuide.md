@@ -25,7 +25,7 @@ beginning of your journey around the world.
 
 <div style="page-break-after: always;"></div>
 
-## 1. About the Document
+## **1. About the Document**
 
 The purpose of this document is to make sure that you have a pleasant and intuitive experience when using our app.
 In line with our user-centric approach, the guide is structured to ensure that the knowledge of the workings of our app
@@ -69,7 +69,7 @@ to locate which words belong to which category of input.
 </p>
 <div style="page-break-after: always;"></div>
 
-## 2. Quick start
+## **2. Quick start**
 AWE's primary asset is its speed. Unlike traditional Graphic User Interfaces (GUIs) which rely on slow actions such as mouse clicking and selection of options from long menus, with its CLI, AWE offers users the benefit of speed.
 For those who type fast, the app will be faster than most mainstream contact management apps.
 For those who are not as fast, familiarity with the commands over time will allow you to harness the full capabilities of AWE.
@@ -125,7 +125,7 @@ For those who are not as fast, familiarity with the commands over time will allo
 </p>
 <div style="page-break-after: always;"></div>
 
-## 3. Features
+## **3. Features**
 
 <div markdown="block" class="alert alert-info">
 
@@ -631,7 +631,7 @@ If your changes to the data file makes its format invalid, AWE will discard all 
 </p>
 <div style="page-break-after: always;"></div>
 
-## 4. FAQ
+## **4. FAQ**
 **Q**: Why is NAME case-sensitive?<br>
 **A**: Since identical names are very common in many cultures, we have decided to allow the addition of 2 contacts such as "jun jie" and "Jun Jie" in order to keep track of their numbers. 
 Furthermore, since AWE deals with overseas travels, quite a number of travellers might get a new overseas number when they are travelling. This will allow users to keep track of both
@@ -671,7 +671,7 @@ If your questions are not answered in the FAQ, check out the issue page on our G
 </p>
 <div style="page-break-after: always;"></div>
 
-## 5. Command summary
+## **5. Command summary**
 
 ### 5.1 Contacts commands
 
@@ -731,7 +731,7 @@ Action | Format, Examples
 </p>
 <div style="page-break-after: always;"></div>
 
-## 6. Final Word
+## **6. Final Word**
 AWE hopes to revolutionise the group-travel space through its effective handling of shared expenses on a centralised
 platform to maximise the efficiency of payment and recollection of debts. Our team is committed to delivering a seamless 
 experience for potential users. We are always looking to improve. As such, do drop us an email at <a href = "mailto: awe80contact@gmail.com">awe80contact@gmail.com</a>
