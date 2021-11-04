@@ -78,8 +78,7 @@ public class GroupRemoveTagCommandParserTest {
     public void parse_validGroupName_success() {
         //Removing tags from group
         GroupRemoveTagCommand expectedCommand = new GroupRemoveTagCommand(new GroupName("Bali"),
-                TAGS_IN_GROUP,
-                true);
+                TAGS_IN_GROUP);
         assertParseSuccess(parser, " gn/Bali t/friends t/3days2night", expectedCommand);
 
         //reset parser
@@ -87,8 +86,7 @@ public class GroupRemoveTagCommandParserTest {
 
         //Removing tags that are not from the group (checking for this is done in command)
         GroupRemoveTagCommand expectedCommandDuplicatePerson = new GroupRemoveTagCommand(new GroupName("Bali"),
-                TAGS_NOT_IN_GROUP,
-                true);
+                TAGS_NOT_IN_GROUP);
         assertParseSuccess(parser, " gn/Bali t/Friends t/family", expectedCommandDuplicatePerson);
     }
 }

@@ -6,7 +6,6 @@ import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
@@ -61,11 +60,6 @@ public class GroupRemoveTagCommandParser implements Parser<GroupRemoveTagCommand
 
         Set<Tag> tagsToBeRemoved = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        boolean isValidCommand = true;
-        if (Objects.isNull(tagsToBeRemoved)) {
-            isValidCommand = false;
-        }
-
-        return new GroupRemoveTagCommand(groupName, tagsToBeRemoved, isValidCommand);
+        return new GroupRemoveTagCommand(groupName, tagsToBeRemoved);
     }
 }
