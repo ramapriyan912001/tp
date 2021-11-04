@@ -55,7 +55,7 @@ If you wish to jump straight into using our features, refer to Section 5 for the
 Here are some pointers to take note of.
 1. Words in `UPPER_CASE` are parameters to be supplied by you.
 2. Words that are enclosed in `[   ]` denote optional parameters that the user can choose to enter or leave out.
-3. You will notice that our commands require you to use characters such as `e/`, `t/`, etc. This is allows our programme
+3. You will notice that our commands require you to use characters such as `n/`, `t/`, etc. This is allows our programme
 to locate which words belong to which category of input.
 
 <br>
