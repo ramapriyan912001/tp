@@ -50,7 +50,7 @@ public class GroupRemoveContactCommandParserTest {
     private static final ArrayList<Person> GROUP_MEMBERS_IN_GROUP = new ArrayList<>(Arrays.asList(membersInGroup));
     private static final ArrayList<Person> NONEXISTENT_MEMBERS = new ArrayList<>(Arrays.asList(nonexistentMembers));
     private static final ObservableList<Person> MEMBERS_IN_MODEL =
-            new ModelBuilder().build().getAddressBook().getPersonList();
+            new ModelBuilder().build().getAwe().getPersonList();
     private GroupRemoveContactCommandParser parser = new GroupRemoveContactCommandParser(new ModelBuilder().build());
 
 
