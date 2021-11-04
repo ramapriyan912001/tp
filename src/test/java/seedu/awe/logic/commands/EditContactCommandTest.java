@@ -124,10 +124,10 @@ public class EditContactCommandTest {
     @Test
     public void execute_sameName_failure() {
         MainWindow.setViewEnum(UiView.CONTACT_PAGE);
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_FIRST);
 
-        Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        EditContactCommand editContactCommand = new EditContactCommand(INDEX_FIRST_PERSON,
+        Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        EditContactCommand editContactCommand = new EditContactCommand(INDEX_FIRST,
                 new EditPersonDescriptorBuilder().withName(personInFilteredList.getName().getFullName()).build());
 
         assertCommandFailure(editContactCommand, model, MESSAGE_EDITCONTACTCOMMAND_SAME_NAME);
@@ -136,10 +136,10 @@ public class EditContactCommandTest {
     @Test
     public void execute_sameNumber_failure() {
         MainWindow.setViewEnum(UiView.CONTACT_PAGE);
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_FIRST);
 
-        Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        EditContactCommand editContactCommand = new EditContactCommand(INDEX_FIRST_PERSON,
+        Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        EditContactCommand editContactCommand = new EditContactCommand(INDEX_FIRST,
                 new EditPersonDescriptorBuilder().withPhone(personInFilteredList.getPhone().toString()).build());
 
         assertCommandFailure(editContactCommand, model, MESSAGE_EDITCONTACTCOMMAND_SAME_NUMBER);
@@ -148,10 +148,10 @@ public class EditContactCommandTest {
     @Test
     public void execute_differentNameSameNumber_failure() {
         MainWindow.setViewEnum(UiView.CONTACT_PAGE);
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_FIRST);
 
-        Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        EditContactCommand editContactCommand = new EditContactCommand(INDEX_FIRST_PERSON,
+        Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        EditContactCommand editContactCommand = new EditContactCommand(INDEX_FIRST,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                         .withPhone(personInFilteredList.getPhone().toString()).build());
 
