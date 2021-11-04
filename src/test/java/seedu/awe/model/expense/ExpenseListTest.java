@@ -50,12 +50,12 @@ public class ExpenseListTest {
     }
 
     @Test
-    public void setPerson_nullTargetExpense_throwsNullPointerException() {
+    public void setExpense_nullTargetExpense_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> expenseList.setExpense(null, HOLIDAY));
     }
 
     @Test
-    public void setPerson_nullEditedExpense_throwsNullPointerException() {
+    public void setExpense_nullEditedExpense_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> expenseList.setExpense(HOLIDAY, null));
     }
 
@@ -69,7 +69,7 @@ public class ExpenseListTest {
     }
 
     @Test
-    public void setPerson_editedExpenseHasSameIdentity_success() {
+    public void setExpense_editedExpenseHasSameIdentity_success() {
         expenseList.add(HOLIDAY);
         Map<Person, Cost> validSplitExpenses = new HashMap<>();
         validSplitExpenses.put(BOB, new Cost(5));
@@ -82,12 +82,17 @@ public class ExpenseListTest {
     }
 
     @Test
-    public void setPerson_editedExpenseHasDifferentIdentity_success() {
+    public void setExpense_editedExpenseHasDifferentIdentity_success() {
         expenseList.add(HOLIDAY);
         expenseList.setExpense(HOLIDAY, DINNER);
         ExpenseList expectedExpenseList = new ExpenseList();
         expectedExpenseList.add(DINNER);
         assertEquals(expectedExpenseList, expenseList);
+    }
+
+    @Test
+    public void setExpense_expenseDooesNotExist_throwsExpenseNotFoundException() {
+        assertThrows(ExpenseNotFoundException.class, () -> expenseList.setExpense(HOLIDAY, DINNER));
     }
 
     @Test

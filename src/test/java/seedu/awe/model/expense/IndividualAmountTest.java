@@ -40,6 +40,9 @@ public class IndividualAmountTest {
         // different persons
         assertFalse(ALICE_INDIVIDUAL_AMOUNT.equals(new IndividualAmount(BOB, 20)));
 
+        // different type
+        assertFalse(ALICE_INDIVIDUAL_AMOUNT.equals(20));
+
         assertTrue(ALICE_INDIVIDUAL_AMOUNT.equals(ALICE_INDIVIDUAL_AMOUNT));
         assertTrue(ALICE_INDIVIDUAL_AMOUNT.equals(new IndividualAmount(ALICE, 20)));
     }
