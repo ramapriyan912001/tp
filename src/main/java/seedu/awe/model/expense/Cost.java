@@ -9,10 +9,10 @@ public class Cost {
     public static final String MESSAGE_CONSTRAINTS =
             "Cost should only contain numeric characters without spaces, should not be negative numbers, "
                     + "should only contain at most two decimal places otherwise the cost will be rounded off"
-                    + "to the nearest two decimal places, "
+                    + "to the nearest two decimal places, should be one billion or less "
                     + "and it should not be blank!";
 
-    public static final double MAX_COST = 10000000;
+    public static final double MAX_COST = 1000000000;
     public static final int MAX_LENGTH = 50;
 
     /*
@@ -88,34 +88,6 @@ public class Cost {
      */
     public Cost subtract(Cost c) {
         double result = cost - c.cost;
-        if (result < 0) {
-            result = 0;
-        }
-        return new Cost(result);
-    }
-
-    /**
-     * Multiplies the cost by the inputted value c.
-     *
-     * @param c Value to multiply the cost by.
-     * @return Result of the multiplication.
-     */
-    public Cost multiply(double c) {
-        double result = cost * c;
-        if (result < 0) {
-            result = 0;
-        }
-        return new Cost(result);
-    }
-
-    /**
-     * Divides the cost by the inputted value c.
-     *
-     * @param c Value to divide the cost by.
-     * @return Result of the division.
-     */
-    public Cost divide(double c) {
-        double result = cost / c;
         if (result < 0) {
             result = 0;
         }

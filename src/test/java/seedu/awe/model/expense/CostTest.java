@@ -1,11 +1,10 @@
 package seedu.awe.model.expense;
 
-import org.junit.jupiter.api.Test;
-import seedu.awe.model.person.Name;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.awe.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 public class CostTest {
 
@@ -37,9 +36,9 @@ public class CostTest {
         assertFalse(Cost.isValidCost("^")); // only non-alphanumeric characters
         assertFalse(Cost.isValidCost("abc")); // only non-numeric characters
         assertFalse(Cost.isValidCost("30*")); // contains non-alphanumeric characters
-        assertFalse(Cost.isValidCost("123456789012345678901234567"
+        assertFalse(Cost.isValidCost("12.3456789012345678901234567"
                 + "890123456789012345678901")); // contains more than 50 characters
-        assertFalse(Cost.isValidCost("50505050.50")); // cost greater than max cost
+        assertFalse(Cost.isValidCost("50505050505050.50")); // cost greater than max cost
 
         // valid costs
         assertTrue(Cost.isValidCost("50")); // numeric characters only

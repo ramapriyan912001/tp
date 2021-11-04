@@ -4,7 +4,17 @@ import static java.util.Objects.requireNonNull;
 import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_PAYER_DOES_NOT_EXIST;
 import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_USAGE;
 import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.awe.logic.commands.CommandTestUtil.COST_DESC_FIFTY;
+import static seedu.awe.logic.commands.CommandTestUtil.COST_DESC_TWO;
+import static seedu.awe.logic.commands.CommandTestUtil.DESCRIPTION_DESC_HOLIDAY;
+import static seedu.awe.logic.commands.CommandTestUtil.EXCLUDE_DESC_ALICE;
+import static seedu.awe.logic.commands.CommandTestUtil.EXCLUDE_DESC_BOB;
+import static seedu.awe.logic.commands.CommandTestUtil.GROUPNAME_DESC_BALI;
+import static seedu.awe.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.awe.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.awe.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
+import static seedu.awe.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.awe.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.awe.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.awe.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -41,7 +51,7 @@ import seedu.awe.testutil.PersonBuilder;
 public class AddExpenseCommandParserTest {
     private Person validPerson = new PersonBuilder().build();
     private Person validSelfPayee = new PersonBuilder().withName("Bob").build();
-    private Person validExcludedPerson = new PersonBuilder().withName("Charlie").build();
+    private Person validExcludedPerson = new PersonBuilder().withName(VALID_NAME_BOB).build();
     private Group validGroup = new GroupBuilder().build();
     private Expense validExpense = new ExpenseBuilder().build();
 
@@ -54,36 +64,37 @@ public class AddExpenseCommandParserTest {
         AddExpenseCommandParser parser = new AddExpenseCommandParser(modelStub);
 
         // No individual payments, no excluded
-        assertParseSuccess(parser, " n/Amy Bee gn/Bali $/50 d/holiday",
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_AMY + GROUPNAME_DESC_BALI
+                        + COST_DESC_FIFTY + DESCRIPTION_DESC_HOLIDAY,
                 new AddExpenseCommand(validPerson, validExpense.getCost(), validExpense.getDescription(),
                         validGroup.getGroupName(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
 
         // With individual payments, no excluded
-        assertParseSuccess(parser, " n/Amy Bee gn/Bali $/50 d/holiday n/Bob $/20",
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_AMY + GROUPNAME_DESC_BALI
+                        + COST_DESC_FIFTY + DESCRIPTION_DESC_HOLIDAY + NAME_DESC_BOB + COST_DESC_TWO,
                 new AddExpenseCommand(validPerson, validExpense.getCost(), validExpense.getDescription(),
                         validGroup.getGroupName(), new ArrayList<>(Arrays.asList(validSelfPayee)),
                         new ArrayList<>(Arrays.asList(validCost)), new ArrayList<>()));
 
         // No individual payments, with excluded
-        assertParseSuccess(parser, " n/Amy Bee gn/Bali $/50 d/holiday",
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_AMY + GROUPNAME_DESC_BALI
+                        + COST_DESC_FIFTY + DESCRIPTION_DESC_HOLIDAY + EXCLUDE_DESC_BOB,
                 new AddExpenseCommand(validPerson, validExpense.getCost(), validExpense.getDescription(),
                         validGroup.getGroupName(), new ArrayList<>(), new ArrayList<>(),
                         new ArrayList<>(Arrays.asList(validExcludedPerson))));
 
         // With both individual payments and excluded
-        assertParseSuccess(parser, " n/Amy Bee gn/Bali $/50 d/holiday",
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_AMY + GROUPNAME_DESC_BALI
+                        + COST_DESC_FIFTY + DESCRIPTION_DESC_HOLIDAY + NAME_DESC_BOB + COST_DESC_TWO
+                        + EXCLUDE_DESC_ALICE,
                 new AddExpenseCommand(validPerson, validExpense.getCost(), validExpense.getDescription(),
                         validGroup.getGroupName(), new ArrayList<>(Arrays.asList(validSelfPayee)),
                         new ArrayList<>(Arrays.asList(validCost)),
                         new ArrayList<>(Arrays.asList(validExcludedPerson))));
 
         // Payer not part of group
-        assertParseSuccess(parser, " n/Amy Bee gn/Bali $/50 d/holiday",
-                new AddExpenseCommand(validPerson, validExpense.getCost(), validExpense.getDescription(),
-                        validGroup.getGroupName(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
-
-        // Excluded doesn't exist
-        assertParseSuccess(parser, " n/Amy Bee gn/Bali $/50 d/holiday",
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_AMY + GROUPNAME_DESC_BALI
+                        + COST_DESC_FIFTY + DESCRIPTION_DESC_HOLIDAY,
                 new AddExpenseCommand(validPerson, validExpense.getCost(), validExpense.getDescription(),
                         validGroup.getGroupName(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
     }
@@ -95,35 +106,43 @@ public class AddExpenseCommandParserTest {
         AddExpenseCommandParser parser = new AddExpenseCommandParser(modelStub);
 
         // Missing name argument
-        assertParseFailure(parser, " gn/Bali $/50 d/holiday",
+        assertParseFailure(parser, PREAMBLE_WHITESPACE + GROUPNAME_DESC_BALI
+                        + COST_DESC_FIFTY + DESCRIPTION_DESC_HOLIDAY,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_ADDEXPENSECOMMAND_USAGE));
 
         // Missing group name argument
-        assertParseFailure(parser, " n/Amy Bee $/50 d/holiday",
+        assertParseFailure(parser, PREAMBLE_WHITESPACE + NAME_DESC_AMY
+                        + COST_DESC_FIFTY + DESCRIPTION_DESC_HOLIDAY,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_ADDEXPENSECOMMAND_USAGE));
 
         // Missing cost argument
-        assertParseFailure(parser, " n/Amy Bee gn/Bali d/holiday",
+        assertParseFailure(parser, PREAMBLE_WHITESPACE + NAME_DESC_AMY + GROUPNAME_DESC_BALI
+                        + DESCRIPTION_DESC_HOLIDAY,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_ADDEXPENSECOMMAND_USAGE));
 
         // Missing description argument
-        assertParseFailure(parser, " n/Amy Bee gn/Bali $/50",
+        assertParseFailure(parser, PREAMBLE_WHITESPACE + NAME_DESC_AMY + GROUPNAME_DESC_BALI
+                        + COST_DESC_FIFTY,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_ADDEXPENSECOMMAND_USAGE));
 
         // Non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + "n/Amy Bee gn/Bali $/50 d/holiday",
+        assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_AMY + GROUPNAME_DESC_BALI
+                        + COST_DESC_FIFTY + DESCRIPTION_DESC_HOLIDAY,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_ADDEXPENSECOMMAND_USAGE));
 
         // More names than costs
-        assertParseFailure(parser, " n/Amy Bee gn/Bali $/50 d/holiday n/Joseph",
+        assertParseFailure(parser, PREAMBLE_WHITESPACE + NAME_DESC_AMY + GROUPNAME_DESC_BALI
+                        + COST_DESC_FIFTY + DESCRIPTION_DESC_HOLIDAY + NAME_DESC_BOB,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_ADDEXPENSECOMMAND_USAGE));
 
         // More costs than names
-        assertParseFailure(parser, " n/Amy Bee gn/Bali $/50 d/holiday $/20",
+        assertParseFailure(parser, PREAMBLE_WHITESPACE + NAME_DESC_AMY + GROUPNAME_DESC_BALI
+                        + COST_DESC_FIFTY + DESCRIPTION_DESC_HOLIDAY + COST_DESC_TWO,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_ADDEXPENSECOMMAND_USAGE));
 
         // Payer does not exist
-        assertParseFailure(parser, " n/Joseph gn/Bali $/50 d/holiday",
+        assertParseFailure(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + GROUPNAME_DESC_BALI
+                        + COST_DESC_FIFTY + DESCRIPTION_DESC_HOLIDAY,
                 String.format(MESSAGE_ADDEXPENSECOMMAND_PAYER_DOES_NOT_EXIST));
     }
 

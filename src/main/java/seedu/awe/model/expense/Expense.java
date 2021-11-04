@@ -149,7 +149,9 @@ public class Expense {
         Expense otherExpense = (Expense) other;
         return otherExpense.getPayer().equals(getPayer())
                 && otherExpense.getCost().equals(getCost())
-                && otherExpense.getDescription().equals(getDescription());
+                && otherExpense.getDescription().equals(getDescription())
+                && otherExpense.getIndividualExpenses().equals(getIndividualExpenses())
+                && otherExpense.getIncluded().equals(getIncluded());
     }
 
     @Override

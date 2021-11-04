@@ -67,6 +67,7 @@ public class AddExpenseCommand extends Command {
     public CommandResult execute(Model model) throws CommandException, DuplicateGroupException {
         requireNonNull(model);
 
+
         Group group = model.getGroupByName(groupName);
 
         if (group == null) {
@@ -77,7 +78,9 @@ public class AddExpenseCommand extends Command {
             throw new CommandException(MESSAGE_ADDEXPENSECOMMAND_NOT_PART_OF_GROUP);
         }
 
-        if (totalCost.getCost() > Cost.MAX_COST) {
+        double totalCostInGroup = getTotalExpenseCostInGroup(group);
+
+        if (totalCostInGroup + totalCost.getCost() > Cost.MAX_COST) {
             throw new CommandException(MESSAGE_ADDEXPENSECOMMAND_COST_MORE_THAN_MAX);
         }
 
@@ -164,6 +167,14 @@ public class AddExpenseCommand extends Command {
 
     public Cost getTotalCost() {
         return totalCost;
+    }
+
+    private double getTotalExpenseCostInGroup(Group group) {
+        double result = 0;
+        for (Expense expense : group.getExpenses()) {
+            result += expense.getCost().getCost();
+        }
+        return result;
     }
 
     @Override

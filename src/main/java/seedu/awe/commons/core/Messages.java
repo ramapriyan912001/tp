@@ -20,7 +20,6 @@ import seedu.awe.logic.commands.FindGroupsCommand;
 import seedu.awe.logic.commands.HelpCommand;
 import seedu.awe.logic.commands.ListContactsCommand;
 import seedu.awe.logic.commands.ListExpensesCommand;
-import seedu.awe.model.expense.Cost;
 
 /**
  * Container for user visible messages.
@@ -196,7 +195,7 @@ public class Messages {
     public static final String MESSAGE_ADDEXPENSECOMMAND_GROUP_DOES_NOT_EXIST =
             "The group you specified doesn't exist!";
     public static final String MESSAGE_ADDEXPENSECOMMAND_COST_MORE_THAN_MAX =
-            "Please enter a cost less than " + String.format("%.2f", Cost.MAX_COST) + "!";
+            "The total expenditure for that specified travel group has exceeded one billion!!";
     public static final String MESSAGE_ADDEXPENSECOMMAND_PAYER_DOES_NOT_EXIST =
             "The payer does not exist!";
 

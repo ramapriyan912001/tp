@@ -1,26 +1,22 @@
 package seedu.awe.model.expense;
 
-import org.junit.jupiter.api.Test;
-import seedu.awe.model.person.Person;
-import seedu.awe.testutil.ExpenseBuilder;
-import seedu.awe.testutil.PersonBuilder;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.awe.logic.commands.CommandTestUtil.VALID_COST_BUFFET;
+import static seedu.awe.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BUFFET;
+import static seedu.awe.testutil.Assert.assertThrows;
+import static seedu.awe.testutil.TypicalExpenses.HOLIDAY;
+import static seedu.awe.testutil.TypicalExpenses.PIZZA;
+import static seedu.awe.testutil.TypicalPersons.ALICE;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.awe.logic.commands.CommandTestUtil.VALID_COST_BUFFET;
-import static seedu.awe.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BUFFET;
-import static seedu.awe.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.awe.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.awe.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.awe.testutil.Assert.assertThrows;
-import static seedu.awe.testutil.TypicalExpenses.PIZZA;
-import static seedu.awe.testutil.TypicalPersons.ALICE;
-import static seedu.awe.testutil.TypicalPersons.BOB;
-import static seedu.awe.testutil.TypicalExpenses.HOLIDAY;
+import org.junit.jupiter.api.Test;
+
+import seedu.awe.model.person.Person;
+import seedu.awe.testutil.ExpenseBuilder;
 
 public class ExpenseTest {
 
@@ -83,6 +79,13 @@ public class ExpenseTest {
 
         // different payer -> returns false
         editedPizza = new ExpenseBuilder(PIZZA).withPayer(ALICE).build();
+        assertFalse(PIZZA.equals(editedPizza));
+
+
+        // different individual expenses -> returns false
+        Map<Person, Cost> individualExpense = new HashMap<>();
+        individualExpense.put(ALICE, new Cost("2"));
+        editedPizza = new ExpenseBuilder(PIZZA).withIndividualExpenses(individualExpense).build();
         assertFalse(PIZZA.equals(editedPizza));
     }
 }

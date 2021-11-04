@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_ALL_MEMBERS_EXCLUDED;
 import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_CANNOT_ADD_EXCLUDED_MEMBER;
-import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_COST_MORE_THAN_MAX;
 import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_COST_ZERO_OR_LESS;
 import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_GROUP_DOES_NOT_EXIST;
 import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_NOT_PART_OF_GROUP;
@@ -244,26 +243,6 @@ public class AddExpenseCommandTest {
                     commandException.getMessage());
         }
     }
-
-//    @Test
-//    public void execute_costGreaterThanMaxCost_throwsCommandException() {
-//        ModelStubAcceptingExpenseAdded modelStub = new ModelStubAcceptingExpenseAdded();
-//        Person validPerson = new PersonBuilder().build();
-//        Group validGroup = new GroupBuilder().build();
-//        String maxCost = String.format("%.2f", Cost.MAX_COST + 1);
-//        Expense validExpense = new ExpenseBuilder().withCost(maxCost).build();
-//        validGroup = validGroup.addMember(validPerson);
-//        modelStub.addGroup(validGroup);
-//        try {
-//            CommandResult commandResult = new AddExpenseCommand(validExpense.getPayer(), new Cost(),
-//                    validExpense.getDescription(), validGroup.getGroupName(), new ArrayList<>(), new ArrayList<>(),
-//                    new ArrayList<>()).execute(modelStub);
-//            fail(COMMAND_FAIL_FAILED_MESSAGE);
-//        } catch (CommandException commandException) {
-//            assertEquals(String.format(MESSAGE_ADDEXPENSECOMMAND_COST_MORE_THAN_MAX, validPerson),
-//                    commandException.getMessage());
-//        }
-//    }
 
     @Test
     public void execute_individualPayerExcluded_throwsCommandException() {

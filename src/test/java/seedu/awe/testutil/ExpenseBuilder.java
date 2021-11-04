@@ -13,7 +13,7 @@ import seedu.awe.model.person.Person;
 public class ExpenseBuilder {
 
     public static final String DEFAULT_COST = "50";
-    public static final String DEFAULT_DESCRIPTION = "holiday";
+    public static final String DEFAULT_DESCRIPTION = "Holiday";
     public static final Person DEFAULT_PERSON = new PersonBuilder().build();
     public static final List<Person> DEFAULT_INCLUDED = new ArrayList<>();
     public static final HashMap<Person, Cost> DEFAULT_INDIVIDUAL_EXPENSE = new HashMap<>();

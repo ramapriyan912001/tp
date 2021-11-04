@@ -1221,9 +1221,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
   
-* 1c. AWE detects that the cost inputted into the expense is more than ten million.
+* 1c. AWE detects that the cost inputted into the expense is more than one billion.
 
-    * 1c1. AWE inform user that the cost of the expense has to be less than ten million.
+    * 1c1. AWE inform user that the cost of the expense has to be less than one billion.
   
       Use case ends.
   
@@ -1248,6 +1248,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1g. AWE detects that all members in the specified travel group are excluded from the expense.
 
     * 1g1. AWE informs user that they cannot exclude all members in the travel group from the expense.
+  
+      Use case ends.
+  
+* 1h. AWE detects that the total expenditure of the specified group is over one billion.
+
+    * 1h1. AWE informs user that the total expenses of the travel group has reached its limit of one billion.
   
       Use case ends.
 
