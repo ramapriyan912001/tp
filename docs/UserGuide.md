@@ -159,6 +159,7 @@ For those who are not as fast, familiarity with the commands over time will allo
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
   
 * Except `findexpenses`, `findgroups`, `findcontacts`, parameters for other commands are case-sensitive.
+</div>
 
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
