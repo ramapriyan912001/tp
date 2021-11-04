@@ -36,6 +36,7 @@ public class Cost {
         } catch (NumberFormatException e) {
             checkArgument(isValidCost(cost), MESSAGE_CONSTRAINTS);
         }
+        checkArgument(cost.length() <= MAX_LENGTH, MESSAGE_CONSTRAINTS);
         String costDoubleToString = String.format("%.2f", costAsDouble);
         checkArgument(isValidCost(costDoubleToString), MESSAGE_CONSTRAINTS);
         if (costAsDouble > Cost.MAX_COST) {

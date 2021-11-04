@@ -10,9 +10,26 @@ import static seedu.awe.testutil.Assert.assertThrows;
 public class CostTest {
 
     @Test
+    public void constructor_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new Cost(null));
+    }
+
+    @Test
+    public void constructor_invalidCost_throwsIllegalArgumentException() {
+        String invalidCost = "";
+        assertThrows(IllegalArgumentException.class, () -> new Cost(invalidCost));
+    }
+
+    @Test
+    public void constructor_longCost_throwsIllegalArgumentException() {
+        String invalidCost = "12.3456789012345678901234567890123456789012345678901";
+        assertThrows(IllegalArgumentException.class, () -> new Cost(invalidCost));
+    }
+
+    @Test
     public void isValidName() {
         // null cost
-        assertThrows(NullPointerException.class, () -> new Cost(null));
+        assertThrows(NullPointerException.class, () -> Cost.isValidCost(null));
 
         // invalid cost
         assertFalse(Cost.isValidCost("")); // empty string
@@ -51,7 +68,7 @@ public class CostTest {
         // Double is passed in -> false
         assertFalse(cost.equals(50.0));
 
-        // different name -> return false
+        // different cost -> return false
         assertFalse(cost.equals(new Cost("30")));
     }
 }
