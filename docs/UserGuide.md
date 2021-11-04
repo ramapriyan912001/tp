@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-Around the World in $80 (AWE) is a desktop app for keeping track of spending and expenditure during travels, splitting 
+Around the World in $80 (AWE) is a desktop application for keeping track of spending and expenditure during travels, splitting 
 expenses with travel-mates, and facilitating easy recollection of debts at the end of every trip. AWE is the world's
 only bespoke app designed for group travellers.
 
@@ -36,7 +36,7 @@ can focus on exploring AWE to the full extent of its functionalities.
 * We provide you with the tools to be able to read this guide with little need for re-referencing previous sections.
 
 [Section 1](#1-about-the-document) provides readers with a brief overview of how to use this document. [Section 2](#2-quick-start) details the setting up of AWE
-and [Section 3](#2-features) documents the main features of AWE. If you still face problems using AWE, refer to our FAQ in [Section 4](#4-faq). 
+and [Section 3](#3-features) documents the main features of AWE. If you still face problems using AWE, refer to our FAQ in [Section 4](#4-faq). 
 For a summary of all the commands available, refer to [Section 5](#5-command-summary).
 
 <div style="page-break-after: always;"></div>

@@ -190,6 +190,65 @@ Classes used by multiple components are in the `seedu.awe.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+**Note: The words contact and person will be used interchangeably in this section.** 
+
+### Add Contact Feature
+
+The add contact mechanism is facilitated by defining a Person model and adding a Unique Person List field to
+`AddressBook`. The Person model contains a `Name` field containing the name of the contact, a `Phone` field containing the
+number of the contact, and optional `Tags` to attach to the contact.
+
+The following activity diagram shows what happens when a user executes a `createGroup` command.
+
+![AddContactActivityDiagram](images/AddContactActivityDiagram.png)
+
+Given below is an example usage scenario and how the `creategroup` mechanism behaves at each step.
+
+Step 1. A valid `addcontact` command is given as user input. This prompts the `LogicManager` to run its execute()
+method.
+
+Step 2. The `AddContactCommandParser` parses the input and checks for presence of the relevant prefixes.
+It also checks that the name is valid and all members specified are in the contact list.
+It returns a `AddContactCommand`.
+
+Step 3. `AddContactCommand` runs its execute() method which checks if a contact with the same name has already been
+created. If not, the newly created contact is added into the AWE model. Upon successful execution, `CommandResult` is returned.
+
+The following sequence operation shows how the `addcontact` operation works.
+![AddContactSequenceDiagram](images/AddContactSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddContactCommandParser`
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+![AddContactRef](images/AddContactRefSequenceDiagram.png)
+
+#### Design considerations:
+
+**Aspect: Case-sensitivity of `Name` parameter in `addcontact` command:**
+
+* **Alternative 1 (current choice):** `Name` is case-sensitive (for instance, `Alex` and `alex` are treated as unique names, and effectively, unique persons as well).
+  * Pros: Easy to implement.
+  * Pros: Many cultures have names that are common. Allowing users to enter the same name but in different case allows unique users with the same name to store their contacts.
+  * Pros: Many cultures have names that are spelled in different case. For instance, in Singapore, the characters "s/o" (often used to denote "son of") are spelled in different case by different people. Should multiple users have the same name but different case-spelling, it would be respectful to accept all versions of the name, regardless of case.
+  * Pros: Provides the user with a greater level of flexibility and user-choice.
+  * Cons: Possibility of user referring to the wrong person in commands due to creation of multiple persons with the same names but in different case.
+
+
+* **Alternative 2 :** `Name` is not case-sensitive.
+  * Pros: Difficult to implement.
+  * Pros: Safeguards user from erroneously referring to the wrong person in commands.
+  * Cons: Difficult for users with the same name.
+  * Cons: May offend some people if the casing of their name is regarded as unacceptable or not given recognition.
+  * Cons: User has limited flexibility and restricted user-choice.
+
+
+* **Justification**
+  * The two cases described in the alternatives, where multiple persons of the same name but different case are necessary, are quite prevalent.
+  * Moreover, we trust the user to be careful with the casing of the `Name` when entering the commands.
+  * As such, we chose to make the `Name` parameter case-sensitive.
+  
+
 ### Create Group Feature
 
 The create group mechanism is facilitated by defining a Group model and adding a Unique Group List field to 
@@ -249,6 +308,38 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
     * This minimizes the number of commands a user has to make in setting up a functional Group.
     * As such, it is better to choose Alternative 1, as this provides the user with a far better user experience.
 
+**Aspect: Case-sensitivity of `GroupName` parameter in `creategroup` command:**
+
+* **Alternative 1 (current choice):** `GroupName` is case-sensitive (for instance, `BALI` and `bali` are treated as unique group names, and effectively, unique groups as well).
+  * Pros: Easy to implement.
+  * Pros: If the user goes on multiple trips to the same place, they can keep track of multiple groups by adding multiple groups of a similar name, different by case.
+  * Pros: If multiple groups of users go on trips to the same place, they can keep track of multiple trips by adding multiple groups of a similar name, different by case.
+  * Pros: Provides the user with a greater level of flexibility and user-choice.
+  * Cons: Possibility of user referring to the wrong group in commands due to creation of multiple-groups with the same names but in different case.
+
+
+* **Alternative 2 :** `GroupName` is not case-sensitive.
+  * Pros: Difficult to implement.
+  * Pros: Safeguards user from erroneously referring to the wrong group in commands.  
+  * Cons: Difficult for users who go on a trip to the same place multple times to keep track of their trips.
+  * Cons: Difficult to keep track of trips or groups if multiple groups of users go on trips to the same place.
+  * Cons: User has limited flexibility and restricted user-choice.
+
+
+* **Justification**
+  * The two cases described in the alternatives, where multiple groups of the same name are necessary, are quite prevalent.
+  * Moreover, we trust the user to be careful with the casing of the `GroupName` when entering the commands.
+  * As such, we chose to make the `GroupName` parameter case-sensitive.
+  
+
+* **Improvements**
+  * The solution of making the `GroupName` parameter case-sensitive to permit users to create groups of the same name should the use case demand it is not ideal.
+  * In the long-term, we plan to make `GroupName` case-insensitive, but this will require changes to the command.  
+  * One such change currently being worked on is to include a `DATETIME` parameter for this command, so that users who go on multiple trips to the same location at different times can keep track of their trips.
+  * Other solutions are necessary to satisfy the use case wherein different sets of members wish to go on a trip to the same location at the same time and wish to create groups of the same name.
+  * A solution that is being considered is to check for uniqueness of the group by checking that the members in each group are different.
+  * However, this will require changes to other commands as presently most commands operate on the assumption that `GroupName` is unique (case-sensitivity considered).
+
 
 ### Delete Group Feature
 
@@ -283,14 +374,14 @@ The following sequence operation shows how the `deletegroup` operation works.
 
 **Aspect: User command for deletegroup:**
 
-* **Alternative 1 (current choice):** Delete based on `GroupName`
+* **Alternative 1 (current choice):** Delete based on `GroupName`.
     * Pros: Easy to implement.
     * Pros: Difficult for user to make an erroneous command.
     * Cons: Long user command.  
     * Cons: Requires imposition of constraint that group names are unique.
     
 
-* **Alternative 2 (index based):** Delete based on index position in `ObservableList`
+* **Alternative 2 (index based):** Delete based on index position in `ObservableList`.
     * Pros: Easy to implement.
     * Pros: Short user command  
     * Cons: Unintuitive for user.
@@ -304,13 +395,13 @@ The following sequence operation shows how the `deletegroup` operation works.
 
 **Aspect: Internal delete mechanism:**
 
-* **Alternative 1 (current choice):** Retrieve group from list and delete
+* **Alternative 1 (current choice):** Retrieve group from list and delete.
   * Pros: Easy to implement.
   * Pros: Easier to modify in future.
   * Cons: Extra step of retrieval leads to slower execution.
   
 
-* **Alternative 2 (name based):** Delete based on `GroupName`
+* **Alternative 2 (name based):** Delete based on `GroupName`.
   * Pros: Easy to implement.
   * Pros: Process is completed faster.
   * Cons: Might cause issues in case of future modifications.
@@ -328,6 +419,8 @@ The following sequence operation shows how the `deletegroup` operation works.
 
 ### Group Remove Contact Feature
 ![GroupRemoveContactSequenceDiagram](images/GroupRemoveContactSequenceDiagram.png)
+
+**Note: When a `Person` is deleted from contacts, they are automatically deleted from the `members` list of the group as well.**
 
 ### Group Add Tag Feature
 ![GroupAddTagSequenceDiagram](images/GroupAddTagSequenceDiagram.png)
@@ -794,35 +887,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                            | I want to …​                                        | So that I can…​                                                           |
 | -------- | ------------------------------------------------- | -------------------------------------------------- | ------------------------------------------------------------------------ |
+| `* * *`  | beginner user who first opened the app            | view the help page                                 | so that I can learn how to use the app                                   |
+| `* * *`  | user with contacts to remember                    | add a contact                                   | keep track of my contacts                                                |
+| `* * *`  | user who has lots of contacts to keep track of    | view contacts                                      | easily see my contacts in one centralised location                       |
+| `* * *`  | user who wants to find contacts with a certain string of characters in their name | find contacts by a regex                                 | search for contacts easily         |
+| `* * *`  | user who has lots of contacts to keep track of    | tag a contact                                   | keep track of contacts by certain characteristics/tags                          |
+| `* * *`  | user with contacts that no longer exist           | delete a contact                                 | keep my contacts relevant and current                                   |
+| `* * *`  | user with contacts that have changed          | edit a contact                                 | keep my contacts accurate and current                                   |
+| `* * *`  | user with a trip to go on                   | add a group                                   | keep track of my groups                                                |
+| `* * *`  | user who has lots of trips to keep track of    | view groups                                      | easily see my groups in one centralised location                       |
+| `* * *`  | user who wants to find groups with a certain string of characters in their name | find groups by a regex                                 | search for groups easily         |
+| `* * *`  | user who has lots of groups to keep track of    | tag a group                                   | keep track of groups by certain characteristics/tags                          |
+| `* * *`  | user with groups that no longer exist           | delete a group                                 | keep my groups relevant and current                                   |
+| `* * *`  | user with flexible travel plans         | edit a group                                 | keep my groups accurate and current                                   |
 | `* * *`  | user that has paid for a shared experience        | easily check how much I have paid up front         | ensure I have liquidity for emergencies and or other unforeseen expenses |
 | `* * *`  | user who has paid for others                      | easily check how much I am owed by friends         | recoup the money I have paid on their behalf                             |
 | `* * *`  | user paying for a shared expense                  | enter the amount I have paid                       | update the total amount they have to pay                                 |
 | `* * *`  | user that owes my friend money                    | easily check how much I owe each person            | conveniently proceed to pay my friend                                    |
 | `* * *`  | busy user who does not want to remember phone numbers | easily save all my friends' numbers            | conveniently proceed to pay my friend                                    |
-| `* * *`  | user with flexible travel plans                   | edit the details of expenditure for events         | modify the records quickly and easily                                    |
+| `* * *`  | user with flexible travel plans                   | edit the details of a trip/group (members, group name, tags)         | modify the records quickly and easily                                    |
 | `* * *`  | beginner user                                     | run the app easily with a click of a button        | avoid wasting time trying to figure out how to get the app to work       |
 | `* * *`  | inexperienced user in the app who types fast      | type in the commands for the app                   | do more things in the app with the same amount of time compared to using a mouse to click |
 | `* * *`  | user who wants an easy workflow                   | easily toggle between contacts and groups page with a command or a click of a button | make my workflow on the app smoother   |
-| `* *`    | user who has a number of travel plans             | easily find a group                                | check who still owes me money in the group                               |
 | `* *`    | user who has to recoup the money                  | divide up the expenses suitably amongst my friends | know how much to recoup from each person                                 |
-| `* *`    | user paying for the shared expense                | see how much I have paid according to the date     | monitor the amount spent each day                                        |
 | `* *`    | user who worries about individual expenses        | check the breakdown of my personal expenditure     | keep track of how much money I have spent                                |
 | `* *`    | user who likes to differentiate work from leisure | use this app to separate the different types of contacts I have | I won’t mix them up                                         |
 | `* *`    | user who wants to stay in contact with friends    | use this app to easily save their phone numbers    | I can remain in contact                                                  |
 | `* *`    | potential user exploring the app                  | see the app containing sample data                 | see what the app generally looks like when it is used                    |
-| `* *`    | potential user exploring the app                  | undo my actions                                    | test the app's features with the same data                               |
 | `* *`    | potential user testing the app                    | run the app on different platforms (windows, linux and os-x) | not have to specifically run a certain platform                |
-| `* *`    | user with flexible travel plans                   | delete a group                                     | modify the records easily if plans change                                |
-| `* *`    | beginner user who first opened the app            | view the help page                                 | so that I can learn how to use the app                                   |
-| `*`      | user who values organisation                      | view the group’s expenditure by categories         | plan the budgeting for future expenses more effectively                  |
-| `*`      | user who needs to repay debt                      | easily set up installment payments                 | can avoid paying too much money at one go                                |
-| `*`      | user who has lots of contacts to keep track of    | tag each contact                                   | easily find groups of people using the tags                              |
 | `* `     | user whose friends frequently change numbers      | use this app to easily edit their numbers or save multiple numbers with notes | easily remember which number to use           |
 | `*`      | beginner user that is tech-savvy                  | view the documentation                             | figure out how to use the app                                            |
-| `*`      | beginner user                                     | mass add my contacts                               | avoid manually keying in one by one                                      |
 | `*`      | beginner user                                     | easily distinguish functions in the app            | use it without the app being too daunting                                |
-| `*`      | expert user                                       | create my own shortcuts for commands               | control what I can do with the app more effectively                      |
-| `*`      | expert user                                       | mass delete contacts from the app                  | save time by not deleting it manually                                    |
 | `*`      | expert user                                       | refer to previous trips and the expenditure        | plan future trips efficiently                                            |
 
 ### Use cases
