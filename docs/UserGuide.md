@@ -17,9 +17,9 @@ Our mission is to accomplish through a user-centric approach that seeks to provi
 tip of their fingertips. This document marks the first step towards the accomplishment of that mission, and the
 beginning of your journey around the world.
 
-<div style="page-break-after: always;" id="tableofcontents"></div>
+<div style="page-break-after: always;"></div>
 
-<p style="font-size: 1.75rem; margin-top: 60px; color: #e46c0a; font-weight:400; margin-bottom: 15px;">Table of Contents</p>
+<p style="font-size: 1.75rem; margin-top: 60px; color: #e46c0a; font-weight:400; margin-bottom: 15px;" id="tableofcontents">Table of Contents</p>
 * Table of Contents
 {:toc}
 
