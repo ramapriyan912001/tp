@@ -17,12 +17,12 @@ Our mission is to accomplish through a user-centric approach that seeks to provi
 tip of their fingertips. This document marks the first step towards the accomplishment of that mission, and the
 beginning of your journey around the world.
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;" id="tableofcontents"></div>
+
 <p style="font-size: 1.75rem; margin-top: 60px; color: #e46c0a; font-weight:400; margin-bottom: 15px;">Table of Contents</p>
 * Table of Contents
 {:toc}
---------------------------------------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
 
 ## 1. About the Document
@@ -60,10 +60,10 @@ Here are some pointers to take note of.
 3. You will notice that our commands require you to use characters such as `n/`, `t/`, etc. This is allows our programme
 to locate which words belong to which category of input.
 
-<br>
-[Click here to return to table of contents](#tableofcontents)
-<br>
---------------------------------------------------------------------------------------------------------------------
+<p align="center">
+    [Click here to return to table of contents](#tableofcontents)
+</p>
+
 <div style="page-break-after: always;"></div>
 
 ## 2. Quick start
