@@ -74,7 +74,7 @@ public class GroupRemoveTagCommand extends Command {
     public boolean checkSameTags(Set<Tag> otherTags) {
         int numberOfNonMatchingTags = otherTags.size();
         for (Tag tag : this.tagsToBeRemoved) {
-            checkForTag(numberOfNonMatchingTags, tag, otherTags);
+            numberOfNonMatchingTags = checkForTag(numberOfNonMatchingTags, tag, otherTags);
         }
         return numberOfNonMatchingTags == 0;
     }

@@ -124,10 +124,10 @@ public class AweParser {
             return new GroupEditNameCommandParser().parse(arguments);
 
         case GroupAddTagCommand.COMMAND_WORD:
-            return new GroupAddTagCommandParser().parse(arguments);
+            return new GroupAddTagCommandParser(model).parse(arguments);
 
         case GroupRemoveTagCommand.COMMAND_WORD:
-            return new GroupRemoveTagCommandParser().parse(arguments);
+            return new GroupRemoveTagCommandParser(model).parse(arguments);
 
         case ListTransactionSummaryCommand.COMMAND_WORD:
             return new ListTransactionSummaryCommandParser().parse(arguments);

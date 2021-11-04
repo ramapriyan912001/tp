@@ -1,0 +1,17 @@
+{
+  "persons" : [ {
+    "name" : "Bernice Yu",
+    "phone" : "99272758",
+    "tagged" : [ "colleagues", "friends" ]
+  } ],
+  "groups" : [ {
+    "members" : [ {
+      "name" : "Alex Yeoh",
+      "phone" : "9123456",
+      "tagged" : [ "colleagues", "friends" ]
+    } ],
+    "tags" : [ "SchoolTrip" ],
+    "expenses" : [ ],
+    "groupName" : "London"
+  } ]
+}

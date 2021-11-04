@@ -25,7 +25,7 @@ public class JsonAdaptedExpense {
     private final List<JsonAdaptedIndividualAmount> individualExpenses = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedExpense} with the given group details.
+     * Constructs a {@code JsonAdaptedExpense} with the given expense details.
      */
     @JsonCreator
     public JsonAdaptedExpense(@JsonProperty("payer") JsonAdaptedPerson payer,
@@ -65,9 +65,9 @@ public class JsonAdaptedExpense {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Group} object.
+     * Converts this Jackson-friendly adapted expense object into the model's {@code Expense} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted expense.
      */
     public Expense toModelType() throws IllegalValueException {
         final Person modelPayer = payer.toModelType();
