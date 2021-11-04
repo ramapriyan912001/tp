@@ -81,6 +81,7 @@ public class TypicalGroups {
                     BALI.getMembers()))
             .withExpense(new Expense(SOUVENIRS.getPayer(), SOUVENIRS.getCost(), SOUVENIRS.getDescription(),
                     BALI.getMembers()))
+            .withTags("friends", "3days2nights")
             .build();
 
     public static final Group RIO_WITH_EXPENSES_INVALID = new GroupBuilder().withGroupName("Rio")
