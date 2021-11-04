@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.awe.commons.core.Messages.MESSAGE_EDITCONTACTCOMMAND_CANNOT_BE_EDITED;
 import static seedu.awe.commons.core.Messages.MESSAGE_EDITCONTACTCOMMAND_DUPLICATE_PERSON;
 import static seedu.awe.commons.core.Messages.MESSAGE_EDITCONTACTCOMMAND_EDIT_PERSON_SUCCESS;
+import static seedu.awe.commons.core.Messages.MESSAGE_EDITCONTACTCOMMAND_SAME_NAME;
+import static seedu.awe.commons.core.Messages.MESSAGE_EDITCONTACTCOMMAND_SAME_NUMBER;
 import static seedu.awe.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.awe.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.awe.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -118,6 +120,44 @@ public class EditContactCommandTest {
 
         assertCommandSuccess(editContactCommand, model, expectedMessage, expectedModel);
     }
+
+    @Test
+    public void execute_sameName_failure() {
+        MainWindow.setViewEnum(UiView.CONTACT_PAGE);
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+
+        Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditContactCommand editContactCommand = new EditContactCommand(INDEX_FIRST_PERSON,
+                new EditPersonDescriptorBuilder().withName(personInFilteredList.getName().getFullName()).build());
+
+        assertCommandFailure(editContactCommand, model, MESSAGE_EDITCONTACTCOMMAND_SAME_NAME);
+    }
+
+    @Test
+    public void execute_sameNumber_failure() {
+        MainWindow.setViewEnum(UiView.CONTACT_PAGE);
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+
+        Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditContactCommand editContactCommand = new EditContactCommand(INDEX_FIRST_PERSON,
+                new EditPersonDescriptorBuilder().withPhone(personInFilteredList.getPhone().toString()).build());
+
+        assertCommandFailure(editContactCommand, model, MESSAGE_EDITCONTACTCOMMAND_SAME_NUMBER);
+    }
+
+    @Test
+    public void execute_differentNameSameNumber_failure() {
+        MainWindow.setViewEnum(UiView.CONTACT_PAGE);
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+
+        Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditContactCommand editContactCommand = new EditContactCommand(INDEX_FIRST_PERSON,
+                new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+                        .withPhone(personInFilteredList.getPhone().toString()).build());
+
+        assertCommandFailure(editContactCommand, model, MESSAGE_EDITCONTACTCOMMAND_SAME_NUMBER);
+    }
+
 
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
