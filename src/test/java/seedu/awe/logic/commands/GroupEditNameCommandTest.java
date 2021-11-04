@@ -3,6 +3,7 @@ package seedu.awe.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.awe.commons.core.Messages.MESSAGE_GROUPEDITNAMECOMMAND_SAME_NAME;
 import static seedu.awe.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.awe.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.awe.testutil.Assert.assertThrows;
@@ -70,6 +71,17 @@ public class GroupEditNameCommandTest {
         expectedModel.setGroup(BALI, updatedGroup);
 
         assertCommandSuccess(groupEditNameCommand, model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_sameGroupName_failure() {
+        GroupEditNameCommand groupEditNameCommand = new GroupEditNameCommand(BALI_GROUP_NAME, BALI_GROUP_NAME);
+
+        CommandResult expectedCommandResult = new CommandResult(
+                String.format(Messages.MESSAGE_GROUPEDITNAMECOMMAND_SUCCESS, JAPAN_GROUP_NAME));
+
+
+        assertCommandFailure(groupEditNameCommand, model, MESSAGE_GROUPEDITNAMECOMMAND_SAME_NAME);
     }
 
     @Test

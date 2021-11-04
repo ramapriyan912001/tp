@@ -1,13 +1,11 @@
 package seedu.awe.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.awe.commons.core.Messages.MESSAGE_GROUPEDITNAMECOMMAND_EXISTING_GROUP;
-import static seedu.awe.commons.core.Messages.MESSAGE_GROUPEDITNAMECOMMAND_SUCCESS;
-import static seedu.awe.commons.core.Messages.MESSAGE_NONEXISTENT_GROUP;
 import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import seedu.awe.commons.core.Messages;
 import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.logic.parser.ParserUtil;
 import seedu.awe.model.Model;
@@ -42,16 +40,19 @@ public class GroupEditNameCommand extends Command {
         requireNonNull(model);
         Group oldGroup = model.getGroupByName(oldGroupName);
         if (Objects.isNull(oldGroup)) {
-            throw new CommandException(String.format(MESSAGE_NONEXISTENT_GROUP, oldGroupName));
+            throw new CommandException(String.format(Messages.MESSAGE_NONEXISTENT_GROUP, oldGroupName));
+        }
+        if (newGroupName.equals(oldGroupName)) {
+            throw new CommandException(Messages.MESSAGE_GROUPEDITNAMECOMMAND_SAME_NAME);
         }
         if (ParserUtil.findExistingGroupName(newGroupName, model.getAddressBook().getGroupList())) {
             throw new CommandException(
-                    String.format(MESSAGE_GROUPEDITNAMECOMMAND_EXISTING_GROUP, newGroupName.getName()));
+                    String.format(Messages.MESSAGE_GROUPEDITNAMECOMMAND_EXISTING_GROUP, newGroupName.getName()));
         }
         Group newGroup = oldGroup.editName(newGroupName);
         model.setGroup(oldGroup, newGroup);
         model.setAllMembersOfGroup(newGroup);
-        return new CommandResult(String.format(MESSAGE_GROUPEDITNAMECOMMAND_SUCCESS, newGroupName));
+        return new CommandResult(String.format(Messages.MESSAGE_GROUPEDITNAMECOMMAND_SUCCESS, newGroupName));
     }
 
     @Override

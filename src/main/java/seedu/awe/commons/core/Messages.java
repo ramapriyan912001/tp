@@ -75,6 +75,9 @@ public class Messages {
     public static final String MESSAGE_EDITCONTACTCOMMAND_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_EDITCONTACTCOMMAND_DUPLICATE_PERSON =
             "This person already exists in the awe book.";
+    public static final String MESSAGE_EDITCONTACTCOMMAND_SAME_NAME = "New name must be different from the old name.";
+    public static final String MESSAGE_EDITCONTACTCOMMAND_SAME_NUMBER =
+            "New number must be different from the old number.";
 
 
     public static final String MESSAGE_FINDCONTACTSCOMMAND_USAGE = FindContactsCommand.COMMAND_WORD
@@ -155,6 +158,8 @@ public class Messages {
             "Group name %1$s already exists in AWE. Please use a different name.";
     public static final String MESSAGE_GROUPEDITNAMECOMMAND_USAGE =
             "groupeditname gn/[OLDGROUPNAME] gn/[NEWGROUPNAME]\n";
+    public static final String MESSAGE_GROUPEDITNAMECOMMAND_SAME_NAME =
+            "New group name must be different from the old group name.";
 
 
     public static final String MESSAGE_NONEXISTENT_GROUP = "Group %1$s does not exist.";
