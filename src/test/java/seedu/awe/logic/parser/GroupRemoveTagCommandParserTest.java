@@ -2,6 +2,7 @@ package seedu.awe.logic.parser;
 
 import static seedu.awe.commons.core.Messages.MESSAGE_GROUPREMOVETAGCOMMAND_USAGE;
 import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.awe.commons.core.Messages.MESSAGE_NONEXISTENT_GROUP;
 import static seedu.awe.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.awe.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.awe.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -56,7 +57,7 @@ public class GroupRemoveTagCommandParserTest {
         // 1 gn/ tag, 1 t/ tag but no group name
         assertParseFailure(parser, " gn/ t/friends", MESSAGE_GROUP_NAME_INVALID);
 
-        // 1 gn/ tag, 1 t/ tag but no member name
+        // 1 gn/ tag, 1 t/ tag but no tag name
         assertParseFailure(parser, " gn/London t/", Tag.MESSAGE_CONSTRAINTS);
     }
 
@@ -67,6 +68,10 @@ public class GroupRemoveTagCommandParserTest {
 
         // invalid member name
         assertParseFailure(parser, " gn/Bali t/%s", Tag.MESSAGE_CONSTRAINTS);
+
+        //non existent group
+        assertParseFailure(parser, " gn/nonexistentGroup t/friends",
+                String.format(MESSAGE_NONEXISTENT_GROUP, "nonexistentGroup"));
     }
 
     @Test

@@ -3,6 +3,7 @@ package seedu.awe.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.awe.commons.core.Messages.MESSAGE_CREATEGROUPCOMMAND_EMPTY_GROUP;
 import static seedu.awe.commons.core.Messages.MESSAGE_CREATEGROUPCOMMAND_INVALID_NAMES;
+import static seedu.awe.commons.core.Messages.MESSAGE_GROUPADDCONTACTCOMMAND_NONEXISTENT_PERSON;
 import static seedu.awe.commons.core.Messages.MESSAGE_GROUPADDCONTACTCOMMAND_USAGE;
 import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.awe.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
@@ -84,16 +85,21 @@ public class GroupAddContactCommandParserTest {
     }
 
     @Test
-    public void parse_invalidArguments_failure() {
+    public void parse_invalidArguments_failure() throws ParseException {
         // invalid group name
         assertParseFailure(parser, " gn/* n/" + VALID_NAME_BOB, MESSAGE_GROUP_NAME_INVALID);
 
         // invalid member name
         assertThrows(EmptyGroupException.class, () -> parser.parse(" gn/Bali n/%s"));
+
+        //nonexistent member in AWE
+        assertParseFailure(parser, " gn/Bali n/"
+                + NONEXISTENTPERSON.getName().getFullName(),
+                MESSAGE_GROUPADDCONTACTCOMMAND_NONEXISTENT_PERSON);
     }
 
     @Test
-    public void parse_validGroupName_success() {
+    public void parse_validArguments_success() {
         //Adding people into group
         GroupAddContactCommand expectedCommand = new GroupAddContactCommand(new GroupName("Bali"),
                 GROUP_MEMBERS_NOT_IN_GROUP, true);

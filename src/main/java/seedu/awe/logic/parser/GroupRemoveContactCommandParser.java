@@ -84,17 +84,10 @@ public class GroupRemoveContactCommandParser implements Parser<GroupRemoveContac
      * @return ArrayList of Person objects representing members to be added to the group
      */
     public ArrayList<Person> findMembersToBeRemoved(List<Name> membersToBeRemovedNames) throws ParseException {
-        try {
-            for (Name name : membersToBeRemovedNames) {
-                addMemberToRemoveList(name);
-            }
-            if (!membersToBeRemovedNames.isEmpty() && membersToBeRemovedNames.isEmpty()) {
-                throw new ParseException(MESSAGE_GROUPREMOVECONTACTCOMMAND_NONEXISTENT_PERSON);
-            }
-            return membersToBeRemoved;
-        } catch (IndexOutOfBoundsException e) {
-            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
+        for (Name name : membersToBeRemovedNames) {
+            addMemberToRemoveList(name);
         }
+        return membersToBeRemoved;
     }
 
     /**
