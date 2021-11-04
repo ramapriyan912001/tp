@@ -159,6 +159,7 @@ For those who are not as fast, familiarity with the commands over time will allo
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
   
 * Except `findexpenses`, `findgroups`, `findcontacts`, parameters for other commands are case-sensitive.
+
 </div>
 
 <p align="center">
@@ -201,7 +202,7 @@ Examples:
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
 </p>
-<div style="page-break-after: always;"></div>W
+<div style="page-break-after: always;"></div>
 
 #### 3.1.3. Editing a contact : `editcontact`
 
@@ -222,6 +223,11 @@ Format: `editcontact INDEX [n/NAME] [p/PHONE] [t/TAG]…​`
 Examples:
 *  `editcontact 1 p/91234567` Edits the phone number of the 1st contact to be `91234567`.
 *  `editcontact 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 
 #### 3.1.4. Deleting a contact : `deletecontact`
@@ -336,11 +342,15 @@ Format: `findgroups KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `findgroups London` returns `London` and `london trip`
 * `findgroups Taiwan Malaysia` returns `Taiwan` `Malaysia`<br>
-    <img src="images/findGroupMalaysiaTaiwanResult.png" width="600" />
 
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:** You can search for multiple groups by entering more keywords.
 </div>
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 #### 3.2.5. Adding a contact to an existing group: `groupaddcontact`
 
@@ -380,6 +390,11 @@ Examples:
 * `groupremovecontact gn/Prague n/Bernice Yu n/David Li n/Alex Yeoh` to remove Bernice Yu, David Li, and Alex Yeoh
 from the Prague travel group.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 #### 3.2.7. Adding a tag to an existing group: `groupaddtag`
 
 Add tag for an existing travel group.
@@ -416,6 +431,11 @@ Examples:
 * `groupremovetag gn/Bali t/Friends` to remove the friends tag from the Bali travel group.
 * `groupremovetag gn/Prague t/Family t/Cousins` to the tags family and cousins from the Prague travel group.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 #### 3.2.9. Editing travel group name: `groupeditname`
 
 Edit group name for an existing travel group.
@@ -432,10 +452,9 @@ Examples:
 * `groupeditname gn/Bali gn/Thailand` to change the group name from Bali to Thailand.
 * `groupeditname gn/Germany gn/Munich` to change the group name from Germany to Munich.
 
-<br>
-[Click here to return to table of contents](#tableofcontents)
-<br>
---------------------------------------------------------------------------------------------------------------------
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
 <div style="page-break-after: always;"></div>
 
 ### 3.3. Expenses
@@ -453,6 +472,10 @@ Examples:
 * `expenses gn/London` shows all the expenses of the group named London.
 ![result for 'expenses gn/London](images/ShowExpenseResult.png)
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 #### 3.3.2. Adding a shared expense: `addexpense`
 Adds a shared expense to the specified travel group.
@@ -477,6 +500,11 @@ Examples:
 * `addexpense n/Tom gn/Date $/60 d/Big meal but Jerry wants to pay for his own Coke n/Jerry $/2`
 * `addexpense n/Keith gn/Movie night $/40 d/For movie but Kelly didn't watch ex/Kelly`
 * `addexpense n/Jerry gn/Catch up $/50 d/dinner n/Tom $/20 ex/Ryan`
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 #### 3.3.3. Deleting a shared expense: `deleteexpense`
 
@@ -511,6 +539,11 @@ Format: `findexpenses KEYWORD [MORE_KEYWORDS] gn/GROUP_NAME`
 Examples:
 * `findexpenses dinner gn/London` returns `dinner` and `Friday dinner` in the group `London`
 * `findexpenses lunch souvenirs gn/London` returns `lunch`, `souvenirs`in the group `London`<br>
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 #### 3.3.5 Calculating total spending of each user: `transactionsummary`
 Displays a list of individual spending for each user in the group.
