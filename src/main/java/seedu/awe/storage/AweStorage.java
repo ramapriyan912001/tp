@@ -10,7 +10,7 @@ import seedu.awe.model.ReadOnlyAddressBook;
 /**
  * Represents a storage for {@link seedu.awe.model.AddressBook}.
  */
-public interface AddressBookStorage {
+public interface AweStorage {
 
     /**
      * Returns the file path of the data file.

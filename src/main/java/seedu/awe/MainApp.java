@@ -23,8 +23,8 @@ import seedu.awe.model.ReadOnlyAddressBook;
 import seedu.awe.model.ReadOnlyUserPrefs;
 import seedu.awe.model.UserPrefs;
 import seedu.awe.model.util.SampleDataUtil;
-import seedu.awe.storage.AddressBookStorage;
-import seedu.awe.storage.JsonAddressBookStorage;
+import seedu.awe.storage.AweStorage;
+import seedu.awe.storage.JsonAweStorage;
 import seedu.awe.storage.JsonUserPrefsStorage;
 import seedu.awe.storage.Storage;
 import seedu.awe.storage.StorageManager;
@@ -58,8 +58,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        AweStorage aweStorage = new JsonAweStorage(userPrefs.getAddressBookFilePath());
+        storage = new StorageManager(aweStorage, userPrefsStorage);
 
         initLogging(config);
 

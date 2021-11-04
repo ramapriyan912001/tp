@@ -26,7 +26,7 @@ import seedu.awe.model.ModelManager;
 import seedu.awe.model.ReadOnlyAddressBook;
 import seedu.awe.model.UserPrefs;
 import seedu.awe.model.person.Person;
-import seedu.awe.storage.JsonAddressBookStorage;
+import seedu.awe.storage.JsonAweStorage;
 import seedu.awe.storage.JsonUserPrefsStorage;
 import seedu.awe.storage.StorageManager;
 import seedu.awe.testutil.PersonBuilder;
@@ -44,8 +44,8 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookStorage(temporaryFolder.resolve("awe.json"));
+        JsonAweStorage addressBookStorage =
+                new JsonAweStorage(temporaryFolder.resolve("awe.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
@@ -72,9 +72,9 @@ public class LogicManagerTest {
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
-        // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAwe.json"));
+        // Setup LogicManager with JsonAweIoExceptionThrowingStub
+        JsonAweStorage addressBookStorage =
+                new JsonAweIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAwe.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
@@ -150,8 +150,8 @@ public class LogicManagerTest {
     /**
      * A stub class to throw an {@code IOException} when the save method is called.
      */
-    private static class JsonAddressBookIoExceptionThrowingStub extends JsonAddressBookStorage {
-        private JsonAddressBookIoExceptionThrowingStub(Path filePath) {
+    private static class JsonAweIoExceptionThrowingStub extends JsonAweStorage {
+        private JsonAweIoExceptionThrowingStub(Path filePath) {
             super(filePath);
         }
 
