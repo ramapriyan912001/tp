@@ -149,7 +149,7 @@ For those who are not as fast, familiarity with the commands over time will allo
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* Parameters can be in any order other than `addexpenses`. Look at [`addexoense`](#332-adding-a-shared-expense-addexpense) for more details regarding it. <br>
+* Parameters can be in any order other than `addexpenses`. Look at [`addexpense`](#332-adding-a-shared-expense-addexpense) for more details regarding it. <br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
@@ -159,6 +159,11 @@ For those who are not as fast, familiarity with the commands over time will allo
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
   
 * Except `findexpenses`, `findgroups`, `findcontacts`, parameters for other commands are case-sensitive.
+
+* Do note that the [Contact-related commands](#51-contacts-commands) and
+[Expense-related commands](#53-expense-commands) both use accept an index as an argument to identify which
+contact/expense to modify. On the other hand, [Group-related commands](#52-groups-commands) accept a unique group
+name as an argument. For the reasons behind this implementation, refer to our [FAQ](#4-faq)
 
 </div>
 
@@ -293,7 +298,7 @@ Format: `creategroup gn/GROUP_NAME n/NAME1 [n/NAME2] [n/NAME3]...[t/TAG1]`
 * GROUP_NAME is a mandatory field.
 * GROUP_NAME are up to 50 characters only.
 * A group with the same name as GROUP_NAME cannot exist for the creation of a group through this command. 
-* GROUP_NAME are case-sensitive, "Japan" and "japan" will be treated as 2 separate groups. Refer to [FAQ](#4faq) for the rationale behind this.
+* GROUP_NAME are case-sensitive, "Japan" and "japan" will be treated as 2 separate groups. Refer to [FAQ](#4-faq) for the rationale behind this.
 * At least one NAME is necessary.
 * The names are required to be in AWE and should match contact names exactly.
 * Tags cannot have whitespace and special characters other than alphanumeric characters.
@@ -637,7 +642,7 @@ If your changes to the data file makes its format invalid, AWE will discard all 
 **A**: Since identical names are very common in many cultures, we have decided to allow the addition of 2 contacts such as "jun jie" and "Jun Jie" in order to keep track of their numbers. 
 Furthermore, since AWE deals with overseas travels, quite a number of travellers might get a new overseas number when they are travelling. This will allow users to keep track of both
 their local and overseas local separately. Deleting the number after returning from the trip will be easier as well. In both cases, users can distinguish the 2 contacts with similar names using tags.
-This is also consistent with most mobile-phones, wherein contact names are case sensitive.
+This is also consistent with most mobile-phones, wherein contact names are case-sensitive.
 To address the overseas number use case, for our next release, we are considering providing users with the ability to input more than one phone number when adding a contact.
 
 **Q**: Why is GROUP_NAME case-sensitive?<br>
@@ -646,6 +651,14 @@ This will allow the addition of each individual trips.
 To address, this use case, we are considering requiring a DATE_TIME parameter when creating a group. 
 We did not do so for this release due to concerns that two separate groups of users might be on a trip at the same location in the same time frame.
 In this case, users might be unable to create two groups, even though the use case would merit such an action.
+
+**Q**: Why are some commands accept an index as an argument whereas other commands accept names as an argument?<br>
+**A**: [Contact-related commands](#51-contacts-commands) and [Expense-related commands](#53-expense-commands) both use 
+an index to identify which contact/expense to modify. Users can simply view the list of contacts/expenses and choose
+the relevant index in a convenient manner as compared to typing out the full name. However, groups contain a large
+amount of sensitive information (such as membership and expenses) that cannot be recovered upon deletion. As such, our
+team decided to implement [Group-related commands](#52-groups-commands) by accepting the unique group name as an
+argument. This minimises the chances of accidentally deleting a group.
 
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install AWE on the other computer and replace the empty data file it creates with the data file used by the AWE on your previous computer.
