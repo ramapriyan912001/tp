@@ -8,7 +8,7 @@ import static seedu.awe.logic.commands.CommandTestUtil.VALID_NAME_ALICE;
 import static seedu.awe.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.awe.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.awe.testutil.Assert.assertThrows;
-import static seedu.awe.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.awe.testutil.TypicalIndexes.INDEX_FIRST;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -60,10 +60,10 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("1"));
+        assertEquals(INDEX_FIRST, ParserUtil.parseIndex("1"));
 
         // Leading and trailing whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+        assertEquals(INDEX_FIRST, ParserUtil.parseIndex("  1  "));
     }
 
     @Test

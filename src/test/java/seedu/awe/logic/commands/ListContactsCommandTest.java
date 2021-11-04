@@ -3,7 +3,7 @@ package seedu.awe.logic.commands;
 import static seedu.awe.commons.core.Messages.MESSAGE_LISTCONTACTSCOMMAND_SUCCESS;
 import static seedu.awe.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.awe.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.awe.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.awe.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.awe.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -35,7 +35,7 @@ public class ListContactsCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_FIRST);
         assertCommandSuccess(new ListContactsCommand(), model, MESSAGE_LISTCONTACTSCOMMAND_SUCCESS,
                 expectedModel, false, true, false, false, false);
     }
