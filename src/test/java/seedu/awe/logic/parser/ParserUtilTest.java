@@ -6,7 +6,6 @@ import static seedu.awe.logic.commands.CommandTestUtil.INVALID_NAME_JAMES;
 import static seedu.awe.logic.commands.CommandTestUtil.INVALID_NAME_JOHN;
 import static seedu.awe.logic.commands.CommandTestUtil.VALID_NAME_ALICE;
 import static seedu.awe.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.awe.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.awe.logic.parser.ParserUtil.MESSAGE_INVALID_LENGTH_INDEX;
 import static seedu.awe.testutil.Assert.assertThrows;
 import static seedu.awe.testutil.TypicalIndexes.INDEX_FIRST;
