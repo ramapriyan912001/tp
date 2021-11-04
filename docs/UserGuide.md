@@ -19,7 +19,7 @@ beginning of your journey around the world.
 
 <div style="page-break-after: always;"></div>
 
-<p style="font-size: 1.75rem; margin-top: 60px; color: #e46c0a; font-weight:400; margin-bottom: 15px;" id="tableofcontents">Table of Contents</p>
+<h2 style="font-size: 1.75rem; margin-top: 60px; color: #e46c0a; font-weight:400; margin-bottom: 15px;" id="tableofcontents"><strong>Table of Contents</strong></h2>
 * Table of Contents
 {:toc}
 
