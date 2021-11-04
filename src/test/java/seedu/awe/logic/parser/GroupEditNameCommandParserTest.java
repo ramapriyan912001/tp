@@ -26,6 +26,9 @@ public class GroupEditNameCommandParserTest {
         // no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
 
+        // empty input
+        assertParseFailure(parser, " ", MESSAGE_INVALID_FORMAT);
+
         // only 1 group name specified
         assertParseFailure(parser, " gn/London", MESSAGE_INVALID_FORMAT);
 

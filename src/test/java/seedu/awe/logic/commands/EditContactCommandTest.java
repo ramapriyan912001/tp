@@ -171,6 +171,11 @@ public class EditContactCommandTest {
     }
 
     @Test
+    public void createEditedPerson_nullPersonToEdit_failure() {
+
+    }
+
+    @Test
     public void equals() {
         MainWindow.setViewEnum(UiView.CONTACT_PAGE);
         final EditContactCommand standardCommand = new EditContactCommand(INDEX_FIRST, DESC_AMY);
