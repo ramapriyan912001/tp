@@ -37,7 +37,7 @@ public class AddExpenseCommandParser implements Parser<AddExpenseCommand> {
      * @param model Model object passed into constructor to provide list of contacts.
      */
     public AddExpenseCommandParser(Model model) {
-        ReadOnlyAddressBook addressBook = model.getAddressBook();
+        ReadOnlyAddressBook addressBook = model.getAwe();
         allMembers = addressBook.getPersonList();
     }
 

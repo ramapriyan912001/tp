@@ -12,7 +12,7 @@ import seedu.awe.model.ReadOnlyUserPrefs;
 import seedu.awe.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of Awe data in local storage.
  */
 public class StorageManager implements Storage {
 
@@ -47,7 +47,7 @@ public class StorageManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ Awe methods ==============================
 
     @Override
     public Path getAddressBookFilePath() {

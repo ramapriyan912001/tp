@@ -6,7 +6,7 @@ import static seedu.awe.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.awe.model.AddressBook;
+import seedu.awe.model.Awe;
 import seedu.awe.model.Model;
 import seedu.awe.model.ModelManager;
 import seedu.awe.model.UserPrefs;
@@ -29,7 +29,7 @@ public class ClearAllDataCommandTest {
     public void execute_nonEmptyAddressBook_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.setAddressBook(new AddressBook());
+        expectedModel.setAwe(new Awe());
 
         CommandResult commandResult = new CommandResult(MESSAGE_CLEARALLDATACOMMAND_SUCCESS,
                 false, false, false, true, false, false, false);

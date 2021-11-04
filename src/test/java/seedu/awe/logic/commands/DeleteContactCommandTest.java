@@ -52,7 +52,7 @@ public class DeleteContactCommandTest {
                 String.format(MESSAGE_DELETECONTACTCOMMAND_DELETE_PERSON_SUCCESS, personToDelete),
                 false, false, false, true, false, false, false);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getAwe(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
 
 
@@ -80,7 +80,7 @@ public class DeleteContactCommandTest {
                 String.format(MESSAGE_DELETECONTACTCOMMAND_DELETE_PERSON_SUCCESS, personToDelete),
                 false, false, false, true, false, false, false);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAwe(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
         showNoPerson(expectedModel);
 
@@ -94,7 +94,7 @@ public class DeleteContactCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of awe book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAwe().getPersonList().size());
 
         DeleteContactCommand deleteContactCommand = new DeleteContactCommand(outOfBoundIndex);
 

@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.awe.commons.core.GuiSettings;
-import seedu.awe.model.AddressBook;
+import seedu.awe.model.Awe;
 import seedu.awe.model.ReadOnlyAddressBook;
 import seedu.awe.model.UserPrefs;
 
@@ -54,10 +54,10 @@ public class StorageManagerTest {
          * {@link JsonAweStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonAweStorageTest} class.
          */
-        AddressBook original = getTypicalAddressBook();
+        Awe original = getTypicalAddressBook();
         storageManager.saveAddressBook(original);
         ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
-        assertEquals(original, new AddressBook(retrieved));
+        assertEquals(original, new Awe(retrieved));
     }
 
     @Test

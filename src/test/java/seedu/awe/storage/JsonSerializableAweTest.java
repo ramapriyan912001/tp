@@ -10,10 +10,10 @@ import org.junit.jupiter.api.Test;
 
 import seedu.awe.commons.exceptions.IllegalValueException;
 import seedu.awe.commons.util.JsonUtil;
-import seedu.awe.model.AddressBook;
+import seedu.awe.model.Awe;
 import seedu.awe.testutil.TypicalPersons;
 
-public class JsonSerializableAddressBookTest {
+public class JsonSerializableAweTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableAweTest");
     private static final Path TYPICAL_PERSONS_FILE = TEST_DATA_FOLDER.resolve("typicalPersonsAwe.json");
@@ -26,9 +26,9 @@ public class JsonSerializableAddressBookTest {
     public void toModelType_typicalPersonsFile_success() throws Exception {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
                 JsonSerializableAddressBook.class).get();
-        AddressBook addressBookFromFile = dataFromFile.toModelType();
-        AddressBook typicalPersonsAddressBook = TypicalPersons.getTypicalAddressBook();
-        assertEquals(addressBookFromFile, typicalPersonsAddressBook);
+        Awe aweFromFile = dataFromFile.toModelType();
+        Awe typicalPersonsAwe = TypicalPersons.getTypicalAddressBook();
+        assertEquals(aweFromFile, typicalPersonsAwe);
     }
 
     @Test

@@ -9,13 +9,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.awe.commons.exceptions.IllegalValueException;
-import seedu.awe.model.AddressBook;
+import seedu.awe.model.Awe;
 import seedu.awe.model.ReadOnlyAddressBook;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.person.Person;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable Awe that is serializable to JSON format.
  */
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
@@ -51,41 +51,41 @@ class JsonSerializableAddressBook {
      * Checks if the members in the group are inside list of persons.
      *
      * @param group The group to check if members are valid.
-     * @param addressBook The address book containing list of persons.
+     * @param awe The address book containing list of persons.
      */
-    public boolean areValidMembers(Group group, AddressBook addressBook) {
+    public boolean areValidMembers(Group group, Awe awe) {
         for (Person person : group.getMembers()) {
-            if (!addressBook.hasPerson(person)) {
+            if (!awe.hasPerson(person)) {
                 return false;
             }
         } return true;
     }
 
     /**
-     * Converts this awe book into the model's {@code AddressBook} object.
+     * Converts this awe book into the model's {@code Awe} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public Awe toModelType() throws IllegalValueException {
+        Awe awe = new Awe();
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             Person person = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(person)) {
+            if (awe.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addPerson(person);
+            awe.addPerson(person);
         }
         for (JsonAdaptedGroup jsonAdaptedGroup : groups) {
             Group group = jsonAdaptedGroup.toModelType();
-            if (addressBook.hasGroup(group)) {
+            if (awe.hasGroup(group)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_GROUP);
             }
-            if (!areValidMembers(group, addressBook)) {
+            if (!areValidMembers(group, awe)) {
                 throw new IllegalValueException(MESSAGE_INVALID_GROUP_MEMBER);
             }
-            addressBook.addGroup(group);
+            awe.addGroup(group);
         }
-        return addressBook;
+        return awe;
     }
 
 }

@@ -25,7 +25,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.awe.commons.core.GuiSettings;
 import seedu.awe.logic.commands.exceptions.CommandException;
-import seedu.awe.model.AddressBook;
+import seedu.awe.model.Awe;
 import seedu.awe.model.Model;
 import seedu.awe.model.ReadOnlyAddressBook;
 import seedu.awe.model.ReadOnlyUserPrefs;
@@ -278,12 +278,12 @@ public class AddExpenseCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setAwe(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyAddressBook getAwe() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -469,8 +469,8 @@ public class AddExpenseCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyAddressBook getAwe() {
+            return new Awe();
         }
     }
 

@@ -36,7 +36,7 @@ public class CreateGroupCommandParser implements Parser<CreateGroupCommand> {
      * @param model Model object passed into constructor to provide list of contacts.
      */
     public CreateGroupCommandParser(Model model) {
-        ReadOnlyAddressBook addressBook = model.getAddressBook();
+        ReadOnlyAddressBook addressBook = model.getAwe();
         this.allMembers = addressBook.getPersonList();
         this.toBeAddedToGroup = new ArrayList<>();
     }

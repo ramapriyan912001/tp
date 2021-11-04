@@ -60,14 +60,14 @@ public interface Model {
     void setAddressBookFilePath(Path addressBookFilePath);
 
     /**
-     * Replaces awe book data with the data in {@code addressBook}.
+     * Replaces awe book data with the data in {@code awe}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setAwe(ReadOnlyAddressBook awe);
 
-    /** Returns the AddressBook. */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the Awe. */
+    ReadOnlyAddressBook getAwe();
 
-    /** Returns the group of the ExpenseList in AddressBook. */
+    /** Returns the group of the ExpenseList in Awe. */
     Group getActiveGroupFromAddressBook() throws CommandException;
 
     /**

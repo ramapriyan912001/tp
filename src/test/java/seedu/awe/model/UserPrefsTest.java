@@ -30,7 +30,7 @@ public class UserPrefsTest {
     public void equals() {
         resetUserPrefs();
         assertEquals(userPrefs, userPrefs);
-        assertNotEquals(userPrefs, new AddressBook());
+        assertNotEquals(userPrefs, new Awe());
     }
 
     @Test
