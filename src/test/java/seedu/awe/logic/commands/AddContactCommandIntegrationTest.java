@@ -31,7 +31,7 @@ public class AddContactCommandIntegrationTest {
     public void execute_newPerson_success() {
         Person validPerson = new PersonBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAwe(), new UserPrefs());
         expectedModel.addPerson(validPerson);
 
         CommandResult commandResult = new CommandResult(String.format(MESSAGE_ADDCONTACTCOMMAND_SUCCESS, validPerson),
@@ -43,7 +43,7 @@ public class AddContactCommandIntegrationTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Person personInList = model.getAddressBook().getPersonList().get(0);
+        Person personInList = model.getAwe().getPersonList().get(0);
         assertCommandFailure(new AddContactCommand(personInList), model, MESSAGE_ADDCONTACTCOMMAND_DUPLICATE);
     }
 

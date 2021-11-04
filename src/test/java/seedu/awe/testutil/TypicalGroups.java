@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.awe.model.AddressBook;
+import seedu.awe.model.Awe;
 import seedu.awe.model.expense.Cost;
 import seedu.awe.model.expense.Description;
 import seedu.awe.model.expense.Expense;
@@ -146,10 +146,10 @@ public class TypicalGroups {
     private TypicalGroups() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons and groups.
+     * Returns an {@code Awe} with all the typical persons and groups.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static Awe getTypicalAddressBook() {
+        Awe ab = new Awe();
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }

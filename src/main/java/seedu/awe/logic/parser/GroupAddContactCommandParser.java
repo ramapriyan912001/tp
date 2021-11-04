@@ -31,7 +31,7 @@ public class GroupAddContactCommandParser implements Parser<GroupAddContactComma
      * @param model Model object passed into constructor to provide list of contacts.
      */
     public GroupAddContactCommandParser(Model model) {
-        ReadOnlyAddressBook addressBook = model.getAddressBook();
+        ReadOnlyAddressBook addressBook = model.getAwe();
         this.allMembers = addressBook.getPersonList();
         this.allGroups = addressBook.getGroupList();
         this.newMembersToAdd = new ArrayList<>();

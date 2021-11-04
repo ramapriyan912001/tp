@@ -44,8 +44,13 @@ CommandBox --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
-UiManager -right-> Logic
+UiManager -up-> Logic
 MainWindow -left-> Logic
+
+
+note "Implementation are referenced below." as N1
+NavigationButton ... N1
+ViewPanel ... N1
 
 
 HelpWindow -[hidden]left- CommandBox

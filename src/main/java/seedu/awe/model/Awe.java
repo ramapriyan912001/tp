@@ -26,7 +26,7 @@ import seedu.awe.model.transactionsummary.TransactionSummaryList;
  * Wraps all data at the awe-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class Awe implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final UniqueGroupList groups;
@@ -49,12 +49,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         transactionSummary = new TransactionSummaryList();
     }
 
-    public AddressBook() {}
+    public Awe() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an Awe using the Persons in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public Awe(ReadOnlyAddressBook toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -120,7 +120,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code Awe} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
@@ -160,7 +160,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code Awe}.
      * {@code key} must exist in the awe book.
      */
     public void removePerson(Person key) {
@@ -279,11 +279,11 @@ public class AddressBook implements ReadOnlyAddressBook {
             return true;
         }
 
-        if (!(other instanceof AddressBook)) { // instanceof handles nulls
+        if (!(other instanceof Awe)) { // instanceof handles nulls
             return false;
         }
 
-        AddressBook toBeChecked = (AddressBook) other;
+        Awe toBeChecked = (Awe) other;
         return persons.equals(toBeChecked.persons)
                 && groups.equals(toBeChecked.groups);
     }
