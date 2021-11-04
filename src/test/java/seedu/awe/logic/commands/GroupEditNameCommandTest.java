@@ -61,15 +61,6 @@ public class GroupEditNameCommandTest {
     }
 
     @Test
-    public void execute_changeToSameName_failure() {
-        GroupEditNameCommand groupEditNameCommand = new GroupEditNameCommand(BALI_GROUP_NAME, BALI_GROUP_NAME);
-
-        String expectedMessage = String.format(Messages.MESSAGE_GROUPEDITNAMECOMMAND_EXISTING_GROUP, BALI_GROUP_NAME);
-
-        assertCommandFailure(groupEditNameCommand, model, expectedMessage);
-    }
-
-    @Test
     public void execute_changeToExistingName_failure() {
         GroupEditNameCommand groupEditNameCommand = new GroupEditNameCommand(BALI_GROUP_NAME, LONDON_GROUP_NAME);
 
