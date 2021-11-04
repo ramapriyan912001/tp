@@ -109,6 +109,7 @@ public class Messages {
                     + "[" + PREFIX_NAME + "OPTIONAL_NAMES]...\n"
                     + "Example: "
                     + CreateGroupCommand.COMMAND_WORD
+                    + " "
                     + PREFIX_GROUP_NAME
                     + "Bali "
                     + PREFIX_NAME
@@ -148,6 +149,7 @@ public class Messages {
                     + "[" + PREFIX_NAME + "OPTIONAL_NAMES]...\n"
                     + "Example: "
                     + GroupAddContactCommand.COMMAND_WORD
+                    + " "
                     + PREFIX_GROUP_NAME
                     + "Bali "
                     + PREFIX_NAME
@@ -164,6 +166,7 @@ public class Messages {
                     + "[" + PREFIX_NAME + "OPTIONAL_NAMES]...\n"
                     + "Example: "
                     + GroupRemoveContactCommand.COMMAND_WORD
+                    + " "
                     + PREFIX_GROUP_NAME
                     + "Bali "
                     + PREFIX_NAME
@@ -182,6 +185,7 @@ public class Messages {
                     + "[" + PREFIX_TAG + "OPTIONAL_TAGS]...\n"
                     + "Example: "
                     + GroupAddTagCommand.COMMAND_WORD
+                    + " "
                     + PREFIX_GROUP_NAME
                     + "Bali "
                     + PREFIX_TAG
@@ -201,6 +205,7 @@ public class Messages {
                     + "[" + PREFIX_TAG + "OPTIONAL_TAGS]...\n"
                     + "Example: "
                     + GroupRemoveTagCommand.COMMAND_WORD
+                    + " "
                     + PREFIX_GROUP_NAME
                     + "Bali "
                     + PREFIX_TAG
@@ -218,6 +223,7 @@ public class Messages {
                     + PREFIX_GROUP_NAME + "NEWGROUPNAME\n"
                     + "Example: "
                     + GroupEditNameCommand.COMMAND_WORD
+                    + " "
                     + PREFIX_GROUP_NAME
                     + "Bali "
                     + PREFIX_GROUP_NAME
