@@ -1,5 +1,6 @@
 package seedu.awe.model.expense;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.awe.testutil.Assert.assertThrows;
@@ -17,12 +18,53 @@ public class CostTest {
     public void constructor_invalidCost_throwsIllegalArgumentException() {
         String invalidCost = "";
         assertThrows(IllegalArgumentException.class, () -> new Cost(invalidCost));
+
+        String invalidCost2 = "abc";
+        assertThrows(IllegalArgumentException.class, () -> new Cost(invalidCost2));
     }
 
     @Test
     public void constructor_longCost_throwsIllegalArgumentException() {
         String invalidCost = "12.3456789012345678901234567890123456789012345678901";
         assertThrows(IllegalArgumentException.class, () -> new Cost(invalidCost));
+    }
+
+    @Test
+    public void constructor_bigCost_throwsIllegalArgumentException() {
+        String bigCost = "1000000001";
+        assertThrows(IllegalArgumentException.class, () -> new Cost(bigCost));
+    }
+
+    @Test
+    public void add_validArgs_costAdded() {
+        Cost cost1 = new Cost(10);
+        Cost cost2 = new Cost(20);
+        Cost expectedSum = new Cost(30);
+        assertEquals(expectedSum, cost1.add(cost2));
+    }
+
+    @Test
+    public void add_resultGreaterThanMaxCost_costConvertedToMaxCost() {
+        Cost cost1 = new Cost(Cost.MAX_COST);
+        Cost cost2 = new Cost(20);
+        Cost expectedSum = new Cost(Cost.MAX_COST);
+        assertEquals(expectedSum, cost1.add(cost2));
+    }
+
+    @Test
+    public void subtract_validArgs_costSubtracted() {
+        Cost cost1 = new Cost(10);
+        Cost cost2 = new Cost(20);
+        Cost expectedSum = new Cost(10);
+        assertEquals(expectedSum, cost2.subtract(cost1));
+    }
+
+    @Test
+    public void subtract_resultLessThanZero_costConvertedToZero() {
+        Cost cost1 = new Cost(10);
+        Cost cost2 = new Cost(20);
+        Cost expectedSum = new Cost(0);
+        assertEquals(expectedSum, cost1.subtract(cost2));
     }
 
     @Test

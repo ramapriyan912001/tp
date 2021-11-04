@@ -1,8 +1,10 @@
 package seedu.awe.model.expense;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.awe.testutil.Assert.assertThrows;
+import static seedu.awe.testutil.TypicalExpenses.HOLIDAY;
 
 import org.junit.jupiter.api.Test;
 
@@ -63,8 +65,15 @@ public class DescriptionTest {
         // String is passed in -> false
         assertFalse(description.equals("dinner"));
 
-
         // different description -> return false
         assertFalse(description.equals(new Description("lunch")));
+    }
+
+    @Test
+    public void hashcode() {
+        // same object
+        assertEquals(HOLIDAY.getDescription().hashCode(), HOLIDAY.getDescription().hashCode());
+
+        assertEquals(HOLIDAY.getDescription().hashCode(), new Description("Holiday").hashCode());
     }
 }
