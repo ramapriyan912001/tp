@@ -1,8 +1,10 @@
 package seedu.awe.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_PAYER_DOES_NOT_EXIST;
 import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_USAGE;
 import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.awe.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.awe.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.awe.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -47,28 +49,14 @@ public class AddExpenseCommandParserTest {
     public void parse_validArgs_returnsAddExpenseCommand() {
         ModelStubAcceptingExpenseAdded modelStub = new ModelStubAcceptingExpenseAdded();
         modelStub.addPerson(validPerson);
-        validGroup.addMember(validPerson);
-        modelStub.addGroup(validGroup);
+        modelStub.addPerson(validExcludedPerson);
+        Cost validCost = new Cost(20);
         AddExpenseCommandParser parser = new AddExpenseCommandParser(modelStub);
 
         // No individual payments, no excluded
         assertParseSuccess(parser, " n/Amy Bee gn/Bali $/50 d/holiday",
                 new AddExpenseCommand(validPerson, validExpense.getCost(), validExpense.getDescription(),
                         validGroup.getGroupName(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
-    }
-
-    @Test
-    public void parse_specialArgs_returnsAddExpenseCommand() {
-        ModelStubAcceptingExpenseAdded modelStub = new ModelStubAcceptingExpenseAdded();
-        modelStub.addPerson(validPerson);
-        Cost validCost = new Cost(20);
-        modelStub.addPerson(validSelfPayee);
-        modelStub.addPerson(validExcludedPerson);
-        validGroup.addMember(validSelfPayee);
-        validGroup.addMember(validPerson);
-        validGroup.addMember(validExcludedPerson);
-        modelStub.addGroup(validGroup);
-        AddExpenseCommandParser parser = new AddExpenseCommandParser(modelStub);
 
         // With individual payments, no excluded
         assertParseSuccess(parser, " n/Amy Bee gn/Bali $/50 d/holiday n/Bob $/20",
@@ -88,28 +76,22 @@ public class AddExpenseCommandParserTest {
                         validGroup.getGroupName(), new ArrayList<>(Arrays.asList(validSelfPayee)),
                         new ArrayList<>(Arrays.asList(validCost)),
                         new ArrayList<>(Arrays.asList(validExcludedPerson))));
-    }
 
-    @Test
-    public void parse_payerNotPartOfGroup_returnsAddExpenseCommand() {
-        ModelStubAcceptingExpenseAdded modelStub = new ModelStubAcceptingExpenseAdded();
-        Person validPersonJoseph = new PersonBuilder().withName("Joseph").build();
-        modelStub.addPerson(validPersonJoseph);
-        validGroup.addMember(validPersonJoseph);
-        modelStub.addGroup(validGroup);
-        AddExpenseCommandParser parser = new AddExpenseCommandParser(modelStub);
+        // Payer not part of group
+        assertParseSuccess(parser, " n/Amy Bee gn/Bali $/50 d/holiday",
+                new AddExpenseCommand(validPerson, validExpense.getCost(), validExpense.getDescription(),
+                        validGroup.getGroupName(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
 
-        assertParseSuccess(parser, " n/Joseph gn/Bali $/50 d/holiday",
-                new AddExpenseCommand(validPersonJoseph, validExpense.getCost(), validExpense.getDescription(),
+        // Excluded doesn't exist
+        assertParseSuccess(parser, " n/Amy Bee gn/Bali $/50 d/holiday",
+                new AddExpenseCommand(validPerson, validExpense.getCost(), validExpense.getDescription(),
                         validGroup.getGroupName(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
     }
 
     @Test
-    public void parse_missingArgs_throwsParseException() {
+    public void parse_invalidArgs_throwsParseException() {
         ModelStubAcceptingExpenseAdded modelStub = new ModelStubAcceptingExpenseAdded();
         modelStub.addPerson(validPerson);
-        validGroup.addMember(validPerson);
-        modelStub.addGroup(validGroup);
         AddExpenseCommandParser parser = new AddExpenseCommandParser(modelStub);
 
         // Missing name argument
@@ -127,6 +109,22 @@ public class AddExpenseCommandParserTest {
         // Missing description argument
         assertParseFailure(parser, " n/Amy Bee gn/Bali $/50",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_ADDEXPENSECOMMAND_USAGE));
+
+        // Non-empty preamble
+        assertParseFailure(parser, PREAMBLE_NON_EMPTY + "n/Amy Bee gn/Bali $/50 d/holiday",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_ADDEXPENSECOMMAND_USAGE));
+
+        // More names than costs
+        assertParseFailure(parser, " n/Amy Bee gn/Bali $/50 d/holiday n/Joseph",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_ADDEXPENSECOMMAND_USAGE));
+
+        // More costs than names
+        assertParseFailure(parser, " n/Amy Bee gn/Bali $/50 d/holiday $/20",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_ADDEXPENSECOMMAND_USAGE));
+
+        // Payer does not exist
+        assertParseFailure(parser, " n/Joseph gn/Bali $/50 d/holiday",
+                String.format(MESSAGE_ADDEXPENSECOMMAND_PAYER_DOES_NOT_EXIST));
     }
 
     /**

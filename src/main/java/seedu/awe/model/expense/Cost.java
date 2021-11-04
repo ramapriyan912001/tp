@@ -13,6 +13,7 @@ public class Cost {
                     + "and it should not be blank!";
 
     public static final double MAX_COST = 10000000;
+    public static final int MAX_LENGTH = 50;
 
     /*
      * The first character of the address must not be a whitespace,
@@ -29,11 +30,16 @@ public class Cost {
      */
     public Cost(String cost) {
         requireNonNull(cost);
-        double costAsDouble = Double.parseDouble(cost);;
-        String costDoubleToString = String.format("%.2f", costAsDouble);;
+        double costAsDouble = 0;
+        try {
+            costAsDouble = Double.parseDouble(cost);
+        } catch (NumberFormatException e) {
+            checkArgument(isValidCost(cost), MESSAGE_CONSTRAINTS);
+        }
+        String costDoubleToString = String.format("%.2f", costAsDouble);
         checkArgument(isValidCost(costDoubleToString), MESSAGE_CONSTRAINTS);
-        if (costAsDouble > 10000000) {
-            costAsDouble = 10000000;
+        if (costAsDouble > Cost.MAX_COST) {
+            costAsDouble = Cost.MAX_COST;
         }
         this.cost = costAsDouble;
     }
@@ -119,9 +125,16 @@ public class Cost {
      * Returns true if a given string is a valid cost.
      */
     public static boolean isValidCost(String test) {
-        double costAsDouble = Double.parseDouble(test);
+        double costAsDouble = 0;
+        try {
+            costAsDouble = Double.parseDouble(test);
+        } catch (NumberFormatException e) {
+            return false;
+        }
         String costDoubleToString = String.format("%.2f", costAsDouble);
-        return costDoubleToString.matches(VALIDATION_REGEX);
+        return costDoubleToString.matches(VALIDATION_REGEX)
+                && costAsDouble <= MAX_COST
+                && test.length() <= MAX_LENGTH;
     }
 
     @Override
