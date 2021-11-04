@@ -9,16 +9,16 @@ import static seedu.awe.testutil.TypicalGroups.BALI;
 import static seedu.awe.testutil.TypicalPersons.HOON;
 import static seedu.awe.testutil.TypicalPersons.IDA;
 
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.awe.model.group.exceptions.DuplicateGroupException;
 import seedu.awe.model.group.exceptions.GroupNotFoundException;
 import seedu.awe.testutil.GroupBuilder;

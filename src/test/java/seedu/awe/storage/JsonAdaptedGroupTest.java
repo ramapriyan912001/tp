@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.awe.commons.exceptions.IllegalValueException;
 import seedu.awe.model.group.GroupName;
-import seedu.awe.testutil.TypicalGroups;
 
 public class JsonAdaptedGroupTest {
     private static final String INVALID_GROUP_NAME = "R@chel Birthday";

@@ -1,6 +1,7 @@
 package seedu.awe.logic.parser;
 
-import static seedu.awe.commons.core.Messages.*;
+import static seedu.awe.commons.core.Messages.MESSAGE_DELETECONTACTCOMMAND_USAGE;
+import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.awe.logic.parser.ParserUtil.MESSAGE_INVALID_LENGTH_INDEX;
 
 import seedu.awe.commons.core.Messages;

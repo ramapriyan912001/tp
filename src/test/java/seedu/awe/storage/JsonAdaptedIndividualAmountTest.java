@@ -1,11 +1,12 @@
 package seedu.awe.storage;
 
-import org.junit.jupiter.api.Test;
-import seedu.awe.commons.exceptions.IllegalValueException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.awe.testutil.Assert.assertThrows;
 import static seedu.awe.testutil.TypicalIndividualAmounts.ALICE_INDIVIDUAL_AMOUNT;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.awe.commons.exceptions.IllegalValueException;
 
 public class JsonAdaptedIndividualAmountTest {
     private static final JsonAdaptedPerson VALID_PERSON = new JsonAdaptedPerson(ALICE_INDIVIDUAL_AMOUNT.getPerson());

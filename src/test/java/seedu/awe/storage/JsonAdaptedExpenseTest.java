@@ -1,27 +1,26 @@
 package seedu.awe.storage;
 
-import org.junit.jupiter.api.Test;
-import seedu.awe.commons.exceptions.IllegalValueException;
-import seedu.awe.model.expense.Cost;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.awe.storage.JsonAdaptedExpense.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.awe.testutil.Assert.assertThrows;
-
-import seedu.awe.model.expense.Description;
+import static seedu.awe.testutil.TypicalExpenses.HOLIDAY;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.awe.testutil.TypicalExpenses.HOLIDAY;
+import org.junit.jupiter.api.Test;
+
+import seedu.awe.commons.exceptions.IllegalValueException;
+import seedu.awe.model.expense.Cost;
+import seedu.awe.model.expense.Description;
 
 public class JsonAdaptedExpenseTest {
 
     private static final JsonAdaptedPerson VALID_PAYER = new JsonAdaptedPerson(HOLIDAY.getPayer());
     private static final String VALID_COST = "1000";
     private static final String VALID_DESCRIPTION = HOLIDAY.getDescription().getFullDescription();
-    private final List<JsonAdaptedPerson> VALID_INCLUDED = new ArrayList<>();
-    private final List<JsonAdaptedIndividualAmount> VALID_INDIVIDUAL_EXPENSES = new ArrayList<>();
+    private static final List<JsonAdaptedPerson> VALID_INCLUDED = new ArrayList<>();
+    private static final List<JsonAdaptedIndividualAmount> VALID_INDIVIDUAL_EXPENSES = new ArrayList<>();
     private static final String INVALID_DESCRIPTION = "Desc@ription";
     private static final String INVALID_LENGTH_DESCRIPTION = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";

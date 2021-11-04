@@ -1,7 +1,6 @@
 package seedu.awe.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.awe.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -12,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import seedu.awe.commons.exceptions.IllegalValueException;
 import seedu.awe.commons.util.JsonUtil;
 import seedu.awe.model.AddressBook;
-import seedu.awe.model.group.GroupName;
 import seedu.awe.testutil.TypicalPersons;
 
 public class JsonSerializableAddressBookTest {
@@ -21,7 +19,8 @@ public class JsonSerializableAddressBookTest {
     private static final Path TYPICAL_PERSONS_FILE = TEST_DATA_FOLDER.resolve("typicalPersonsAwe.json");
     private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonAwe.json");
     private static final Path DUPLICATE_GROUP_FILE = TEST_DATA_FOLDER.resolve("duplicateGroupAwe.json");
-    private static final Path INVALID_MEMBERS_IN_GROUP_FILE = TEST_DATA_FOLDER.resolve("validPersonAndInvalidGroupAwe.json");
+    private static final Path INVALID_MEMBERS_IN_GROUP_FILE = TEST_DATA_FOLDER
+            .resolve("validPersonAndInvalidGroupAwe.json");
 
     @Test
     public void toModelType_typicalPersonsFile_success() throws Exception {

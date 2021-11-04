@@ -8,7 +8,6 @@ import static seedu.awe.logic.parser.ParserUtil.MESSAGE_INVALID_LENGTH_INDEX;
 import seedu.awe.commons.core.Messages;
 import seedu.awe.commons.core.index.Index;
 import seedu.awe.logic.commands.DeleteExpenseCommand;
-import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.logic.parser.exceptions.ParseException;
 
 public class DeleteExpenseCommandParser implements Parser<DeleteExpenseCommand> {

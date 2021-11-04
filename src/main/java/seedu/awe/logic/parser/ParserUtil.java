@@ -40,7 +40,7 @@ public class ParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
-        if(oneBasedIndex.length() > 9 ) {
+        if (oneBasedIndex.length() > 9) {
             throw new ParseException(MESSAGE_INVALID_LENGTH_INDEX);
         }
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
