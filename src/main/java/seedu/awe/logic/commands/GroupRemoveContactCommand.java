@@ -8,6 +8,7 @@ import static seedu.awe.commons.core.Messages.MESSAGE_NONEXISTENT_GROUP;
 import static seedu.awe.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.model.Model;
@@ -60,6 +61,9 @@ public class GroupRemoveContactCommand extends Command {
      * @return boolean object representing if membersToBeRemoved contains the same Person objects as otherMembers.
      */
     public boolean checkSameMembers(ArrayList<Person> otherMembers) {
+        if (this.membersToBeRemoved.size() != otherMembers.size()) {
+            return false;
+        }
         int numberOfNonMatchingMembers = otherMembers.size();
         for (Person member : this.membersToBeRemoved) {
             numberOfNonMatchingMembers = checkForMember(numberOfNonMatchingMembers, member, otherMembers);
@@ -86,15 +90,28 @@ public class GroupRemoveContactCommand extends Command {
         return true;
     }
 
+    public GroupName getGroupName() {
+        return groupName;
+    }
+
+    public ArrayList<Person> getMembersToBeRemoved() {
+        return membersToBeRemoved;
+    }
+
+    public boolean isValidCommand() {
+        return isValidCommand;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (!isValidCommand) {
-            throw new CommandException(MESSAGE_NONEXISTENT_GROUP);
-        }
-
         Group oldGroup = model.getGroupByName(groupName);
-
+        if (Objects.isNull(oldGroup)) {
+            throw new CommandException(String.format(MESSAGE_NONEXISTENT_GROUP, groupName.getName()));
+        }
+        if (!isValidCommand) {
+            throw new CommandException(MESSAGE_GROUPREMOVECONTACTCOMMAND_NONEXISTENT_PERSON);
+        }
         ArrayList<Person> membersFromOldGroup = oldGroup.getMembers();
         if (!checkRemoveMembers(membersFromOldGroup, membersToBeRemoved)) {
             throw new CommandException(MESSAGE_GROUPREMOVECONTACTCOMMAND_NONEXISTENT_PERSON);
@@ -119,12 +136,12 @@ public class GroupRemoveContactCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        if (!(other instanceof GroupAddContactCommand)) {
+        if (!(other instanceof GroupRemoveContactCommand)) {
             return false;
         }
-        GroupAddContactCommand otherCommand = (GroupAddContactCommand) other;
-        if (this.isValidCommand == otherCommand.getValidCommand()
-                && checkSameMembers(otherCommand.getNewMembers())
+        GroupRemoveContactCommand otherCommand = (GroupRemoveContactCommand) other;
+        if (this.isValidCommand == otherCommand.isValidCommand()
+                && checkSameMembers(otherCommand.getMembersToBeRemoved())
                 && this.groupName.equals(otherCommand.getGroupName())) {
             return true;
         }

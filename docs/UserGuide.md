@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-Around the World in $80 (AWE) is a desktop app for keeping track of spending and expenditure during travels, splitting 
+Around the World in $80 (AWE) is a desktop application for keeping track of spending and expenditure during travels, splitting 
 expenses with travel-mates, and facilitating easy recollection of debts at the end of every trip. AWE is the world's
 only bespoke app designed for group travellers.
 
@@ -36,7 +36,7 @@ can focus on exploring AWE to the full extent of its functionalities.
 * We provide you with the tools to be able to read this guide with little need for re-referencing previous sections.
 
 [Section 1](#1-about-the-document) provides readers with a brief overview of how to use this document. [Section 2](#2-quick-start) details the setting up of AWE
-and [Section 3](#2-features) documents the main features of AWE. If you still face problems using AWE, refer to our FAQ in [Section 4](#4-faq). 
+and [Section 3](#3-features) documents the main features of AWE. If you still face problems using AWE, refer to our FAQ in [Section 4](#4-faq). 
 For a summary of all the commands available, refer to [Section 5](#5-command-summary).
 
 <div style="page-break-after: always;"></div>
@@ -55,7 +55,7 @@ If you wish to jump straight into using our features, refer to Section 5 for the
 Here are some pointers to take note of.
 1. Words in `UPPER_CASE` are parameters to be supplied by you.
 2. Words that are enclosed in `[   ]` denote optional parameters that the user can choose to enter or leave out.
-3. You will notice that our commands require you to use characters such as `e/`, `t/`, etc. This is allows our programme
+3. You will notice that our commands require you to use characters such as `n/`, `t/`, etc. This is allows our programme
 to locate which words belong to which category of input.
 
 <br>
@@ -187,6 +187,7 @@ Format: `addcontact n/NAME p/PHONE_NUMBER [t/TAG]…​`
 * Contacts are duplicate if they have the same name
 * NAME are case-sensitive, "Hans" and "hans" will be treated as 2 separate person. Refer to [FAQ](#4faq) for the rationale behind this.
 * NAME are up to 50 characters only.
+* TAG are up to 50 characters only.
 * PHONE_NUMBER should have between 3 and 16 numbers.
 * Contact list will be displayed after the command succeeded.
 
@@ -211,6 +212,7 @@ Format: `editcontact INDEX [n/NAME] [p/PHONE] [t/TAG]…​`
 * When editing tags, the existing tags of the contact will be removed i.e adding of tags is not cumulative.
 * You can remove all the contact’s tags by typing `t/` without specifying any tags after it.
 * NAME are up to 50 characters only.
+* TAG are up to 50 characters only.
 * PHONE_NUMBER should have between 3 and 16 numbers
 
 Examples:
@@ -281,6 +283,7 @@ Format: `creategroup gn/GROUP_NAME n/NAME1 [n/NAME2] [n/NAME3]...[t/TAG1]`
 * At least one NAME is necessary.
 * The names are required to be in AWE and should match contact names exactly.
 * Tags cannot have whitespace and special characters other than alphanumeric characters.
+* TAG are up to 50 characters only.
 * Tags are optional.
 * Group list will be displayed after the command succeeded.
 
@@ -296,6 +299,7 @@ Format: `deletegroup gn/GROUP_NAME`
 
 * GROUP_NAME is a mandatory field.
 * A group with GROUP_NAME as its name must exist.
+* GROUP_NAME are up to 50 characters only.
 * Group list will be displayed after the command succeeded.
 
 Examples:
@@ -373,6 +377,7 @@ Format: `groupaddtag gn/GROUP_NAME t/TAG [t/TAG2] ...`
 * The search is case-sensitive. e.g `bali` will not match `Bali`
 * Only full words will be matched e.g. `Bal` will not match `Bali`
 * Duplicate tags in a group/user input will not be added.
+* TAG are up to 50 characters only.
 * Group list will not be displayed after the command succeeded.
 
 Examples:
@@ -388,6 +393,7 @@ Format: `groupremovetag gn/GROUP_NAME t/TAG [t/TAG2] ...`
 
 * Group name in the user input must already be an existing group.
 * Tag has to be in existing group before it can be removed.
+* TAG are up to 50 characters only.
 * The search is case-sensitive. e.g `bali` will not match `Bali`
 * Only full words will be matched e.g. `Bal` will not match `Bali`
 * Duplicate tags in a group/user input will not be removed.
@@ -406,6 +412,7 @@ Format: `groupeditname gn/OLD_GROUP_NAME gn/NEW_GROUP_NAME`
 * Group name in the user input must already be an existing group.
 * The search is case-sensitive. e.g `bali` will not match `Bali`
 * Only full words will be matched e.g. `Bal` will not match `Bali`
+* GROUP_NAME are up to 50 characters only.
 * Group list will not be displayed after the command succeeded.
 
 Examples:

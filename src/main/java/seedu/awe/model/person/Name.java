@@ -5,7 +5,7 @@ import static seedu.awe.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's name in the awe book.
- * Guarantees: immutable; is valid as declared in {@link #isValidGroupName(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Name {
 
@@ -30,7 +30,7 @@ public class Name {
      */
     public Name(String name) {
         requireNonNull(name);
-        checkArgument(isValidGroupName(name), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
         checkArgument(name.length() <= MAX_LENGTH, MESSAGE_CONSTRAINTS);
         fullName = name;
     }
@@ -46,7 +46,7 @@ public class Name {
     /**
      * Returns true if a given string is a valid name.
      */
-    public static boolean isValidGroupName(String test) {
+    public static boolean isValidName(String test) {
         return test.matches(VALIDATION_REGEX) && test.length() <= MAX_LENGTH;
     }
 

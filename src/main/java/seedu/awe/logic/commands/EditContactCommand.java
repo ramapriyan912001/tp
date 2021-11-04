@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.awe.commons.core.Messages.MESSAGE_EDITCONTACTCOMMAND_CANNOT_BE_EDITED;
 import static seedu.awe.commons.core.Messages.MESSAGE_EDITCONTACTCOMMAND_DUPLICATE_PERSON;
 import static seedu.awe.commons.core.Messages.MESSAGE_EDITCONTACTCOMMAND_EDIT_PERSON_SUCCESS;
+import static seedu.awe.commons.core.Messages.MESSAGE_EDITCONTACTCOMMAND_SAME_NAME;
+import static seedu.awe.commons.core.Messages.MESSAGE_EDITCONTACTCOMMAND_SAME_NUMBER;
 import static seedu.awe.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -68,7 +70,19 @@ public class EditContactCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
+
+        if (editPersonDescriptor.getName().isPresent()
+                && editPersonDescriptor.getName().get().equals(personToEdit.getName())) {
+            throw new CommandException(MESSAGE_EDITCONTACTCOMMAND_SAME_NAME);
+        }
+
+        if (editPersonDescriptor.getPhone().isPresent()
+                && editPersonDescriptor.getPhone().get().equals(personToEdit.getPhone())) {
+            throw new CommandException(MESSAGE_EDITCONTACTCOMMAND_SAME_NUMBER);
+        }
+
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_EDITCONTACTCOMMAND_DUPLICATE_PERSON);

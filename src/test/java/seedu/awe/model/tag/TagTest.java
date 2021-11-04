@@ -24,6 +24,23 @@ public class TagTest {
     public void isValidTagName() {
         // null tag name
         assertThrows(NullPointerException.class, () -> Tag.isValidTagName(null));
+
+        // Invalid tag
+        assertFalse(Tag.isValidTagName("")); // empty string
+        assertFalse(Tag.isValidTagName(" ")); // spaces only
+        assertFalse(Tag.isValidTagName("^")); // only non-alphanumeric characters
+        assertFalse(Tag.isValidTagName("friend*")); // contains non-alphanumeric characters
+        assertFalse(Tag.isValidTagName("friends from schoool")); // Contains spaces
+        assertFalse(Tag.isValidTagName("123456789012345678901234567"
+                + "890123456789012345678901")); // contains more than 50 characters
+
+        // valid Tag name
+        assertTrue(Tag.isValidTagName("enemy")); // alphabets only
+        assertTrue(Tag.isValidTagName("12345")); // numbers only
+        assertTrue(Tag.isValidTagName("CapitalTan")); // with capital letters
+        assertTrue(Tag.isValidTagName("DavidRogerJacksonRayJr2nd")); // long Tagnames
+        assertTrue(Tag.isValidTagName("123456789012345678901234567"
+                + "89012345678901234567890")); // contains exactly 50 characters
     }
 
     @Test
