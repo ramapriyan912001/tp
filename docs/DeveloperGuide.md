@@ -2,7 +2,8 @@
 layout: page
 title: Developer Guide
 ---
-## Table of Contents
+<div style="page-break-after: always;" id="tableofcontents"></div>
+<p style="font-size: 1.75rem; margin-top: 60px; color: #e46c0a; font-weight:400; margin-bottom: 15px;">Table of Contents</p>
 * Table of Contents
 {:toc}
 --------------------------------------------------------------------------------------------------------------------
