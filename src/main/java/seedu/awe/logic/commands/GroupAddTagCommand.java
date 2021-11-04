@@ -19,16 +19,14 @@ public class GroupAddTagCommand extends Command {
 
     private final GroupName groupName;
     private final Set<Tag> newTags;
-    private final boolean isValidCommand;
 
     /**
      * Creates a GroupAddTagCommand to add the specified {@code Tag}
      */
-    public GroupAddTagCommand(GroupName groupName, Set<Tag> newTags, boolean isValidCommand) {
-        requireAllNonNull(groupName, newTags, isValidCommand);
+    public GroupAddTagCommand(GroupName groupName, Set<Tag> newTags) {
+        requireAllNonNull(groupName, newTags);
         this.groupName = groupName;
         this.newTags = newTags;
-        this.isValidCommand = isValidCommand;
     }
 
     public GroupName getGroupName() {
@@ -37,10 +35,6 @@ public class GroupAddTagCommand extends Command {
 
     public Set<Tag> getNewTags() {
         return newTags;
-    }
-
-    public boolean getValidCommand() {
-        return isValidCommand;
     }
 
     /**
@@ -71,7 +65,7 @@ public class GroupAddTagCommand extends Command {
     public boolean checkSameTags(Set<Tag> otherTags) {
         int numberOfNonMatchingTags = otherTags.size();
         for (Tag tag : this.newTags) {
-            checkForTag(numberOfNonMatchingTags, tag, otherTags);
+            numberOfNonMatchingTags = checkForTag(numberOfNonMatchingTags, tag, otherTags);
         }
         return numberOfNonMatchingTags == 0;
     }
@@ -79,9 +73,6 @@ public class GroupAddTagCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (!isValidCommand) {
-            throw new CommandException(Tag.MESSAGE_CONSTRAINTS);
-        }
 
         Group oldGroup = model.getGroupByName(groupName);
         if (Objects.isNull(oldGroup)) {
@@ -105,8 +96,7 @@ public class GroupAddTagCommand extends Command {
             return false;
         }
         GroupAddTagCommand otherCommand = (GroupAddTagCommand) other;
-        if (this.isValidCommand == otherCommand.getValidCommand()
-                && checkSameTags(otherCommand.getNewTags())
+        if (checkSameTags(otherCommand.getNewTags())
                 && this.groupName.equals(otherCommand.getGroupName())) {
             return true;
         }
