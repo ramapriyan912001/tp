@@ -558,6 +558,11 @@ Examples:
 * `transactionsummary gn/London`
 ![result for 'transactionsummary gn/London](images/TransactionSummaryResult.png)
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 #### 3.3.6. Calculating payments to make: `calculatepayments`
 Uses the net spend of the user on the trip to tabulate a fast set of payments to settle the debts between members of the group.
 
@@ -574,12 +579,9 @@ Examples:
   
 **Note: When a `Person` is deleted from contacts or removed from the group, the functioning of this command does not change. The deleted person may still be part of the list of payments depending on the expenses they had previously.**
 
-
-<br>
-[Click here to return to table of contents](#tableofcontents)
-<br>
-
---------------------------------------------------------------------------------------------------------------------
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
 <div style="page-break-after: always;"></div>
 
 ### 3.4. Miscellaneous
@@ -610,6 +612,11 @@ Format: `exit`
 
 AWE data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 #### 3.4.5. Editing the data file
 
 AWE data are saved as a JSON file `[JAR file location]/data/awe.json`. Advanced users are welcome to update data directly by editing that data file.
@@ -619,21 +626,20 @@ AWE data are saved as a JSON file `[JAR file location]/data/awe.json`. Advanced 
 If your changes to the data file makes its format invalid, AWE will discard all data and start with an empty data file at the next run.
 </div>
 
-<br>
-[Click here to return to table of contents](#tableofcontents)
-<br>
---------------------------------------------------------------------------------------------------------------------
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
 <div style="page-break-after: always;"></div>
 
 ## 4. FAQ
-**Q**: Why is NAME case-sensitive?
+**Q**: Why is NAME case-sensitive?<br>
 **A**: Since identical names are very common in many cultures, we have decided to allow the addition of 2 contacts such as "jun jie" and "Jun Jie" in order to keep track of their numbers. 
 Furthermore, since AWE deals with overseas travels, quite a number of travellers might get a new overseas number when they are travelling. This will allow users to keep track of both
 their local and overseas local separately. Deleting the number after returning from the trip will be easier as well. In both cases, users can distinguish the 2 contacts with similar names using tags.
 This is also consistent with most mobile-phones, wherein contact names are case sensitive.
 To address the overseas number use case, for our next release, we are considering providing users with the ability to input more than one phone number when adding a contact.
 
-**Q**: Why is GROUP_NAME case-sensitive?
+**Q**: Why is GROUP_NAME case-sensitive?<br>
 **A**: Similar to the above question, a user might travel to the same destination more than once. 
 This will allow the addition of each individual trips.
 To address, this use case, we are considering requiring a DATE_TIME parameter when creating a group. 
@@ -644,18 +650,25 @@ In this case, users might be unable to create two groups, even though the use ca
 **A**: Install AWE on the other computer and replace the empty data file it creates with the data file used by the AWE on your previous computer.
 
 **Q**: What if the Jar file does not open properly when I double click on it?<br>
-**A**: Open a command prompt in that folder and run the command `java -jar -ea AWE.jar`.
+**A**: Open a command prompt in that folder and run the command `java -jar AWE.jar`.
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 **Q**: What do I do if I see `AWE.jar` cannot be opened because it is from an unidentified developer when I double click the jar file on a mac?<br>
-**A**: Go to `System Preferences -> Security and Privacy -> General` and click on `Open anyways` as such<br>
-![Mac Security Preference](images/MacSecurityPreference.png)
+**A**: Go to `System Preferences -> Security and Privacy -> General` and click on `Open anyways` as such
+<p align="center">
+    <img src="images/MacSecurityPreference.png" />
+</p>
+<br>
 <br>
 If your questions are not answered in the FAQ, check out the issue page on our GitHub linked [here](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues).
 
-<br>
-[Click here to return to table of contents](#tableofcontents)
-<br>
---------------------------------------------------------------------------------------------------------------------
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
 <div style="page-break-after: always;"></div>
 
 ## 5. Command summary
@@ -670,7 +683,9 @@ Action | Format, Examples
 **Edit Contact** | `editcontact INDEX [n/NAME] [p/PHONE_NUMBER] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee`
 **Find Contacts** | `findcontacts KEYWORD [MORE_KEYWORDS]`<br> e.g., `findcontacts James Jake`
 
-
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
 <div style="page-break-after: always;"></div>
 
 ### 5.2 Groups commands
@@ -688,6 +703,9 @@ Action | Format, Examples
 **Remove Contact from Group** | `groupremovecontact gn/GROUP_NAME n/NAME1 [n/MORE_NAMES]` <br> e.g., `groupremovecontact gn/Bali n/Jacob Tan`
 **Find Groups** | `findgroups KEYWORD [MORE_KEYWORDS]`<br> e.g., `findgroups James Jake`
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
 <div style="page-break-after: always;"></div>
 
 ### 5.3 Expense commands
@@ -708,10 +726,9 @@ Action | Format, Examples
 **Clear Data** | `clearalldata`
 **Help** | `help`
 
-<br>
-[Click here to return to table of contents](#tableofcontents)
-<br>
---------------------------------------------------------------------------------------------------------------------
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
 <div style="page-break-after: always;"></div>
 
 ## 6. Final Word
@@ -720,6 +737,6 @@ platform to maximise the efficiency of payment and recollection of debts. Our te
 experience for potential users. We are always looking to improve. As such, do drop us an email at <a href = "mailto: awe80contact@gmail.com">awe80contact@gmail.com</a>
 if you discover any bugs while using the application.
 
-<br>
-[Click here to return to table of contents](#tableofcontents)
-<br>
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
