@@ -41,6 +41,10 @@ can focus on exploring AWE to the full extent of its functionalities.
 and [Section 3](#3-features) documents the main features of AWE. If you still face problems using AWE, refer to our FAQ in [Section 4](#4-faq). 
 For a summary of all the commands available, refer to [Section 5](#5-command-summary).
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+
 <div style="page-break-after: always;"></div>
 
 ### 1.1 Glossary
@@ -63,7 +67,6 @@ to locate which words belong to which category of input.
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
 </p>
-
 <div style="page-break-after: always;"></div>
 
 ## 2. Quick start
@@ -79,8 +82,10 @@ For those who are not as fast, familiarity with the commands over time will allo
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/AweUi.png)
-   
-<div style="page-break-after: always;"></div>
+    <p align="center">
+        <a href="#tableofcontents">Click here to return to table of contents</a>
+    </p>
+    <div style="page-break-after: always;"></div>
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -115,10 +120,9 @@ For those who are not as fast, familiarity with the commands over time will allo
 
 6. Refer to the [Features](#features) below for details of each command.
 
-<br>
-[Click here to return to table of contents](#tableofcontents)
-<br>
---------------------------------------------------------------------------------------------------------------------
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
 <div style="page-break-after: always;"></div>
 
 ## 3. Features
@@ -127,17 +131,12 @@ For those who are not as fast, familiarity with the commands over time will allo
 
 **Breakdown of command abbreviations:** <br>
 
-* `d/`: Description
-
-* `gn/`: Group Name
-
-* `n/`: Name
-
-* `p/`: Phone number
-
-* `t/`: Tag
-
-* `$/`: Cost
+* `d/`: Description (1 to 50 characters in length)
+* `gn/`: Group Name (1 to 50 characters in length)
+* `n/`: Name (1 to 50 characters in length)
+* `p/`: Phone number (3 to 16 digits in length)
+* `t/`: Tag (1 to 50 characters in length)
+* `$/`: Cost 
 
 **Notes about the command format:**<br>
 
@@ -161,12 +160,9 @@ For those who are not as fast, familiarity with the commands over time will allo
   
 * Except `findexpenses`, `findgroups`, `findcontacts`, parameters for other commands are case-sensitive.
 
-</div>
-
-<br>
-[Click here to return to table of contents](#tableofcontents)
-<br>
---------------------------------------------------------------------------------------------------------------------
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
 <div style="page-break-after: always;"></div>
 
 ### 3.1. Contacts
@@ -200,6 +196,11 @@ A contact can have any number of tags (including 0)
 Examples:
 * `addcontact n/John Doe p/98765432`
 * `addcontact n/Betsy Crowe t/friend p/1234567 t/criminal`
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>W
 
 #### 3.1.3. Editing a contact : `editcontact`
 
@@ -239,6 +240,11 @@ Examples:
 * `contacts` to display a list of all contacts, followed by `deletecontact 2` deletes the 2nd contact in AWE.
 * `findcontacts Betsy` to find all contacts with the name Betsy, followed by `deletecontact 1` deletes the 1st contact in the results of the `findcontacts` command.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 #### 3.1.5. Locating a contact by name: `findcontacts`
 
 Finds contacts whose names contain any of the given keywords.
@@ -258,10 +264,9 @@ Examples:
 * `findcontacts alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-<br>
-[Click here to return to table of contents](#tableofcontents)
-<br>
---------------------------------------------------------------------------------------------------------------------
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
 <div style="page-break-after: always;"></div>
 
 ### 3.2. Groups
@@ -292,6 +297,11 @@ Format: `creategroup gn/GROUP_NAME n/NAME1 [n/NAME2] [n/NAME3]...[t/TAG1]`
 Examples:
 * `creategroup gn/Bali n/Jacob Tan n/Max Chia n/Julianne Tay`
 * `creategroup gn/London n/Justin Lee n/Raj Gopal n/Keith Chia`
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 #### 3.2.3. Deleting a travel group: `deletegroup`
 Deletes a group from your groups.
@@ -325,7 +335,7 @@ Format: `findgroups KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `findgroups London` returns `London` and `london trip`
 * `findgroups Taiwan Malaysia` returns `Taiwan` `Malaysia`<br>
-  ![result for 'findcontacts Taiwan Malaysia'](images/findGroupMalaysiaTaiwanResult.png)
+    <img src="images/findGroupMalaysiaTaiwanResult.png" width="600" />
 
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:** You can search for multiple groups by entering more keywords.
