@@ -488,7 +488,8 @@ Format: `addexpense n/PAYER_NAME gn/GROUP_NAME $/TOTAL_AMOUNT_PAID d/DESCRIPTION
 * By default, all members of the group will be included in the expense.
 * The names are required to be in AWE.
 * The names are required to be in the specified group.
-* COST has a limit of ten million and any addition or entering of COST more than ten million will result in it defaulting to a cost of ten million.
+* COST has a limit of one billion and any addition or entering of COST more than one billion will result in it defaulting to a cost of one billion.
+* The total expenses of a group also cannot exceed one billion.
 * COST should only have a maximum of two decimal places, otherwise the COST will be rounded off to the nearest two decimal places.
 * COST should not be negative.
 * DESCRIPTION does not need to be unique.
