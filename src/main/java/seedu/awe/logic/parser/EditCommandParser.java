@@ -33,14 +33,12 @@ public class EditCommandParser implements Parser<EditContactCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_TAG);
-
         Index index;
-
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException parseException) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_EDITCONTACTCOMMAND_USAGE),
-                    parseException);
+            throw new ParseException(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_EDITCONTACTCOMMAND_USAGE), parseException);
         }
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
@@ -55,7 +53,6 @@ public class EditCommandParser implements Parser<EditContactCommand> {
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(MESSAGE_EDITCONTACTCOMMAND_NOT_EDITED);
         }
-
         return new EditContactCommand(index, editPersonDescriptor);
     }
 
