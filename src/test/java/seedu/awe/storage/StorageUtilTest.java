@@ -37,7 +37,6 @@ public class StorageUtilTest {
     public void convertExpenseMapToListToIndividualAmounts_validInput_success() {
         List<IndividualAmount> listAbc1 = StorageUtil.convertExpenseMapToListOfIndividualAmounts(
                 TypicalIndividualAmounts.VALID_EXPENSE_MAP_ABC);
-
         List<IndividualAmount> listAbc2 = TypicalIndividualAmounts.VALID_INDIVIDUAL_AMOUNTS_ABC;
         assertTrue(listAbc1.size() == listAbc2.size());
         for (IndividualAmount individualAmount1 : listAbc1) {

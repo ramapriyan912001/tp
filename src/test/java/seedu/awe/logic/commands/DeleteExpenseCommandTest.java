@@ -12,8 +12,8 @@ import static seedu.awe.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.awe.logic.commands.CommandTestUtil.showExpenseAtIndex;
 import static seedu.awe.testutil.Assert.assertThrows;
 import static seedu.awe.testutil.TypicalExpenses.getTypicalAddressBook;
-import static seedu.awe.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
-import static seedu.awe.testutil.TypicalIndexes.INDEX_SECOND_EXPENSE;
+import static seedu.awe.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.awe.testutil.TypicalIndexes.INDEX_SECOND;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -62,7 +62,7 @@ public class DeleteExpenseCommandTest {
         Expense expenseToDelete = expenses.get(0);
         expensesList.remove(expenseToDelete);
 
-        CommandResult commandResult = new DeleteExpenseCommand(INDEX_FIRST_EXPENSE).execute(modelStub);
+        CommandResult commandResult = new DeleteExpenseCommand(INDEX_FIRST).execute(modelStub);
 
         assertEquals(String.format(MESSAGE_DELETEEXPENSECOMMAND_SUCCESS,
                 expenseToDelete.getDescription().getFullDescription()), commandResult.getFeedbackToUser());
@@ -84,7 +84,7 @@ public class DeleteExpenseCommandTest {
     public void execute_inValidViewPage_throwsCommandException() {
         MainWindow.setViewEnum(UiView.CONTACT_PAGE);
         ModelStubWithExpense modelStub = new ModelStubWithExpense();
-        DeleteExpenseCommand deleteExpenseCommand = new DeleteExpenseCommand(INDEX_FIRST_EXPENSE);
+        DeleteExpenseCommand deleteExpenseCommand = new DeleteExpenseCommand(INDEX_FIRST);
         assertThrows(CommandException.class,
                 MESSAGE_DELETEEXPENSECOMMAND_CANNOT_BE_DELETED, () -> deleteExpenseCommand.execute(modelStub));
     }
@@ -93,10 +93,10 @@ public class DeleteExpenseCommandTest {
     public void execute_validIndexFilteredList_success() throws Exception {
         MainWindow.setViewEnum(UiView.EXPENSE_PAGE);
         model.setExpenses(model.getGroupByName(new GroupName("Bali")));
-        showExpenseAtIndex(model, INDEX_FIRST_EXPENSE);
+        showExpenseAtIndex(model, INDEX_FIRST);
 
-        Expense expenseToDelete = model.getExpenses().get(INDEX_FIRST_EXPENSE.getZeroBased());
-        DeleteExpenseCommand deleteExpenseCommand = new DeleteExpenseCommand(INDEX_FIRST_EXPENSE);
+        Expense expenseToDelete = model.getExpenses().get(INDEX_FIRST.getZeroBased());
+        DeleteExpenseCommand deleteExpenseCommand = new DeleteExpenseCommand(INDEX_FIRST);
 
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.setExpenses(expectedModel.getGroupByName(new GroupName("Bali")));
@@ -118,9 +118,9 @@ public class DeleteExpenseCommandTest {
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         MainWindow.setViewEnum(UiView.EXPENSE_PAGE);
         model.setExpenses(model.getGroupByName(new GroupName("Bali")));
-        showExpenseAtIndex(model, INDEX_FIRST_EXPENSE);
+        showExpenseAtIndex(model, INDEX_FIRST);
 
-        Index outOfBoundIndex = INDEX_SECOND_EXPENSE;
+        Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of awe book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getExpenseList().size());
 
@@ -131,14 +131,14 @@ public class DeleteExpenseCommandTest {
 
     @Test
     public void equals() {
-        DeleteExpenseCommand deleteFirstCommand = new DeleteExpenseCommand(INDEX_FIRST_EXPENSE);
-        DeleteExpenseCommand deleteSecondCommand = new DeleteExpenseCommand(INDEX_SECOND_EXPENSE);
+        DeleteExpenseCommand deleteFirstCommand = new DeleteExpenseCommand(INDEX_FIRST);
+        DeleteExpenseCommand deleteSecondCommand = new DeleteExpenseCommand(INDEX_SECOND);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteExpenseCommand deleteFirstCommandCopy = new DeleteExpenseCommand(INDEX_FIRST_EXPENSE);
+        DeleteExpenseCommand deleteFirstCommandCopy = new DeleteExpenseCommand(INDEX_FIRST);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false

@@ -6,9 +6,9 @@ import static seedu.awe.logic.commands.CommandTestUtil.INVALID_NAME_JAMES;
 import static seedu.awe.logic.commands.CommandTestUtil.INVALID_NAME_JOHN;
 import static seedu.awe.logic.commands.CommandTestUtil.VALID_NAME_ALICE;
 import static seedu.awe.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.awe.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.awe.logic.parser.ParserUtil.MESSAGE_INVALID_LENGTH_INDEX;
 import static seedu.awe.testutil.Assert.assertThrows;
-import static seedu.awe.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.awe.testutil.TypicalIndexes.INDEX_FIRST;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -52,18 +52,18 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
+    public void parseIndex_tooLongInput_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_INVALID_LENGTH_INDEX, ()
             -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("1"));
+        assertEquals(INDEX_FIRST, ParserUtil.parseIndex("1"));
 
         // Leading and trailing whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+        assertEquals(INDEX_FIRST, ParserUtil.parseIndex("  1  "));
     }
 
     @Test

@@ -3,6 +3,7 @@ package seedu.awe.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.awe.commons.core.Messages.MESSAGE_GROUPEDITNAMECOMMAND_SAME_NAME;
 import static seedu.awe.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.awe.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.awe.testutil.Assert.assertThrows;
@@ -24,6 +25,7 @@ public class GroupEditNameCommandTest {
     private static final GroupName BALI_GROUP_NAME = new GroupName("Bali");
     private static final GroupName JAPAN_GROUP_NAME = new GroupName("Japan");
     private static final GroupName TAIWAN_GROUP_NAME = new GroupName("Taiwan");
+    private static final GroupName LONDON_GROUP_NAME = new GroupName("London");
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -59,6 +61,24 @@ public class GroupEditNameCommandTest {
     }
 
     @Test
+    public void execute_changeToSameName_failure() {
+        GroupEditNameCommand groupEditNameCommand = new GroupEditNameCommand(BALI_GROUP_NAME, BALI_GROUP_NAME);
+
+        String expectedMessage = String.format(Messages.MESSAGE_GROUPEDITNAMECOMMAND_EXISTING_GROUP, BALI_GROUP_NAME);
+
+        assertCommandFailure(groupEditNameCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_changeToExistingName_failure() {
+        GroupEditNameCommand groupEditNameCommand = new GroupEditNameCommand(BALI_GROUP_NAME, LONDON_GROUP_NAME);
+
+        String expectedMessage = String.format(Messages.MESSAGE_GROUPEDITNAMECOMMAND_EXISTING_GROUP, LONDON_GROUP_NAME);
+
+        assertCommandFailure(groupEditNameCommand, model, expectedMessage);
+    }
+
+    @Test
     public void execute_validInputs_success() {
         GroupEditNameCommand groupEditNameCommand = new GroupEditNameCommand(BALI_GROUP_NAME, JAPAN_GROUP_NAME);
 
@@ -70,6 +90,17 @@ public class GroupEditNameCommandTest {
         expectedModel.setGroup(BALI, updatedGroup);
 
         assertCommandSuccess(groupEditNameCommand, model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_sameGroupName_failure() {
+        GroupEditNameCommand groupEditNameCommand = new GroupEditNameCommand(BALI_GROUP_NAME, BALI_GROUP_NAME);
+
+        CommandResult expectedCommandResult = new CommandResult(
+                String.format(Messages.MESSAGE_GROUPEDITNAMECOMMAND_SUCCESS, JAPAN_GROUP_NAME));
+
+
+        assertCommandFailure(groupEditNameCommand, model, MESSAGE_GROUPEDITNAMECOMMAND_SAME_NAME);
     }
 
     @Test

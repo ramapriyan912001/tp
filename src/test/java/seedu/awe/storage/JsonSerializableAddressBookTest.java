@@ -19,6 +19,8 @@ public class JsonSerializableAddressBookTest {
     private static final Path TYPICAL_PERSONS_FILE = TEST_DATA_FOLDER.resolve("typicalPersonsAwe.json");
     private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonAwe.json");
     private static final Path DUPLICATE_GROUP_FILE = TEST_DATA_FOLDER.resolve("duplicateGroupAwe.json");
+    private static final Path INVALID_MEMBERS_IN_GROUP_FILE = TEST_DATA_FOLDER
+            .resolve("validPersonAndInvalidGroupAwe.json");
 
     @Test
     public void toModelType_typicalPersonsFile_success() throws Exception {
@@ -45,4 +47,11 @@ public class JsonSerializableAddressBookTest {
                 dataFromFile::toModelType);
     }
 
+    @Test
+    public void toModelType_inValidMemberInGroup_throwsIllegalValueException() throws Exception {
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(INVALID_MEMBERS_IN_GROUP_FILE,
+            JsonSerializableAddressBook.class).get();
+        assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_INVALID_GROUP_MEMBER,
+            dataFromFile::toModelType);
+    }
 }

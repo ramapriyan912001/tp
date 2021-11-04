@@ -7,8 +7,8 @@ import static seedu.awe.commons.core.Messages.MESSAGE_DELETECONTACTCOMMAND_DELET
 import static seedu.awe.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.awe.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.awe.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.awe.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.awe.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.awe.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.awe.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.awe.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -34,8 +34,8 @@ public class DeleteContactCommandTest {
     @Test
     public void execute_notOnContactsPage_failure() {
         MainWindow.setViewEnum(UiView.EXPENSE_PAGE);
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteContactCommand deleteContactCommand = new DeleteContactCommand(INDEX_FIRST_PERSON);
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        DeleteContactCommand deleteContactCommand = new DeleteContactCommand(INDEX_FIRST);
 
         String expectedMessage = MESSAGE_DELETECONTACTCOMMAND_CANNOT_BE_DELETED;
 
@@ -45,8 +45,8 @@ public class DeleteContactCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         MainWindow.setViewEnum(UiView.CONTACT_PAGE);
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteContactCommand deleteContactCommand = new DeleteContactCommand(INDEX_FIRST_PERSON);
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        DeleteContactCommand deleteContactCommand = new DeleteContactCommand(INDEX_FIRST);
 
         CommandResult commandResult = new CommandResult(
                 String.format(MESSAGE_DELETECONTACTCOMMAND_DELETE_PERSON_SUCCESS, personToDelete),
@@ -71,10 +71,10 @@ public class DeleteContactCommandTest {
     @Test
     public void execute_validIndexFilteredList_success() {
         MainWindow.setViewEnum(UiView.CONTACT_PAGE);
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_FIRST);
 
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteContactCommand deleteContactCommand = new DeleteContactCommand(INDEX_FIRST_PERSON);
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        DeleteContactCommand deleteContactCommand = new DeleteContactCommand(INDEX_FIRST);
 
         CommandResult commandResult = new CommandResult(
                 String.format(MESSAGE_DELETECONTACTCOMMAND_DELETE_PERSON_SUCCESS, personToDelete),
@@ -90,9 +90,9 @@ public class DeleteContactCommandTest {
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         MainWindow.setViewEnum(UiView.CONTACT_PAGE);
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_FIRST);
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of awe book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
@@ -104,14 +104,14 @@ public class DeleteContactCommandTest {
     @Test
     public void equals() {
         MainWindow.setViewEnum(UiView.CONTACT_PAGE);
-        DeleteContactCommand deleteFirstCommand = new DeleteContactCommand(INDEX_FIRST_PERSON);
-        DeleteContactCommand deleteSecondCommand = new DeleteContactCommand(INDEX_SECOND_PERSON);
+        DeleteContactCommand deleteFirstCommand = new DeleteContactCommand(INDEX_FIRST);
+        DeleteContactCommand deleteSecondCommand = new DeleteContactCommand(INDEX_SECOND);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteContactCommand deleteFirstCommandCopy = new DeleteContactCommand(INDEX_FIRST_PERSON);
+        DeleteContactCommand deleteFirstCommandCopy = new DeleteContactCommand(INDEX_FIRST);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false

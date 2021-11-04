@@ -12,7 +12,6 @@ import javafx.collections.ObservableList;
 import seedu.awe.model.group.exceptions.DuplicateGroupException;
 import seedu.awe.model.group.exceptions.GroupNotFoundException;
 import seedu.awe.model.person.Person;
-import seedu.awe.model.person.exceptions.DuplicatePersonException;
 
 /**
  * A list of groups that enforces uniqueness between its elements and does not allow nulls.
@@ -126,7 +125,7 @@ public class UniqueGroupList implements Iterable<Group> {
     public void setGroups(List<Group> groups) {
         requireAllNonNull(groups);
         if (!groupsAreUnique(groups)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateGroupException();
         }
 
         internalList.setAll(groups);
@@ -165,7 +164,7 @@ public class UniqueGroupList implements Iterable<Group> {
     /**
      * Returns true if {@code groups} contains only unique groups.
      */
-    private boolean groupsAreUnique(List<Group> groups) {
+    public boolean groupsAreUnique(List<Group> groups) {
         for (int i = 0; i < groups.size() - 1; i++) {
             for (int j = i + 1; j < groups.size(); j++) {
                 if (groups.get(i).isSameGroup(groups.get(j))) {
