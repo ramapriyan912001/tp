@@ -19,7 +19,7 @@ public class CostTest {
         String invalidCost = "";
         assertThrows(IllegalArgumentException.class, () -> new Cost(invalidCost));
 
-        String invalidCost2 = "abc";
+        String invalidCost2 = "-abc";
         assertThrows(IllegalArgumentException.class, () -> new Cost(invalidCost2));
     }
 
@@ -33,6 +33,9 @@ public class CostTest {
     public void constructor_bigCost_throwsIllegalArgumentException() {
         String bigCost = "1000000001";
         assertThrows(IllegalArgumentException.class, () -> new Cost(bigCost));
+
+        Cost expected = new Cost(Cost.MAX_COST);
+        assertEquals(expected, new Cost(1000000001));
     }
 
     @Test
