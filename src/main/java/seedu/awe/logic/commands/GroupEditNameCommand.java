@@ -45,7 +45,7 @@ public class GroupEditNameCommand extends Command {
         if (newGroupName.equals(oldGroupName)) {
             throw new CommandException(Messages.MESSAGE_GROUPEDITNAMECOMMAND_SAME_NAME);
         }
-        if (ParserUtil.findExistingGroupName(newGroupName, model.getAddressBook().getGroupList())) {
+        if (ParserUtil.findExistingGroupName(newGroupName, model.getAwe().getGroupList())) {
             throw new CommandException(
                     String.format(Messages.MESSAGE_GROUPEDITNAMECOMMAND_EXISTING_GROUP, newGroupName.getName()));
         }

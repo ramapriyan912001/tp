@@ -2,7 +2,9 @@
 layout: page
 title: User Guide
 ---
-
+<p align="center">
+    <img src="images/awelogo.png" width="300" />
+</p>
 Around the World in $80 (AWE) is a desktop application for keeping track of spending and expenditure during travels, splitting 
 expenses with travel-mates, and facilitating easy recollection of debts at the end of every trip. AWE is the world's
 only bespoke app designed for group travellers.
@@ -15,15 +17,15 @@ Our mission is to accomplish through a user-centric approach that seeks to provi
 tip of their fingertips. This document marks the first step towards the accomplishment of that mission, and the
 beginning of your journey around the world.
 
---------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;" id="tableofcontents"></div>
-<p style="font-size: 1.75rem; margin-top: 60px; color: #e46c0a; font-weight:400; margin-bottom: 15px;">Table of Contents</p>
-* Table of Contents
-{:toc}
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
-## 1. About the Document
+<h2 style="font-size: 1.75rem; margin-top: 60px; color: #e46c0a; font-weight:400; margin-bottom: 15px;" id="tableofcontents"><strong>Table of Contents</strong></h2>
+* Table of Contents
+{:toc}
+
+<div style="page-break-after: always;"></div>
+
+## **1. About the Document**
 
 The purpose of this document is to make sure that you have a pleasant and intuitive experience when using our app.
 In line with our user-centric approach, the guide is structured to ensure that the knowledge of the workings of our app
@@ -38,6 +40,10 @@ can focus on exploring AWE to the full extent of its functionalities.
 [Section 1](#1-about-the-document) provides readers with a brief overview of how to use this document. [Section 2](#2-quick-start) details the setting up of AWE
 and [Section 3](#3-features) documents the main features of AWE. If you still face problems using AWE, refer to our FAQ in [Section 4](#4-faq). 
 For a summary of all the commands available, refer to [Section 5](#5-command-summary).
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
 
 <div style="page-break-after: always;"></div>
 
@@ -58,13 +64,12 @@ Here are some pointers to take note of.
 3. You will notice that our commands require you to use characters such as `n/`, `t/`, etc. This is allows our programme
 to locate which words belong to which category of input.
 
-<br>
-[Click here to return to table of contents](#tableofcontents)
-<br>
---------------------------------------------------------------------------------------------------------------------
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
 <div style="page-break-after: always;"></div>
 
-## 2. Quick start
+## **2. Quick start**
 AWE's primary asset is its speed. Unlike traditional Graphic User Interfaces (GUIs) which rely on slow actions such as mouse clicking and selection of options from long menus, with its CLI, AWE offers users the benefit of speed.
 For those who type fast, the app will be faster than most mainstream contact management apps.
 For those who are not as fast, familiarity with the commands over time will allow you to harness the full capabilities of AWE.
@@ -77,8 +82,10 @@ For those who are not as fast, familiarity with the commands over time will allo
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/AweUi.png)
-   
-<div style="page-break-after: always;"></div>
+    <p align="center">
+        <a href="#tableofcontents">Click here to return to table of contents</a>
+    </p>
+    <div style="page-break-after: always;"></div>
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -113,29 +120,23 @@ For those who are not as fast, familiarity with the commands over time will allo
 
 6. Refer to the [Features](#features) below for details of each command.
 
-<br>
-[Click here to return to table of contents](#tableofcontents)
-<br>
---------------------------------------------------------------------------------------------------------------------
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
 <div style="page-break-after: always;"></div>
 
-## 3. Features
+## **3. Features**
 
 <div markdown="block" class="alert alert-info">
 
 **Breakdown of command abbreviations:** <br>
 
-* `d/`: Description
-
-* `gn/`: Group Name
-
-* `n/`: Name
-
-* `p/`: Phone number
-
-* `t/`: Tag
-
-* `$/`: Cost
+* `d/`: Description (1 to 50 characters in length)
+* `gn/`: Group Name (1 to 50 characters in length)
+* `n/`: Name (1 to 50 characters in length)
+* `p/`: Phone number (3 to 16 digits in length)
+* `t/`: Tag (1 to 50 characters in length)
+* `$/`: Cost 
 
 **Notes about the command format:**<br>
 
@@ -161,10 +162,9 @@ For those who are not as fast, familiarity with the commands over time will allo
 
 </div>
 
-<br>
-[Click here to return to table of contents](#tableofcontents)
-<br>
---------------------------------------------------------------------------------------------------------------------
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
 <div style="page-break-after: always;"></div>
 
 ### 3.1. Contacts
@@ -199,6 +199,11 @@ Examples:
 * `addcontact n/John Doe p/98765432`
 * `addcontact n/Betsy Crowe t/friend p/1234567 t/criminal`
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 #### 3.1.3. Editing a contact : `editcontact`
 
 Edits an existing contact in AWE.
@@ -219,6 +224,11 @@ Examples:
 *  `editcontact 1 p/91234567` Edits the phone number of the 1st contact to be `91234567`.
 *  `editcontact 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 
 #### 3.1.4. Deleting a contact : `deletecontact`
 
@@ -236,6 +246,11 @@ Format: `deletecontact INDEX`
 Examples:
 * `contacts` to display a list of all contacts, followed by `deletecontact 2` deletes the 2nd contact in AWE.
 * `findcontacts Betsy` to find all contacts with the name Betsy, followed by `deletecontact 1` deletes the 1st contact in the results of the `findcontacts` command.
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 #### 3.1.5. Locating a contact by name: `findcontacts`
 
@@ -256,10 +271,9 @@ Examples:
 * `findcontacts alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-<br>
-[Click here to return to table of contents](#tableofcontents)
-<br>
---------------------------------------------------------------------------------------------------------------------
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
 <div style="page-break-after: always;"></div>
 
 ### 3.2. Groups
@@ -290,6 +304,11 @@ Format: `creategroup gn/GROUP_NAME n/NAME1 [n/NAME2] [n/NAME3]...[t/TAG1]`
 Examples:
 * `creategroup gn/Bali n/Jacob Tan n/Max Chia n/Julianne Tay`
 * `creategroup gn/London n/Justin Lee n/Raj Gopal n/Keith Chia`
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 #### 3.2.3. Deleting a travel group: `deletegroup`
 Deletes a group from your groups.
@@ -323,11 +342,15 @@ Format: `findgroups KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `findgroups London` returns `London` and `london trip`
 * `findgroups Taiwan Malaysia` returns `Taiwan` `Malaysia`<br>
-  ![result for 'findcontacts Taiwan Malaysia'](images/findGroupMalaysiaTaiwanResult.png)
 
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:** You can search for multiple groups by entering more keywords.
 </div>
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 #### 3.2.5. Adding a contact to an existing group: `groupaddcontact`
 
@@ -367,6 +390,11 @@ Examples:
 * `groupremovecontact gn/Prague n/Bernice Yu n/David Li n/Alex Yeoh` to remove Bernice Yu, David Li, and Alex Yeoh
 from the Prague travel group.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 #### 3.2.7. Adding a tag to an existing group: `groupaddtag`
 
 Add tag for an existing travel group.
@@ -403,6 +431,11 @@ Examples:
 * `groupremovetag gn/Bali t/Friends` to remove the friends tag from the Bali travel group.
 * `groupremovetag gn/Prague t/Family t/Cousins` to the tags family and cousins from the Prague travel group.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 #### 3.2.9. Editing travel group name: `groupeditname`
 
 Edit group name for an existing travel group.
@@ -419,10 +452,9 @@ Examples:
 * `groupeditname gn/Bali gn/Thailand` to change the group name from Bali to Thailand.
 * `groupeditname gn/Germany gn/Munich` to change the group name from Germany to Munich.
 
-<br>
-[Click here to return to table of contents](#tableofcontents)
-<br>
---------------------------------------------------------------------------------------------------------------------
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
 <div style="page-break-after: always;"></div>
 
 ### 3.3. Expenses
@@ -440,6 +472,10 @@ Examples:
 * `expenses gn/London` shows all the expenses of the group named London.
 ![result for 'expenses gn/London](images/ShowExpenseResult.png)
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 #### 3.3.2. Adding a shared expense: `addexpense`
 Adds a shared expense to the specified travel group.
@@ -464,6 +500,11 @@ Examples:
 * `addexpense n/Tom gn/Date $/60 d/Big meal but Jerry wants to pay for his own Coke n/Jerry $/2`
 * `addexpense n/Keith gn/Movie night $/40 d/For movie but Kelly didn't watch ex/Kelly`
 * `addexpense n/Jerry gn/Catch up $/50 d/dinner n/Tom $/20 ex/Ryan`
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 #### 3.3.3. Deleting a shared expense: `deleteexpense`
 
@@ -499,6 +540,11 @@ Examples:
 * `findexpenses dinner gn/London` returns `dinner` and `Friday dinner` in the group `London`
 * `findexpenses lunch souvenirs gn/London` returns `lunch`, `souvenirs`in the group `London`<br>
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 #### 3.3.5 Calculating total spending of each user: `transactionsummary`
 Displays a list of individual spending for each user in the group.
 
@@ -511,6 +557,11 @@ Examples:
 * `transactionsummary gn/Bali`
 * `transactionsummary gn/London`
 ![result for 'transactionsummary gn/London](images/TransactionSummaryResult.png)
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 #### 3.3.6. Calculating payments to make: `calculatepayments`
 Uses the net spend of the user on the trip to tabulate a fast set of payments to settle the debts between members of the group.
@@ -528,12 +579,9 @@ Examples:
   
 **Note: When a `Person` is deleted from contacts or removed from the group, the functioning of this command does not change. The deleted person may still be part of the list of payments depending on the expenses they had previously.**
 
-
-<br>
-[Click here to return to table of contents](#tableofcontents)
-<br>
-
---------------------------------------------------------------------------------------------------------------------
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
 <div style="page-break-after: always;"></div>
 
 ### 3.4. Miscellaneous
@@ -564,6 +612,11 @@ Format: `exit`
 
 AWE data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 #### 3.4.5. Editing the data file
 
 AWE data are saved as a JSON file `[JAR file location]/data/awe.json`. Advanced users are welcome to update data directly by editing that data file.
@@ -573,21 +626,20 @@ AWE data are saved as a JSON file `[JAR file location]/data/awe.json`. Advanced 
 If your changes to the data file makes its format invalid, AWE will discard all data and start with an empty data file at the next run.
 </div>
 
-<br>
-[Click here to return to table of contents](#tableofcontents)
-<br>
---------------------------------------------------------------------------------------------------------------------
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
 <div style="page-break-after: always;"></div>
 
-## 4. FAQ
-**Q**: Why is NAME case-sensitive?
+## **4. FAQ**
+**Q**: Why is NAME case-sensitive?<br>
 **A**: Since identical names are very common in many cultures, we have decided to allow the addition of 2 contacts such as "jun jie" and "Jun Jie" in order to keep track of their numbers. 
 Furthermore, since AWE deals with overseas travels, quite a number of travellers might get a new overseas number when they are travelling. This will allow users to keep track of both
 their local and overseas local separately. Deleting the number after returning from the trip will be easier as well. In both cases, users can distinguish the 2 contacts with similar names using tags.
 This is also consistent with most mobile-phones, wherein contact names are case sensitive.
 To address the overseas number use case, for our next release, we are considering providing users with the ability to input more than one phone number when adding a contact.
 
-**Q**: Why is GROUP_NAME case-sensitive?
+**Q**: Why is GROUP_NAME case-sensitive?<br>
 **A**: Similar to the above question, a user might travel to the same destination more than once. 
 This will allow the addition of each individual trips.
 To address, this use case, we are considering requiring a DATE_TIME parameter when creating a group. 
@@ -598,21 +650,28 @@ In this case, users might be unable to create two groups, even though the use ca
 **A**: Install AWE on the other computer and replace the empty data file it creates with the data file used by the AWE on your previous computer.
 
 **Q**: What if the Jar file does not open properly when I double click on it?<br>
-**A**: Open a command prompt in that folder and run the command `java -jar -ea AWE.jar`.
+**A**: Open a command prompt in that folder and run the command `java -jar AWE.jar`.
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 **Q**: What do I do if I see `AWE.jar` cannot be opened because it is from an unidentified developer when I double click the jar file on a mac?<br>
-**A**: Go to `System Preferences -> Security and Privacy -> General` and click on `Open anyways` as such<br>
-![Mac Security Preference](images/MacSecurityPreference.png)
+**A**: Go to `System Preferences -> Security and Privacy -> General` and click on `Open anyways` as such
+<p align="center">
+    <img src="images/MacSecurityPreference.png" />
+</p>
+<br>
 <br>
 If your questions are not answered in the FAQ, check out the issue page on our GitHub linked [here](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues).
 
-<br>
-[Click here to return to table of contents](#tableofcontents)
-<br>
---------------------------------------------------------------------------------------------------------------------
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
 <div style="page-break-after: always;"></div>
 
-## 5. Command summary
+## **5. Command summary**
 
 ### 5.1 Contacts commands
 
@@ -624,7 +683,9 @@ Action | Format, Examples
 **Edit Contact** | `editcontact INDEX [n/NAME] [p/PHONE_NUMBER] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee`
 **Find Contacts** | `findcontacts KEYWORD [MORE_KEYWORDS]`<br> e.g., `findcontacts James Jake`
 
-
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
 <div style="page-break-after: always;"></div>
 
 ### 5.2 Groups commands
@@ -642,6 +703,9 @@ Action | Format, Examples
 **Remove Contact from Group** | `groupremovecontact gn/GROUP_NAME n/NAME1 [n/MORE_NAMES]` <br> e.g., `groupremovecontact gn/Bali n/Jacob Tan`
 **Find Groups** | `findgroups KEYWORD [MORE_KEYWORDS]`<br> e.g., `findgroups James Jake`
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
 <div style="page-break-after: always;"></div>
 
 ### 5.3 Expense commands
@@ -662,18 +726,17 @@ Action | Format, Examples
 **Clear Data** | `clearalldata`
 **Help** | `help`
 
-<br>
-[Click here to return to table of contents](#tableofcontents)
-<br>
---------------------------------------------------------------------------------------------------------------------
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
 <div style="page-break-after: always;"></div>
 
-## 6. Final Word
+## **6. Final Word**
 AWE hopes to revolutionise the group-travel space through its effective handling of shared expenses on a centralised
 platform to maximise the efficiency of payment and recollection of debts. Our team is committed to delivering a seamless 
 experience for potential users. We are always looking to improve. As such, do drop us an email at <a href = "mailto: awe80contact@gmail.com">awe80contact@gmail.com</a>
 if you discover any bugs while using the application.
 
-<br>
-[Click here to return to table of contents](#tableofcontents)
-<br>
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>

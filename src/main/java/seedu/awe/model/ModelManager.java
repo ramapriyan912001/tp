@@ -29,7 +29,7 @@ import seedu.awe.model.transactionsummary.TransactionSummary;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final Awe awe;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Group> filteredGroups;
@@ -38,7 +38,7 @@ public class ModelManager implements Model {
     private final FilteredList<Payment> payments;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given awe and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         super();
@@ -46,17 +46,17 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with awe book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.awe = new Awe(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredGroups = new FilteredList<>(this.addressBook.getGroupList());
-        filteredExpenses = new FilteredList<>(this.addressBook.getExpenseList());
-        transactionSummary = new FilteredList<>(this.addressBook.getTransactionSummaryList());
-        payments = new FilteredList<>(this.addressBook.getPaymentList());
+        filteredPersons = new FilteredList<>(this.awe.getPersonList());
+        filteredGroups = new FilteredList<>(this.awe.getGroupList());
+        filteredExpenses = new FilteredList<>(this.awe.getExpenseList());
+        transactionSummary = new FilteredList<>(this.awe.getTransactionSummaryList());
+        payments = new FilteredList<>(this.awe.getPaymentList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new Awe(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -94,21 +94,21 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== Awe ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setAwe(ReadOnlyAddressBook awe) {
+        this.awe.resetData(awe);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyAddressBook getAwe() {
+        return awe;
     }
 
     @Override
     public Group getActiveGroupFromAddressBook() throws CommandException {
-        return addressBook.getGroupFromExpenseList().orElseThrow(() ->
+        return awe.getGroupFromExpenseList().orElseThrow(() ->
                 new CommandException("Sorry! The operation could not be completed!"));
     }
 
@@ -117,18 +117,18 @@ public class ModelManager implements Model {
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return addressBook.hasPerson(person);
+        return awe.hasPerson(person);
     }
 
     @Override
     public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+        awe.removePerson(target);
         deletePersonFromGroups(target);
     }
 
     @Override
     public void addPerson(Person person) {
-        addressBook.addPerson(person);
+        awe.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -136,7 +136,7 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        addressBook.setPerson(target, editedPerson);
+        awe.setPerson(target, editedPerson);
     }
 
     @Override
@@ -144,7 +144,7 @@ public class ModelManager implements Model {
         requireNonNull(group);
 
         for (Person member : group.getMembers()) {
-            addressBook.setPerson(member, member);
+            awe.setPerson(member, member);
         }
     }
 
@@ -175,7 +175,7 @@ public class ModelManager implements Model {
      */
     @Override
     public void addGroup(Group group) {
-        addressBook.addGroup(group);
+        awe.addGroup(group);
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
@@ -187,7 +187,7 @@ public class ModelManager implements Model {
      */
     @Override
     public void deleteGroup(Group group) {
-        addressBook.removeGroup(group);
+        awe.removeGroup(group);
     }
 
     /**
@@ -199,13 +199,13 @@ public class ModelManager implements Model {
     @Override
     public boolean hasGroup(Group group) {
         requireNonNull(group);
-        return addressBook.hasGroup(group);
+        return awe.hasGroup(group);
     }
 
     @Override
     public void setGroup(Group group, Group newGroup) {
         requireNonNull(group);
-        addressBook.setGroup(group, newGroup);
+        awe.setGroup(group, newGroup);
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
     //=========== TransactionSummary List Accessors =============================================================
@@ -213,7 +213,7 @@ public class ModelManager implements Model {
     @Override
     public void setTransactionSummary(HashMap<Person, Cost> summary) {
         requireNonNull(summary);
-        addressBook.setTransactionSummary(summary);
+        awe.setTransactionSummary(summary);
     }
 
     @Override
@@ -243,7 +243,7 @@ public class ModelManager implements Model {
 
     private List<Group> getGroupsOfPerson(Person person) {
         List<Group> groupList = new ArrayList<>();
-        List<Group> groups = addressBook.getGroupList();
+        List<Group> groups = awe.getGroupList();
         for (int i = 0; i < groups.size(); i++) {
             Group group = groups.get(i);
             if (group.isPartOfGroup(person)) {
@@ -256,7 +256,7 @@ public class ModelManager implements Model {
     @Override
     public void setPayments(List<Payment> payments) {
         requireNonNull(payments);
-        addressBook.setPayments(payments);
+        awe.setPayments(payments);
     }
 
 
@@ -282,7 +282,7 @@ public class ModelManager implements Model {
     @Override
     public Group getGroupByName(GroupName groupName) {
         requireNonNull(groupName);
-        return addressBook.getGroupByName(groupName);
+        return awe.getGroupByName(groupName);
     }
 
     //=========== Expenses List Accessors ===================================================================
@@ -297,7 +297,7 @@ public class ModelManager implements Model {
      */
     @Override
     public void addExpense(Expense expense, Group group) {
-        addressBook.addExpense(expense, group);
+        awe.addExpense(expense, group);
         updateFilteredExpenseList(PREDICATE_SHOW_ALL_EXPENSES);
     }
 
@@ -310,7 +310,7 @@ public class ModelManager implements Model {
      */
     @Override
     public void deleteExpense(Expense expense, Group group) {
-        addressBook.deleteExpense(expense, group);
+        awe.deleteExpense(expense, group);
     }
 
     //=========== Filtered Expense List Accessors =============================================================
@@ -322,7 +322,7 @@ public class ModelManager implements Model {
      */
     @Override
     public boolean isCurrentExpenseList(Group group) {
-        return addressBook.isCurrentExpenseList(group);
+        return awe.isCurrentExpenseList(group);
     }
 
     /**
@@ -348,7 +348,7 @@ public class ModelManager implements Model {
 
     @Override
     public void setExpenses(Group group) {
-        addressBook.setExpenses(group);
+        awe.setExpenses(group);
         updateFilteredExpenseList(PREDICATE_SHOW_ALL_EXPENSES);
     }
 
@@ -366,7 +366,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return awe.equals(other.awe)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons)
                 && filteredGroups.equals(other.filteredGroups);

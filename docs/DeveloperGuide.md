@@ -2,7 +2,24 @@
 layout: page
 title: Developer Guide
 ---
-## Table of Contents
+<p align="center">
+    <img src="images/awelogo.png" width="300" />
+</p>
+Around the World in $80 (AWE) is a desktop application for keeping track of spending and expenditure during travels, splitting 
+expenses with travel-mates, and facilitating easy recollection of debts at the end of every trip. AWE is the world's
+only bespoke app designed for group travellers.
+
+The app promises to revolutionise the group-travel space. With AWE, bills can be split and monitored in a centralised
+manner that minimises the potential for disputes and maximises the efficiency of payment and recollection of debts.
+
+AWE's vision is a more interconnected world where relationships are more easily built and maintained.
+Our mission is to accomplish through a user-centric approach that seeks to provide the user with what they need, at the
+tip of their fingertips. This document marks the first step towards the accomplishment of that mission, and the
+beginning of your journey around the world.
+
+<div style="page-break-after: always;"></div>
+
+<h2 style="font-size: 1.75rem; margin-top: 60px; color: #e46c0a; font-weight:400; margin-bottom: 15px;" id="tableofcontents"><strong>Table of Contents</strong></h2>
 * Table of Contents
 {:toc}
 --------------------------------------------------------------------------------------------------------------------
@@ -23,7 +40,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S1-CS2103T-F13-1/tp/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -36,7 +53,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-F13-1/tp/tree/master/src/main/java/seedu/awe/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-F13-1/tp/tree/master/src/main/java/seedu/awe/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -69,15 +86,14 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-F13-1/tp/tree/master/src/main/java/seedu/awe/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
-(Note: Implementation of NavigationButton and ViewPanel class diagram are referenced below.)
+<img src="images/UiClassDiagram.png" width="750" />
 
 The UI consists of a `MainWindow` that is made up of parts e.g. `CommandBox`, `ResultDisplay`, `ViewPanel`, `NavigationButton` etc. 
 All these, except for `GroupButtonListener` and `PersonButtonListner` in `NavigationButton`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-F13-1/tp/tree/master/src/main/java/seedu/awe/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-F13-1/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -86,7 +102,8 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
-<img src="images/UiViewPanelDiagram.png" width="450" />
+#### View Panel
+<img src="images/UiViewPanelDiagram.png" width="500" />
 
 The `ViewPanel` consist of the following parts:
 * `GroupListPanel`
@@ -102,7 +119,8 @@ We have decided to opt for this way of implementation due to the following:
 
 In addition to using CLI command, we will also be implementing the toggling of list panel with the use of buttons.
 
-<img src="images/UiNavigationButtonDiagram.png" width="450" />
+#### Navigation Buttons
+<img src="images/UiNavigationButtonDiagram.png" width="600" />
 
 The `NavigationButtonPanel` consist of the following parts:
 * GroupViewButton
@@ -112,21 +130,21 @@ Clicking each button will show the respective list view in `ViewPanel`. The clic
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-F13-1/tp/tree/master/src/main/java/seedu/awe/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
+1. When `Logic` is called upon to execute a command, it uses the `AweParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a contact).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
-<img src="images/DeleteSequenceDiagram.png" width="600" />
+<img src="images/DeleteSequenceDiagram.png" width="750" />
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -136,19 +154,19 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `AweParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AweParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-F13-1/tp/tree/master/src/main/java/seedu/awe/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="700" />
+<img src="images/ModelClassDiagram.png" width="750" />
 <br>
 (Note: Implementation of Person, Group and Expense class diagram are referenced below.)
 
 The `Model` component,
 
-* stores the address book data
+* stores AWE data
     * all `Person` objects (which are contained in a `UniquePersonList` object).
     * all `Group` objects (which are contained in a `UniqueGroupList` object).
     * all `Expense` objects (which are contained in a `ExpenseList` object).
@@ -157,27 +175,20 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<img src="images/PersonClassDiagram.png" width="450" />
-<img src="images/ExpenseClassDiagram.png" width="350" />
-<img src="images/GroupClassDiagram.png" width="450" />
-<img src="images/PaymentClassDiagram.png" width="450" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
-
+<img src="images/PersonClassDiagram.png" width="250" /><br>
+<img src="images/ExpenseClassDiagram.png" width="250" /><br>
+<img src="images/GroupClassDiagram.png" width="450" /><br>
+<img src="images/PaymentClassDiagram.png" width="250" /><br>
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-F13-1/tp/tree/master/src/main/java/seedu/awe/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both AWE data and user preference data in json format, and read them back into corresponding objects.
+* inherits from both `AweStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -195,7 +206,7 @@ This section describes some noteworthy details on how certain features are imple
 ### Add Contact Feature
 
 The add contact mechanism is facilitated by defining a Person model and adding a Unique Person List field to
-`AddressBook`. The Person model contains a `Name` field containing the name of the contact, a `Phone` field containing the
+AWE. The Person model contains a `Name` field containing the name of the contact, a `Phone` field containing the
 number of the contact, and optional `Tags` to attach to the contact.
 
 The following activity diagram shows what happens when a user executes a `createGroup` command.
@@ -252,7 +263,7 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 ### Create Group Feature
 
 The create group mechanism is facilitated by defining a Group model and adding a Unique Group List field to 
-`AddressBook`. The Group model contains a `GroupName` field containing the name of the group, an `ArrayList` of `Person`
+AWE. The Group model contains a `GroupName` field containing the name of the group, an `ArrayList` of `Person`
 objects who are members of the Group, an `ArrayList` of `Expense` objects that keeps track of the expenditures of the 
 Group, a `HashMap` that contains details of how much each member has paid in total across the expenses, and a `HashMap`
 that contains details of the total expenditure incurred by each member across the trip.
@@ -360,7 +371,7 @@ It also checks that the group name is valid (does not have any non-alphanumeric 
 It returns a `DeleteGroupCommand`.
 
 Step 3. `DeleteGroupCommand` runs its execute() method which checks if a group with the same name has been
-created in the past. If so, this group is retrieved from the model. Subsequently, the group is removed from the addressbook.
+created in the past. If so, this group is retrieved from the model. Subsequently, the group is removed from the AWE.
 Upon successful execution, `CommandResult` is returned.
 
 
@@ -443,7 +454,7 @@ Given below is an example usage scenario and how the `findgroup` operation behav
 
 Assuming the programs only have the initial data when the user first starts the app, the `FilteredList` should contain only 2 groups - London and Bali.
 
-Step 1. When the user executes `findgroups London` command, the message is passed into `LogicManager` and parsed by `AddressBookParser`.
+Step 1. When the user executes `findgroups London` command, the message is passed into `LogicManager` and parsed by `AweParser`.
 
 Step 2. `FindGroupsCommandParser` is created and the arguments are parsed by it. The arguments are used to create `GroupContainsKeywordsPredicate` and `FindGroupsCommand` is returned to the `LogicManager`.
 
@@ -463,7 +474,7 @@ The following sequence diagram shows how the `findgroups` operation works:
 ### Add expense feature
 
 The add expense mechanism is facilitated by defining an Expense model and adding an Expense List field to
-`AddressBook`. The Expense model contains a `Person` field containing the payer of the Expense, a `Cost` field
+`Awe`. The Expense model contains a `Person` field containing the payer of the Expense, a `Cost` field
 containing the cost of the expense, a `List` of `Person` objects that keeps track of the people involved in the
 expense, a `HashMap` that contains details of how much each member has paid in total for the expense.
 
@@ -571,8 +582,8 @@ The following sequence operation shows how the `findexpenses` operation works.
 
 ### Delete Expense Feature
 
-The delete expense mechanism is facilitated by the addition of an `ExpenseList` field within the `AddressBook` object maintained by the model.
-Each `Expense` belongs to a `Group` object, also maintained within the `AddressBook`.
+The delete expense mechanism is facilitated by the addition of an `ExpenseList` field within the `Awe` object maintained by the model.
+Each `Expense` belongs to a `Group` object, also maintained within the `Awe`.
 Deletion of an expense must be accompanied by deletion of the expense from the `Group` object to which it belongs.
 The command allows the user to delete an expense based on the index position of the expense in the page viewed by the user.
 This means that the user is constrained to only being permitted to delete expenses when they are viewing a list of expenses; that is, after they enter the `findexpenses` or `expenses` command.
@@ -594,7 +605,7 @@ If so, the `Expense` at the `INDEX` position is deleted from the `ExpenseList`. 
 
 Step 4. The `Group` to which this expense belongs is retrieved from the `ExpenseList`.
 The expense is subsequently deleted from the `expenses` field present in the `Group` object.
-The updated `Group` is then placed back into the `GroupList` within the `AddressBook`.
+The updated `Group` is then placed back into the `GroupList` within the `Awe`.
 
 Step 5: Upon successful execution, `CommandResult` is returned.
 
@@ -633,7 +644,7 @@ The following sequence operation shows how the `deleteexpense` operation works.
 ### Calculate Payments Feature
 
 The purpose of this feature is to provide users with a simple set of transactions that would allow all debts within the group to be settled.
-The UI mechanism is facilitated by the addition of a `PaymentList` field of `Payment` objects, present within the `AddressBook` object maintained by the model.
+The UI mechanism is facilitated by the addition of a `PaymentList` field of `Payment` objects, present within the `Awe` object maintained by the model.
 The functionality of this feature is facilitated by the fact that group objects maintain two hashmaps: -
 * `paidByPayers`, which maintains how much each member of the group has paid (total payments) during the course of the trip.
 * `splitExpenses`, which maintains how much expenditure each member of the group has incurred (total expenditure) during the course of the trip.
@@ -730,7 +741,7 @@ To achieve the toggling between each view panels, we implemented the following:
 
 The following activity diagram shows how the `MainWindow` checks and sends the `UiView` to `ViewPanel`. 
 <br>
-<img src="images/UiTogglingActivityDiagram.png" width="500" />
+<img src="images/UiTogglingActivityDiagram.png" width="450" />
 
 #### Proposed Implementation
 **Aspect: Navigating between different view**
@@ -755,6 +766,11 @@ To improve the usability of AWE, buttons are implemented into the Ui to allow sw
 
 However, only 2 main views can be toggled by the buttons - Contacts page and Groups page.
 
+Navigation Buttons is designed using Model View Controller (MVC) pattern. 
+* View: Buttons
+* Controller: EventHandler
+* Model: Backend codes for displaying the list
+
 To achieve this, the following is implemented:
 * 2 buttons (`GroupViewButton` and `ContactViewButton`) for the user to click.
 * Event listener for each button - `GroupButtonListener` and `ContactButtonListener`. The event listener works by calling `ViewPanel#toggleView` when the button is clicked.
@@ -766,87 +782,6 @@ Step 1. When `GroupViewButton` is initiated, an event listener `GroupButtonListe
 Step 2. Once the user clicks on `GroupViewButton`, the event listener will trigger and the `GroupButtonListener#handle` will run. This calls `ViewPanel#toggleView` and passes `UiView.GROUP_PAGE` as parameters. 
 
 Step 3. `ViewPanel` will change the child of itself to `ContactListPanel` (Refer to [JavaFx tutorial](https://se-education.org/guides/tutorials/javaFxPart1.html) for more information about JavaFx). Hence, GUI will update to show contact page
-
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `contacts`. Commands that do not modify the address book, such as `contacts`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clearalldata`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -944,7 +879,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User chooses to add a person to the AddressBook.
+1. User chooses to add a person to the AWE.
 2. User enters add command into CLI along with person name, phone number, and tags if applicable.
 3. AWE displays confirmation message.
 
@@ -1089,8 +1024,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. AWE detects group member whose name is not in the AddressBook.
-  * 2a1. AWE displays message to remind User to type in full name of members as in the AddressBook.
+* 2a. AWE detects group member whose name is not in the AWE.
+  * 2a1. AWE displays message to remind User to type in full name of members as in the AWE.
   
     Use case ends.
     
@@ -1113,8 +1048,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-* 2b. AWE detects group name that is not in address book.
-    * 2a1. AWE displays message to remind User to type in name of a group inside the addressbook.
+* 2b. AWE detects group name that is not in AWE.
+    * 2a1. AWE displays message to remind User to type in name of a group inside the AWE.
 
       Use case ends.    
 
@@ -1278,12 +1213,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
       Use case ends.
 
-**Use case: Clear AddressBook of all entries**
+**Use case: Clear AWE of all entries**
 
 **MSS**
 
 1. User enters clearalldata command.
-2. All entries are deleted from AddressBook.
+2. All entries are deleted from AWE.
 
    Use case ends.
 
@@ -1300,9 +1235,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2b. AWE detects group name that is not in address book.
+* 2b. AWE detects group name that is not in AWE.
   
-  * 2a1. AWE displays message to remind User to type in name of a group inside the addressbook.
+  * 2a1. AWE displays message to remind User to type in name of a group inside the AWE.
 
     Use case ends.
 
@@ -1328,7 +1263,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **AddressBook**: The page displaying all the contacts
 * **ContactPage**: The page displaying all the contacts
 * **GroupsPage**: The page displaying all the travel groups
 * **ExpensesPage**: The page displaying all the expenses of a travel group

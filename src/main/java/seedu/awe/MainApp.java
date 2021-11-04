@@ -23,8 +23,8 @@ import seedu.awe.model.ReadOnlyAddressBook;
 import seedu.awe.model.ReadOnlyUserPrefs;
 import seedu.awe.model.UserPrefs;
 import seedu.awe.model.util.SampleDataUtil;
-import seedu.awe.storage.AddressBookStorage;
-import seedu.awe.storage.JsonAddressBookStorage;
+import seedu.awe.storage.AweStorage;
+import seedu.awe.storage.JsonAweStorage;
 import seedu.awe.storage.JsonUserPrefsStorage;
 import seedu.awe.storage.Storage;
 import seedu.awe.storage.StorageManager;
@@ -50,7 +50,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing Awe ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -58,8 +58,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        AweStorage aweStorage = new JsonAweStorage(userPrefs.getAddressBookFilePath());
+        storage = new StorageManager(aweStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -154,7 +154,7 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty Awe");
             initializedPrefs = new UserPrefs();
         }
 
@@ -170,7 +170,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting Awe " + MainApp.VERSION);
         ui.setIsDataError(isDataError);
         ui.start(primaryStage);
     }
