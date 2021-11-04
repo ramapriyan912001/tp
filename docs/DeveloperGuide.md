@@ -2,8 +2,24 @@
 layout: page
 title: Developer Guide
 ---
-<div style="page-break-after: always;" id="tableofcontents"></div>
-<p style="font-size: 1.75rem; margin-top: 60px; color: #e46c0a; font-weight:400; margin-bottom: 15px;">Table of Contents</p>
+<p align="center">
+    <img src="images/awelogo.png" width="300" />
+</p>
+Around the World in $80 (AWE) is a desktop application for keeping track of spending and expenditure during travels, splitting 
+expenses with travel-mates, and facilitating easy recollection of debts at the end of every trip. AWE is the world's
+only bespoke app designed for group travellers.
+
+The app promises to revolutionise the group-travel space. With AWE, bills can be split and monitored in a centralised
+manner that minimises the potential for disputes and maximises the efficiency of payment and recollection of debts.
+
+AWE's vision is a more interconnected world where relationships are more easily built and maintained.
+Our mission is to accomplish through a user-centric approach that seeks to provide the user with what they need, at the
+tip of their fingertips. This document marks the first step towards the accomplishment of that mission, and the
+beginning of your journey around the world.
+
+<div style="page-break-after: always;"></div>
+
+<h2 style="font-size: 1.75rem; margin-top: 60px; color: #e46c0a; font-weight:400; margin-bottom: 15px;" id="tableofcontents"><strong>Table of Contents</strong></h2>
 * Table of Contents
 {:toc}
 --------------------------------------------------------------------------------------------------------------------
@@ -24,7 +40,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S1-CS2103T-F13-1/tp/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -37,7 +53,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-F13-1/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-F13-1/tp/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -70,15 +86,14 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-F13-1/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
-(Note: Implementation of NavigationButton and ViewPanel class diagram are referenced below.)
+<img src="images/UiClassDiagram.png" width="750" />
 
 The UI consists of a `MainWindow` that is made up of parts e.g. `CommandBox`, `ResultDisplay`, `ViewPanel`, `NavigationButton` etc. 
 All these, except for `GroupButtonListener` and `PersonButtonListner` in `NavigationButton`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-F13-1/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-F13-1/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -87,7 +102,8 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
-<img src="images/UiViewPanelDiagram.png" width="450" />
+#### View Panel
+<img src="images/UiViewPanelDiagram.png" width="500" />
 
 The `ViewPanel` consist of the following parts:
 * `GroupListPanel`
@@ -103,7 +119,8 @@ We have decided to opt for this way of implementation due to the following:
 
 In addition to using CLI command, we will also be implementing the toggling of list panel with the use of buttons.
 
-<img src="images/UiNavigationButtonDiagram.png" width="450" />
+#### Navigation Buttons
+<img src="images/UiNavigationButtonDiagram.png" width="600" />
 
 The `NavigationButtonPanel` consist of the following parts:
 * GroupViewButton
@@ -113,7 +130,7 @@ Clicking each button will show the respective list view in `ViewPanel`. The clic
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-F13-1/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -127,7 +144,7 @@ How the `Logic` component works:
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
-<img src="images/DeleteSequenceDiagram.png" width="600" />
+<img src="images/DeleteSequenceDiagram.png" width="750" />
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -141,9 +158,9 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-F13-1/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="700" />
+<img src="images/ModelClassDiagram.png" width="750" />
 <br>
 (Note: Implementation of Person, Group and Expense class diagram are referenced below.)
 
@@ -158,21 +175,14 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<img src="images/PersonClassDiagram.png" width="450" />
+
+<img src="images/PersonClassDiagram.png" width="350" />
 <img src="images/ExpenseClassDiagram.png" width="350" />
 <img src="images/GroupClassDiagram.png" width="450" />
-<img src="images/PaymentClassDiagram.png" width="450" />
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
-
+<img src="images/PaymentClassDiagram.png" width="350" />
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/ay2122s1-cs2103t-f13-1/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-F13-1/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -755,6 +765,11 @@ The following activity diagram shows how the `MainWindow` checks and sends the `
 To improve the usability of AWE, buttons are implemented into the Ui to allow switching of view easily.
 
 However, only 2 main views can be toggled by the buttons - Contacts page and Groups page.
+
+Navigation Buttons is designed using Model View Controller (MVC) pattern. 
+* View: Buttons
+* Controller: EventHandler
+* Model: Backend codes for displaying the list
 
 To achieve this, the following is implemented:
 * 2 buttons (`GroupViewButton` and `ContactViewButton`) for the user to click.
