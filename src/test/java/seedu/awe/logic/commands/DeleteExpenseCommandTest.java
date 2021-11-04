@@ -122,7 +122,7 @@ public class DeleteExpenseCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of awe book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getExpenseList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAwe().getExpenseList().size());
 
         DeleteExpenseCommand deleteExpenseCommand = new DeleteExpenseCommand(outOfBoundIndex);
 
@@ -201,12 +201,12 @@ public class DeleteExpenseCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setAwe(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyAddressBook getAwe() {
             throw new AssertionError("This method should not be called.");
         }
 

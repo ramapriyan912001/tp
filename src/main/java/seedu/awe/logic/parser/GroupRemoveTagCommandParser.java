@@ -26,7 +26,7 @@ public class GroupRemoveTagCommandParser implements Parser<GroupRemoveTagCommand
      * @param model Model object passed into constructor to provide list of groups.
      */
     public GroupRemoveTagCommandParser(Model model) {
-        ReadOnlyAddressBook addressBook = model.getAddressBook();
+        ReadOnlyAddressBook addressBook = model.getAwe();
         this.allGroups = addressBook.getGroupList();
     }
     /**

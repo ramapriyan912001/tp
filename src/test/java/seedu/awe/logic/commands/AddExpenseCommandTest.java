@@ -6,7 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_ALL_MEMBERS_EXCLUDED;
+import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_CANNOT_ADD_EXCLUDED_MEMBER;
 import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_COST_ZERO_OR_LESS;
+import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_GROUP_DOES_NOT_EXIST;
 import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_NOT_PART_OF_GROUP;
 import static seedu.awe.commons.core.Messages.MESSAGE_ADDEXPENSECOMMAND_SUCCESS;
 import static seedu.awe.testutil.Assert.assertThrows;
@@ -25,7 +27,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.awe.commons.core.GuiSettings;
 import seedu.awe.logic.commands.exceptions.CommandException;
-import seedu.awe.model.AddressBook;
+import seedu.awe.model.Awe;
 import seedu.awe.model.Model;
 import seedu.awe.model.ReadOnlyAddressBook;
 import seedu.awe.model.ReadOnlyUserPrefs;
@@ -34,7 +36,6 @@ import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.group.exceptions.DuplicateGroupException;
-import seedu.awe.model.group.exceptions.GroupNotFoundException;
 import seedu.awe.model.payment.Payment;
 import seedu.awe.model.person.Person;
 import seedu.awe.model.transactionsummary.TransactionSummary;
@@ -64,6 +65,26 @@ public class AddExpenseCommandTest {
         CommandResult commandResult = new AddExpenseCommand(validExpense.getPayer(), validExpense.getCost(),
                 validExpense.getDescription(), groupName, new ArrayList<>(),
                 new ArrayList<>(), new ArrayList<>()).execute(modelStub);
+
+        assertEquals(String.format(MESSAGE_ADDEXPENSECOMMAND_SUCCESS, validPerson),
+                commandResult.getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_expenseWithExcludedAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingExpenseAdded modelStub = new ModelStubAcceptingExpenseAdded();
+        Person validPerson = new PersonBuilder().build();
+        Person validPerson2 = new PersonBuilder().withName("Bob").build();
+        Group validGroup = new GroupBuilder().build();
+        Expense validExpense = new ExpenseBuilder().build();
+        validGroup = validGroup.addMember(validPerson);
+        validGroup = validGroup.addMember(validPerson2);
+        modelStub.addGroup(validGroup);
+        GroupName groupName = validGroup.getGroupName();
+
+        CommandResult commandResult = new AddExpenseCommand(validExpense.getPayer(), validExpense.getCost(),
+                validExpense.getDescription(), groupName, new ArrayList<>(),
+                new ArrayList<>(), new ArrayList<>(Arrays.asList(validPerson2))).execute(modelStub);
 
         assertEquals(String.format(MESSAGE_ADDEXPENSECOMMAND_SUCCESS, validPerson),
                 commandResult.getFeedbackToUser());
@@ -111,7 +132,7 @@ public class AddExpenseCommandTest {
     }
 
     @Test
-    public void execute_includedPersonNotPartOfGroup_throwsCommandException() throws Exception {
+    public void execute_excludedPersonNotPartOfGroup_throwsCommandException() throws Exception {
         ModelStubAcceptingExpenseAdded modelStub = new ModelStubAcceptingExpenseAdded();
 
         Person validPerson = new PersonBuilder().build();
@@ -183,7 +204,7 @@ public class AddExpenseCommandTest {
     }
 
     @Test
-    public void execute_withSelfPayeesNotInGroup_throwsCommandException() throws Exception {
+    public void execute_individualPayersNotInGroup_throwsCommandException() throws Exception {
         ModelStubAcceptingExpenseAdded modelStub = new ModelStubAcceptingExpenseAdded();
         Person validPerson = new PersonBuilder().build();
         Person validSelfPayee = new PersonBuilder().withName("nic").build();
@@ -200,14 +221,51 @@ public class AddExpenseCommandTest {
                     Arrays.asList(costOfSelfPayment), new ArrayList<>()).execute(modelStub);
             fail(COMMAND_FAIL_FAILED_MESSAGE);
         } catch (CommandException exception) {
-            assertEquals(String.format(MESSAGE_ADDEXPENSECOMMAND_NOT_PART_OF_GROUP,
-                    validPerson), exception.getMessage());
+            assertEquals(String.format(MESSAGE_ADDEXPENSECOMMAND_NOT_PART_OF_GROUP), exception.getMessage());
         }
     }
 
     @Test
-    public void execute_withExcludedMembersNotInGroup_throwsCommandException() throws Exception {
+    public void execute_groupDoesNotExist_throwsCommandException() throws Exception {
+        ModelStubAcceptingExpenseAdded modelStub = new ModelStubAcceptingExpenseAdded();
+        Person validPerson = new PersonBuilder().build();
+        Group validGroup = new GroupBuilder().build();
+        Expense validExpense = new ExpenseBuilder().build();
+        modelStub.addPerson(validPerson);
 
+        try {
+            CommandResult commandResult = new AddExpenseCommand(validExpense.getPayer(), validExpense.getCost(),
+                    validExpense.getDescription(), validGroup.getGroupName(), new ArrayList<>(), new ArrayList<>(),
+                    new ArrayList<>()).execute(modelStub);
+            fail(COMMAND_FAIL_FAILED_MESSAGE);
+        } catch (CommandException commandException) {
+            assertEquals(String.format(MESSAGE_ADDEXPENSECOMMAND_GROUP_DOES_NOT_EXIST),
+                    commandException.getMessage());
+        }
+    }
+
+    @Test
+    public void execute_individualPayerExcluded_throwsCommandException() {
+        ModelStubAcceptingExpenseAdded modelStub = new ModelStubAcceptingExpenseAdded();
+        Person validPerson = new PersonBuilder().build();
+        Person validIndividualPayer = new PersonBuilder().withName("Bob").build();
+        Group validGroup = new GroupBuilder().build();
+        Expense validExpense = new ExpenseBuilder().build();
+        Expense validIndividualExpense = new ExpenseBuilder().withCost("20").build();
+        validGroup = validGroup.addMember(validPerson);
+        validGroup = validGroup.addMember(validIndividualPayer);
+        modelStub.addGroup(validGroup);
+        try {
+            CommandResult commandResult = new AddExpenseCommand(validExpense.getPayer(), validExpense.getCost(),
+                    validExpense.getDescription(), validGroup.getGroupName(),
+                    new ArrayList<>(Arrays.asList(validIndividualPayer)),
+                    new ArrayList<>(Arrays.asList(validIndividualExpense.getCost())),
+                    new ArrayList<>(Arrays.asList(validIndividualPayer))).execute(modelStub);
+            fail(COMMAND_FAIL_FAILED_MESSAGE);
+        } catch (CommandException commandException) {
+            assertEquals(String.format(MESSAGE_ADDEXPENSECOMMAND_CANNOT_ADD_EXCLUDED_MEMBER, validPerson),
+                    commandException.getMessage());
+        }
     }
 
     @Test
@@ -278,12 +336,12 @@ public class AddExpenseCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setAwe(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyAddressBook getAwe() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -465,12 +523,12 @@ public class AddExpenseCommandTest {
                     return group;
                 }
             }
-            throw new GroupNotFoundException();
+            return null;
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyAddressBook getAwe() {
+            return new Awe();
         }
     }
 

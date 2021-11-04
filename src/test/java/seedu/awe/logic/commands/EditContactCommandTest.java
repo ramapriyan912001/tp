@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 import seedu.awe.commons.core.Messages;
 import seedu.awe.commons.core.index.Index;
 import seedu.awe.logic.commands.EditContactCommand.EditPersonDescriptor;
-import seedu.awe.model.AddressBook;
+import seedu.awe.model.Awe;
 import seedu.awe.model.Model;
 import seedu.awe.model.ModelManager;
 import seedu.awe.model.UserPrefs;
@@ -62,7 +62,7 @@ public class EditContactCommandTest {
 
         String expectedMessage = String.format(MESSAGE_EDITCONTACTCOMMAND_EDIT_PERSON_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Awe(model.getAwe()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editContactCommand, model, expectedMessage, expectedModel);
@@ -84,7 +84,7 @@ public class EditContactCommandTest {
 
         String expectedMessage = String.format(MESSAGE_EDITCONTACTCOMMAND_EDIT_PERSON_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Awe(model.getAwe()), new UserPrefs());
         expectedModel.setPerson(lastPerson, editedPerson);
 
         assertCommandSuccess(editContactCommand, model, expectedMessage, expectedModel);
@@ -98,7 +98,7 @@ public class EditContactCommandTest {
 
         String expectedMessage = String.format(MESSAGE_EDITCONTACTCOMMAND_EDIT_PERSON_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Awe(model.getAwe()), new UserPrefs());
 
         assertCommandSuccess(editContactCommand, model, expectedMessage, expectedModel);
     }
@@ -115,7 +115,7 @@ public class EditContactCommandTest {
 
         String expectedMessage = String.format(MESSAGE_EDITCONTACTCOMMAND_EDIT_PERSON_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Awe(model.getAwe()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editContactCommand, model, expectedMessage, expectedModel);
@@ -175,7 +175,7 @@ public class EditContactCommandTest {
         showPersonAtIndex(model, INDEX_FIRST);
 
         // edit person in filtered list into a duplicate in awe book
-        Person personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND.getZeroBased());
+        Person personInList = model.getAwe().getPersonList().get(INDEX_SECOND.getZeroBased());
         EditContactCommand editContactCommand = new EditContactCommand(INDEX_FIRST,
                 new EditPersonDescriptorBuilder(personInList).build());
 
@@ -202,7 +202,7 @@ public class EditContactCommandTest {
         showPersonAtIndex(model, INDEX_FIRST);
         Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of awe book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAwe().getPersonList().size());
 
         EditContactCommand editContactCommand = new EditContactCommand(outOfBoundIndex,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());

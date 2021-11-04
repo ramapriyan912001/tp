@@ -11,7 +11,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.awe.model.expense.exceptions.ExpenseNotFoundException;
 import seedu.awe.model.group.Group;
-import seedu.awe.model.person.exceptions.DuplicatePersonException;
 
 public class ExpenseList implements Iterable<Expense> {
 
@@ -23,11 +22,9 @@ public class ExpenseList implements Iterable<Expense> {
     public ExpenseList() {
         group = Optional.empty();
     }
-    public ExpenseList(Group group) {
-        this.group = Optional.of(group);
-    }
 
     public void setGroup(Group group) {
+        requireNonNull(group);
         this.group = Optional.of(group);
     }
 
@@ -77,10 +74,6 @@ public class ExpenseList implements Iterable<Expense> {
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new ExpenseNotFoundException();
-        }
-
-        if (!target.equals(editedExpense) && contains(editedExpense)) {
-            throw new DuplicatePersonException();
         }
 
         internalList.set(index, editedExpense);

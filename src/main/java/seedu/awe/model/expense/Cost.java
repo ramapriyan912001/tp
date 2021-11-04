@@ -9,10 +9,11 @@ public class Cost {
     public static final String MESSAGE_CONSTRAINTS =
             "Cost should only contain numeric characters without spaces, should not be negative numbers, "
                     + "should only contain at most two decimal places otherwise the cost will be rounded off"
-                    + "to the nearest two decimal places, "
+                    + "to the nearest two decimal places, should be one billion or less "
                     + "and it should not be blank!";
 
-    public static final double MAX_COST = 10000000;
+    public static final double MAX_COST = 1000000000;
+    public static final int MAX_LENGTH = 50;
 
     /*
      * The first character of the address must not be a whitespace,
@@ -29,11 +30,17 @@ public class Cost {
      */
     public Cost(String cost) {
         requireNonNull(cost);
-        double costAsDouble = Double.parseDouble(cost);;
-        String costDoubleToString = String.format("%.2f", costAsDouble);;
+        double costAsDouble = 0;
+        try {
+            costAsDouble = Double.parseDouble(cost);
+        } catch (NumberFormatException e) {
+            checkArgument(isValidCost(cost), MESSAGE_CONSTRAINTS);
+        }
+        checkArgument(cost.length() <= MAX_LENGTH, MESSAGE_CONSTRAINTS);
+        String costDoubleToString = String.format("%.2f", costAsDouble);
         checkArgument(isValidCost(costDoubleToString), MESSAGE_CONSTRAINTS);
-        if (costAsDouble > 10000000) {
-            costAsDouble = 10000000;
+        if (costAsDouble > Cost.MAX_COST) {
+            costAsDouble = Cost.MAX_COST;
         }
         this.cost = costAsDouble;
     }
@@ -88,40 +95,19 @@ public class Cost {
     }
 
     /**
-     * Multiplies the cost by the inputted value c.
-     *
-     * @param c Value to multiply the cost by.
-     * @return Result of the multiplication.
-     */
-    public Cost multiply(double c) {
-        double result = cost * c;
-        if (result < 0) {
-            result = 0;
-        }
-        return new Cost(result);
-    }
-
-    /**
-     * Divides the cost by the inputted value c.
-     *
-     * @param c Value to divide the cost by.
-     * @return Result of the division.
-     */
-    public Cost divide(double c) {
-        double result = cost / c;
-        if (result < 0) {
-            result = 0;
-        }
-        return new Cost(result);
-    }
-
-    /**
      * Returns true if a given string is a valid cost.
      */
     public static boolean isValidCost(String test) {
-        double costAsDouble = Double.parseDouble(test);
+        double costAsDouble = 0;
+        try {
+            costAsDouble = Double.parseDouble(test);
+        } catch (NumberFormatException e) {
+            return false;
+        }
         String costDoubleToString = String.format("%.2f", costAsDouble);
-        return costDoubleToString.matches(VALIDATION_REGEX);
+        return costDoubleToString.matches(VALIDATION_REGEX)
+                && costAsDouble <= MAX_COST
+                && test.length() <= MAX_LENGTH;
     }
 
     @Override

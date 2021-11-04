@@ -5,12 +5,13 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.awe.commons.exceptions.DataConversionException;
+import seedu.awe.model.Awe;
 import seedu.awe.model.ReadOnlyAddressBook;
 
 /**
- * Represents a storage for {@link seedu.awe.model.AddressBook}.
+ * Represents a storage for {@link Awe}.
  */
-public interface AddressBookStorage {
+public interface AweStorage {
 
     /**
      * Returns the file path of the data file.
@@ -18,7 +19,7 @@ public interface AddressBookStorage {
     Path getAddressBookFilePath();
 
     /**
-     * Returns AddressBook data as a {@link ReadOnlyAddressBook}.
+     * Returns Awe data as a {@link ReadOnlyAddressBook}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
