@@ -4,7 +4,7 @@ skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
 skinparam classBackgroundColor UI_COLOR
 
-package NavigationButton <<Rectangle>>{
+package "Navigation Button" <<Rectangle>>{
 Class "{abstract}\nUiPart" as UiPart
 Class NavigationButtonPanel
 Class GroupViewButton
@@ -13,7 +13,7 @@ Class PersonButtonListener
 Class GroupButtonListener
 }
 
-package ViewPanel <<Rectangle>> {
+package "View Panel" <<Rectangle>> {
 Class HiddenLogic #FFFFFF
 }
 
@@ -26,8 +26,8 @@ PersonViewButton *--> "1" PersonButtonListener
 NavigationButtonPanel *--> "1" GroupViewButton
 NavigationButtonPanel *--> "1" PersonViewButton
 
-PersonButtonListener -right-> ViewPanel
-GroupButtonListener -left-> ViewPanel
+PersonButtonListener -right-> "View Panel"
+GroupButtonListener -left-> "View Panel"
 
 NavigationButtonPanel --|> UiPart
 GroupViewButton --|> UiPart

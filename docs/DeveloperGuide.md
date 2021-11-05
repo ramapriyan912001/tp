@@ -71,7 +71,7 @@ The rest of the App consists of four components.
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<img src="images/ArchitectureSequenceDiagram.png" width="650" />
 
 Each of the four main components (also shown in the diagram above),
 
@@ -103,12 +103,13 @@ The `UI` component,
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
 #### View Panel
-<img src="images/UiViewPanelDiagram.png" width="500" />
+<img src="images/UiViewPanelDiagram.png" width="750" />
 
 The `ViewPanel` consist of the following parts:
 * `GroupListPanel`
 * `ContactListPanel`
 * `ExpenseListPanel`
+* `TransactionSummary`
 * `PaymentListPanel`
 
 Each panel will display the corresponding list accordingly. The ViewPanel will only show up a single list panel at a time. 
@@ -170,16 +171,56 @@ The `Model` component,
     * all `Person` objects (which are contained in a `UniquePersonList` object).
     * all `Group` objects (which are contained in a `UniqueGroupList` object).
     * all `Expense` objects (which are contained in a `ExpenseList` object).
+    * all `TransactionSummary` objects (which are contained in a `TransactionSummaryList` object).
     * all `Payment` objects (which are contained in a `PaymentList` object).
-* stores the currently 'selected' `Person`/`Group`/`Expense`/`Payment` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Person`/`Group`/`Expense`/`TransactionSummary` /`Payment` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
+<img src="images/PersonClassDiagram.png" width="300" />
+<br>
 
-<img src="images/PersonClassDiagram.png" width="250" /><br>
-<img src="images/ExpenseClassDiagram.png" width="250" /><br>
-<img src="images/GroupClassDiagram.png" width="450" /><br>
-<img src="images/PaymentClassDiagram.png" width="250" /><br>
+The `Person` component, 
+
+*  Handles the storing of each contact in AWE.
+*  Stores a `Name` and a `Phone` object for each person.
+*  Stores any amount of `Tag` objects.
+
+<img src="images/ExpenseClassDiagram.png" width="300" />
+<br>
+
+The `Expense` component, 
+
+*  Handles the storing of each expense in AWE.
+*  Expenses will store a reference to all instance of `Person` involved in the expenses.
+*  Stores a `Cost` and a `Description` for each `Expense`.
+
+<img src="images/GroupClassDiagram.png" width="350" /><br>
+
+The `Group` component, 
+
+*  Handles the data of each group in AWE.
+*  Groups will store a list of reference to all `Expense` and `Person` in the group.
+*  Stores a `GroupName` for each group.
+*  Stores any amount of `Tag` object.
+
+<img src="images/TransactionSummaryClassDiagram.png" width="200" />
+<br>
+
+The `TransactionSummary` component,
+
+*  Handles the display of all the individual split expenses in a group.
+*  Stores a reference to a `Person` and a `Cost`.
+
+
+<img src="images/PaymentClassDiagram.png" width="200" />
+<br>
+
+The `Payment` component,
+
+*  Handles the display of all the payments between contacts in a group.
+*  Stores 2 `Person`object and a `Cost` reference.
+
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-F13-1/tp/tree/master/src/main/java/seedu/awe/storage/Storage.java)
@@ -232,7 +273,7 @@ The following sequence operation shows how the `addcontact` operation works.
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-![AddContactRef](images/AddContactRefSequenceDiagram.png)
+<img src="images/AddContactRefSequenceDiagram.png" width="600" />
 
 #### Design considerations:
 
@@ -292,7 +333,7 @@ The following sequence operation shows how the `creategroup` operation works.
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-![CreateGroupRef](images/CreateGroupRef.png)
+<img src="images/CreateGroupRef.png" width="600" />
 
 #### Design considerations:
 
@@ -359,7 +400,8 @@ This allows the `Model` class to easily retrieve the Group based on the name ent
 
 The following activity diagram shows what happens when a user executes a `deletegroup` command.
 
-![DeleteGroupActivityDiagram](images/DeleteGroupActivityDiagram.png)
+<img src="images/DeleteGroupActivityDiagram.png" width="350" />
+
 
 Given below is an example usage scenario and how the `deletegroup` mechanism behaves at each step.
 
@@ -448,7 +490,7 @@ The find group feature supports both single keyword and multi keyword search. Th
 
 The following activity diagram shows what happens when a user executes a `findgroups` command:
 
-<img src="images/FindGroupsActivityDiagram.png" width="350" />
+<img src="images/FindGroupsActivityDiagram.png" width="300" />
 
 Given below is an example usage scenario and how the `findgroup` operation behaves at each step:
 
@@ -468,8 +510,9 @@ Step 6. The output from `CommandResult` is then displayed as an output for the u
 
 The following sequence diagram shows how the `findgroups` operation works:
 
-<img src="images/FindGroupsSequenceDiagram.png" width="600" />
+<img src="images/FindGroupsSequenceDiagram.png" width="750" />
 
+<img src="images/FindGroupsRefSequenceDiagram.png" width="600" />
 
 ### Add expense feature
 
@@ -675,7 +718,7 @@ Initialise a `Pair` object with the `Person` object of the individual, and their
 
 The following diagram shows the flow of the algorithm.
 
-![CalculatePaymentsAlgorithmDiagram](images/CalculatePaymentsCommandAlgorithmDiagram.png)
+<img src="images/CalculatePaymentsCommandAlgorithmDiagram.png" width="600" />
   
 
 The following activity diagram shows what happens when a user executes a `calculatepayments` command.
@@ -703,6 +746,7 @@ Step 6. Upon successful execution, `CommandResult` is returned.
 
 The following sequence operation shows how the `calculatepayments` operation works.
 ![DeleteExpenseSequenceDiagram](images/CalculatePaymentsSequenceDiagram.png)
+![DeleteExpenseSequenceDiagram](images/CalculatePaymentsRefSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `CalculatePaymentsCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -729,7 +773,7 @@ The following sequence operation shows how the `calculatepayments` operation wor
     * As such, we chose to prioritise the settling of bigger debts in our algorithm.
   
 
-### UI Display
+### UI
 AWE has multiple lists / views to display such as for `groups`, `contacts` and `expenses`.
 
 The display, called view panel, will only be able to show up 1 view at a time depending on the command. It is of upmost importance to get it to display the correct view.
@@ -761,7 +805,7 @@ The following activity diagram shows how the `MainWindow` checks and sends the `
     * Using JavaFx's tab will not let us customise the layout as such.
     * Hence, replacing the child of a view panel is more appropriate.
     
-### Ui Navigation Buttons
+#### Ui Navigation Buttons
 To improve the usability of AWE, buttons are implemented into the Ui to allow switching of view easily.
 
 However, only 2 main views can be toggled by the buttons - Contacts page and Groups page.
@@ -860,19 +904,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the **System** is the `AWE` and the **Actor** is the `user`, unless specified otherwise)
 
 
-**Use case: Help User Understand Product**
+**Use case: UC1- Help User Understand Product**
 
 **MSS**
 
 1. User request to find commands and their explanations.
 2. AWE shows a list of command keyword(s) and explanations.
+   <br>Use case ends.
 
 **Extensions**
 
 * 2a. AWE detects errant command.
     * 2a1. AWE displays the list of command keyword(s) and explanations.
-
-      Use case ends.
+      <br>Use case ends.
     
 
 **Use case: Add a Person**
@@ -882,29 +926,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User chooses to add a person to the AWE.
 2. User enters add command into CLI along with person name, phone number, and tags if applicable.
 3. AWE displays confirmation message.
-
-   Use case ends.
+   <br>Use case ends.
 
 **Extensions**
 
 * 2a. AWE detects invalid command format that does not contain all 2 parameter identifiers ("n/", "p/").
     * 2a1. AWE returns invalid command format error and displays ```add``` command format and example.
-
-      Use case ends.
-
+      <br>Use case ends.
 * 2b. Command contains 2 parameters identifiers but name is blank.
     * 2b1. AWE reminds user that names should only contain alphanumeric characters and should not be blank.
-
-      Use case ends.
-
+      <br>Use case ends.
 * 2c. Command contains 2 parameters identifiers but phone number is less than 3 digits or not a number.
     * 2c1. AWE reminds user that phone numbers should only contain numbers and be at least 3 digits long.
-
-      Use case ends.
+      <br>Use case ends.
 
 **Use case: Edit a person**
 
-**Preconditions: User's last entered command is either `findcontacts` or `contacts`, i.e. the user is viewing an contacts list.**
+**Preconditions:**
+User's last entered command is either `findcontacts` or `contacts`, i.e. the user is viewing an contacts list.
 
 **MSS**
 
@@ -913,32 +952,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. User requests to edit a specific person in the list
 4. User enters edited information
 5. AWE edits the person
-    
-    Use case ends.
+   <br>Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
-
-  Use case ends.
-
+  <br>Use case ends.
 * 2b. The given index is invalid.
-
     * 2b1. AWE shows an error message.
-
-      Use case resumes at step 2.
-
+      <br>Use case resumes at step 2.
 * 2c. The given information has an invalid format.
-
     * 2c1. AWE shows an error message.
-
       Use case resumes at step 2.
-
 * 2d. User is not viewing a list of contacts when entering command.
-
   * 2d1. AWE shows an error message asking user to enter `findcontacts` or `contacts` command first.
-
-    Use case ends.
+    <br>Use case ends.
     
 **Use case: List all contacts**
 
@@ -946,44 +974,42 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to list contacts.
 2. AWE shows list of contacts. 
-
-   Use case ends. 
+   <br>Use case ends. 
 
 **Extensions**
 
 * 2a. There are no contacts to be listed.
     * 2a1. AWE does not display any contacts.
-      
-      Use case ends.
+      <br>Use case ends.
 
 
 **Use case: Find a person**
 
-**Preconditions: User is in ContactsPage**
+**Preconditions:**
+User is in ContactsPage
 
 **MSS**
 
 1. User request to find person based on keyword(s).
 2. AWE shows a list of contacts that matches the keyword(s).
+   <br>Use case ends. 
 
 **Extensions**
 
 * 2a. There isn't any contacts saved.
     * 2a1. AWE displays nothing in the contacts page.
     * 2a2. AWE shows a message saying no person found.
-    
-      Use case ends.
-      
+      <br>Use case ends.
 * 2b. There is not contacts matching the search parameters.
     * 2b1. AWE displays nothing in the contacts page.
     * 2b2. AWE shows a message saying no person found.
-    
-      Use case ends.
+      <br>Use case ends.
 
 
 **Use case: Delete a person**
 
-**Preconditions: User's last entered command is either `findcontacts` or `contacts`, i.e. the user is viewing an contacts list.**
+**Preconditions:**
+User's last entered command is either `findcontacts` or `contacts`, i.e. the user is viewing an contacts list.
 
 **MSS**
 
@@ -993,24 +1019,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. AWE deletes the person.
 5. AWE removes the person from groups of which the person was a member.
 6. AWE displays confirmation message.
-
-    Use case ends.
+    <br>Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
-
-  Use case ends.
-
+  <br>Use case ends.
 * 2b. The given index is invalid.
-
     * 2b1. AWE shows an error message.
-
 * 2c. User is not viewing a list of contacts when entering command.
-
   * 2c1. AWE shows an error message asking user to enter `findcontacts` or `contacts` command first.
-
-    Use case ends.
+    <br>Use case ends.
     
 **Use case: Create Travel Group**
 
@@ -1019,15 +1038,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User chooses to create a group.
 2. User enters create group command into CLI along with group name and names of members.
 3. AWE displays confirmation message.
-
-   Use case ends.
+   <br>Use case ends.
 
 **Extensions**
 
 * 2a. AWE detects group member whose name is not in the AWE.
   * 2a1. AWE displays message to remind User to type in full name of members as in the AWE.
-  
-    Use case ends.
+    <br>Use case ends.
     
     
 **Use case: Delete Travel Group**
@@ -1038,20 +1055,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. AWE deletes group with specified group name.
 3. AWE shows updated list of groups.
 3. AWE displays confirmation message.
-
-   Use case ends.
+   <br>Use case ends.
 
 **Extensions**
 
 * 2a. AWE detects group name that contains non-alphanumeric characters.
   * 2a1. AWE displays message to remind User to type in a group name that contains only alphanumeric characters.
-
-    Use case ends.
-
+    <br>Use case ends.
 * 2b. AWE detects group name that is not in AWE.
     * 2a1. AWE displays message to remind User to type in name of a group inside the AWE.
-
-      Use case ends.    
+      <br>Use case ends.    
 
 **Use case: List all travel groups**
 
@@ -1059,12 +1072,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User choose to list all groups
 2. GroupsPage shows a list of groups
+   <br>Use case ends. 
 
 **Extension**
+
 * 2a. AWE detects that there is no group created.
     * 2a1 AWE displays a blank screen.
-    
-      Use case ends.
+      <br>Use case ends.
 
 **Use case: List expenses of a travel group**
 
@@ -1074,25 +1088,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. GroupsPage shows a list of groups.
 3. User request to see expenses of a specific group.
 4. AW3 displays all the expenses of the group.
-
-   Use case ends.
+   <br>Use case ends.
 
 **Extensions**
 
 * 2a. AWE detects no groups created yet.
   * 2a1. AWE displays message to remind User to create a group before empty GroupsPage displayed.
-  
-    Use case ends.
-    
+    <br>Use case ends.
 * 3a. The given group name is invalid.
     * 3a1. AWE displays an error.
-    
-      Use case ends.
-      
+      <br>Use case ends.
 * 4a. AWE detect no expenses logged under the group.
     * 4a1. AWE displays an empty list.
-    
-      Use case ends.
+      <br>Use case ends.
 
 **Use case: Find expenses in a travel group**
 
@@ -1100,101 +1108,77 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User request to find expense(s) based on keyword(s) and group name.
 2. AWE shows a list of expenses in specified group that matches the keyword(s).
+   <br>Use case ends. 
 
 **Extensions**
 
 * 2a. The specified group does not exist in AWE.
     * 2a1. AWE shows a message saying that there is no such existing group.
-
-      Use case ends.
-
+      <br>Use case ends.
 * 2b. There are no expenses matching the search parameters.
     * 2b1. AWE displays nothing in the expenses page.
     * 2b2. AWE shows a message saying no expenses are found.
-
-      Use case ends.
+      <br>Use case ends.
 
 
 **Use case: Find Groups**
 
 *MSS*
+
 1. User request to find groups based on keywords.
 2. GroupsPage shows a list of groups that matches the search predicates.
 3. AWE displays a message with number of groups found
-
-    Use case ends
+   <br>Use case ends. 
     
 **Extension**
+
 * 2a. AWE can't find any groups that matches the keywords.
     2a1. GroupsPage shows an empty page
-    
-    Use case continues
+    <br>Use case continues
 
 
 **Use case: Add Expense**
 
-**Preconditions: User has is a member of the specified travel group**
+**Preconditions:** User has is a member of the specified travel group.
 
 **MSS**
 
 1. User requests to add an expense to the specified travel group
 2. AWE displays confirmation message.
-
-    Use case ends.
+    <br>Use case ends.
 
 **Extensions**
 
 * 1a. AWE detects that the specified travel group does not exist.
-
     * 1a1. AWE informs user that the specified travel group does not exist.
-  
-      Use case ends.
-
+      <br>Use case ends.
 * 1b. AWE detects that inputted command is an incorrect format.
-
     * 1b1. AWE informs user that expense was not added and reminds the user of the correct format.
-
-      Use case ends.
-  
+      <br>Use case ends.
 * 1c. AWE detects that the cost inputted into the expense is more than one billion.
-
     * 1c1. AWE inform user that the cost of the expense has to be less than one billion.
-  
-      Use case ends.
-  
+      <br>Use case ends.
 * 1d. AWE detects that the payer is not part of the specified travel group.
-
     * 1d1. AWE informs user that the payer has to be a part of the specified travel group.
-  
-      Use case ends.
-  
+      <br>Use case ends.
 * 1e. AWE detects that individual payer are not part of the specified travel group.
-
     * 1e1. AWE informs user that the individual payer has to be part of the specified travel group.
-  
-      Use case ends.
-  
+      <br>Use case ends.
 * 1f. AWE detects that the excluded member is not part of the specified travel group.
-
     * 1f1. AWE informs user that the excluded member has to be part of the specified travel group.
-  
-      Use case ends.
-  
+      <br>Use case ends.
 * 1g. AWE detects that all members in the specified travel group are excluded from the expense.
-
     * 1g1. AWE informs user that they cannot exclude all members in the travel group from the expense.
-  
-      Use case ends.
-  
+      <br>Use case ends.
 * 1h. AWE detects that the total expenditure of the specified group is over one billion.
-
     * 1h1. AWE informs user that the total expenses of the travel group has reached its limit of one billion.
-  
-      Use case ends.
+      <br>Use case ends.
 
 **Use case: Delete a shared expense**
 
-**Preconditions: User's last entered command is either `findexpenses` or `expenses`, i.e. the user is viewing an expense list.**
+**Preconditions:**
+
+User's last entered command is either `findexpenses` or `expenses`, i.e. the user is viewing an expense list.
 
 **MSS**
 
@@ -1202,22 +1186,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. AWE deletes the specified expense.
 3. AWE shows updated list of expenses.
 4. AWE displays confirmation message.
+   <br>Use case ends. 
 
-   Use case ends. 
 
 **Extensions**
 
 * 2a. The given index is not within range 1 to length of list of expenses on screen.
-
     * 2a1. AWE shows an error message saying index is invalid.
-
-      Use case ends.
-  
+      <br>Use case ends.
 * 2b. User is not viewing a list of expenses when entering command.
-
     * 2b1. AWE shows an error message asking user to enter `findexpenses` or `expenses` command first.
-  
-      Use case ends.
+      <br>Use case ends.
 
 **Use case: Clear AWE of all entries**
 
@@ -1225,8 +1204,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User enters clearalldata command.
 2. All entries are deleted from AWE.
+   <br>Use case ends.
 
-   Use case ends.
+**Use case: Calculate individual expenses**
+
+**MSS**
+
+1. User requests to calculate and show individual expenses made in a specified group.
+2. AWE shows list of individual expenses.
+3. AWE displays confirmation message.
+   <br>Use case ends.
+
+**Extensions**
+
+* 2b. AWE detects group name that is not in AWE.
+  * 2a1. AWE displays message to remind User to type in name of a group inside the AWE.
+    <br>Use case ends.
 
 **Use case: Calculate payments**
 
@@ -1236,30 +1229,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. AWE calculate payments for the specified group.
 3. AWE shows list of payments.
 4. AWE displays confirmation message.
-
-   Use case ends.
+   <br>Use case ends.
 
 **Extensions**
 
 * 2b. AWE detects group name that is not in AWE.
-  
   * 2a1. AWE displays message to remind User to type in name of a group inside the AWE.
-
-    Use case ends.
-
+    <br>Use case ends.
 * 2b. There are no payments to be made.
-
   * 2b1. AWE shows an empty list of payments.
   * 2b2. AWE displays a confirmation message stating that there are no payments to be made.
-    
-    Use case ends.
+    <br>Use case ends.
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 500 contacts without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  Should be able to hold up to 100 groups without a noticeable sluggishness in performance for typical usage.
+4.  Should be able to hold up to 50 groups without a noticeable sluggishness in performance for typical usage.
 5.  Layout between contacts and groups should be intuitive and easy to understand and navigate.
 6.  Usage of `$` should be standardized for money.
 
@@ -1299,8 +1286,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person while all contacts are being shown
@@ -1315,8 +1300,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
 
 ### Search for groups
 
@@ -1344,7 +1327,6 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `findgroups Singapore`
       Expected: GroupList displayed. GroupList will display a blank page. 0 groups found shown in status message.
     
-    
 
 ### Viewing expenses
 
@@ -1362,13 +1344,9 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
       
 
-
-1. _{ more test cases …​ }_
-
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
