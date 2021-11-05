@@ -34,6 +34,18 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
     * Highlights: This implementation added in a new command `calculatepayments` to provide users with a number of suggested transactions to settle their debts from the trip.
     * Contribution: Built the entire framework for the feature including command and parser classes.
 
+### Testing
+* Wrote test cases for the following classes
+  * `DeleteGroupCommand`
+  * `DeleteGroupCommandParser`
+  * `CalculatePaymentsCommand`
+  * `CalculatePaymentsCommandParser`
+  * `Payment`
+  * `PaymentList`
+  * `Awe`
+  * `ModelManager`
+  * `UserPrefs`
+
 ### Others
 * **Project management**
     * Managed releases: -

@@ -5,7 +5,7 @@ import static seedu.awe.commons.core.Messages.MESSAGE_NONEXISTENT_GROUP;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Objects;
+import java.util.List;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
@@ -47,18 +47,19 @@ public class GroupRemoveTagCommandParser implements Parser<GroupRemoveTagCommand
                     MESSAGE_GROUPREMOVETAGCOMMAND_USAGE));
         }
 
-        GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).get());
+        List<GroupName> groupNamesList = ParserUtil.parseGroupNames(argMultimap.getAllValues(PREFIX_GROUP_NAME));
+        if (groupNamesList.size() != 1) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    MESSAGE_GROUPREMOVETAGCOMMAND_USAGE));
+        }
+        GroupName groupName = groupNamesList.get(0);
+
         if (!ParserUtil.findExistingGroupName(groupName, allGroups)) {
             throw new ParseException(String.format(MESSAGE_NONEXISTENT_GROUP, groupName));
         }
 
         Set<Tag> tagsToBeRemoved = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        boolean isValidCommand = true;
-        if (Objects.isNull(tagsToBeRemoved)) {
-            isValidCommand = false;
-        }
-
-        return new GroupRemoveTagCommand(groupName, tagsToBeRemoved, isValidCommand);
+        return new GroupRemoveTagCommand(groupName, tagsToBeRemoved);
     }
 }

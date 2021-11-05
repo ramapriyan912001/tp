@@ -16,14 +16,21 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
     * Highlights: This implementation added a new command 'expenses' to list expenses of a group.
     * Contribution: Built the entire framework for this feature.
 
+* **New Feature**: Added the ability to find expenses belonging to a specified group.
+  * What it does: Allows the user to find all the expenses containing the input keyword(s) for a certain group.
+  * Justification: This feature is crucial as the user should be able to view the specific expenses they wish
+  * to view easily. 
+  * Highlights: This implementation added a new command 'findexpenses' to find expenses of a group.
+  * Contribution: Built the entire framework for this feature.
+
 * **Enhancements to existing features**:
     * Added the UI for expenses page.
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for `delete expense` feature
+        * Added documentation for `find expenses` feature
     * Developer Guide:
-        * Added use cases for the `list persons` and 'delete expense' feature.
+        * Added use cases for the `list expenses` and 'find expenses' feature.
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()

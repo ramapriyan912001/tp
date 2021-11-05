@@ -117,8 +117,7 @@ public class CreateGroupCommandParserTest {
         String userInput = GROUPNAME_DESC_BALI + INVALID_NAME_DESC + INVALID_NAME_DESC_ONE + INVALID_NAME_DESC_TWO;
         assertThrows(EmptyGroupException.class,
                 MESSAGE_CREATEGROUPCOMMAND_EMPTY_GROUP
-                        + MESSAGE_CREATEGROUPCOMMAND_INVALID_NAMES
-                        + MESSAGE_CREATEGROUPCOMMAND_USAGE, () -> parser.parse(userInput));
+                        + MESSAGE_CREATEGROUPCOMMAND_INVALID_NAMES, () -> parser.parse(userInput));
         resetParser();
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + GROUPNAME_DESC_BALI
