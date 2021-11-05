@@ -20,7 +20,6 @@ import seedu.awe.logic.commands.FindGroupsCommand;
 import seedu.awe.logic.commands.HelpCommand;
 import seedu.awe.logic.commands.ListContactsCommand;
 import seedu.awe.logic.commands.ListExpensesCommand;
-import seedu.awe.model.expense.Cost;
 
 /**
  * Container for user visible messages.
@@ -176,13 +175,14 @@ public class Messages {
     public static final String MESSAGE_ADDEXPENSECOMMAND_USAGE = AddExpenseCommand.COMMAND_WORD
             + ": Adds an expense to a group. "
             + "Parameters: "
-            + PREFIX_NAME + "PAYER NAME "
-            + PREFIX_GROUP_NAME + "GROUP NAME "
-            + PREFIX_COST + "COST "
-            + PREFIX_DESCRIPTION + "DESCRIPTION "
-            + "[" + PREFIX_NAME + "PAYEE NAME" + "] "
-            + "[" + PREFIX_COST + "PAYEE EXPENSE" + "] "
-            + "[" + PREFIX_EXCLUDE + "EXCLUDED PERSON" + "]";
+            + PREFIX_NAME + "PAYER NAME\n"
+            + PREFIX_GROUP_NAME + "GROUP NAME\n"
+            + PREFIX_COST + "COST\n"
+            + PREFIX_DESCRIPTION + "DESCRIPTION\n"
+            + "[" + PREFIX_NAME + "PAYEE NAME" + "]\n"
+            + "[" + PREFIX_COST + "PAYEE EXPENSE" + "]\n"
+            + "[" + PREFIX_EXCLUDE + "EXCLUDED PERSON" + "]\n"
+            + "and you must have the same number of persons and costs involved in the expense!";
     public static final String MESSAGE_ADDEXPENSECOMMAND_SUCCESS = "Expense added!";
     public static final String MESSAGE_ADDEXPENSECOMMAND_NOT_PART_OF_GROUP =
             "The person isn't part of the specified group!";
@@ -195,7 +195,9 @@ public class Messages {
     public static final String MESSAGE_ADDEXPENSECOMMAND_GROUP_DOES_NOT_EXIST =
             "The group you specified doesn't exist!";
     public static final String MESSAGE_ADDEXPENSECOMMAND_COST_MORE_THAN_MAX =
-            "Please enter a cost less than " + String.format("%.2f", Cost.MAX_COST) + "!";
+            "The total expenditure for that specified travel group has exceeded one billion!!";
+    public static final String MESSAGE_ADDEXPENSECOMMAND_PAYER_DOES_NOT_EXIST =
+            "The payer does not exist!";
 
 
     public static final String MESSAGE_DELETEEXPENSECOMMAND_USAGE = DeleteExpenseCommand.COMMAND_WORD

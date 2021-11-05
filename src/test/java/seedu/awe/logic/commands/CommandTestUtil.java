@@ -2,6 +2,9 @@ package seedu.awe.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.awe.logic.parser.CliSyntax.PREFIX_COST;
+import static seedu.awe.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.awe.logic.parser.CliSyntax.PREFIX_EXCLUDE;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -43,8 +46,12 @@ public class CommandTestUtil {
 
     public static final String VALID_DESCRIPTION_BUFFET = "Buffet";
     public static final String VALID_DESCRIPTION_SOUVENIRS = "Souvenirs";
+    public static final String VALID_DESCRIPTION_HOLIDAY = "Holiday";
+    public static final String VALID_DESCRIPTION_SNACK = "Snack";
     public static final String VALID_COST_BUFFET = "300";
     public static final String VALID_COST_SOUVENIRS = "200";
+    public static final String VALID_COST_HOLIDAY = "50";
+    public static final String VALID_COST_SNACK = "2";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -58,6 +65,25 @@ public class CommandTestUtil {
     public static final String GROUPNAME_DESC_OSLO = " " + PREFIX_GROUP_NAME + VALID_GROUPNAME_OSLO;
     public static final String TAG_DESC_FRIENDS = " " + PREFIX_TAG + VALID_GROUP_TAG_FRIENDS;
     public static final String TAG_DESC_FAMILY = " " + PREFIX_TAG + VALID_GROUP_TAG_FAMILY;
+
+    public static final String COST_DESC_FIFTY = " " + PREFIX_COST + VALID_COST_HOLIDAY;
+    public static final String COST_DESC_TWO = " " + PREFIX_COST + VALID_COST_SNACK;
+
+    public static final String DESCRIPTION_DESC_HOLIDAY = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_HOLIDAY;
+    public static final String DESCRIPTION_DESC_SNACK = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_SNACK;
+
+    public static final String EXCLUDE_DESC_BOB = " " + PREFIX_EXCLUDE + VALID_NAME_BOB;
+    public static final String EXCLUDE_DESC_ALICE = " " + PREFIX_EXCLUDE + VALID_NAME_ALICE;
+
+    public static final String EXPENSE_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY + PREFIX_GROUP_NAME
+            + VALID_GROUPNAME_BALI + PREFIX_COST + VALID_COST_HOLIDAY + PREFIX_DESCRIPTION + VALID_DESCRIPTION_HOLIDAY;
+    public static final String EXPENSE_DESC_AMY_WITH_BOB_INDIVIDUAL_PAYMENT = " " + PREFIX_NAME + VALID_NAME_AMY
+            + PREFIX_GROUP_NAME + VALID_GROUPNAME_BALI + PREFIX_COST + VALID_COST_BUFFET
+            + PREFIX_DESCRIPTION + VALID_DESCRIPTION_BUFFET + PREFIX_NAME + VALID_NAME_BOB + PREFIX_COST
+            + VALID_COST_HOLIDAY;
+    public static final String EXPENSE_DESC_AMY_WITH_BOB_EXCLUDED = " " + PREFIX_NAME + VALID_NAME_AMY
+            + PREFIX_GROUP_NAME + VALID_GROUPNAME_BALI + PREFIX_COST + VALID_COST_BUFFET
+            + PREFIX_DESCRIPTION + VALID_DESCRIPTION_BUFFET + PREFIX_EXCLUDE + VALID_NAME_BOB;
 
     public static final String INVALID_NAME_JAMES = "James#";
     public static final String INVALID_NAME_JOHN = "Jo&hn*";
