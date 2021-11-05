@@ -218,8 +218,8 @@ The `TransactionSummary` component,
 
 The `Payment` component,
 
-*  Handles the display of all the payments between contacts in a group.
-*  Stores 2 `Person`object and a `Cost` reference.
+*  Handles the display of all the payments to be made between contacts in a group.
+*  Stores 2 `Person` objects and a `Cost`.
 
 ### Storage component
 
