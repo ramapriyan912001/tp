@@ -71,7 +71,11 @@ The rest of the App consists of four components.
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="650" />
+<p align="center">
+    <img src="images/ArchitectureSequenceDiagram.png" width="650" />
+    <br>
+    Fig 1. Architecture Sequence Diagram
+</p>
 
 Each of the four main components (also shown in the diagram above),
 
