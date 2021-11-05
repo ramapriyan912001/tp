@@ -37,38 +37,32 @@ public class GroupRemoveTagCommandTest {
     public void constructor_nullGroup_throwsNullPointerException() {
         // group name null
         assertThrows(NullPointerException.class, () ->
-                new GroupRemoveTagCommand(null, GROUP_TAGS_TO_REMOVE, true));
+                new GroupRemoveTagCommand(null, GROUP_TAGS_TO_REMOVE));
 
         // TAGS null
         assertThrows(NullPointerException.class, () ->
-                new GroupRemoveTagCommand(BALI_GROUP_NAME, null, true));
+                new GroupRemoveTagCommand(BALI_GROUP_NAME, null));
     }
 
     @Test
     public void getters_validConstructor_success() {
         GroupRemoveTagCommand groupRemoveTagCommandTrue =
-                new GroupRemoveTagCommand(BALI_GROUP_NAME, GROUP_TAGS_TO_REMOVE, true);
+                new GroupRemoveTagCommand(BALI_GROUP_NAME, GROUP_TAGS_TO_REMOVE);
 
         GroupRemoveTagCommand groupRemoveTagCommandFalse =
-                new GroupRemoveTagCommand(BALI_GROUP_NAME, GROUP_TAGS_TO_REMOVE, false);
+                new GroupRemoveTagCommand(BALI_GROUP_NAME, GROUP_TAGS_TO_REMOVE);
 
         // getGroupName
         assertEquals(groupRemoveTagCommandTrue.getGroupName(), BALI_GROUP_NAME);
 
         // getGroupTAGS
         assertEquals(groupRemoveTagCommandTrue.getTagsToBeRemoved(), GROUP_TAGS_TO_REMOVE);
-
-        // getValidCommand
-        assertEquals(groupRemoveTagCommandTrue.getValidCommand(), true);
-
-        // getValidCommand
-        assertEquals(groupRemoveTagCommandFalse.getValidCommand(), false);
     }
 
     @Test
     public void execute_noGroupFound_failure() {
         GroupRemoveTagCommand groupRemoveTagCommand =
-                new GroupRemoveTagCommand(JAPAN_GROUP_NAME, GROUP_TAGS_TO_REMOVE, true);
+                new GroupRemoveTagCommand(JAPAN_GROUP_NAME, GROUP_TAGS_TO_REMOVE);
 
         String expectedMessage = String.format(Messages.MESSAGE_NONEXISTENT_GROUP, JAPAN_GROUP_NAME);
 
@@ -78,19 +72,19 @@ public class GroupRemoveTagCommandTest {
     @Test
     public void execute_invalidCommandFound_failure() {
         GroupRemoveTagCommand groupRemoveTagCommandTrue =
-                new GroupRemoveTagCommand(BALI_GROUP_NAME, GROUP_ABSENT_TAG_TO_REMOVE, true);
+                new GroupRemoveTagCommand(BALI_GROUP_NAME, GROUP_ABSENT_TAG_TO_REMOVE);
         String expectedMessage = String.format(Messages.MESSAGE_GROUPREMOVETAGCOMMAND_NONEXISTENT_TAG, "family");
         assertCommandFailure(groupRemoveTagCommandTrue, model, expectedMessage);
 
         GroupRemoveTagCommand groupRemoveTagCommandFalse =
-                new GroupRemoveTagCommand(BALI_GROUP_NAME, GROUP_TAGS_TO_REMOVE, false);
+                new GroupRemoveTagCommand(BALI_GROUP_NAME, GROUP_TAGS_TO_REMOVE);
         assertCommandFailure(groupRemoveTagCommandTrue, model, expectedMessage);
     }
 
     @Test
     public void execute_validInputs_success() {
         GroupRemoveTagCommand groupRemoveTagCommand =
-                new GroupRemoveTagCommand(BALI_GROUP_NAME, GROUP_TAGS_TO_REMOVE, true);
+                new GroupRemoveTagCommand(BALI_GROUP_NAME, GROUP_TAGS_TO_REMOVE);
 
         CommandResult expectedCommandResult = new CommandResult(
                 String.format(Messages.MESSAGE_GROUPREMOVETAGCOMMAND_SUCCESS, BALI_GROUP_NAME));
@@ -108,33 +102,27 @@ public class GroupRemoveTagCommandTest {
 
     @Test
     public void equals() {
-        GroupRemoveTagCommand groupRemoveTagCommandTrue =
-                new GroupRemoveTagCommand(BALI_GROUP_NAME, GROUP_TAGS_TO_REMOVE, true);
-
-        GroupRemoveTagCommand groupRemoveTagCommandFalse =
-                new GroupRemoveTagCommand(BALI_GROUP_NAME, GROUP_TAGS_TO_REMOVE, false);
+        GroupRemoveTagCommand groupRemoveTagCommand =
+                new GroupRemoveTagCommand(BALI_GROUP_NAME, GROUP_TAGS_TO_REMOVE);
 
         // null input -> false
-        assertFalse(groupRemoveTagCommandTrue.equals(null));
+        assertFalse(groupRemoveTagCommand.equals(null));
 
         // Not same class -> false
-        assertFalse(groupRemoveTagCommandTrue.equals(new ListContactsCommand()));
+        assertFalse(groupRemoveTagCommand.equals(new ListContactsCommand()));
 
         // Same instance -> true
-        assertTrue(groupRemoveTagCommandTrue.equals(groupRemoveTagCommandTrue));
+        assertTrue(groupRemoveTagCommand.equals(groupRemoveTagCommand));
 
         // Different instance but same details -> true
         GroupRemoveTagCommand groupRemoveTagCommandToCheck =
-                new GroupRemoveTagCommand(BALI_GROUP_NAME, GROUP_TAGS_TO_REMOVE, true);
-        assertTrue(groupRemoveTagCommandTrue.equals(groupRemoveTagCommandToCheck));
+                new GroupRemoveTagCommand(BALI_GROUP_NAME, GROUP_TAGS_TO_REMOVE);
+        assertTrue(groupRemoveTagCommand.equals(groupRemoveTagCommandToCheck));
 
         // Different instance with different TAGS -> false
         System.out.println(GROUP_TAGS_TO_REMOVE.size());
         GroupRemoveTagCommand groupRemoveTagCommandDifferentTags =
-                new GroupRemoveTagCommand(BALI_GROUP_NAME, GROUP_ABSENT_TAG_TO_REMOVE, true);
-        assertFalse(groupRemoveTagCommandTrue.equals(groupRemoveTagCommandDifferentTags));
-
-        // Different instance with different valid command -> false
-        assertFalse(groupRemoveTagCommandTrue.equals(groupRemoveTagCommandFalse));
+                new GroupRemoveTagCommand(BALI_GROUP_NAME, GROUP_ABSENT_TAG_TO_REMOVE);
+        assertFalse(groupRemoveTagCommand.equals(groupRemoveTagCommandDifferentTags));
     }
 }

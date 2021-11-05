@@ -4,15 +4,14 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Package Payment <<Rectangle>>{
-    Class Payment
+Package "Transaction Summary" <<Rectangle>>{
+    Class TransactionSummary
 }
 
 Package Person <<Rectangle>>{
 }
 
-Payment *--> "payee" Person
-Payment *--> "payer" Person
-Payment *--> "1 cost" Cost
+TransactionSummary *-->  "1" Person
+TransactionSummary *--> "1" Cost
 
 @enduml
