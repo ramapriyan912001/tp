@@ -39,7 +39,7 @@ public class EditCommandParser implements Parser<EditContactCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException parseException) {
-            if(parseException.getMessage().equals(MESSAGE_INVALID_SIZE_INDEX)) {
+            if (parseException.getMessage().equals(MESSAGE_INVALID_SIZE_INDEX)) {
                 throw new ParseException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             } else {
                 throw new ParseException(

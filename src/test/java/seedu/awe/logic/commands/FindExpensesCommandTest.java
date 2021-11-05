@@ -3,7 +3,8 @@ package seedu.awe.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.awe.commons.core.Messages.*;
+import static seedu.awe.commons.core.Messages.MESSAGE_EXPENSES_LISTED_OVERVIEW;
+import static seedu.awe.commons.core.Messages.MESSAGE_FINDEXPENSESCOMMAND_GROUP_NOT_FOUND;
 import static seedu.awe.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.awe.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.awe.testutil.TypicalExpenses.BUFFET;
@@ -12,12 +13,9 @@ import static seedu.awe.testutil.TypicalExpenses.getTypicalAddressBook;
 import static seedu.awe.testutil.TypicalGroups.BALI;
 import static seedu.awe.testutil.TypicalGroups.VIENNA_NOT_IN_GROUPS;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Set;
 
-import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import seedu.awe.model.Model;
@@ -26,7 +24,6 @@ import seedu.awe.model.UserPrefs;
 import seedu.awe.model.expense.DescriptionContainsKeywordsPredicate;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
-import seedu.awe.model.person.Person;
 import seedu.awe.testutil.ModelBuilder;
 
 /**

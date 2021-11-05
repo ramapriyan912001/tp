@@ -12,15 +12,9 @@ import static seedu.awe.testutil.TypicalGroups.OSLO;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.model.Model;
 import seedu.awe.model.group.GroupName;
-import seedu.awe.model.person.Person;
-import seedu.awe.testutil.GroupBuilder;
 import seedu.awe.testutil.ModelBuilder;
-
-import java.util.ArrayList;
-import java.util.HashSet;
 
 
 public class ListExpensesCommandTest {
