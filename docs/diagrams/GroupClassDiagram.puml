@@ -23,7 +23,7 @@ Class HiddenOutside #FFFFFF
 HiddenOutside --> Group
 
 Group *--> GroupName
-Group *--> "*" Tag
+Group *-right-> "*" Tag
 Group --> "1..* members" Person
 Group --> "*" Expense
 

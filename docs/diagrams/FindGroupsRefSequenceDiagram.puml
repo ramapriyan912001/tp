@@ -1,0 +1,45 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":AweParser" as AweParser LOGIC_COLOR
+participant ":FindGroupsCommandParser" as FindGroupsCommandParser LOGIC_COLOR
+participant "d:FindGroupsCommand" as FindGroupsCommand LOGIC_COLOR
+participant ":GroupContainsKeywordsPredicate" as GroupContainsKeywordsPredicate LOGIC_COLOR
+end box
+
+
+mainframe sd get addContactCommand
+
+create FindGroupsCommandParser
+AweParser -> FindGroupsCommandParser
+activate FindGroupsCommandParser
+
+FindGroupsCommandParser --> AweParser
+deactivate FindGroupsCommandParser
+
+AweParser -> FindGroupsCommandParser : parse("London")
+activate FindGroupsCommandParser
+
+create GroupContainsKeywordsPredicate
+FindGroupsCommandParser -> GroupContainsKeywordsPredicate
+activate GroupContainsKeywordsPredicate
+
+GroupContainsKeywordsPredicate -> FindGroupsCommandParser : predicate
+deactivate GroupContainsKeywordsPredicate
+
+create FindGroupsCommand
+FindGroupsCommandParser -> FindGroupsCommand : predicate
+activate FindGroupsCommand
+
+FindGroupsCommand --> FindGroupsCommandParser : command
+deactivate FindGroupsCommand
+
+FindGroupsCommandParser --> AweParser : command
+deactivate FindGroupsCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindGroupsCommandParser -[hidden]-> AweParser
+destroy FindGroupsCommandParser
+
+
+@enduml

@@ -170,16 +170,56 @@ The `Model` component,
     * all `Person` objects (which are contained in a `UniquePersonList` object).
     * all `Group` objects (which are contained in a `UniqueGroupList` object).
     * all `Expense` objects (which are contained in a `ExpenseList` object).
+    * all `TransactionSummary` objects (which are contained in a `TransactionSummaryList` object).
     * all `Payment` objects (which are contained in a `PaymentList` object).
-* stores the currently 'selected' `Person`/`Group`/`Expense`/`Payment` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Person`/`Group`/`Expense`/`TransactionSummary` /`Payment` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
+<img src="images/PersonClassDiagram.png" width="250" />
+<br>
 
-<img src="images/PersonClassDiagram.png" width="250" /><br>
-<img src="images/ExpenseClassDiagram.png" width="250" /><br>
-<img src="images/GroupClassDiagram.png" width="450" /><br>
-<img src="images/PaymentClassDiagram.png" width="250" /><br>
+The `Person` component, 
+
+*  Handles the storing of each contact in AWE.
+*  Stores a `Name` and a `Phone` object for each person.
+*  Stores any amount of `Tag` objects.
+
+<img src="images/ExpenseClassDiagram.png" width="250" />
+<br>
+
+The `Expense` component, 
+
+*  Handles the storing of each expense in AWE.
+*  Expenses will store a reference to all instance of `Person` involved in the expenses.
+*  Stores a `Cost` and a `Description` for each `Expense`.
+
+<img src="images/GroupClassDiagram.png" width="400" /><br>
+
+The `Group` component, 
+
+*  Handles the data of each group in AWE.
+*  Groups will store a list of reference to all `Expense` and `Person` in the group.
+*  Stores a `GroupName` for each group.
+*  Stores any amount of `Tag` object.
+
+<img src="images/TransactionSummaryClassDiagram.png" width="200" />
+<br>
+
+The `TransactionSummary` component,
+
+*  Handles the display of all the individual split expenses in a group.
+*  Stores a reference to a `Person` and a `Cost`.
+
+
+<img src="images/PaymentClassDiagram.png" width="200" />
+<br>
+
+The `Payment` component,
+
+*  Handles the display of all the payments between contacts in a group.
+*  Stores 2 `Person`object and a `Cost` reference.
+
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-F13-1/tp/tree/master/src/main/java/seedu/awe/storage/Storage.java)
@@ -232,7 +272,7 @@ The following sequence operation shows how the `addcontact` operation works.
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-![AddContactRef](images/AddContactRefSequenceDiagram.png)
+<img src="images/AddContactRefSequenceDiagram.png" width="600" />
 
 #### Design considerations:
 
@@ -292,7 +332,7 @@ The following sequence operation shows how the `creategroup` operation works.
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-![CreateGroupRef](images/CreateGroupRef.png)
+<img src="images/CreateGroupRef.png" width="600" />
 
 #### Design considerations:
 
@@ -359,7 +399,8 @@ This allows the `Model` class to easily retrieve the Group based on the name ent
 
 The following activity diagram shows what happens when a user executes a `deletegroup` command.
 
-![DeleteGroupActivityDiagram](images/DeleteGroupActivityDiagram.png)
+<img src="images/DeleteGroupActivityDiagram.png" width="350" />
+
 
 Given below is an example usage scenario and how the `deletegroup` mechanism behaves at each step.
 
@@ -448,7 +489,7 @@ The find group feature supports both single keyword and multi keyword search. Th
 
 The following activity diagram shows what happens when a user executes a `findgroups` command:
 
-<img src="images/FindGroupsActivityDiagram.png" width="350" />
+<img src="images/FindGroupsActivityDiagram.png" width="300" />
 
 Given below is an example usage scenario and how the `findgroup` operation behaves at each step:
 
@@ -468,8 +509,9 @@ Step 6. The output from `CommandResult` is then displayed as an output for the u
 
 The following sequence diagram shows how the `findgroups` operation works:
 
-<img src="images/FindGroupsSequenceDiagram.png" width="600" />
+<img src="images/FindGroupsSequenceDiagram.png" width="700" />
 
+<img src="images/FindGroupsRefSequenceDiagram.png" width="600" />
 
 ### Add expense feature
 
@@ -675,7 +717,7 @@ Initialise a `Pair` object with the `Person` object of the individual, and their
 
 The following diagram shows the flow of the algorithm.
 
-![CalculatePaymentsAlgorithmDiagram](images/CalculatePaymentsCommandAlgorithmDiagram.png)
+<img src="images/CalculatePaymentsCommandAlgorithmDiagram.png" width="600" />
   
 
 The following activity diagram shows what happens when a user executes a `calculatepayments` command.
@@ -703,6 +745,7 @@ Step 6. Upon successful execution, `CommandResult` is returned.
 
 The following sequence operation shows how the `calculatepayments` operation works.
 ![DeleteExpenseSequenceDiagram](images/CalculatePaymentsSequenceDiagram.png)
+![DeleteExpenseSequenceDiagram](images/CalculatePaymentsRefSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `CalculatePaymentsCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
