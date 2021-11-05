@@ -79,6 +79,7 @@ public class Awe implements ReadOnlyAddressBook {
 
     public void setGroup(Group group, Group newGroup) {
         groups.setGroup(group, newGroup);
+        expenses.setGroup(newGroup);
     }
 
     /**
