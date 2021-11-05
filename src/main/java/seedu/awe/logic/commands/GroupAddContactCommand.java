@@ -71,6 +71,9 @@ public class GroupAddContactCommand extends Command {
      * @return boolean object representing if this.newMembers contains the same Person objects as otherMembers.
      */
     public boolean checkSameMembers(ArrayList<Person> otherMembers) {
+        if (this.newMembers.size() != otherMembers.size()) {
+            return false;
+        }
         int numberOfNonMatchingMembers = otherMembers.size();
         for (Person member : this.newMembers) {
             numberOfNonMatchingMembers = checkForMember(numberOfNonMatchingMembers, member, otherMembers);

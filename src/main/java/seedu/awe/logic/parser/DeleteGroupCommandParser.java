@@ -22,7 +22,7 @@ public class DeleteGroupCommandParser implements Parser<DeleteGroupCommand> {
      * @param model Model object passed into constructor to provide list of contacts.
      */
     public DeleteGroupCommandParser(Model model) {
-        ReadOnlyAddressBook addressBook = model.getAddressBook();
+        ReadOnlyAddressBook addressBook = model.getAwe();
     }
     //assume command is of the following form
     //deletegroup gn/Berlin

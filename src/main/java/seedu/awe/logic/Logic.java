@@ -29,9 +29,9 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the Awe.
      *
-     * @see seedu.awe.model.Model#getAddressBook()
+     * @see seedu.awe.model.Model#getAwe()
      */
     ReadOnlyAddressBook getAddressBook();
 

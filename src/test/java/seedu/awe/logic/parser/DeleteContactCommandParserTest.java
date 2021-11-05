@@ -1,10 +1,12 @@
 package seedu.awe.logic.parser;
 
+
 import static seedu.awe.commons.core.Messages.MESSAGE_DELETECONTACTCOMMAND_USAGE;
 import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.awe.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.awe.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.awe.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.awe.testutil.TypicalIndexes.INDEX_FIRST;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,12 +25,17 @@ public class DeleteContactCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteContactCommand(INDEX_FIRST_PERSON));
+        assertParseSuccess(parser, "1", new DeleteContactCommand(INDEX_FIRST));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 MESSAGE_DELETECONTACTCOMMAND_USAGE));
+    }
+
+    @Test
+    public void parse_tooLongArgs_returnsDeleteExpenseCommand() {
+        assertParseFailure(parser, "9999999999", String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX));
     }
 }

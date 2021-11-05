@@ -4,11 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.awe.logic.commands.CommandTestUtil.INVALID_NAME_JAMES;
 import static seedu.awe.logic.commands.CommandTestUtil.INVALID_NAME_JOHN;
+import static seedu.awe.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BUFFET;
 import static seedu.awe.logic.commands.CommandTestUtil.VALID_NAME_ALICE;
 import static seedu.awe.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.awe.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.awe.logic.parser.ParserUtil.MESSAGE_INVALID_LENGTH_INDEX;
 import static seedu.awe.testutil.Assert.assertThrows;
-import static seedu.awe.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.awe.testutil.TypicalIndexes.INDEX_FIRST;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -20,6 +21,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.awe.logic.parser.exceptions.EmptyGroupException;
 import seedu.awe.logic.parser.exceptions.ParseException;
+import seedu.awe.model.expense.Description;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.person.Name;
 import seedu.awe.model.person.Phone;
@@ -31,6 +33,8 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+
+    private static final String INVALID_DESCRIPTION = "E@t";
 
     private static final String INVALID_GROUPNAME = "B@li";
 
@@ -52,18 +56,18 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
+    public void parseIndex_tooLongInput_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_INVALID_LENGTH_INDEX, ()
             -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("1"));
+        assertEquals(INDEX_FIRST, ParserUtil.parseIndex("1"));
 
         // Leading and trailing whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+        assertEquals(INDEX_FIRST, ParserUtil.parseIndex("  1  "));
     }
 
     @Test
@@ -212,5 +216,32 @@ public class ParserUtilTest {
         List<Name> expectedNameList = Arrays.asList(new Name(VALID_NAME_ALICE));
 
         assertEquals(actualNameList, expectedNameList);
+    }
+
+    @Test
+    public void parseDescription_validDescription_returnsDescription() throws ParseException {
+        Description expectedDescription = new Description(VALID_DESCRIPTION_BUFFET);
+        assertEquals(expectedDescription, ParserUtil.parseDescription(VALID_DESCRIPTION_BUFFET));
+
+    }
+
+    @Test
+    public void parseDescription_invalidDescription_throwsParseException() {
+        assertThrows(ParseException.class, Description.MESSAGE_CONSTRAINTS, () -> ParserUtil
+                .parseDescription(INVALID_DESCRIPTION));
+    }
+
+    @Test
+    public void parseExcluded_invalidNameInExcluded_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil
+                .parseExcluded(Arrays.asList(VALID_NAME_ALICE, INVALID_NAME)));
+    }
+
+    @Test
+    public void parseExcluded_validExcludedList_throwsParseException() throws Exception {
+        List<String> excluded = Arrays.asList(VALID_NAME_ALICE, VALID_NAME_AMY);
+        List<Name> expectedExcluded = Arrays.asList(ParserUtil.parseName(VALID_NAME_ALICE),
+                ParserUtil.parseName(VALID_NAME_AMY));
+        assertEquals(expectedExcluded, ParserUtil.parseExcluded(excluded));
     }
 }

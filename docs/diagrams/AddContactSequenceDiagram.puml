@@ -1,0 +1,68 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AweParser" as AweParser LOGIC_COLOR
+participant ":AddContactCommand" as AddContactCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("addcontact n/Tom p/96524841")
+activate LogicManager
+
+LogicManager -> AweParser : parseCommand("addcontact n/Tom p/96524841")
+activate AweParser
+
+/'Clarify with tutor if there is a need to display AddContactCommandParser class within the ref'/
+note right
+Refer to ref frame for
+details on creation of
+the AddContactCommand object
+end note
+group sd get addContactCommand
+create AddContactCommand
+AweParser -> AddContactCommand
+activate AddContactCommand
+AddContactCommand --> AweParser
+deactivate AddContactCommand
+end group
+
+
+
+
+AweParser --> LogicManager : addContactCommand
+deactivate AweParser
+
+LogicManager -> AddContactCommand : execute()
+activate AddContactCommand
+
+AddContactCommand -> Model : hasPerson(p:Person)
+activate Model
+
+Model --> AddContactCommand
+deactivate Model
+
+AddContactCommand -> Model : addPerson(p:Person)
+activate Model
+
+Model --> AddContactCommand
+deactivate Model
+
+create CommandResult
+AddContactCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddContactCommand
+deactivate CommandResult
+
+AddContactCommand --> LogicManager : result
+deactivate AddContactCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

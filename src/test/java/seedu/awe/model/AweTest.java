@@ -31,25 +31,25 @@ import seedu.awe.model.person.UniquePersonList;
 import seedu.awe.model.person.exceptions.DuplicatePersonException;
 import seedu.awe.testutil.PersonBuilder;
 
-public class AddressBookTest {
+public class AweTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final Awe awe = new Awe();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), awe.getPersonList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> awe.resetData(null));
     }
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+        Awe newData = getTypicalAddressBook();
+        awe.resetData(newData);
+        assertEquals(newData, awe);
     }
 
     @Test
@@ -60,69 +60,69 @@ public class AddressBookTest {
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newPersons);
 
-        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicatePersonException.class, () -> awe.resetData(newData));
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> awe.hasPerson(null));
     }
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+        assertFalse(awe.hasPerson(ALICE));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+        awe.addPerson(ALICE);
+        assertTrue(awe.hasPerson(ALICE));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
+        awe.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(awe.hasPerson(editedAlice));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> awe.getPersonList().remove(0));
     }
 
     @Test
     public void getPersons_returnsPersonList() {
-        assertEquals(addressBook.getPersons(), new UniquePersonList());
-        addressBook.addPerson(ALICE);
+        assertEquals(awe.getPersons(), new UniquePersonList());
+        awe.addPerson(ALICE);
         UniquePersonList personList = new UniquePersonList();
         personList.add(ALICE);
-        assertEquals(addressBook.getPersons(), personList);
+        assertEquals(awe.getPersons(), personList);
     }
 
     @Test
     public void getGroups_returnsGroupList() {
-        assertEquals(addressBook.getGroups(), new UniqueGroupList());
-        addressBook.addGroup(DUBAI);
+        assertEquals(awe.getGroups(), new UniqueGroupList());
+        awe.addGroup(DUBAI);
         UniqueGroupList groupList = new UniqueGroupList();
         groupList.add(DUBAI);
-        assertEquals(addressBook.getGroups(), groupList);
+        assertEquals(awe.getGroups(), groupList);
     }
 
     @Test
     public void equals() {
-        assertEquals(addressBook, addressBook);
-        assertNotEquals(addressBook, new ModelManager());
+        assertEquals(awe, awe);
+        assertNotEquals(awe, new ModelManager());
     }
 
     @Test
     public void hashcode() {
-        assertEquals(addressBook.hashCode(), addressBook.hashCode());
-        int oldCode = addressBook.hashCode();
-        addressBook.addPerson(ALICE);
-        int newCode = addressBook.hashCode();
-        assertEquals(addressBook.hashCode(), addressBook.hashCode());
+        assertEquals(awe.hashCode(), awe.hashCode());
+        int oldCode = awe.hashCode();
+        awe.addPerson(ALICE);
+        int newCode = awe.hashCode();
+        assertEquals(awe.hashCode(), awe.hashCode());
         assertNotEquals(oldCode, newCode);
     }
 

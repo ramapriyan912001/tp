@@ -204,7 +204,7 @@ public class CreateGroupCommandParserTest {
 
     @Test
     public void findMember_validValues_personReturned() {
-        ObservableList<Person> membersToSearch = new ModelBuilder().build().getAddressBook().getPersonList();
+        ObservableList<Person> membersToSearch = new ModelBuilder().build().getAwe().getPersonList();
 
         //search for existing member
         Person bob = CreateGroupCommandParser.findMember(BOB.getName(), membersToSearch);
@@ -218,7 +218,7 @@ public class CreateGroupCommandParserTest {
 
     @Test
     public void findMember_invalidValues_nullReturned() {
-        ObservableList<Person> membersToSearch = new ModelBuilder().build().getAddressBook().getPersonList();
+        ObservableList<Person> membersToSearch = new ModelBuilder().build().getAwe().getPersonList();
 
         //search for non-existent member
         Person nonExistentPerson = CreateGroupCommandParser

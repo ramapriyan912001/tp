@@ -26,7 +26,7 @@ import static seedu.awe.testutil.TypicalPersons.HOON;
 import static seedu.awe.testutil.TypicalPersons.IDA;
 
 import javafx.collections.transformation.FilteredList;
-import seedu.awe.model.AddressBook;
+import seedu.awe.model.Awe;
 import seedu.awe.model.Model;
 import seedu.awe.model.ModelManager;
 import seedu.awe.model.UserPrefs;
@@ -39,14 +39,14 @@ import seedu.awe.model.person.Person;
  */
 public class ModelBuilder {
 
-    public static final AddressBook DEFAULT_ADDRESSBOOK = new AddressBook();
+    public static final Awe DEFAULT_ADDRESSBOOK = new Awe();
     public static final UserPrefs DEFAULT_USERPREFS = new UserPrefs();
     public static final FilteredList<Person> DEFAULT_FILTEREDPERSONS =
             new FilteredList<Person>(DEFAULT_ADDRESSBOOK.getPersonList());
     public static final FilteredList<Group> DEFAULT_FILTEREDGROUPS =
             new FilteredList<Group>(DEFAULT_ADDRESSBOOK.getGroupList());
 
-    private AddressBook addressBook;
+    private Awe awe;
     private UserPrefs userPrefs;
     private FilteredList<Person> filteredPersons;
     private FilteredList<Group> filteredGroups;
@@ -55,9 +55,9 @@ public class ModelBuilder {
      * Creates a {@code ModelBuilder} with the default details.
      */
     public ModelBuilder() {
-        addressBook = new AddressBook();
-        addTypicalPersons(addressBook);
-        addTypicalGroups(addressBook);
+        awe = new Awe();
+        addTypicalPersons(awe);
+        addTypicalGroups(awe);
         userPrefs = DEFAULT_USERPREFS;
         filteredPersons = DEFAULT_FILTEREDPERSONS;
         filteredGroups = DEFAULT_FILTEREDGROUPS;
@@ -67,17 +67,17 @@ public class ModelBuilder {
      * Initializes the ModelBuilder with the data of {@code ModelToCopy}.
      */
     public ModelBuilder(Model modelToCopy) {
-        addressBook = (AddressBook) modelToCopy.getAddressBook();
+        awe = (Awe) modelToCopy.getAwe();
         userPrefs = (UserPrefs) modelToCopy.getUserPrefs();
         filteredPersons = (FilteredList<Person>) modelToCopy.getFilteredPersonList();
         filteredGroups = (FilteredList<Group>) modelToCopy.getFilteredGroupList();
     }
 
     /**
-     * Sets the {@code AddressBook} of the {@code Model} that we are building.
+     * Sets the {@code Awe} of the {@code Model} that we are building.
      */
-    public ModelBuilder withAddressBook(AddressBook addressBook) {
-        this.addressBook = addressBook;
+    public ModelBuilder withAddressBook(Awe awe) {
+        this.awe = awe;
         return this;
     }
 
@@ -92,49 +92,49 @@ public class ModelBuilder {
     /**
      * Adds all Person attributes from TypicalPersons into the sample addressbook.
      *
-     * @param addressBook AddressBook object to be used for testing purposes.
+     * @param awe Awe object to be used for testing purposes.
      */
-    public void addTypicalPersons(AddressBook addressBook) {
-        addressBook.addPerson(ALICE);
-        addressBook.addPerson(BENSON);
-        addressBook.addPerson(CARL);
-        addressBook.addPerson(DANIEL);
-        addressBook.addPerson(ELLE);
-        addressBook.addPerson(FIONA);
-        addressBook.addPerson(GEORGE);
-        addressBook.addPerson(HOON);
-        addressBook.addPerson(IDA);
-        addressBook.addPerson(AMY);
-        addressBook.addPerson(BOB);
+    public void addTypicalPersons(Awe awe) {
+        awe.addPerson(ALICE);
+        awe.addPerson(BENSON);
+        awe.addPerson(CARL);
+        awe.addPerson(DANIEL);
+        awe.addPerson(ELLE);
+        awe.addPerson(FIONA);
+        awe.addPerson(GEORGE);
+        awe.addPerson(HOON);
+        awe.addPerson(IDA);
+        awe.addPerson(AMY);
+        awe.addPerson(BOB);
     }
 
     /**
      * Adds all Person attributes from TypicalPersons into the sample addressbook.
      *
-     * @param addressBook AddressBook object to be used for testing purposes.
+     * @param awe Awe object to be used for testing purposes.
      */
-    public void addTypicalGroups(AddressBook addressBook) throws DuplicateGroupException {
-        addressBook.addGroup(AMSTERDAM_WITH_EXPENSES);
-        addressBook.addGroup(BALI_WITH_EXPENSES);
-        addressBook.addGroup(PERU_WITH_EXPENSES_INVALID);
-        addressBook.addGroup(RIO_WITH_EXPENSES_INVALID);
-        addressBook.addGroup(INDIA);
-        addressBook.addGroup(LONDON);
-        addressBook.addGroup(DUBAI);
-        addressBook.addGroup(PARIS);
-        addressBook.addGroup(CHINA);
-        addressBook.addGroup(MALIBU_WITH_EXPENSES);
-        addressBook.addGroup(SANTIAGO_WITH_EXPENSES);
-        addressBook.addGroup(HELSINKI);
-        addressBook.addGroup(OSLO);
+    public void addTypicalGroups(Awe awe) throws DuplicateGroupException {
+        awe.addGroup(AMSTERDAM_WITH_EXPENSES);
+        awe.addGroup(BALI_WITH_EXPENSES);
+        awe.addGroup(PERU_WITH_EXPENSES_INVALID);
+        awe.addGroup(RIO_WITH_EXPENSES_INVALID);
+        awe.addGroup(INDIA);
+        awe.addGroup(LONDON);
+        awe.addGroup(DUBAI);
+        awe.addGroup(PARIS);
+        awe.addGroup(CHINA);
+        awe.addGroup(MALIBU_WITH_EXPENSES);
+        awe.addGroup(SANTIAGO_WITH_EXPENSES);
+        awe.addGroup(HELSINKI);
+        awe.addGroup(OSLO);
     }
 
     public Model build() {
-        return new ModelManager(addressBook, userPrefs);
+        return new ModelManager(awe, userPrefs);
     }
 
     public Model buildEmptyModel() {
-        return new ModelManager(new AddressBook(), new UserPrefs());
+        return new ModelManager(new Awe(), new UserPrefs());
     }
 }
 

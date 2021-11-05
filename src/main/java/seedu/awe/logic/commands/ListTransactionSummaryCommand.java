@@ -35,7 +35,7 @@ public class ListTransactionSummaryCommand extends Command {
             throw new CommandException(MESSAGE_LISTTRANSACTIONSUMMARYCOMMAND_GROUP_NOT_FOUND);
         }
 
-        Group group = model.getAddressBook().getGroupByName(this.group.getGroupName());
+        Group group = model.getAwe().getGroupByName(this.group.getGroupName());
         HashMap<Person, Cost> summary = group.getSplitExpenses();
 
         model.setTransactionSummary(summary);

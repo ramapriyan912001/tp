@@ -1,5 +1,7 @@
 package seedu.awe;
 
+import static seedu.awe.model.util.SampleDataUtil.getSampleAddressBook;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
@@ -15,15 +17,14 @@ import seedu.awe.commons.util.ConfigUtil;
 import seedu.awe.commons.util.StringUtil;
 import seedu.awe.logic.Logic;
 import seedu.awe.logic.LogicManager;
-import seedu.awe.model.AddressBook;
 import seedu.awe.model.Model;
 import seedu.awe.model.ModelManager;
 import seedu.awe.model.ReadOnlyAddressBook;
 import seedu.awe.model.ReadOnlyUserPrefs;
 import seedu.awe.model.UserPrefs;
 import seedu.awe.model.util.SampleDataUtil;
-import seedu.awe.storage.AddressBookStorage;
-import seedu.awe.storage.JsonAddressBookStorage;
+import seedu.awe.storage.AweStorage;
+import seedu.awe.storage.JsonAweStorage;
 import seedu.awe.storage.JsonUserPrefsStorage;
 import seedu.awe.storage.Storage;
 import seedu.awe.storage.StorageManager;
@@ -49,7 +50,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing Awe ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -57,8 +58,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        AweStorage aweStorage = new JsonAweStorage(userPrefs.getAddressBookFilePath());
+        storage = new StorageManager(aweStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -71,8 +72,8 @@ public class MainApp extends Application {
 
     /**
      * Returns a {@code ModelManager} with the data from {@code storage}'s awe book and {@code userPrefs}. <br>
-     * The data from the sample awe book will be used instead if {@code storage}'s awe book is not found,
-     * or an empty awe book will be used instead if errors occur when reading {@code storage}'s awe book.
+     * The data from the sample awe book will be used instead if {@code storage}'s awe book is not found or
+     * if errors occur when reading {@code storage}'s awe book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
@@ -80,19 +81,18 @@ public class MainApp extends Application {
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+                logger.info("Data file not found. Will be starting with a sample AWE book.");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+            logger.warning("Data file not in the correct format. Will be starting with a sample AWE book.");
             isDataError = true;
-            initialData = new AddressBook();
+            initialData = getSampleAddressBook();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with a sample AWE book.");
             isDataError = true;
-            initialData = new AddressBook();
+            initialData = getSampleAddressBook();
         }
-
         return new ModelManager(initialData, userPrefs);
     }
 
@@ -154,7 +154,7 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty Awe");
             initializedPrefs = new UserPrefs();
         }
 
@@ -170,7 +170,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting Awe " + MainApp.VERSION);
         ui.setIsDataError(isDataError);
         ui.start(primaryStage);
     }

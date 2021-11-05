@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.awe.model.AddressBook;
+import seedu.awe.model.Awe;
 import seedu.awe.model.expense.Cost;
 import seedu.awe.model.expense.Description;
 import seedu.awe.model.expense.Expense;
@@ -81,6 +81,7 @@ public class TypicalGroups {
                     BALI.getMembers()))
             .withExpense(new Expense(SOUVENIRS.getPayer(), SOUVENIRS.getCost(), SOUVENIRS.getDescription(),
                     BALI.getMembers()))
+            .withTags("friends", "3days2nights")
             .build();
 
     public static final Group RIO_WITH_EXPENSES_INVALID = new GroupBuilder().withGroupName("Rio")
@@ -145,10 +146,10 @@ public class TypicalGroups {
     private TypicalGroups() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons and groups.
+     * Returns an {@code Awe} with all the typical persons and groups.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static Awe getTypicalAddressBook() {
+        Awe ab = new Awe();
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }

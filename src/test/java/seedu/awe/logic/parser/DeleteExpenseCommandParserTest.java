@@ -1,10 +1,12 @@
 package seedu.awe.logic.parser;
 
+
 import static seedu.awe.commons.core.Messages.MESSAGE_DELETEEXPENSECOMMAND_USAGE;
 import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX;
 import static seedu.awe.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.awe.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.awe.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
+import static seedu.awe.testutil.TypicalIndexes.INDEX_FIRST;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +19,7 @@ public class DeleteExpenseCommandParserTest {
     //EP: positive integer
     @Test
     public void parse_validArgs_returnsDeleteExpenseCommand() {
-        assertParseSuccess(parser, "1", new DeleteExpenseCommand(INDEX_FIRST_EXPENSE));
+        assertParseSuccess(parser, "1", new DeleteExpenseCommand(INDEX_FIRST));
     }
 
     @Test
@@ -33,5 +35,10 @@ public class DeleteExpenseCommandParserTest {
         //EP: zero
         assertParseFailure(parser, "0", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
             MESSAGE_DELETEEXPENSECOMMAND_USAGE));
+    }
+
+    @Test
+    public void parse_tooLongArgs_returnsDeleteExpenseCommand() {
+        assertParseFailure(parser, "9999999999", String.format(MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX));
     }
 }

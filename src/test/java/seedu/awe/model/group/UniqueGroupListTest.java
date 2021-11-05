@@ -9,11 +9,16 @@ import static seedu.awe.testutil.TypicalGroups.BALI;
 import static seedu.awe.testutil.TypicalPersons.HOON;
 import static seedu.awe.testutil.TypicalPersons.IDA;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.awe.model.group.exceptions.DuplicateGroupException;
 import seedu.awe.model.group.exceptions.GroupNotFoundException;
 import seedu.awe.testutil.GroupBuilder;
@@ -154,8 +159,76 @@ public class UniqueGroupListTest {
     }
 
     @Test
+    public void setGroups_listWithDuplicateGroups_throwsDuplicateGroupException() {
+        List<Group> listWithDuplicateGroups = Arrays.asList(AMSTERDAM, AMSTERDAM);
+        assertThrows(DuplicateGroupException.class, () -> uniqueGroupList.setGroups(listWithDuplicateGroups));
+    }
+
+    @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniqueGroupList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void groupsAreUnique_listWithDuplicateGroups_returnsFalse() {
+        List<Group> listWithDuplicateGroups = Arrays.asList(AMSTERDAM, AMSTERDAM);
+        assertFalse(uniqueGroupList.groupsAreUnique(listWithDuplicateGroups));
+    }
+
+    @Test
+    public void groupsAreUnique_listWithoutDuplicateGroups_returnsTrue() {
+        List<Group> listWithDuplicateGroups = Arrays.asList(AMSTERDAM, BALI);
+        assertTrue(uniqueGroupList.groupsAreUnique(listWithDuplicateGroups));
+    }
+
+    @Test
+    public void iterator() {
+        // Empty List
+        assertFalse(uniqueGroupList.iterator().hasNext());
+
+        // Contains 1 group
+        uniqueGroupList.add(AMSTERDAM);
+        Iterator<Group> uniqueGroupListIterator = uniqueGroupList.iterator();
+
+        ObservableList<Group> singleGroupObservableList = FXCollections.observableArrayList(AMSTERDAM);
+        Iterator<Group> singleGroupObservableListIterator = singleGroupObservableList.iterator();
+
+        assertEquals(singleGroupObservableListIterator.next(), uniqueGroupListIterator.next());
+        assertFalse(uniqueGroupListIterator.hasNext());
+
+        // Contains > 1 Group
+        uniqueGroupList.add(BALI);
+        uniqueGroupListIterator = uniqueGroupList.iterator();
+
+        ObservableList<Group> multipleGroupObservableList = FXCollections.observableArrayList(AMSTERDAM, BALI);
+        Iterator<Group> multipleGroupObservableListIterator = multipleGroupObservableList.iterator();
+
+        assertEquals(multipleGroupObservableListIterator.next(), uniqueGroupListIterator.next());
+        assertEquals(multipleGroupObservableListIterator.next(), uniqueGroupListIterator.next());
+        assertFalse(uniqueGroupListIterator.hasNext());
+    }
+
+    @Test
+    public void equals() {
+        // same instance -> true
+        assertTrue(uniqueGroupList.equals(uniqueGroupList));
+
+        // null -> false
+        assertFalse(uniqueGroupList.equals(null));
+
+        // list is passed in -> false
+        assertFalse(uniqueGroupList.equals(new ArrayList<>()));
+
+        // different group -> return false
+        UniqueGroupList containExtraGroup = new UniqueGroupList();
+        containExtraGroup.add(AMSTERDAM);
+
+        assertFalse(uniqueGroupList.equals(containExtraGroup));
+
+        // contain same amount of person
+        uniqueGroupList.add(AMSTERDAM);
+
+        assertTrue(uniqueGroupList.equals(containExtraGroup));
     }
 }
