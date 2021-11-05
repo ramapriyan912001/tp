@@ -5,6 +5,7 @@ import static seedu.awe.commons.core.Messages.MESSAGE_NONEXISTENT_GROUP;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.List;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
@@ -46,7 +47,12 @@ public class GroupAddTagCommandParser implements Parser<GroupAddTagCommand> {
                     MESSAGE_GROUPADDTAGCOMMAND_USAGE));
         }
 
-        GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).get());
+        List<GroupName> groupNamesList = ParserUtil.parseGroupNames(argMultimap.getAllValues(PREFIX_GROUP_NAME));
+        if (groupNamesList.size() != 1) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    MESSAGE_GROUPADDTAGCOMMAND_USAGE));
+        }
+        GroupName groupName = groupNamesList.get(0);
 
         if (!ParserUtil.findExistingGroupName(groupName, allGroups)) {
             throw new ParseException(String.format(MESSAGE_NONEXISTENT_GROUP, groupName));
