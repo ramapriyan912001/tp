@@ -7,12 +7,14 @@ import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.awe.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.awe.commons.core.Messages;
 import seedu.awe.commons.core.index.Index;
 import seedu.awe.logic.commands.EditContactCommand;
 import seedu.awe.logic.commands.EditContactCommand.EditPersonDescriptor;
@@ -37,6 +39,10 @@ public class EditCommandParser implements Parser<EditContactCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException parseException) {
+            String exceptionMessage = parseException.getMessage();
+            if (exceptionMessage.equals(MESSAGE_INVALID_INDEX)) {
+                throw new ParseException(Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
+            }
             throw new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_EDITCONTACTCOMMAND_USAGE), parseException);
         }

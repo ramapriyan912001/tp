@@ -2,6 +2,7 @@ package seedu.awe.logic.parser;
 
 import static seedu.awe.commons.core.Messages.MESSAGE_DELETECONTACTCOMMAND_USAGE;
 import static seedu.awe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.awe.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.awe.logic.parser.ParserUtil.MESSAGE_INVALID_LENGTH_INDEX;
 
 import seedu.awe.commons.core.Messages;
@@ -25,7 +26,8 @@ public class DeleteContactCommandParser implements Parser<DeleteContactCommand> 
             return new DeleteContactCommand(index);
         } catch (ParseException pe) {
             String exceptionMessage = pe.getMessage();
-            if (exceptionMessage.equals(MESSAGE_INVALID_LENGTH_INDEX)) {
+            if (exceptionMessage.equals(MESSAGE_INVALID_LENGTH_INDEX) ||
+                    exceptionMessage.equals(MESSAGE_INVALID_INDEX)) {
                 throw new ParseException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             } else {
                 throw new ParseException(
