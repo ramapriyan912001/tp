@@ -155,7 +155,7 @@ For those who are not as fast, familiarity with the commands over time will allo
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clearalldata`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clearalldata`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
   
 * Except `findexpenses`, `findgroups`, `findcontacts`, parameters for other commands are case-sensitive.
@@ -552,7 +552,7 @@ Examples:
 <div style="page-break-after: always;"></div>
 
 #### 3.3.5 Calculating total spending of each user: `transactionsummary`
-Displays a list of individual spending for each user in the group.
+Displays the spending of all users in the group.
 
 Format: `transactionsummary gn/GROUP_NAME`
 
