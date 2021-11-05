@@ -62,20 +62,44 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
   * Highlights: This implementation ensures that the most up-to-date group data is saved into `/data/awe.json` with each command.
   * Contribution: Pieced together the basic framework provided by [@ramapriyan912001](https://github.com/ramapriyan912001) to develop fully functional storage abilities for `creategroup` and `deletegroup`.
   
+### Testing
+* Wrote all test cases for the following classes
+  * `CreateGroupCommand`
+  * `CreateGroupCommandParser`
+  * `GroupAddContactCommand`
+  * `GroupAddContactCommandParser`
+  * `GroupRemoveContactCommand`
+  * `GroupRemoveContactCommandParser` 
+  * `GroupAddTagCommand`
+  * `GroupAddTagCommandParser` 
+  * `GroupRemoveTagCommand`
+  * `GroupRemoveTagCommandParser`
 ### Others
 * **Project management**
     * Managed releases: -
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for the features `create group`
+        * Added documentation for the features `create group`, `group add tag`, `group remove tag`, `group add contact`,
+      `group remove contact`, and `group edit name`
+        * Add details of the above features into the Command Summary table
+        * Added details for `About the Document`
+        * Added details for `Command Format`
+        * Added details for `FAQ`
+        * Added `Final Word`
     * Developer Guide:
         * Created table of contents for ease of navigation.
         * Rearranged all user stories to ensure they follow decreasing order of priority.
         * Added use cases for `Add a Person`, `Clear All Entries` and `Create Travel Group`.
+        * Added details for `create group`, `group add tag`, `group remove tag`, `group add contact`,
+          `group remove contact` features, including sequence and activity diagrams.
+        * Added use cases for `delete group`, `delete expense`, `calculatepayments`, `help`, `group add tag`,
+      `   group remove tag`, `group add contact`, `group remove contact`.
+
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#124](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/124)
+    * Worked together with [@](https://github.com/chrus-chong) on group features.
     * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
     * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
     * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())

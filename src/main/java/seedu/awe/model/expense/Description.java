@@ -5,7 +5,7 @@ import static seedu.awe.commons.util.AppUtil.checkArgument;
 
 public class Description {
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, "
+            "Description should only contain alphanumeric characters and spaces, "
                     + "should be 50 characters or less and it should not be blank";
 
     /*

@@ -4,7 +4,7 @@ skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
 skinparam classBackgroundColor UI_COLOR
 
-package UI <<Rectangle>>{
+package "User Interface" <<Rectangle>>{
 Interface Ui <<Interface>>
 Class "{abstract}\nUiPart" as UiPart
 Class UiManager
@@ -13,9 +13,9 @@ Class HelpWindow
 Class ResultDisplay
 Class StatusBarFooter
 Class CommandBox
-package NavigationButton <<Rectangle>> {
+package "Navigation Button" <<Rectangle>> {
 }
-package ViewPanel <<Rectangle>> {
+package "View Panel" <<Rectangle>> {
 }
 }
 
@@ -31,13 +31,13 @@ UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" StatusBarFooter
-MainWindow *-down-> "1" NavigationButton
-MainWindow *-down-> "1" ViewPanel
+MainWindow *-down-> "1" "Navigation Button"
+MainWindow *-down-> "1" "View Panel"
 MainWindow --> "0..1" HelpWindow
 
 MainWindow -left-|> UiPart
 
-NavigationButton -left-> ViewPanel
+"Navigation Button" -left-> "View Panel"
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
@@ -49,8 +49,8 @@ MainWindow -left-> Logic
 
 
 note "Implementation are referenced below." as N1
-NavigationButton ... N1
-ViewPanel ... N1
+"Navigation Button" ... N1
+"View Panel" ... N1
 
 
 HelpWindow -[hidden]left- CommandBox
