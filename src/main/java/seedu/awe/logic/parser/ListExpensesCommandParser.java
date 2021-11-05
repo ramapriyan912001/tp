@@ -35,13 +35,8 @@ public class ListExpensesCommandParser implements Parser<ListExpensesCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_LISTEXPENSESCOMMAND_USAGE));
         }
 
-        try {
             GroupName groupName = ParserUtil.parseGroupName((argMultimap.getValue(PREFIX_GROUP_NAME)).get());
             return new ListExpensesCommand(groupName);
-        } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    MESSAGE_LISTEXPENSESCOMMAND_USAGE), ive);
-        }
     }
 
     /**

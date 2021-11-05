@@ -52,6 +52,19 @@ public class ListExpensesCommand extends Command {
             throw new CommandException(MESSAGE_LISTEXPENSESCOMMAND_GROUP_NOT_FOUND);
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof ListExpensesCommand)) { // instanceof handles nulls
+            return false;
+        }
+
+        return this.groupName.equals(((ListExpensesCommand) other).groupName); // state check
+    }
 }
 
 
