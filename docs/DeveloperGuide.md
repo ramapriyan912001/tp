@@ -103,12 +103,13 @@ The `UI` component,
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
 #### View Panel
-<img src="images/UiViewPanelDiagram.png" width="500" />
+<img src="images/UiViewPanelDiagram.png" width="600" />
 
 The `ViewPanel` consist of the following parts:
 * `GroupListPanel`
 * `ContactListPanel`
 * `ExpenseListPanel`
+* `TransactionSummary`
 * `PaymentListPanel`
 
 Each panel will display the corresponding list accordingly. The ViewPanel will only show up a single list panel at a time. 
@@ -176,7 +177,7 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<img src="images/PersonClassDiagram.png" width="250" />
+<img src="images/PersonClassDiagram.png" width="300" />
 <br>
 
 The `Person` component, 
@@ -185,7 +186,7 @@ The `Person` component,
 *  Stores a `Name` and a `Phone` object for each person.
 *  Stores any amount of `Tag` objects.
 
-<img src="images/ExpenseClassDiagram.png" width="250" />
+<img src="images/ExpenseClassDiagram.png" width="300" />
 <br>
 
 The `Expense` component, 
@@ -194,7 +195,7 @@ The `Expense` component,
 *  Expenses will store a reference to all instance of `Person` involved in the expenses.
 *  Stores a `Cost` and a `Description` for each `Expense`.
 
-<img src="images/GroupClassDiagram.png" width="400" /><br>
+<img src="images/GroupClassDiagram.png" width="350" /><br>
 
 The `Group` component, 
 
@@ -772,7 +773,7 @@ The following sequence operation shows how the `calculatepayments` operation wor
     * As such, we chose to prioritise the settling of bigger debts in our algorithm.
   
 
-### UI Display
+### UI
 AWE has multiple lists / views to display such as for `groups`, `contacts` and `expenses`.
 
 The display, called view panel, will only be able to show up 1 view at a time depending on the command. It is of upmost importance to get it to display the correct view.
@@ -804,7 +805,7 @@ The following activity diagram shows how the `MainWindow` checks and sends the `
     * Using JavaFx's tab will not let us customise the layout as such.
     * Hence, replacing the child of a view panel is more appropriate.
     
-### Ui Navigation Buttons
+#### Ui Navigation Buttons
 To improve the usability of AWE, buttons are implemented into the Ui to allow switching of view easily.
 
 However, only 2 main views can be toggled by the buttons - Contacts page and Groups page.
