@@ -218,8 +218,8 @@ The `TransactionSummary` component,
 
 The `Payment` component,
 
-*  Handles the display of all the payments between contacts in a group.
-*  Stores 2 `Person`object and a `Cost` reference.
+*  Handles the display of all the payments to be made between contacts in a group.
+*  Stores 2 `Person` objects and a `Cost`.
 
 ### Storage component
 
@@ -422,6 +422,8 @@ The following sequence operation shows how the `deletegroup` operation works.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteGroupCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
+<img src="images/DeleteGroupRefSequenceDiagram.png" width="600" />
 
 #### Design considerations:
 
@@ -659,6 +661,8 @@ The following sequence operation shows how the `deleteexpense` operation works.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteExpenseCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
+<img src="images/DeleteExpenseRefSequenceDiagram.png" width="600" />
+
 #### Design considerations
 
 **Aspect: User command for deleteexpense:**
@@ -745,11 +749,12 @@ Step 6. Upon successful execution, `CommandResult` is returned.
 
 
 The following sequence operation shows how the `calculatepayments` operation works.
-![DeleteExpenseSequenceDiagram](images/CalculatePaymentsSequenceDiagram.png)
-![DeleteExpenseSequenceDiagram](images/CalculatePaymentsRefSequenceDiagram.png)
+![CalculatePaymentsSequenceDiagram](images/CalculatePaymentsSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `CalculatePaymentsCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
+<img src="images/CreateGroupRef.png" width="600" />
 
 **Note: When a `Person` is deleted from contacts or removed from the group, the functioning of this command does not change. The deleted person may still be part of the list of payments depending on the expenses they had previously.**
 
