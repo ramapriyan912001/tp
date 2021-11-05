@@ -73,7 +73,6 @@ public class StringUtil {
      */
     public static boolean isOverlyLargeInteger(String s) {
         requireNonNull(s);
-        System.out.println(s.matches("[0-9]+"));
         return s.matches("[0-9]+") && s.length() > 9;
     }
 
