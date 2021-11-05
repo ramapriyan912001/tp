@@ -25,6 +25,7 @@ import static seedu.awe.testutil.TypicalIndexes.INDEX_THIRD;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.awe.commons.core.Messages;
 import seedu.awe.commons.core.index.Index;
 import seedu.awe.logic.commands.EditContactCommand;
 import seedu.awe.logic.commands.EditContactCommand.EditPersonDescriptor;
@@ -67,6 +68,9 @@ public class EditContactCommandParserTest {
 
         // invalid prefix being parsed as preamble
         assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+
+        //index too large
+        assertParseFailure(parser, "9999999999", Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test

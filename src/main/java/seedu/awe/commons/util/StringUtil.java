@@ -65,4 +65,17 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Returns true if {@code s} represents an integer that is more
+     * than 9 digits long, e.g. 9999999999 <br>
+     * Will return false for any other non-null string input
+     */
+    public static boolean isOverlyLargeInteger(String s) {
+        requireNonNull(s);
+        System.out.println(s.matches("[0-9]+"));
+        return s.matches("[0-9]+") && s.length() > 9;
+    }
+
+
 }

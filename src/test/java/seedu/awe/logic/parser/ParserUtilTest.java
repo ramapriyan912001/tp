@@ -7,7 +7,7 @@ import static seedu.awe.logic.commands.CommandTestUtil.INVALID_NAME_JOHN;
 import static seedu.awe.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BUFFET;
 import static seedu.awe.logic.commands.CommandTestUtil.VALID_NAME_ALICE;
 import static seedu.awe.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.awe.logic.parser.ParserUtil.MESSAGE_INVALID_LENGTH_INDEX;
+import static seedu.awe.logic.parser.ParserUtil.MESSAGE_INVALID_SIZE_INDEX;
 import static seedu.awe.testutil.Assert.assertThrows;
 import static seedu.awe.testutil.TypicalIndexes.INDEX_FIRST;
 
@@ -57,8 +57,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseIndex_tooLongInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_LENGTH_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+        assertThrows(ParseException.class, MESSAGE_INVALID_SIZE_INDEX, ()
+            -> ParserUtil.parseIndex("999999999999"));
     }
 
     @Test

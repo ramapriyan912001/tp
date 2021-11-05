@@ -31,7 +31,7 @@ import seedu.awe.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_LENGTH_INDEX = "Index is above 9 digits.";
+    public static final String MESSAGE_INVALID_SIZE_INDEX = "Index is too large.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -40,8 +40,8 @@ public class ParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
-        if (oneBasedIndex.length() > 9) {
-            throw new ParseException(MESSAGE_INVALID_LENGTH_INDEX);
+        if (StringUtil.isOverlyLargeInteger(trimmedIndex)) {
+            throw new ParseException(MESSAGE_INVALID_SIZE_INDEX);
         }
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
