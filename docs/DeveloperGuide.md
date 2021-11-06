@@ -1276,22 +1276,21 @@ User's last entered command is either `findcontacts` or `contacts`, i.e. the use
 
 **MSS**
 
-1. User request to list groups.
-2. GroupsPage shows a list of groups.
-3. User request to see expenses of a specific group.
-4. AW3 displays all the expenses of the group.
+1. User request to list expenses of a specific group.
+2. AWE displays all the expenses of the group in ExpensesPage.
    <br>Use case ends.
 
 **Extensions**
 
-* 2a. AWE detects no groups created yet.
-  * 2a1. AWE displays message to remind User to create a group before empty GroupsPage displayed.
+* 2a. The specified group does not exist in AWE.
+  * 2a1. AWE displays message saying that there is no such group in AWE.
     <br>Use case ends.
-* 3a. The given group name is invalid.
-    * 3a1. AWE displays an error.
+* 2b. The given group name is invalid.
+    * 2b1. AWE displays error message saying that group names should only comprise letters, numbers, and spaces,
+      should be within 50 characters, and should not be blank.
       <br>Use case ends.
-* 4a. AWE detect no expenses logged under the group.
-    * 4a1. AWE displays an empty list.
+* 2c. AWE detect no expenses logged under the group.
+    * 2c1. AWE displays an empty list in the ExpensesPage.
       <br>Use case ends.
 
 **Use case: UC16 - Find expenses in a travel group**
@@ -1308,8 +1307,11 @@ User's last entered command is either `findcontacts` or `contacts`, i.e. the use
     * 2a1. AWE shows a message saying that there is no such existing group.
       <br>Use case ends.
 * 2b. There are no expenses matching the search parameters.
-    * 2b1. AWE displays nothing in the expenses page.
-    * 2b2. AWE shows a message saying no expenses are found.
+    * 2b1. AWE displays nothing in the ExpensesPage.
+      <br>Use case ends.
+* 2c. The given group name is invalid.
+    * 2c1. AWE displays error message saying that group names should only comprise letters, numbers, and spaces,
+      should be within 50 characters, and should not be blank.
       <br>Use case ends.
 
 
@@ -1327,8 +1329,7 @@ User's last entered command is either `findcontacts` or `contacts`, i.e. the use
 * 2a. AWE can't find any groups that matches the keywords.
     2a1. GroupsPage shows an empty page
     <br>Use case continues
-
-
+  
 **Use case: UC18 - Add Expense**
 
 **Preconditions:** User has is a member of the specified travel group.
@@ -1686,18 +1687,34 @@ testers are expected to do more *exploratory* testing.
 
 ### Viewing expenses
 
-1. Viewing all expenses of a travel group
+1. Listing expenses of a specific group in ContactPage or GroupsPage.
 
-   1. Prerequisites: Have at least one group in the app.
+  1. Prerequisites: The preloaded data for groups and expenses are not modified. (No groups and expenses are removed or added)
 
-   1. Test case: `expenses gn/London`<br>
-      Expected: Expenses under the group named London are displayed. Details of the operation shown in the status message.
+  2. Test case: `expenses gn/London`
+     Expected: ExpenseList will list out all the expenses added to the London group. Status message confirms that all expenses are listed.
 
-   1. Test case: `expenses gn/Test`<br>
-      Expected: No expenses displayed as group does not exist. Error details shown in the status message.
+  3. Test case: `expenses gn/Singapore`
+     Expected: No changes as group does not exist. Error details stating that specified group does not exist will be shown in status message.
 
-   1. Other incorrect delete commands to try: `expenses`, `expenses gn/`, `...`
-      Expected: Similar to previous.
+### Finding expenses
+
+1. Finding expenses for a specific group in ContactPage or GroupsPage.
+   
+  1. Prerequisites: The preloaded data for groups and expenses are not modified. (No groups and expenses are removed or added)
+
+  2. Test case: `findexpenses Transportation gn/London`
+     Expected: ExpenseList displayed. ExpenseList will list out expenses in the London group with descriptions containing "Transportation". Status message says that 1 expense is found.
+
+  3. Test case: `findexpenses Transportation Buffet gn/London`
+     Expected: ExpenseList displayed. ExpenseList will list out 2 expenses with the matching keywords. 2 expenses found shown in the status message.
+
+  4. Test case: `findexpenses Transportation gn/Bali`
+     Expected: ExpenseList displayed. ExpenseList will display a blank page. 0 expenses found shown in status message.
+     
+  5. Test case: `findexpenses Test gn/Singapore`
+     Expected: No change occurs. Status message says that the specified group does not exist. 
+     
 
 ### Deleting an expense
 
