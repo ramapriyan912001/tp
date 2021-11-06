@@ -28,6 +28,12 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
   * Highlight: This implementation added in a new command `transactionsummary` to see expenses.
   * RepoSense: [link](https://app.codecov.io/gh/AY2122S1-CS2103T-F13-1/tp/compare/206)
 
+* **Update**: Updated the data stored in `Expense` and `Group`.
+  * What it does: Allows for the splitting in expense between users of a group. Update `Expense` command to be more straight forward.
+  * Justification: The data stored is crucial in keeping track of the expense. A clear and straight forward storing of expense is necessary to prevent bugs.
+  * Highlight: This update makes adding of expense more straightforward and split the expenses of users properly.
+  * RepoSense: [link](https://app.codecov.io/gh/AY2122S1-CS2103T-F13-1/tp/compare/245)
+
 * **Enhancements to existing features**:
   * Updated the UI interface layout. [\#121](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/121)
   * Added in buttons to toggle between contacts page and group page [\#121](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/121)
@@ -44,21 +50,38 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
 * **severity.HIGH** Running AWE without data.json will crash the program [\#223](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/223)
     * What happen: Running AWE without data.json will cause a `RuntimeException`. 
     * Pull request: [\#186](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/186)
+    
+* **severity.HIGH** Commands for modifying groups will result in the entire group's expense to be wiped. [\#270](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/270)
+    * What happen: Expenses were not brought from the old instance to the new instance of that specific group.
+    * Pull request: [\#269](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/269), [\#273](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/273)
 
+* **severity.MED** Error message for description when adding expense is wrong. [\#372](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/372)
+    * What happen: Error message was copy and pasted from `Name` without changing.
+    * Pull request: [\#382](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/382/files#diff-91ad22c2685d5cac2700257474d618c27554371ea585eaf29d2f17d7a66791a0)
+
+* **severity.VERY_LOW** Groups displayed in Person card has extra `,`[\169](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/169)
+    * What happen: Displayed list of groups in Person card will have an extra `,` at the back.
+    * Pull request: [\188](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/188)
+    
 ### Others
 * **Project management**
-  * Managed releases: [v1.2](https://github.com/AY2122S1-CS2103T-F13-1/tp/releases/tag/v1.2), [v1.2b]()
+  * Managed releases: [v1.2](https://github.com/AY2122S1-CS2103T-F13-1/tp/releases/tag/v1.2)
 
 * **Documentation**:
   * User Guide:
-    * Added user guide for the features `groups`, `expenses`and `findgroups`.
+    * Updated overall layout.
+    * Added user guide for the features `groups`, `expenses`, `findgroups` and `transactionsummary`.
     * Added FAQ.
+    * Added links to Table Of Content at the end of every page.
   * Developer Guide:
-    * Added use cases for `view groups`, `find person` and `view expenses`.
-    * Updated UI segment with class diagram and explanation.
+    * Updated overall layout.
+    * Updated UI segment in Design with class diagram and explanation.
     * Added implementation, test cases  and use cases for `findgroups`.
+    * Added implementation, test cases  and use cases for `transactionsummary`.
+    * Added implementation and design consideration for user interface.
+    * Added use cases for `view groups`, `find person` and `view expenses`.
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#113](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/113), [\#116](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/116)
-  * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-  * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
+  * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2122S1/forum/issues/328), [2](https://github.com/nus-cs2103-AY2122S1/forum/issues/9), [3](https://github.com/nus-cs2103-AY2122S1/forum/issues/11), [4]())
+  * Reported bugs and suggestions for other teams in the class (examples: [1 (F13-3)](https://github.com/AY2122S1-CS2103T-F13-3/tp/issues/332), [2 (F13-3)](https://github.com/AY2122S1-CS2103T-F13-3/tp/issues/328), [3 (W16-2)](https://github.com/AY2122S1-CS2103T-W16-2/tp/issues/216), [4 (W16-2)](https://github.com/AY2122S1-CS2103T-W16-2/tp/issues/224))
