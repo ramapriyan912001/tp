@@ -74,6 +74,7 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
   * `GroupAddTagCommandParser` 
   * `GroupRemoveTagCommand`
   * `GroupRemoveTagCommandParser`
+
 ### Others
 * **Project management**
     * Managed releases: -
@@ -81,7 +82,7 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
 * **Documentation**:
     * User Guide:
         * Added documentation for the features `create group`, `group add tag`, `group remove tag`, `group add contact`,
-      `group remove contact`, and `group edit name`
+         `group remove contact`, and `group edit name`
         * Add details of the above features into the Command Summary table
         * Added details for `About the Document`
         * Added details for `Command Format`
@@ -91,15 +92,30 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
         * Created table of contents for ease of navigation.
         * Rearranged all user stories to ensure they follow decreasing order of priority.
         * Added use cases for `Add a Person`, `Clear All Entries` and `Create Travel Group`.
-        * Added details for `create group`, `group add tag`, `group remove tag`, `group add contact`,
-          `group remove contact` features, including sequence and activity diagrams.
-        * Added use cases for `delete group`, `delete expense`, `calculatepayments`, `help`, `group add tag`,
-      `   group remove tag`, `group add contact`, `group remove contact`.
+        * Added details for manual testing of `create group`, `groupeditname` features, including sequence and
+          activity diagrams.
+        * Added use cases for `delete group`, `delete expense`, `calculatepayments`, `help`, `groupeditname`,
+         `group add tag`, `group remove tag`, `group add contact`, `group remove contact`.
 
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#124](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/124)
-    * Worked together with [@](https://github.com/chrus-chong) on group features.
-    * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-    * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-    * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
+    * PRs reviewed (with non-trivial review comments): [\#124](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/124),
+      [\#334](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/334).
+    * Worked together with [@ramapriyan912001](https://github.com/ramapriyan912001) on group features.
+    * Contributed to forum discussions (examples: [#38](https://github.com/nus-cs2103-AY2122S1/forum/issues/38),
+  [#113](https://github.com/nus-cs2103-AY2122S1/forum/issues/113),
+  [#264](https://github.com/nus-cs2103-AY2122S1/forum/issues/264),
+  [#342](https://github.com/nus-cs2103-AY2122S1/forum/issues/342))
+    * Reported bugs and suggestions for other teams in the class (examples:
+  [#1](https://github.com/chrus-chong/ped/issues/1),
+  [#2](https://github.com/chrus-chong/ped/issues/2),
+  [#3](https://github.com/chrus-chong/ped/issues/3),
+  [#4](https://github.com/chrus-chong/ped/issues/4),
+  [#5](https://github.com/chrus-chong/ped/issues/5),
+  [#6](https://github.com/chrus-chong/ped/issues/6),
+  [#7](https://github.com/chrus-chong/ped/issues/7),
+  [#8](https://github.com/chrus-chong/ped/issues/8),
+  [#9](https://github.com/chrus-chong/ped/issues/9),'
+  [#10](https://github.com/chrus-chong/ped/issues/10),
+  [#11](https://github.com/chrus-chong/ped/issues/11),
+  [#12](https://github.com/chrus-chong/ped/issues/12))

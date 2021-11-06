@@ -61,7 +61,7 @@ public class Messages {
 
     public static final String MESSAGE_DELETECONTACTCOMMAND_USAGE = DeleteContactCommand.COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Parameters: INDEX (must be a positive integer within range of index numbers seen on screen)\n"
             + "Example: " + DeleteContactCommand.COMMAND_WORD + " 1";
     public static final String MESSAGE_DELETECONTACTCOMMAND_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
@@ -70,7 +70,7 @@ public class Messages {
             + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INDEX (must be a positive integer within range of index numbers seen on screen) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
@@ -113,7 +113,7 @@ public class Messages {
                     + "Bali "
                     + PREFIX_NAME
                     + "David Li\n";
-    public static final String MESSAGE_CREATEGROUPCOMMAND_EMPTY_GROUP = "Group requires at least 1 member.\n";
+    public static final String MESSAGE_CREATEGROUPCOMMAND_EMPTY_GROUP = "Command requires at least 1 member.\n";
     public static final String MESSAGE_CREATEGROUPCOMMAND_INVALID_NAMES =
             "None of the names are in your contact book.\n";
 
@@ -195,7 +195,7 @@ public class Messages {
     public static final String MESSAGE_GROUPREMOVETAGCOMMAND_ERROR =
             "Tag(s) not removed from group. Make sure to use exact tag names.\n";
     public static final String MESSAGE_GROUPREMOVETAGCOMMAND_NONEXISTENT_TAG =
-            "The tag \"%1$s\" is not found in the group.\n";
+            "Tag(s) not removed from group.\n Be sure to use the exact tag names.\n";
     public static final String MESSAGE_GROUPREMOVETAGCOMMAND_USAGE =
             ": Removes the specified tags from a group\n"
                     + "Parameters: "
@@ -272,7 +272,7 @@ public class Messages {
 
     public static final String MESSAGE_DELETEEXPENSECOMMAND_USAGE = DeleteExpenseCommand.COMMAND_WORD
             + ": Deletes the expense identified by the index number used in the displayed expense list.\n"
-            + "Parameters: INDEX (must be a positive integer) within range of index numbers seen on screen.\n"
+            + "Parameters: INDEX (must be a positive integer within range of index numbers seen on screen)\n"
             + "Example: " + DeleteExpenseCommand.COMMAND_WORD + " 1";
     public static final String MESSAGE_DELETEEXPENSECOMMAND_SUCCESS = "Expense %s successfully deleted!";
     public static final String MESSAGE_DELETEEXPENSECOMMAND_CANNOT_BE_DELETED =

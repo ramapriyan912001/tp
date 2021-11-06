@@ -71,14 +71,12 @@ public class GroupRemoveTagCommandTest {
 
     @Test
     public void execute_invalidCommandFound_failure() {
-        GroupRemoveTagCommand groupRemoveTagCommandTrue =
+        GroupRemoveTagCommand groupRemoveTagCommand =
                 new GroupRemoveTagCommand(BALI_GROUP_NAME, GROUP_ABSENT_TAG_TO_REMOVE);
-        String expectedMessage = String.format(Messages.MESSAGE_GROUPREMOVETAGCOMMAND_NONEXISTENT_TAG, "family");
-        assertCommandFailure(groupRemoveTagCommandTrue, model, expectedMessage);
+        String expectedMessage = Messages.MESSAGE_GROUPREMOVETAGCOMMAND_NONEXISTENT_TAG;
+        assertCommandFailure(groupRemoveTagCommand, model, expectedMessage);
 
-        GroupRemoveTagCommand groupRemoveTagCommandFalse =
-                new GroupRemoveTagCommand(BALI_GROUP_NAME, GROUP_TAGS_TO_REMOVE);
-        assertCommandFailure(groupRemoveTagCommandTrue, model, expectedMessage);
+        assertCommandFailure(groupRemoveTagCommand, model, expectedMessage);
     }
 
     @Test
