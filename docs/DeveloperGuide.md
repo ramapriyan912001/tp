@@ -1295,20 +1295,100 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-### Deleting a person
+### Deleting a contact
 
-1. Deleting a person while all contacts are being shown
+1. Deleting a contact while contacts are being shown.
 
-   1. Prerequisites: List all contacts using the `contacts` command. Multiple contacts in the list.
+   1. Prerequisites: The preloaded data for contacts are not modified. (No contacts are removed or added). List contacts using command `contacts`.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `deletecontact 1`<br>
+     Expected: First contact is deleted from the visible list. List is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Test case: `deletecontact 0`<br>
+     Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   1. Test case: `deletecontact -1`<br>
+     Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect delete commands to try: `deletecontact`, `deletecontact x`, `...` (where x is larger than the visible list size)<br>
+     Expected: Similar to previous.
+
+2. Deleting a contact while **filtered** contacts are being shown.
+
+   1. Prerequisites: The preloaded data for contacts are not modified. (No contacts are removed or added). List contacts using command `findcontacts al`.
+
+   1. Test case: `deletecontact 1`<br>
+     Expected: First contact is deleted from the visible list. List is updated.
+
+   1. Test case: `deletecontact 0`<br>
+     Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
+
+   1. Test case: `deletecontact -1`<br>
+     Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect delete commands to try: `deletecontact`, `deletecontact x`, `...` (where x is larger than the visible list size)<br>
+     Expected: Similar to previous.
+
+3. Attempting to delete a contact when not viewing a list of contacts.
+   1. Prerequisites: The preloaded data for contacts are not modified. (No contacts are removed or added). The current page must not be an `ContactsPage`. The previous valid command entered should not be a `findcontacts` or `contacts` command.
+
+   1. Test case: `deletecontact 1` <br>
+     Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
+
+### Editing a contact
+
+1. Editing a contact while contacts are being shown.
+
+   1. Prerequisites: The preloaded data for contacts are not modified. (No contacts are removed or added). List contacts using command `contacts`.
+
+   1. Test case: `editcontact 1 n/Alex`<br>
+     Expected: First contact is edited from the visible list. List is updated to show edited contact with new name.
+
+   1. Test case: `editcontact 1 p/92748316`<br>
+   Expected: First contact is edited from the visible list. List is updated to show edited contact with new phone number.
+
+   1. Test case: `editcontact 1 n/Brandon p/93359216`<br>
+   Expected: First contact is edited from the visible list. List is updated to show edited contact with new name and phone number.
+
+   1. Test case: `editcontact 0 n/Alex `<br>
+     Expected: No contact is edited. Error details shown in the status message. Status bar remains the same.
+
+   1. Test case: `editcontact 1`<br>
+     Expected: No contact is edited. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect edit commands to try: `editcontact`, `editcontact x n/NAME p/PHONE`, `...` (where x is larger than the visible list size)<br>
+     Expected: Similar to previous.
+
+2. Editing a contact while **filtered** contacts are being shown.
+
+   1. Prerequisites: The preloaded data for contacts are not modified. (No contacts are removed or added). List contacts using command `findcontacts al`.
+
+   1. Test case: `editcontact 1 n/Alex`<br>
+     Expected: First contact is edited from the visible list. List is updated to show edited contact with new name.
+
+   1. Test case: `editcontact 1 p/92748316`<br>
+     Expected: First contact is edited from the visible list. List is updated to show edited contact with new phone number.
+
+   1. Test case: `editcontact 1 n/Brandon p/93359216`<br>
+     Expected: First contact is edited from the visible list. List is updated to show edited contact with new name and phone number.
+
+   1. Test case: `editcontact 0 n/Alex `<br>
+     Expected: No contact is edited. Error details shown in the status message. Status bar remains the same.
+   
+   1. Test case: `editcontact 2 n/Bernice Yu`<br>
+     Expected: No contact is edited as this name is identical to the name of the current contact at INDEX 2. Error details shown in the status message. Status bar remains the same.
+
+   1. Test case: `editcontact 1`<br>
+     Expected: No contact is edited. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect edit commands to try: `editcontact`, `editcontact x n/NAME p/PHONE`, `...` (where x is larger than the visible list size)<br>
+   Expected: Similar to previous.
+
+3. Attempting to delete a contact when not viewing a list of contacts.
+   1. Prerequisites: The preloaded data for contacts are not modified. (No contacts are removed or added). The current page must not be an `ContactsPage`. The previous valid command entered should not be a `findcontacts` or `contacts` command.
+
+   1. Test case: `editcontact 1 n/Alex` <br>
+     Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
 
 ### Search for groups
 
@@ -1335,7 +1415,17 @@ testers are expected to do more *exploratory* testing.
    
    1. Test case: `findgroups Singapore`
       Expected: GroupList displayed. GroupList will display a blank page. 0 groups found shown in status message.
-    
+      
+### Deleting a Group
+
+1. Deleting a group
+   1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added).
+  
+   1. Test case: `deletegroup gn/London`
+     Expected: GroupList displayed. Group with name London not seen on the list. Status message will confirm deletion of the group.
+
+   1. Test case: `deletegroup gn/Turkey`
+     Expected: No changes as group does not exist. Error details shown in the status message.
 
 ### Viewing expenses
 
@@ -1351,7 +1441,65 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `expenses`, `delete gn/`, `...`
       Expected: Similar to previous.
+
+### Deleting an expense
+
+1. Deleting an expense while expenses of a group are being shown.
+
+   1. Prerequisites: The preloaded data for groups and expenses are not modified. (No groups or expenses are removed or added). List expenses using command `expenses gn/London`.
+   
+   1. Test case: `deleteexpense 1`<br>
+     Expected: First expense is deleted from the visible list. List is updated.
+
+   1. Test case: `deleteexpense 0`<br>
+     Expected: No expense is deleted. Error details shown in the status message. Status bar remains the same.
+
+   1. Test case: `deleteexpense -1`<br>
+     Expected: No expense is deleted. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect delete commands to try: `deleteexpense`, `deleteexpense x`, `...` (where x is larger than the visible list size)<br>
+     Expected: Similar to previous.
+
+2. Deleting an expense while **filtered** expenses of a group are being shown.
+
+   1. Prerequisites: The preloaded data for groups and expenses are not modified. (No groups or expenses are removed or added). List expenses using command `findexpenses transport gn/London`.
+
+   1. Test case: `deleteexpense 1`<br>
+     Expected: First expense is deleted from the visible list. List is updated.
+
+   1. Test case: `deleteexpense 0`<br>
+     Expected: No expense is deleted. Error details shown in the status message. Status bar remains the same.
+
+   1. Test case: `deleteexpense -1`<br>
+     Expected: No expense is deleted. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect delete commands to try: `deleteexpense`, `deleteexpense x`, `...` (where x is larger than the visible list size)<br>
+     Expected: Similar to previous.
+     
+3. Attempting to delete an expense when not viewing a list of expenses.
+   1. Prerequisites: The preloaded data for groups and expenses are not modified. (No groups or expenses are removed or added). The current page must not be an `ExpensesPage`. The previous valid command entered should not be a `findexpenses` or `expenses` command.
+  
+   1. Test case: `deleteexpense 1` <br>
+     Expected: No expense is deleted. Error details shown in the status message. Status bar remains the same.
       
+### Calculating Payments
+
+1. Calculating payments of a group with expenses.
+
+   1. Prerequisites: The preloaded data for groups and expenses are not modified. (No groups or expenses are removed or added).
+  
+   1. Test case: `calculatepayments gn/London`
+     Expected: PaymentList populated with payments is displayed. Status message will indicate successful execution of the command.
+
+   1. Test case: `calculatepayments gn/Turkey`
+     Expected: No changes as group does not exist. Error details shown in the status message.
+      
+2. Calculating payments of a group without expenses
+
+   1. Prerequisites: The preloaded data for groups and expenses are not modified. (No groups or expenses are removed or added).
+
+   1. Test case: `calculatepayments gn/Bali`
+     Expected: Empty PaymentList is displayed. Status message will indicate successful execution of the command.
 
 ### Saving data
 

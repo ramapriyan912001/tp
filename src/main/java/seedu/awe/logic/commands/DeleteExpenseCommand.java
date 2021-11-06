@@ -45,7 +45,7 @@ public class DeleteExpenseCommand extends Command {
             throw new CommandException(MESSAGE_DELETEEXPENSECOMMAND_CANNOT_BE_DELETED);
         }
 
-        if (index.getZeroBased() >= expenseList.size()) {
+        if ((index.getZeroBased() >= expenseList.size())) {
             throw new CommandException(Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
         }
 
