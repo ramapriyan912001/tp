@@ -1449,7 +1449,7 @@ User's last entered command is either `findexpenses` or `expenses`, i.e. the use
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **ContactPage**: The page displaying all the contacts
+* **ContactsPage**: The page displaying all the contacts
 * **GroupsPage**: The page displaying all the travel groups
 * **ExpensesPage**: The page displaying all the expenses of a travel group
 
@@ -1589,7 +1589,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Search for groups
 
-1. Search for groups in GroupPage
+1. Search for groups in GroupsPage
 
     1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added)
     
@@ -1602,7 +1602,7 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `findgroups Singapore`
        Expected: GroupList will display a blank page. 0 groups found shown in status message.
        
-2. Search for groups in ContactPage
+2. Search for groups in ContactsPage
    1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added)
    
    2. Test case: `findgroups London`
@@ -1687,7 +1687,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Viewing expenses
 
-1. Listing expenses of a specific group in ContactPage or GroupsPage.
+1. Listing expenses of a specific group in ContactsPage or GroupsPage.
 
   1. Prerequisites: The preloaded data for groups and expenses are not modified. (No groups and expenses are removed or added)
 
@@ -1699,7 +1699,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Finding expenses
 
-1. Finding expenses for a specific group in ContactPage or GroupsPage.
+1. Finding expenses for a specific group in ContactsPage or GroupsPage.
    
   1. Prerequisites: The preloaded data for groups and expenses are not modified. (No groups and expenses are removed or added)
 
