@@ -4,10 +4,8 @@
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AweParser" as AweParser LOGIC_COLOR
-participant ":FindExpensesCommandParser" as FindExpensesCommandParser LOGIC_COLOR
-participant "d:FindExpensesCommand" as FindExpensesCommand LOGIC_COLOR
+participant "findExpensesCommand:FindExpensesCommand" as FindExpensesCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
-participant ":DescriptionContainsKeywordsPredicate" as DescriptionContainsKeywordsPredicate LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -20,43 +18,26 @@ activate LogicManager
 LogicManager -> AweParser : parseCommand("findexpenses dinner gn/London")
 activate AweParser
 
-create FindExpensesCommandParser
-AweParser -> FindExpensesCommandParser
-activate FindExpensesCommandParser
-
-FindExpensesCommandParser --> AweParser
-deactivate FindGroupsCommandParser
-
-AweParser -> FindExpensesCommandParser : parse("dinner gn/London")
-activate FindExpensesCommandParser
-
-create DescriptionContainsKeywordsPredicate
-FindExpensesCommandParser ->DescriptionContainsKeywordsPredicate
-activate DescriptionContainsKeywordsPredicate
-
-DescriptionContainsKeywordsPredicate -> FindExpensesCommandParser : c
-deactivate DescriptionContainsKeywordsPredicate
-
+note right
+Refer to ref frame for
+details on creation of
+the FindExpensesCommand object
+end note
+group sd get findExpensesCommand
 create FindExpensesCommand
-FindExpensesCommandParser -> FindExpensesCommand : c
+AweParser -> FindExpensesCommand
 activate FindExpensesCommand
-
-FindExpensesCommand --> FindExpensesCommandParser : d
+FindExpensesCommand --> AweParser
 deactivate FindExpensesCommand
+end group
 
-FindExpensesCommandParser --> AweParser : d
-deactivate FindExpensesCommandParser
-'Hidden arrow to position the destroy marker below the end of the activation bar.
-FindExpensesCommandParser -[hidden]-> AweParser
-destroy FindExpensesCommandParser
-
-AweParser --> LogicManager : d
+AweParser --> LogicManager : findExpensesCommand
 deactivate AweParser
 
 LogicManager -> FindExpensesCommand : execute()
 activate FindExpensesCommand
 
-FindExpensesCommand -> Model : updateFilteredExpenseList(c)
+FindExpensesCommand -> Model : updateFilteredExpenseList(predicate)
 activate Model
 
 Model --> FindExpensesCommand
@@ -66,7 +47,7 @@ create CommandResult
 FindExpensesCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> FindExpensesCommand
+CommandResult --> FindExpensesCommand : result
 deactivate CommandResult
 
 FindExpensesCommand --> LogicManager : result

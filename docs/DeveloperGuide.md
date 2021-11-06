@@ -598,10 +598,13 @@ Step 6. The output from `CommandResult` is then displayed as an output for the u
 
 
 The following sequence operation shows how the `findexpenses` operation works.
-![FindExpensesSequenceDiagram](images/FindExpensesSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteGroupCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<img src="images/FindExpensesSequenceDiagram.png" width="750" />
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindExpensesCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
+<img src="images/FindExpensesRefSequenceDiagram.png" width="600" />
 
 #### Design considerations:
 
@@ -615,13 +618,14 @@ The following sequence operation shows how the `findexpenses` operation works.
 
 * **Alternative 2 (index based):** Find expenses in the group indicated by index position in `ObservableList`
     * Pros: Short user command with just the index.
-    * Cons: User need to check for the right index of the group.
+    * Cons: User needs to check for the right index of the group.
     * Cons: Easy for user to make an erroneous command.
 
 
 * **Justification**
-    * Each group has a unique name and the implementation for finding a group based on the group name is simple. 
-    * Users may need a long time to find the index of a group if the list of groups is very long.
+    * Each group has a unique name and can be used easily in the implementation to find expenses within the specified group. 
+    * Users may need a long time to find the index of the group if the list of groups is very long.
+    * This would be more inconvenient for the user.
     * Hence, finding expenses based on the specified group name is more appropriate.
 
 
@@ -1345,7 +1349,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `expenses gn/Test`<br>
       Expected: No expenses displayed as group does not exist. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `expenses`, `delete gn/`, `...`
+   1. Other incorrect delete commands to try: `expenses`, `expenses gn/`, `...`
       Expected: Similar to previous.
       
 

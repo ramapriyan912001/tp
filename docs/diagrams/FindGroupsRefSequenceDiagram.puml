@@ -9,7 +9,7 @@ participant ":GroupContainsKeywordsPredicate" as GroupContainsKeywordsPredicate 
 end box
 
 
-mainframe sd get addContactCommand
+mainframe sd get findGroupsCommand
 
 create FindGroupsCommandParser
 AweParser -> FindGroupsCommandParser

@@ -22,9 +22,9 @@ activate AweParser
 note right
 Refer to ref frame for
 details on creation of
-the AddContactCommand object
+the FindGroupsCommand object
 end note
-group sd get findGroupCommand
+group sd get findGroupsCommand
 create FindGroupsCommand
 AweParser -> FindGroupsCommand
 activate FindGroupsCommand
