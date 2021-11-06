@@ -162,7 +162,7 @@ For those who are not as fast, familiarity with the commands over time will allo
 
 * Do note that the [Contact-related commands](#51-contacts-commands) and
 [Expense-related commands](#53-expense-commands) both use accept an index as an argument to identify which
-contact/expense to modify. On the other hand, [Group-related commands](#52-groups-commands) accept a unique group
+contact/expense to delete. On the other hand, [Group-related commands](#52-groups-commands) accept a unique group
 name as an argument. For the reasons behind this implementation, refer to our [FAQ](#4-faq)
 
 </div>

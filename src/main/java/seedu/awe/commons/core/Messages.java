@@ -113,7 +113,7 @@ public class Messages {
                     + "Bali "
                     + PREFIX_NAME
                     + "David Li\n";
-    public static final String MESSAGE_CREATEGROUPCOMMAND_EMPTY_GROUP = "Group requires at least 1 member.\n";
+    public static final String MESSAGE_CREATEGROUPCOMMAND_EMPTY_GROUP = "Command requires at least 1 member.\n";
     public static final String MESSAGE_CREATEGROUPCOMMAND_INVALID_NAMES =
             "None of the names are in your contact book.\n";
 
@@ -195,7 +195,7 @@ public class Messages {
     public static final String MESSAGE_GROUPREMOVETAGCOMMAND_ERROR =
             "Tag(s) not removed from group. Make sure to use exact tag names.\n";
     public static final String MESSAGE_GROUPREMOVETAGCOMMAND_NONEXISTENT_TAG =
-            "The tag \"%1$s\" is not found in the group.\n";
+            "Tag(s) not removed from group.\n Be sure to use the exact tag names.\n";
     public static final String MESSAGE_GROUPREMOVETAGCOMMAND_USAGE =
             ": Removes the specified tags from a group\n"
                     + "Parameters: "

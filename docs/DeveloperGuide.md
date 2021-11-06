@@ -472,23 +472,59 @@ The following sequence operation shows how the `deletegroup` operation works.
   * Should we modify or remove the constraint, the alternative implementation would require significant alterations.
   * To make the feature more extendable, we choose alternative 1.
 
-### Group Add Contact Feature
-![GroupAddContactSequenceDiagram](images/GroupAddContactSequenceDiagram.png)
+### Group Edit Features
+The group edit mechanism is facilitated by defining a Group model and adding a Unique Group List field to
+AWE. The Group model contains a `GroupName` field containing the name of the group, an `ArrayList` of `Person`
+objects who are members of the Group, an `ArrayList` of `Expense` objects that keeps track of the expenditures of the
+Group. The group edit mechanism comprises the following commands. 
+* `groupeditname`
+* `groupaddcontact`
+* `groupremovecontact`
+* `groupaddtag`
+* `groupremovetag`
 
+Given the high degree of similarity in implementation and design considerations between these commands, only the
+`groupeditname` command will be explained comprehensively in this section.
 
-### Group Remove Contact Feature
-![GroupRemoveContactSequenceDiagram](images/GroupRemoveContactSequenceDiagram.png)
+Given below is an example usage scenario and how the `groupeditname` command behaves at each step.
 
-**Note: When a `Person` is deleted from contacts, they are automatically deleted from the `members` list of the group as well.**
+Step 1. A valid `groupeditname` command is given as user input. This prompts the `LogicManager` to run its execute()
+method.
 
-### Group Add Tag Feature
-![GroupAddTagSequenceDiagram](images/GroupAddTagSequenceDiagram.png)
+Step 2. The `GroupEditNameCommandParser` parses the input and checks for presence of the relevant prefixes.
+It also checks that both the old and new group names are valid.
+It returns a `GroupEditNameCommand`.
 
-### Group Remove Tag Feature
-![GroupRemoveTagSequenceDiagram](images/GroupRemoveTagSequenceDiagram.png)
+Step 3. `GroupEditNameCommand` runs its execute() method which updates the name of the group in the AWE model.
+Upon successful execution,`CommandResult` is returned.
 
-### Group Edit Name Feature
+The following sequence operation shows how the `groupeditname` command works.
 ![GroupEditNameSequenceDiagram](images/GroupEditNameSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `oldGroup:Group`
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+#### Design considerations:
+
+**Aspect: User command for `groupeditname`:**
+
+* **Alternative 1 (current choice):** Edit each attribute of a group with separate commands.
+  * Pros: Significantly shorter commands.
+  * Pros: Provides user with convenience of editing a group with minimal input.
+  * Cons: More commands for user to work with. Harder to remember relevant commands.
+
+* **Alternative 2 :** Edit groups with a single command, as is implemented in `editcontact`.
+  * Pros: Easy to implement.
+  * Cons: Inconvenient for user to edit a person if there are multiple attributes they wish to change.
+  * Cons: Easy for user to make an erroneous command.
+
+* **Justification**
+  * Unlike Person objects, Group objects have many more attributes that users may wish to change.
+  * The length of a single edit command that can change all attributes will be extremely long if a user wishes to add
+  and remove multiple members simultaneously.
+  * This significantly increases the chances of users inputting erroneous commands as well
+  * Hence, editing attributes of a group using separate commands is more convenient and appropriate.
 
 ### Find group feature
 
@@ -913,7 +949,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the **System** is the `AWE` and the **Actor** is the `user`, unless specified otherwise)
 
 
-**Use case: UC1- Help User Understand Product**
+**Use case: UC1- Help user understand AWE**
 
 **MSS**
 
@@ -928,7 +964,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       <br>Use case ends.
     
 
-**Use case: Add a Person**
+**Use case: UC2 - Add a person**
 
 **MSS**
 
@@ -949,7 +985,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2c1. AWE reminds user that phone numbers should only contain numbers and be at least 3 digits long.
       <br>Use case ends.
 
-**Use case: Edit a person**
+**Use case: UC3 - Edit a person**
 
 **Preconditions:**
 User's last entered command is either `findcontacts` or `contacts`, i.e. the user is viewing an contacts list.
@@ -977,7 +1013,7 @@ User's last entered command is either `findcontacts` or `contacts`, i.e. the use
   * 2d1. AWE shows an error message asking user to enter `findcontacts` or `contacts` command first.
     <br>Use case ends.
     
-**Use case: List all contacts**
+**Use case: UC4 - List all contacts**
 
 **MSS**
 
@@ -992,7 +1028,7 @@ User's last entered command is either `findcontacts` or `contacts`, i.e. the use
       <br>Use case ends.
 
 
-**Use case: Find a person**
+**Use case: UC5 - Find a person**
 
 **Preconditions:**
 User is in ContactsPage
@@ -1015,7 +1051,7 @@ User is in ContactsPage
       <br>Use case ends.
 
 
-**Use case: Delete a person**
+**Use case: UC6 - Delete a person**
 
 **Preconditions:**
 User's last entered command is either `findcontacts` or `contacts`, i.e. the user is viewing an contacts list.
@@ -1040,7 +1076,7 @@ User's last entered command is either `findcontacts` or `contacts`, i.e. the use
   * 2c1. AWE shows an error message asking user to enter `findcontacts` or `contacts` command first.
     <br>Use case ends.
     
-**Use case: Create Travel Group**
+**Use case: UC7 - Create Travel Group**
 
 **MSS**
 
@@ -1056,7 +1092,7 @@ User's last entered command is either `findcontacts` or `contacts`, i.e. the use
     <br>Use case ends.
     
     
-**Use case: Delete Travel Group**
+**Use case: UC8 - Delete Travel Group**
 
 **MSS**
 
@@ -1075,7 +1111,150 @@ User's last entered command is either `findcontacts` or `contacts`, i.e. the use
     * 2a1. AWE displays message to remind User to type in name of a group inside the AWE.
       <br>Use case ends.    
 
-**Use case: List all travel groups**
+**Use case: UC9 - Change group name**
+
+**MSS**
+
+1. User requests to change group name.
+2. Named is changed for relevant group.
+3. AWE shows updated list of groups and contacts.
+4. AWE displays confirmation message.
+   <br>Use case ends.
+
+**Extension**
+
+* 1a. AWE detects that the user input does not follow the command format.
+  * 1a1. AWE displays message of invalid command format as well as the appropriate command usage.
+    <br>Use case ends.
+* 1b. AWE detects that there is no valid old group name or new group name being specified.
+  * 1b1 AWE displays message informing user that group names should only comprise letters, numbers, and spaces,
+        should be within 50 characters, and should not be blank.
+    <br>Use case ends.
+* 1c. AWE detects group name that is not in AWE.
+  * 1c1. AWE displays message to remind User to type in name of a group inside the AWE.
+    <br>Use case ends.
+
+**Use case: UC10 - Add contact to group**
+
+**MSS**
+
+1. User requests to add contact to a group.
+2. Contact added to group.
+3. AWE shows updated list of groups and contacts.
+4. AWE displays confirmation message.
+   <br>Use case ends.
+
+**Extension**
+
+* 1a. AWE detects that the user input does not follow the command format.
+  * 1a1. AWE displays message of invalid command format as well as the appropriate command usage.
+    <br>Use case ends.
+* 1b. AWE detects that there is no valid group name being specified.
+  * 1b1 AWE displays error message informing user that group names should only comprise letters, numbers, and spaces,
+    should be within 50 characters, and should not be blank.
+    <br>Use case ends.
+* 1c. AWE detects group name that is not in AWE.
+  * 1c1. AWE displays message to remind User to type in name of a group inside the AWE.
+    <br>Use case ends.
+* 1d. AWE detects that there is no contact names being specified.
+  * 1d1 AWE displays message informing user that there should be at least one group member in each group.
+    <br>Use case ends.
+* 1d. AWE detects contact name that is not in AWE.
+  * 1d1. AWE displays message to inform user that none of the specified contact names are in AWE.
+    <br>Use case ends.
+
+**Use case: UC11 - Remove contact from group**
+
+**MSS**
+
+1. User requests to remove contact from a group.
+2. Contact removed from group.
+3. AWE shows updated list of groups and contacts.
+4. AWE displays confirmation message.
+   <br>Use case ends.
+
+**Extension**
+
+* 1a. AWE detects that the user input does not follow the command format.
+  * 1a1. AWE displays message of invalid command format as well as the appropriate command usage.
+    <br>Use case ends.
+* 1b. AWE detects that there is no valid group name being specified.
+  * 1b1 AWE displays message informing user that group names should only comprise letters, numbers, and spaces,
+    should be within 50 characters, and should not be blank.
+    <br>Use case ends.
+* 1c. AWE detects group name that is not in AWE.
+  * 1c1. AWE displays message to remind User to type in name of a group inside the AWE.
+    <br>Use case ends.
+* 1d. AWE detects that there is no contact names being specified.
+  * 1d1 AWE displays message informing user that there should be at least one group member in each group.
+    <br>Use case ends.
+* 1d. AWE detects contact name that is not in AWE.
+  * 1d1. AWE displays message to inform user that none of the specified contact names are in AWE.
+    <br>Use case ends.
+* 2a. AWE detects that the removal of person from group results in the group having 0 members.
+  * 2a1. AWE deletes the group with 0 members 
+  * 2a2. AWE shows updated list of groups and contacts.
+  * 2a3. AWE displays confirmation message and informs user that the group with 0 members has been deleted.
+   <br>Use case ends.
+
+**Use case: UC12 - Add tag to group**
+
+**MSS**
+
+1. User requests to add tag to a group.
+2. Tag added to group.
+3. AWE shows updated list of groups.
+4. AWE displays confirmation message.
+   <br>Use case ends.
+
+**Extension**
+
+* 1a. AWE detects that the user input does not follow the command format.
+  * 1a1. AWE displays error message of invalid command format as well as the appropriate command usage.
+    <br>Use case ends.
+* 1b. AWE detects that there is no valid group name being specified.
+  * 1b1 AWE displays message informing user that group names should only comprise letters, numbers, and spaces,
+    should be within 50 characters, and should not be blank.
+    <br>Use case ends.
+* 1c. AWE detects group name that is not in AWE.
+  * 1c1. AWE displays message to remind User to type in name of a group inside the AWE.
+    <br>Use case ends.
+* 1d. AWE detects that there is no valid tags being specified.
+  * 1d1 AWE displays error message informing user that tags should only comprise letters, numbers, and spaces,
+    should be within 50 characters, and should not be blank.
+    <br>Use case ends.
+
+**Use case: UC13 - Remove tag from group**
+
+**MSS**
+
+1. User requests to remove tag from a group.
+2. Tag removed from group.
+3. AWE shows updated list of groups.
+4. AWE displays confirmation message.
+   <br>Use case ends.
+
+**Extension**
+
+* 1a. AWE detects that the user input does not follow the command format.
+  * 1a1. AWE displays error message of invalid command format as well as the appropriate command usage.
+    <br>Use case ends.
+* 1b. AWE detects that there is no valid group name being specified.
+  * 1b1 AWE displays message informing user that group names should only comprise letters, numbers, and spaces,
+    should be within 50 characters, and should not be blank.
+    <br>Use case ends.
+* 1c. AWE detects group name that is not in AWE.
+  * 1c1. AWE displays message to remind User to type in name of a group inside the AWE.
+    <br>Use case ends.
+* 1d. AWE detects that there is no valid tags being specified.
+  * 1d1 AWE displays error message informing user that tags should only comprise letters, numbers, and spaces,
+    should be within 50 characters, and should not be blank.
+    <br>Use case ends.
+* 1d. AWE detects tag is not in group.
+  * 1d1. AWE displays message to inform user that the specified tags are not in the group.
+    <br>Use case ends.
+
+**Use case: UC14 - List all travel groups**
 
 **MSS**
 
@@ -1089,7 +1268,7 @@ User's last entered command is either `findcontacts` or `contacts`, i.e. the use
     * 2a1 AWE displays a blank screen.
       <br>Use case ends.
 
-**Use case: List expenses of a travel group**
+**Use case: UC15 - List expenses of a travel group**
 
 **MSS**
 
@@ -1111,7 +1290,7 @@ User's last entered command is either `findcontacts` or `contacts`, i.e. the use
     * 4a1. AWE displays an empty list.
       <br>Use case ends.
 
-**Use case: Find expenses in a travel group**
+**Use case: UC16 - Find expenses in a travel group**
 
 **MSS**
 
@@ -1130,7 +1309,7 @@ User's last entered command is either `findcontacts` or `contacts`, i.e. the use
       <br>Use case ends.
 
 
-**Use case: Find Groups**
+**Use case: UC17 - Find Groups**
 
 *MSS*
 
@@ -1146,7 +1325,7 @@ User's last entered command is either `findcontacts` or `contacts`, i.e. the use
     <br>Use case continues
 
 
-**Use case: Add Expense**
+**Use case: UC18 - Add Expense**
 
 **Preconditions:** User has is a member of the specified travel group.
 
@@ -1183,7 +1362,7 @@ User's last entered command is either `findcontacts` or `contacts`, i.e. the use
     * 1h1. AWE informs user that the total expenses of the travel group has reached its limit of one billion.
       <br>Use case ends.
 
-**Use case: Delete a shared expense**
+**Use case: UC19 - Delete a shared expense**
 
 **Preconditions:**
 
@@ -1207,7 +1386,7 @@ User's last entered command is either `findexpenses` or `expenses`, i.e. the use
     * 2b1. AWE shows an error message asking user to enter `findexpenses` or `expenses` command first.
       <br>Use case ends.
 
-**Use case: Clear AWE of all entries**
+**Use case: UC20 - Clear AWE of all entries**
 
 **MSS**
 
@@ -1215,7 +1394,7 @@ User's last entered command is either `findexpenses` or `expenses`, i.e. the use
 2. All entries are deleted from AWE.
    <br>Use case ends.
 
-**Use case: Calculate individual expenses**
+**Use case: UC21 - Calculate individual expenses**
 
 **MSS**
 
@@ -1230,7 +1409,7 @@ User's last entered command is either `findexpenses` or `expenses`, i.e. the use
   * 2a1. AWE displays message to remind User to type in name of a group inside the AWE.
     <br>Use case ends.
 
-**Use case: Calculate payments**
+**Use case: UC22 - Calculate payments**
 
 **MSS**
 
@@ -1385,37 +1564,111 @@ testers are expected to do more *exploratory* testing.
    Expected: Similar to previous.
 
 3. Attempting to delete a contact when not viewing a list of contacts.
-   1. Prerequisites: The preloaded data for contacts are not modified. (No contacts are removed or added). The current page must not be an `ContactsPage`. The previous valid command entered should not be a `findcontacts` or `contacts` command.
+   1. Prerequisites: The preloaded data for contacts are not modified. (No contacts are removed or added). The current page must not be `ContactsPage`. The previous valid command entered should not be a `findcontacts` or `contacts` command.
 
    1. Test case: `editcontact 1 n/Alex` <br>
      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
 
+### Creating a group
+
+1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added)
+
+2. Test case: `creategroup gn/London n/Irfan Ibrahim`
+   Expected: Group not created. Status message indicates that group already exists.
+
+3. Test case: `creategroup gn/Toronto n/`
+   Expected: Group not created. Status message indicates that the command requires at least 1 member.
+
+4. Test case: `creategroup gn/Toronto n/Irfan Ibrahim`
+   Expected: Group Toronto created with member Irfan Ibrahim. Status message indicates new group has been created.
+
 ### Search for groups
 
 1. Search for groups in GroupPage
+
     1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added)
     
-    1. Test case: `findgroups London`
+    2. Test case: `findgroups London`
        Expected: GroupList will list out 1 group with the name 'London'. 1 groups found shown in the status message.
        
-    1. Test case: `findgroups London Singapore`
+    3. Test case: `findgroups London Singapore`
        Expected: GroupList will list out 1 group with the name 'London'. 1 groups found shown in the status message.
     
-    1. Test case: `findgroups Singapore`
+    4. Test case: `findgroups Singapore`
        Expected: GroupList will display a blank page. 0 groups found shown in status message.
        
 2. Search for groups in ContactPage
    1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added)
    
-   1. Test case: `findgroups London`
+   2. Test case: `findgroups London`
       Expected: GroupList displayed. GroupList will list out 1 group with the name 'London'. 1 groups found shown in the status message.
       
-   1. Test case: `findgroups London Singapore`
+   3. Test case: `findgroups London Singapore`
       Expected: GroupList displayed. GroupList will list out 1 group with the name 'London'. 1 groups found shown in the status message.
    
-   1. Test case: `findgroups Singapore`
+   4. Test case: `findgroups Singapore`
       Expected: GroupList displayed. GroupList will display a blank page. 0 groups found shown in status message.
-      
+
+### Edit Group Name
+
+1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added)
+2. Test case: `groupeditname gn/London gn/Bali`
+     Expected: Name of London group remains unchanged. Status message indicates that group name Bali already exists.
+
+3. Test case: `groupeditname gn/London gn/`
+   Expected: Name of London group remains unchanged. Status message indicates that group name cannot be blank.
+
+4. Test case: `groupeditname gn/London gn/Thailand`
+   Expected: Name of London group will change to Thailand. Status message indicates that the group name has been changed to Thailand.
+
+### Adding a contact to group
+
+1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added)
+2. Test case: `groupaddcontact gn/London n/Bernice Yu`
+   Expected: Group membership unchanged. Status message indicates that Bernice Yu is already in the group.
+
+3. Test case: `groupaddcontact gn/London n/`
+   Expected: Group membership remains unchanged. Status message indicates that the command requires at least 1 member.
+
+4. Test case: `groupaddcontact gn/London n/Irfan Ibrahim`
+   Expected: Irfan Ibrahim added to group. Status message indicates that the new member has been added to group.
+
+### Removing a contact from group
+
+1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added)
+2. Test case: `groupremovecontact gn/London n/Irfan Ibrahim`
+   Expected: Group membership unchanged. Status message indicates that contact is not removed as the contact was not previously in the group.
+
+3. Test case: `groupremovecontact gn/London n/`
+   Expected: Group membership remains unchanged. Status message indicates that the command requires at least 1 member.
+
+4. Test case: `groupremovecontact gn/London n/Bernice Yu`
+   Expected: Bernice Yu removed from group. Status message indicates that the member has been removed from group.
+
+### Adding a tag to group
+
+1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added)
+2. Test case: `groupaddtag gn/London t/SchoolTrip`
+   Expected: Tags unchanged. Status message indicates that the tag SchoolTrip is already in the group.
+
+3. Test case: `groupaddtag gn/London t/`
+   Expected: Tags unchanged. Status message indicates that tag cannot be blank.
+
+4. Test case: `groupaddtag gn/London t/Friends`
+   Expected: Friends tag added to group. Status message indicates that the new tag has been added to group.
+
+### Removing a tag from group
+
+1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added)
+2. Test case: `groupremovetag gn/London t/Friends`
+   Expected: Tags unchanged. Status message indicates that the tag is not removed as the tag was not previously in the group.
+
+3. Test case: `groupremovetag gn/London t/`
+   Expected: Tags unchanged. Status message indicates that tag cannot be blank.
+
+4. Test case: `groupremovetag gn/London t/SchoolTrip`
+   Expected: SchoolTrip tag removed from group. Status message indicates that the tag has been removed from group.
+
 ### Deleting a Group
 
 1. Deleting a group
