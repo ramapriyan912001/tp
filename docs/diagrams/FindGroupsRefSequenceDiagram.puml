@@ -4,7 +4,7 @@
 box Logic LOGIC_COLOR_T1
 participant ":AweParser" as AweParser LOGIC_COLOR
 participant ":FindGroupsCommandParser" as FindGroupsCommandParser LOGIC_COLOR
-participant "d:FindGroupsCommand" as FindGroupsCommand LOGIC_COLOR
+participant ":FindGroupsCommand" as FindGroupsCommand LOGIC_COLOR
 participant ":GroupContainsKeywordsPredicate" as GroupContainsKeywordsPredicate LOGIC_COLOR
 end box
 
