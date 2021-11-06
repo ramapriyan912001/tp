@@ -727,7 +727,7 @@ Action | Format, Examples
 
 Action | Format, Examples
 --------|------------------
-**View Expense** | `expense gn/GROUP_NAME` <br> e.g., `expense gn/London`
+**View Expense** | `expenses gn/GROUP_NAME` <br> e.g., `expenses gn/London`
 **Add Expense** | `addexpense n/PAYER_NAME gn/GROUP_NAME $/TOTAL_AMOUNT_PAID d/DESCRIPTION [n/PAYEE_WHO_MADE_A_PERSONAL_PAYMENT] [$/PAYEE'S_PERSONAL_PAYMENT_TO_EXCLUDE_FROM_TOTAL_AMOUNT] [ex/PERSON_TO_EXCLUDE_FROM_EXPENSE]` <br> e.g., `addexpense n/Alex Yeoh gn/London $/50 d/Dinner n/Bernice Yu $/2 ex/David Li`
 **Delete Expense** | `deleteexpense INDEX` <br> e.g., `deleteexpense 1`
 **Find Expenses** | `findexpenses KEYWORD [MORE_KEYWORDS] gn/GROUP_NAME`<br> e.g., `findexpenses dinner buffet gn/London`
