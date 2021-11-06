@@ -60,6 +60,6 @@ public class FindExpensesCommand extends Command {
             return false;
         }
 
-        return predicate.equals(((FindExpensesCommand) other).predicate); // state check
+        return this.predicate.equals(((FindExpensesCommand) other).predicate); // state check
     }
 }

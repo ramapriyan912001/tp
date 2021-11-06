@@ -4,11 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.awe.commons.core.Messages.MESSAGE_EXPENSES_LISTED_OVERVIEW;
+import static seedu.awe.commons.core.Messages.MESSAGE_FINDEXPENSESCOMMAND_GROUP_NOT_FOUND;
+import static seedu.awe.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.awe.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.awe.testutil.TypicalExpenses.BUFFET;
 import static seedu.awe.testutil.TypicalExpenses.SOUVENIRS;
 import static seedu.awe.testutil.TypicalExpenses.getTypicalAddressBook;
 import static seedu.awe.testutil.TypicalGroups.BALI;
+import static seedu.awe.testutil.TypicalGroups.VIENNA_NOT_IN_GROUPS;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,7 +22,9 @@ import seedu.awe.model.Model;
 import seedu.awe.model.ModelManager;
 import seedu.awe.model.UserPrefs;
 import seedu.awe.model.expense.DescriptionContainsKeywordsPredicate;
+import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
+import seedu.awe.testutil.ModelBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindExpensesCommand}.
@@ -74,6 +79,15 @@ public class FindExpensesCommandTest {
         expectedModel.updateFilteredExpenseList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel, false, false, true, false, false);
         assertEquals(Arrays.asList(BUFFET, SOUVENIRS), model.getExpenses());
+    }
+
+    @Test
+    public void execute_groupNotInModel_throwsCommandException() {
+        Model testModel = new ModelBuilder().build();
+        Group nonExistentGroup = VIENNA_NOT_IN_GROUPS;
+        DescriptionContainsKeywordsPredicate predicate = preparePredicate("Souvenirs Buffet");
+        FindExpensesCommand findExpensesCommand = new FindExpensesCommand(nonExistentGroup.getGroupName(), predicate);
+        assertCommandFailure(findExpensesCommand, testModel, MESSAGE_FINDEXPENSESCOMMAND_GROUP_NOT_FOUND);
     }
 
     /**
