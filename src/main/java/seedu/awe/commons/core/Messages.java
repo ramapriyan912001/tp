@@ -61,7 +61,7 @@ public class Messages {
 
     public static final String MESSAGE_DELETECONTACTCOMMAND_USAGE = DeleteContactCommand.COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Parameters: INDEX (must be a positive integer within range of index numbers seen on screen)\n"
             + "Example: " + DeleteContactCommand.COMMAND_WORD + " 1";
     public static final String MESSAGE_DELETECONTACTCOMMAND_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
@@ -70,7 +70,7 @@ public class Messages {
             + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INDEX (must be a positive integer within range of index numbers seen on screen) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
@@ -272,7 +272,7 @@ public class Messages {
 
     public static final String MESSAGE_DELETEEXPENSECOMMAND_USAGE = DeleteExpenseCommand.COMMAND_WORD
             + ": Deletes the expense identified by the index number used in the displayed expense list.\n"
-            + "Parameters: INDEX (must be a positive integer) within range of index numbers seen on screen.\n"
+            + "Parameters: INDEX (must be a positive integer within range of index numbers seen on screen)\n"
             + "Example: " + DeleteExpenseCommand.COMMAND_WORD + " 1";
     public static final String MESSAGE_DELETEEXPENSECOMMAND_SUCCESS = "Expense %s successfully deleted!";
     public static final String MESSAGE_DELETEEXPENSECOMMAND_CANNOT_BE_DELETED =

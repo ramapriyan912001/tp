@@ -10,7 +10,7 @@ Retrieve total payments and expenditures;
 :Calculate the surplus of each individual
 Populate pair list with Persons with non-zero surpluses;
 
-while (pair list is not empty)
+while () is ([Pair list is not empty])
 :Sort the list in ascending order of surplus;
 :Retrieve the first Pair and last Pair in the list;
 :Check to see which pair has a smaller magnitude
@@ -24,6 +24,6 @@ Payer is Person from last pair;
     else ([else])
     :Remove both pairs from list;
     endif
-endwhile
+endwhile ([Pair list is empty])
 stop
 @enduml
