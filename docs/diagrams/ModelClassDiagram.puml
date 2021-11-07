@@ -14,18 +14,16 @@ Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
-Class UniquePersonList
-Class UniqueGroupList
-Class ExpenseList
+Class UniqueXYZList
+Class ABCList
 
-Package Person <<Rectangle>>{
+Package XYZ <<Rectangle>>{
 }
 
-Package Group <<Rectangle>>{
+Package ABC <<Rectangle>>{
 }
 
-Package Expense <<Rectangle>>{
-}
+note "XYZ = Groups, Person\nABC = Expense, Transaction Summary, Payments \n\nImplementation are referenced below" as n1
 
 }
 
@@ -34,29 +32,25 @@ Package Expense <<Rectangle>>{
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook ..|> ReadOnlyAddressBook
+AddressBook .up.|> ReadOnlyAddressBook
 
-ModelManager ..|> Model
-Model ..> ReadOnlyUserPrefs
-Model ..> ReadOnlyAddressBook
-ModelManager --> "1" AddressBook
-ModelManager --> "1" UserPrefs
-UserPrefs ..|> ReadOnlyUserPrefs
+ModelManager .up.|> Model
+Model .right.> ReadOnlyUserPrefs
+Model .left.> ReadOnlyAddressBook
+ModelManager -left-> "1" AddressBook
+ModelManager -right-> "1" UserPrefs
+UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
+AddressBook *--> "1" UniqueXYZList
+UniqueXYZList -right-> "~* all" XYZ
 
-AddressBook *--> "1" UniqueGroupList
-UniqueGroupList -right-> "~* all" Group
-Group --> "1..* members" Person
+AddressBook *--> "1" ABCList
+ABCList --> "~* all" ABC
 
-AddressBook *--> "1" ExpenseList
-ExpenseList --> "~* all" Expense
-Expense ---> "1 payer" Person
-Expense -right--> "1..* involved" Person
+ModelManager -->"~* filtered" XYZ
+ModelManager -->"~* filtered" ABC
 
+ABC .. n1
+XYZ .. n1
 
-ModelManager -->"~* filtered" Person
-ModelManager -->"~* filtered" Group
-ModelManager -->"~* filtered" Expense
 @enduml

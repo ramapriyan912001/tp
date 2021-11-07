@@ -9,6 +9,7 @@ Around the World in $80 is a desktop application that splits bills between diffe
 
 Given below are my contributions to the project. [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=marcuspeh&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17)
 
+<div style="page-break-after: always;"></div>
 ### Features
 * **New Feature**: Added the ability to change between contacts and groups view.
   * What it does: Allows the user to see groups / contacts with a command.
@@ -38,6 +39,7 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
   * Updated the UI interface layout. [\#121](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/121)
   * Added in buttons to toggle between contacts page and group page [\#121](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/121)
 
+<div style="page-break-after: always;"></div>
 ### Bug Fixes
 * **severity.HIGH** Edit person does not update groups and expenses. [\#158](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/153)
    * What happen: The command `addPerson` does not replace the instance of the old person from groups and expenses.
@@ -63,6 +65,7 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
     * What happen: Displayed list of groups in Person card will have an extra `,` at the back.
     * Pull request: [\188](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/188)
     
+<div style="page-break-after: always;"></div>
 ### Others
 * **Project management**
   * Managed releases: [v1.2](https://github.com/AY2122S1-CS2103T-F13-1/tp/releases/tag/v1.2)
@@ -76,12 +79,12 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
   * Developer Guide:
     * Updated overall layout.
     * Updated UI segment in Design with class diagram and explanation.
-    * Added implementation, test cases  and use cases for `findgroups`.
-    * Added implementation, test cases  and use cases for `transactionsummary`.
+    * Added implementation, test cases and use cases for `findgroups`.
+    * Added implementation, test cases and use cases for `transactionsummary`.
     * Added implementation and design consideration for user interface.
     * Added use cases for `view groups`, `find person` and `view expenses`.
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#113](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/113), [\#116](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/116)
-  * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2122S1/forum/issues/328), [2](https://github.com/nus-cs2103-AY2122S1/forum/issues/9), [3](https://github.com/nus-cs2103-AY2122S1/forum/issues/11), [4]())
+  * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2122S1/forum/issues/328), [2](https://github.com/nus-cs2103-AY2122S1/forum/issues/9), [3](https://github.com/nus-cs2103-AY2122S1/forum/issues/11))
   * Reported bugs and suggestions for other teams in the class (examples: [1 (F13-3)](https://github.com/AY2122S1-CS2103T-F13-3/tp/issues/332), [2 (F13-3)](https://github.com/AY2122S1-CS2103T-F13-3/tp/issues/328), [3 (W16-2)](https://github.com/AY2122S1-CS2103T-W16-2/tp/issues/216), [4 (W16-2)](https://github.com/AY2122S1-CS2103T-W16-2/tp/issues/224))

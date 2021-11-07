@@ -94,7 +94,7 @@ For those who are not as fast, familiarity with the commands over time will allo
    
    * **`groups`** : The command `groups` lists all groups.
 
-   * **`expenses`** : The command `expenses gn/London` lists all expenses in the preloaded group `London`.
+   * **`expenses`** : The command `expenses gn/London` lists all expenses in the group `London`.
      
    * **`addcontact`** : The command `addcontact n/John Doe p/98765432` adds a contact named `John Doe` to AWE.
 
@@ -118,7 +118,7 @@ For those who are not as fast, familiarity with the commands over time will allo
 
    * **`exit`** : The command `exit` exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#3-features) below for details of each command.
 
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
@@ -126,8 +126,6 @@ For those who are not as fast, familiarity with the commands over time will allo
 <div style="page-break-after: always;"></div>
 
 ## **3. Features**
-
-<div markdown="block" class="alert alert-info">
 
 **Breakdown of command abbreviations:** <br>
 
@@ -149,7 +147,7 @@ For those who are not as fast, familiarity with the commands over time will allo
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* Parameters can be in any order other than `addexpenses`. Look at [`addexpense`](#332-adding-a-shared-expense-addexpense) for more details regarding it. <br>
+* Parameters can be in any order other than [`addexpense`](#332-adding-a-shared-expense-addexpense) and [`groupeditname`](#329-editing-travel-group-name-groupeditname). <br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
@@ -165,8 +163,6 @@ For those who are not as fast, familiarity with the commands over time will allo
 contact/expense to delete. On the other hand, [Group-related commands](#52-groups-commands) accept a unique group
 name as an argument. For the reasons behind this implementation, refer to our [FAQ](#4-faq)
 
-</div>
-
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
 </p>
@@ -180,6 +176,8 @@ Shows a list of all contacts in AWE.
 
 Format: `contacts`
 
+* When you use this command, you will be brought to the contacts page if you are currently viewing a different page.
+
 #### 3.1.2. Adding a contact: `addcontact`
 
 Adds a contact to AWE.
@@ -187,14 +185,13 @@ Adds a contact to AWE.
 Format: `addcontact n/NAME p/PHONE_NUMBER [t/TAG]…​`
 
 * Contact list will be displayed after the command succeeded.
-
 * Duplicate contacts cannot be added into AWE
 * Contacts are duplicate if they have the same name
-* NAME are case-sensitive, "Hans" and "hans" will be treated as 2 separate person. Refer to [FAQ](#4faq) for the rationale behind this.
+* NAME are case-sensitive, "Hans" and "hans" will be treated as 2 separate person. Refer to [FAQ](#4-faq) for the rationale behind this.
 * NAME are up to 50 characters only.
 * TAG are up to 50 characters only.
 * PHONE_NUMBER should have between 3 and 16 numbers.
-* Contact list will be displayed after the command succeeded.
+* When you use this command, you will be brought to the contacts page if you are currently viewing a different page.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A contact can have any number of tags (including 0)
@@ -241,13 +238,12 @@ Deletes the specified contact from AWE.
 
 Format: `deletecontact INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* Deletes the person from any groups of which the person was a member.
+* Deletes the contact at the specified `INDEX`.
+* Deletes the contact from any groups of which the contact was a member.
 * Since the command deletes the contact based on the list visible to the user, it is necessary for the user to be viewing a list of contacts when utilising this command. This means that the user must have entered a `findcontacts` or `contacts` command just prior to entering the `deletecontact` command.
 * If the contact was the only member of a group, that group will now be deleted.  
-* The index refers to the index number shown in the displayed person list.
+* The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* Contact list will be displayed after the command succeeded.
 
 Examples:
 * `contacts` to display a list of all contacts, followed by `deletecontact 2` deletes the 2nd contact in AWE.
@@ -270,7 +266,7 @@ Format: `findcontacts KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * contacts matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* Contact list will be displayed after the command succeeded.
+* When you use this command, you will be brought to the contacts page if you are currently viewing a different page.
 
 Examples:
 * `findcontacts John` returns `john` and `John Doe`
@@ -290,11 +286,13 @@ Shows a list of all groups in GroupPage.
 
 Format: `groups`
 
+* When you use this command, you will be brought to the groups page if you are currently viewing a different page.
+
 #### 3.2.2. Creating a travel group: ```creategroup```
 Creates a group of people of your choice from AWE.
 Adds you as a member of the group by default.
 
-Format: `creategroup gn/GROUP_NAME n/NAME1 [n/NAME2] [n/NAME3]...[t/TAG1]`
+Format: `creategroup gn/GROUP_NAME n/NAME1 [n/NAME2]... [t/TAG1]...`
 
 * GROUP_NAME is a mandatory field.
 * GROUP_NAME are up to 50 characters only.
@@ -305,7 +303,7 @@ Format: `creategroup gn/GROUP_NAME n/NAME1 [n/NAME2] [n/NAME3]...[t/TAG1]`
 * Tags cannot have whitespace and special characters other than alphanumeric characters.
 * TAG are up to 50 characters only.
 * Tags are optional.
-* Group list will be displayed after the command succeeded.
+* When you use this command, you will be brought to the groups page if you are currently viewing a different page.
 
 Examples:
 * `creategroup gn/Bali n/Jacob Tan n/Max Chia n/Julianne Tay`
@@ -325,7 +323,7 @@ Format: `deletegroup gn/GROUP_NAME`
 * GROUP_NAME is a mandatory field.
 * A group with GROUP_NAME as its name must exist.
 * GROUP_NAME are up to 50 characters only.
-* Group list will be displayed after the command succeeded.
+* When you use this command, you will be brought to the groups page if you are currently viewing a different page.
 
 Examples:
 * `deletegroup gn/Bali`
@@ -343,7 +341,7 @@ Format: `findgroups KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g. `London` will not match `Lond`
 * Groups matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Taiwan Malaysia` will return `Taiwan`, `Malaysia`
-* Group list will be displayed after the command succeeded.
+* When you use this command, you will be brought to the groups page if you are currently viewing a different page.
 
 Examples:
 * `findgroups London` returns `London` and `london trip`
@@ -370,7 +368,6 @@ Format: `groupaddcontact gn/GROUP_NAME n/CONTACT_NAME1 [n/CONTACT_NAME2] ...`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Type in the full name of contacts to add.
 * Duplicate members in a group/user input will not be added.
-* Group list will not be displayed after the command succeeded.
 
 Examples:
 * `groupaddcontact gn/Bali n/Irfan Ibrahim` to add Irfan Ibrahim into the Bali travel group.
@@ -389,7 +386,6 @@ Format: `groupremovecontact gn/GROUP_NAME n/CONTACT_NAME [n/CONTACT_NAME] ...`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Type in the full name of contacts to remove.
 * Members can only be removed if they are in the travel group.
-* Group list will not be displayed after the command succeeded.
 
 Examples:
 * `groupremovecontact gn/Bali n/Irfan Ibrahim` to remove Irfan Ibrahim from the Bali travel group.
@@ -412,7 +408,6 @@ Format: `groupaddtag gn/GROUP_NAME t/TAG [t/TAG2] ...`
 * Only full words will be matched e.g. `Bal` will not match `Bali`
 * Duplicate tags in a group/user input will not be added.
 * TAG are up to 50 characters only.
-* Group list will not be displayed after the command succeeded.
 
 Examples:
 * `groupaddtag gn/Bali t/Friends` to indicate that the Bali travel group is with friends.
@@ -431,7 +426,6 @@ Format: `groupremovetag gn/GROUP_NAME t/TAG [t/TAG2] ...`
 * The search is case-sensitive. e.g `bali` will not match `Bali`
 * Only full words will be matched e.g. `Bal` will not match `Bali`
 * Duplicate tags in a group/user input will not be removed.
-* Group list will not be displayed after the command succeeded.
 
 Examples:
 * `groupremovetag gn/Bali t/Friends` to remove the friends tag from the Bali travel group.
@@ -452,7 +446,6 @@ Format: `groupeditname gn/OLD_GROUP_NAME gn/NEW_GROUP_NAME`
 * The search is case-sensitive. e.g `bali` will not match `Bali`
 * Only full words will be matched e.g. `Bal` will not match `Bali`
 * GROUP_NAME are up to 50 characters only.
-* Group list will not be displayed after the command succeeded.
 
 Examples:
 * `groupeditname gn/Bali gn/Thailand` to change the group name from Bali to Thailand.
@@ -467,12 +460,13 @@ Examples:
 
 #### 3.3.1. Listing expenses of a specified group: `expenses`
 
-Shows a list containing all existing expenses within the specified travel group. Expenses are sorted from most recent to least recent.
+Shows a list containing all existing expenses within the specified travel group. 
 
 Format: `expenses gn/GROUP_NAME`
 
 * GROUP_NAME argument is mandatory.
 * GROUP_NAME must correspond to the name of an existing travel group.
+* When you use this command, you will be brought to the expense page for the specified group if you are currently viewing a different page.
 
 Examples: 
 * `expenses gn/London` shows all the expenses of the group named London.
@@ -500,7 +494,6 @@ Format: `addexpense n/PAYER_NAME gn/GROUP_NAME $/TOTAL_AMOUNT_PAID d/DESCRIPTION
 * COST should not be negative.
 * DESCRIPTION does not need to be unique.
 * Each personal payment has to be a name immediately followed by the amount of the personal payment.
-* Expense list of the group will not be displayed after the command succeeded.
 
 Examples:
 * `addexpense n/Nic gn/Catch up $/50 d/Movie and dinner`
@@ -523,11 +516,15 @@ Format: `deleteexpense INDEX`
 * INDEX argument is mandatory.
 * INDEX has to be between 1 and the length of the list of expenses visible to the user on the screen.
 * Since the command deletes the expense based on the list visible to the user, it is necessary for the user to be viewing a list of expenses when utilising this command. This means that the user must have entered a `findexpenses` or `expenses` command just prior to entering the `deleteexpense` command. 
-* Expense list of the group will remain to be displayed after the command succeeded.
 
 Examples:
 * `deleteexpense 1`
 * `deleteexpense 2`
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="clear: both; page-break-after: always;"></div>
 
 #### 3.3.4. Locating a shared expense by description: `findexpenses`
 
@@ -541,7 +538,7 @@ Format: `findexpenses KEYWORD [MORE_KEYWORDS] gn/GROUP_NAME`
 * Only full words will be matched e.g. `Dinner` will not match `Dinners`
 * Expenses matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Dinner Transportation` will return `Friday dinner`, `Transportation tickets`
-* Expense list of the group will be displayed after the command succeeded.
+* When you use this command, you will be brought to the expense page for the specified group if you are currently viewing a different page.
 
 Examples:
 * `findexpenses dinner gn/London` returns `dinner` and `Friday dinner` in the group `London`
@@ -559,11 +556,14 @@ Format: `transactionsummary gn/GROUP_NAME`
 
 * GROUP_NAME is a mandatory field.
 * A group with GROUP_NAME as its name must exist.
+* When you use this command, you will be brought to the spending page for the specified group if you are currently viewing a different page.
 
 Examples:
 * `transactionsummary gn/Bali`
 * `transactionsummary gn/London`
   ![result for `transactionsummary gn/London`](images/TransactionSummaryResult.png)
+
+**Note:** When a `contact` is deleted or removed from the group, the functioning of this command does not change. The deleted contact may still be part of the list of spending depending on the expenses they had previously.
 
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
@@ -578,13 +578,14 @@ Format: `calculatepayments gn/GROUP_NAME`
 * GROUP_NAME is a mandatory field.
 * A group with GROUP_NAME as its name must exist.
 * Output e.g. [`John pays Mark $20.50`, `Sara pays Dev $15`]
+* When you use this command, you will be brought to the payments page for the specified group if you are currently viewing a different page.
 
 Examples:
 * `calculatepayments gn/Bali`
 * `calculatepayments gn/London`<br>
   ![result for 'calculatepayments gn/London'](images/CalculatePaymentResult.png)
   
-**Note: When a `Person` is deleted from contacts or removed from the group, the functioning of this command does not change. The deleted person may still be part of the list of payments depending on the expenses they had previously.**
+**Note:** When a `contact` is deleted or removed from the group, the functioning of this command does not change. The deleted contact may still be part of the list of payments depending on the expenses they had previously.
 
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
@@ -628,9 +629,11 @@ AWE data are saved in the hard disk automatically after any command that changes
 
 AWE data are saved as a JSON file `[JAR file location]/data/awe.json`. Advanced users are welcome to update data directly by editing that data file.
 
+* If the contact details in the JSON file is changed without making the same changes to expenses, AWE will treat the old and new contacts as separate contacts.
+
 <div markdown="span" class="alert alert-warning">
 :exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AWE will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, AWE will discard all data and start with sample data at the next run.
 </div>
 
 <p align="center">
@@ -675,7 +678,7 @@ argument. This minimises the chances of accidentally deleting a group.
 **Q**: What do I do if I see `AWE.jar` cannot be opened because it is from an unidentified developer when I double click the jar file on a mac?<br>
 **A**: Go to `System Preferences -> Security and Privacy -> General` and click on `Open anyways` as such
 <p align="center">
-    <_img_ src="images/MacSecurityPreference.png" />
+    <img src="images/MacSecurityPreference.png" width="600"/>
 </p>
 <br>
 <br>
@@ -709,13 +712,13 @@ Action | Format, Examples
 Action | Format, Examples
 --------|------------------
 **View Groups** | `groups`
-**Create Group** | `creategroup gn/GROUP_NAME n/NAME1 n/NAME2 n/NAME3...t/TAG1` <br> e.g., `creategroup gn/Bali n/Jacob Tan n/Max Chia n/Julianne Tay t/friends`
+**Create Group** | `creategroup gn/GROUP_NAME n/NAME1 [n/NAME2]... [t/TAG]...` <br> e.g., `creategroup gn/Bali n/Jacob Tan n/Max Chia n/Julianne Tay t/friends`
 **Delete Group** | `deletegroup gn/GROUP_NAME` <br> e.g., `deletegroup gn/Vienna`
-**Add Contact to Group** | `groupaddcontact gn/GROUP_NAME n/NAME1 [n/MORE_NAMES]` <br> e.g., `groupaddcontact gn/Bali n/Jacob Tan`
-**Add Tags to Group** | `groupaddtag gn/GROUP_NAME n/TAG1 [n/MORE_TAGS]` <br> e.g., `groupaddtag gn/Bali n/friends`
+**Add Contact to Group** | `groupaddcontact gn/GROUP_NAME n/NAME1 [n/MORE_NAMES]...` <br> e.g., `groupaddcontact gn/Bali n/Jacob Tan`
+**Add Tags to Group** | `groupaddtag gn/GROUP_NAME n/TAG1 [n/MORE_TAGS]...` <br> e.g., `groupaddtag gn/Bali n/friends`
 **Edit Group Name** | `groupeditname gn/OLD_GROUP_NAME gn/NEW_GROUP_NAME` <br> e.g., `groupedittag gn/Bali gn/Hanoi`
-**Remove Tags from Group** | `groupremovetag gn/GROUP_NAME n/TAG1 [n/MORE_TAGS]` <br> e.g., `groupremovetag gn/Bali n/friends`
-**Remove Contact from Group** | `groupremovecontact gn/GROUP_NAME n/NAME1 [n/MORE_NAMES]` <br> e.g., `groupremovecontact gn/Bali n/Jacob Tan`
+**Remove Tags from Group** | `groupremovetag gn/GROUP_NAME n/TAG1 [n/MORE_TAGS]...` <br> e.g., `groupremovetag gn/Bali n/friends`
+**Remove Contact from Group** | `groupremovecontact gn/GROUP_NAME n/NAME1 [n/MORE_NAMES]...` <br> e.g., `groupremovecontact gn/Bali n/Jacob Tan`
 **Find Groups** | `findgroups KEYWORD [MORE_KEYWORDS]`<br> e.g., `findgroups James Jake`
 
 <p align="center">
@@ -727,7 +730,7 @@ Action | Format, Examples
 
 Action | Format, Examples
 --------|------------------
-**View Expense** | `expense gn/GROUP_NAME` <br> e.g., `expense gn/Bali`
+**View Expense** | `expenses gn/GROUP_NAME` <br> e.g., `expenses gn/London`
 **Add Expense** | `addexpense n/PAYER_NAME gn/GROUP_NAME $/TOTAL_AMOUNT_PAID d/DESCRIPTION [n/PAYEE_WHO_MADE_A_PERSONAL_PAYMENT] [$/PAYEE'S_PERSONAL_PAYMENT_TO_EXCLUDE_FROM_TOTAL_AMOUNT] [ex/PERSON_TO_EXCLUDE_FROM_EXPENSE]` <br> e.g., `addexpense n/Alex Yeoh gn/London $/50 d/Dinner n/Bernice Yu $/2 ex/David Li`
 **Delete Expense** | `deleteexpense INDEX` <br> e.g., `deleteexpense 1`
 **Find Expenses** | `findexpenses KEYWORD [MORE_KEYWORDS] gn/GROUP_NAME`<br> e.g., `findexpenses dinner buffet gn/London`

@@ -52,9 +52,6 @@ public class GroupAddTagCommandParserTest {
 
     @Test
     public void parse_invalidPreamble_failure() {
-        // more than 1 group name
-        assertParseFailure(parser, " gn/Japan gn/London t/friends", MESSAGE_INVALID_FORMAT);
-
         // 1 gn/ tag, 1 t/ tag but no group name
         assertParseFailure(parser, " gn/ t/friends", MESSAGE_GROUP_NAME_INVALID);
 
@@ -77,16 +74,24 @@ public class GroupAddTagCommandParserTest {
 
     @Test
     public void parse_validGroupName_success() {
-        //Adding people into group
-        GroupAddTagCommand expectedCommand = new GroupAddTagCommand(new GroupName("Bali"), TAGS_IN_GROUP);
-        assertParseSuccess(parser, " gn/Bali t/friends t/3days2night", expectedCommand);
+        //Adding duplicate tags into group
+        GroupAddTagCommand expectedCommandDuplicateTags = new GroupAddTagCommand(new GroupName("Bali"), TAGS_IN_GROUP);
+        assertParseSuccess(parser, " gn/Bali t/friends t/3days2night", expectedCommandDuplicateTags);
 
         //reset parser
         parser = new GroupAddTagCommandParser(new ModelBuilder().build());
 
-        //Adding duplicate person into group
-        GroupAddTagCommand expectedCommandDuplicatePerson = new GroupAddTagCommand(new GroupName("Bali"),
+        //Adding tags into group
+        GroupAddTagCommand expectedCommand = new GroupAddTagCommand(new GroupName("Bali"),
                 TAGS_NOT_IN_GROUP);
-        assertParseSuccess(parser, " gn/Bali t/Friends t/family", expectedCommandDuplicatePerson);
+        assertParseSuccess(parser, " gn/Bali t/Friends t/family", expectedCommand);
+
+        //reset parser
+        parser = new GroupAddTagCommandParser(new ModelBuilder().build());
+
+        // more than 1 group name
+        GroupAddTagCommand expectedCommandDuplicateGroup = new GroupAddTagCommand(new GroupName("Bali"),
+                TAGS_NOT_IN_GROUP);
+        assertParseSuccess(parser, " gn/Japan gn/Bali t/Friends t/family", expectedCommandDuplicateGroup);
     }
 }

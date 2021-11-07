@@ -137,7 +137,7 @@ public class ParserUtil {
      * @param names Collection of strings that represent names.
      * @return List of names
      */
-    public static List<Name> parseMemberNames(Collection<String> names) throws EmptyGroupException {
+    public static List<Name> parseMemberNames(Collection<String> names) throws EmptyGroupException, ParseException {
         requireNonNull(names);
         final Set<Name> memberNameSet = new HashSet<>();
         final List<Name> memberNameList = new ArrayList<>();
@@ -159,6 +159,11 @@ public class ParserUtil {
             throw new EmptyGroupException(MESSAGE_CREATEGROUPCOMMAND_EMPTY_GROUP
                     + MESSAGE_CREATEGROUPCOMMAND_INVALID_NAMES);
         }
+
+        if (invalidCount > 0) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+
         memberNameList.addAll(memberNameSet);
         return memberNameList;
     }

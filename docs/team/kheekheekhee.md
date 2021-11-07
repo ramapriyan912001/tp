@@ -45,10 +45,15 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `expenses`
+    * Added documentation for the feature `expenses`
+    * Adjusted diagram sizes.
+    * Added figure numbers for all diagrams.
   * Developer Guide:
     * Added use cases for `edit a person`, `add expense` and `delete a person`.
+    * Added implementation, test cases and use cases for `add expense`.
     * Added non-functional requirements.
+    * Updated model diagram.
+    * Added design considerations for `add expense`.
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#1]()
