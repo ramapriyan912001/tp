@@ -13,7 +13,7 @@ public class DescriptionContainsKeywordsPredicate implements Predicate<Expense> 
     private final List<String> keywords;
 
     /**
-     * A public constructor to initialise the list of keywords
+     * A public constructor to initialize the list of keywords
      * to the given one.
      *
      * @param keywords The list of keywords.
