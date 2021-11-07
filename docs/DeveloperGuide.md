@@ -319,7 +319,7 @@ The following activity diagram shows what happens when a user executes a `create
 
 
 <p align="center">
-  <img src="images/AddContactActivityDiagram.png" alt="Add Contact Activity Diagram" width="550" />
+  <img src="images/AddContactActivityDiagram.png" alt="Add Contact Activity Diagram" width="450" />
   <br>
     Fig 17. Add Contact Activity Diagram
 </p>
@@ -390,7 +390,7 @@ that contains details of the total expenditure incurred by each member across th
 The following activity diagram shows what happens when a user executes a `createGroup` command.
 
 <p align="center">
-  <img src="images/CreateGroupActivityDiagram.png" alt="Create Group Activity Diagram" width="600" />
+  <img src="images/CreateGroupActivityDiagram.png" alt="Create Group Activity Diagram" width="450" />
   <br>
     Fig 20. Create Group Activity Diagram
 </p>
@@ -492,7 +492,7 @@ This allows the `Model` class to easily retrieve the Group based on the name ent
 The following activity diagram shows what happens when a user executes a `deletegroup` command.
 
 <p align="center">
-  <img src="images/DeleteGroupActivityDiagram.png" alt="Delete Group Activity Diagram" width="750" />
+  <img src="images/DeleteGroupActivityDiagram.png" alt="Delete Group Activity Diagram" width="450" />
   <br>
     Fig 23. Delete Group Activity Diagram
 </p>
@@ -683,7 +683,7 @@ expense, a `HashMap` that contains details of how much each member has paid in t
 The following activity diagram shows what happens when a user executes a `addexpense` command.
 
 <p align="center">
-  <img src="images/AddExpenseActivityDiagram.png" alt="Add Expense Activity Diagram" width="750" />
+  <img src="images/AddExpenseActivityDiagram.png" alt="Add Expense Activity Diagram" width="450" />
   <br>
     Fig 30. Add Expense Activity Diagram
 </p>
@@ -749,7 +749,7 @@ required for finding expenses within a group.
 The following activity diagram shows what happens when a user executes a `findexpenses` command.
 
 <p align="center">
-  <img src="images/FindExpensesActivityDiagram.png" alt="Find Expenses Activity Diagram" width="600" />
+  <img src="images/FindExpensesActivityDiagram.png" alt="Find Expenses Activity Diagram" width="450" />
   <br>
     Fig 33. Find Expenses Activity Diagram
 </p>
@@ -817,7 +817,7 @@ This means that the user is constrained to only being permitted to delete expens
 The following activity diagram shows what happens when a user executes a `deleteexpense` command.
 
 <p align="center">
-  <img src="images/DeleteExpenseActivityDiagram.png" alt="Delete Expense Activity Diagram" width="600" />
+  <img src="images/DeleteExpenseActivityDiagram.png" alt="Delete Expense Activity Diagram" width="450" />
   <br>
     Fig 35. Delete Expense Activity Diagram
 </p>
@@ -926,7 +926,7 @@ The following diagram shows the flow of the algorithm.
 The following activity diagram shows what happens when a user executes a `calculatepayments` command.
 
 <p align="center">
-  <img src="images/CalculatePaymentsActivityDiagram.png" alt="Calculate Payments Activity Diagram" width="750" />
+  <img src="images/CalculatePaymentsActivityDiagram.png" alt="Calculate Payments Activity Diagram" width="450" />
   <br>
     Fig 39. Calculate Payments Activity Diagram
 </p>
@@ -1003,7 +1003,7 @@ The following activity diagram shows how the `MainWindow` checks and sends the `
 <br>
 
 <p align="center">
-  <img src="images/UiTogglingActivityDiagram.png" alt="Ui Toggling Activity Diagram" width="600" />
+  <img src="images/UiTogglingActivityDiagram.png" alt="Ui Toggling Activity Diagram" width="450" />
   <br>
     Fig 42. Ui Toggling Activity Diagram
 </p>
