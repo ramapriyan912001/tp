@@ -386,6 +386,7 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.awe.commons` package.
 
+
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
@@ -401,15 +402,15 @@ number of the contact, and optional `Tags` to attach to the contact.
 The following activity diagram shows what happens when a user executes an `addContact` command.
 
 <p align="center">
-    <a href="#tableofcontents">Click here to return to table of contents</a>
-</p>
-<div style="page-break-after: always;"></div>
-
-<p align="center">
   <img src="images/AddContactActivityDiagram.png" alt="Add Contact Activity Diagram" width="420" />
   <br>
     Fig 17. Add Contact Activity Diagram
 </p>
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 Given below is an example usage scenario and how the `creategroup` mechanism behaves at each step.
 
@@ -1149,12 +1150,13 @@ Initialise a `Pair` object with the `Person` object of the individual, and their
   
 * Return the list of `Payment` objects.
 
-The following diagram shows the flow of the algorithm.
 
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
 </p>
 <div style="page-break-after: always;"></div>
+
+The following diagram shows the flow of the algorithm.
 
 <p align="center">
   <img src="images/CalculatePaymentsCommandAlgorithmDiagram.png" alt="Calculate Payments Command Algorithm Diagram" width="600" />
@@ -1180,11 +1182,6 @@ Given below is an example usage scenario and how the `calculatepayments` mechani
 Step 1. A valid `calculatepayments` command is given as user input. This prompts the `LogicManager` to run its execute()
 method.
 
-<p align="center">
-    <a href="#tableofcontents">Click here to return to table of contents</a>
-</p>
-<div style="page-break-after: always;"></div>
-
 Step 2. The `CalculatePaymentsCommandParser` parses the input and checks for presence of the `GROUP_NAME` prefix.
 It checks that the `GROUP_NAME` is valid (does not have any non-alphanumeric characters).
 It returns a `CalculatePaymentsCommand`.
@@ -1198,6 +1195,11 @@ Step 5. The `PaymentList` field is updated with the generated list of payments, 
 
 Step 6. Upon successful execution, `CommandResult` is returned.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+
+<div style="page-break-after: always;"></div>
 
 The following sequence operation shows how the `calculatepayments` operation works.
 
@@ -1211,17 +1213,17 @@ The following sequence operation shows how the `calculatepayments` operation wor
 </div>
 
 <p align="center">
-    <a href="#tableofcontents">Click here to return to table of contents</a>
-</p>
-<div style="page-break-after: always;"></div>
-
-<p align="center">
   <img src="images/CalculatePaymentsRefSequenceDiagram.png" alt="Calculate Payments Reference Sequence Diagram" width="650" />
   <br>
     Fig 42. Calculate Payments Reference Sequence Diagram
 </p>
 
 **Note: When a `Person` is deleted from contacts or removed from the group, the functioning of this command does not change. The deleted person may still be part of the list of payments depending on the expenses they had previously.**
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 #### Design considerations
 
@@ -1962,6 +1964,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Transaction Summary**: The amount each contact spent on a trip
+* **Payment**: The amount one contact has to pay another
 * **ContactsPage**: The page displaying all the contacts
 * **GroupsPage**: The page displaying all the travel groups
 * **ExpensesPage**: The page displaying all the expenses of a travel group
