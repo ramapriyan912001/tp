@@ -51,9 +51,6 @@ public class GroupRemoveTagCommandParserTest {
 
     @Test
     public void parse_invalidPreamble_failure() {
-        // more than 1 group name
-        assertParseFailure(parser, " gn/Japan gn/London t/friends", MESSAGE_INVALID_FORMAT);
-
         // 1 gn/ tag, 1 t/ tag but no group name
         assertParseFailure(parser, " gn/ t/friends", MESSAGE_GROUP_NAME_INVALID);
 
@@ -88,5 +85,14 @@ public class GroupRemoveTagCommandParserTest {
         GroupRemoveTagCommand expectedCommandDuplicatePerson = new GroupRemoveTagCommand(new GroupName("Bali"),
                 TAGS_NOT_IN_GROUP);
         assertParseSuccess(parser, " gn/Bali t/Friends t/family", expectedCommandDuplicatePerson);
+
+        //reset parser
+        parser = new GroupRemoveTagCommandParser(new ModelBuilder().build());
+
+        // more than 1 group name
+        GroupRemoveTagCommand expectedCommandDuplicateGroup = new GroupRemoveTagCommand(new GroupName("Bali"),
+                TAGS_IN_GROUP);
+        assertParseSuccess(parser, " gn/Japan gn/Bali t/friends t/3days2night", expectedCommandDuplicateGroup);
+
     }
 }

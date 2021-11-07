@@ -55,12 +55,7 @@ public class GroupAddContactCommandParser implements Parser<GroupAddContactComma
                     MESSAGE_GROUPADDCONTACTCOMMAND_USAGE));
         }
 
-        List<GroupName> groupNamesList = ParserUtil.parseGroupNames(argMultimap.getAllValues(PREFIX_GROUP_NAME));
-        if (groupNamesList.size() != 1) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    MESSAGE_GROUPADDCONTACTCOMMAND_USAGE));
-        }
-        GroupName groupName = groupNamesList.get(0);
+        GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).get());
 
         if (!ParserUtil.findExistingGroupName(groupName, allGroups)) {
             throw new ParseException(String.format(MESSAGE_NONEXISTENT_GROUP, groupName));

@@ -1151,38 +1151,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list contact.
-2. AWE shows a list of contact.
-3. User requests to delete a specific contact in the list.
-4. AWE deletes the contact.
-5. AWE removes the contact from groups of which the person was a member.
-6. AWE displays confirmation message.
+1. User <ins>finds contacts (UC4)</ins> or <ins>views all contacts (UC5)</ins>
+2. User requests to delete a specific contact in the list.
+3. AWE deletes the contact.
+4. AWE removes the contact from groups of which the person was a member.
+5. AWE displays confirmation message.
     <br>Use case ends.
 
 **Extensions**
 
-* 2a. The contact list is empty.
+* 1a. The contact list is empty.
   <br>Use case ends.
-* 2b. The given index is invalid.
-    * 2b1. AWE shows an error message.
-* 2c. User is not viewing a list of contacts when entering command.
-  * 2c1. AWE shows an error message asking user to enter `findcontacts` or `contacts` command first.
+* 2a. The given index is invalid.
+    * 2a1. AWE shows an error message.
+* 2b. User is not viewing a list of contacts when entering command.
+  * 2b1. AWE shows an error message asking user to enter `findcontacts` or `contacts` command first.
     <br>Use case ends.
 
-**Use case: UC3 - Edit a contact**
+**Use case: UC3 - Edit contact**
 
 **MSS**
 
-1. User requests to list contacts.
-2. AWE shows a list of contacts.
-3. User requests to edit a specific contact in the list.
-4. User enters edited information.
-5. AWE edits the contacts.
-   <br>Use case ends.
+1. User <ins>finds contacts (UC4)</ins> or <ins>views all contacts (UC5)</ins>
+2. User requests to edit a specific contacts in the list
+3. User enters edited information
+4. AWE edits the contacts
+
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
   <br>Use case ends.
 * 3a. The given index is invalid.
     * 3a1. AWE shows an error message.
@@ -1208,7 +1206,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. There isn't any contacts saved.
     * 2a1. AWE displays nothing in the contacts page ie an empty screen.
       <br>Use case ends.
-* 2b. There is not contacts matching the search parameters.
+* 2b. There is no contacts matching the search parameters.
     * 2b1. AWE displays nothing in the contacts page ie an empty screen.
       <br>Use case continues.
 
@@ -1441,7 +1439,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Expenses Use Cases
 
-**Use case: UC15 - Add Expense**
+**Use case: UC15 - Add expense**
 
 **Preconditions:** User has is a member of the specified travel group.
 
@@ -1477,27 +1475,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1h. AWE detects that the total expenditure of the specified group is over one billion.
     * 1h1. AWE informs user that the total expenses of the travel group has reached its limit of one billion.
       <br>Use case ends.
+    
+**Use case: UC16 - Delete expense**
 
-**Use case: UC16 - Delete an expense**
+**Preconditions:**
+
+User's last entered command is either `findexpenses` or `expenses`, i.e. the user is viewing an expense list.
 
 **MSS**
 
-1. User requests to list expenses of a group.
-2. AWE shows a list of expenses.
-3. User requests to delete an expense from list of expenses viewed by its position on screen.
-4. AWE deletes the specified expense.
-5. AWE shows updated list of expenses.
-6. AWE displays confirmation message.
-   <br>Use case ends. 
-
+1. User <ins>finds expenses in a travel group (UC17)</ins> or <ins>lists expenses in a travel group (UC18)</ins>
+2. User requests to delete an expense from list of expenses viewed by its position on screen.
+3. AWE deletes the specified expense.
+4. AWE shows updated list of expenses.
+5. AWE displays confirmation message.
 
 **Extensions**
 
-* 3a. User is not viewing a list of expenses when entering command.
-  * 3a1. AWE shows an error message asking user to enter `findexpenses` or `expenses` command first.
+* 2a. User is not viewing a list of expenses when entering command.
+  * 2a1. AWE shows an error message asking user to enter `findexpenses` or `expenses` command first.
     <br>Use case ends.
-* 3b. The given index is not within range 1 to length of list of expenses on screen.
-    * 3b1. AWE shows an error message saying index is invalid.
+* 2b. The given index is not within range 1 to length of list of expenses on screen.
+    * 2b1. AWE shows an error message saying index is invalid.
       <br>Use case ends.
       
 **Use case: UC17 - Find expenses in a travel group**

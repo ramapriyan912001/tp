@@ -11,6 +11,7 @@ import seedu.awe.logic.parser.exceptions.ParseException;
 import seedu.awe.model.group.GroupName;
 
 public class GroupEditNameCommandParser implements Parser<GroupEditNameCommand> {
+
     /**
      * Returns GroupEditNameCommand based on user input.
      *
@@ -33,7 +34,7 @@ public class GroupEditNameCommandParser implements Parser<GroupEditNameCommand> 
         GroupName oldGroupName;
         GroupName newGroupName;
 
-        if (groupNamesList.size() > 2) {
+        if (groupNamesList.size() != 2) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     MESSAGE_GROUPEDITNAMECOMMAND_USAGE));
         }
