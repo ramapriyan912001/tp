@@ -338,7 +338,7 @@ created. If not, the newly created contact is added into the AWE model. Upon suc
 
 The following sequence operation shows how the `addcontact` operation works.
 <p align="center">
-  <img src="images/AddContactSequenceDiagram.png" alt="Add Contact Sequence Diagram" width="600" />
+  <img src="images/AddContactSequenceDiagram.png" alt="Add Contact Sequence Diagram" width="750" />
   <br>
     Fig 18. Add Contact Sequence Diagram
 </p>
@@ -411,7 +411,7 @@ the model. Upon successful execution, `CommandResult` is returned.
 The following sequence operation shows how the `creategroup` operation works.
 
 <p align="center">
-  <img src="images/CreateGroupSequenceDiagram.png" alt="Create Group Sequence Diagram" width="600" />
+  <img src="images/CreateGroupSequenceDiagram.png" alt="Create Group Sequence Diagram" width="750" />
   <br>
     Fig 21. Create Group Sequence Diagram
 </p>
@@ -515,7 +515,7 @@ Upon successful execution, `CommandResult` is returned.
 The following sequence operation shows how the `deletegroup` operation works.
 
 <p align="center">
-  <img src="images/DeleteGroupSequenceDiagram.png" alt="Delete Group Sequence Diagram" width="600" />
+  <img src="images/DeleteGroupSequenceDiagram.png" alt="Delete Group Sequence Diagram" width="750" />
   <br>
     Fig 24. Delete Group Sequence Diagram
 </p>
@@ -601,7 +601,7 @@ Upon successful execution,`CommandResult` is returned.
 The following sequence operation shows how the `groupeditname` command works.
 
 <p align="center">
-  <img src="images/GroupEditNameSequenceDiagram.png" alt="Group Edit Name Sequence Diagram" width="600" />
+  <img src="images/GroupEditNameSequenceDiagram.png" alt="Group Edit Name Sequence Diagram" width="750" />
   <br>
     Fig 26. Group Edit Name Sequence Diagram
 </p>
@@ -776,7 +776,7 @@ Step 6. The output from `CommandResult` is then displayed as an output for the u
 The following sequence operation shows how the `findexpenses` operation works.
 
 <p align="center">
-  <img src="images/FindExpensesSequenceDiagram.png" alt="Find Expenses Sequence Diagram" width="600" />
+  <img src="images/FindExpensesSequenceDiagram.png" alt="Find Expenses Sequence Diagram" width="750" />
   <br>
     Fig 34. Find Expenses Sequence Diagram
 </p>
