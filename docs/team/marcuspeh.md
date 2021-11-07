@@ -66,7 +66,7 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
     * Added use cases for `view groups`, `find person` and `view expenses`.
     
 * **Testing**:
-    * Examples of PR that increase code coverageL [\#352](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/352), [\#353](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/353), [/356](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/356)
+    * Examples of PR that increase code coverageL [\#352](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/352), [\#353](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/353), [/#356](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/356)
 
 * **Community**:
   * Maintaining the issue tracker
