@@ -295,6 +295,7 @@ The `Storage` component,
 * can save both AWE data and user preference data in json format, and read them back into corresponding objects.
 * inherits from both `AweStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* has the `IndividualAmount` class which is composed of a `Person` and a `Cost`, similar to the entries within the `HashMaps` within `Expense`. Since `HashMap` is not serializable in Json format, we utilise a list of `IndividualAmount` objects to store the `HashMap`. 
 
 ### Common classes
 
@@ -842,7 +843,7 @@ Step 5: Upon successful execution, `CommandResult` is returned.
 The following sequence operation shows how the `deleteexpense` operation works.
 
 <p align="center">
-  <img src="images/DeleteExpenseSequenceDiagram.png" alt="Delete Expense Sequence Diagram" width="600" />
+  <img src="images/DeleteExpenseSequenceDiagram.png" alt="Delete Expense Sequence Diagram" width="750" />
   <br>
     Fig 36. Delete Expense Sequence Diagram
 </p>
@@ -851,7 +852,7 @@ The following sequence operation shows how the `deleteexpense` operation works.
 </div>
 
 <p align="center">
-  <img src="images/DeleteExpenseRefSequenceDiagram.png" alt="Delete Expense Reference Sequence Diagram" width="600" />
+  <img src="images/DeleteExpenseRefSequenceDiagram.png" alt="Delete Expense Reference Sequence Diagram" width="750" />
   <br>
     Fig 37. Delete Expense Reference Sequence Diagram
 </p>
@@ -925,7 +926,7 @@ The following diagram shows the flow of the algorithm.
 The following activity diagram shows what happens when a user executes a `calculatepayments` command.
 
 <p align="center">
-  <img src="images/CalculatePaymentsActivityDiagram.png" alt="Calculate Payments Activity Diagram" width="600" />
+  <img src="images/CalculatePaymentsActivityDiagram.png" alt="Calculate Payments Activity Diagram" width="750" />
   <br>
     Fig 39. Calculate Payments Activity Diagram
 </p>
@@ -952,7 +953,7 @@ Step 6. Upon successful execution, `CommandResult` is returned.
 The following sequence operation shows how the `calculatepayments` operation works.
 
 <p align="center">
-  <img src="images/CalculatePaymentsSequenceDiagram.png" alt="Calculate Payments Sequence Diagram" width="600" />
+  <img src="images/CalculatePaymentsSequenceDiagram.png" alt="Calculate Payments Sequence Diagram" width="750" />
   <br>
     Fig 40. Calculate Payments Sequence Diagram
 </p>
@@ -1002,7 +1003,7 @@ The following activity diagram shows how the `MainWindow` checks and sends the `
 <br>
 
 <p align="center">
-  <img src="images/UiTogglingActivityDiagram.png" alt="Ui Toggling Activity Diagram" width="450" />
+  <img src="images/UiTogglingActivityDiagram.png" alt="Ui Toggling Activity Diagram" width="600" />
   <br>
     Fig 42. Ui Toggling Activity Diagram
 </p>
