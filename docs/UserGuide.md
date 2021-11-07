@@ -693,9 +693,9 @@ If your questions are not answered in the FAQ, check out the issue page on our G
 Action | Format, Examples
 --------|------------------
 **View Contacts** | `contacts`
-**Add Contact** | `addcontact n/NAME p/PHONE_NUMBER [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 t/friend t/colleague`
-**Delete Contact** | `deletecontact INDEX`<br> e.g., `delete 3`
-**Edit Contact** | `editcontact INDEX [n/NAME] [p/PHONE_NUMBER] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee`
+**Add Contact** | `addcontact n/NAME p/PHONE_NUMBER [t/TAG]…​` <br> e.g., `addcontact n/James Ho p/22224444 t/friend t/colleague`
+**Delete Contact** | `deletecontact INDEX`<br> e.g., `deletecontact 3`
+**Edit Contact** | `editcontact INDEX [n/NAME] [p/PHONE_NUMBER] [t/TAG]…​`<br> e.g.,`editcontact 2 n/James Lee`
 **Find Contacts** | `findcontacts KEYWORD [MORE_KEYWORDS]`<br> e.g., `findcontacts James Jake`
 
 <p align="center">
