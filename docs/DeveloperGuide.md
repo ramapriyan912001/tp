@@ -962,9 +962,9 @@ The following sequence operation shows how the `calculatepayments` operation wor
 </div>
 
 <p align="center">
-  <img src="images/CreateGroupRef.png" alt="Create Group Reference" width="600" />
+  <img src="images/CalculatePaymentsRefSequenceDiagram.png" alt="Calculate Payments Reference Sequence Diagram" width="600" />
   <br>
-    Fig 41. Create Group Reference
+    Fig 41. Calculate Payments Reference Sequence Diagram
 </p>
 
 **Note: When a `Person` is deleted from contacts or removed from the group, the functioning of this command does not change. The deleted person may still be part of the list of payments depending on the expenses they had previously.**
