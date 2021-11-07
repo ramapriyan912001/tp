@@ -19,6 +19,7 @@ public class JsonSerializableAweTest {
     private static final Path TYPICAL_PERSONS_FILE = TEST_DATA_FOLDER.resolve("typicalPersonsAwe.json");
     private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonAwe.json");
     private static final Path DUPLICATE_GROUP_FILE = TEST_DATA_FOLDER.resolve("duplicateGroupAwe.json");
+    private static final Path PARTIAL_MODIFIED_PERSON_FILE = TEST_DATA_FOLDER.resolve("partialModifiedPersonAwe.json");
     private static final Path INVALID_MEMBERS_IN_GROUP_FILE = TEST_DATA_FOLDER
             .resolve("validPersonAndInvalidGroupAwe.json");
 
@@ -36,6 +37,14 @@ public class JsonSerializableAweTest {
         JsonSerializableAwe dataFromFile = JsonUtil.readJsonFile(DUPLICATE_PERSON_FILE,
                 JsonSerializableAwe.class).get();
         assertThrows(IllegalValueException.class, JsonSerializableAwe.MESSAGE_DUPLICATE_PERSON,
+                dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_partialModifiedPerson_throwsIllegalValueException() throws Exception {
+        JsonSerializableAwe dataFromFile = JsonUtil.readJsonFile(PARTIAL_MODIFIED_PERSON_FILE,
+                JsonSerializableAwe.class).get();
+        assertThrows(IllegalValueException.class, JsonSerializableAwe.MESSAGE_INVALID_GROUP_MEMBER,
                 dataFromFile::toModelType);
     }
 

@@ -55,7 +55,7 @@ class JsonSerializableAwe {
      */
     public boolean areValidMembers(Group group, Awe awe) {
         for (Person person : group.getMembers()) {
-            if (!awe.hasPerson(person)) {
+            if (!awe.hasExactPerson(person)) {
                 return false;
             }
         } return true;

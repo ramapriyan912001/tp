@@ -1465,7 +1465,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User <ins>finds contacts (UC4)</ins> or <ins>views all contacts (UC5)</ins>
+1. User <ins>finds contacts (UC4)</ins> or <ins>views all contacts (UC5)</ins>.
 2. User requests to delete a specific contact in the list.
 3. AWE deletes the contact.
 4. AWE removes the contact from groups of which the person was a member.
@@ -1474,7 +1474,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The contact list is empty.
+* 1a. The contacts page is empty.
   <br>Use case ends.
 * 2a. The given index is invalid.
     * 2a1. AWE shows an error message.
@@ -1487,19 +1487,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 </p>
 <div style="page-break-after: always;"></div>
 
-**Use case: UC3 - Edit contact**
+**Use case: UC3 - Edit a contact**
 
 **MSS**
 
-1. User <ins>finds contacts (UC4)</ins> or <ins>views all contacts (UC5)</ins>
-2. User requests to edit a specific contacts in the list
-3. User enters edited information
-4. AWE edits the contacts
+1. User <ins>finds contacts (UC4)</ins> or <ins>views all contacts (UC5)</ins>.
+2. User requests to edit a specific contacts in the list.
+3. User enters edited information.
+4. AWE edits the contacts.
 
 
 **Extensions**
 
-* 1a. The list is empty.
+* 1a. The contacts page is empty.
   <br>Use case ends.
 * 3a. The given index is invalid.
     * 3a1. AWE shows an error message.
@@ -1555,7 +1555,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Groups Use Cases
 
-**Use case: UC6 - Create Travel Group**
+**Use case: UC6 - Create travel group**
 
 **MSS**
 
@@ -1571,7 +1571,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     <br>Use case ends.
     
     
-**Use case: UC7 - Delete Travel Group**
+**Use case: UC7 - Delete travel group**
 
 **MSS**
 
@@ -1777,7 +1777,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Expenses Use Cases
 
-**Use case: UC15 - Add expense**
+**Use case: UC15 - Add an expense**
 
 **Preconditions:** User has is a member of the specified travel group.
 
@@ -1819,16 +1819,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1h. AWE detects that the total expenditure of the specified group is over one billion.
     * 1h1. AWE informs user that the total expenses of the travel group has reached its limit of one billion.
       <br>Use case ends.
+      
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
-**Use case: UC16 - Delete expense**
-
-**Preconditions:**
-
-User's last entered command is either `findexpenses` or `expenses`, i.e. the user is viewing an expense list.
+**Use case: UC16 - Delete an expense**
 
 **MSS**
 
-1. User <ins>finds expenses in a travel group (UC17)</ins> or <ins>lists expenses in a travel group (UC18)</ins>
+1. User <ins>finds expenses in a travel group (UC17)</ins> or <ins>lists expenses in a travel group (UC18)</ins>.
 2. User requests to delete an expense from list of expenses viewed by its position on screen.
 3. AWE deletes the specified expense.
 4. AWE shows updated list of expenses.
@@ -2159,7 +2160,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `deletegroup gn/Turkey`
      Expected: No changes as group does not exist. Error details shown in the status message.
 
-### Edit Group Name
+### Editing group name
 
 1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added)
 2. Test case: `groupeditname gn/London gn/Bali`
@@ -2377,7 +2378,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `deleteexpense 1` <br>
      Expected: No expense is deleted. Error details shown in the status message. Status bar remains the same.
       
-### Calculating Transaction Summary
+### Calculating transaction summary
 
 1. Calculating individual spending of a group with expenses.
 
@@ -2401,7 +2402,7 @@ testers are expected to do more *exploratory* testing.
 </p>
 <div style="page-break-after: always;"></div>
 
-### Calculating Payments
+### Calculating payments
 
 1. Calculating payments of a group with expenses.
 
