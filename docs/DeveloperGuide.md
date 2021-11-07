@@ -3,8 +3,9 @@ layout: page
 title: Developer Guide
 ---
 <p align="center">
-    <img src="images/awelogo.png" width="300" />
+    <img src="images/awelogo.png" alt="awe logo" width="300" />
 </p>
+
 Around the World in $80 (AWE) is a desktop application for keeping track of spending and expenditure during travels, splitting 
 expenses with travel-mates, and facilitating easy recollection of debts at the end of every trip. AWE is the world's
 only bespoke app designed for group travellers.
@@ -45,7 +46,11 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+<p align="center">
+  <img src="images/ArchitectureDiagram.png" alt="Architecture Diagram" width="280" />
+  <br>
+    Fig 1. Architecture Diagram
+</p>
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -72,9 +77,9 @@ The rest of the App consists of four components.
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
 <p align="center">
-    <img src="images/ArchitectureSequenceDiagram.png" width="650" />
+    <img src="images/ArchitectureSequenceDiagram.png" alt="Architecture Sequence Diagram" width="650" />
     <br>
-    Fig 1. Architecture Sequence Diagram
+      Fig 2. Architecture Sequence Diagram
 </p>
 
 Each of the four main components (also shown in the diagram above),
@@ -84,7 +89,11 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<img src="images/ComponentManagers.png" width="300" />
+<p align="center">
+  <img src="images/ComponentManagers.png" alt="Component Managers" width="300" />
+  <br>
+      Fig 3. Component Managers
+</p>
 
 The sections below give more details of each component.
 
@@ -92,7 +101,11 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-F13-1/tp/tree/master/src/main/java/seedu/awe/ui/Ui.java)
 
-<img src="images/UiClassDiagram.png" width="750" />
+<p align="center">
+  <img src="images/UiClassDiagram.png" alt="Ui Class Diagram" width="750" />
+  <br>
+    Fig 4. Ui Class Diagram
+</p>
 
 The UI consists of a `MainWindow` that is made up of parts e.g. `CommandBox`, `ResultDisplay`, `ViewPanel`, `NavigationButton` etc. 
 All these, except for `GroupButtonListener` and `PersonButtonListner` in `NavigationButton`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
@@ -107,7 +120,11 @@ The `UI` component,
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
 #### View Panel
-<img src="images/UiViewPanelDiagram.png" width="750" />
+<p align="center">
+  <img src="images/UiViewPanelDiagram.png" alt="Ui View Panel Diagram" width="750" />
+  <br>
+    Fig 5. Ui View Panel Diagram
+</p>
 
 The `ViewPanel` consist of the following parts:
 * `GroupListPanel`
@@ -125,7 +142,11 @@ We have decided to opt for this way of implementation due to the following:
 In addition to using CLI command, we will also be implementing the toggling of list panel with the use of buttons.
 
 #### Navigation Buttons
-<img src="images/UiNavigationButtonDiagram.png" width="600" />
+<p align="center">
+  <img src="images/UiNavigationButtonDiagram.png" alt="Ui Navigation Button Diagram" width="600" />
+  <br>
+    Fig 6. Ui Navigation Button Diagram
+</p>
 
 The `NavigationButtonPanel` consist of the following parts:
 * GroupViewButton
@@ -139,7 +160,11 @@ Clicking each button will show the respective list view in `ViewPanel`. The clic
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+<p align="center">
+  <img src="images/LogicClassDiagram.png" alt="Logic Class Diagram" width="550"/>
+  <br>
+    Fig 7. Logic Class Diagram
+</p>
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AweParser` class to parse the user command.
@@ -149,14 +174,22 @@ How the `Logic` component works:
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
-<img src="images/DeleteSequenceDiagram.png" width="750" />
+<p align="center">
+  <img src="images/DeleteSequenceDiagram.png" alt="Delete Sequence Diagram" width="750" />
+  <br>
+    Fig 8. Delete Sequence Diagram
+</p>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/ParserClasses.png" width="600"/>
+<p align="center">
+  <img src="images/ParserClasses.png" alt="Parser Classes" width="600"/>
+  <br>
+    Fig 9. Parser Classes
+</p>
 
 How the parsing works:
 * When called upon to parse a user command, the `AweParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AweParser` returns back as a `Command` object.
@@ -165,9 +198,13 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-F13-1/tp/tree/master/src/main/java/seedu/awe/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="750" />
-<br>
-(Note: Implementation of Person, Group and Expense class diagram are referenced below.)
+<p align="center">
+  <img src="images/ModelClassDiagram.png" alt="Model Class Diagram" width="750" />
+  <br>
+    Fig 10. Model Class Diagram
+  <br>
+  (Note: Implementation of Person, Group and Expense class diagram are referenced below.)
+</p>
 
 The `Model` component,
 
@@ -181,8 +218,12 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<img src="images/PersonClassDiagram.png" width="300" />
-<br>
+<p align="center">
+  <img src="images/PersonClassDiagram.png" alt="Person Class Diagram" width="300" />
+  <br>
+    Fig 11. Person Class Diagram
+  <br>
+</p>
 
 The `Person` component, 
 
@@ -190,8 +231,12 @@ The `Person` component,
 *  Stores a `Name` and a `Phone` object for each person.
 *  Stores any amount of `Tag` objects.
 
-<img src="images/ExpenseClassDiagram.png" width="300" />
-<br>
+<p align="center">
+  <img src="images/ExpenseClassDiagram.png" alt="Expense Class Diagram" width="300" />
+  <br>
+    Fig 12. Expense Class Diagram
+  <br>
+</p>
 
 The `Expense` component, 
 
@@ -199,7 +244,11 @@ The `Expense` component,
 *  Expenses will store a reference to all instance of `Person` involved in the expenses.
 *  Stores a `Cost` and a `Description` for each `Expense`.
 
-<img src="images/GroupClassDiagram.png" width="350" /><br>
+<p align="center">
+  <img src="images/GroupClassDiagram.png" alt="Group Class Diagram" width="350" /><br>
+  <br>
+    Fig 13. Group Class Diagram
+</p>
 
 The `Group` component, 
 
@@ -208,17 +257,24 @@ The `Group` component,
 *  Stores a `GroupName` for each group.
 *  Stores any amount of `Tag` object.
 
-<img src="images/TransactionSummaryClassDiagram.png" width="200" />
-<br>
+<p align="center">
+  <img src="images/TransactionSummaryClassDiagram.png" alt="Transaction Summary Class Diagram" width="200" />
+  <br>
+    Fig 14. Transaction Summary Class Diagram
+  <br>
+</p>
 
 The `TransactionSummary` component,
 
 *  Handles the display of all the individual split expenses in a group.
 *  Stores a reference to a `Person` and a `Cost`.
 
-
-<img src="images/PaymentClassDiagram.png" width="200" />
-<br>
+<p align="center">
+  <img src="images/PaymentClassDiagram.png" alt="Payment Class Diagram" width="200" />
+  <br>
+    Fig 15. Payment Class Diagram
+  <br>
+</p>
 
 The `Payment` component,
 
@@ -229,12 +285,17 @@ The `Payment` component,
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-F13-1/tp/tree/master/src/main/java/seedu/awe/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<p align="center">
+  <img src="images/StorageClassDiagram.png" alt="Storage Class Diagram" width="550" />
+  <br>
+    Fig 16. Storage Class Diagram
+</p>
 
 The `Storage` component,
 * can save both AWE data and user preference data in json format, and read them back into corresponding objects.
 * inherits from both `AweStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* has the `IndividualAmount` class which is composed of a `Person` and a `Cost`, similar to the entries within the `HashMaps` within `Expense`. Since `HashMap` is not serializable in Json format, we utilise a list of `IndividualAmount` objects to store the `HashMap`. 
 
 ### Common classes
 
@@ -256,7 +317,12 @@ number of the contact, and optional `Tags` to attach to the contact.
 
 The following activity diagram shows what happens when a user executes a `createGroup` command.
 
-![AddContactActivityDiagram](images/AddContactActivityDiagram.png)
+
+<p align="center">
+  <img src="images/AddContactActivityDiagram.png" alt="Add Contact Activity Diagram" width="550" />
+  <br>
+    Fig 17. Add Contact Activity Diagram
+</p>
 
 Given below is an example usage scenario and how the `creategroup` mechanism behaves at each step.
 
@@ -271,13 +337,21 @@ Step 3. `AddContactCommand` runs its execute() method which checks if a contact 
 created. If not, the newly created contact is added into the AWE model. Upon successful execution, `CommandResult` is returned.
 
 The following sequence operation shows how the `addcontact` operation works.
-![AddContactSequenceDiagram](images/AddContactSequenceDiagram.png)
+<p align="center">
+  <img src="images/AddContactSequenceDiagram.png" alt="Add Contact Sequence Diagram" width="750" />
+  <br>
+    Fig 18. Add Contact Sequence Diagram
+</p>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddContactCommandParser`
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-<img src="images/AddContactRefSequenceDiagram.png" width="600" />
+<p align="center">
+  <img src="images/AddContactRefSequenceDiagram.png" alt="Add Contact Reference Sequence Diagram" width="600" />
+  <br>
+    Fig 19. Add Contact Reference Sequence Diagram
+</p>
 
 #### Design considerations:
 
@@ -315,7 +389,11 @@ that contains details of the total expenditure incurred by each member across th
 
 The following activity diagram shows what happens when a user executes a `createGroup` command.
 
-![CreateGroupActivityDiagram](images/CreateGroupActivityDiagram.png)
+<p align="center">
+  <img src="images/CreateGroupActivityDiagram.png" alt="Create Group Activity Diagram" width="600" />
+  <br>
+    Fig 20. Create Group Activity Diagram
+</p>
 
 Given below is an example usage scenario and how the `creategroup` mechanism behaves at each step.
 
@@ -331,13 +409,22 @@ created. If not, the newly created group is added into the AWE model and all mem
 the model. Upon successful execution, `CommandResult` is returned.
 
 The following sequence operation shows how the `creategroup` operation works.
-![CreateGroupSequenceDiagram](images/CreateGroupSequenceDiagram.png)
+
+<p align="center">
+  <img src="images/CreateGroupSequenceDiagram.png" alt="Create Group Sequence Diagram" width="750" />
+  <br>
+    Fig 21. Create Group Sequence Diagram
+</p>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `CreateGroupCommandParser`
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-<img src="images/CreateGroupRef.png" width="600" />
+<p align="center">
+  <img src="images/CreateGroupRef.png" alt="Create Group Reference Sequence Diagram" width="600" />
+  <br>
+    Fig 22. Create Group Reference Sequence Diagram
+</p>
 
 #### Design considerations:
 
@@ -404,7 +491,11 @@ This allows the `Model` class to easily retrieve the Group based on the name ent
 
 The following activity diagram shows what happens when a user executes a `deletegroup` command.
 
-<img src="images/DeleteGroupActivityDiagram.png" width="350" />
+<p align="center">
+  <img src="images/DeleteGroupActivityDiagram.png" alt="Delete Group Activity Diagram" width="750" />
+  <br>
+    Fig 23. Delete Group Activity Diagram
+</p>
 
 
 Given below is an example usage scenario and how the `deletegroup` mechanism behaves at each step.
@@ -422,12 +513,21 @@ Upon successful execution, `CommandResult` is returned.
 
 
 The following sequence operation shows how the `deletegroup` operation works.
-![DeleteGroupSequenceDiagram](images/DeleteGroupSequenceDiagram.png)
+
+<p align="center">
+  <img src="images/DeleteGroupSequenceDiagram.png" alt="Delete Group Sequence Diagram" width="750" />
+  <br>
+    Fig 24. Delete Group Sequence Diagram
+</p>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteGroupCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-<img src="images/DeleteGroupRefSequenceDiagram.png" width="600" />
+<p align="center">
+  <img src="images/DeleteGroupRefSequenceDiagram.png" alt="Delete Group Reference Sequence Diagram" width="600" />
+  <br>
+    Fig 25. Delete Group Reference Sequence Diagram
+</p>
 
 #### Design considerations:
 
@@ -499,7 +599,12 @@ Step 3. `GroupEditNameCommand` runs its execute() method which updates the name 
 Upon successful execution,`CommandResult` is returned.
 
 The following sequence operation shows how the `groupeditname` command works.
-![GroupEditNameSequenceDiagram](images/GroupEditNameSequenceDiagram.png)
+
+<p align="center">
+  <img src="images/GroupEditNameSequenceDiagram.png" alt="Group Edit Name Sequence Diagram" width="750" />
+  <br>
+    Fig 26. Group Edit Name Sequence Diagram
+</p>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `oldGroup:Group`
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -532,7 +637,11 @@ The find group feature supports both single keyword and multi keyword search. Th
 
 The following activity diagram shows what happens when a user executes a `findgroups` command:
 
-<img src="images/FindGroupsActivityDiagram.png" width="300" />
+<p align="center">
+  <img src="images/FindGroupsActivityDiagram.png" alt="Find Groups Activity Diagram" width="300" />
+  <br>
+    Fig 27. Find Groups Activity Diagram
+</p>
 
 Given below is an example usage scenario and how the `findgroup` operation behaves at each step:
 
@@ -552,9 +661,17 @@ Step 6. The output from `CommandResult` is then displayed as an output for the u
 
 The following sequence diagram shows how the `findgroups` operation works:
 
-<img src="images/FindGroupsSequenceDiagram.png" width="750" />
+<p align="center">
+  <img src="images/FindGroupsSequenceDiagram.png" alt="Find Groups Sequence Diagram" width="750" />
+  <br>
+    Fig 28. Find Groups Sequence Diagram
+</p>
 
-<img src="images/FindGroupsRefSequenceDiagram.png" width="600" />
+<p align="center">
+  <img src="images/FindGroupsRefSequenceDiagram.png" alt="Find Groups Reference Sequence Diagram" width="600" />
+  <br>
+    Fig 29. Find Groups Reference Sequence Diagram
+</p>
 
 ### Add expense feature
 
@@ -565,7 +682,11 @@ expense, a `HashMap` that contains details of how much each member has paid in t
 
 The following activity diagram shows what happens when a user executes a `addexpense` command.
 
-![AddExpenseActivityDiagram](images/AddExpenseActivityDiagram.png)
+<p align="center">
+  <img src="images/AddExpenseActivityDiagram.png" alt="Add Expense Activity Diagram" width="750" />
+  <br>
+    Fig 30. Add Expense Activity Diagram
+</p>
 
 Given below is an example usage scenario and how the `addexpense` mechanism behaves at each step.
 
@@ -581,11 +702,22 @@ relevant group members into the group and the group is updated in the AWE model.
 `CommandResult` is returned.
 
 The following sequence operation shows how the `addexpense` operation works.
-![AddExpenseSequenceDiagram](images/AddExpenseSequenceDiagram.png)
+
+<p align="center">
+  <img src="images/AddExpenseSequenceDiagram.png" alt="Add Expense Sequence Diagram" width="750" />
+  <br>
+    Fig 31. Add Expense Sequence Diagram
+</p>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddExpenseCommandParser`
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
+<p align="center">
+  <img src="images/AddExpenseRefSequenceDiagram.png" alt="Add Expense Reference Sequence Diagram" width="750" />
+  <br>
+    Fig 32. Add Expense Reference Sequence Diagram
+</p>
 
 #### Design considerations:
 
@@ -616,7 +748,11 @@ required for finding expenses within a group.
 
 The following activity diagram shows what happens when a user executes a `findexpenses` command.
 
-![FindExpensesActivityDiagram](images/FindExpensesActivityDiagram.png)
+<p align="center">
+  <img src="images/FindExpensesActivityDiagram.png" alt="Find Expenses Activity Diagram" width="600" />
+  <br>
+    Fig 33. Find Expenses Activity Diagram
+</p>
 
 Given below is an example usage scenario and how the `findexpenses` mechanism behaves at each step.
 
@@ -638,7 +774,12 @@ Step 6. The output from `CommandResult` is then displayed as an output for the u
 
 
 The following sequence operation shows how the `findexpenses` operation works.
-![FindExpensesSequenceDiagram](images/FindExpensesSequenceDiagram.png)
+
+<p align="center">
+  <img src="images/FindExpensesSequenceDiagram.png" alt="Find Expenses Sequence Diagram" width="750" />
+  <br>
+    Fig 34. Find Expenses Sequence Diagram
+</p>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteGroupCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -675,7 +816,11 @@ This means that the user is constrained to only being permitted to delete expens
 
 The following activity diagram shows what happens when a user executes a `deleteexpense` command.
 
-![DeleteExpenseActivityDiagram](images/DeleteExpenseActivityDiagram.png)
+<p align="center">
+  <img src="images/DeleteExpenseActivityDiagram.png" alt="Delete Expense Activity Diagram" width="600" />
+  <br>
+    Fig 35. Delete Expense Activity Diagram
+</p>
 
 Given below is an example usage scenario and how the `deleteexpense` mechanism behaves at each step.
 
@@ -696,12 +841,21 @@ Step 5: Upon successful execution, `CommandResult` is returned.
 
 
 The following sequence operation shows how the `deleteexpense` operation works.
-![DeleteExpenseSequenceDiagram](images/DeleteExpenseSequenceDiagram.png)
+
+<p align="center">
+  <img src="images/DeleteExpenseSequenceDiagram.png" alt="Delete Expense Sequence Diagram" width="750" />
+  <br>
+    Fig 36. Delete Expense Sequence Diagram
+</p>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteExpenseCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-<img src="images/DeleteExpenseRefSequenceDiagram.png" width="600" />
+<p align="center">
+  <img src="images/DeleteExpenseRefSequenceDiagram.png" alt="Delete Expense Reference Sequence Diagram" width="750" />
+  <br>
+    Fig 37. Delete Expense Reference Sequence Diagram
+</p>
 
 #### Design considerations
 
@@ -762,12 +916,20 @@ Initialise a `Pair` object with the `Person` object of the individual, and their
 
 The following diagram shows the flow of the algorithm.
 
-<img src="images/CalculatePaymentsCommandAlgorithmDiagram.png" width="600" />
+<p align="center">
+  <img src="images/CalculatePaymentsCommandAlgorithmDiagram.png" alt="Calculate Payments Command Algorithm Diagram" width="600" />
+  <br>
+    Fig 38. Calculate Payments Command Algorithm Diagram
+</p>
   
 
 The following activity diagram shows what happens when a user executes a `calculatepayments` command.
 
-![CalculatePaymentsActivityDiagram](images/CalculatePaymentsActivityDiagram.png)
+<p align="center">
+  <img src="images/CalculatePaymentsActivityDiagram.png" alt="Calculate Payments Activity Diagram" width="750" />
+  <br>
+    Fig 39. Calculate Payments Activity Diagram
+</p>
 
 Given below is an example usage scenario and how the `calculatepayments` mechanism behaves at each step.
 
@@ -789,12 +951,21 @@ Step 6. Upon successful execution, `CommandResult` is returned.
 
 
 The following sequence operation shows how the `calculatepayments` operation works.
-![CalculatePaymentsSequenceDiagram](images/CalculatePaymentsSequenceDiagram.png)
+
+<p align="center">
+  <img src="images/CalculatePaymentsSequenceDiagram.png" alt="Calculate Payments Sequence Diagram" width="750" />
+  <br>
+    Fig 40. Calculate Payments Sequence Diagram
+</p>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `CalculatePaymentsCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-<img src="images/CreateGroupRef.png" width="600" />
+<p align="center">
+  <img src="images/CreateGroupRef.png" alt="Create Group Reference" width="600" />
+  <br>
+    Fig 41. Create Group Reference
+</p>
 
 **Note: When a `Person` is deleted from contacts or removed from the group, the functioning of this command does not change. The deleted person may still be part of the list of payments depending on the expenses they had previously.**
 
@@ -830,7 +1001,12 @@ To achieve the toggling between each view panels, we implemented the following:
 
 The following activity diagram shows how the `MainWindow` checks and sends the `UiView` to `ViewPanel`. 
 <br>
-<img src="images/UiTogglingActivityDiagram.png" width="450" />
+
+<p align="center">
+  <img src="images/UiTogglingActivityDiagram.png" alt="Ui Toggling Activity Diagram" width="600" />
+  <br>
+    Fig 42. Ui Toggling Activity Diagram
+</p>
 
 #### Proposed Implementation
 **Aspect: Navigating between different view**
@@ -1581,7 +1757,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a Group
 
-1. Deleting a group
+1. Deleting a group.
    1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added).
   
    1. Test case: `deletegroup gn/London`
@@ -1594,7 +1770,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added)
 2. Test case: `groupeditname gn/London gn/Bali`
-     Expected: Name of London group remains unchanged. Status message indicates that group name Bali already exists.
+   Expected: Name of London group remains unchanged. Status message indicates that group name Bali already exists.
 
 3. Test case: `groupeditname gn/London gn/`
    Expected: Name of London group remains unchanged. Status message indicates that group name cannot be blank.
@@ -1677,10 +1853,9 @@ testers are expected to do more *exploratory* testing.
    4. Test case: `findgroups Singapore`
       Expected: GroupList displayed. GroupList will display a blank page. 0 groups found shown in status message.
 
-
 ### Viewing expenses
 
-1. Viewing all expenses of a travel group
+1. Viewing all expenses of a travel group.
 
    1. Prerequisites: Have at least one group in the app.
 
@@ -1692,6 +1867,32 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `expenses`, `delete gn/`, `...`
       Expected: Similar to previous.
+      
+### Adding an expense
+
+1. Adding an expense involving an existing member of a specific travel group.
+   
+   1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added)
+
+   1. Test case: `addexpense n/Alex Yeoh gn/London $/50 d/Dinner`<br>
+     Expected: An expense of $50 for Dinner is added to the travel group London with Alex Yeoh as its payer.
+     
+   1. Test case: `addexpense gn/London $/50 d/Dinner`<br>
+      Expected: No expense added. Status message will display the correct format of the addexpense command.
+     
+1. Adding an expense involving a payer not part of the specified travel group.
+
+   1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added)
+
+   1. Test case: `addexpense n/David Li gn/London $/50 d/Dinner`<br>
+      Expected: No expense added. Status message will indicate that the payer is not part of the specified travel group.
+     
+1. Adding an expense involving a travel group that does not exist.
+
+   1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added)
+
+   1. Test case: `addexpense n/Alex Yeoh gn/Sweden $/50 d/Arcade`<br>
+      Expected: No expense added. Status message will indicate that the specified travel group does not exist.
 
 ### Deleting an expense
 

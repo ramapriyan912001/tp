@@ -117,12 +117,13 @@ public class AddExpenseCommand extends Command {
             if (currentPayer == null || !group.isPartOfGroup(currentPayer)) {
                 throw new CommandException(MESSAGE_ADDEXPENSECOMMAND_NOT_PART_OF_GROUP);
             }
+
+            if (leftoverExpenseAfterIndividualExpense.cost - selfCosts.get(i).cost < 0) {
+                throw new CommandException(MESSAGE_ADDEXPENSECOMMAND_COST_ZERO_OR_LESS);
+            }
+
             individualPayment.merge(currentPayer, selfCosts.get(i), (original, toAdd) -> original.add(toAdd));
             leftoverExpenseAfterIndividualExpense = leftoverExpenseAfterIndividualExpense.subtract(selfCosts.get(i));
-        }
-
-        if (leftoverExpenseAfterIndividualExpense.cost <= 0) {
-            throw new CommandException(MESSAGE_ADDEXPENSECOMMAND_COST_ZERO_OR_LESS);
         }
 
         ArrayList<Person> groupMembers = removeExcludedFromGroup(group.getMembers());

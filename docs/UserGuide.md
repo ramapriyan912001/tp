@@ -563,7 +563,7 @@ Format: `transactionsummary gn/GROUP_NAME`
 Examples:
 * `transactionsummary gn/Bali`
 * `transactionsummary gn/London`
-![result for 'transactionsummary gn/London](images/TransactionSummaryResult.png)
+  ![result for `transactionsummary gn/London`](images/TransactionSummaryResult.png)
 
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
@@ -675,7 +675,7 @@ argument. This minimises the chances of accidentally deleting a group.
 **Q**: What do I do if I see `AWE.jar` cannot be opened because it is from an unidentified developer when I double click the jar file on a mac?<br>
 **A**: Go to `System Preferences -> Security and Privacy -> General` and click on `Open anyways` as such
 <p align="center">
-    <img src="images/MacSecurityPreference.png" />
+    <_img_ src="images/MacSecurityPreference.png" />
 </p>
 <br>
 <br>
