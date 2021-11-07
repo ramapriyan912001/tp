@@ -322,16 +322,16 @@ The `Group` component,
 *  Stores any amount of `Tag` object.
 
 <p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
+<p align="center">
   <img src="images/TransactionSummaryClassDiagram.png" alt="Transaction Summary Class Diagram" width="200" />
   <br>
     Fig 14. Transaction Summary Class Diagram
   <br>
 </p>
-
-<p align="center">
-    <a href="#tableofcontents">Click here to return to table of contents</a>
-</p>
-<div style="page-break-after: always;"></div>
 
 The `TransactionSummary` component,
 
