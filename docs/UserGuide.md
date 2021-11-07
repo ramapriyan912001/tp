@@ -54,14 +54,14 @@ Term | Explanation
 **Command Line Interface (CLI)** | The Command Line Interface, or CLI for short, is the user interface on which AWE is based. This means that most of AWE's functionality is unlocked by the typing of inputs by the user, rather than the clicking of a mouse or the selection of options via a menu.
 **Graphical User Interface (GUI)** | The Graphical User Interface, or GUI for short, is a user interface which supports all of its features through the clicking of a mouse or the selection of options via a menu. It does not require users to type in commands.
 **Command** | Commands are the user inputs that trigger the specific features of the app. Commands are often denoted in highlighted letters. For instance, to create a group, the `creategroup` command is utilized. 
-**Parameter** | A Parameter refers to a specific detail required for a command. For instance, adding a contact within an app would require a details such as the contact's name. In this case, the name is a parameter of this command. Parameters are often denoted in the guide in highlighted uppercase letters, for eg. `NAME`.
+**Parameter** | A Parameter refers to a specific detail required for a command. For instance, adding a contact within an app would require details such as the contact's name. In this case, the name is a parameter of this command. Parameters are often denoted in the guide in highlighted uppercase letters, for eg. `NAME`.
 
 ### 1.2 Format of commands
 If you wish to jump straight into using our features, refer to Section 5 for the summary of commands.
 Here are some pointers to take note of.
 1. Words in `UPPER_CASE` are parameters to be supplied by you.
 2. Words that are enclosed in `[   ]` denote optional parameters that the user can choose to enter or leave out.
-3. You will notice that our commands require you to use characters such as `n/`, `t/`, etc. This is allows our programme
+3. You will notice that our commands require you to use characters such as `n/`, `t/`, etc. This allows our programme
 to locate which words belong to which category of input.
 
 <p align="center">
@@ -159,7 +159,7 @@ For those who are not as fast, familiarity with the commands over time will allo
 * Except `findexpenses`, `findgroups`, `findcontacts`, parameters for other commands are case-sensitive.
 
 * Do note that the [Contact-related commands](#51-contacts-commands) and
-[Expense-related commands](#53-expense-commands) both use accept an index as an argument to identify which
+[Expense-related commands](#53-expense-commands) both accept an index as an argument to identify which
 contact/expense to delete. On the other hand, [Group-related commands](#52-groups-commands) accept a unique group
 name as an argument. For the reasons behind this implementation, refer to our [FAQ](#4-faq)
 
@@ -668,14 +668,14 @@ argument. This maximizes the chances of accidentally deleting a group.
 **A**: Install AWE on the other computer and replace the empty data file it creates with the data file used by the AWE on your previous computer.
 
 **Q**: What if the Jar file does not open properly when I double click on it?<br>
-**A**: Open a command prompt in that folder and run the command `java -jar AWE.jar`.
+**A**: Open a command prompt in that folder and run the command `java -jar awe.jar`.
 
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
 </p>
 <div style="page-break-after: always;"></div>
 
-**Q**: What do I do if I see `AWE.jar` cannot be opened because it is from an unidentified developer when I double click the jar file on a mac?<br>
+**Q**: What do I do if I see `awe.jar` cannot be opened because it is from an unidentified developer when I double click the jar file on a mac?<br>
 **A**: Go to `System Preferences -> Security and Privacy -> General` and click on `Open anyways` as such
 <p align="center">
     <img src="images/MacSecurityPreference.png" width="600"/>
