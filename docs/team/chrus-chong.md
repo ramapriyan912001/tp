@@ -105,12 +105,12 @@ Given below are my contributions to the project.[RepoSense link](https://nus-cs2
       based on.
 
 <p align="center">
-  <img src="images/CreateGroupSequenceDiagram.png" alt="Create Group Sequence Diagram" width="750" />
+  <img src="../images/CreateGroupSequenceDiagram.png" alt="Create Group Sequence Diagram" width="750" />
   <br>
 </p>
 
 <p align="center">
-  <img src="images/CreateGroupRef.png" alt="Create Group Reference Sequence Diagram" width="600" />
+  <img src="../images/CreateGroupRef.png" alt="Create Group Reference Sequence Diagram" width="600" />
   <br>
 </p>
 
