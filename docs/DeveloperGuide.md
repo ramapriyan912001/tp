@@ -127,7 +127,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 </p>
 
 The UI consists of a `MainWindow` that is made up of parts e.g. `CommandBox`, `ResultDisplay`, `ViewPanel`, `NavigationButton` etc. 
-All these, except for `GroupButtonListener` and `PersonButtonListner` in `NavigationButton`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+All these, except for `GroupButtonListener` and `PersonButtonListener` in `NavigationButton`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
