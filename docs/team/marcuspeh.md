@@ -6,7 +6,7 @@ title: Marcus Peh's Project Portfolio Page
 ### Project: Around the World in $80
 
 <p align="center">
-    <img src="images/awelogo.png" alt="awe logo" width="300" />
+    <img src="../images/awelogo.png" alt="awe logo" width="300" />
 </p>
 
 Around the World in $80 (AWE) is a desktop application for keeping track of spending and expenditure during travels, splitting expenses with travel-mates, and facilitating easy recollection of debts at the end of every trip. AWE is the world’s only bespoke app designed for group travellers.
