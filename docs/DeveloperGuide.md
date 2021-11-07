@@ -376,11 +376,6 @@ The `Storage` component,
 </p>
 <div style="page-break-after: always;"></div>
 
-### Common classes
-
-Classes used by multiple components are in the `seedu.awe.commons` package.
-
-
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
