@@ -42,10 +42,6 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
 * **severity.HIGH** Edit person does not update groups and expenses. [\#158](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/153)
    * What happen: The command `addPerson` does not replace the instance of the old person from groups and expenses.
    * Pull request: [\#158](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/158)
-      
-* **severity.HIGH** Running AWE without data.json will crash the program [\#223](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/223)
-    * What happen: Running AWE without data.json will cause a `RuntimeException`. 
-    * Pull request: [\#186](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/186)
     
 * **severity.HIGH** Commands for modifying groups will result in the entire group's expense to be wiped. [\#270](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/270)
     * What happen: Expenses were not brought from the old instance to the new instance of that specific group.
@@ -60,24 +56,17 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
   * Managed releases: [v1.2](https://github.com/AY2122S1-CS2103T-F13-1/tp/releases/tag/v1.2)
 
 * **User Guide**:
-    * Updated overall layout.
     * Added user guide for the features `groups`, `expenses`, `findgroups` and `transactionsummary`.
     * Added FAQs.
     
 * **Developer Guide**:
-    * Updated overall layout.
     * Updated UI segment in Design with class diagram and explanation.
     * Added implementation and design consideration for user interface.
     * Added implementation, test cases  and use cases for `findgroups`, `transactionsummary`.
     * Added use cases for `view groups`, `find person` and `view expenses`.
     
 * **Testing**:
-    * Wrote entire test cases for the following:
-        * `Tag`
-        * `TransactionSummary` & `TransactionSummaryList`
-        * `FindGroupsCommand` & `FindGroupsCommandParser`
-        * `ListGroupsCommand` & `ListGroupsCommandParser`
-        * `GroupEditNameCommand` & `GroupEditNameCommandParser`
+    * Examples of PR that increase code coverageL [\#352](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/352), [\#353](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/353), [/356](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/356)
 
 * **Community**:
   * Maintaining the issue tracker
