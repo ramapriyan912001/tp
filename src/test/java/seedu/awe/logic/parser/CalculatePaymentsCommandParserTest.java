@@ -31,7 +31,7 @@ public class CalculatePaymentsCommandParserTest {
     }
 
     /**
-     * Resets parser. Necessary as CalculatePaymentsCommand parser needs to be initialised with a model for each call.
+     * Resets parser. Necessary as CalculatePaymentsCommand parser needs to be initialized with a model for each call.
      * Failure to reset parser will result in Duplicate exceptions being raised.
      */
     public void resetParser() {
