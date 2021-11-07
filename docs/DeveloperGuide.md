@@ -23,6 +23,9 @@ beginning of your journey around the world.
 <h2 style="font-size: 1.75rem; margin-top: 60px; color: #e46c0a; font-weight:400; margin-bottom: 15px;" id="tableofcontents"><strong>Table of Contents</strong></h2>
 * Table of Contents
 {:toc}
+
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
@@ -36,6 +39,7 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -96,6 +100,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 </p>
 
 The sections below give more details of each component.
+
+<div style="page-break-after: always;"></div>
 
 ### UI component
 
