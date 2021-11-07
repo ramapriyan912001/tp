@@ -298,7 +298,7 @@ public class Messages {
             + ": Finds all expenses within the specified group "
             + "which description contains any of the specified keywords (case-insensitive) and displays them as a"
             + " list with index numbers.\n"
-            + "Parameters:"
+            + "Parameters:\n"
             + "KEYWORD [MORE_KEYWORDS]...\n"
             + PREFIX_GROUP_NAME + "GROUP_NAME"
             + " Example: " + FindExpensesCommand.COMMAND_WORD + " pizza pasta " + PREFIX_GROUP_NAME + "London";
