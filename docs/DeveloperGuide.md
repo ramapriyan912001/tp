@@ -571,11 +571,6 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
       upon creation.
     * This minimizes the number of commands a user has to make in setting up a functional Group.
     * As such, it is better to choose Alternative 1, as this provides the user with a far better user experience.
-  
-<p align="center">
-    <a href="#tableofcontents">Click here to return to table of contents</a>
-</p>
-<div style="page-break-after: always;"></div>
 
 **Aspect: Case-sensitivity of `GroupName` parameter in `creategroup` command:**
 
@@ -594,16 +589,15 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
   * Cons: Difficult to keep track of trips or groups if multiple groups of users go on trips to the same place.
   * Cons: User has limited flexibility and restricted user-choice.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 * **Justification**
   * The two cases described in the alternatives, where multiple groups of the same name are necessary, are quite prevalent.
   * Moreover, we trust the user to be careful with the casing of the `GroupName` when entering the commands.
   * As such, we chose to make the `GroupName` parameter case-sensitive.
-
-<p align="center">
-    <a href="#tableofcontents">Click here to return to table of contents</a>
-</p>
-<div style="page-break-after: always;"></div>
 
 * **Improvements**
   * The solution of making the `GroupName` parameter case-sensitive to permit users to create groups of the same name should the use case demand it is not ideal.
@@ -625,7 +619,7 @@ This allows the `Model` class to easily retrieve the Group based on the name ent
 
 The following activity diagram shows what happens when a user executes a `deletegroup` command.
 <p align="center">
-  <img src="images/DeleteGroupActivityDiagram.png" alt="Delete Group Activity Diagram" width="750" />
+  <img src="images/DeleteGroupActivityDiagram.png" alt="Delete Group Activity Diagram" width="700"/>
   <br>
     Fig 23. Delete Group Activity Diagram
 </p>
@@ -997,11 +991,6 @@ The following sequence operation shows how the `findexpenses` operation works.
     Fig 35. Find Expenses Reference Sequence Diagram
 </p>
 
-<p align="center">
-    <a href="#tableofcontents">Click here to return to table of contents</a>
-</p>
-<div style="page-break-after: always;"></div>
-
 #### Design considerations:
 
 **Aspect: User command for findexpenses:**
@@ -1159,6 +1148,11 @@ Initialise a `Pair` object with the `Person` object of the individual, and their
 The following diagram shows the flow of the algorithm.
 
 <p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
+<p align="center">
   <img src="images/CalculatePaymentsCommandAlgorithmDiagram.png" alt="Calculate Payments Command Algorithm Diagram" width="600" />
   <br>
     Fig 39. Calculate Payments Command Algorithm Diagram
@@ -1269,7 +1263,7 @@ The following activity diagram shows how the `MainWindow` checks and sends the `
 <div style="page-break-after: always;"></div>
 
 <p align="center">
-  <img src="images/UiTogglingActivityDiagram.png" alt="Ui Toggling Activity Diagram" width="600" height="850" />
+  <img src="images/UiTogglingActivityDiagram.png" alt="Ui Toggling Activity Diagram" width="500" />
   <br>
     Fig 43. Ui Toggling Activity Diagram
 </p>
@@ -2081,13 +2075,13 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `editcontact 1`<br>
      Expected: No contact is edited. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect edit commands to try: `editcontact`, `editcontact x n/NAME p/PHONE`, `...` (where x is larger than the visible list size)<br>
-     Expected: Similar to previous.
-
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
 </p>
 <div style="page-break-after: always;"></div>
+
+   1. Other incorrect edit commands to try: `editcontact`, `editcontact x n/NAME p/PHONE`, `...` (where x is larger than the visible list size)<br>
+     Expected: Similar to previous.
 
 2. Editing a contact while **filtered** contacts are being shown.
 
@@ -2114,16 +2108,16 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect edit commands to try: `editcontact`, `editcontact x n/NAME p/PHONE`, `...` (where x is larger than the visible list size)<br>
    Expected: Similar to previous.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 3. Attempting to delete a contact when not viewing a list of contacts.
    1. Prerequisites: The preloaded data for contacts are not modified. (No contacts are removed or added). The current page must not be `ContactsPage`.
 
    1. Test case: `editcontact 1 n/Alex` <br>
      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
-
-<p align="center">
-    <a href="#tableofcontents">Click here to return to table of contents</a>
-</p>
-<div style="page-break-after: always;"></div>
 
 ### Creating a group
 
@@ -2137,7 +2131,12 @@ testers are expected to do more *exploratory* testing.
 
 4. Test case: `creategroup gn/Toronto n/Irfan Ibrahim`
    Expected: Group Toronto created with member Irfan Ibrahim. Status message indicates new group has been created.
-   
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 ### Deleting a Group
 
 1. Deleting a group.
@@ -2190,6 +2189,11 @@ testers are expected to do more *exploratory* testing.
 4. Test case: `groupremovecontact gn/London n/Bernice Yu`
    Expected: Bernice Yu removed from group. Status message indicates that the member has been removed from group.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 ### Adding a tag to group
 
 1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added)
@@ -2218,6 +2222,11 @@ testers are expected to do more *exploratory* testing.
 
 4. Test case: `groupremovetag gn/London t/SchoolTrip`
    Expected: SchoolTrip tag removed from group. Status message indicates that the tag has been removed from group.
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 ### Searching for groups
 
@@ -2348,13 +2357,13 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `deleteexpense -1`<br>
      Expected: No expense is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `deleteexpense`, `deleteexpense x`, `...` (where x is larger than the visible list size)<br>
-     Expected: Similar to previous.
-
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
 </p>
 <div style="page-break-after: always;"></div>
+
+   1. Other incorrect delete commands to try: `deleteexpense`, `deleteexpense x`, `...` (where x is larger than the visible list size)<br>
+     Expected: Similar to previous.
 
 3. Attempting to delete an expense when not viewing a list of expenses.
    1. Prerequisites: The preloaded data for groups and expenses are not modified. (No groups or expenses are removed or added). The current page must not be an `ExpensesPage`.
@@ -2414,4 +2423,4 @@ testers are expected to do more *exploratory* testing.
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
 </p>
-<div style="page-break-after: always;"></div>
+
