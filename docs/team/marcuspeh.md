@@ -57,6 +57,10 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
     * What happen: Expenses were not brought from the old instance to the new instance of that specific group.
     * Pull request: [\#269](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/269), [\#273](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/273)
 
+* **severity.MED** Json files loads even when phone number of contacts is partially changed ie not all phone number of a contact is changed.
+    * What happen: Checks when file is loading is only done based on the name of the contact and not the entire contact info.
+    * Pull request: [\#425](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/425)
+
 * **severity.MED** Error message for description when adding expense is wrong. [\#372](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/372)
     * What happen: Error message was copy and pasted from `Name` without changing.
     * Pull request: [\#382](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/382/files#diff-91ad22c2685d5cac2700257474d618c27554371ea585eaf29d2f17d7a66791a0)
@@ -66,23 +70,38 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
     * Pull request: [\188](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/188)
     
 <div style="page-break-after: always;"></div>
-### Others
-* **Project management**
-  * Managed releases: [v1.2](https://github.com/AY2122S1-CS2103T-F13-1/tp/releases/tag/v1.2)
 
-* **Documentation**:
-  * User Guide:
+
+### Documentation:
+* **User Guide**:
     * Updated overall layout.
     * Added user guide for the features `groups`, `expenses`, `findgroups` and `transactionsummary`.
-    * Added FAQ.
+    * Added FAQs.
     * Added links to Table Of Content at the end of every page.
-  * Developer Guide:
+* **Developer Guide**:
     * Updated overall layout.
     * Updated UI segment in Design with class diagram and explanation.
+    * Added implementation for UI
     * Added implementation, test cases  and use cases for `findgroups`.
     * Added implementation, test cases  and use cases for `transactionsummary`.
     * Added implementation and design consideration for user interface.
     * Added use cases for `view groups`, `find person` and `view expenses`.
+    
+### Testing:
+* Wrote test cases for the following classes:
+    * `Tag`
+    * `TransactionSummary`
+    * `TransactionSummaryList`
+    * `FindGroupsCommand`
+    * `FindGroupsCommandParser`
+    * `ListGroupsCommand`
+    * `ListGroupsCommandParser`
+    * `GroupEditNameCommand`
+    * `GroupEditNameCommandParser`
+
+### Others
+* **Project management**
+  * Managed releases: [v1.2](https://github.com/AY2122S1-CS2103T-F13-1/tp/releases/tag/v1.2)
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#113](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/113), [\#116](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/116)
