@@ -2,15 +2,15 @@ package seedu.awe.ui.listener;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import seedu.awe.ui.MainWindow;
 import seedu.awe.ui.UiView;
-import seedu.awe.ui.ViewPanel;
 
 public class ContactButtonListener implements EventHandler<ActionEvent> {
 
-    private ViewPanel viewPanel;
+    private MainWindow mainWindow;
 
-    public ContactButtonListener(ViewPanel viewPanel) {
-        this.viewPanel = viewPanel;
+    public ContactButtonListener(MainWindow mainWindow) {
+        this.mainWindow = mainWindow;
     }
 
     /**
@@ -21,6 +21,6 @@ public class ContactButtonListener implements EventHandler<ActionEvent> {
      */
     @Override
     public void handle(ActionEvent event) {
-        viewPanel.toggleView(UiView.CONTACT_PAGE);
+        mainWindow.toggleView(UiView.CONTACT_PAGE);
     }
 }
