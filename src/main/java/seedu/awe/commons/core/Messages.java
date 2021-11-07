@@ -307,9 +307,9 @@ public class Messages {
 
     //messages for calculatepayment related commands
     public static final String MESSAGE_CALCULATEPAYMENTSCOMMAND_SUCCESS =
-            "Payments to be made between group members are listed.";
+            "Payments to be made are listed.";
     public static final String MESSAGE_CALCULATEPAYMENTSCOMMAND_USAGE = CalculatePaymentsCommand.COMMAND_WORD
-            + ": Calculates the payments to be made between group members to settle debts.\n"
+            + ": Calculates the payments to be made to settle debts.\n"
             + "Parameters: "
             + PREFIX_GROUP_NAME + "GROUP_NAME\n"
             + "Example: " + CalculatePaymentsCommand.COMMAND_WORD + " "

@@ -202,7 +202,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseMemberNames_collectionWithValidMemberNames_returnsMemberNames() {
+    public void parseMemberNames_collectionWithValidMemberNames_returnsMemberNames() throws ParseException {
         Set<Name> actualNameSet = Set.copyOf(
                 ParserUtil.parseMemberNames(Arrays.asList(VALID_NAME_ALICE, VALID_NAME_AMY)));
         Set<Name> expectedNameSet = Set.of(new Name(VALID_NAME_ALICE), new Name(VALID_NAME_AMY));
@@ -211,7 +211,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseMemberNames_collectionWithDuplicateMemberNames_returnsUniqueMemberNames() {
+    public void parseMemberNames_collectionWithDuplicateMemberNames_returnsUniqueMemberNames() throws ParseException {
         List<Name> actualNameList = ParserUtil.parseMemberNames(Arrays.asList(VALID_NAME_ALICE, VALID_NAME_ALICE));
         List<Name> expectedNameList = Arrays.asList(new Name(VALID_NAME_ALICE));
 

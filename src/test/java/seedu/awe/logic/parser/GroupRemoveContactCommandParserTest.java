@@ -77,9 +77,6 @@ public class GroupRemoveContactCommandParserTest {
 
     @Test
     public void parse_invalidPreamble_failure() {
-        // more than 1 group name
-        assertParseFailure(parser, " gn/Japan gn/London n/" + VALID_NAME_BOB, MESSAGE_INVALID_FORMAT);
-
         // 1 gn/ tag, 1 n/ tag but no group name
         assertParseFailure(parser, " gn/ n/" + VALID_NAME_BOB, MESSAGE_GROUP_NAME_INVALID);
 
@@ -112,6 +109,15 @@ public class GroupRemoveContactCommandParserTest {
                 + VALID_NAME_BOB + " n/"
                 + VALID_NAME_AMY + " n/"
                 + VALID_NAME_ALICE, expectedCommandDuplicatePerson);
+
+        //reset parser
+        parser = new GroupRemoveContactCommandParser(new ModelBuilder().build());
+
+        // more than 1 group name
+        GroupRemoveContactCommand expectedCommandDuplicateGroup = new GroupRemoveContactCommand(new GroupName("Bali"),
+                GROUP_MEMBERS_NOT_IN_GROUP, true);
+        assertParseSuccess(parser, " gn/Japan gn/Bali n/Elle Meyer n/Fiona Kunz n/George Best",
+                expectedCommandDuplicateGroup);
     }
 
     @Test
