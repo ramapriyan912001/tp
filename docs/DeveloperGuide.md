@@ -258,7 +258,6 @@ How the parsing works:
   <br>
     Fig 10. Model Class Diagram
   <br>
-  (Note: Implementation of Person, Group and Expense class diagram are referenced below.)
 </p>
 
 <p align="center">
@@ -279,11 +278,6 @@ The `Model` component,
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <p align="center">
-    <a href="#tableofcontents">Click here to return to table of contents</a>
-</p>
-<div style="page-break-after: always;"></div>
-
-<p align="center">
   <img src="images/PersonClassDiagram.png" alt="Person Class Diagram" width="300" />
   <br>
     Fig 11. Person Class Diagram
@@ -297,6 +291,11 @@ The `Person` component,
 *  Stores any amount of `Tag` objects.
 
 <p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
+<p align="center">
   <img src="images/ExpenseClassDiagram.png" alt="Expense Class Diagram" width="300" />
   <br>
     Fig 12. Expense Class Diagram
@@ -308,11 +307,6 @@ The `Expense` component,
 *  Handles the storing of each expense in AWE.
 *  Expenses will store a reference to all instance of `Person` involved in the expenses.
 *  Stores a `Cost` and a `Description` for each `Expense`.
-
-<p align="center">
-    <a href="#tableofcontents">Click here to return to table of contents</a>
-</p>
-<div style="page-break-after: always;"></div>
 
 <p align="center">
   <img src="images/GroupClassDiagram.png" alt="Group Class Diagram" width="350" /><br>
@@ -334,15 +328,15 @@ The `Group` component,
   <br>
 </p>
 
-The `TransactionSummary` component,
-
-*  Handles the display of all the individual split expenses in a group.
-*  Stores a reference to a `Person` and a `Cost`.
-
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
 </p>
 <div style="page-break-after: always;"></div>
+
+The `TransactionSummary` component,
+
+*  Handles the display of all the individual split expenses in a group.
+*  Stores a reference to a `Person` and a `Cost`.
 
 <p align="center">
   <img src="images/PaymentClassDiagram.png" alt="Payment Class Diagram" width="200" />
