@@ -26,19 +26,15 @@ beginning of your journey around the world.
 
 <div style="page-break-after: always;"></div>
 
---------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
---------------------------------------------------------------------------------------------------------------------
-
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
---------------------------------------------------------------------------------------------------------------------
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
 </p>
@@ -390,8 +386,6 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.awe.commons` package.
 
---------------------------------------------------------------------------------------------------------------------
-
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
@@ -412,7 +406,7 @@ The following activity diagram shows what happens when a user executes an `addCo
 <div style="page-break-after: always;"></div>
 
 <p align="center">
-  <img src="images/AddContactActivityDiagram.png" alt="Add Contact Activity Diagram" width="550" />
+  <img src="images/AddContactActivityDiagram.png" alt="Add Contact Activity Diagram" width="420" />
   <br>
     Fig 17. Add Contact Activity Diagram
 </p>
@@ -446,7 +440,7 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 </div>
 
 <p align="center">
-  <img src="images/AddContactRefSequenceDiagram.png" alt="Add Contact Reference Sequence Diagram" width="600" />
+  <img src="images/AddContactRefSequenceDiagram.png" alt="Add Contact Reference Sequence Diagram" width="650" />
   <br>
     Fig 19. Add Contact Reference Sequence Diagram
 </p>
@@ -501,7 +495,7 @@ The following activity diagram shows what happens when a user executes a `create
 <div style="page-break-after: always;"></div>
 
 <p align="center">
-  <img src="images/CreateGroupActivityDiagram.png" alt="Create Group Activity Diagram" width="600" />
+  <img src="images/CreateGroupActivityDiagram.png" alt="Create Group Activity Diagram" width="400" />
   <br>
     Fig 20. Create Group Activity Diagram
 </p>
@@ -543,7 +537,7 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 </div>
 
 <p align="center">
-  <img src="images/CreateGroupRef.png" alt="Create Group Reference Sequence Diagram" width="600" />
+  <img src="images/CreateGroupRef.png" alt="Create Group Reference Sequence Diagram" width="650" />
   <br>
     Fig 22. Create Group Reference Sequence Diagram
 </p>
@@ -624,7 +618,7 @@ This allows the `Model` class to easily retrieve the Group based on the name ent
 
 The following activity diagram shows what happens when a user executes a `deletegroup` command.
 <p align="center">
-  <img src="images/DeleteGroupActivityDiagram.png" alt="Delete Group Activity Diagram" width="450"/>
+  <img src="images/DeleteGroupActivityDiagram.png" alt="Delete Group Activity Diagram" width="400"/>
   <br>
     Fig 23. Delete Group Activity Diagram
 </p>
@@ -844,7 +838,7 @@ The following sequence diagram shows how the `findgroups` operation works:
 <div style="page-break-after: always;"></div>
 
 <p align="center">
-  <img src="images/FindGroupsRefSequenceDiagram.png" alt="Find Groups Reference Sequence Diagram" width="600" />
+  <img src="images/FindGroupsRefSequenceDiagram.png" alt="Find Groups Reference Sequence Diagram" width="650" />
   <br>
     Fig 29. Find Groups Reference Sequence Diagram
 </p>
@@ -864,7 +858,7 @@ expense, a `HashMap` that contains details of how much each member has paid in t
 The following activity diagram shows what happens when a user executes a `addexpense` command.
 
 <p align="center">
-  <img src="images/AddExpenseActivityDiagram.png" alt="Add Expense Activity Diagram" width="750" />
+  <img src="images/AddExpenseActivityDiagram.png" alt="Add Expense Activity Diagram" width="570" />
   <br>
     Fig 30. Add Expense Activity Diagram
 </p>
@@ -905,7 +899,7 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 <div style="page-break-after: always;"></div>
 
 <p align="center">
-  <img src="images/AddExpenseRefSequenceDiagram.png" alt="Add Expense Reference Sequence Diagram" width="750" />
+  <img src="images/AddExpenseRefSequenceDiagram.png" alt="Add Expense Reference Sequence Diagram" width="650" />
   <br>
     Fig 32. Add Expense Reference Sequence Diagram
 </p>
@@ -945,7 +939,7 @@ required for finding expenses within a group.
 The following activity diagram shows what happens when a user executes a `findexpenses` command.
 
 <p align="center">
-  <img src="images/FindExpensesActivityDiagram.png" alt="Find Expenses Activity Diagram" width="450" />
+  <img src="images/FindExpensesActivityDiagram.png" alt="Find Expenses Activity Diagram" width="320" />
   <br>
     Fig 33. Find Expenses Activity Diagram
 </p>
@@ -1034,7 +1028,7 @@ This means that the user is constrained to only being permitted to delete expens
 The following activity diagram shows what happens when a user executes a `deleteexpense` command.
 
 <p align="center">
-  <img src="images/DeleteExpenseActivityDiagram.png" alt="Delete Expense Activity Diagram" width="450" />
+  <img src="images/DeleteExpenseActivityDiagram.png" alt="Delete Expense Activity Diagram" width="420" />
   <br>
     Fig 36. Delete Expense Activity Diagram
 </p>
@@ -1078,7 +1072,7 @@ The following sequence operation shows how the `deleteexpense` operation works.
 </div>
 
 <p align="center">
-  <img src="images/DeleteExpenseRefSequenceDiagram.png" alt="Delete Expense Reference Sequence Diagram" width="750" />
+  <img src="images/DeleteExpenseRefSequenceDiagram.png" alt="Delete Expense Reference Sequence Diagram" width="650" />
   <br>
     Fig 38. Delete Expense Reference Sequence Diagram
 </p>
@@ -1176,7 +1170,7 @@ The following diagram shows the flow of the algorithm.
 The following activity diagram shows what happens when a user executes a `calculatepayments` command.
 
 <p align="center">
-  <img src="images/CalculatePaymentsActivityDiagram.png" alt="Calculate Payments Activity Diagram" width="600" />
+  <img src="images/CalculatePaymentsActivityDiagram.png" alt="Calculate Payments Activity Diagram" width="450" />
   <br>
     Fig 40. Calculate Payments Activity Diagram
 </p>
@@ -1222,7 +1216,7 @@ The following sequence operation shows how the `calculatepayments` operation wor
 <div style="page-break-after: always;"></div>
 
 <p align="center">
-  <img src="images/CalculatePaymentsRefSequenceDiagram.png" alt="Calculate Payments Reference Sequence Diagram" width="600" />
+  <img src="images/CalculatePaymentsRefSequenceDiagram.png" alt="Calculate Payments Reference Sequence Diagram" width="650" />
   <br>
     Fig 42. Calculate Payments Reference Sequence Diagram
 </p>
@@ -1328,7 +1322,6 @@ Step 2. Once the user clicks on `GroupViewButton`, the event listener will trigg
 
 Step 3. `ViewPanel` will change the child of itself to `ContactListPanel` (Refer to [JavaFx tutorial](https://se-education.org/guides/tutorials/javaFxPart1.html) for more information about JavaFx). Hence, GUI will update to show contact page
 
---------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -1337,8 +1330,6 @@ Step 3. `ViewPanel` will change the child of itself to `ContactListPanel` (Refer
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
-
---------------------------------------------------------------------------------------------------------------------
 
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
@@ -1975,8 +1966,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **GroupsPage**: The page displaying all the travel groups
 * **ExpensesPage**: The page displaying all the expenses of a travel group
 
---------------------------------------------------------------------------------------------------------------------
-
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -2405,12 +2394,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `calculatepayments gn/Colombia`
      Expected: Empty PaymentList is displayed. Status message will indicate successful execution of the command.
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
