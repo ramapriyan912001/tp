@@ -258,7 +258,7 @@ How the parsing works:
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-F13-1/tp/tree/master/src/main/java/seedu/awe/model/Model.java)
 
 <p align="center">
-  <img src="images/ModelClassDiagram.png" alt="Model Class Diagram" width="750" />
+  <img src="images/ModelClassDiagram.png" alt="Model Class Diagram" width="500" />
   <br>
     Fig 10. Model Class Diagram
   <br>
@@ -619,7 +619,7 @@ This allows the `Model` class to easily retrieve the Group based on the name ent
 
 The following activity diagram shows what happens when a user executes a `deletegroup` command.
 <p align="center">
-  <img src="images/DeleteGroupActivityDiagram.png" alt="Delete Group Activity Diagram" width="700"/>
+  <img src="images/DeleteGroupActivityDiagram.png" alt="Delete Group Activity Diagram" width="450"/>
   <br>
     Fig 23. Delete Group Activity Diagram
 </p>
@@ -940,7 +940,7 @@ required for finding expenses within a group.
 The following activity diagram shows what happens when a user executes a `findexpenses` command.
 
 <p align="center">
-  <img src="images/FindExpensesActivityDiagram.png" alt="Find Expenses Activity Diagram" width="600" />
+  <img src="images/FindExpensesActivityDiagram.png" alt="Find Expenses Activity Diagram" width="450" />
   <br>
     Fig 33. Find Expenses Activity Diagram
 </p>
@@ -1171,7 +1171,7 @@ The following diagram shows the flow of the algorithm.
 The following activity diagram shows what happens when a user executes a `calculatepayments` command.
 
 <p align="center">
-  <img src="images/CalculatePaymentsActivityDiagram.png" alt="Calculate Payments Activity Diagram" width="750" />
+  <img src="images/CalculatePaymentsActivityDiagram.png" alt="Calculate Payments Activity Diagram" width="600" />
   <br>
     Fig 40. Calculate Payments Activity Diagram
 </p>
@@ -1403,6 +1403,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | beginner user that is tech-savvy                  | view the documentation                             | figure out how to use the app                                            |
 | `*`      | beginner user                                     | easily distinguish functions in the app            | use it without the app being too daunting                                |
 | `*`      | expert user                                       | refer to previous trips and the expenditure        | plan future trips efficiently                                            |
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="clear: both; page-break-after: always;"></div>
 
 ### Use Cases
 
