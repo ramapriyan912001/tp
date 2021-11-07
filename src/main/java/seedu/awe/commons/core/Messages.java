@@ -297,11 +297,11 @@ public class Messages {
     public static final String MESSAGE_FINDEXPENSESCOMMAND_USAGE = FindExpensesCommand.COMMAND_WORD
             + ": Finds all expenses within the specified group "
             + "which description contains any of the specified keywords (case-insensitive) and displays them as a"
-            + "list with index numbers.\n"
+            + " list with index numbers.\n"
             + "Parameters:"
             + "KEYWORD [MORE_KEYWORDS]...\n"
-            + PREFIX_GROUP_NAME + " GROUP NAME"
-            + " Example: " + FindExpensesCommand.COMMAND_WORD + "pizza pasta " + PREFIX_GROUP_NAME + " london";
+            + PREFIX_GROUP_NAME + "GROUP_NAME"
+            + " Example: " + FindExpensesCommand.COMMAND_WORD + " pizza pasta " + PREFIX_GROUP_NAME + "London";
     public static final String MESSAGE_FINDEXPENSESCOMMAND_GROUP_NOT_FOUND = "The specified group does not exists.";
 
 
