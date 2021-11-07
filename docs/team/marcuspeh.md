@@ -74,9 +74,9 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
     * What happen: Error message was copy and pasted from `Name` without changing.
     * Pull request: [\#382](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/382/files#diff-91ad22c2685d5cac2700257474d618c27554371ea585eaf29d2f17d7a66791a0)
 
-* **severity.VERY_LOW** Groups displayed in Person card has extra `,`[\169](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/169)
+* **severity.VERY_LOW** Groups displayed in Person card has extra `,` [\#169](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/169)
     * What happen: Displayed list of groups in Person card will have an extra `,` at the back.
-    * Pull request: [\188](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/188)
+    * Pull request: [\#188](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/188)
     
 <div style="page-break-after: always;"></div>
 
