@@ -944,32 +944,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | beginner user                                     | easily distinguish functions in the app            | use it without the app being too daunting                                |
 | `*`      | expert user                                       | refer to previous trips and the expenditure        | plan future trips efficiently                                            |
 
-### Use cases
+### Use Cases
 
 (For all use cases below, the **System** is the `AWE` and the **Actor** is the `user`, unless specified otherwise)
 
+#### Contacts Use Cases
 
-**Use case: UC1- Help user understand AWE**
-
-**MSS**
-
-1. User request to find commands and their explanations.
-2. AWE shows a list of command keyword(s) and explanations.
-   <br>Use case ends.
-
-**Extensions**
-
-* 2a. AWE detects errant command.
-    * 2a1. AWE displays the list of command keyword(s) and explanations.
-      <br>Use case ends.
-    
-
-**Use case: UC2 - Add a person**
+**Use case: UC1 - Add a contact**
 
 **MSS**
 
-1. User chooses to add a person to the AWE.
-2. User enters add command into CLI along with person name, phone number, and tags if applicable.
+1. User chooses to add a contact to the AWE.
+2. User enters add command into CLI along with contact name, phone number, and tags if applicable.
 3. AWE displays confirmation message.
    <br>Use case ends.
 
@@ -985,18 +971,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2c1. AWE reminds user that phone numbers should only contain numbers and be at least 3 digits long.
       <br>Use case ends.
 
-**Use case: UC3 - Edit a person**
+**Use case: UC2 - Delete a contact**
 
-**Preconditions:**
-User's last entered command is either `findcontacts` or `contacts`, i.e. the user is viewing an contacts list.
+**MSS**
+
+1. User requests to list contact.
+2. AWE shows a list of contact.
+3. User requests to delete a specific contact in the list.
+4. AWE deletes the contact.
+5. AWE removes the contact from groups of which the person was a member.
+6. AWE displays confirmation message.
+    <br>Use case ends.
+
+**Extensions**
+
+* 2a. The contact list is empty.
+  <br>Use case ends.
+* 2b. The given index is invalid.
+    * 2b1. AWE shows an error message.
+* 2c. User is not viewing a list of contacts when entering command.
+  * 2c1. AWE shows an error message asking user to enter `findcontacts` or `contacts` command first.
+    <br>Use case ends.
+
+**Use case: UC3 - Edit a person**
 
 **MSS**
 
 1. User requests to list contacts
 2. AWE shows a list of contacts
-3. User requests to edit a specific person in the list
+3. User requests to edit a specific contacts in the list
 4. User enters edited information
-5. AWE edits the person
+5. AWE edits the contacts
    <br>Use case ends.
 
 **Extensions**
@@ -1013,70 +1018,41 @@ User's last entered command is either `findcontacts` or `contacts`, i.e. the use
   * 2d1. AWE shows an error message asking user to enter `findcontacts` or `contacts` command first.
     <br>Use case ends.
     
-**Use case: UC4 - List all contacts**
+**Use case: UC4 - Find contacts**
 
 **MSS**
 
-1. User requests to list contacts.
+1. User request to find contacts based on keyword(s).
+2. AWE shows a list of contacts that matches the keyword(s).
+3. AWE displays a message with number of contacts found
+   <br>Use case continues. 
+
+**Extensions**
+
+* 2a. There isn't any contacts saved.
+    * 2a1. AWE displays nothing in the contacts page ie an empty screen.
+      <br>Use case ends.
+* 2b. There is not contacts matching the search parameters.
+    * 2b1. AWE displays nothing in the contacts page ie an empty screen.
+      <br>Use case continues.
+
+**Use case: UC5 - View all contacts**
+
+**MSS**
+
+1. User requests to view contacts.
 2. AWE shows list of contacts. 
    <br>Use case ends. 
 
 **Extensions**
 
 * 2a. There are no contacts to be listed.
-    * 2a1. AWE does not display any contacts.
+    * 2a1. AWE does not display any contacts but an empty list.
       <br>Use case ends.
 
+#### Groups Use Cases
 
-**Use case: UC5 - Find a person**
-
-**Preconditions:**
-User is in ContactsPage
-
-**MSS**
-
-1. User request to find person based on keyword(s).
-2. AWE shows a list of contacts that matches the keyword(s).
-   <br>Use case ends. 
-
-**Extensions**
-
-* 2a. There isn't any contacts saved.
-    * 2a1. AWE displays nothing in the contacts page.
-    * 2a2. AWE shows a message saying no person found.
-      <br>Use case ends.
-* 2b. There is not contacts matching the search parameters.
-    * 2b1. AWE displays nothing in the contacts page.
-    * 2b2. AWE shows a message saying no person found.
-      <br>Use case ends.
-
-
-**Use case: UC6 - Delete a person**
-
-**Preconditions:**
-User's last entered command is either `findcontacts` or `contacts`, i.e. the user is viewing an contacts list.
-
-**MSS**
-
-1. User requests to list persons.
-2. AWE shows a list of persons.
-3. User requests to delete a specific person in the list.
-4. AWE deletes the person.
-5. AWE removes the person from groups of which the person was a member.
-6. AWE displays confirmation message.
-    <br>Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-  <br>Use case ends.
-* 2b. The given index is invalid.
-    * 2b1. AWE shows an error message.
-* 2c. User is not viewing a list of contacts when entering command.
-  * 2c1. AWE shows an error message asking user to enter `findcontacts` or `contacts` command first.
-    <br>Use case ends.
-    
-**Use case: UC7 - Create Travel Group**
+**Use case: UC6 - Create Travel Group**
 
 **MSS**
 
@@ -1092,7 +1068,7 @@ User's last entered command is either `findcontacts` or `contacts`, i.e. the use
     <br>Use case ends.
     
     
-**Use case: UC8 - Delete Travel Group**
+**Use case: UC7 - Delete Travel Group**
 
 **MSS**
 
@@ -1111,7 +1087,7 @@ User's last entered command is either `findcontacts` or `contacts`, i.e. the use
     * 2a1. AWE displays message to remind User to type in name of a group inside the AWE.
       <br>Use case ends.    
 
-**Use case: UC9 - Change group name**
+**Use case: UC8 - Change group name**
 
 **MSS**
 
@@ -1134,7 +1110,7 @@ User's last entered command is either `findcontacts` or `contacts`, i.e. the use
   * 1c1. AWE displays message to remind User to type in name of a group inside the AWE.
     <br>Use case ends.
 
-**Use case: UC10 - Add contact to group**
+**Use case: UC9 - Add contact to group**
 
 **MSS**
 
@@ -1163,7 +1139,7 @@ User's last entered command is either `findcontacts` or `contacts`, i.e. the use
   * 1d1. AWE displays message to inform user that none of the specified contact names are in AWE.
     <br>Use case ends.
 
-**Use case: UC11 - Remove contact from group**
+**Use case: UC10 - Remove contact from group**
 
 **MSS**
 
@@ -1197,7 +1173,7 @@ User's last entered command is either `findcontacts` or `contacts`, i.e. the use
   * 2a3. AWE displays confirmation message and informs user that the group with 0 members has been deleted.
    <br>Use case ends.
 
-**Use case: UC12 - Add tag to group**
+**Use case: UC11 - Add tag to group**
 
 **MSS**
 
@@ -1224,7 +1200,7 @@ User's last entered command is either `findcontacts` or `contacts`, i.e. the use
     should be within 50 characters, and should not be blank.
     <br>Use case ends.
 
-**Use case: UC13 - Remove tag from group**
+**Use case: UC12 - Remove tag from group**
 
 **MSS**
 
@@ -1234,6 +1210,39 @@ User's last entered command is either `findcontacts` or `contacts`, i.e. the use
 4. AWE displays confirmation message.
    <br>Use case ends.
 
+**Use case: UC13 - Find groups**
+
+**MSS**
+
+1. User request to find groups based on keyword(s).
+2. AWE shows a list of groups that matches the keyword(s).
+3. AWE displays a message with number of groups found.
+   <br>Use case ends. 
+
+**Extensions**
+
+* 2a. There isn't any groups created.
+    * 2a1. AWE displays nothing in the groups page ie an empty screen.
+      <br>Use case continues.
+* 2b. There is not groups matching the search parameters.
+    * 2b1. AWE displays nothing in the groups page ie an empty screen.
+      <br>Use case continues.
+
+**Use case: UC14 - View all travel groups**
+
+**MSS**
+
+1. User choose to list all groups
+2. GroupsPage shows a list of groups
+   <br>Use case ends. 
+
+**Extension**
+
+* 2a. AWE detects that there is no group created.
+    * 2a1 AWE displays a blank screen.
+      <br>Use case ends.
+      
+      
 **Extension**
 
 * 1a. AWE detects that the user input does not follow the command format.
@@ -1254,78 +1263,9 @@ User's last entered command is either `findcontacts` or `contacts`, i.e. the use
   * 1d1. AWE displays message to inform user that the specified tags are not in the group.
     <br>Use case ends.
 
-**Use case: UC14 - List all travel groups**
+#### Expenses Use Cases
 
-**MSS**
-
-1. User choose to list all groups
-2. GroupsPage shows a list of groups
-   <br>Use case ends. 
-
-**Extension**
-
-* 2a. AWE detects that there is no group created.
-    * 2a1 AWE displays a blank screen.
-      <br>Use case ends.
-
-**Use case: UC15 - List expenses of a travel group**
-
-**MSS**
-
-1. User request to list groups.
-2. GroupsPage shows a list of groups.
-3. User request to see expenses of a specific group.
-4. AW3 displays all the expenses of the group.
-   <br>Use case ends.
-
-**Extensions**
-
-* 2a. AWE detects no groups created yet.
-  * 2a1. AWE displays message to remind User to create a group before empty GroupsPage displayed.
-    <br>Use case ends.
-* 3a. The given group name is invalid.
-    * 3a1. AWE displays an error.
-      <br>Use case ends.
-* 4a. AWE detect no expenses logged under the group.
-    * 4a1. AWE displays an empty list.
-      <br>Use case ends.
-
-**Use case: UC16 - Find expenses in a travel group**
-
-**MSS**
-
-1. User request to find expense(s) based on keyword(s) and group name.
-2. AWE shows a list of expenses in specified group that matches the keyword(s).
-   <br>Use case ends. 
-
-**Extensions**
-
-* 2a. The specified group does not exist in AWE.
-    * 2a1. AWE shows a message saying that there is no such existing group.
-      <br>Use case ends.
-* 2b. There are no expenses matching the search parameters.
-    * 2b1. AWE displays nothing in the expenses page.
-    * 2b2. AWE shows a message saying no expenses are found.
-      <br>Use case ends.
-
-
-**Use case: UC17 - Find Groups**
-
-*MSS*
-
-1. User request to find groups based on keywords.
-2. GroupsPage shows a list of groups that matches the search predicates.
-3. AWE displays a message with number of groups found
-   <br>Use case ends. 
-    
-**Extension**
-
-* 2a. AWE can't find any groups that matches the keywords.
-    2a1. GroupsPage shows an empty page
-    <br>Use case continues
-
-
-**Use case: UC18 - Add Expense**
+**Use case: UC15 - Add Expense**
 
 **Preconditions:** User has is a member of the specified travel group.
 
@@ -1362,7 +1302,7 @@ User's last entered command is either `findcontacts` or `contacts`, i.e. the use
     * 1h1. AWE informs user that the total expenses of the travel group has reached its limit of one billion.
       <br>Use case ends.
 
-**Use case: UC19 - Delete a shared expense**
+**Use case: UC16 - Delete a shared expense**
 
 **Preconditions:**
 
@@ -1385,16 +1325,48 @@ User's last entered command is either `findexpenses` or `expenses`, i.e. the use
 * 2b. User is not viewing a list of expenses when entering command.
     * 2b1. AWE shows an error message asking user to enter `findexpenses` or `expenses` command first.
       <br>Use case ends.
-
-**Use case: UC20 - Clear AWE of all entries**
+      
+**Use case: UC17 - Find expenses in a travel group**
 
 **MSS**
 
-1. User enters clearalldata command.
-2. All entries are deleted from AWE.
+1. User request to find expense(s) based on keyword(s) and group name.
+2. AWE shows a list of expenses in specified group that matches the keyword(s).
+3. AWE displays a message with number of expenses found.
+   <br>Use case ends. 
+
+**Extensions**
+
+* 2a. The specified group does not exist in AWE.
+    * 2a1. AWE shows a message saying that there is no such existing group.
+      <br>Use case ends.
+* 2b. There are no expenses matching the search parameters.
+    * 2b1. AWE displays nothing in the expenses page.
+      <br>Use case continues.
+
+**Use case: UC18 - List expenses of a travel group**
+
+**MSS**
+
+1. User request to list groups.
+2. GroupsPage shows a list of groups.
+3. User request to see expenses of a specific group.
+4. AW3 displays all the expenses of the group.
    <br>Use case ends.
 
-**Use case: UC21 - Calculate individual expenses**
+**Extensions**
+
+* 2a. AWE detects no groups created yet.
+  * 2a1. AWE displays message to remind User to create a group before empty GroupsPage displayed.
+    <br>Use case ends.
+* 3a. The given group name is invalid.
+    * 3a1. AWE displays an error.
+      <br>Use case ends.
+* 4a. AWE detect no expenses logged under the group.
+    * 4a1. AWE displays an empty list.
+      <br>Use case ends.
+
+**Use case: UC19 - Calculate individual expenses**
 
 **MSS**
 
@@ -1409,7 +1381,7 @@ User's last entered command is either `findexpenses` or `expenses`, i.e. the use
   * 2a1. AWE displays message to remind User to type in name of a group inside the AWE.
     <br>Use case ends.
 
-**Use case: UC22 - Calculate payments**
+**Use case: UC20 - Calculate payments**
 
 **MSS**
 
@@ -1429,6 +1401,32 @@ User's last entered command is either `findexpenses` or `expenses`, i.e. the use
   * 2b2. AWE displays a confirmation message stating that there are no payments to be made.
     <br>Use case ends.
 
+
+
+#### Miscellaneous Use Cases
+
+**Use case: UC21 - Clear AWE of all entries**
+
+**MSS**
+
+1. User enters clearalldata command.
+2. All entries are deleted from AWE.
+   <br>Use case ends.
+   
+**Use case: UC22 - Help user understand AWE**
+
+**MSS**
+
+1. User request to find commands and their explanations.
+2. AWE shows a list of command keyword(s) and explanations.
+  <br>Use case ends.
+
+**Extensions**
+
+* 2a. AWE detects errant command.
+   * 2a1. AWE displays the list of command keyword(s) and explanations.
+     <br>Use case ends.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -1437,8 +1435,6 @@ User's last entered command is either `findexpenses` or `expenses`, i.e. the use
 4.  Should be able to hold up to 50 groups without a noticeable sluggishness in performance for typical usage.
 5.  Layout between contacts and groups should be intuitive and easy to understand and navigate.
 6.  Usage of `$` should be standardized for money.
-
-*{More to be added}*
 
 ### Glossary
 
@@ -1582,32 +1578,17 @@ testers are expected to do more *exploratory* testing.
 4. Test case: `creategroup gn/Toronto n/Irfan Ibrahim`
    Expected: Group Toronto created with member Irfan Ibrahim. Status message indicates new group has been created.
 
-### Search for groups
 
-1. Search for groups in GroupPage
+### Deleting a Group
 
-    1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added)
-    
-    2. Test case: `findgroups London`
-       Expected: GroupList will list out 1 group with the name 'London'. 1 groups found shown in the status message.
-       
-    3. Test case: `findgroups London Singapore`
-       Expected: GroupList will list out 1 group with the name 'London'. 1 groups found shown in the status message.
-    
-    4. Test case: `findgroups Singapore`
-       Expected: GroupList will display a blank page. 0 groups found shown in status message.
-       
-2. Search for groups in ContactPage
-   1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added)
-   
-   2. Test case: `findgroups London`
-      Expected: GroupList displayed. GroupList will list out 1 group with the name 'London'. 1 groups found shown in the status message.
-      
-   3. Test case: `findgroups London Singapore`
-      Expected: GroupList displayed. GroupList will list out 1 group with the name 'London'. 1 groups found shown in the status message.
-   
-   4. Test case: `findgroups Singapore`
-      Expected: GroupList displayed. GroupList will display a blank page. 0 groups found shown in status message.
+1. Deleting a group
+   1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added).
+  
+   1. Test case: `deletegroup gn/London`
+     Expected: GroupList displayed. Group with name London not seen on the list. Status message will confirm deletion of the group.
+
+   1. Test case: `deletegroup gn/Turkey`
+     Expected: No changes as group does not exist. Error details shown in the status message.
 
 ### Edit Group Name
 
@@ -1669,16 +1650,33 @@ testers are expected to do more *exploratory* testing.
 4. Test case: `groupremovetag gn/London t/SchoolTrip`
    Expected: SchoolTrip tag removed from group. Status message indicates that the tag has been removed from group.
 
-### Deleting a Group
+### Search for groups
 
-1. Deleting a group
-   1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added).
-  
-   1. Test case: `deletegroup gn/London`
-     Expected: GroupList displayed. Group with name London not seen on the list. Status message will confirm deletion of the group.
+1. Search for groups in GroupPage
 
-   1. Test case: `deletegroup gn/Turkey`
-     Expected: No changes as group does not exist. Error details shown in the status message.
+    1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added)
+    
+    2. Test case: `findgroups London`
+       Expected: GroupList will list out 1 group with the name 'London'. 1 groups found shown in the status message.
+       
+    3. Test case: `findgroups London Singapore`
+       Expected: GroupList will list out 1 group with the name 'London'. 1 groups found shown in the status message.
+    
+    4. Test case: `findgroups Singapore`
+       Expected: GroupList will display a blank page. 0 groups found shown in status message.
+       
+2. Search for groups in ContactPage
+   1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added)
+   
+   2. Test case: `findgroups London`
+      Expected: GroupList displayed. GroupList will list out 1 group with the name 'London'. 1 groups found shown in the status message.
+      
+   3. Test case: `findgroups London Singapore`
+      Expected: GroupList displayed. GroupList will list out 1 group with the name 'London'. 1 groups found shown in the status message.
+   
+   4. Test case: `findgroups Singapore`
+      Expected: GroupList displayed. GroupList will display a blank page. 0 groups found shown in status message.
+
 
 ### Viewing expenses
 
@@ -1734,6 +1732,25 @@ testers are expected to do more *exploratory* testing.
   
    1. Test case: `deleteexpense 1` <br>
      Expected: No expense is deleted. Error details shown in the status message. Status bar remains the same.
+      
+### Calculating Transaction Summary
+
+1. Calculating individual spending of a group with expenses.
+
+   1. Prerequisites: The preloaded data for groups and expenses are not modified. (No groups or expenses are removed or added).
+  
+   1. Test case: `calculatepayments gn/London`
+     Expected: Transaction summary list populated with individual spending is displayed. Status message will indicate successful execution of the command.
+
+   1. Test case: `calculatepayments gn/Turkey`
+     Expected: No changes as group does not exist. Error details shown in the status message.
+      
+2. Calculating payments of a group without expenses.
+
+   1. Prerequisites: The group `Bali` should be created and without any expenses.
+
+   1. Test case: `calculatepayments gn/Bali`
+     Expected: Transaction summary list for each person will be displayed. Each person will have $0 as the amount of money they spent. Status message will indicate successful execution of the command.      
       
 ### Calculating Payments
 
