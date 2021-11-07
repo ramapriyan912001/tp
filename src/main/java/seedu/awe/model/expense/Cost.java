@@ -13,6 +13,7 @@ public class Cost {
                     + "and it should not be blank!";
 
     public static final double MAX_COST = 1000000000;
+    public static final int MIN_COST = 0;
     public static final int MAX_LENGTH = 50;
 
     /*
@@ -72,8 +73,8 @@ public class Cost {
      */
     public Cost add(Cost c) {
         double result = cost + c.cost;
-        if (result < 0) {
-            result = 0;
+        if (result < MIN_COST) {
+            result = MIN_COST;
         } else if (result > MAX_COST) {
             result = MAX_COST;
         }
@@ -88,8 +89,8 @@ public class Cost {
      */
     public Cost subtract(Cost c) {
         double result = cost - c.cost;
-        if (result < 0) {
-            result = 0;
+        if (result < MIN_COST) {
+            result = MIN_COST;
         }
         return new Cost(result);
     }

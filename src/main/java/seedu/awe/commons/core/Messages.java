@@ -259,7 +259,7 @@ public class Messages {
     public static final String MESSAGE_ADDEXPENSECOMMAND_ALL_MEMBERS_EXCLUDED =
             "You can't exclude every member of the group!";
     public static final String MESSAGE_ADDEXPENSECOMMAND_COST_ZERO_OR_LESS =
-            "The cost of this expense is zero or less!";
+            "The cost of this expense is less than zero!";
     public static final String MESSAGE_ADDEXPENSECOMMAND_CANNOT_ADD_EXCLUDED_MEMBER =
             "You tried to add an expense for an excluded member!";
     public static final String MESSAGE_ADDEXPENSECOMMAND_GROUP_DOES_NOT_EXIST =
