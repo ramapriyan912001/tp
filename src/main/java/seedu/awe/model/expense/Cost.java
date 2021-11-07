@@ -8,7 +8,7 @@ public class Cost {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Cost should only contain numeric characters without spaces, should not be negative numbers, "
-                    + "should only contain at most two decimal places otherwise the cost will be rounded off"
+                    + "should only contain at most two decimal places otherwise the cost will be rounded off "
                     + "to the nearest two decimal places, should be one billion or less "
                     + "and it should not be blank!";
 
