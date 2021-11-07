@@ -159,18 +159,22 @@ public class AddExpenseCommandTest {
     }
 
     @Test
-    public void execute_invalidExpenseCost_throwsCommandException() throws Exception {
+    public void execute_invalidSplitExpenseCost_throwsCommandException() throws Exception {
         ModelStubAcceptingExpenseAdded modelStub = new ModelStubAcceptingExpenseAdded();
         Person validPerson = new PersonBuilder().build();
+        Person validPersonBob = BOB;
         Group validGroup = new GroupBuilder().build();
         Expense validExpense = new ExpenseBuilder().withCost("0").build();
+        Expense validIndividualExpense = new ExpenseBuilder().withCost("1").build();
         validGroup = validGroup.addMember(validPerson);
+        validGroup = validGroup.addMember(validPersonBob);
         modelStub.addGroup(validGroup);
         GroupName groupName = validGroup.getGroupName();
 
         try {
             CommandResult commandResult = new AddExpenseCommand(validExpense.getPayer(), validExpense.getCost(),
-                    validExpense.getDescription(), groupName, new ArrayList<>(), new ArrayList<>(),
+                    validExpense.getDescription(), groupName, Arrays.asList(validPersonBob),
+                    Arrays.asList(validIndividualExpense.getCost()),
                     new ArrayList<>()).execute(modelStub);
             fail(COMMAND_FAIL_FAILED_MESSAGE);
         } catch (CommandException commandException) {

@@ -27,19 +27,19 @@ public class NavigationButtonPanel extends UiPart<Region> {
     /**
      * Constructor for NavigationButtonPanel.
      *
-     * @param viewPanel To pass to buttons to allow them to toggle panel on click.
+     * @param mainWindow To pass to buttons to allow them to toggle panel on click.
      */
-    public NavigationButtonPanel(ViewPanel viewPanel) {
+    public NavigationButtonPanel(MainWindow mainWindow) {
         super(FXML);
 
-        fillInnerParts(viewPanel);
+        fillInnerParts(mainWindow);
     }
 
-    void fillInnerParts(ViewPanel viewPanel) {
-        groupViewButton = new GroupViewButton(viewPanel);
+    void fillInnerParts(MainWindow mainWindow) {
+        groupViewButton = new GroupViewButton(mainWindow);
         groupButtonPlaceholder.getChildren().add(groupViewButton.getRoot());
 
-        contactViewButton = new ContactViewButton(viewPanel);
+        contactViewButton = new ContactViewButton(mainWindow);
         personButtonPlaceholder.getChildren().add(contactViewButton.getRoot());
 
     }

@@ -4,8 +4,7 @@
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AweParser" as AweParser LOGIC_COLOR
-participant ":AddExpenseCommandParser" as AddExpenseCommandParser LOGIC_COLOR
-participant "addExpenseCommand:AddExpenseCommand" as AddExpenseCommand LOGIC_COLOR
+participant ":AddExpenseCommand" as AddExpenseCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -19,28 +18,18 @@ activate LogicManager
 LogicManager -> AweParser : parseCommand("addexpense n/Alex Yeoh gn/Bali $/50 d/Food")
 activate AweParser
 
-create AddExpenseCommandParser
-AweParser -> AddExpenseCommandParser
-activate AddExpenseCommandParser
-
-AddExpenseCommandParser --> AweParser
-deactivate AddExpenseCommandParser
-
-AweParser -> AddExpenseCommandParser : parse("n/Alex Yeoh gn/Bali $/50 d/Food")
-activate AddExpenseCommandParser
-
+note right
+Refer to ref frame for
+details on creation of
+the AddExpenseCommand object
+end note
+group sd get addExpenseCommand
 create AddExpenseCommand
-AddExpenseCommandParser -> AddExpenseCommand
+AweParser -> AddExpenseCommand
 activate AddExpenseCommand
-
-AddExpenseCommand --> AddExpenseCommandParser : addExpenseCommand
+AddExpenseCommand --> AweParser
 deactivate AddExpenseCommand
-
-AddExpenseCommandParser --> AweParser : addExpenseCommand
-deactivate AddExpenseCommandParser
-'Hidden arrow to position the destroy marker below the end of the activation bar.
-AddExpenseCommandParser -[hidden]-> AweParser
-destroy AddExpenseCommandParser
+end group
 
 AweParser --> LogicManager : addExpenseCommand
 deactivate AweParser
