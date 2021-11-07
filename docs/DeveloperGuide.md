@@ -258,12 +258,17 @@ How the parsing works:
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-F13-1/tp/tree/master/src/main/java/seedu/awe/model/Model.java)
 
 <p align="center">
-  <img src="images/ModelClassDiagram.png" alt="Model Class Diagram" width="500" />
+  <img src="images/ModelClassDiagram.png" alt="Model Class Diagram" width="450" />
   <br>
     Fig 10. Model Class Diagram
   <br>
   (Note: Implementation of Person, Group and Expense class diagram are referenced below.)
 </p>
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="clear: both; page-break-after: always;"></div>
 
 The `Model` component,
 
