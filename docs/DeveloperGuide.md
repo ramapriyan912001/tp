@@ -10,8 +10,8 @@ Around the World in $80 (AWE) is a desktop application for keeping track of spen
 expenses with travel-mates, and facilitating easy recollection of debts at the end of every trip. AWE is the world's
 only bespoke app designed for group travellers.
 
-The app promises to revolutionise the group-travel space. With AWE, bills can be split and monitored in a centralised
-manner that minimises the potential for disputes and maximises the efficiency of payment and recollection of debts.
+The app promises to revolutionize the group-travel space. With AWE, bills can be split and monitored in a centralized
+manner that maximizes the potential for disputes and maximizes the efficiency of payment and recollection of debts.
 
 AWE's vision is a more interconnected world where relationships are more easily built and maintained.
 Our mission is to accomplish through a user-centric approach that seeks to provide the user with what they need, at the
@@ -26,19 +26,15 @@ beginning of your journey around the world.
 
 <div style="page-break-after: always;"></div>
 
---------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
---------------------------------------------------------------------------------------------------------------------
-
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
---------------------------------------------------------------------------------------------------------------------
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
 </p>
@@ -262,7 +258,6 @@ How the parsing works:
   <br>
     Fig 10. Model Class Diagram
   <br>
-  (Note: Implementation of Person, Group and Expense class diagram are referenced below.)
 </p>
 
 <p align="center">
@@ -283,11 +278,6 @@ The `Model` component,
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <p align="center">
-    <a href="#tableofcontents">Click here to return to table of contents</a>
-</p>
-<div style="page-break-after: always;"></div>
-
-<p align="center">
   <img src="images/PersonClassDiagram.png" alt="Person Class Diagram" width="300" />
   <br>
     Fig 11. Person Class Diagram
@@ -299,6 +289,11 @@ The `Person` component,
 *  Handles the storing of each contact in AWE.
 *  Stores a `Name` and a `Phone` object for each person.
 *  Stores any amount of `Tag` objects.
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 <p align="center">
   <img src="images/ExpenseClassDiagram.png" alt="Expense Class Diagram" width="300" />
@@ -314,11 +309,6 @@ The `Expense` component,
 *  Stores a `Cost` and a `Description` for each `Expense`.
 
 <p align="center">
-    <a href="#tableofcontents">Click here to return to table of contents</a>
-</p>
-<div style="page-break-after: always;"></div>
-
-<p align="center">
   <img src="images/GroupClassDiagram.png" alt="Group Class Diagram" width="350" /><br>
   <br>
     Fig 13. Group Class Diagram
@@ -332,6 +322,11 @@ The `Group` component,
 *  Stores any amount of `Tag` object.
 
 <p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
+<p align="center">
   <img src="images/TransactionSummaryClassDiagram.png" alt="Transaction Summary Class Diagram" width="200" />
   <br>
     Fig 14. Transaction Summary Class Diagram
@@ -342,11 +337,6 @@ The `TransactionSummary` component,
 
 *  Handles the display of all the individual split expenses in a group.
 *  Stores a reference to a `Person` and a `Cost`.
-
-<p align="center">
-    <a href="#tableofcontents">Click here to return to table of contents</a>
-</p>
-<div style="page-break-after: always;"></div>
 
 <p align="center">
   <img src="images/PaymentClassDiagram.png" alt="Payment Class Diagram" width="200" />
@@ -379,18 +369,12 @@ The `Storage` component,
 * can save both AWE data and user preference data in json format, and read them back into corresponding objects.
 * inherits from both `AweStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
-* has the `IndividualAmount` class which is composed of a `Person` and a `Cost`, similar to the entries within the `HashMaps` within `Expense`. Since `HashMap` is not serializable in Json format, we utilise a list of `IndividualAmount` objects to store the `HashMap`. 
+* has the `IndividualAmount` class which is composed of a `Person` and a `Cost`, similar to the entries within the `HashMaps` within `Expense`. Since `HashMap` is not serializable in Json format, we utilize a list of `IndividualAmount` objects to store the `HashMap`. 
 
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
 </p>
 <div style="page-break-after: always;"></div>
-
-### Common classes
-
-Classes used by multiple components are in the `seedu.awe.commons` package.
-
---------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
 
@@ -404,20 +388,21 @@ The add contact mechanism is facilitated by defining a Person model and adding a
 AWE. The Person model contains a `Name` field containing the name of the contact, a `Phone` field containing the
 number of the contact, and optional `Tags` to attach to the contact.
 
-The following activity diagram shows what happens when a user executes an `addContact` command.
+The following activity diagram shows what happens when a user executes an `addcontact` command.
+
+<p align="center">
+  <img src="images/AddContactActivityDiagram.png" alt="Add Contact Activity Diagram" width="420" />
+  <br>
+    Fig 17. Add Contact Activity Diagram
+</p>
 
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
 </p>
 <div style="page-break-after: always;"></div>
 
-<p align="center">
-  <img src="images/AddContactActivityDiagram.png" alt="Add Contact Activity Diagram" width="450" />
-  <br>
-    Fig 17. Add Contact Activity Diagram
-</p>
+Given below is an example usage scenario and how the `addcontact` mechanism behaves at each step.
 
-Given below is an example usage scenario and how the `creategroup` mechanism behaves at each step.
 
 Step 1. A valid `addcontact` command is given as user input. This prompts the `LogicManager` to run its execute()
 method.
@@ -446,7 +431,7 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 </div>
 
 <p align="center">
-  <img src="images/AddContactRefSequenceDiagram.png" alt="Add Contact Reference Sequence Diagram" width="600" />
+  <img src="images/AddContactRefSequenceDiagram.png" alt="Add Contact Reference Sequence Diagram" width="650" />
   <br>
     Fig 19. Add Contact Reference Sequence Diagram
 </p>
@@ -494,14 +479,8 @@ that contains details of the total expenditure incurred by each member across th
 
 The following activity diagram shows what happens when a user executes a `createGroup` command.
 
-
 <p align="center">
-    <a href="#tableofcontents">Click here to return to table of contents</a>
-</p>
-<div style="page-break-after: always;"></div>
-
-<p align="center">
-  <img src="images/CreateGroupActivityDiagram.png" alt="Create Group Activity Diagram" width="450" />
+  <img src="images/CreateGroupActivityDiagram.png" alt="Create Group Activity Diagram" width="400" />
   <br>
     Fig 20. Create Group Activity Diagram
 </p>
@@ -543,7 +522,7 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 </div>
 
 <p align="center">
-  <img src="images/CreateGroupRef.png" alt="Create Group Reference Sequence Diagram" width="600" />
+  <img src="images/CreateGroupRef.png" alt="Create Group Reference Sequence Diagram" width="650" />
   <br>
     Fig 22. Create Group Reference Sequence Diagram
 </p>
@@ -624,7 +603,7 @@ This allows the `Model` class to easily retrieve the Group based on the name ent
 
 The following activity diagram shows what happens when a user executes a `deletegroup` command.
 <p align="center">
-  <img src="images/DeleteGroupActivityDiagram.png" alt="Delete Group Activity Diagram" width="450"/>
+  <img src="images/DeleteGroupActivityDiagram.png" alt="Delete Group Activity Diagram" width="400"/>
   <br>
     Fig 23. Delete Group Activity Diagram
 </p>
@@ -844,7 +823,7 @@ The following sequence diagram shows how the `findgroups` operation works:
 <div style="page-break-after: always;"></div>
 
 <p align="center">
-  <img src="images/FindGroupsRefSequenceDiagram.png" alt="Find Groups Reference Sequence Diagram" width="600" />
+  <img src="images/FindGroupsRefSequenceDiagram.png" alt="Find Groups Reference Sequence Diagram" width="650" />
   <br>
     Fig 29. Find Groups Reference Sequence Diagram
 </p>
@@ -864,7 +843,7 @@ expense, a `HashMap` that contains details of how much each member has paid in t
 The following activity diagram shows what happens when a user executes a `addexpense` command.
 
 <p align="center">
-  <img src="images/AddExpenseActivityDiagram.png" alt="Add Expense Activity Diagram" width="450" />
+  <img src="images/AddExpenseActivityDiagram.png" alt="Add Expense Activity Diagram" width="570" />
   <br>
     Fig 30. Add Expense Activity Diagram
 </p>
@@ -905,7 +884,7 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 <div style="page-break-after: always;"></div>
 
 <p align="center">
-  <img src="images/AddExpenseRefSequenceDiagram.png" alt="Add Expense Reference Sequence Diagram" width="750" />
+  <img src="images/AddExpenseRefSequenceDiagram.png" alt="Add Expense Reference Sequence Diagram" width="650" />
   <br>
     Fig 32. Add Expense Reference Sequence Diagram
 </p>
@@ -945,7 +924,7 @@ required for finding expenses within a group.
 The following activity diagram shows what happens when a user executes a `findexpenses` command.
 
 <p align="center">
-  <img src="images/FindExpensesActivityDiagram.png" alt="Find Expenses Activity Diagram" width="450" />
+  <img src="images/FindExpensesActivityDiagram.png" alt="Find Expenses Activity Diagram" width="320" />
   <br>
     Fig 33. Find Expenses Activity Diagram
 </p>
@@ -1034,7 +1013,7 @@ This means that the user is constrained to only being permitted to delete expens
 The following activity diagram shows what happens when a user executes a `deleteexpense` command.
 
 <p align="center">
-  <img src="images/DeleteExpenseActivityDiagram.png" alt="Delete Expense Activity Diagram" width="450" />
+  <img src="images/DeleteExpenseActivityDiagram.png" alt="Delete Expense Activity Diagram" width="420" />
   <br>
     Fig 36. Delete Expense Activity Diagram
 </p>
@@ -1078,7 +1057,7 @@ The following sequence operation shows how the `deleteexpense` operation works.
 </div>
 
 <p align="center">
-  <img src="images/DeleteExpenseRefSequenceDiagram.png" alt="Delete Expense Reference Sequence Diagram" width="750" />
+  <img src="images/DeleteExpenseRefSequenceDiagram.png" alt="Delete Expense Reference Sequence Diagram" width="650" />
   <br>
     Fig 38. Delete Expense Reference Sequence Diagram
 </p>
@@ -1133,12 +1112,12 @@ Define surplus as the net amount each individual is owed by others. This ultimat
 The goal is to ensure that the deficits balance the surpluses with the minimum number of transactions.
 To assist with the tracking of each individual and their surplus, an inner `Pair` class was created with a `Person` field and a primitive double field for the surplus.
 
-* Initialise an empty list of Pairs and an empty list of `Payment` objects.
+* Initialize an empty list of Pairs and an empty list of `Payment` objects.
 
 * Iterate through the `members` of the group and retrieve each individual's total payments and total expenditures.
 
 * Calculate the surplus of each individual by subtracting their total expenditures from their total payments.
-Initialise a `Pair` object with the `Person` object of the individual, and their surplus. Add this pair to the list if the surplus is not 0.
+Initialize a `Pair` object with the `Person` object of the individual, and their surplus. Add this pair to the list if the surplus is not 0.
 
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
@@ -1155,12 +1134,13 @@ Initialise a `Pair` object with the `Person` object of the individual, and their
   
 * Return the list of `Payment` objects.
 
-The following diagram shows the flow of the algorithm.
 
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
 </p>
 <div style="page-break-after: always;"></div>
+
+The following diagram shows the flow of the algorithm.
 
 <p align="center">
   <img src="images/CalculatePaymentsCommandAlgorithmDiagram.png" alt="Calculate Payments Command Algorithm Diagram" width="600" />
@@ -1176,7 +1156,7 @@ The following diagram shows the flow of the algorithm.
 The following activity diagram shows what happens when a user executes a `calculatepayments` command.
 
 <p align="center">
-  <img src="images/CalculatePaymentsActivityDiagram.png" alt="Calculate Payments Activity Diagram" width="600" />
+  <img src="images/CalculatePaymentsActivityDiagram.png" alt="Calculate Payments Activity Diagram" width="450" />
   <br>
     Fig 40. Calculate Payments Activity Diagram
 </p>
@@ -1185,11 +1165,6 @@ Given below is an example usage scenario and how the `calculatepayments` mechani
 
 Step 1. A valid `calculatepayments` command is given as user input. This prompts the `LogicManager` to run its execute()
 method.
-
-<p align="center">
-    <a href="#tableofcontents">Click here to return to table of contents</a>
-</p>
-<div style="page-break-after: always;"></div>
 
 Step 2. The `CalculatePaymentsCommandParser` parses the input and checks for presence of the `GROUP_NAME` prefix.
 It checks that the `GROUP_NAME` is valid (does not have any non-alphanumeric characters).
@@ -1204,6 +1179,11 @@ Step 5. The `PaymentList` field is updated with the generated list of payments, 
 
 Step 6. Upon successful execution, `CommandResult` is returned.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+
+<div style="page-break-after: always;"></div>
 
 The following sequence operation shows how the `calculatepayments` operation works.
 
@@ -1217,28 +1197,28 @@ The following sequence operation shows how the `calculatepayments` operation wor
 </div>
 
 <p align="center">
-    <a href="#tableofcontents">Click here to return to table of contents</a>
-</p>
-<div style="page-break-after: always;"></div>
-
-<p align="center">
-  <img src="images/CalculatePaymentsRefSequenceDiagram.png" alt="Calculate Payments Reference Sequence Diagram" width="600" />
+  <img src="images/CalculatePaymentsRefSequenceDiagram.png" alt="Calculate Payments Reference Sequence Diagram" width="650" />
   <br>
     Fig 42. Calculate Payments Reference Sequence Diagram
 </p>
 
 **Note: When a `Person` is deleted from contacts or removed from the group, the functioning of this command does not change. The deleted person may still be part of the list of payments depending on the expenses they had previously.**
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 #### Design considerations
 
-**Aspect: Algorithm utilised for calculatepayments:**
+**Aspect: Algorithm utilized for calculatepayments:**
 
-* **Alternative 1 (current choice):** Prioritise settling of bigger debts 
+* **Alternative 1 (current choice):** Prioritize settling of bigger debts 
     * Pros: Easy to implement.
     * Pros: Smaller number of transactions.
     * Cons: Larger value transactions.
 
-* **Alternative 2:** Prioritise settling of smaller debts
+* **Alternative 2:** Prioritize settling of smaller debts
     * Pros: Smaller value transactions.
     * Cons: Greater number of transactions.
     * Cons: More difficult to implement.
@@ -1246,7 +1226,7 @@ The following sequence operation shows how the `calculatepayments` operation wor
 * **Justification**
     * The size of the transaction matters less to the user than the volume of transactions.
     * Moreover, an easier implementation reduces the possibility of bugs.
-    * As such, we chose to prioritise the settling of bigger debts in our algorithm.
+    * As such, we chose to prioritize the settling of bigger debts in our algorithm.
 
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
@@ -1288,17 +1268,17 @@ The following activity diagram shows how the `MainWindow` checks and sends the `
 
 * **Alternative 1**: Make use of JavaFx's tab
     * Pros: Easy to implement.
-    * Cons: Unable to fully customised the layout. Have to use the standard JavaFx's tab layout.
+    * Cons: Unable to fully customized the layout. Have to use the standard JavaFx's tab layout.
   
 * **Alternative 2 (current choice)**: Replacing the child of the view panel node<br>
     (Refer to [JavaFx tutorial](https://se-education.org/guides/tutorials/javaFxPart1.html) for more information about JavaFx)
-    * Pros: More customisable in terms of layout.
+    * Pros: More customizable in terms of layout.
     * Pros: Able to make use of existing codes.
     * Cons: More classes to implement to handle the toggling between views.
     
 * **Justification**
     * We want to place the command result display below the buttons according to our [wireframe](https://www.figma.com/file/VwuDOdHr7CSyDUWb4Kwkmx/CS2103T-tP?node-id=0%3A1).
-    * Using JavaFx's tab will not let us customise the layout as such.
+    * Using JavaFx's tab will not let us customize the layout as such.
     * Hence, replacing the child of a view panel is more appropriate.
     
 #### Ui Navigation Buttons
@@ -1328,7 +1308,6 @@ Step 2. Once the user clicks on `GroupViewButton`, the event listener will trigg
 
 Step 3. `ViewPanel` will change the child of itself to `ContactListPanel` (Refer to [JavaFx tutorial](https://se-education.org/guides/tutorials/javaFxPart1.html) for more information about JavaFx). Hence, GUI will update to show contact page
 
---------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -1337,8 +1316,6 @@ Step 3. `ViewPanel` will change the child of itself to `ContactListPanel` (Refer
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
-
---------------------------------------------------------------------------------------------------------------------
 
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
@@ -1378,13 +1355,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | -------- | ------------------------------------------------- | -------------------------------------------------- | ------------------------------------------------------------------------ |
 | `* * *`  | beginner user who first opened the app            | view the help page                                 | so that I can learn how to use the app                                   |
 | `* * *`  | user with contacts to remember                    | add a contact                                   | keep track of my contacts                                                |
-| `* * *`  | user who has lots of contacts to keep track of    | view contacts                                      | easily see my contacts in one centralised location                       |
+| `* * *`  | user who has lots of contacts to keep track of    | view contacts                                      | easily see my contacts in one centralized location                       |
 | `* * *`  | user who wants to find contacts with a certain string of characters in their name | find contacts by a regex                                 | search for contacts easily         |
 | `* * *`  | user who has lots of contacts to keep track of    | tag a contact                                   | keep track of contacts by certain characteristics/tags                          |
 | `* * *`  | user with contacts that no longer exist           | delete a contact                                 | keep my contacts relevant and current                                   |
 | `* * *`  | user with contacts that have changed          | edit a contact                                 | keep my contacts accurate and current                                   |
 | `* * *`  | user with a trip to go on                   | add a group                                   | keep track of my groups                                                |
-| `* * *`  | user who has lots of trips to keep track of    | view groups                                      | easily see my groups in one centralised location                       |
+| `* * *`  | user who has lots of trips to keep track of    | view groups                                      | easily see my groups in one centralized location                       |
 | `* * *`  | user who wants to find groups with a certain string of characters in their name | find groups by a regex                                 | search for groups easily         |
 | `* * *`  | user who has lots of groups to keep track of    | tag a group                                   | keep track of groups by certain characteristics/tags                          |
 | `* * *`  | user with groups that no longer exist           | delete a group                                 | keep my groups relevant and current                                   |
@@ -1971,11 +1948,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Transaction Summary**: The amount each contact spent on a trip
+* **Payment**: The amount one contact has to pay another
 * **ContactsPage**: The page displaying all the contacts
 * **GroupsPage**: The page displaying all the travel groups
 * **ExpensesPage**: The page displaying all the expenses of a travel group
-
---------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
 
@@ -2405,12 +2382,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `calculatepayments gn/Colombia`
      Expected: Empty PaymentList is displayed. Status message will indicate successful execution of the command.
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>

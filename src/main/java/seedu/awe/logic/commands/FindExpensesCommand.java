@@ -23,7 +23,7 @@ public class FindExpensesCommand extends Command {
     private final DescriptionContainsKeywordsPredicate predicate;
 
     /**
-     * A public constructor to initialise the group name and predicate to
+     * A public constructor to initialize the group name and predicate to
      * the given ones.
      *
      * @param groupName Name of the group to find expenses from.

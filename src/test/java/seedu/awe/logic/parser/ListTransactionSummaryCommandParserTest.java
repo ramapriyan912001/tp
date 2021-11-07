@@ -32,7 +32,7 @@ public class ListTransactionSummaryCommandParserTest {
     }
 
     /**
-     * Resets parser. Necessary as ListTransactionSummaryCommand parser needs to be initialised with a model for
+     * Resets parser. Necessary as ListTransactionSummaryCommand parser needs to be initialized with a model for
      * each call. Failure to reset parser will result in Duplicate exceptions being raised.
      */
     public void resetParser() {

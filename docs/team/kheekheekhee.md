@@ -73,6 +73,7 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
 ### Others
 * **Project management**
   * Managed releases: - [v1.4b](https://github.com/AY2122S1-CS2103T-F13-1/tp/releases/tag/v1.4b)
+  * Participated and added to project planning every week - [1](https://github.com/AY2122S1-CS2103T-F13-1/tp/projects/1)
 
 * **Documentation**:
   * User Guide:
@@ -87,5 +88,5 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
     * Added design considerations for `add expense`.
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#1]()
+  * Reviewed PRs, provided feedback on code and assisted all other teammates in solving bugs via text.
   * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/kheekheekhee/ped/issues/1), [2](https://github.com/kheekheekhee/ped/issues/2), [3](https://github.com/kheekheekhee/ped/issues/3))
