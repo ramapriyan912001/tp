@@ -491,7 +491,7 @@ This allows the `Model` class to easily retrieve the Group based on the name ent
 The following activity diagram shows what happens when a user executes a `deletegroup` command.
 
 <p align="center">
-  <img src="images/DeleteGroupActivityDiagram.png" alt="Delete Group Activity Diagram" width="350" />
+  <img src="images/DeleteGroupActivityDiagram.png" alt="Delete Group Activity Diagram" width="750" />
   <br>
     Fig 23. Delete Group Activity Diagram
 </p>
@@ -682,7 +682,7 @@ expense, a `HashMap` that contains details of how much each member has paid in t
 The following activity diagram shows what happens when a user executes a `addexpense` command.
 
 <p align="center">
-  <img src="images/AddExpenseActivityDiagram.png" alt="Add Expense Activity Diagram" width="600" />
+  <img src="images/AddExpenseActivityDiagram.png" alt="Add Expense Activity Diagram" width="750" />
   <br>
     Fig 30. Add Expense Activity Diagram
 </p>
@@ -703,7 +703,7 @@ relevant group members into the group and the group is updated in the AWE model.
 The following sequence operation shows how the `addexpense` operation works.
 
 <p align="center">
-  <img src="images/AddExpenseSequenceDiagram.png" alt="Add Expense Sequence Diagram" width="600" />
+  <img src="images/AddExpenseSequenceDiagram.png" alt="Add Expense Sequence Diagram" width="750" />
   <br>
     Fig 31. Add Expense Sequence Diagram
 </p>
@@ -713,7 +713,7 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 </div>
 
 <p align="center">
-  <img src="images/AddExpenseRefSequenceDiagram.png" alt="Add Expense Reference Sequence Diagram" width="600" />
+  <img src="images/AddExpenseRefSequenceDiagram.png" alt="Add Expense Reference Sequence Diagram" width="750" />
   <br>
     Fig 32. Add Expense Reference Sequence Diagram
 </p>
