@@ -143,7 +143,7 @@ public class MainWindow extends UiPart<Stage> {
         logoDisplay = new LogoDisplay(url);
         logoDisplayPlaceholder.getChildren().add(logoDisplay.getRoot());
 
-        navigationButtonPanel = new NavigationButtonPanel(viewPanel);
+        navigationButtonPanel = new NavigationButtonPanel(this);
         navigationButtonPlaceholder.getChildren().add(navigationButtonPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -200,6 +200,16 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Method to toggle the view panel.
+     *
+     * @param uiView type of view panel to change to.
+     */
+    public void toggleView(UiView uiView) {
+        viewPanel.toggleView(uiView);
+        setViewEnum(uiView);
+    }
+
+    /**
      * Executes the command and returns the result.
      *
      * @see seedu.awe.logic.Logic#execute(String)
@@ -220,28 +230,23 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isShowContacts()) {
-                viewEnum = UiView.CONTACT_PAGE;
-                viewPanel.toggleView(viewEnum);
+                toggleView(UiView.CONTACT_PAGE);
             }
 
             if (commandResult.isShowGroups()) {
-                viewEnum = UiView.GROUP_PAGE;
-                viewPanel.toggleView(viewEnum);
+                toggleView(UiView.GROUP_PAGE);
             }
 
             if (commandResult.isShowExpenses()) {
-                viewEnum = UiView.EXPENSE_PAGE;
-                viewPanel.toggleView(viewEnum);
+                toggleView(UiView.EXPENSE_PAGE);
             }
 
             if (commandResult.isShowTransactionSummary()) {
-                viewEnum = UiView.TRANSACTION_SUMMARY;
-                viewPanel.toggleView(viewEnum);
+                toggleView(UiView.TRANSACTION_SUMMARY);
             }
 
             if (commandResult.isShowPaymentsCommand()) {
-                viewEnum = UiView.PAYMENT_PAGE;
-                viewPanel.toggleView(viewEnum);
+                toggleView(UiView.PAYMENT_PAGE);
             }
 
             return commandResult;
