@@ -118,7 +118,7 @@ For those who are not as fast, familiarity with the commands over time will allo
 
    * **`exit`** : The command `exit` exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#3-features) below for details of each command.
 
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
@@ -149,7 +149,7 @@ For those who are not as fast, familiarity with the commands over time will allo
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* Parameters can be in any order other than `addexpenses`. Look at [`addexpense`](#332-adding-a-shared-expense-addexpense) for more details regarding it. <br>
+* Parameters can be in any order other than `addexpenses` and `groupeditname`. Look at [`addexpense`](#332-adding-a-shared-expense-addexpense) and [`groupeditname`](#329-editing-travel-group-name-groupeditname) for more details regarding it. <br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
@@ -187,10 +187,9 @@ Adds a contact to AWE.
 Format: `addcontact n/NAME p/PHONE_NUMBER [t/TAG]…​`
 
 * Contact list will be displayed after the command succeeded.
-
 * Duplicate contacts cannot be added into AWE
 * Contacts are duplicate if they have the same name
-* NAME are case-sensitive, "Hans" and "hans" will be treated as 2 separate person. Refer to [FAQ](#4faq) for the rationale behind this.
+* NAME are case-sensitive, "Hans" and "hans" will be treated as 2 separate person. Refer to [FAQ](#4-faq) for the rationale behind this.
 * NAME are up to 50 characters only.
 * TAG are up to 50 characters only.
 * PHONE_NUMBER should have between 3 and 16 numbers.
@@ -294,7 +293,7 @@ Format: `groups`
 Creates a group of people of your choice from AWE.
 Adds you as a member of the group by default.
 
-Format: `creategroup gn/GROUP_NAME n/NAME1 [n/NAME2] [n/NAME3]...[t/TAG1]`
+Format: `creategroup gn/GROUP_NAME n/NAME1 [n/NAME2]... [t/TAG1]...`
 
 * GROUP_NAME is a mandatory field.
 * GROUP_NAME are up to 50 characters only.
@@ -675,7 +674,7 @@ argument. This minimises the chances of accidentally deleting a group.
 **Q**: What do I do if I see `AWE.jar` cannot be opened because it is from an unidentified developer when I double click the jar file on a mac?<br>
 **A**: Go to `System Preferences -> Security and Privacy -> General` and click on `Open anyways` as such
 <p align="center">
-    <_img_ src="images/MacSecurityPreference.png" />
+    <img src="images/MacSecurityPreference.png" width="600"/>
 </p>
 <br>
 <br>
@@ -709,13 +708,13 @@ Action | Format, Examples
 Action | Format, Examples
 --------|------------------
 **View Groups** | `groups`
-**Create Group** | `creategroup gn/GROUP_NAME n/NAME1 n/NAME2 n/NAME3...t/TAG1` <br> e.g., `creategroup gn/Bali n/Jacob Tan n/Max Chia n/Julianne Tay t/friends`
+**Create Group** | `creategroup gn/GROUP_NAME n/NAME1 [n/NAME2]... [t/TAG]...` <br> e.g., `creategroup gn/Bali n/Jacob Tan n/Max Chia n/Julianne Tay t/friends`
 **Delete Group** | `deletegroup gn/GROUP_NAME` <br> e.g., `deletegroup gn/Vienna`
-**Add Contact to Group** | `groupaddcontact gn/GROUP_NAME n/NAME1 [n/MORE_NAMES]` <br> e.g., `groupaddcontact gn/Bali n/Jacob Tan`
-**Add Tags to Group** | `groupaddtag gn/GROUP_NAME n/TAG1 [n/MORE_TAGS]` <br> e.g., `groupaddtag gn/Bali n/friends`
+**Add Contact to Group** | `groupaddcontact gn/GROUP_NAME n/NAME1 [n/MORE_NAMES]...` <br> e.g., `groupaddcontact gn/Bali n/Jacob Tan`
+**Add Tags to Group** | `groupaddtag gn/GROUP_NAME n/TAG1 [n/MORE_TAGS]...` <br> e.g., `groupaddtag gn/Bali n/friends`
 **Edit Group Name** | `groupeditname gn/OLD_GROUP_NAME gn/NEW_GROUP_NAME` <br> e.g., `groupedittag gn/Bali gn/Hanoi`
-**Remove Tags from Group** | `groupremovetag gn/GROUP_NAME n/TAG1 [n/MORE_TAGS]` <br> e.g., `groupremovetag gn/Bali n/friends`
-**Remove Contact from Group** | `groupremovecontact gn/GROUP_NAME n/NAME1 [n/MORE_NAMES]` <br> e.g., `groupremovecontact gn/Bali n/Jacob Tan`
+**Remove Tags from Group** | `groupremovetag gn/GROUP_NAME n/TAG1 [n/MORE_TAGS]...` <br> e.g., `groupremovetag gn/Bali n/friends`
+**Remove Contact from Group** | `groupremovecontact gn/GROUP_NAME n/NAME1 [n/MORE_NAMES]...` <br> e.g., `groupremovecontact gn/Bali n/Jacob Tan`
 **Find Groups** | `findgroups KEYWORD [MORE_KEYWORDS]`<br> e.g., `findgroups James Jake`
 
 <p align="center">
