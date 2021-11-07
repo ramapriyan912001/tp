@@ -1841,7 +1841,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Viewing expenses
 
-1. Listing expenses of a specific group in ContactsPage or GroupsPage.
+1. Viewing all expenses of a specific group in ContactsPage or GroupsPage.
 
   1. Prerequisites: The preloaded data for groups and expenses are not modified. (No groups and expenses are removed or added)
 
