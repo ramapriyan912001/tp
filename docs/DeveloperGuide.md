@@ -2121,7 +2121,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `deletegroup gn/Turkey`
      Expected: No changes as group does not exist. Error details shown in the status message.
 
-### Edit Group Name
+### Editing group name
 
 1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added)
 2. Test case: `groupeditname gn/London gn/Bali`
@@ -2334,7 +2334,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `deleteexpense 1` <br>
      Expected: No expense is deleted. Error details shown in the status message. Status bar remains the same.
       
-### Calculating Transaction Summary
+### Calculating transaction summary
 
 1. Calculating individual spending of a group with expenses.
 
@@ -2358,7 +2358,7 @@ testers are expected to do more *exploratory* testing.
 </p>
 <div style="page-break-after: always;"></div>
 
-### Calculating Payments
+### Calculating payments
 
 1. Calculating payments of a group with expenses.
 
