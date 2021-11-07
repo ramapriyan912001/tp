@@ -401,11 +401,6 @@ The following activity diagram shows what happens when a user executes an `addco
 </p>
 <div style="page-break-after: always;"></div>
 
-<p align="center">
-    <a href="#tableofcontents">Click here to return to table of contents</a>
-</p>
-<div style="page-break-after: always;"></div>
-
 Given below is an example usage scenario and how the `addcontact` mechanism behaves at each step.
 
 

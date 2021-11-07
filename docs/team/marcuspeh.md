@@ -5,19 +5,10 @@ title: Marcus Peh's Project Portfolio Page
 
 ### Project: Around the World in $80
 
-<p align="center">
-    <img src="../images/awelogo.png" alt="awe logo" width="300" />
-</p>
-
-Around the World in $80 (AWE) is a desktop application for keeping track of spending and expenditure during travels, splitting expenses with travel-mates, and facilitating easy recollection of debts at the end of every trip. AWE is the world’s only bespoke app designed for group travellers.
-
-The app promises to revolutionise the group-travel space. With AWE, bills can be split and monitored in a centralised manner that minimises the potential for disputes and maximises the efficiency of payment and recollection of debts.
-
-The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+Around the World in $80 is a desktop application that splits bills between different contacts. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project. [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=marcuspeh&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17)
 
-<div style="page-break-after: always;"></div>
 ### Features
 * **New Feature**: Added the ability to change between contacts and groups view.
   * What it does: Allows the user to see groups / contacts with a command.
@@ -46,21 +37,11 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
 * **Enhancements to existing features**:
   * Updated the UI interface layout. [\#121](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/121)
   * Added in buttons to toggle between contacts page and group page [\#121](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/121)
-
-<div style="page-break-after: always;"></div>
-
+  
 ### Bug Fixes
 * **severity.HIGH** Edit person does not update groups and expenses. [\#158](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/153)
    * What happen: The command `addPerson` does not replace the instance of the old person from groups and expenses.
    * Pull request: [\#158](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/158)
-   
-* **severity.HIGH** Creating an empty group without person will crash the program [\#224](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/224)
-    * What happen: The command `creategroup` throws a `EmptyGroupsException` and is not handled.
-    * Pull request: [\#207](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/207)
-    
-* **severity.HIGH** Running AWE without data.json will crash the program [\#223](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/223)
-    * What happen: Running AWE without data.json will cause a `RuntimeException`. 
-    * Pull request: [\#186](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/186)
     
 * **severity.HIGH** Commands for modifying groups will result in the entire group's expense to be wiped. [\#270](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/270)
     * What happen: Expenses were not brought from the old instance to the new instance of that specific group.
@@ -70,51 +51,25 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
     * What happen: Checks when file is loading is only done based on the name of the contact and not the entire contact info.
     * Pull request: [\#425](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/425)
 
-* **severity.MED** Error message for description when adding expense is wrong. [\#372](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/372)
-    * What happen: Error message was copy and pasted from `Name` without changing.
-    * Pull request: [\#382](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/382/files#diff-91ad22c2685d5cac2700257474d618c27554371ea585eaf29d2f17d7a66791a0)
-
-* **severity.VERY_LOW** Groups displayed in Person card has extra `,` [\#169](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/169)
-    * What happen: Displayed list of groups in Person card will have an extra `,` at the back.
-    * Pull request: [\#188](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/188)
-    
-<div style="page-break-after: always;"></div>
-
-
-### Documentation:
-* **User Guide**:
-    * Updated overall layout.
-    * Added user guide for the features `groups`, `expenses`, `findgroups` and `transactionsummary`.
-    * Added FAQs.
-    * Added links to Table Of Content at the end of every page.
-* **Developer Guide**:
-    * Updated overall layout.
-    * Updated UI segment in Design with class diagram and explanation.
-    * Added implementation for UI
-    * Added implementation, test cases  and use cases for `findgroups`.
-    * Added implementation, test cases  and use cases for `transactionsummary`.
-    * Added implementation and design consideration for user interface.
-    * Added use cases for `view groups`, `find person` and `view expenses`.
-    
-### Testing:
-* Wrote test cases for the following classes:
-    * `Tag`
-    * `TransactionSummary`
-    * `TransactionSummaryList`
-    * `FindGroupsCommand`
-    * `FindGroupsCommandParser`
-    * `ListGroupsCommand`
-    * `ListGroupsCommandParser`
-    * `GroupEditNameCommand`
-    * `GroupEditNameCommandParser`
-    
-<div style="page-break-after: always;"></div>
-
 ### Others
 * **Project management**
   * Managed releases: [v1.2](https://github.com/AY2122S1-CS2103T-F13-1/tp/releases/tag/v1.2)
 
+* **User Guide**:
+    * Added user guide for the features `groups`, `expenses`, `findgroups` and `transactionsummary`.
+    * Added FAQs.
+    
+* **Developer Guide**:
+    * Updated UI segment in Design with class diagram and explanation.
+    * Added implementation and design consideration for user interface.
+    * Added implementation, test cases  and use cases for `findgroups`, `transactionsummary`.
+    * Added use cases for `view groups`, `find person` and `view expenses`.
+    
+* **Testing**:
+    * Examples of PR that increase code coverageL [\#352](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/352), [\#353](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/353), [/#356](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/356)
+
 * **Community**:
+  * Maintaining the issue tracker
   * PRs reviewed (with non-trivial review comments): [\#113](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/113), [\#116](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/116)
   * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2122S1/forum/issues/328), [2](https://github.com/nus-cs2103-AY2122S1/forum/issues/9), [3](https://github.com/nus-cs2103-AY2122S1/forum/issues/11))
   * Reported bugs and suggestions for other teams in the class (examples: [1 (F13-3)](https://github.com/AY2122S1-CS2103T-F13-3/tp/issues/332), [2 (F13-3)](https://github.com/AY2122S1-CS2103T-F13-3/tp/issues/328), [3 (W16-2)](https://github.com/AY2122S1-CS2103T-W16-2/tp/issues/216), [4 (W16-2)](https://github.com/AY2122S1-CS2103T-W16-2/tp/issues/224))
