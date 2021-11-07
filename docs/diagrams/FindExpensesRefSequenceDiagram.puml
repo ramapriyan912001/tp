@@ -1,0 +1,45 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+
+participant ":AweParser" as AweParser LOGIC_COLOR
+participant ":FindExpensesCommandParser" as FindExpensesCommandParser LOGIC_COLOR
+participant "findExpensesCommand:FindExpensesCommand" as FindExpensesCommand LOGIC_COLOR
+participant ":DescriptionContainsKeywordsPredicate" as DescriptionContainsKeywordsPredicate LOGIC_COLOR
+end box
+
+mainframe "sd get findExpensesCommand"
+
+create FindExpensesCommandParser
+AweParser -> FindExpensesCommandParser
+activate FindExpensesCommandParser
+
+FindExpensesCommandParser --> AweParser
+deactivate FindExpensesCommandParser
+
+AweParser -> FindExpensesCommandParser : parse("dinner gn/London")
+activate FindExpensesCommandParser
+
+create DescriptionContainsKeywordsPredicate
+FindExpensesCommandParser -> DescriptionContainsKeywordsPredicate
+activate DescriptionContainsKeywordsPredicate
+
+DescriptionContainsKeywordsPredicate -> FindExpensesCommandParser : predicate
+deactivate DescriptionContainsKeywordsPredicate
+
+create FindExpensesCommand
+FindExpensesCommandParser -> FindExpensesCommand : predicate
+activate FindExpensesCommand
+
+FindExpensesCommand --> FindExpensesCommandParser : findExpensesCommand
+deactivate FindExpensesCommand
+
+FindExpensesCommandParser --> AweParser : findExpensesCommand
+deactivate FindExpensesCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindExpensesCommandParser -[hidden]-> AweParser
+destroy FindExpensesCommandParser
+
+
+@enduml

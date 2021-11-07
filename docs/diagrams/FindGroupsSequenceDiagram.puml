@@ -5,7 +5,7 @@ box Logic LOGIC_COLOR_T1
 
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AweParser" as AweParser LOGIC_COLOR
-participant "d:FindGroupsCommand" as FindGroupsCommand LOGIC_COLOR
+participant ":FindGroupsCommand" as FindGroupsCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -22,9 +22,9 @@ activate AweParser
 note right
 Refer to ref frame for
 details on creation of
-the AddContactCommand object
+the FindGroupsCommand object
 end note
-group sd get findGroupCommand
+group sd get findGroupsCommand
 create FindGroupsCommand
 AweParser -> FindGroupsCommand
 activate FindGroupsCommand
