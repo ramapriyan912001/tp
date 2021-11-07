@@ -18,11 +18,11 @@ public class GroupViewButton extends UiPart<Region> {
     /**
      * Constructor for GroupViewButton.
      *
-     * @param viewPanel viewPanel to set onclick action
+     * @param mainWindow mainWindow to set onclick action
      */
-    public GroupViewButton(ViewPanel viewPanel) {
+    public GroupViewButton(MainWindow mainWindow) {
         super(FXML);
-        groupViewButton.setOnAction(new GroupButtonListener(viewPanel));
+        groupViewButton.setOnAction(new GroupButtonListener(mainWindow));
 
     }
 

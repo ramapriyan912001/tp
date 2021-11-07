@@ -18,11 +18,11 @@ public class ContactViewButton extends UiPart<Region> {
     /**
      * Constructor for PersonViewButton.
      *
-     * @param viewPanel viewPanel to set onclick action
+     * @param mainWindow mainWindow to set onclick action
      */
-    public ContactViewButton(ViewPanel viewPanel) {
+    public ContactViewButton(MainWindow mainWindow) {
         super(FXML);
-        personViewButton.setOnAction(new ContactButtonListener(viewPanel));
+        personViewButton.setOnAction(new ContactButtonListener(mainWindow));
     }
 
 

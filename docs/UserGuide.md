@@ -563,7 +563,7 @@ Format: `transactionsummary gn/GROUP_NAME`
 Examples:
 * `transactionsummary gn/Bali`
 * `transactionsummary gn/London`
-![result for 'transactionsummary gn/London](images/TransactionSummaryResult.png)
+  ![result for `transactionsummary gn/London`](images/TransactionSummaryResult.png)
 
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
@@ -650,7 +650,7 @@ To address the overseas number use case, for our next release, we are considerin
 **Q**: Why is GROUP_NAME case-sensitive?<br>
 **A**: Similar to the above question, a user might travel to the same destination more than once. 
 This will allow the addition of each individual trips.
-To address, this use case, we are considering requiring a DATE_TIME parameter when creating a group. 
+To address this use case, we are considering requiring a DATE_TIME parameter when creating a group. 
 We did not do so for this release due to concerns that two separate groups of users might be on a trip at the same location in the same time frame.
 In this case, users might be unable to create two groups, even though the use case would merit such an action.
 
@@ -676,7 +676,7 @@ argument. This minimises the chances of accidentally deleting a group.
 **Q**: What do I do if I see `AWE.jar` cannot be opened because it is from an unidentified developer when I double click the jar file on a mac?<br>
 **A**: Go to `System Preferences -> Security and Privacy -> General` and click on `Open anyways` as such
 <p align="center">
-    <img src="images/MacSecurityPreference.png" />
+    <_img_ src="images/MacSecurityPreference.png" />
 </p>
 <br>
 <br>
@@ -694,9 +694,9 @@ If your questions are not answered in the FAQ, check out the issue page on our G
 Action | Format, Examples
 --------|------------------
 **View Contacts** | `contacts`
-**Add Contact** | `addcontact n/NAME p/PHONE_NUMBER [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 t/friend t/colleague`
-**Delete Contact** | `deletecontact INDEX`<br> e.g., `delete 3`
-**Edit Contact** | `editcontact INDEX [n/NAME] [p/PHONE_NUMBER] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee`
+**Add Contact** | `addcontact n/NAME p/PHONE_NUMBER [t/TAG]…​` <br> e.g., `addcontact n/James Ho p/22224444 t/friend t/colleague`
+**Delete Contact** | `deletecontact INDEX`<br> e.g., `deletecontact 3`
+**Edit Contact** | `editcontact INDEX [n/NAME] [p/PHONE_NUMBER] [t/TAG]…​`<br> e.g.,`editcontact 2 n/James Lee`
 **Find Contacts** | `findcontacts KEYWORD [MORE_KEYWORDS]`<br> e.g., `findcontacts James Jake`
 
 <p align="center">

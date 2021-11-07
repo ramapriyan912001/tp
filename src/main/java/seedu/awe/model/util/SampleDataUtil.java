@@ -48,6 +48,7 @@ public class SampleDataUtil {
     public static Group[] getSampleGroups() {
         ArrayList<Person> londonMembers = addSampleMembers(0, 3);
         ArrayList<Person> baliMembers = addSampleMembers(3, 6);
+        ArrayList<Person> colombiaMembers = addSampleMembers(0, 4);
         ArrayList<Expense> londonExpenses = addSampleExpenses(0, 3);
         ArrayList<Expense> baliExpenses = addSampleExpenses(3, 6);
 
@@ -55,7 +56,8 @@ public class SampleDataUtil {
             new Group(new GroupName("London"), londonMembers, getTagSet("SchoolTrip"),
                     londonExpenses),
             new Group(new GroupName("Bali"), baliMembers, getTagSet("3DayTrip"),
-                    baliExpenses)
+                    baliExpenses),
+            new Group(new GroupName("Colombia"), colombiaMembers, getTagSet("10DayTrip"))
         };
     }
 
