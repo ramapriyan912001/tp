@@ -95,15 +95,15 @@ The *Sequence Diagram* below shows how the components interact with each other f
       Fig 2. Architecture Sequence Diagram
 </p>
 
-Each of the four main components (also shown in the diagram above),
-
-* defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
-
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
 </p>
 <div style="page-break-after: always;"></div>
+
+Each of the four main components (also shown in the diagram above),
+
+* defines its *API* in an `interface` with the same name as the Component.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -210,16 +210,16 @@ Here's a (partial) class diagram of the `Logic` component:
     Fig 7. Logic Class Diagram
 </p>
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AweParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a contact).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
-
-<p align="center">
-    <a href="#tableofcontents">Click here to return to table of contents</a>
-</p>
-<div style="page-break-after: always;"></div>
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
@@ -339,16 +339,16 @@ The `TransactionSummary` component,
 *  Stores a reference to a `Person` and a `Cost`.
 
 <p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
+<p align="center">
   <img src="images/PaymentClassDiagram.png" alt="Payment Class Diagram" width="200" />
   <br>
     Fig 15. Payment Class Diagram
   <br>
 </p>
-
-<p align="center">
-    <a href="#tableofcontents">Click here to return to table of contents</a>
-</p>
-<div style="page-break-after: always;"></div>
 
 The `Payment` component,
 
@@ -399,19 +399,18 @@ The add contact mechanism is facilitated by defining a Person model and adding a
 AWE. The Person model contains a `Name` field containing the name of the contact, a `Phone` field containing the
 number of the contact, and optional `Tags` to attach to the contact.
 
-The following activity diagram shows what happens when a user executes a `createGroup` command.
+The following activity diagram shows what happens when a user executes an `addContact` command.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 <p align="center">
   <img src="images/AddContactActivityDiagram.png" alt="Add Contact Activity Diagram" width="550" />
   <br>
     Fig 17. Add Contact Activity Diagram
 </p>
-
-<p align="center">
-    <a href="#tableofcontents">Click here to return to table of contents</a>
-</p>
-<div style="page-break-after: always;"></div>
 
 Given below is an example usage scenario and how the `creategroup` mechanism behaves at each step.
 
@@ -462,16 +461,14 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
   * Pros: Many cultures have names that are spelled in different case. For instance, in Singapore, the characters "s/o" (often used to denote "son of") are spelled in different case by different people. Should multiple users have the same name but different case-spelling, it would be respectful to accept all versions of the name, regardless of case.
   * Pros: Provides the user with a greater level of flexibility and user-choice.
   * Cons: Possibility of user referring to the wrong person in commands due to creation of multiple persons with the same names but in different case.
-
-
+  
 * **Alternative 2 :** `Name` is not case-sensitive.
   * Pros: Difficult to implement.
   * Pros: Safeguards user from erroneously referring to the wrong person in commands.
   * Cons: Difficult for users with the same name.
   * Cons: May offend some people if the casing of their name is regarded as unacceptable or not given recognition.
   * Cons: User has limited flexibility and restricted user-choice.
-
-
+  
 * **Justification**
   * The two cases described in the alternatives, where multiple persons of the same name but different case are necessary, are quite prevalent.
   * Moreover, we trust the user to be careful with the casing of the `Name` when entering the commands.
@@ -563,6 +560,10 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
     * Cons: Unintuitive for user as travel group is created without any members or tags.
     * Cons: Inconvenient for user to use multiple commands to set up a travel group.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 * **Justification**
     * User will have at least one member in mind when creating a group.
@@ -598,7 +599,11 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
   * The two cases described in the alternatives, where multiple groups of the same name are necessary, are quite prevalent.
   * Moreover, we trust the user to be careful with the casing of the `GroupName` when entering the commands.
   * As such, we chose to make the `GroupName` parameter case-sensitive.
-  
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 * **Improvements**
   * The solution of making the `GroupName` parameter case-sensitive to permit users to create groups of the same name should the use case demand it is not ideal.
@@ -619,7 +624,6 @@ The delete group mechanism is facilitated by maintaining the constraint that eve
 This allows the `Model` class to easily retrieve the Group based on the name entered by the user and remove the group from the model.
 
 The following activity diagram shows what happens when a user executes a `deletegroup` command.
-
 <p align="center">
   <img src="images/DeleteGroupActivityDiagram.png" alt="Delete Group Activity Diagram" width="750" />
   <br>
@@ -657,15 +661,15 @@ The following sequence operation shows how the `deletegroup` operation works.
 </div>
 
 <p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
+<p align="center">
   <img src="images/DeleteGroupRefSequenceDiagram.png" alt="Delete Group Reference Sequence Diagram" width="600" />
   <br>
     Fig 25. Delete Group Reference Sequence Diagram
 </p>
-
-<p align="center">
-    <a href="#tableofcontents">Click here to return to table of contents</a>
-</p>
-<div style="page-break-after: always;"></div>
 
 #### Design considerations:
 
@@ -689,6 +693,11 @@ The following sequence operation shows how the `deletegroup` operation works.
     * Group contains large mass of information such as multiple expenses, individual expenditures, and payments.
     * This information is unrecoverable once deleted.
     * As such, it is better to choose Alternative 1, as this makes it difficult for user to accidentally delete a group.
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 **Aspect: Internal delete mechanism:**
 
@@ -809,23 +818,18 @@ Step 1. When the user executes `findgroups London` command, the message is passe
 
 Step 2. `FindGroupsCommandParser` is created and the arguments are parsed by it. The arguments are used to create `GroupContainsKeywordsPredicate` and `FindGroupsCommand` is returned to the `LogicManager`.
 
-Step 3. The `LogicManager` then calls `FindGroupCommand#execute(model)` method, which updated the `FilteredList<Group>` in `ModelManager`. Thereafter, the `FilteredList<Group>` should contains only London.
-
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
 </p>
 <div style="page-break-after: always;"></div>
+
+Step 3. The `LogicManager` then calls `FindGroupCommand#execute(model)` method, which updated the `FilteredList<Group>` in `ModelManager`. Thereafter, the `FilteredList<Group>` should contains only London.
 
 Step 4. The GUI listens for updates in the `FilteredList<Group>` and updates the display to display London only.
 
 Step 5. `CommandResult` is returned to the `LogicManager`, which also switches the view panel to `GroupsListPanel` if needed. See UI implementation below for more details of switching view panel.
 
 Step 6. The output from `CommandResult` is then displayed as an output for the user.
-
-<p align="center">
-    <a href="#tableofcontents">Click here to return to table of contents</a>
-</p>
-<div style="page-break-after: always;"></div>
 
 The following sequence diagram shows how the `findgroups` operation works:
 
@@ -834,6 +838,11 @@ The following sequence diagram shows how the `findgroups` operation works:
   <br>
     Fig 28. Find Groups Sequence Diagram
 </p>
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 <p align="center">
   <img src="images/FindGroupsRefSequenceDiagram.png" alt="Find Groups Reference Sequence Diagram" width="600" />
@@ -942,15 +951,15 @@ The following activity diagram shows what happens when a user executes a `findex
     Fig 33. Find Expenses Activity Diagram
 </p>
 
-Given below is an example usage scenario and how the `findexpenses` mechanism behaves at each step.
-
-Step 1. The user executes a valid `findexpenses eat gn/London` command. This prompts the `LogicManager` 
-to run its execute() method.
-
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
 </p>
 <div style="page-break-after: always;"></div>
+
+Given below is an example usage scenario and how the `findexpenses` mechanism behaves at each step.
+
+Step 1. The user executes a valid `findexpenses eat gn/London` command. This prompts the `LogicManager` 
+to run its execute() method.
 
 Step 2. The `FindExpensesCommandParser` parses the input and checks for presence of the group name prefix.
 It also checks that the group name is valid (does not have any non-alphanumeric characters). The arguments are 
@@ -987,6 +996,11 @@ The following sequence operation shows how the `findexpenses` operation works.
   <br>
     Fig 35. Find Expenses Reference Sequence Diagram
 </p>
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 #### Design considerations:
 
@@ -1127,15 +1141,14 @@ To assist with the tracking of each individual and their surplus, an inner `Pair
 * Calculate the surplus of each individual by subtracting their total expenditures from their total payments.
 Initialise a `Pair` object with the `Person` object of the individual, and their surplus. Add this pair to the list if the surplus is not 0.
 
-* Iterate until the list is empty and perform the following steps.
-  * Sort the list in ascending order of surplus. This means that those who owe more are placed in the earlier part of the list and those who are owed more are placed towards the end of the `Pair` list.
-  * Retrieve the first `Pair` and last `Pair` in the list. It is invariant that the first pair will have negative surplus and the last pair will have positive surplus.
-
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
 </p>
 <div style="page-break-after: always;"></div>
 
+* Iterate until the list is empty and perform the following steps.
+  * Sort the list in ascending order of surplus. This means that those who owe more are placed in the earlier part of the list and those who are owed more are placed towards the end of the `Pair` list.
+  * Retrieve the first `Pair` and last `Pair` in the list. It is invariant that the first pair will have negative surplus and the last pair will have positive surplus.
   * Check to see which pair has a smaller magnitude. Define this value to be `SMALL_VAL`.
   * Create a `Payment` object with a `Cost` of `SMALL_VAL`, and payee and payer as the two individuals within the first pair and last pair retrieved respectively. Add this `Payment` object to the list of `Payment` objects.
   * If the pairs do not have equal magnitude, remove the pair with the surplus value of smaller magnitude from the list. Calculate the new surplus value of the other pair to be the sum of the surpluses of both pairs. Update the other pair with this new surplus value and place it back into the list.
@@ -1256,7 +1269,7 @@ The following activity diagram shows how the `MainWindow` checks and sends the `
 <div style="page-break-after: always;"></div>
 
 <p align="center">
-  <img src="images/UiTogglingActivityDiagram.png" alt="Ui Toggling Activity Diagram" width="600" />
+  <img src="images/UiTogglingActivityDiagram.png" alt="Ui Toggling Activity Diagram" width="600" height="850" />
   <br>
     Fig 43. Ui Toggling Activity Diagram
 </p>
@@ -1361,7 +1374,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
 </p>
-<div style="page-break-after: always;"></div>
+<div style="clear: both; page-break-after: always;"></div>
 
 | `* * *`  | user who has lots of contacts to keep track of    | view contacts                                      | easily see my contacts in one centralised location                       |
 | `* * *`  | user who wants to find contacts with a certain string of characters in their name | find contacts by a regex                                 | search for contacts easily         |
@@ -1377,7 +1390,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
 </p>
-<div style="page-break-after: always;"></div>
+<div style="clear: both; page-break-after: always;"></div>
 
 | `* * *`  | user with flexible travel plans         | edit a group                                 | keep my groups accurate and current                                   |
 | `* * *`  | user that has paid for a shared experience        | easily check how much I have paid up front         | ensure I have liquidity for emergencies and or other unforeseen expenses |
@@ -1393,7 +1406,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
 </p>
-<div style="page-break-after: always;"></div>
+<div style="clear: both; page-break-after: always;"></div>
 
 | `* *`    | user who has to recoup the money                  | divide up the expenses suitably amongst my friends | know how much to recoup from each person                                 |
 | `* *`    | user who worries about individual expenses        | check the breakdown of my personal expenditure     | keep track of how much money I have spent                                |
@@ -1463,6 +1476,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2b. User is not viewing a list of contacts when entering command.
   * 2b1. AWE shows an error message asking user to enter `findcontacts` or `contacts` command first.
     <br>Use case ends.
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 **Use case: UC3 - Edit contact**
 
@@ -1784,17 +1802,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1f. AWE detects that the excluded member is not part of the specified travel group.
     * 1f1. AWE informs user that the excluded member has to be part of the specified travel group.
       <br>Use case ends.
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 * 1g. AWE detects that all members in the specified travel group are excluded from the expense.
     * 1g1. AWE informs user that they cannot exclude all members in the travel group from the expense.
       <br>Use case ends.
 * 1h. AWE detects that the total expenditure of the specified group is over one billion.
     * 1h1. AWE informs user that the total expenses of the travel group has reached its limit of one billion.
       <br>Use case ends.
-
-<p align="center">
-    <a href="#tableofcontents">Click here to return to table of contents</a>
-</p>
-<div style="page-break-after: always;"></div>
 
 **Use case: UC16 - Delete expense**
 
@@ -1818,7 +1837,12 @@ User's last entered command is either `findexpenses` or `expenses`, i.e. the use
 * 2b. The given index is not within range 1 to length of list of expenses on screen.
     * 2b1. AWE shows an error message saying index is invalid.
       <br>Use case ends.
-      
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 **Use case: UC17 - Find expenses in a travel group**
 
 **MSS**
@@ -2021,15 +2045,15 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `deletecontact -1`<br>
      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `deletecontact`, `deletecontact x`, `...` (where x is larger than the visible list size)<br>
-     Expected: Similar to previous.
-
+      
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
 </p>
 <div style="page-break-after: always;"></div>
 
+   1. Other incorrect delete commands to try: `deletecontact`, `deletecontact x`, `...` (where x is larger than the visible list size)<br>
+     Expected: Similar to previous.
+      
 3. Attempting to delete a contact when not viewing a list of contacts.
    1. Prerequisites: The preloaded data for contacts are not modified. (No contacts are removed or added). The current page must not be an `ContactsPage`.
 
@@ -2387,3 +2411,7 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
