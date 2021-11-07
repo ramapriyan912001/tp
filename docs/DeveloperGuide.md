@@ -993,29 +993,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 2c1. AWE shows an error message asking user to enter `findcontacts` or `contacts` command first.
     <br>Use case ends.
 
-**Use case: UC3 - Edit a person**
+**Use case: UC3 - Edit a contact**
 
 **MSS**
 
-1. User requests to list contacts
-2. AWE shows a list of contacts
-3. User requests to edit a specific contacts in the list
-4. User enters edited information
-5. AWE edits the contacts
+1. User requests to list contacts.
+2. AWE shows a list of contacts.
+3. User requests to edit a specific contact in the list.
+4. User enters edited information.
+5. AWE edits the contacts.
    <br>Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
   <br>Use case ends.
-* 2b. The given index is invalid.
-    * 2b1. AWE shows an error message.
+* 3a. The given index is invalid.
+    * 3a1. AWE shows an error message.
       <br>Use case resumes at step 2.
-* 2c. The given information has an invalid format.
-    * 2c1. AWE shows an error message.
+* 3b. The given information has an invalid format.
+    * 3b1. AWE shows an error message.
       Use case resumes at step 2.
-* 2d. User is not viewing a list of contacts when entering command.
-  * 2d1. AWE shows an error message asking user to enter `findcontacts` or `contacts` command first.
+* 3c. User is not viewing a list of contacts when entering command.
+  * 3c1. AWE shows an error message asking user to enter `findcontacts` or `contacts` command first.
     <br>Use case ends.
     
 **Use case: UC4 - Find contacts**
@@ -1302,28 +1302,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1h1. AWE informs user that the total expenses of the travel group has reached its limit of one billion.
       <br>Use case ends.
 
-**Use case: UC16 - Delete a shared expense**
-
-**Preconditions:**
-
-User's last entered command is either `findexpenses` or `expenses`, i.e. the user is viewing an expense list.
+**Use case: UC16 - Delete an expense**
 
 **MSS**
 
-1. User requests to delete an expense from list of expenses viewed by its position on screen.
-2. AWE deletes the specified expense.
-3. AWE shows updated list of expenses.
-4. AWE displays confirmation message.
+1. User requests to list expenses of a group.
+2. AWE shows a list of expenses.
+3. User requests to delete an expense from list of expenses viewed by its position on screen.
+4. AWE deletes the specified expense.
+5. AWE shows updated list of expenses.
+6. AWE displays confirmation message.
    <br>Use case ends. 
 
 
 **Extensions**
 
-* 2a. The given index is not within range 1 to length of list of expenses on screen.
-    * 2a1. AWE shows an error message saying index is invalid.
-      <br>Use case ends.
-* 2b. User is not viewing a list of expenses when entering command.
-    * 2b1. AWE shows an error message asking user to enter `findexpenses` or `expenses` command first.
+* 3a. User is not viewing a list of expenses when entering command.
+  * 3a1. AWE shows an error message asking user to enter `findexpenses` or `expenses` command first.
+    <br>Use case ends.
+* 3b. The given index is not within range 1 to length of list of expenses on screen.
+    * 3b1. AWE shows an error message saying index is invalid.
       <br>Use case ends.
       
 **Use case: UC17 - Find expenses in a travel group**
@@ -1393,12 +1391,12 @@ User's last entered command is either `findexpenses` or `expenses`, i.e. the use
 
 **Extensions**
 
-* 2b. AWE detects group name that is not in AWE.
+* 2a. AWE detects group name that is not in AWE.
   * 2a1. AWE displays message to remind User to type in name of a group inside the AWE.
     <br>Use case ends.
-* 2b. There are no payments to be made.
-  * 2b1. AWE shows an empty list of payments.
-  * 2b2. AWE displays a confirmation message stating that there are no payments to be made.
+* 3a. There are no payments to be made.
+  * 3a1. AWE shows an empty list of payments.
+  * 3a2. AWE displays a confirmation message stating that there are no payments to be made.
     <br>Use case ends.
 
 
@@ -1505,7 +1503,7 @@ testers are expected to do more *exploratory* testing.
      Expected: Similar to previous.
 
 3. Attempting to delete a contact when not viewing a list of contacts.
-   1. Prerequisites: The preloaded data for contacts are not modified. (No contacts are removed or added). The current page must not be an `ContactsPage`. The previous valid command entered should not be a `findcontacts` or `contacts` command.
+   1. Prerequisites: The preloaded data for contacts are not modified. (No contacts are removed or added). The current page must not be an `ContactsPage`.
 
    1. Test case: `deletecontact 1` <br>
      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
@@ -1560,7 +1558,7 @@ testers are expected to do more *exploratory* testing.
    Expected: Similar to previous.
 
 3. Attempting to delete a contact when not viewing a list of contacts.
-   1. Prerequisites: The preloaded data for contacts are not modified. (No contacts are removed or added). The current page must not be `ContactsPage`. The previous valid command entered should not be a `findcontacts` or `contacts` command.
+   1. Prerequisites: The preloaded data for contacts are not modified. (No contacts are removed or added). The current page must not be `ContactsPage`.
 
    1. Test case: `editcontact 1 n/Alex` <br>
      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
@@ -1650,7 +1648,7 @@ testers are expected to do more *exploratory* testing.
 4. Test case: `groupremovetag gn/London t/SchoolTrip`
    Expected: SchoolTrip tag removed from group. Status message indicates that the tag has been removed from group.
 
-### Search for groups
+### Searching for groups
 
 1. Search for groups in GroupPage
 
@@ -1728,7 +1726,7 @@ testers are expected to do more *exploratory* testing.
      Expected: Similar to previous.
      
 3. Attempting to delete an expense when not viewing a list of expenses.
-   1. Prerequisites: The preloaded data for groups and expenses are not modified. (No groups or expenses are removed or added). The current page must not be an `ExpensesPage`. The previous valid command entered should not be a `findexpenses` or `expenses` command.
+   1. Prerequisites: The preloaded data for groups and expenses are not modified. (No groups or expenses are removed or added). The current page must not be an `ExpensesPage`.
   
    1. Test case: `deleteexpense 1` <br>
      Expected: No expense is deleted. Error details shown in the status message. Status bar remains the same.
@@ -1768,7 +1766,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: The preloaded data for groups and expenses are not modified. (No groups or expenses are removed or added).
 
-   1. Test case: `calculatepayments gn/Bali`
+   1. Test case: `calculatepayments gn/Colombia`
      Expected: Empty PaymentList is displayed. Status message will indicate successful execution of the command.
 
 ### Saving data
