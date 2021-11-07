@@ -55,32 +55,29 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
     * What happen: Checks when file is loading is only done based on the name of the contact and not the entire contact info.
     * Pull request: [\#425](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/425)
 
-### Documentation:
+### Others
+* **Project management**
+  * Managed releases: [v1.2](https://github.com/AY2122S1-CS2103T-F13-1/tp/releases/tag/v1.2)
+
 * **User Guide**:
     * Updated overall layout.
     * Added user guide for the features `groups`, `expenses`, `findgroups` and `transactionsummary`.
     * Added FAQs.
-    * Added links to Table Of Content at the end of every page.
+    
 * **Developer Guide**:
     * Updated overall layout.
     * Updated UI segment in Design with class diagram and explanation.
-    * Added implementation for UI
-    * Added implementation, test cases  and use cases for `findgroups`.
-    * Added implementation, test cases  and use cases for `transactionsummary`.
     * Added implementation and design consideration for user interface.
+    * Added implementation, test cases  and use cases for `findgroups`, `transactionsummary`.
     * Added use cases for `view groups`, `find person` and `view expenses`.
     
-### Testing:
-* Wrote test cases for the following:
-    * `Tag`
-    * `TransactionSummary` & `TransactionSummaryList`
-    * `FindGroupsCommand` & `FindGroupsCommandParser`
-    * `ListGroupsCommand` & `ListGroupsCommandParser`
-    * `GroupEditNameCommand` & `GroupEditNameCommandParser`
-    
-### Others
-* **Project management**
-  * Managed releases: [v1.2](https://github.com/AY2122S1-CS2103T-F13-1/tp/releases/tag/v1.2)
+* **Testing**:
+    * Wrote entire test cases for the following:
+        * `Tag`
+        * `TransactionSummary` & `TransactionSummaryList`
+        * `FindGroupsCommand` & `FindGroupsCommandParser`
+        * `ListGroupsCommand` & `ListGroupsCommandParser`
+        * `GroupEditNameCommand` & `GroupEditNameCommandParser`
 
 * **Community**:
   * Maintaining the issue tracker
