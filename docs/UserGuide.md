@@ -94,7 +94,7 @@ For those who are not as fast, familiarity with the commands over time will allo
    
    * **`groups`** : The command `groups` lists all groups.
 
-   * **`expenses`** : The command `expenses gn/London` lists all expenses in the preloaded group `London`.
+   * **`expenses`** : The command `expenses gn/London` lists all expenses in the group `London`.
      
    * **`addcontact`** : The command `addcontact n/John Doe p/98765432` adds a contact named `John Doe` to AWE.
 
@@ -467,7 +467,7 @@ Examples:
 
 #### 3.3.1. Listing expenses of a specified group: `expenses`
 
-Shows a list containing all existing expenses within the specified travel group. Expenses are sorted from most recent to least recent.
+Shows a list containing all existing expenses within the specified travel group. 
 
 Format: `expenses gn/GROUP_NAME`
 
@@ -630,7 +630,7 @@ AWE data are saved as a JSON file `[JAR file location]/data/awe.json`. Advanced 
 
 <div markdown="span" class="alert alert-warning">
 :exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AWE will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, AWE will discard all data and start with sample data at the next run.
 </div>
 
 <p align="center">
@@ -727,7 +727,7 @@ Action | Format, Examples
 
 Action | Format, Examples
 --------|------------------
-**View Expense** | `expense gn/GROUP_NAME` <br> e.g., `expense gn/Bali`
+**View Expense** | `expenses gn/GROUP_NAME` <br> e.g., `expenses gn/London`
 **Add Expense** | `addexpense n/PAYER_NAME gn/GROUP_NAME $/TOTAL_AMOUNT_PAID d/DESCRIPTION [n/PAYEE_WHO_MADE_A_PERSONAL_PAYMENT] [$/PAYEE'S_PERSONAL_PAYMENT_TO_EXCLUDE_FROM_TOTAL_AMOUNT] [ex/PERSON_TO_EXCLUDE_FROM_EXPENSE]` <br> e.g., `addexpense n/Alex Yeoh gn/London $/50 d/Dinner n/Bernice Yu $/2 ex/David Li`
 **Delete Expense** | `deleteexpense INDEX` <br> e.g., `deleteexpense 1`
 **Find Expenses** | `findexpenses KEYWORD [MORE_KEYWORDS] gn/GROUP_NAME`<br> e.g., `findexpenses dinner buffet gn/London`
