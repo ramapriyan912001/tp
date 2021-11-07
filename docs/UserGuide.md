@@ -627,7 +627,6 @@ AWE data are saved in the hard disk automatically after any command that changes
 #### 3.4.5. Editing the data file
 
 AWE data are saved as a JSON file `[JAR file location]/data/awe.json`. Advanced users are welcome to update data directly by editing that data file.
-The persons involved in an expense will not change if the user only edits the contact name without editing the persons involved in the expense in the data file.
 
 <div markdown="span" class="alert alert-warning">
 :exclamation: **Caution:**
