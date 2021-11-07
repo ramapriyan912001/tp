@@ -1491,6 +1491,7 @@ User's last entered command is either `findexpenses` or `expenses`, i.e. the use
 
 1. User request to find expense(s) based on keyword(s) and group name.
 2. AWE shows a list of expenses in specified group that matches the keyword(s).
+3. AWE displays confirmation message.
    <br>Use case ends.
 
 **Extensions**
@@ -1512,6 +1513,7 @@ User's last entered command is either `findexpenses` or `expenses`, i.e. the use
 
 1. User request to list expenses of a specific group.
 2. AWE displays all the expenses of the group in ExpensesPage.
+3. AWE displays confirmation message. 
    <br>Use case ends.
 
 **Extensions**
