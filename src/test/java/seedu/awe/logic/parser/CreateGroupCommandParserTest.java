@@ -51,7 +51,7 @@ public class CreateGroupCommandParserTest {
     }
 
     /**
-     * Resets parser. Necessary as CreateGroupCommand parser needs to be initialised with a model for each call.
+     * Resets parser. Necessary as CreateGroupCommand parser needs to be initialized with a model for each call.
      * Failure to reset parser will result in Duplicate exceptions being raised.
      */
     public void resetParser() throws DuplicateGroupException {

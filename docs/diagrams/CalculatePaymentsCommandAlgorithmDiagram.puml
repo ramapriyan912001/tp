@@ -1,8 +1,8 @@
 @startuml
 start
 -> Receive Group object;
-:Initialise an empty list of Pairs
-Initialise an empty list of Payments;
+:Initialize an empty list of Pairs
+Initialize an empty list of Payments;
 
 :Iterate over group members
 Retrieve total payments and expenditures;
