@@ -478,12 +478,6 @@ that contains details of the total expenditure incurred by each member across th
 
 The following activity diagram shows what happens when a user executes a `createGroup` command.
 
-
-<p align="center">
-    <a href="#tableofcontents">Click here to return to table of contents</a>
-</p>
-<div style="page-break-after: always;"></div>
-
 <p align="center">
   <img src="images/CreateGroupActivityDiagram.png" alt="Create Group Activity Diagram" width="400" />
   <br>
