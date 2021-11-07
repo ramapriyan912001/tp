@@ -39,6 +39,9 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
 <div style="page-break-after: always;"></div>
 
 ## **Design**
@@ -57,6 +60,12 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 </p>
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
+
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 Given below is a quick overview of main components and how they interact with each other.
 
@@ -91,6 +100,11 @@ Each of the four main components (also shown in the diagram above),
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <p align="center">
@@ -101,6 +115,9 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
 <div style="page-break-after: always;"></div>
 
 ### UI component
@@ -116,6 +133,11 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 The UI consists of a `MainWindow` that is made up of parts e.g. `CommandBox`, `ResultDisplay`, `ViewPanel`, `NavigationButton` etc. 
 All these, except for `GroupButtonListener` and `PersonButtonListner` in `NavigationButton`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-F13-1/tp/tree/master/src/main/java/seedu/awe/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-F13-1/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
@@ -124,6 +146,12 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 #### View Panel
 <p align="center">
@@ -147,6 +175,11 @@ We have decided to opt for this way of implementation due to the following:
 
 In addition to using CLI command, we will also be implementing the toggling of list panel with the use of buttons.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 #### Navigation Buttons
 <p align="center">
   <img src="images/UiNavigationButtonDiagram.png" alt="Ui Navigation Button Diagram" width="600" />
@@ -159,6 +192,11 @@ The `NavigationButtonPanel` consist of the following parts:
 * ContactViewButton
 
 Clicking each button will show the respective list view in `ViewPanel`. The clicking of the button is handled by `EventHandler`.
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -178,6 +216,11 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to add a contact).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
 <p align="center">
@@ -188,6 +231,11 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -200,6 +248,11 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 * When called upon to parse a user command, the `AweParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AweParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-F13-1/tp/tree/master/src/main/java/seedu/awe/model/Model.java)
@@ -223,6 +276,11 @@ The `Model` component,
 * stores the currently 'selected' `Person`/`Group`/`Expense`/`TransactionSummary` /`Payment` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 <p align="center">
   <img src="images/PersonClassDiagram.png" alt="Person Class Diagram" width="300" />
@@ -249,6 +307,11 @@ The `Expense` component,
 *  Handles the storing of each expense in AWE.
 *  Expenses will store a reference to all instance of `Person` involved in the expenses.
 *  Stores a `Cost` and a `Description` for each `Expense`.
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 <p align="center">
   <img src="images/GroupClassDiagram.png" alt="Group Class Diagram" width="350" /><br>
@@ -282,10 +345,20 @@ The `TransactionSummary` component,
   <br>
 </p>
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 The `Payment` component,
 
 *  Handles the display of all the payments to be made between contacts in a group.
 *  Stores 2 `Person` objects and a `Cost`.
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -302,6 +375,11 @@ The `Storage` component,
 * inherits from both `AweStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 * has the `IndividualAmount` class which is composed of a `Person` and a `Cost`, similar to the entries within the `HashMaps` within `Expense`. Since `HashMap` is not serializable in Json format, we utilise a list of `IndividualAmount` objects to store the `HashMap`. 
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 ### Common classes
 
@@ -330,6 +408,11 @@ The following activity diagram shows what happens when a user executes a `create
     Fig 17. Add Contact Activity Diagram
 </p>
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 Given below is an example usage scenario and how the `creategroup` mechanism behaves at each step.
 
 Step 1. A valid `addcontact` command is given as user input. This prompts the `LogicManager` to run its execute()
@@ -341,6 +424,11 @@ It returns a `AddContactCommand`.
 
 Step 3. `AddContactCommand` runs its execute() method which checks if a contact with the same name has already been
 created. If not, the newly created contact is added into the AWE model. Upon successful execution, `CommandResult` is returned.
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 The following sequence operation shows how the `addcontact` operation works.
 <p align="center">
@@ -358,6 +446,11 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
   <br>
     Fig 19. Add Contact Reference Sequence Diagram
 </p>
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 #### Design considerations:
 
@@ -384,6 +477,10 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
   * Moreover, we trust the user to be careful with the casing of the `Name` when entering the commands.
   * As such, we chose to make the `Name` parameter case-sensitive.
   
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 ### Create Group Feature
 
@@ -395,11 +492,22 @@ that contains details of the total expenditure incurred by each member across th
 
 The following activity diagram shows what happens when a user executes a `createGroup` command.
 
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 <p align="center">
   <img src="images/CreateGroupActivityDiagram.png" alt="Create Group Activity Diagram" width="600" />
   <br>
     Fig 20. Create Group Activity Diagram
 </p>
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 Given below is an example usage scenario and how the `creategroup` mechanism behaves at each step.
 
@@ -421,6 +529,12 @@ The following sequence operation shows how the `creategroup` operation works.
   <br>
     Fig 21. Create Group Sequence Diagram
 </p>
+
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `CreateGroupCommandParser`
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -456,6 +570,11 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
       upon creation.
     * This minimizes the number of commands a user has to make in setting up a functional Group.
     * As such, it is better to choose Alternative 1, as this provides the user with a far better user experience.
+  
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 **Aspect: Case-sensitivity of `GroupName` parameter in `creategroup` command:**
 
@@ -488,7 +607,11 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
   * Other solutions are necessary to satisfy the use case wherein different sets of members wish to go on a trip to the same location at the same time and wish to create groups of the same name.
   * A solution that is being considered is to check for uniqueness of the group by checking that the members in each group are different.
   * However, this will require changes to other commands as presently most commands operate on the assumption that `GroupName` is unique (case-sensitivity considered).
-
+  
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 ### Delete Group Feature
 
@@ -503,6 +626,10 @@ The following activity diagram shows what happens when a user executes a `delete
     Fig 23. Delete Group Activity Diagram
 </p>
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 Given below is an example usage scenario and how the `deletegroup` mechanism behaves at each step.
 
@@ -534,6 +661,11 @@ The following sequence operation shows how the `deletegroup` operation works.
   <br>
     Fig 25. Delete Group Reference Sequence Diagram
 </p>
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 #### Design considerations:
 
@@ -578,6 +710,11 @@ The following sequence operation shows how the `deletegroup` operation works.
   * Should we modify or remove the constraint, the alternative implementation would require significant alterations.
   * To make the feature more extendable, we choose alternative 1.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 ### Group Edit Features
 The group edit mechanism is facilitated by defining a Group model and adding a Unique Group List field to
 AWE. The Group model contains a `GroupName` field containing the name of the group, an `ArrayList` of `Person`
@@ -604,6 +741,11 @@ It returns a `GroupEditNameCommand`.
 Step 3. `GroupEditNameCommand` runs its execute() method which updates the name of the group in the AWE model.
 Upon successful execution,`CommandResult` is returned.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 The following sequence operation shows how the `groupeditname` command works.
 
 <p align="center">
@@ -615,6 +757,11 @@ The following sequence operation shows how the `groupeditname` command works.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `oldGroup:Group`
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 #### Design considerations:
 
@@ -636,6 +783,11 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
   and remove multiple members simultaneously.
   * This significantly increases the chances of users inputting erroneous commands as well
   * Hence, editing attributes of a group using separate commands is more convenient and appropriate.
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 ### Find group feature
 
@@ -659,11 +811,21 @@ Step 2. `FindGroupsCommandParser` is created and the arguments are parsed by it.
 
 Step 3. The `LogicManager` then calls `FindGroupCommand#execute(model)` method, which updated the `FilteredList<Group>` in `ModelManager`. Thereafter, the `FilteredList<Group>` should contains only London.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 Step 4. The GUI listens for updates in the `FilteredList<Group>` and updates the display to display London only.
 
 Step 5. `CommandResult` is returned to the `LogicManager`, which also switches the view panel to `GroupsListPanel` if needed. See UI implementation below for more details of switching view panel.
 
 Step 6. The output from `CommandResult` is then displayed as an output for the user.
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 The following sequence diagram shows how the `findgroups` operation works:
 
@@ -679,6 +841,11 @@ The following sequence diagram shows how the `findgroups` operation works:
     Fig 29. Find Groups Reference Sequence Diagram
 </p>
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 ### Add expense feature
 
 The add expense mechanism is facilitated by defining an Expense model and adding an Expense List field to
@@ -693,6 +860,11 @@ The following activity diagram shows what happens when a user executes a `addexp
   <br>
     Fig 30. Add Expense Activity Diagram
 </p>
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 Given below is an example usage scenario and how the `addexpense` mechanism behaves at each step.
 
@@ -718,6 +890,11 @@ The following sequence operation shows how the `addexpense` operation works.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddExpenseCommandParser`
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 <p align="center">
   <img src="images/AddExpenseRefSequenceDiagram.png" alt="Add Expense Reference Sequence Diagram" width="750" />
@@ -747,6 +924,11 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
     * Users may need a long time to find the index of a person or group if the list of either is very long.
     * Hence, adding expenses based on the specified person and group name is more appropriate.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 ### Find Expenses Feature
 
 The find expenses mechanism is facilitated by `Group`. Each group has a unique group name and also an expense list 
@@ -764,6 +946,11 @@ Given below is an example usage scenario and how the `findexpenses` mechanism be
 
 Step 1. The user executes a valid `findexpenses eat gn/London` command. This prompts the `LogicManager` 
 to run its execute() method.
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 Step 2. The `FindExpensesCommandParser` parses the input and checks for presence of the group name prefix.
 It also checks that the group name is valid (does not have any non-alphanumeric characters). The arguments are 
@@ -789,6 +976,11 @@ The following sequence operation shows how the `findexpenses` operation works.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindExpensesCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 <p align="center">
   <img src="images/FindExpensesRefSequenceDiagram.png" alt="Find Expenses Reference Sequence Diagram" width="750" />
@@ -817,7 +1009,11 @@ The following sequence operation shows how the `findexpenses` operation works.
     * Users may need a long time to find the index of the group if the list of groups is very long.
     * This would be more inconvenient for the user.
     * Hence, finding expenses based on the specified group name is more appropriate.
-
+  
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 ### Delete Expense Feature
 
@@ -834,6 +1030,11 @@ The following activity diagram shows what happens when a user executes a `delete
   <br>
     Fig 36. Delete Expense Activity Diagram
 </p>
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 Given below is an example usage scenario and how the `deleteexpense` mechanism behaves at each step.
 
@@ -852,6 +1053,10 @@ The updated `Group` is then placed back into the `GroupList` within the `Awe`.
 
 Step 5: Upon successful execution, `CommandResult` is returned.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 The following sequence operation shows how the `deleteexpense` operation works.
 
@@ -895,6 +1100,11 @@ The following sequence operation shows how the `deleteexpense` operation works.
     * Furthermore, many expenses are likely to have similar descriptions. Constraining users to using unique descriptions for expenses is likely to compromise the user experience.
     * As such, it is better to choose Alternative 1, as this allows the user to quickly delete expenses, and not compromise on the flexibility of the user.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 ### Calculate Payments Feature
 
 The purpose of this feature is to provide users with a simple set of transactions that would allow all debts within the group to be settled.
@@ -920,6 +1130,12 @@ Initialise a `Pair` object with the `Person` object of the individual, and their
 * Iterate until the list is empty and perform the following steps.
   * Sort the list in ascending order of surplus. This means that those who owe more are placed in the earlier part of the list and those who are owed more are placed towards the end of the `Pair` list.
   * Retrieve the first `Pair` and last `Pair` in the list. It is invariant that the first pair will have negative surplus and the last pair will have positive surplus.
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
   * Check to see which pair has a smaller magnitude. Define this value to be `SMALL_VAL`.
   * Create a `Payment` object with a `Cost` of `SMALL_VAL`, and payee and payer as the two individuals within the first pair and last pair retrieved respectively. Add this `Payment` object to the list of `Payment` objects.
   * If the pairs do not have equal magnitude, remove the pair with the surplus value of smaller magnitude from the list. Calculate the new surplus value of the other pair to be the sum of the surpluses of both pairs. Update the other pair with this new surplus value and place it back into the list.
@@ -934,7 +1150,11 @@ The following diagram shows the flow of the algorithm.
   <br>
     Fig 39. Calculate Payments Command Algorithm Diagram
 </p>
-  
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 The following activity diagram shows what happens when a user executes a `calculatepayments` command.
 
@@ -948,6 +1168,11 @@ Given below is an example usage scenario and how the `calculatepayments` mechani
 
 Step 1. A valid `calculatepayments` command is given as user input. This prompts the `LogicManager` to run its execute()
 method.
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 Step 2. The `CalculatePaymentsCommandParser` parses the input and checks for presence of the `GROUP_NAME` prefix.
 It checks that the `GROUP_NAME` is valid (does not have any non-alphanumeric characters).
@@ -975,6 +1200,11 @@ The following sequence operation shows how the `calculatepayments` operation wor
 </div>
 
 <p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
+<p align="center">
   <img src="images/CreateGroupRef.png" alt="Create Group Reference" width="600" />
   <br>
     Fig 42. Create Group Reference
@@ -1000,7 +1230,11 @@ The following sequence operation shows how the `calculatepayments` operation wor
     * The size of the transaction matters less to the user than the volume of transactions.
     * Moreover, an easier implementation reduces the possibility of bugs.
     * As such, we chose to prioritise the settling of bigger debts in our algorithm.
-  
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 ### UI
 AWE has multiple lists / views to display such as for `groups`, `contacts` and `expenses`.
@@ -1015,11 +1249,22 @@ To achieve the toggling between each view panels, we implemented the following:
 The following activity diagram shows how the `MainWindow` checks and sends the `UiView` to `ViewPanel`. 
 <br>
 
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 <p align="center">
   <img src="images/UiTogglingActivityDiagram.png" alt="Ui Toggling Activity Diagram" width="600" />
   <br>
     Fig 43. Ui Toggling Activity Diagram
 </p>
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 #### Proposed Implementation
 **Aspect: Navigating between different view**
@@ -1053,6 +1298,11 @@ To achieve this, the following is implemented:
 * 2 buttons (`GroupViewButton` and `ContactViewButton`) for the user to click.
 * Event listener for each button - `GroupButtonListener` and `ContactButtonListener`. The event listener works by calling `ViewPanel#toggleView` when the button is clicked.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 Given below is an example usage scenario and how the button mechanism behaves at each step. In this example, the button used is `GroupViewButton` but it can also be replaced with `ContactViewButton`.
 
 Step 1. When `GroupViewButton` is initiated, an event listener `GroupButtonListener` is created and used.
@@ -1072,6 +1322,11 @@ Step 3. `ViewPanel` will change the child of itself to `ContactListPanel` (Refer
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
 
@@ -1102,6 +1357,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | -------- | ------------------------------------------------- | -------------------------------------------------- | ------------------------------------------------------------------------ |
 | `* * *`  | beginner user who first opened the app            | view the help page                                 | so that I can learn how to use the app                                   |
 | `* * *`  | user with contacts to remember                    | add a contact                                   | keep track of my contacts                                                |
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 | `* * *`  | user who has lots of contacts to keep track of    | view contacts                                      | easily see my contacts in one centralised location                       |
 | `* * *`  | user who wants to find contacts with a certain string of characters in their name | find contacts by a regex                                 | search for contacts easily         |
 | `* * *`  | user who has lots of contacts to keep track of    | tag a contact                                   | keep track of contacts by certain characteristics/tags                          |
@@ -1112,6 +1373,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user who wants to find groups with a certain string of characters in their name | find groups by a regex                                 | search for groups easily         |
 | `* * *`  | user who has lots of groups to keep track of    | tag a group                                   | keep track of groups by certain characteristics/tags                          |
 | `* * *`  | user with groups that no longer exist           | delete a group                                 | keep my groups relevant and current                                   |
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 | `* * *`  | user with flexible travel plans         | edit a group                                 | keep my groups accurate and current                                   |
 | `* * *`  | user that has paid for a shared experience        | easily check how much I have paid up front         | ensure I have liquidity for emergencies and or other unforeseen expenses |
 | `* * *`  | user who has paid for others                      | easily check how much I am owed by friends         | recoup the money I have paid on their behalf                             |
@@ -1122,6 +1389,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | beginner user                                     | run the app easily with a click of a button        | avoid wasting time trying to figure out how to get the app to work       |
 | `* * *`  | inexperienced user in the app who types fast      | type in the commands for the app                   | do more things in the app with the same amount of time compared to using a mouse to click |
 | `* * *`  | user who wants an easy workflow                   | easily toggle between contacts and groups page with a command or a click of a button | make my workflow on the app smoother   |
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 | `* *`    | user who has to recoup the money                  | divide up the expenses suitably amongst my friends | know how much to recoup from each person                                 |
 | `* *`    | user who worries about individual expenses        | check the breakdown of my personal expenditure     | keep track of how much money I have spent                                |
 | `* *`    | user who likes to differentiate work from leisure | use this app to separate the different types of contacts I have | I won’t mix them up                                         |
@@ -1132,6 +1405,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | beginner user that is tech-savvy                  | view the documentation                             | figure out how to use the app                                            |
 | `*`      | beginner user                                     | easily distinguish functions in the app            | use it without the app being too daunting                                |
 | `*`      | expert user                                       | refer to previous trips and the expenditure        | plan future trips efficiently                                            |
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 ### Use Cases
 
@@ -1159,6 +1437,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2c. Command contains 2 parameters identifiers but phone number is less than 3 digits or not a number.
     * 2c1. AWE reminds user that phone numbers should only contain numbers and be at least 3 digits long.
       <br>Use case ends.
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 **Use case: UC2 - Delete a contact**
 
@@ -1204,7 +1487,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3c. User is not viewing a list of contacts when entering command.
   * 3c1. AWE shows an error message asking user to enter `findcontacts` or `contacts` command first.
     <br>Use case ends.
-    
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 **Use case: UC4 - Find contacts**
 
 **MSS**
@@ -1236,6 +1524,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. There are no contacts to be listed.
     * 2a1. AWE does not display any contacts but an empty list.
       <br>Use case ends.
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 #### Groups Use Cases
 
@@ -1274,6 +1567,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. AWE displays message to remind User to type in name of a group inside the AWE.
       <br>Use case ends.    
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 **Use case: UC8 - Change group name**
 
 **MSS**
@@ -1296,6 +1594,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1c. AWE detects group name that is not in AWE.
   * 1c1. AWE displays message to remind User to type in name of a group inside the AWE.
     <br>Use case ends.
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 **Use case: UC9 - Add contact to group**
 
@@ -1325,6 +1628,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1e. AWE detects contact name that is not in AWE.
   * 1e1. AWE displays message to inform user that none of the specified contact names are in AWE.
     <br>Use case ends.
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 **Use case: UC10 - Remove contact from group**
 
@@ -1359,6 +1667,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 2a2. AWE shows updated list of groups and contacts.
   * 2a3. AWE displays confirmation message and informs user that the group with 0 members has been deleted.
    <br>Use case ends.
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 **Use case: UC11 - Add tag to group**
 
@@ -1397,6 +1710,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. AWE displays confirmation message.
    <br>Use case ends.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 **Use case: UC13 - Find groups**
 
 **MSS**
@@ -1428,7 +1746,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. AWE detects that there is no group created.
     * 2a1. AWE displays a blank screen.
       <br>Use case ends.
-      
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 #### Expenses Use Cases
 
 **Use case: UC15 - Add expense**
@@ -1467,7 +1790,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1h. AWE detects that the total expenditure of the specified group is over one billion.
     * 1h1. AWE informs user that the total expenses of the travel group has reached its limit of one billion.
       <br>Use case ends.
-    
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 **Use case: UC16 - Delete expense**
 
 **Preconditions:**
@@ -1512,7 +1840,12 @@ User's last entered command is either `findexpenses` or `expenses`, i.e. the use
   * 2c1. AWE displays error message saying that group names should only comprise letters, numbers, and spaces,
     should be within 50 characters, and should not be blank.
     <br>Use case ends.
-    
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 **Use case: UC18 - List expenses of a travel group**
 
 **MSS**
@@ -1550,6 +1883,11 @@ User's last entered command is either `findexpenses` or `expenses`, i.e. the use
   * 2a1. AWE displays message to remind User to type in name of a group inside the AWE.
     <br>Use case ends.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 **Use case: UC20 - Calculate payments**
 
 **MSS**
@@ -1570,6 +1908,10 @@ User's last entered command is either `findexpenses` or `expenses`, i.e. the use
   * 3a2. AWE displays a confirmation message stating that there are no payments to be made.
     <br>Use case ends.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 
 #### Miscellaneous Use Cases
@@ -1605,6 +1947,11 @@ User's last entered command is either `findexpenses` or `expenses`, i.e. the use
 5.  Layout between contacts and groups should be intuitive and easy to understand and navigate.
 6.  Usage of `$` should be standardized for money.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
@@ -1638,6 +1985,11 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 ### Deleting a contact
 
@@ -1673,6 +2025,11 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `deletecontact`, `deletecontact x`, `...` (where x is larger than the visible list size)<br>
      Expected: Similar to previous.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 3. Attempting to delete a contact when not viewing a list of contacts.
    1. Prerequisites: The preloaded data for contacts are not modified. (No contacts are removed or added). The current page must not be an `ContactsPage`.
 
@@ -1702,6 +2059,11 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect edit commands to try: `editcontact`, `editcontact x n/NAME p/PHONE`, `...` (where x is larger than the visible list size)<br>
      Expected: Similar to previous.
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 2. Editing a contact while **filtered** contacts are being shown.
 
@@ -1733,6 +2095,11 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `editcontact 1 n/Alex` <br>
      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 ### Creating a group
 
@@ -1770,6 +2137,11 @@ testers are expected to do more *exploratory* testing.
 4. Test case: `groupeditname gn/London gn/Thailand`
    Expected: Name of London group will change to Thailand. Status message indicates that the group name has been changed to Thailand.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 ### Adding a contact to group
 
 1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added)
@@ -1805,6 +2177,11 @@ testers are expected to do more *exploratory* testing.
 
 4. Test case: `groupaddtag gn/London t/Friends`
    Expected: Friends tag added to group. Status message indicates that the new tag has been added to group.
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 ### Removing a tag from group
 
@@ -1845,6 +2222,11 @@ testers are expected to do more *exploratory* testing.
    4. Test case: `findgroups Singapore`
       Expected: GroupList displayed. GroupList will display a blank page. 0 groups found shown in status message.
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 ### Viewing expenses
 
 1. Viewing all expenses of a specific group in ContactsPage or GroupsPage.
@@ -1874,7 +2256,12 @@ testers are expected to do more *exploratory* testing.
      
   5. Test case: `findexpenses Test gn/Singapore`
      Expected: No change occurs. Status message says that the specified group does not exist.
-      
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 ### Adding an expense
 
 1. Adding an expense involving an existing member of a specific travel group.
@@ -1900,6 +2287,11 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `addexpense n/Alex Yeoh gn/Sweden $/50 d/Arcade`<br>
       Expected: No expense added. Status message will indicate that the specified travel group does not exist.
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 ### Deleting an expense
 
@@ -1934,7 +2326,12 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `deleteexpense`, `deleteexpense x`, `...` (where x is larger than the visible list size)<br>
      Expected: Similar to previous.
-     
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 3. Attempting to delete an expense when not viewing a list of expenses.
    1. Prerequisites: The preloaded data for groups and expenses are not modified. (No groups or expenses are removed or added). The current page must not be an `ExpensesPage`.
   
@@ -1959,7 +2356,12 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `calculatepayments gn/Bali`
      Expected: Transaction summary list for each person will be displayed. Each person will have $0 as the amount of money they spent. Status message will indicate successful execution of the command.      
-      
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
 ### Calculating Payments
 
 1. Calculating payments of a group with expenses.
