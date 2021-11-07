@@ -5,7 +5,15 @@ title: Marcus Peh's Project Portfolio Page
 
 ### Project: Around the World in $80
 
-Around the World in $80 is a desktop application that splits bills between different contacts. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+<p align="center">
+    <img src="images/awelogo.png" alt="awe logo" width="300" />
+</p>
+
+Around the World in $80 (AWE) is a desktop application for keeping track of spending and expenditure during travels, splitting expenses with travel-mates, and facilitating easy recollection of debts at the end of every trip. AWE is the world’s only bespoke app designed for group travellers.
+
+The app promises to revolutionise the group-travel space. With AWE, bills can be split and monitored in a centralised manner that minimises the potential for disputes and maximises the efficiency of payment and recollection of debts.
+
+The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project. [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=marcuspeh&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17)
 
@@ -40,6 +48,7 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
   * Added in buttons to toggle between contacts page and group page [\#121](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/121)
 
 <div style="page-break-after: always;"></div>
+
 ### Bug Fixes
 * **severity.HIGH** Edit person does not update groups and expenses. [\#158](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/153)
    * What happen: The command `addPerson` does not replace the instance of the old person from groups and expenses.
@@ -98,6 +107,8 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
     * `ListGroupsCommandParser`
     * `GroupEditNameCommand`
     * `GroupEditNameCommandParser`
+    
+<div style="page-break-after: always;"></div>
 
 ### Others
 * **Project management**
