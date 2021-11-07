@@ -10,8 +10,8 @@ Around the World in $80 (AWE) is a desktop application for keeping track of spen
 expenses with travel-mates, and facilitating easy recollection of debts at the end of every trip. AWE is the world's
 only bespoke app designed for group travellers.
 
-The app promises to revolutionise the group-travel space. With AWE, bills can be split and monitored in a centralised
-manner that minimises the potential for disputes and maximises the efficiency of payment and recollection of debts.
+The app promises to revolutionize the group-travel space. With AWE, bills can be split and monitored in a centralized
+manner that maximizes the potential for disputes and maximizes the efficiency of payment and recollection of debts.
 
 AWE's vision is a more interconnected world where relationships are more easily built and maintained.
 Our mission is to accomplish through a user-centric approach that seeks to provide the user with what they need, at the
@@ -369,7 +369,7 @@ The `Storage` component,
 * can save both AWE data and user preference data in json format, and read them back into corresponding objects.
 * inherits from both `AweStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
-* has the `IndividualAmount` class which is composed of a `Person` and a `Cost`, similar to the entries within the `HashMaps` within `Expense`. Since `HashMap` is not serializable in Json format, we utilise a list of `IndividualAmount` objects to store the `HashMap`. 
+* has the `IndividualAmount` class which is composed of a `Person` and a `Cost`, similar to the entries within the `HashMaps` within `Expense`. Since `HashMap` is not serializable in Json format, we utilize a list of `IndividualAmount` objects to store the `HashMap`. 
 
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
@@ -388,7 +388,7 @@ The add contact mechanism is facilitated by defining a Person model and adding a
 AWE. The Person model contains a `Name` field containing the name of the contact, a `Phone` field containing the
 number of the contact, and optional `Tags` to attach to the contact.
 
-The following activity diagram shows what happens when a user executes an `addContact` command.
+The following activity diagram shows what happens when a user executes an `addcontact` command.
 
 <p align="center">
   <img src="images/AddContactActivityDiagram.png" alt="Add Contact Activity Diagram" width="420" />
@@ -401,7 +401,13 @@ The following activity diagram shows what happens when a user executes an `addCo
 </p>
 <div style="page-break-after: always;"></div>
 
-Given below is an example usage scenario and how the `creategroup` mechanism behaves at each step.
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
+Given below is an example usage scenario and how the `addcontact` mechanism behaves at each step.
+
 
 Step 1. A valid `addcontact` command is given as user input. This prompts the `LogicManager` to run its execute()
 method.
@@ -1111,12 +1117,12 @@ Define surplus as the net amount each individual is owed by others. This ultimat
 The goal is to ensure that the deficits balance the surpluses with the minimum number of transactions.
 To assist with the tracking of each individual and their surplus, an inner `Pair` class was created with a `Person` field and a primitive double field for the surplus.
 
-* Initialise an empty list of Pairs and an empty list of `Payment` objects.
+* Initialize an empty list of Pairs and an empty list of `Payment` objects.
 
 * Iterate through the `members` of the group and retrieve each individual's total payments and total expenditures.
 
 * Calculate the surplus of each individual by subtracting their total expenditures from their total payments.
-Initialise a `Pair` object with the `Person` object of the individual, and their surplus. Add this pair to the list if the surplus is not 0.
+Initialize a `Pair` object with the `Person` object of the individual, and their surplus. Add this pair to the list if the surplus is not 0.
 
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
@@ -1210,14 +1216,14 @@ The following sequence operation shows how the `calculatepayments` operation wor
 
 #### Design considerations
 
-**Aspect: Algorithm utilised for calculatepayments:**
+**Aspect: Algorithm utilized for calculatepayments:**
 
-* **Alternative 1 (current choice):** Prioritise settling of bigger debts 
+* **Alternative 1 (current choice):** Prioritize settling of bigger debts 
     * Pros: Easy to implement.
     * Pros: Smaller number of transactions.
     * Cons: Larger value transactions.
 
-* **Alternative 2:** Prioritise settling of smaller debts
+* **Alternative 2:** Prioritize settling of smaller debts
     * Pros: Smaller value transactions.
     * Cons: Greater number of transactions.
     * Cons: More difficult to implement.
@@ -1225,7 +1231,7 @@ The following sequence operation shows how the `calculatepayments` operation wor
 * **Justification**
     * The size of the transaction matters less to the user than the volume of transactions.
     * Moreover, an easier implementation reduces the possibility of bugs.
-    * As such, we chose to prioritise the settling of bigger debts in our algorithm.
+    * As such, we chose to prioritize the settling of bigger debts in our algorithm.
 
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
@@ -1267,17 +1273,17 @@ The following activity diagram shows how the `MainWindow` checks and sends the `
 
 * **Alternative 1**: Make use of JavaFx's tab
     * Pros: Easy to implement.
-    * Cons: Unable to fully customised the layout. Have to use the standard JavaFx's tab layout.
+    * Cons: Unable to fully customized the layout. Have to use the standard JavaFx's tab layout.
   
 * **Alternative 2 (current choice)**: Replacing the child of the view panel node<br>
     (Refer to [JavaFx tutorial](https://se-education.org/guides/tutorials/javaFxPart1.html) for more information about JavaFx)
-    * Pros: More customisable in terms of layout.
+    * Pros: More customizable in terms of layout.
     * Pros: Able to make use of existing codes.
     * Cons: More classes to implement to handle the toggling between views.
     
 * **Justification**
     * We want to place the command result display below the buttons according to our [wireframe](https://www.figma.com/file/VwuDOdHr7CSyDUWb4Kwkmx/CS2103T-tP?node-id=0%3A1).
-    * Using JavaFx's tab will not let us customise the layout as such.
+    * Using JavaFx's tab will not let us customize the layout as such.
     * Hence, replacing the child of a view panel is more appropriate.
     
 #### Ui Navigation Buttons
@@ -1354,13 +1360,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | -------- | ------------------------------------------------- | -------------------------------------------------- | ------------------------------------------------------------------------ |
 | `* * *`  | beginner user who first opened the app            | view the help page                                 | so that I can learn how to use the app                                   |
 | `* * *`  | user with contacts to remember                    | add a contact                                   | keep track of my contacts                                                |
-| `* * *`  | user who has lots of contacts to keep track of    | view contacts                                      | easily see my contacts in one centralised location                       |
+| `* * *`  | user who has lots of contacts to keep track of    | view contacts                                      | easily see my contacts in one centralized location                       |
 | `* * *`  | user who wants to find contacts with a certain string of characters in their name | find contacts by a regex                                 | search for contacts easily         |
 | `* * *`  | user who has lots of contacts to keep track of    | tag a contact                                   | keep track of contacts by certain characteristics/tags                          |
 | `* * *`  | user with contacts that no longer exist           | delete a contact                                 | keep my contacts relevant and current                                   |
 | `* * *`  | user with contacts that have changed          | edit a contact                                 | keep my contacts accurate and current                                   |
 | `* * *`  | user with a trip to go on                   | add a group                                   | keep track of my groups                                                |
-| `* * *`  | user who has lots of trips to keep track of    | view groups                                      | easily see my groups in one centralised location                       |
+| `* * *`  | user who has lots of trips to keep track of    | view groups                                      | easily see my groups in one centralized location                       |
 | `* * *`  | user who wants to find groups with a certain string of characters in their name | find groups by a regex                                 | search for groups easily         |
 | `* * *`  | user who has lots of groups to keep track of    | tag a group                                   | keep track of groups by certain characteristics/tags                          |
 | `* * *`  | user with groups that no longer exist           | delete a group                                 | keep my groups relevant and current                                   |

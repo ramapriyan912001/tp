@@ -9,8 +9,8 @@ Around the World in $80 (AWE) is a desktop application for keeping track of spen
 expenses with travel-mates, and facilitating easy recollection of debts at the end of every trip. AWE is the world's
 only bespoke app designed for group travellers.
 
-The app promises to revolutionise the group-travel space. With AWE, bills can be split and monitored in a centralised
-manner that minimises the potential for disputes and maximises the efficiency of payment and recollection of debts.
+The app promises to revolutionize the group-travel space. With AWE, bills can be split and monitored in a centralized
+manner that maximizes the potential for disputes and maximizes the efficiency of payment and recollection of debts.
 
 AWE's vision is a more interconnected world where relationships are more easily built and maintained.
 Our mission is to accomplish through a user-centric approach that seeks to provide the user with what they need, at the
@@ -53,7 +53,7 @@ Term | Explanation
 --------|------------------
 **Command Line Interface (CLI)** | The Command Line Interface, or CLI for short, is the user interface on which AWE is based. This means that most of AWE's functionality is unlocked by the typing of inputs by the user, rather than the clicking of a mouse or the selection of options via a menu.
 **Graphical User Interface (GUI)** | The Graphical User Interface, or GUI for short, is a user interface which supports all of its features through the clicking of a mouse or the selection of options via a menu. It does not require users to type in commands.
-**Command** | Commands are the user inputs that trigger the specific features of the app. Commands are often denoted in highlighted letters. For instance, to create a group, the `creategroup` command is utilised. 
+**Command** | Commands are the user inputs that trigger the specific features of the app. Commands are often denoted in highlighted letters. For instance, to create a group, the `creategroup` command is utilized. 
 **Parameter** | A Parameter refers to a specific detail required for a command. For instance, adding a contact within an app would require a details such as the contact's name. In this case, the name is a parameter of this command. Parameters are often denoted in the guide in highlighted uppercase letters, for eg. `NAME`.
 
 ### 1.2 Format of commands
@@ -662,7 +662,7 @@ an index to identify which contact/expense to modify. Users can simply view the 
 the relevant index in a convenient manner as compared to typing out the full name. However, groups contain a large
 amount of sensitive information (such as membership and expenses) that cannot be recovered upon deletion. As such, our
 team decided to implement [Group-related commands](#52-groups-commands) by accepting the unique group name as an
-argument. This minimises the chances of accidentally deleting a group.
+argument. This maximizes the chances of accidentally deleting a group.
 
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install AWE on the other computer and replace the empty data file it creates with the data file used by the AWE on your previous computer.
@@ -750,8 +750,8 @@ Action | Format, Examples
 <div style="page-break-after: always;"></div>
 
 ## **6. Final Word**
-AWE hopes to revolutionise the group-travel space through its effective handling of shared expenses on a centralised
-platform to maximise the efficiency of payment and recollection of debts. Our team is committed to delivering a seamless 
+AWE hopes to revolutionize the group-travel space through its effective handling of shared expenses on a centralized
+platform to maximize the efficiency of payment and recollection of debts. Our team is committed to delivering a seamless 
 experience for potential users. We are always looking to improve. As such, do drop us an email at <a href = "mailto: awe80contact@gmail.com">awe80contact@gmail.com</a>
 if you discover any bugs while using the application.
 

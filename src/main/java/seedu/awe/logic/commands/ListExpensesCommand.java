@@ -25,7 +25,7 @@ public class ListExpensesCommand extends Command {
     private final GroupName groupName;
 
     /**
-     * A public constructor to initialise the group name
+     * A public constructor to initialize the group name
      * to the given one.
      *
      * @param groupName The name of the group.
