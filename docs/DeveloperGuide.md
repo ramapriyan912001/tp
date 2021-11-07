@@ -1151,7 +1151,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User <ins>finds contacts (UC4)</ins> or <ins>views all contacts (UC5)</ins>
+1. User <ins>finds contacts (UC4)</ins> or <ins>views all contacts (UC5)</ins>.
 2. User requests to delete a specific contact in the list.
 3. AWE deletes the contact.
 4. AWE removes the contact from groups of which the person was a member.
@@ -1160,7 +1160,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The contact list is empty.
+* 1a. The contacts page is empty.
   <br>Use case ends.
 * 2a. The given index is invalid.
     * 2a1. AWE shows an error message.
@@ -1168,19 +1168,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 2b1. AWE shows an error message asking user to enter `findcontacts` or `contacts` command first.
     <br>Use case ends.
 
-**Use case: UC3 - Edit contact**
+**Use case: UC3 - Edit a contact**
 
 **MSS**
 
-1. User <ins>finds contacts (UC4)</ins> or <ins>views all contacts (UC5)</ins>
-2. User requests to edit a specific contacts in the list
-3. User enters edited information
-4. AWE edits the contacts
+1. User <ins>finds contacts (UC4)</ins> or <ins>views all contacts (UC5)</ins>.
+2. User requests to edit a specific contacts in the list.
+3. User enters edited information.
+4. AWE edits the contacts.
 
 
 **Extensions**
 
-* 1a. The list is empty.
+* 1a. The contacts page is empty.
   <br>Use case ends.
 * 3a. The given index is invalid.
     * 3a1. AWE shows an error message.
@@ -1226,7 +1226,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Groups Use Cases
 
-**Use case: UC6 - Create Travel Group**
+**Use case: UC6 - Create travel group**
 
 **MSS**
 
@@ -1242,7 +1242,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     <br>Use case ends.
     
     
-**Use case: UC7 - Delete Travel Group**
+**Use case: UC7 - Delete travel group**
 
 **MSS**
 
@@ -1439,7 +1439,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Expenses Use Cases
 
-**Use case: UC15 - Add expense**
+**Use case: UC15 - Add an expense**
 
 **Preconditions:** User has is a member of the specified travel group.
 
@@ -1476,15 +1476,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1h1. AWE informs user that the total expenses of the travel group has reached its limit of one billion.
       <br>Use case ends.
     
-**Use case: UC16 - Delete expense**
-
-**Preconditions:**
-
-User's last entered command is either `findexpenses` or `expenses`, i.e. the user is viewing an expense list.
+**Use case: UC16 - Delete an expense**
 
 **MSS**
 
-1. User <ins>finds expenses in a travel group (UC17)</ins> or <ins>lists expenses in a travel group (UC18)</ins>
+1. User <ins>finds expenses in a travel group (UC17)</ins> or <ins>lists expenses in a travel group (UC18)</ins>.
 2. User requests to delete an expense from list of expenses viewed by its position on screen.
 3. AWE deletes the specified expense.
 4. AWE shows updated list of expenses.
