@@ -1,0 +1,36 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+
+participant ":AweParser" as AweParser LOGIC_COLOR
+participant ":AddExpenseCommandParser" as AddExpenseCommandParser LOGIC_COLOR
+participant "addExpenseCommand:AddExpenseCommand" as AddExpenseCommand LOGIC_COLOR
+end box
+
+mainframe sd get addExpenseCommand
+
+create AddExpenseCommandParser
+AweParser -> AddExpenseCommandParser
+activate AddExpenseCommandParser
+
+AddExpenseCommandParser --> AweParser
+deactivate AddExpenseCommandParser
+
+AweParser -> AddExpenseCommandParser : parse("n/Alex Yeoh gn/Bali $/50 d/Food")
+activate AddExpenseCommandParser
+
+create AddExpenseCommand
+AddExpenseCommandParser -> AddExpenseCommand
+activate AddExpenseCommand
+
+AddExpenseCommand --> AddExpenseCommandParser : addExpenseCommand
+deactivate AddExpenseCommand
+
+AddExpenseCommandParser --> AweParser : addExpenseCommand
+deactivate AddExpenseCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddExpenseCommandParser -[hidden]-> AweParser
+destroy AddExpenseCommandParser
+
+@enduml

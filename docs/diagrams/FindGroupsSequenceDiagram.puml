@@ -2,12 +2,11 @@
 !include style.puml
 
 box Logic LOGIC_COLOR_T1
+
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AweParser" as AweParser LOGIC_COLOR
-participant ":FindGroupsCommandParser" as FindGroupsCommandParser LOGIC_COLOR
-participant "d:FindGroupsCommand" as FindGroupsCommand LOGIC_COLOR
+participant ":FindGroupsCommand" as FindGroupsCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
-participant ":GroupContainsKeywordsPredicate" as GroupContainsKeywordsPredicate LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -20,35 +19,18 @@ activate LogicManager
 LogicManager -> AweParser : parseCommand("findgroups London")
 activate AweParser
 
-create FindGroupsCommandParser
-AweParser -> FindGroupsCommandParser
-activate FindGroupsCommandParser
-
-FindGroupsCommandParser --> AweParser
-deactivate FindGroupsCommandParser
-
-AweParser -> FindGroupsCommandParser : parse("London")
-activate FindGroupsCommandParser
-
-create GroupContainsKeywordsPredicate
-FindGroupsCommandParser -> GroupContainsKeywordsPredicate
-activate GroupContainsKeywordsPredicate
-
-GroupContainsKeywordsPredicate -> FindGroupsCommandParser : predicate
-deactivate GroupContainsKeywordsPredicate
-
+note right
+Refer to ref frame for
+details on creation of
+the FindGroupsCommand object
+end note
+group sd get findGroupsCommand
 create FindGroupsCommand
-FindGroupsCommandParser -> FindGroupsCommand : predicate
+AweParser -> FindGroupsCommand
 activate FindGroupsCommand
-
-FindGroupsCommand --> FindGroupsCommandParser : command
+FindGroupsCommand --> AweParser
 deactivate FindGroupsCommand
-
-FindGroupsCommandParser --> AweParser : command
-deactivate FindGroupsCommandParser
-'Hidden arrow to position the destroy marker below the end of the activation bar.
-FindGroupsCommandParser -[hidden]-> AweParser
-destroy FindGroupsCommandParser
+end group
 
 AweParser --> LogicManager : command
 deactivate AweParser

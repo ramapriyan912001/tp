@@ -7,7 +7,6 @@ import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 
 import java.util.stream.Stream;
 
-import seedu.awe.commons.exceptions.IllegalValueException;
 import seedu.awe.logic.commands.ListExpensesCommand;
 import seedu.awe.logic.parser.exceptions.ParseException;
 import seedu.awe.model.group.GroupName;
@@ -35,13 +34,8 @@ public class ListExpensesCommandParser implements Parser<ListExpensesCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_LISTEXPENSESCOMMAND_USAGE));
         }
 
-        try {
-            GroupName groupName = ParserUtil.parseGroupName((argMultimap.getValue(PREFIX_GROUP_NAME)).get());
-            return new ListExpensesCommand(groupName);
-        } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    MESSAGE_LISTEXPENSESCOMMAND_USAGE), ive);
-        }
+        GroupName groupName = ParserUtil.parseGroupName((argMultimap.getValue(PREFIX_GROUP_NAME)).get());
+        return new ListExpensesCommand(groupName);
     }
 
     /**

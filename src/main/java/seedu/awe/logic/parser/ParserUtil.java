@@ -3,7 +3,6 @@ package seedu.awe.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.awe.commons.core.Messages.MESSAGE_CREATEGROUPCOMMAND_EMPTY_GROUP;
 import static seedu.awe.commons.core.Messages.MESSAGE_CREATEGROUPCOMMAND_INVALID_NAMES;
-import static seedu.awe.commons.core.Messages.MESSAGE_CREATEGROUPCOMMAND_USAGE;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -31,7 +30,7 @@ import seedu.awe.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_LENGTH_INDEX = "Index is above 9 digits.";
+    public static final String MESSAGE_INVALID_SIZE_INDEX = "Index is too large.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -40,8 +39,8 @@ public class ParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
-        if (oneBasedIndex.length() > 9) {
-            throw new ParseException(MESSAGE_INVALID_LENGTH_INDEX);
+        if (StringUtil.isOverlyLargeInteger(trimmedIndex)) {
+            throw new ParseException(MESSAGE_INVALID_SIZE_INDEX);
         }
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
@@ -138,7 +137,7 @@ public class ParserUtil {
      * @param names Collection of strings that represent names.
      * @return List of names
      */
-    public static List<Name> parseMemberNames(Collection<String> names) throws EmptyGroupException {
+    public static List<Name> parseMemberNames(Collection<String> names) throws EmptyGroupException, ParseException {
         requireNonNull(names);
         final Set<Name> memberNameSet = new HashSet<>();
         final List<Name> memberNameList = new ArrayList<>();
@@ -158,8 +157,13 @@ public class ParserUtil {
         }
         if (invalidCount == names.size()) {
             throw new EmptyGroupException(MESSAGE_CREATEGROUPCOMMAND_EMPTY_GROUP
-                    + MESSAGE_CREATEGROUPCOMMAND_INVALID_NAMES + MESSAGE_CREATEGROUPCOMMAND_USAGE);
+                    + MESSAGE_CREATEGROUPCOMMAND_INVALID_NAMES);
         }
+
+        if (invalidCount > 0) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+
         memberNameList.addAll(memberNameSet);
         return memberNameList;
     }

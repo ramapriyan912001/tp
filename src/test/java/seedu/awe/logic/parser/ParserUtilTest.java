@@ -7,7 +7,7 @@ import static seedu.awe.logic.commands.CommandTestUtil.INVALID_NAME_JOHN;
 import static seedu.awe.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BUFFET;
 import static seedu.awe.logic.commands.CommandTestUtil.VALID_NAME_ALICE;
 import static seedu.awe.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.awe.logic.parser.ParserUtil.MESSAGE_INVALID_LENGTH_INDEX;
+import static seedu.awe.logic.parser.ParserUtil.MESSAGE_INVALID_SIZE_INDEX;
 import static seedu.awe.testutil.Assert.assertThrows;
 import static seedu.awe.testutil.TypicalIndexes.INDEX_FIRST;
 
@@ -57,8 +57,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseIndex_tooLongInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_LENGTH_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+        assertThrows(ParseException.class, MESSAGE_INVALID_SIZE_INDEX, ()
+            -> ParserUtil.parseIndex("999999999999"));
     }
 
     @Test
@@ -202,7 +202,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseMemberNames_collectionWithValidMemberNames_returnsMemberNames() {
+    public void parseMemberNames_collectionWithValidMemberNames_returnsMemberNames() throws ParseException {
         Set<Name> actualNameSet = Set.copyOf(
                 ParserUtil.parseMemberNames(Arrays.asList(VALID_NAME_ALICE, VALID_NAME_AMY)));
         Set<Name> expectedNameSet = Set.of(new Name(VALID_NAME_ALICE), new Name(VALID_NAME_AMY));
@@ -211,7 +211,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseMemberNames_collectionWithDuplicateMemberNames_returnsUniqueMemberNames() {
+    public void parseMemberNames_collectionWithDuplicateMemberNames_returnsUniqueMemberNames() throws ParseException {
         List<Name> actualNameList = ParserUtil.parseMemberNames(Arrays.asList(VALID_NAME_ALICE, VALID_NAME_ALICE));
         List<Name> expectedNameList = Arrays.asList(new Name(VALID_NAME_ALICE));
 

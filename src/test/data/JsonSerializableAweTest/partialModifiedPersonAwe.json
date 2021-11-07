@@ -1,0 +1,26 @@
+{
+  "persons": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "tagged": [ "friends" ]
+  }],
+  "groups": [
+    {
+      "name": "Dubai",
+      "members": [
+        {
+          "name": "Alice Pauline",
+          "phone": "94351253"
+        }
+      ]
+    }, {
+      "name": "Dubai",
+      "members": [
+        {
+          "name": "Alice Pauline",
+          "phone": "94351253"
+        }
+      ]
+    }
+  ]
+}

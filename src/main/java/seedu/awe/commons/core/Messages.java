@@ -10,6 +10,7 @@ import static seedu.awe.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.awe.logic.commands.AddContactCommand;
 import seedu.awe.logic.commands.AddExpenseCommand;
 import seedu.awe.logic.commands.CalculatePaymentsCommand;
+import seedu.awe.logic.commands.CreateGroupCommand;
 import seedu.awe.logic.commands.DeleteContactCommand;
 import seedu.awe.logic.commands.DeleteExpenseCommand;
 import seedu.awe.logic.commands.DeleteGroupCommand;
@@ -17,6 +18,11 @@ import seedu.awe.logic.commands.EditContactCommand;
 import seedu.awe.logic.commands.FindContactsCommand;
 import seedu.awe.logic.commands.FindExpensesCommand;
 import seedu.awe.logic.commands.FindGroupsCommand;
+import seedu.awe.logic.commands.GroupAddContactCommand;
+import seedu.awe.logic.commands.GroupAddTagCommand;
+import seedu.awe.logic.commands.GroupEditNameCommand;
+import seedu.awe.logic.commands.GroupRemoveContactCommand;
+import seedu.awe.logic.commands.GroupRemoveTagCommand;
 import seedu.awe.logic.commands.HelpCommand;
 import seedu.awe.logic.commands.ListContactsCommand;
 import seedu.awe.logic.commands.ListExpensesCommand;
@@ -39,7 +45,7 @@ public class Messages {
 
 
     public static final String MESSAGE_ADDCONTACTCOMMAND_USAGE = AddContactCommand.COMMAND_WORD
-            + ": Adds a person to the awe book. "
+            + ": Adds a person to the awe book.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -55,7 +61,7 @@ public class Messages {
 
     public static final String MESSAGE_DELETECONTACTCOMMAND_USAGE = DeleteContactCommand.COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Parameters: INDEX (must be a positive integer within range of index numbers seen on screen)\n"
             + "Example: " + DeleteContactCommand.COMMAND_WORD + " 1";
     public static final String MESSAGE_DELETECONTACTCOMMAND_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
@@ -64,7 +70,7 @@ public class Messages {
             + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INDEX (must be a positive integer within range of index numbers seen on screen) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
@@ -80,7 +86,7 @@ public class Messages {
 
 
     public static final String MESSAGE_FINDCONTACTSCOMMAND_USAGE = FindContactsCommand.COMMAND_WORD
-            + ": Finds all persons whose names contain any of "
+            + ": Finds all persons whose names contain any of"
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + FindContactsCommand.COMMAND_WORD + " alice bob charlie";
@@ -95,14 +101,25 @@ public class Messages {
             "Group not created. Be sure to use the exact names of group members\n";
     public static final String MESSAGE_CREATEGROUPCOMMAND_DUPLICATE_GROUP = "This group already exists\n";
     public static final String MESSAGE_CREATEGROUPCOMMAND_USAGE =
-            "creategroup gn/GROUPNAME n/NAME1 n/[OPTIONAL NAME2]...\n";
-    public static final String MESSAGE_CREATEGROUPCOMMAND_EMPTY_GROUP = "Group requires at least 1 member.\n";
+            ": Creates a group containing the specified members.\n"
+                    + "Parameters: "
+                    + PREFIX_GROUP_NAME + "GROUPNAME "
+                    + PREFIX_NAME + "NAME "
+                    + "[" + PREFIX_NAME + "OPTIONAL_NAMES]...\n"
+                    + "Example: "
+                    + CreateGroupCommand.COMMAND_WORD
+                    + " "
+                    + PREFIX_GROUP_NAME
+                    + "Bali "
+                    + PREFIX_NAME
+                    + "David Li\n";
+    public static final String MESSAGE_CREATEGROUPCOMMAND_EMPTY_GROUP = "Command requires at least 1 member.\n";
     public static final String MESSAGE_CREATEGROUPCOMMAND_INVALID_NAMES =
             "None of the names are in your contact book.\n";
 
 
     public static final String MESSAGE_DELETEGROUPCOMMAND_USAGE = DeleteGroupCommand.COMMAND_WORD
-            + ": deletes a group from the awe book. "
+            + ": Deletes a group from the awe book. "
             + "Parameters: "
             + PREFIX_GROUP_NAME + "GROUP_NAME\n"
             + "Example: " + DeleteGroupCommand.COMMAND_WORD + " "
@@ -124,14 +141,35 @@ public class Messages {
             "Contact(s) not added. Be sure to use the exact names of group members\n";
     public static final String MESSAGE_GROUPADDCONTACTCOMMAND_DUPLICATE_PERSON = "%1$s is already in the group\n";
     public static final String MESSAGE_GROUPADDCONTACTCOMMAND_USAGE =
-            "groupaddcontact gn/[GROUPNAME] n/[NAME1] n/[OPTIONAL NAME2]...\n";
-
+            ": Adds the specified contacts to a group\n"
+                    + "Parameters: "
+                    + PREFIX_GROUP_NAME + "GROUPNAME "
+                    + PREFIX_NAME + "NAME "
+                    + "[" + PREFIX_NAME + "OPTIONAL_NAMES]...\n"
+                    + "Example: "
+                    + GroupAddContactCommand.COMMAND_WORD
+                    + " "
+                    + PREFIX_GROUP_NAME
+                    + "Bali "
+                    + PREFIX_NAME
+                    + "David Li\n";
 
     public static final String MESSAGE_GROUPREMOVECONTACTCOMMAND_SUCCESS = "Member(s) removed from group\n";
     public static final String MESSAGE_GROUPREMOVECONTACTCOMMAND_NONEXISTENT_PERSON =
             "Contact(s) not removed from group.\n Be sure to use the exact names of group members\n";
     public static final String MESSAGE_GROUPREMOVECONTACTCOMMAND_USAGE =
-            "groupremovecontact gn/[GROUPNAME] n/[NAME1] n/[OPTIONAL NAME2]...\n";
+            ": Removes the specified contacts from a group\n"
+                    + "Parameters: "
+                    + PREFIX_GROUP_NAME + "GROUPNAME "
+                    + PREFIX_NAME + "NAME "
+                    + "[" + PREFIX_NAME + "OPTIONAL_NAMES]...\n"
+                    + "Example: "
+                    + GroupRemoveContactCommand.COMMAND_WORD
+                    + " "
+                    + PREFIX_GROUP_NAME
+                    + "Bali "
+                    + PREFIX_NAME
+                    + "David Li\n";
     public static final String MESSAGE_GROUPREMOVECONTACTCOMMAND_GROUP_DELETED =
             "Group %1$s deleted as it contains 0 members\n";
 
@@ -139,16 +177,38 @@ public class Messages {
     public static final String MESSAGE_GROUPADDTAGCOMMAND_SUCCESS = "New tag(s) added to group\n";
     public static final String MESSAGE_GROUPADDTAGCOMMAND_DUPLICATE_TAG = "%1$s is already in the group\n";
     public static final String MESSAGE_GROUPADDTAGCOMMAND_USAGE =
-            "groupaddtag gn/[GROUPNAME] t/[TAG1] t/[OPTIONAL TAG2]...\n";
+            ": Adds the specified tags to a group\n"
+                    + "Parameters: "
+                    + PREFIX_GROUP_NAME + "GROUPNAME "
+                    + PREFIX_TAG + "TAG "
+                    + "[" + PREFIX_TAG + "OPTIONAL_TAGS]...\n"
+                    + "Example: "
+                    + GroupAddTagCommand.COMMAND_WORD
+                    + " "
+                    + PREFIX_GROUP_NAME
+                    + "Bali "
+                    + PREFIX_TAG
+                    + "friends\n";
 
 
     public static final String MESSAGE_GROUPREMOVETAGCOMMAND_SUCCESS = "Tag(s) removed from group\n";
     public static final String MESSAGE_GROUPREMOVETAGCOMMAND_ERROR =
             "Tag(s) not removed from group. Make sure to use exact tag names.\n";
     public static final String MESSAGE_GROUPREMOVETAGCOMMAND_NONEXISTENT_TAG =
-            "The tag \"%1$s\" is not found in the group.\n";
+            "Tag(s) not removed from group.\n Be sure to use the exact tag names.\n";
     public static final String MESSAGE_GROUPREMOVETAGCOMMAND_USAGE =
-            "groupaddtag gn/[GROUPNAME] n/[TAG1] n/[OPTIONAL TAG2]...\n";
+            ": Removes the specified tags from a group\n"
+                    + "Parameters: "
+                    + PREFIX_GROUP_NAME + "GROUPNAME "
+                    + PREFIX_TAG + "TAG "
+                    + "[" + PREFIX_TAG + "OPTIONAL_TAGS]...\n"
+                    + "Example: "
+                    + GroupRemoveTagCommand.COMMAND_WORD
+                    + " "
+                    + PREFIX_GROUP_NAME
+                    + "Bali "
+                    + PREFIX_TAG
+                    + "friends\n";
 
 
     public static final String MESSAGE_GROUPEDITNAMECOMMAND_SUCCESS = "Group name changed to %1$s\n";
@@ -156,7 +216,17 @@ public class Messages {
     public static final String MESSAGE_GROUPEDITNAMECOMMAND_EXISTING_GROUP =
             "Group name %1$s already exists in AWE. Please use a different name.";
     public static final String MESSAGE_GROUPEDITNAMECOMMAND_USAGE =
-            "groupeditname gn/[OLDGROUPNAME] gn/[NEWGROUPNAME]\n";
+            ": Edits the group name of a specified group\n"
+                    + "Parameters: "
+                    + PREFIX_GROUP_NAME + "OLDGROUPNAME "
+                    + PREFIX_GROUP_NAME + "NEWGROUPNAME\n"
+                    + "Example: "
+                    + GroupEditNameCommand.COMMAND_WORD
+                    + " "
+                    + PREFIX_GROUP_NAME
+                    + "Bali "
+                    + PREFIX_GROUP_NAME
+                    + "Thailand\n";
     public static final String MESSAGE_GROUPEDITNAMECOMMAND_SAME_NAME =
             "New group name must be different from the old group name.";
 
@@ -189,7 +259,7 @@ public class Messages {
     public static final String MESSAGE_ADDEXPENSECOMMAND_ALL_MEMBERS_EXCLUDED =
             "You can't exclude every member of the group!";
     public static final String MESSAGE_ADDEXPENSECOMMAND_COST_ZERO_OR_LESS =
-            "The cost of this expense is zero or less!";
+            "The cost of this expense is less than zero!";
     public static final String MESSAGE_ADDEXPENSECOMMAND_CANNOT_ADD_EXCLUDED_MEMBER =
             "You tried to add an expense for an excluded member!";
     public static final String MESSAGE_ADDEXPENSECOMMAND_GROUP_DOES_NOT_EXIST =
@@ -202,7 +272,7 @@ public class Messages {
 
     public static final String MESSAGE_DELETEEXPENSECOMMAND_USAGE = DeleteExpenseCommand.COMMAND_WORD
             + ": Deletes the expense identified by the index number used in the displayed expense list.\n"
-            + "Parameters: INDEX (must be a positive integer) within range of index numbers seen on screen.\n"
+            + "Parameters: INDEX (must be a positive integer within range of index numbers seen on screen)\n"
             + "Example: " + DeleteExpenseCommand.COMMAND_WORD + " 1";
     public static final String MESSAGE_DELETEEXPENSECOMMAND_SUCCESS = "Expense %s successfully deleted!";
     public static final String MESSAGE_DELETEEXPENSECOMMAND_CANNOT_BE_DELETED =
@@ -237,9 +307,9 @@ public class Messages {
 
     //messages for calculatepayment related commands
     public static final String MESSAGE_CALCULATEPAYMENTSCOMMAND_SUCCESS =
-            "Payments to be made between group members are listed.";
+            "Payments to be made are listed.";
     public static final String MESSAGE_CALCULATEPAYMENTSCOMMAND_USAGE = CalculatePaymentsCommand.COMMAND_WORD
-            + ": Calculates the payments to be made between group members to settle debts.\n"
+            + ": Calculates the payments to be made to settle debts.\n"
             + "Parameters: "
             + PREFIX_GROUP_NAME + "GROUP_NAME\n"
             + "Example: " + CalculatePaymentsCommand.COMMAND_WORD + " "

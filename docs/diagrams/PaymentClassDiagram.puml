@@ -5,7 +5,10 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Payment <<Rectangle>>{
+    Class Payment
+}
 
+Package Person <<Rectangle>>{
 }
 
 Payment *--> "payee" Person

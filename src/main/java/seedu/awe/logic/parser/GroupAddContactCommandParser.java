@@ -56,6 +56,7 @@ public class GroupAddContactCommandParser implements Parser<GroupAddContactComma
         }
 
         GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).get());
+
         if (!ParserUtil.findExistingGroupName(groupName, allGroups)) {
             throw new ParseException(String.format(MESSAGE_NONEXISTENT_GROUP, groupName));
         }
@@ -77,17 +78,10 @@ public class GroupAddContactCommandParser implements Parser<GroupAddContactComma
      * @return ArrayList of Person objects representing members to be added to the group
      */
     public ArrayList<Person> findNewMembers(List<Name> newMemberNames) throws ParseException {
-        try {
-            for (Name name : newMemberNames) {
-                addMemberIfExist(name);
-            }
-            if (!newMemberNames.isEmpty() && newMembersToAdd.isEmpty()) {
-                throw new ParseException(MESSAGE_GROUPADDCONTACTCOMMAND_NONEXISTENT_PERSON);
-            }
-            return newMembersToAdd;
-        } catch (IndexOutOfBoundsException e) {
-            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
+        for (Name name : newMemberNames) {
+            addMemberIfExist(name);
         }
+        return newMembersToAdd;
     }
 
     /**

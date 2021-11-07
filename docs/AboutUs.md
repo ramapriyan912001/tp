@@ -16,7 +16,7 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 
 [LinkedIn](https://www.linkedin.com/in/chrus-chong/)
 [GitHub](https://github.com/chrus-chong)
-[Portfolio](team/chruschong.md)
+[Portfolio](team/chrus-chong.md)
 
 * Role: Project Advisor
 
@@ -37,7 +37,7 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 
 [LinkedIn](https://www.linkedin.com/in/ramapriyansrivatsanpd/)
 [Github](https://github.com/ramapriyan912001)
-[Portfolio](team/ramapriyansrivatsanpurisaidevarajan.md)
+[Portfolio](team/ramapriyan912001.md)
 
 * Role: Team Lead
 * Responsibilities: Backend Engineering
@@ -48,7 +48,7 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 
 [LinkedIn](https://www.linkedin.com/in/ekhn/)
 [Github](http://github.com/kheekheekhee)
-[Portfolio](team/nicholasee.md)
+[Portfolio](team/kheekheekhee.md)
 
 * Role: Developer
 * Responsibilities: Frontend Engineering
@@ -58,7 +58,7 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 <img src="images/jingwencloud.png" width="200px">
 
 [Github](http://github.com/Jingwencloud)
-[Portfolio](team/ongjingwen.md)
+[Portfolio](team/jingwencloud.md)
 
 * Role: Developer
 

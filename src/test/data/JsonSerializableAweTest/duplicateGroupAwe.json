@@ -10,7 +10,8 @@
       "members": [
         {
           "name": "Alice Pauline",
-          "phone": "94351253"
+          "phone": "94351253",
+          "tagged": [ "friends" ]
         }
       ]
     }, {
@@ -18,7 +19,8 @@
       "members": [
         {
           "name": "Alice Pauline",
-          "phone": "94351253"
+          "phone": "94351253",
+          "tagged": [ "friends" ]
         }
       ]
     }

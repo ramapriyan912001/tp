@@ -9,7 +9,9 @@ import static seedu.awe.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be 50 characters or lesser and be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Tag names should be 50 characters or lesser "
+            + "and be alphanumeric without spaces."
+            + "Tag names cannot be blank";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public static final int MAX_LENGTH = 50;

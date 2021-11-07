@@ -25,7 +25,7 @@ public class ListExpensesCommand extends Command {
     private final GroupName groupName;
 
     /**
-     * A public constructor to initialise the group name
+     * A public constructor to initialize the group name
      * to the given one.
      *
      * @param groupName The name of the group.
@@ -51,6 +51,19 @@ public class ListExpensesCommand extends Command {
         } catch (GroupNotFoundException e) {
             throw new CommandException(MESSAGE_LISTEXPENSESCOMMAND_GROUP_NOT_FOUND);
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof ListExpensesCommand)) { // instanceof handles nulls
+            return false;
+        }
+
+        return this.groupName.equals(((ListExpensesCommand) other).groupName); // state check
     }
 }
 

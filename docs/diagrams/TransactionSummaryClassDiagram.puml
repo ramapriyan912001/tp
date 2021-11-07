@@ -1,0 +1,17 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package "Transaction Summary" <<Rectangle>>{
+    Class TransactionSummary
+}
+
+Package Person <<Rectangle>>{
+}
+
+TransactionSummary *-->  "1" Person
+TransactionSummary *--> "1" Cost
+
+@enduml

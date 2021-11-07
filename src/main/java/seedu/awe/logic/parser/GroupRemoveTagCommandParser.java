@@ -5,7 +5,6 @@ import static seedu.awe.commons.core.Messages.MESSAGE_NONEXISTENT_GROUP;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.awe.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Objects;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
@@ -48,17 +47,13 @@ public class GroupRemoveTagCommandParser implements Parser<GroupRemoveTagCommand
         }
 
         GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).get());
+
         if (!ParserUtil.findExistingGroupName(groupName, allGroups)) {
             throw new ParseException(String.format(MESSAGE_NONEXISTENT_GROUP, groupName));
         }
 
         Set<Tag> tagsToBeRemoved = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        boolean isValidCommand = true;
-        if (Objects.isNull(tagsToBeRemoved)) {
-            isValidCommand = false;
-        }
-
-        return new GroupRemoveTagCommand(groupName, tagsToBeRemoved, isValidCommand);
+        return new GroupRemoveTagCommand(groupName, tagsToBeRemoved);
     }
 }

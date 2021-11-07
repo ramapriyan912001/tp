@@ -18,7 +18,7 @@ import seedu.awe.model.person.Person;
  * An Immutable Awe that is serializable to JSON format.
  */
 @JsonRootName(value = "addressbook")
-class JsonSerializableAddressBook {
+class JsonSerializableAwe {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_GROUP = "Groups list contains duplicate group(s).";
@@ -28,11 +28,11 @@ class JsonSerializableAddressBook {
     private final List<JsonAdaptedGroup> groups = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableAwe} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
-                                       @JsonProperty("groups") List<JsonAdaptedGroup> groups) {
+    public JsonSerializableAwe(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
+                               @JsonProperty("groups") List<JsonAdaptedGroup> groups) {
         this.persons.addAll(persons);
         this.groups.addAll(groups);
     }
@@ -40,9 +40,9 @@ class JsonSerializableAddressBook {
     /**
      * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableAwe}.
      */
-    public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
+    public JsonSerializableAwe(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
         groups.addAll(source.getGroupList().stream().map(JsonAdaptedGroup::new).collect(Collectors.toList()));
     }
@@ -55,7 +55,7 @@ class JsonSerializableAddressBook {
      */
     public boolean areValidMembers(Group group, Awe awe) {
         for (Person person : group.getMembers()) {
-            if (!awe.hasPerson(person)) {
+            if (!awe.hasExactPerson(person)) {
                 return false;
             }
         } return true;

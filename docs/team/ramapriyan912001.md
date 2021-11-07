@@ -7,7 +7,7 @@ title: Ramapriyan Srivatsan Purisai Devarajan's Project Portfolio Page
 
 Around the World in $80 is a desktop application that allows group travellers to split bills between different contacts. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
-Given below are my contributions to the project. [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=ramapriyan&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=false&zFR=false)
+My contributions to the project can be viewed [here](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=ramapriyan&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=false&zFR=false).
 
 ### Features
 * **New Feature**: Constructed the `deletegroup` feature
@@ -33,25 +33,53 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
     * Justification: This feature is crucial as the users should be able to efficiently settle their debts in a manner that leaves no room for disputes, and error by manual computation.
     * Highlights: This implementation added in a new command `calculatepayments` to provide users with a number of suggested transactions to settle their debts from the trip.
     * Contribution: Built the entire framework for the feature including command and parser classes.
+  
+* **Miscellaneous**:
+    * Introduced constraints to `editcontact` and `deletecontact` commands wherein user must be viewing a contacts page if they wish to execute these commands.
+    * Introduced constraints to the `deleteexpense` command wherein user must be viewing an expenses page if they wish to execute this command.
+    * Implemented classes for UI display of payments upon execution of `calculatepayments` command.
+
+
+### Testing
+* Wrote test cases for the following classes
+  * `DeleteGroupCommand`
+  * `DeleteGroupCommandParser`
+  * `CalculatePaymentsCommand`
+  * `CalculatePaymentsCommandParser`
+  * `Payment`
+  * `PaymentList`
+  * `Awe`
+  * `ModelManager`
+  * `UserPrefs`
+  
+### Bug Fixes
+* **severity.HIGH** Does not take note of the difference in sign of surplus between those who are owed and those who owe. [\#274](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/276)
+  * Bug description: The command `calculatepayments` does not take into account people who owe money, and only takes into account those who are owed money.
+  * Pull request: [\#158](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/274)
+
+* **severity.HIGH** Storage of IndividualAmount class failed [\#224](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/213)
+  * Bug description: The `JsonAdaptedIndividualAmount` took in a Person parameter rather than a JsonAdaptedPerson parameter.
+  * Pull request: [\#207](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/205)
 
 ### Others
 * **Project management**
-    * Managed releases: -
+  * Managed releases: [v1.3](https://github.com/AY2122S1-CS2103T-F13-1/tp/releases/tag/v1.3)
     
 * **Miscellaneous**
     * Created storage classes for expenses and groups.
-    * Created UI classes for displaying of payments to be made via the `calculate payments` command.
+    * Created UI classes for displaying of payments to be made via the `calculatepayments` command.
 
 * **Documentation**:
     * User Guide:
         * Documented `delete group`, `create group`, `delete expense` and `calculatepayments` features.
         * Added details of `Quick Start`.
-        * Added details of `delete group`, `create group`, `delete expense`, `calculatepayments` and `help` to Command Summary table.
+        * Added details of `deletegroup`, `creategroup`, `deleteexpense`, `calculatepayments` and `help` commands to Command Summary table.
+        * Added significant details of `About The Document` section.
     * Developer Guide:
-        * Added details for `creategroup`, `deletegroup`, `deleteexpense`, and `calculatepayments` features, including sequence and activity diagrams.
-        * Added use cases for `delete group`, `delete expense`, `calculatepayments`, and `help`.
+        * Added implementation details for `creategroup`, `deletegroup`, `deleteexpense`, and `calculatepayments` features, including sequence and activity diagrams.
+        * Added use cases for deleting a travel group, deleting an expense, calculating payments, and help.
     * Created labels for issue-tracking and documentation.
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#113](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/113), [\#121](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/121), [\#166](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/166)
-    * Worked together with [@chrus-chong](https://github.com/chrus-chong) on group features.
+    * PRs reviewed (with non-trivial review comments): [\#113](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/113), [\#121](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/121), [\#166](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/166), [\#380](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/380)
+    * Collaborated with [@chrus-chong](https://github.com/chrus-chong) on `creategroup` features.
