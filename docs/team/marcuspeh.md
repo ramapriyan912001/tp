@@ -5,7 +5,6 @@ title: Marcus Peh's Project Portfolio Page
 
 ### Project: Around the World in $80
 
-
 Around the World in $80 is a desktop application that splits bills between different contacts. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project. [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=marcuspeh&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17)
@@ -43,11 +42,7 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
 * **severity.HIGH** Edit person does not update groups and expenses. [\#158](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/153)
    * What happen: The command `addPerson` does not replace the instance of the old person from groups and expenses.
    * Pull request: [\#158](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/158)
-   
-* **severity.HIGH** Creating an empty group without person will crash the program [\#224](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/224)
-    * What happen: The command `creategroup` throws a `EmptyGroupsException` and is not handled.
-    * Pull request: [\#207](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/207)
-    
+      
 * **severity.HIGH** Running AWE without data.json will crash the program [\#223](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/223)
     * What happen: Running AWE without data.json will cause a `RuntimeException`. 
     * Pull request: [\#186](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/186)
@@ -59,14 +54,6 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
 * **severity.MED** Json files loads even when phone number of contacts is partially changed ie not all phone number of a contact is changed.
     * What happen: Checks when file is loading is only done based on the name of the contact and not the entire contact info.
     * Pull request: [\#425](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/425)
-
-* **severity.MED** Error message for description when adding expense is wrong. [\#372](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/372)
-    * What happen: Error message was copy and pasted from `Name` without changing.
-    * Pull request: [\#382](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/382/files#diff-91ad22c2685d5cac2700257474d618c27554371ea585eaf29d2f17d7a66791a0)
-
-* **severity.VERY_LOW** Groups displayed in Person card has extra `,` [\#169](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/169)
-    * What happen: Displayed list of groups in Person card will have an extra `,` at the back.
-    * Pull request: [\#188](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/188)
 
 ### Documentation:
 * **User Guide**:
@@ -84,16 +71,12 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
     * Added use cases for `view groups`, `find person` and `view expenses`.
     
 ### Testing:
-* Wrote test cases for the following classes:
+* Wrote test cases for the following:
     * `Tag`
-    * `TransactionSummary`
-    * `TransactionSummaryList`
-    * `FindGroupsCommand`
-    * `FindGroupsCommandParser`
-    * `ListGroupsCommand`
-    * `ListGroupsCommandParser`
-    * `GroupEditNameCommand`
-    * `GroupEditNameCommandParser`
+    * `TransactionSummary` & `TransactionSummaryList`
+    * `FindGroupsCommand` & `FindGroupsCommandParser`
+    * `ListGroupsCommand` & `ListGroupsCommandParser`
+    * `GroupEditNameCommand` & `GroupEditNameCommandParser`
     
 ### Others
 * **Project management**
