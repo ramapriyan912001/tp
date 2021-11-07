@@ -1029,7 +1029,7 @@ This means that the user is constrained to only being permitted to delete expens
 The following activity diagram shows what happens when a user executes a `deleteexpense` command.
 
 <p align="center">
-  <img src="images/DeleteExpenseActivityDiagram.png" alt="Delete Expense Activity Diagram" width="600" />
+  <img src="images/DeleteExpenseActivityDiagram.png" alt="Delete Expense Activity Diagram" width="450" />
   <br>
     Fig 36. Delete Expense Activity Diagram
 </p>
@@ -1077,6 +1077,11 @@ The following sequence operation shows how the `deleteexpense` operation works.
   <br>
     Fig 38. Delete Expense Reference Sequence Diagram
 </p>
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
 
 #### Design considerations
 
@@ -1379,13 +1384,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user who has lots of trips to keep track of    | view groups                                      | easily see my groups in one centralised location                       |
 | `* * *`  | user who wants to find groups with a certain string of characters in their name | find groups by a regex                                 | search for groups easily         |
 | `* * *`  | user who has lots of groups to keep track of    | tag a group                                   | keep track of groups by certain characteristics/tags                          |
-| `* * *`  | user with groups that no longer exist           | delete a group                                 | keep my groups relevant and current                                   |
 
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
 </p>
 <div style="clear: both; page-break-after: always;"></div>
 
+| `* * *`  | user with groups that no longer exist           | delete a group                                 | keep my groups relevant and current                                   |
 | `* * *`  | user with flexible travel plans         | edit a group                                 | keep my groups accurate and current                                   |
 | `* * *`  | user that has paid for a shared experience        | easily check how much I have paid up front         | ensure I have liquidity for emergencies and or other unforeseen expenses |
 | `* * *`  | user who has paid for others                      | easily check how much I am owed by friends         | recoup the money I have paid on their behalf                             |
@@ -1394,14 +1399,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | busy user who does not want to remember phone numbers | easily save all my friends' numbers            | conveniently proceed to pay my friend                                    |
 | `* * *`  | user with flexible travel plans                   | edit the details of a trip/group (members, group name, tags)         | modify the records quickly and easily                                    |
 | `* * *`  | beginner user                                     | run the app easily with a click of a button        | avoid wasting time trying to figure out how to get the app to work       |
-| `* * *`  | inexperienced user in the app who types fast      | type in the commands for the app                   | do more things in the app with the same amount of time compared to using a mouse to click |
-| `* * *`  | user who wants an easy workflow                   | easily toggle between contacts and groups page with a command or a click of a button | make my workflow on the app smoother   |
 
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
 </p>
 <div style="clear: both; page-break-after: always;"></div>
 
+| `* * *`  | inexperienced user in the app who types fast      | type in the commands for the app                   | do more things in the app with the same amount of time compared to using a mouse to click |
+| `* * *`  | user who wants an easy workflow                   | easily toggle between contacts and groups page with a command or a click of a button | make my workflow on the app smoother   |
 | `* *`    | user who has to recoup the money                  | divide up the expenses suitably amongst my friends | know how much to recoup from each person                                 |
 | `* *`    | user who worries about individual expenses        | check the breakdown of my personal expenditure     | keep track of how much money I have spent                                |
 | `* *`    | user who likes to differentiate work from leisure | use this app to separate the different types of contacts I have | I won’t mix them up                                         |
@@ -1409,6 +1414,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | potential user exploring the app                  | see the app containing sample data                 | see what the app generally looks like when it is used                    |
 | `* *`    | potential user testing the app                    | run the app on different platforms (windows, linux and os-x) | not have to specifically run a certain platform                |
 | `* `     | user whose friends frequently change numbers      | use this app to easily edit their numbers or save multiple numbers with notes | easily remember which number to use           |
+
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="clear: both; page-break-after: always;"></div>
+
 | `*`      | beginner user that is tech-savvy                  | view the documentation                             | figure out how to use the app                                            |
 | `*`      | beginner user                                     | easily distinguish functions in the app            | use it without the app being too daunting                                |
 | `*`      | expert user                                       | refer to previous trips and the expenditure        | plan future trips efficiently                                            |
@@ -2205,11 +2216,6 @@ testers are expected to do more *exploratory* testing.
 
 4. Test case: `groupaddtag gn/London t/Friends`
    Expected: Friends tag added to group. Status message indicates that the new tag has been added to group.
-
-<p align="center">
-    <a href="#tableofcontents">Click here to return to table of contents</a>
-</p>
-<div style="page-break-after: always;"></div>
 
 ### Removing a tag from group
 

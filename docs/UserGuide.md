@@ -529,6 +529,11 @@ Examples:
 * `deleteexpense 1`
 * `deleteexpense 2`
 
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="clear: both; page-break-after: always;"></div>
+
 #### 3.3.4. Locating a shared expense by description: `findexpenses`
 
 Finds expenses within the specified group which descriptions contain any of the given keywords.
