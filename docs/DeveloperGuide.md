@@ -404,7 +404,7 @@ The add contact mechanism is facilitated by defining a Person model and adding a
 AWE. The Person model contains a `Name` field containing the name of the contact, a `Phone` field containing the
 number of the contact, and optional `Tags` to attach to the contact.
 
-The following activity diagram shows what happens when a user executes an `addContact` command.
+The following activity diagram shows what happens when a user executes an `addcontact` command.
 
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
@@ -417,7 +417,13 @@ The following activity diagram shows what happens when a user executes an `addCo
     Fig 17. Add Contact Activity Diagram
 </p>
 
-Given below is an example usage scenario and how the `creategroup` mechanism behaves at each step.
+<p align="center">
+    <a href="#tableofcontents">Click here to return to table of contents</a>
+</p>
+<div style="page-break-after: always;"></div>
+
+Given below is an example usage scenario and how the `addcontact` mechanism behaves at each step.
+
 
 Step 1. A valid `addcontact` command is given as user input. This prompts the `LogicManager` to run its execute()
 method.
