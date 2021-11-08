@@ -164,7 +164,7 @@ contact/expense to delete. On the other hand, [Group-related commands](#52-group
 name as an argument. For the reasons behind this implementation, refer to our [FAQ](#4-faq)
 
 * Do not add any additional special characters when entering a command. For example, if you enter
-`deletegroup gn/Bali p/12345678` for a delete group command that is only meant to contain the special character `gn/`,
+`deletegroup gn/Bali p/12345678` for a `deletegroup` command that is only meant to contain the special character `gn/`, 
 AWE will take `Bali p/12345678` as the group name and raise an error informing the user of an invalid group name.
 
 <p align="center">
