@@ -217,15 +217,15 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to add a contact).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("deletecontact 1")` API call.
 
 <p align="center">
   <img src="images/DeleteSequenceDiagram.png" alt="Delete Sequence Diagram" width="750" />
   <br>
-    Fig 8. Delete Sequence Diagram
+    Fig 8. Delete Contact Sequence Diagram
 </p>
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteContactCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 <p align="center">
