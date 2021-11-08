@@ -719,9 +719,9 @@ Action | Format, Examples
 **Create Group** | `creategroup gn/GROUP_NAME n/NAME1 [n/NAME2]... [t/TAG]...` <br> e.g., `creategroup gn/Bali n/Jacob Tan n/Max Chia n/Julianne Tay t/friends`
 **Delete Group** | `deletegroup gn/GROUP_NAME` <br> e.g., `deletegroup gn/Vienna`
 **Add Contact to Group** | `groupaddcontact gn/GROUP_NAME n/NAME1 [n/MORE_NAMES]...` <br> e.g., `groupaddcontact gn/Bali n/Jacob Tan`
-**Add Tags to Group** | `groupaddtag gn/GROUP_NAME n/TAG1 [n/MORE_TAGS]...` <br> e.g., `groupaddtag gn/Bali n/friends`
+**Add Tags to Group** | `groupaddtag gn/GROUP_NAME t/TAG1 [t/MORE_TAGS]...` <br> e.g., `groupaddtag gn/Bali n/friends`
 **Edit Group Name** | `groupeditname gn/OLD_GROUP_NAME gn/NEW_GROUP_NAME` <br> e.g., `groupeditname gn/Bali gn/Hanoi`
-**Remove Tags from Group** | `groupremovetag gn/GROUP_NAME n/TAG1 [n/MORE_TAGS]...` <br> e.g., `groupremovetag gn/Bali n/friends`
+**Remove Tags from Group** | `groupremovetag gn/GROUP_NAME t/TAG1 [t/MORE_TAGS]...` <br> e.g., `groupremovetag gn/Bali n/friends`
 **Remove Contact from Group** | `groupremovecontact gn/GROUP_NAME n/NAME1 [n/MORE_NAMES]...` <br> e.g., `groupremovecontact gn/Bali n/Jacob Tan`
 **Find Groups** | `findgroups KEYWORD [MORE_KEYWORDS]`<br> e.g., `findgroups James Jake`
 
