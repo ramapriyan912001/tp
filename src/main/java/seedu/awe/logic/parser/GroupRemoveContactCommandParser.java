@@ -31,9 +31,9 @@ public class GroupRemoveContactCommandParser implements Parser<GroupRemoveContac
      * @param model Model object passed into constructor to provide list of contacts.
      */
     public GroupRemoveContactCommandParser(Model model) {
-        ReadOnlyAwe addressBook = model.getAwe();
-        this.allMembers = addressBook.getPersonList();
-        this.allGroups = addressBook.getGroupList();
+        ReadOnlyAwe awe = model.getAwe();
+        this.allMembers = awe.getPersonList();
+        this.allGroups = awe.getGroupList();
         this.membersToBeRemoved = new ArrayList<>();
     }
 

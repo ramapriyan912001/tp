@@ -47,13 +47,13 @@ public class ContactCard extends UiPart<Region> {
      * Introduce addressbook here so that personCard can display group membership of each person without adding Group
      * as an attribute of Person class. Doing so prevents circular dependencies.
      */
-    public ContactCard(Person person, int displayedIndex, ReadOnlyAwe addressBook) {
+    public ContactCard(Person person, int displayedIndex, ReadOnlyAwe awe) {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        groups.setText(person.getGroupsName(addressBook.getGroupList()));
+        groups.setText(person.getGroupsName(awe.getGroupList()));
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

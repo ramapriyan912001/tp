@@ -92,12 +92,12 @@ public class JsonAweStorageTest {
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code awe} at the specified {@code filePath}.
      */
-    private void saveAwe(ReadOnlyAwe addressBook, String filePath) {
+    private void saveAwe(ReadOnlyAwe awe, String filePath) {
         try {
             new JsonAweStorage(Paths.get(filePath))
-                    .saveAwe(addressBook, addToTestDataPathIfNotNull(filePath));
+                    .saveAwe(awe, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }

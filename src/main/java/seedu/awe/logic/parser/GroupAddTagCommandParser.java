@@ -25,8 +25,8 @@ public class GroupAddTagCommandParser implements Parser<GroupAddTagCommand> {
      * @param model Model object passed into constructor to provide list of groups.
      */
     public GroupAddTagCommandParser(Model model) {
-        ReadOnlyAwe addressBook = model.getAwe();
-        this.allGroups = addressBook.getGroupList();
+        ReadOnlyAwe awe = model.getAwe();
+        this.allGroups = awe.getGroupList();
     }
     /**
      * Returns GroupAddTagCommand based on user input.

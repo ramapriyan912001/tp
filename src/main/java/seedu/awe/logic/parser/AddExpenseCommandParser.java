@@ -38,8 +38,8 @@ public class AddExpenseCommandParser implements Parser<AddExpenseCommand> {
      * @param model Model object passed into constructor to provide list of contacts.
      */
     public AddExpenseCommandParser(Model model) {
-        ReadOnlyAwe addressBook = model.getAwe();
-        allMembers = addressBook.getPersonList();
+        ReadOnlyAwe awe = model.getAwe();
+        allMembers = awe.getPersonList();
     }
 
     /**
