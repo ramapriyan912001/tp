@@ -5,11 +5,11 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
+Interface ReadOnlyAwe <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
+Class Awe
+Class ReadOnlyAwe
 Class Model
 Class ModelManager
 Class UserPrefs
@@ -32,19 +32,19 @@ note "XYZ = Groups, Person\nABC = Expense, Transaction Summary, Payments \n\nImp
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+Awe .up.|> ReadOnlyAwe
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .left.> ReadOnlyAwe
+ModelManager -left-> "1" Awe
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniqueXYZList
+Awe *--> "1" UniqueXYZList
 UniqueXYZList -right-> "~* all" XYZ
 
-AddressBook *--> "1" ABCList
+Awe *--> "1" ABCList
 ABCList --> "~* all" ABC
 
 ModelManager -->"~* filtered" XYZ

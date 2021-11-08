@@ -40,7 +40,7 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given awe and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAwe addressBook, ReadOnlyUserPrefs userPrefs) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
@@ -84,30 +84,30 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getAweFilePath() {
+        return userPrefs.getAweFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
+    public void setAweFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+        userPrefs.setAweFilePath(addressBookFilePath);
     }
 
     //=========== Awe ================================================================================
 
     @Override
-    public void setAwe(ReadOnlyAddressBook awe) {
+    public void setAwe(ReadOnlyAwe awe) {
         this.awe.resetData(awe);
     }
 
     @Override
-    public ReadOnlyAddressBook getAwe() {
+    public ReadOnlyAwe getAwe() {
         return awe;
     }
 
     @Override
-    public Group getActiveGroupFromAddressBook() throws CommandException {
+    public Group getActiveGroupFromAwe() throws CommandException {
         return awe.getGroupFromExpenseList().orElseThrow(() ->
                 new CommandException("Sorry! The operation could not be completed!"));
     }
@@ -152,7 +152,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedAwe}
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
@@ -168,7 +168,7 @@ public class ModelManager implements Model {
     //=========== Groups ================================================================================
 
     /**
-     * Adds group into addressbook.
+     * Adds group into awe.
      * Assumption is that group name is unique.
      *
      * @param group Group object representing members going on a trip.
@@ -266,7 +266,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Group} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedAwe}
      */
     @Override
     public ObservableList<Group> getFilteredGroupList() {

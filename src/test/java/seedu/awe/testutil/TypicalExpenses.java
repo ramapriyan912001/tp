@@ -59,7 +59,7 @@ public class TypicalExpenses {
     /**
      * Returns an {@code Awe} with all the typical expenses.
      */
-    public static Awe getTypicalAddressBook() {
+    public static Awe getTypicalAwe() {
         Awe ab = new Awe();
 
         for (Person person : getTypicalPersons()) {

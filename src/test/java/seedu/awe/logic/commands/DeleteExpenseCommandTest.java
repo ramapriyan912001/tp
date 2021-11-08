@@ -11,7 +11,7 @@ import static seedu.awe.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.awe.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.awe.logic.commands.CommandTestUtil.showExpenseAtIndex;
 import static seedu.awe.testutil.Assert.assertThrows;
-import static seedu.awe.testutil.TypicalExpenses.getTypicalAddressBook;
+import static seedu.awe.testutil.TypicalExpenses.getTypicalAwe;
 import static seedu.awe.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.awe.testutil.TypicalIndexes.INDEX_SECOND;
 
@@ -31,7 +31,7 @@ import seedu.awe.commons.core.index.Index;
 import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.model.Model;
 import seedu.awe.model.ModelManager;
-import seedu.awe.model.ReadOnlyAddressBook;
+import seedu.awe.model.ReadOnlyAwe;
 import seedu.awe.model.ReadOnlyUserPrefs;
 import seedu.awe.model.UserPrefs;
 import seedu.awe.model.expense.Cost;
@@ -48,7 +48,7 @@ import seedu.awe.ui.UiView;
 
 public class DeleteExpenseCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAwe(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() throws Exception {
@@ -98,7 +98,7 @@ public class DeleteExpenseCommandTest {
         Expense expenseToDelete = model.getExpenses().get(INDEX_FIRST.getZeroBased());
         DeleteExpenseCommand deleteExpenseCommand = new DeleteExpenseCommand(INDEX_FIRST);
 
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalAwe(), new UserPrefs());
         expectedModel.setExpenses(expectedModel.getGroupByName(new GroupName("Bali")));
         Group group = expectedModel.getGroupByName(new GroupName("Bali"));
         Group newGroup = group.deleteExpense(expenseToDelete);
@@ -186,12 +186,12 @@ public class DeleteExpenseCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getAweFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setAweFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -201,17 +201,17 @@ public class DeleteExpenseCommandTest {
         }
 
         @Override
-        public void setAwe(ReadOnlyAddressBook newData) {
+        public void setAwe(ReadOnlyAwe newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAwe() {
+        public ReadOnlyAwe getAwe() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public Group getActiveGroupFromAddressBook() throws CommandException {
+        public Group getActiveGroupFromAwe() throws CommandException {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -267,7 +267,7 @@ public class DeleteExpenseCommandTest {
 
         /**
          * Returns an unmodifiable view of the list of {@code Group} backed by the internal list of
-         * {@code versionedAddressBook}
+         * {@code versionedAwe}
          */
         @Override
         public ObservableList<Group> getFilteredGroupList() {
@@ -379,7 +379,7 @@ public class DeleteExpenseCommandTest {
         }
 
         @Override
-        public Group getActiveGroupFromAddressBook() {
+        public Group getActiveGroupFromAwe() {
             return group;
         }
 

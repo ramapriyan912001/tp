@@ -43,7 +43,7 @@ activate Model
 Model --> DeleteExpenseCommand : Expense expense
 deactivate Model
 
-DeleteExpenseCommand -> Model : getActiveGroupFromAddressBook()
+DeleteExpenseCommand -> Model : getActiveGroupFromAwe()
 activate Model
 Model --> DeleteExpenseCommand : Group group
 deactivate Model

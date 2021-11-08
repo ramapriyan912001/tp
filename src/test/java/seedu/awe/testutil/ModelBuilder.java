@@ -76,7 +76,7 @@ public class ModelBuilder {
     /**
      * Sets the {@code Awe} of the {@code Model} that we are building.
      */
-    public ModelBuilder withAddressBook(Awe awe) {
+    public ModelBuilder withAwe(Awe awe) {
         this.awe = awe;
         return this;
     }

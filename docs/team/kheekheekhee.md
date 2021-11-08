@@ -37,21 +37,56 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
 * **Enhancements to Existing Feature**:
   * Changed the app's logo to AWE's logo. [\#255](https://app.codecov.io/gh/AY2122S1-CS2103T-F13-1/tp/compare/255)
   * Updated the UI to display AWE's logo on the main window. [\#256](https://app.codecov.io/gh/AY2122S1-CS2103T-F13-1/tp/compare/256)
+
+### Bug Fixes
+* **severity.HIGH** Ensure that the input for expenses cannot be negative. [\#150](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/150)
+  * What happened: Negative inputs were able to inputted when using `addexpense`.
+  * Pull request: [\#179](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/179)
+
+* **severity.HIGH** Entering a large number for `addexpense` results in the app crashing [\#324](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/324)
+  * What happened: The value of a large expense was being converted into scientific notation and thus could not saved properly.
+  * Pull request: [\#359](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/359)
+
+* **severity.MED** Error message for `addexpense` is wrong [\#310](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/310)
+  * What happened: Entering a group that does not exist shows an error message that the payer is not part of the group rather than indicating that the group does not exist.
+  * Pull request: [\#359](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/359)
   
+* **severity.MED** An expense of zero cost was able to be added through rounding of a number close to zero. [\#393](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/393)
+  * What happened: The cost of the expense was rounded off to zero due to it being too close to zero.
+  * Pull request: [\#413](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/413)
+
+* **severity.LOW** Transaction summary lacked a dollar sign when displayed. [\#329](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/329)
+  * What happened: Displayed transaction summary lacked a dollar sign which made its purpose confusion.
+  * Pull request: [\#359](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/359)
+
+### Testing
+* Wrote all test cases for the following classes
+  * `AddExpenseCommand`
+  * `AddExpenseCommandParser`
+  * `Cost`
+  * `Description`
+  * `Expense`
+  * `ExpenseList`
+  * `IndividualAmount`
+  * `FindExpenseCommandParser`
 
 ### Others
 * **Project management**
-  * Managed releases: -
+  * Managed releases: - [v1.4b](https://github.com/AY2122S1-CS2103T-F13-1/tp/releases/tag/v1.4b)
+  * Participated and added to project planning every week - [1](https://github.com/AY2122S1-CS2103T-F13-1/tp/projects/1)
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `expenses`
+    * Added documentation for the feature `expenses`
+    * Adjusted diagram sizes.
+    * Added figure numbers for all diagrams.
   * Developer Guide:
     * Added use cases for `edit a person`, `add expense` and `delete a person`.
+    * Added implementation, test cases and use cases for `add expense`.
     * Added non-functional requirements.
+    * Updated model diagram.
+    * Added design considerations for `add expense`.
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#1]()
-  * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-  * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-  * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
+  * Reviewed PRs, provided feedback on code and assisted all other teammates in solving bugs via text.
+  * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/kheekheekhee/ped/issues/1), [2](https://github.com/kheekheekhee/ped/issues/2), [3](https://github.com/kheekheekhee/ped/issues/3))

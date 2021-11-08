@@ -7,7 +7,7 @@ import seedu.awe.commons.core.GuiSettings;
 import seedu.awe.logic.commands.CommandResult;
 import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.logic.parser.exceptions.ParseException;
-import seedu.awe.model.ReadOnlyAddressBook;
+import seedu.awe.model.ReadOnlyAwe;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.payment.Payment;
@@ -33,7 +33,7 @@ public interface Logic {
      *
      * @see seedu.awe.model.Model#getAwe()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyAwe getAwe();
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
@@ -53,7 +53,7 @@ public interface Logic {
     /**
      * Returns the user prefs' awe book file path.
      */
-    Path getAddressBookFilePath();
+    Path getAweFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

@@ -51,7 +51,7 @@ public class TypicalPersons {
     /**
      * Returns an {@code Awe} with all the typical persons.
      */
-    public static Awe getTypicalAddressBook() {
+    public static Awe getTypicalAwe() {
         Awe ab = new Awe();
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);

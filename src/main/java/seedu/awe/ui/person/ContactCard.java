@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.awe.model.ReadOnlyAddressBook;
+import seedu.awe.model.ReadOnlyAwe;
 import seedu.awe.model.person.Person;
 import seedu.awe.ui.UiPart;
 
@@ -47,7 +47,7 @@ public class ContactCard extends UiPart<Region> {
      * Introduce addressbook here so that personCard can display group membership of each person without adding Group
      * as an attribute of Person class. Doing so prevents circular dependencies.
      */
-    public ContactCard(Person person, int displayedIndex, ReadOnlyAddressBook addressBook) {
+    public ContactCard(Person person, int displayedIndex, ReadOnlyAwe addressBook) {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");

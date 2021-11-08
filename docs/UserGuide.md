@@ -58,7 +58,7 @@ Term | Explanation
 
 ### 1.2 Format of commands
 If you wish to jump straight into using our features, refer to Section 5 for the summary of commands.
-Here are some pointers to take note of.
+Here are some key pointers to take note of.
 1. Words in `UPPER_CASE` are parameters to be supplied by you.
 2. Words that are enclosed in `[   ]` denote optional parameters that the user can choose to enter or leave out.
 3. You will notice that our commands require you to use characters such as `n/`, `t/`, etc. This allows our programme
@@ -162,6 +162,10 @@ For those who are not as fast, familiarity with the commands over time will allo
 [Expense-related commands](#53-expense-commands) both accept an index as an argument to identify which
 contact/expense to delete. On the other hand, [Group-related commands](#52-groups-commands) accept a unique group
 name as an argument. For the reasons behind this implementation, refer to our [FAQ](#4-faq)
+
+* Do not add any additional special characters when entering a command. For example, if you enter
+`deletegroup gn/Bali p/12345678` for a `deletegroup` command that is only meant to contain the special character `gn/`, 
+AWE will take `Bali p/12345678` as the group name and raise an error informing the user of an invalid group name.
 
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>

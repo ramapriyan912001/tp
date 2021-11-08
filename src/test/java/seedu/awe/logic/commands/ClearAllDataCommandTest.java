@@ -2,7 +2,7 @@ package seedu.awe.logic.commands;
 
 import static seedu.awe.commons.core.Messages.MESSAGE_CLEARALLDATACOMMAND_SUCCESS;
 import static seedu.awe.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.awe.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.awe.testutil.TypicalPersons.getTypicalAwe;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +14,7 @@ import seedu.awe.model.UserPrefs;
 public class ClearAllDataCommandTest {
 
     @Test
-    public void execute_emptyAddressBook_success() {
+    public void execute_emptyAwe_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
@@ -26,9 +26,9 @@ public class ClearAllDataCommandTest {
     }
 
     @Test
-    public void execute_nonEmptyAddressBook_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    public void execute_nonEmptyAwe_success() {
+        Model model = new ModelManager(getTypicalAwe(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalAwe(), new UserPrefs());
         expectedModel.setAwe(new Awe());
 
         CommandResult commandResult = new CommandResult(MESSAGE_CLEARALLDATACOMMAND_SUCCESS,
