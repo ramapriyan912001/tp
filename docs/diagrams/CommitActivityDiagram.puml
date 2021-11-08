@@ -8,7 +8,7 @@ start
 if () then ([command commits Awe])
     :Purge redundant states;
     :Save Awe to
-    addressBookStateList;
+    aweStateList;
 else ([else])
 endif
 stop
