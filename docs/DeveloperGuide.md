@@ -83,7 +83,7 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deletecontact 1`.
 
 <p align="center">
     <img src="images/ArchitectureSequenceDiagram.png" alt="Architecture Sequence Diagram" width="650" />
@@ -127,7 +127,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 </p>
 
 The UI consists of a `MainWindow` that is made up of parts e.g. `CommandBox`, `ResultDisplay`, `ViewPanel`, `NavigationButton` etc. 
-All these, except for `GroupButtonListener` and `PersonButtonListner` in `NavigationButton`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+All these, except for `GroupButtonListener` and `PersonButtonListener` in `NavigationButton`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
@@ -1871,7 +1871,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2b. AWE detects group name that is not in AWE.
+* 2a. AWE detects group name that is not in AWE.
   * 2a1. AWE displays message to remind User to type in name of a group inside the AWE.
     <br>Use case ends.
 
