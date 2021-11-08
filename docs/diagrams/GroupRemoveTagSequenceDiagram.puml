@@ -27,7 +27,7 @@ GroupRemoveTagCommand
 and GroupRemoveTagCommandParser
 end note
 
-group sd get groupRemoveTagCommand
+group ref [get groupRemoveTagCommand]
     create GroupRemoveTagCommand
     AweParser -> GroupRemoveTagCommand
     activate GroupRemoveTagCommand

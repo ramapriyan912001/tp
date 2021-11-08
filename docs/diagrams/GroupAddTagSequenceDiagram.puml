@@ -26,7 +26,7 @@ ref frame except with
 GroupAddTagCommand
 and GroupAddTagCommandParser
 end note
-group sd get groupAddTagCommand
+group ref [get groupAddTagCommand]
 create GroupAddTagCommand
 AweParser -> GroupAddTagCommand
 activate GroupAddTagCommand

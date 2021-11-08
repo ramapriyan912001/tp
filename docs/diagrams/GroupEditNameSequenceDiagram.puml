@@ -26,7 +26,7 @@ ref frame except with
 GroupEditNameCommand
 and GroupEditNameCommandParser
 end note
-group sd get groupEditNameCommand
+group ref [get groupEditNameCommand]
 create GroupEditNameCommand
 AweParser -> GroupEditNameCommand
 activate GroupEditNameCommand

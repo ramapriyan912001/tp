@@ -9,7 +9,7 @@ participant "findExpensesCommand:FindExpensesCommand" as FindExpensesCommand LOG
 participant ":DescriptionContainsKeywordsPredicate" as DescriptionContainsKeywordsPredicate LOGIC_COLOR
 end box
 
-mainframe "sd get findExpensesCommand"
+mainframe sd get findExpensesCommand
 
 create FindExpensesCommandParser
 AweParser -> FindExpensesCommandParser

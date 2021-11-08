@@ -24,7 +24,8 @@ Refer to ref frame for
 details on creation of
 the AddContactCommand object
 end note
-group sd get addContactCommand
+
+group ref [get addContactCommand]
 create AddContactCommand
 AweParser -> AddContactCommand
 activate AddContactCommand

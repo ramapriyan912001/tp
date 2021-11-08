@@ -23,7 +23,7 @@ Refer to ref frame for
 details on creation of
 the CalculatePaymentsCommand object
 end note
-group sd get calculatePaymentsCommand
+group ref [get calculatePaymentsCommand]
 create CalculatePaymentsCommand
 AweParser -> CalculatePaymentsCommand
 activate CalculatePaymentsCommand

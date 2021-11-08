@@ -27,7 +27,7 @@ GroupRemoveContactCommand
 and GroupRemoveContactCommandParser
 end note
 
-group sd get groupRemoveContactCommand
+group ref [get groupRemoveContactCommand]
     create GroupRemoveContactCommand
     AweParser -> GroupRemoveContactCommand
     activate GroupRemoveContactCommand
