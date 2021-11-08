@@ -53,11 +53,11 @@ My contributions to the project can be viewed [here](https://nus-cs2103-ay2122s1
   * `UserPrefs`
   
 ### Bug Fixes
-* **severity.HIGH** Does not take note of the difference in sign of surplus between those who are owed and those who owe. [\#274](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/276)
+* **severity.HIGH** Does not take note of the difference in sign of surplus between those who are owed and those who owe: [\#274](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/276)
   * Bug description: The `calculatepayments` command does not take into account people who owe money, and only takes into account those who are owed money.
   * Pull request: [\#158](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/274)
 
-* **severity.HIGH** Storage of IndividualAmount class failed [\#224](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/213)
+* **severity.HIGH** Storage of IndividualAmount class failed: [\#224](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/213)
   * Bug description: The `JsonAdaptedIndividualAmount` took in a Person parameter rather than a JsonAdaptedPerson parameter.
   * Pull request: [\#207](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/205)
 
