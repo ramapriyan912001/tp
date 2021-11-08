@@ -8,7 +8,7 @@ participant ":CalculatePaymentsCommandParser" as CalculatePaymentsCommandParser 
 participant "cpCommand:CalculatePaymentsCommand" as CalculatePaymentsCommand LOGIC_COLOR
 end box
 
-mainframe "sd get calculatePaymentsCommand"
+mainframe sd get calculatePaymentsCommand
 
 activate AweParser
 create CalculatePaymentsCommandParser

@@ -24,7 +24,7 @@ Refer to ref frame for
 details on creation of
 the CreateGroupCommand object
 end note
-group sd get createGroupCommand
+group ref [get createGroupCommand]
 create CreateGroupCommand
 AweParser -> CreateGroupCommand
 activate CreateGroupCommand

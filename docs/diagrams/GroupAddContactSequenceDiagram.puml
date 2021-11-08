@@ -26,7 +26,7 @@ ref frame except with
 GroupAddContactCommand
 and GroupAddContactCommandParser
 end note
-group sd get groupAddContactCommand
+group ref [get groupAddContactCommand]
 create GroupAddContactCommand
 AweParser -> GroupAddContactCommand
 activate GroupAddContactCommand

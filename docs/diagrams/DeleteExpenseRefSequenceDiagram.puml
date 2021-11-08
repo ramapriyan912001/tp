@@ -8,7 +8,7 @@ participant ":DeleteExpenseCommandParser" as DeleteExpenseCommandParser LOGIC_CO
 participant "deleteExpenseCommand:DeleteExpenseCommand" as DeleteExpenseCommand LOGIC_COLOR
 end box
 
-mainframe "sd get deleteExpenseCommand"
+mainframe sd get deleteExpenseCommand
 
 activate AweParser
 create DeleteExpenseCommandParser

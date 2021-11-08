@@ -23,7 +23,7 @@ Refer to ref frame for
 details on creation of
 the FindExpensesCommand object
 end note
-group sd get findExpensesCommand
+group ref [get findExpensesCommand]
 create FindExpensesCommand
 AweParser -> FindExpensesCommand
 activate FindExpensesCommand
