@@ -156,7 +156,7 @@ public class LogicManagerTest {
         }
 
         @Override
-        public void saveAwe(ReadOnlyAwe addressBook, Path filePath) throws IOException {
+        public void saveAwe(ReadOnlyAwe awe, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

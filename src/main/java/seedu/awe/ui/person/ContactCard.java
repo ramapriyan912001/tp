@@ -44,7 +44,7 @@ public class ContactCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      *
-     * Introduce addressbook here so that personCard can display group membership of each person without adding Group
+     * Introduce awe here so that personCard can display group membership of each person without adding Group
      * as an attribute of Person class. Doing so prevents circular dependencies.
      */
     public ContactCard(Person person, int displayedIndex, ReadOnlyAwe awe) {
