@@ -89,9 +89,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setAweFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAweFilePath(addressBookFilePath);
+    public void setAweFilePath(Path aweFilePath) {
+        requireNonNull(aweFilePath);
+        userPrefs.setAweFilePath(aweFilePath);
     }
 
     //=========== Awe ================================================================================

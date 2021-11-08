@@ -377,7 +377,7 @@ public class AddExpenseCommandTest {
         }
 
         @Override
-        public void setAweFilePath(Path addressBookFilePath) {
+        public void setAweFilePath(Path aweFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
