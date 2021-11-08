@@ -55,17 +55,16 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
   * What happened: The cost of the expense was rounded off to zero due to it being too close to zero.
   * Pull request: [\#413](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/413)
 
-### Testing
-* Wrote all test cases for the following classes
-  * `AddExpenseCommand`
-  * `AddExpenseCommandParser`
-  * `Expense` model related classes
-  * `FindExpenseCommandParser`
-
 ### Others
 * **Project management**
   * Managed releases: - [v1.4b](https://github.com/AY2122S1-CS2103T-F13-1/tp/releases/tag/v1.4b)
   * Participated and added to project planning every week - [1](https://github.com/AY2122S1-CS2103T-F13-1/tp/projects/1)
+* **Testing**
+  * Wrote all test cases for the following classes:
+    * `AddExpenseCommand`
+    * `AddExpenseCommandParser`
+    * `Expense` model related classes
+    * `FindExpenseCommandParser`
 
 * **Documentation**:
   * User Guide:
