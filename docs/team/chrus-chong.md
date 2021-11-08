@@ -16,12 +16,6 @@ my contributions to the project.
     * Justification: This feature is crucial as the user should be able to create groups to record travel expenses.
     * Contribution: Built the entire framework for this feature.
 
-* **New Feature**: Constructed the `groupeditname` feature for AWE.
-    * What it does: Allows user to change the group name of an existing group with the command line interface.
-    * Justification: This feature is important as the user should be able to change a travel group's name.
-      The prevents the need for deleting a re-creating a group to change group name.
-    * Contribution: Built the entire framework for this feature.
-
 * **New Feature**: Constructed the `groupeditname`, `groupaddcontact`, `groupremovecontact`, `groupaddtag` and
 `groupremovetag`features for AWE.
     * What it does: Allows user to modify existing group attributes with the command line interface.
