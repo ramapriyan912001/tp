@@ -33,14 +33,14 @@ Given below are my contributions to the project.[RepoSense link](https://nus-cs2
 ### Others
 * **Project management**
     * Release management:[v1.4](https://github.com/AY2122S1-CS2103T-F13-1/tp/releases/tag/v1.4)
-  **Testing**
+* **Testing**
     * Wrote tests for the following:
         * `Group` model related classes
         * `Storage` model related classes
         * `ListExpensesCommand`
         * `ListExpensesCommandParser`
         * `FindExpensesCommand`
-  **Major Bug Fixes**
+* **Major Bug Fixes**
     * **severity.HIGH** Error checking for Json file does not check if group members are in the list of contacts.
         * What happened: The error checking for Json file is not complete and can cause app to start with erroneous
         * data. 
