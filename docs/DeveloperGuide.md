@@ -242,8 +242,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 </p>
 
 How the parsing works:
-* When called upon to parse a user command, the `AweParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AweParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AweParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddContactCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddContactCommand`) which the `AweParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddContactCommandParser`, `DeleteContactCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
@@ -801,7 +801,7 @@ Step 2. `FindGroupsCommandParser` is created and the arguments are parsed by it.
 </p>
 <div style="page-break-after: always;"></div>
 
-Step 3. The `LogicManager` then calls `FindGroupCommand#execute(model)` method, which updated the `FilteredList<Group>` in `ModelManager`. Thereafter, the `FilteredList<Group>` should contains only London.
+Step 3. The `LogicManager` then calls `FindGroupCommand` `execute(model)` method, which updated the `FilteredList<Group>` in `ModelManager`. Thereafter, the `FilteredList<Group>` should contains only London.
 
 Step 4. The GUI listens for updates in the `FilteredList<Group>` and updates the display to display London only.
 
@@ -943,7 +943,7 @@ Step 2. The `FindExpensesCommandParser` parses the input and checks for presence
 It also checks that the group name is valid (does not have any non-alphanumeric characters). The arguments are 
 used to create `DescriptionContainsKeywordsPredicate` and `FindExpensesCommand` is returned to the `LogicManager`.
 
-Step 3. The `LogicManager` then calls `FindExpensesCommand#execute(model)` method, which updates the 
+Step 3. The `LogicManager` then calls `FindExpensesCommand` `execute(model)` method, which updates the 
 `FilteredList<Expense>` in `ModelManager` using the predicate created in step 2.
 
 Step 4. The GUI listens for updates in the `FilteredList<Expense>` and updates the display accordingly.
@@ -2113,14 +2113,13 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a Group
 
-1. Deleting a group.
-   1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added).
+1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added).
   
-   1. Test case: `deletegroup gn/London`
-     Expected: GroupList displayed. Group with name London not seen on the list. Status message will confirm deletion of the group.
+2. Test case: `deletegroup gn/London`
+  Expected: GroupList displayed. Group with name London not seen on the list. Status message will confirm deletion of the group.
 
-   1. Test case: `deletegroup gn/Turkey`
-     Expected: No changes as group does not exist. Error details shown in the status message.
+3. Test case: `deletegroup gn/Turkey`
+  Expected: No changes as group does not exist. Error details shown in the status message.
 
 ### Editing group name
 
