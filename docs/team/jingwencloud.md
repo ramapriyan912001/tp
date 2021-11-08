@@ -18,9 +18,7 @@ Given below are my contributions to the project.[RepoSense link](https://nus-cs2
 
 * **New Feature**: Added the ability to find expenses for a specified group.
     * What it does: Allows the user to find all the expenses containing the input keyword(s) for a certain group.
-    * Justification: This feature is crucial as the user should be able to view the specific expenses they wish
-    * to view more conveniently. Users would be able to search for expenses within groups, so that they do not need
-    * to manually filter the matching expenses by their groups.  
+    * Justification: This feature is crucial as the user should be able to view the specific expenses they wish to view more conveniently. Users would be able to search for expenses within groups, so that they do not need to manually filter the matching expenses by their groups.  
     * Highlights: This implementation added a new command 'findexpenses' to find expenses of a group.
     * Contribution: Built the entire framework for this feature.
 
@@ -32,7 +30,7 @@ Given below are my contributions to the project.[RepoSense link](https://nus-cs2
 
 ### Others
 * **Project management**
-    * Release management:[v1.4](https://github.com/AY2122S1-CS2103T-F13-1/tp/releases/tag/v1.4)
+    * Release management: [v1.4](https://github.com/AY2122S1-CS2103T-F13-1/tp/releases/tag/v1.4)
 * **Testing**
     * Wrote tests for the following:
         * `Group` model related classes
@@ -42,8 +40,7 @@ Given below are my contributions to the project.[RepoSense link](https://nus-cs2
         * `FindExpensesCommand`
 * **Major Bug Fixes**
     * **severity.HIGH** Error checking for Json file does not check if group members are in the list of contacts.
-        * What happened: The error checking for Json file is not complete and can cause app to start with erroneous
-        * data. 
+        * What happened: The error checking for Json file is not complete and can cause app to start with erroneous data. 
         * Pull request: [#361](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/361)
 * **Documentation**:
     * User Guide:
