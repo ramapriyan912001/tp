@@ -6,7 +6,7 @@ import static seedu.awe.testutil.Assert.assertThrows;
 import static seedu.awe.testutil.TypicalPersons.ALICE;
 import static seedu.awe.testutil.TypicalPersons.HOON;
 import static seedu.awe.testutil.TypicalPersons.IDA;
-import static seedu.awe.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.awe.testutil.TypicalPersons.getTypicalAwe;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -17,7 +17,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.awe.commons.exceptions.DataConversionException;
 import seedu.awe.model.Awe;
-import seedu.awe.model.ReadOnlyAddressBook;
+import seedu.awe.model.ReadOnlyAwe;
 
 public class JsonAweStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAweStorageTest");
@@ -26,12 +26,12 @@ public class JsonAweStorageTest {
     public Path testFolder;
 
     @Test
-    public void readAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> readAddressBook(null));
+    public void readAwe_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> readAwe(null));
     }
 
-    private java.util.Optional<ReadOnlyAddressBook> readAddressBook(String filePath) throws Exception {
-        return new JsonAweStorage(Paths.get(filePath)).readAddressBook(addToTestDataPathIfNotNull(filePath));
+    private java.util.Optional<ReadOnlyAwe> readAwe(String filePath) throws Exception {
+        return new JsonAweStorage(Paths.get(filePath)).readAwe(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -42,69 +42,69 @@ public class JsonAweStorageTest {
 
     @Test
     public void read_missingFile_emptyResult() throws Exception {
-        assertFalse(readAddressBook("NonExistentFile.json").isPresent());
+        assertFalse(readAwe("NonExistentFile.json").isPresent());
     }
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("notJsonFormatAwe.json"));
+        assertThrows(DataConversionException.class, () -> readAwe("notJsonFormatAwe.json"));
     }
 
     @Test
-    public void readAddressBook_invalidPersonAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidPersonAwe.json"));
+    public void readAwe_invalidPersonAwe_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readAwe("invalidPersonAwe.json"));
     }
 
     @Test
-    public void readAddressBook_invalidAndValidPersonAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidPersonAwe.json"));
+    public void readAwe_invalidAndValidPersonAwe_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readAwe("invalidAndValidPersonAwe.json"));
     }
 
     @Test
-    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
+    public void readAndSaveAwe_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempAwe.json");
-        Awe original = getTypicalAddressBook();
-        JsonAweStorage jsonAddressBookStorage = new JsonAweStorage(filePath);
+        Awe original = getTypicalAwe();
+        JsonAweStorage jsonAweStorage = new JsonAweStorage(filePath);
 
         // Save in new file and read back
-        jsonAddressBookStorage.saveAddressBook(original, filePath);
-        ReadOnlyAddressBook readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
+        jsonAweStorage.saveAwe(original, filePath);
+        ReadOnlyAwe readBack = jsonAweStorage.readAwe(filePath).get();
         assertEquals(original, new Awe(readBack));
 
         // Modify data, overwrite exiting file, and read back
         original.addPerson(HOON);
         original.removePerson(ALICE);
-        jsonAddressBookStorage.saveAddressBook(original, filePath);
-        readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
+        jsonAweStorage.saveAwe(original, filePath);
+        readBack = jsonAweStorage.readAwe(filePath).get();
         assertEquals(original, new Awe(readBack));
 
         // Save and read without specifying file path
         original.addPerson(IDA);
-        jsonAddressBookStorage.saveAddressBook(original); // file path not specified
-        readBack = jsonAddressBookStorage.readAddressBook().get(); // file path not specified
+        jsonAweStorage.saveAwe(original); // file path not specified
+        readBack = jsonAweStorage.readAwe().get(); // file path not specified
         assertEquals(original, new Awe(readBack));
 
     }
 
     @Test
-    public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(null, "SomeFile.json"));
+    public void saveAwe_nullAwe_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> saveAwe(null, "SomeFile.json"));
     }
 
     /**
      * Saves {@code addressBook} at the specified {@code filePath}.
      */
-    private void saveAddressBook(ReadOnlyAddressBook addressBook, String filePath) {
+    private void saveAwe(ReadOnlyAwe addressBook, String filePath) {
         try {
             new JsonAweStorage(Paths.get(filePath))
-                    .saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
+                    .saveAwe(addressBook, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(new Awe(), null));
+    public void saveAwe_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> saveAwe(new Awe(), null));
     }
 }

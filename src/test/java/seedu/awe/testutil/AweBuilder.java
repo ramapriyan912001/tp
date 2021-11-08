@@ -4,26 +4,26 @@ import seedu.awe.model.Awe;
 import seedu.awe.model.person.Person;
 
 /**
- * A utility class to help with building Addressbook objects.
+ * A utility class to help with building Awe objects.
  * Example usage: <br>
- *     {@code Awe ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
+ *     {@code Awe ab = new AweBuilder().withPerson("John", "Doe").build();}
  */
-public class AddressBookBuilder {
+public class AweBuilder {
 
     private Awe awe;
 
-    public AddressBookBuilder() {
+    public AweBuilder() {
         awe = new Awe();
     }
 
-    public AddressBookBuilder(Awe awe) {
+    public AweBuilder(Awe awe) {
         this.awe = awe;
     }
 
     /**
      * Adds a new {@code Person} to the {@code Awe} that we are building.
      */
-    public AddressBookBuilder withPerson(Person person) {
+    public AweBuilder withPerson(Person person) {
         awe.addPerson(person);
         return this;
     }

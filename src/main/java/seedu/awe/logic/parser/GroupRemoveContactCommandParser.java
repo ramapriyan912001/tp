@@ -14,7 +14,7 @@ import javafx.collections.ObservableList;
 import seedu.awe.logic.commands.GroupRemoveContactCommand;
 import seedu.awe.logic.parser.exceptions.ParseException;
 import seedu.awe.model.Model;
-import seedu.awe.model.ReadOnlyAddressBook;
+import seedu.awe.model.ReadOnlyAwe;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.person.Name;
@@ -31,7 +31,7 @@ public class GroupRemoveContactCommandParser implements Parser<GroupRemoveContac
      * @param model Model object passed into constructor to provide list of contacts.
      */
     public GroupRemoveContactCommandParser(Model model) {
-        ReadOnlyAddressBook addressBook = model.getAwe();
+        ReadOnlyAwe addressBook = model.getAwe();
         this.allMembers = addressBook.getPersonList();
         this.allGroups = addressBook.getGroupList();
         this.membersToBeRemoved = new ArrayList<>();

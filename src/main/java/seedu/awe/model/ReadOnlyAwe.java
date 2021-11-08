@@ -14,7 +14,7 @@ import seedu.awe.model.person.Person;
 /**
  * Unmodifiable view of an awe book
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyAwe {
 
     /**
      * Returns an unmodifiable view of the persons list.

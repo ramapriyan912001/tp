@@ -10,14 +10,14 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.awe.commons.exceptions.IllegalValueException;
 import seedu.awe.model.Awe;
-import seedu.awe.model.ReadOnlyAddressBook;
+import seedu.awe.model.ReadOnlyAwe;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.person.Person;
 
 /**
  * An Immutable Awe that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
+@JsonRootName(value = "awe")
 class JsonSerializableAwe {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
@@ -38,11 +38,11 @@ class JsonSerializableAwe {
     }
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyAwe} into this class for Jackson use.
      *
      * @param source future changes to this will not affect the created {@code JsonSerializableAwe}.
      */
-    public JsonSerializableAwe(ReadOnlyAddressBook source) {
+    public JsonSerializableAwe(ReadOnlyAwe source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
         groups.addAll(source.getGroupList().stream().map(JsonAdaptedGroup::new).collect(Collectors.toList()));
     }

@@ -8,7 +8,7 @@ import static seedu.awe.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.awe.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.awe.testutil.Assert.assertThrows;
 import static seedu.awe.testutil.TypicalGroups.BALI;
-import static seedu.awe.testutil.TypicalGroups.getTypicalAddressBook;
+import static seedu.awe.testutil.TypicalGroups.getTypicalAwe;
 
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +27,7 @@ public class GroupEditNameCommandTest {
     private static final GroupName TAIWAN_GROUP_NAME = new GroupName("Taiwan");
     private static final GroupName LONDON_GROUP_NAME = new GroupName("London");
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAwe(), new UserPrefs());
 
     @Test
     public void constructor_nullGroup_throwsNullPointerException() {
@@ -76,7 +76,7 @@ public class GroupEditNameCommandTest {
         CommandResult expectedCommandResult = new CommandResult(
                 String.format(Messages.MESSAGE_GROUPEDITNAMECOMMAND_SUCCESS, JAPAN_GROUP_NAME));
 
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalAwe(), new UserPrefs());
         Group updatedGroup = new GroupBuilder(BALI).withGroupName(JAPAN_GROUP_NAME.getName()).build();
         expectedModel.setGroup(BALI, updatedGroup);
 

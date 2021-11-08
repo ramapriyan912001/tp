@@ -5,7 +5,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.awe.commons.exceptions.DataConversionException;
-import seedu.awe.model.ReadOnlyAddressBook;
+import seedu.awe.model.ReadOnlyAwe;
 import seedu.awe.model.ReadOnlyUserPrefs;
 import seedu.awe.model.UserPrefs;
 
@@ -21,12 +21,12 @@ public interface Storage extends AweStorage, UserPrefsStorage {
     void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
 
     @Override
-    Path getAddressBookFilePath();
+    Path getAweFilePath();
 
     @Override
-    Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyAwe> readAwe() throws DataConversionException, IOException;
 
     @Override
-    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    void saveAwe(ReadOnlyAwe awe) throws IOException;
 
 }

@@ -8,7 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.awe.commons.core.LogsCenter;
-import seedu.awe.model.ReadOnlyAddressBook;
+import seedu.awe.model.ReadOnlyAwe;
 import seedu.awe.model.person.Person;
 import seedu.awe.ui.UiPart;
 
@@ -25,7 +25,7 @@ public class ContactListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public ContactListPanel(ObservableList<Person> personList, ReadOnlyAddressBook addressBook) {
+    public ContactListPanel(ObservableList<Person> personList, ReadOnlyAwe addressBook) {
         super(FXML);
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell(addressBook));
@@ -35,9 +35,9 @@ public class ContactListPanel extends UiPart<Region> {
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
     class PersonListViewCell extends ListCell<Person> {
-        private final ReadOnlyAddressBook addressBook;
+        private final ReadOnlyAwe addressBook;
 
-        public PersonListViewCell(ReadOnlyAddressBook addressBook) {
+        public PersonListViewCell(ReadOnlyAwe addressBook) {
             this.addressBook = addressBook;
         }
 

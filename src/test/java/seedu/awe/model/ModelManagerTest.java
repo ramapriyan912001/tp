@@ -31,7 +31,7 @@ import seedu.awe.model.expense.Expense;
 import seedu.awe.model.person.NameContainsKeywordsPredicate;
 import seedu.awe.model.person.Person;
 import seedu.awe.model.transactionsummary.TransactionSummary;
-import seedu.awe.testutil.AddressBookBuilder;
+import seedu.awe.testutil.AweBuilder;
 import seedu.awe.testutil.ModelBuilder;
 
 public class ModelManagerTest {
@@ -61,14 +61,14 @@ public class ModelManagerTest {
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         resetModelManager();
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAddressBookFilePath(Paths.get("awe/book/file/path"));
+        userPrefs.setAweFilePath(Paths.get("awe/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setAddressBookFilePath(Paths.get("new/awe/book/file/path"));
+        userPrefs.setAweFilePath(Paths.get("new/awe/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -87,17 +87,17 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
+    public void setAweFilePath_nullPath_throwsNullPointerException() {
         resetModelManager();
-        assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));
+        assertThrows(NullPointerException.class, () -> modelManager.setAweFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+    public void setAweFilePath_validPath_setsAweFilePath() {
         resetModelManager();
         Path path = Paths.get("awe/book/file/path");
-        modelManager.setAddressBookFilePath(path);
-        assertEquals(path, modelManager.getAddressBookFilePath());
+        modelManager.setAweFilePath(path);
+        assertEquals(path, modelManager.getAweFilePath());
     }
 
     @Test
@@ -113,25 +113,25 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasGroup_validGroupInAddressBook_returnsTrue() {
+    public void hasGroup_validGroupInAwe_returnsTrue() {
         resetModelManager();
         assertTrue(modelManager.hasGroup(INDIA));
     }
 
     @Test
-    public void hasGroup_validGroupInAddressBook_returnsFalse() {
+    public void hasGroup_validGroupInAwe_returnsFalse() {
         resetModelManager();
         assertFalse(modelManager.hasGroup(BUDAPEST_WITH_EXPENSES));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPerson_personNotInAwe_returnsFalse() {
         resetModelManager();
         assertFalse(modelManager.hasPerson(NONEXISTENTPERSON));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPerson_personInAwe_returnsTrue() {
         resetModelManager();
         assertTrue(modelManager.hasPerson(ALICE));
     }
@@ -188,16 +188,16 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getActiveGroupFromAddressBook_throwsCommandException() {
+    public void getActiveGroupFromAwe_throwsCommandException() {
         resetModelManager();
-        assertThrows(CommandException.class, () -> modelManager.getActiveGroupFromAddressBook());
+        assertThrows(CommandException.class, () -> modelManager.getActiveGroupFromAwe());
     }
 
     @Test
-    public void getActiveGroupFromAddressBook_returnsGroup() throws CommandException {
+    public void getActiveGroupFromAwe_returnsGroup() throws CommandException {
         resetModelManager();
         modelManager.setExpenses(DUBAI);
-        assertEquals(modelManager.getActiveGroupFromAddressBook(), DUBAI);
+        assertEquals(modelManager.getActiveGroupFromAwe(), DUBAI);
     }
 
     @Test
@@ -239,7 +239,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        Awe awe = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        Awe awe = new AweBuilder().withPerson(ALICE).withPerson(BENSON).build();
         Awe differentAwe = new Awe();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -270,7 +270,7 @@ public class ModelManagerTest {
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
+        differentUserPrefs.setAweFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(awe, differentUserPrefs)));
     }
 }

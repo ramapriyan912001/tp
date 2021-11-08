@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.awe.model.Awe;
-import seedu.awe.model.ReadOnlyAddressBook;
+import seedu.awe.model.ReadOnlyAwe;
 import seedu.awe.model.expense.Cost;
 import seedu.awe.model.expense.Description;
 import seedu.awe.model.expense.Expense;
@@ -61,7 +61,7 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
+    public static ReadOnlyAwe getSampleAwe() {
         Awe sampleAb = new Awe();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);

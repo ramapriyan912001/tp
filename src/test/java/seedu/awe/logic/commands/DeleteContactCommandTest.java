@@ -9,7 +9,7 @@ import static seedu.awe.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.awe.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.awe.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.awe.testutil.TypicalIndexes.INDEX_SECOND;
-import static seedu.awe.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.awe.testutil.TypicalPersons.getTypicalAwe;
 
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +28,7 @@ import seedu.awe.ui.UiView;
  */
 public class DeleteContactCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAwe(), new UserPrefs());
 
 
     @Test

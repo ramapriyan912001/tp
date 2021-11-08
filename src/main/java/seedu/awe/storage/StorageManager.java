@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 import seedu.awe.commons.core.LogsCenter;
 import seedu.awe.commons.exceptions.DataConversionException;
-import seedu.awe.model.ReadOnlyAddressBook;
+import seedu.awe.model.ReadOnlyAwe;
 import seedu.awe.model.ReadOnlyUserPrefs;
 import seedu.awe.model.UserPrefs;
 
@@ -50,30 +50,30 @@ public class StorageManager implements Storage {
     // ================ Awe methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return aweStorage.getAddressBookFilePath();
+    public Path getAweFilePath() {
+        return aweStorage.getAweFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(aweStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyAwe> readAwe() throws DataConversionException, IOException {
+        return readAwe(aweStorage.getAweFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyAwe> readAwe(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return aweStorage.readAddressBook(filePath);
+        return aweStorage.readAwe(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, aweStorage.getAddressBookFilePath());
+    public void saveAwe(ReadOnlyAwe awe) throws IOException {
+        saveAwe(awe, aweStorage.getAweFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+    public void saveAwe(ReadOnlyAwe awe, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        aweStorage.saveAddressBook(addressBook, filePath);
+        aweStorage.saveAwe(awe, filePath);
     }
 
 }

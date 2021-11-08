@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import seedu.awe.commons.exceptions.DataConversionException;
 import seedu.awe.model.Awe;
-import seedu.awe.model.ReadOnlyAddressBook;
+import seedu.awe.model.ReadOnlyAwe;
 
 /**
  * Represents a storage for {@link Awe}.
@@ -16,31 +16,31 @@ public interface AweStorage {
     /**
      * Returns the file path of the data file.
      */
-    Path getAddressBookFilePath();
+    Path getAweFilePath();
 
     /**
-     * Returns Awe data as a {@link ReadOnlyAddressBook}.
+     * Returns Awe data as a {@link ReadOnlyAwe}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyAwe> readAwe() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getAweFilePath()
      */
-    Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyAwe> readAwe(Path filePath) throws DataConversionException, IOException;
 
     /**
-     * Saves the given {@link ReadOnlyAddressBook} to the storage.
-     * @param addressBook cannot be null.
+     * Saves the given {@link ReadOnlyAwe} to the storage.
+     * @param awe cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    void saveAwe(ReadOnlyAwe awe) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyAddressBook)
+     * @see #saveAwe(ReadOnlyAwe)
      */
-    void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException;
+    void saveAwe(ReadOnlyAwe awe, Path filePath) throws IOException;
 
 }

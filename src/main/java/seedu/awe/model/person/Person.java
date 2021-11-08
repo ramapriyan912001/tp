@@ -55,7 +55,7 @@ public class Person {
     /**
      * Returns an ArrayList of groups that the instance of Person belongs to.
      *
-     * @param groups ObservableList of Group objects that exist in the addressbook.
+     * @param groups ObservableList of Group objects that exist in the awe.
      * @return ArrayList of Group objects that the instance of Person belongs to.
      */
     public ArrayList<Group> getPersonGroups(ObservableList<Group> groups) {
@@ -71,7 +71,7 @@ public class Person {
     /**
      * Returns a String representation of group names that the instance of Person belongs to.
      *
-     * @param groups ObservableList of Group objects that exist in the addressbook.
+     * @param groups ObservableList of Group objects that exist in the awe.
      * @return String object representing all groups that the instance of Person belongs to.
      */
     public String getGroupsName(ObservableList<Group> groups) {

@@ -33,7 +33,7 @@ import seedu.awe.logic.commands.AddExpenseCommand;
 import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.model.Awe;
 import seedu.awe.model.Model;
-import seedu.awe.model.ReadOnlyAddressBook;
+import seedu.awe.model.ReadOnlyAwe;
 import seedu.awe.model.ReadOnlyUserPrefs;
 import seedu.awe.model.expense.Cost;
 import seedu.awe.model.expense.Expense;
@@ -171,12 +171,12 @@ public class AddExpenseCommandParserTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getAweFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setAweFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -186,17 +186,17 @@ public class AddExpenseCommandParserTest {
         }
 
         @Override
-        public void setAwe(ReadOnlyAddressBook newData) {
+        public void setAwe(ReadOnlyAwe newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAwe() {
+        public ReadOnlyAwe getAwe() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public Group getActiveGroupFromAddressBook() throws CommandException {
+        public Group getActiveGroupFromAwe() throws CommandException {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -252,7 +252,7 @@ public class AddExpenseCommandParserTest {
 
         /**
          * Returns an unmodifiable view of the list of {@code Group} backed by the internal list of
-         * {@code versionedAddressBook}
+         * {@code versionedAwe}
          */
         @Override
         public ObservableList<Group> getFilteredGroupList() {
@@ -377,7 +377,7 @@ public class AddExpenseCommandParserTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAwe() {
+        public ReadOnlyAwe getAwe() {
             Awe toReturn = new Awe();
             toReturn.setPersons(personsAdded);
             toReturn.setGroups(groups);

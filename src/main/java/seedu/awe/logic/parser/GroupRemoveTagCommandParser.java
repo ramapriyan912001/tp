@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import seedu.awe.logic.commands.GroupRemoveTagCommand;
 import seedu.awe.logic.parser.exceptions.ParseException;
 import seedu.awe.model.Model;
-import seedu.awe.model.ReadOnlyAddressBook;
+import seedu.awe.model.ReadOnlyAwe;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.tag.Tag;
@@ -25,7 +25,7 @@ public class GroupRemoveTagCommandParser implements Parser<GroupRemoveTagCommand
      * @param model Model object passed into constructor to provide list of groups.
      */
     public GroupRemoveTagCommandParser(Model model) {
-        ReadOnlyAddressBook addressBook = model.getAwe();
+        ReadOnlyAwe addressBook = model.getAwe();
         this.allGroups = addressBook.getGroupList();
     }
     /**
