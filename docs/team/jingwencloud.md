@@ -7,7 +7,7 @@ title: Ong Jingwen's Project Portfolio Page
 
 Around the World in $80 is a desktop application that splits bills between different contacts. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
-Given below are my contributions to the project. They can be viewed [here](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=Jingwencloud&tabRepo=AY2122S1-CS2103T-F13-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs&authorshipIsBinaryFileTypeChecked=false&zFR=false).
+Given below are my contributions to the project.[RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=Jingwencloud&tabRepo=AY2122S1-CS2103T-F13-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs&authorshipIsBinaryFileTypeChecked=false&zFR=false)
 
 * **New Feature**: Added the ability to list expenses of a specified group.
     * What it does: Allows the user to view all the expenses for a certain group, where the description, cost and payer
@@ -40,6 +40,11 @@ Given below are my contributions to the project. They can be viewed [here](https
         * `ListExpensesCommand`
         * `ListExpensesCommandParser`
         * `FindExpensesCommand`
+  **Major Bug Fixes**
+    * **severity.HIGH** Error checking for Json file does not check if group members are in the list of contacts.
+        * What happened: The error checking for Json file is not complete and can cause app to start with erroneous
+        * data. 
+        * Pull request: [#361](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/361)
 * **Documentation**:
     * User Guide:
         * Added documentation for `find expenses` feature
