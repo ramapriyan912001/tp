@@ -50,30 +50,17 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
 * **severity.MED** Error message for `addexpense` is wrong [\#310](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/310)
   * What happened: Entering a group that does not exist shows an error message that the payer is not part of the group rather than indicating that the group does not exist.
   * Pull request: [\#359](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/359)
-  
-* **severity.MED** An expense of zero cost was able to be added through rounding of a number close to zero. [\#393](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/393)
-  * What happened: The cost of the expense was rounded off to zero due to it being too close to zero.
-  * Pull request: [\#413](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/413)
-
-* **severity.LOW** Transaction summary lacked a dollar sign when displayed. [\#329](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/329)
-  * What happened: Displayed transaction summary lacked a dollar sign which made its purpose confusion.
-  * Pull request: [\#359](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/359)
-
-### Testing
-* Wrote all test cases for the following classes
-  * `AddExpenseCommand`
-  * `AddExpenseCommandParser`
-  * `Cost`
-  * `Description`
-  * `Expense`
-  * `ExpenseList`
-  * `IndividualAmount`
-  * `FindExpenseCommandParser`
 
 ### Others
 * **Project management**
   * Managed releases: - [v1.4b](https://github.com/AY2122S1-CS2103T-F13-1/tp/releases/tag/v1.4b)
   * Participated and added to project planning every week - [1](https://github.com/AY2122S1-CS2103T-F13-1/tp/projects/1)
+* **Testing**
+  * Wrote all test cases for the following classes:
+    * `AddExpenseCommand`
+    * `AddExpenseCommandParser`
+    * `Expense` model related classes
+    * `FindExpenseCommandParser`
 
 * **Documentation**:
   * User Guide:
