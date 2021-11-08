@@ -41,7 +41,7 @@ My contributions to the project can be viewed [here](https://nus-cs2103-ay2122s1
 
 
 ### Testing
-* Wrote test cases for the following classes
+* Wrote automated tests for the following classes
   * `DeleteGroupCommand`
   * `DeleteGroupCommandParser`
   * `CalculatePaymentsCommand`
@@ -78,6 +78,7 @@ My contributions to the project can be viewed [here](https://nus-cs2103-ay2122s1
     * Developer Guide:
         * Added implementation details for add contact, delete group, create group, delete expense, and calculate payments features, including sequence and activity diagrams.
         * Added use cases for editing a contact, deleting a contact, deleting a travel group, deleting an expense, calculating payments, and help.
+        * Added manual test cases for editing a contact, deleting a contact, deleting a travel group, deleting an expense, and calculating payments.
     * Created labels for issue-tracking and documentation.
 
 * **Community**:
