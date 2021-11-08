@@ -2003,7 +2003,7 @@ testers are expected to do more *exploratory* testing.
 
 2. Deleting a contact while **filtered** contacts are being shown.
 
-   1. Prerequisites: The preloaded data for contacts are not modified. (No contacts are removed or added). List contacts using command `findcontacts al`.
+   1. Prerequisites: The preloaded data for contacts are not modified. (No contacts are removed or added). List contacts using command `findcontacts alex`.
 
    1. Test case: `deletecontact 1`<br>
      Expected: First contact is deleted from the visible list. List is updated.
@@ -2059,7 +2059,7 @@ testers are expected to do more *exploratory* testing.
 
 2. Editing a contact while **filtered** contacts are being shown.
 
-   1. Prerequisites: The preloaded data for contacts are not modified. (No contacts are removed or added). List contacts using command `findcontacts al`.
+   1. Prerequisites: The preloaded data for contacts are not modified. (No contacts are removed or added). List contacts using command `findcontacts alex`.
 
    1. Test case: `editcontact 1 n/Alex`<br>
      Expected: First contact is edited from the visible list. List is updated to show edited contact with new name.
@@ -2212,7 +2212,7 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `findgroups Singapore`
        Expected: GroupList will display a blank page. 0 groups found shown in status message.
        
-2. Search for groups in ContactsPage
+2. Search for groups when not viewing GroupsPage.
    1. Prerequisites: The preloaded data for groups are not modified. (No groups are removed or added)
    
    2. Test case: `findgroups London`
@@ -2354,9 +2354,9 @@ testers are expected to do more *exploratory* testing.
       
 2. Calculating payments of a group without expenses.
 
-   1. Prerequisites: The group `Bali` should be created and without any expenses.
+   1. Prerequisites: The preloaded data for groups and expenses are not modified. (No groups or expenses are removed or added).
 
-   1. Test case: `calculatepayments gn/Bali`
+   1. Test case: `calculatepayments gn/Colombia`
      Expected: Transaction summary list for each person will be displayed. Each person will have $0 as the amount of money they spent. Status message will indicate successful execution of the command.      
 
 <p align="center">
