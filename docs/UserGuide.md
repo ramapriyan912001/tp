@@ -10,7 +10,7 @@ expenses with travel-mates, and facilitating easy recollection of debts at the e
 only bespoke app designed for group travellers.
 
 The app promises to revolutionize the group-travel space. With AWE, bills can be split and monitored in a centralized
-manner that maximizes the potential for disputes and maximizes the efficiency of payment and recollection of debts.
+manner that minimizes the potential for disputes and maximizes the efficiency of payment and recollection of debts.
 
 AWE's vision is a more interconnected world where relationships are more easily built and maintained.
 Our mission is to accomplish through a user-centric approach that seeks to provide the user with what they need, at the
@@ -666,7 +666,7 @@ an index to identify which contact/expense to modify. Users can simply view the 
 the relevant index in a convenient manner as compared to typing out the full name. However, groups contain a large
 amount of sensitive information (such as membership and expenses) that cannot be recovered upon deletion. As such, our
 team decided to implement [Group-related commands](#52-groups-commands) by accepting the unique group name as an
-argument. This maximizes the chances of accidentally deleting a group.
+argument. This minimizes the chances of accidentally deleting a group.
 
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install AWE on the other computer and replace the empty data file it creates with the data file used by the AWE on your previous computer.
