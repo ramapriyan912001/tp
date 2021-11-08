@@ -54,18 +54,7 @@ Given below are my contributions to the project.[RepoSense link](https://nus-cs2
 ### Others
 * **Project management**
     * Managed releases: v1.2b
-* **Testing**
-  * Wrote all test cases for the following classes
-      * `CreateGroupCommand`
-      * `CreateGroupCommandParser`
-      * `GroupAddContactCommand`
-      * `GroupAddContactCommandParser`
-      * `GroupRemoveContactCommand`
-      * `GroupRemoveContactCommandParser`
-      * `GroupAddTagCommand`
-      * `GroupAddTagCommandParser`
-      * `GroupRemoveTagCommand`
-      * `GroupRemoveTagCommandParser`
+
 * **Documentation**:
     * User Guide:
         * Added documentation for the features `create group`, `group add tag`, `group remove tag`, `group add contact`,
@@ -85,18 +74,8 @@ Given below are my contributions to the project.[RepoSense link](https://nus-cs2
       `groupaddcontact`, `groupremovecontact` commands.
         * Added use cases for `addcontact`, `clearalldata`, `creategroup`, `help`, `groupeditname`,
          `groupaddtag`, `group remove tag`, `group add contact`, `group remove contact` commands.
-        * Wrote the code for the following 2 sequence diagrams, upon which a bulk of the other sequence diagrams were
-      based on.
-
-<p align="center">
-  <img src="../images/CreateGroupSequenceDiagram.png" alt="Create Group Sequence Diagram" width="750" />
-  <br>
-</p>
-
-<p align="center">
-  <img src="../images/CreateGroupRef.png" alt="Create Group Reference Sequence Diagram" width="600" />
-  <br>
-</p>
+        * Wrote the code for the sequence diagram of `creategroup`, upon which a bulk of the other sequence diagrams
+      were based on.
 
 * **Major bug fixes**:
   * **severity.HIGH** `groupremovecontact` does not delete the group even when removing the last member of the group.
@@ -116,8 +95,6 @@ Given below are my contributions to the project.[RepoSense link](https://nus-cs2
       * Bug description: The `groupaddcontact` command accepts an invalid name as an argument without raising any error
     messages.
       * Pull request: [\#417](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/417)
-
-
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#124](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/124),
