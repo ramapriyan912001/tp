@@ -6,9 +6,9 @@ title: Chrus Chong's Project Portfolio Page
 ### Project: Around the World in $80
 
 Around the World in $80 (AWE) is a desktop application that splits bills between different contacts.
-The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java.
-
-Given below are my contributions to the project.[RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=chrus&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=false&zFR=false)
+The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java. Given below are
+my contributions to the project.
+[RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=chrus&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=false&zFR=false)
 
 ### Features
 * **New Feature**: Constructed the `creategroup` feature for AWE.
@@ -16,18 +16,11 @@ Given below are my contributions to the project.[RepoSense link](https://nus-cs2
     * Justification: This feature is crucial as the user should be able to create groups to record travel expenses.
     * Contribution: Built the entire framework for this feature.
 
-* **New Feature**: Constructed the `groupeditname` feature for AWE.
-    * What it does: Allows user to change the group name of an existing group with the command line interface.
-    * Justification: This feature is important as the user should be able to change a travel group's name.
-      The prevents the need for deleting a re-creating a group to change group name.
-    * Contribution: Built the entire framework for this feature.
-
-* **New Feature**: Constructed the `groupaddcontact`, `groupremovecontact`, `groupaddtag` and `groupremovetag`feature
-for AWE.
-    * What it does: Allows user to add and remove members/tags from an existing group with the command line interface.
-    * Justification: This feature is important as the user should be able to add and remove members/tags from travel
-  groups after creating them. The prevents the need for deleting a re-creating a group to change membership or tag
-  status.
+* **New Feature**: Constructed the `groupeditname`, `groupaddcontact`, `groupremovecontact`, `groupaddtag` and
+`groupremovetag`features for AWE.
+    * What it does: Allows user to modify existing group attributes with the command line interface.
+    * Justification: This feature is important as the user should be able to modify attributes in travel
+  groups after creating them. The prevents the need for deleting a re-creating a group.
     * Contribution: Built the entire framework for this feature.
 
 * **New Feature**: Developed storage functionalities for `creategroup` and `deletegroup` feature.
@@ -67,15 +60,13 @@ for AWE.
   * **severity.HIGH** `groupremovecontact` does not delete the group even when removing the last member of the group.
   [\#341](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/341)
       * Bug description: The `groupremovecontact` command removes the final person in the group, leaving AWE with a
-    group that has no members.
-      * Pull request: [\#360](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/360)
+    group that has no members. (Pull request: [\#360](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/360))
 
   * **severity.HIGH** `groupeditname` causes AWE to become unresponsive.
     [\#314](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/314)
       * Bug description: The `groupeditname` causes AWE to become unresponsive upon trying to change a specific group
-        name to another group name that already exists within AWE.
-      * Pull request: [\#360](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/360)
-
+        name to another group name that already exists within AWE. (Pull request:
+    [\#360](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/360))
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#124](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/124),
