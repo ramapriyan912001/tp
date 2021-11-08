@@ -10,7 +10,7 @@ Around the World in $80 is a desktop application that allows group travellers to
 My contributions to the project can be viewed [here](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=ramapriyan&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=false&zFR=false).
 
 ### Features
-* **New Feature**: Contributed to delete group feature
+* **New Feature**: Contributed to delete group feature.
     * What it does: Allows the user to delete a group with a command.
     * Justification: This feature is crucial as the user should be able to delete groups once they are obsolete or if the user has made an error.
     * Highlights: This implementation added in a new command `deletegroup` to delete a group by name.
