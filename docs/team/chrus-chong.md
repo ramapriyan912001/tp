@@ -6,8 +6,7 @@ title: Chrus Chong's Project Portfolio Page
 ### Project: Around the World in $80
 
 Around the World in $80 (AWE) is a desktop application that splits bills between different contacts.
-The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about
-10 kLoC.
+The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java.
 
 Given below are my contributions to the project.[RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=chrus&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=false&zFR=false)
 
@@ -15,31 +14,20 @@ Given below are my contributions to the project.[RepoSense link](https://nus-cs2
 * **New Feature**: Constructed the `creategroup` feature for AWE.
     * What it does: Allows user to create a new travel group with the command line interface.
     * Justification: This feature is crucial as the user should be able to create groups to record travel expenses.
-    * Highlights: This implementation added in a new command `creategroup` to create a new group. It creates a
-      new travel group with the specified members.
-    * Contribution: Built the entire framework for this feature.
-
-* **New Feature**: Constructed the `groupaddcontact` and `groupremovecontact` feature for AWE.
-    * What it does: Allows user to add and remove a person from an existing group with the command line interface.
-    * Justification: This feature is important as the user should be able to add and remove members from travel groups
-      after creating them. The prevents the need for deleting a re-creating a group to change membership.
-    * Highlights: This implementation added 2 new commands,`groupaddcontact` and `groupremovecontact` to add and remove
-      contacts from a specified group respectively.
     * Contribution: Built the entire framework for this feature.
 
 * **New Feature**: Constructed the `groupeditname` feature for AWE.
     * What it does: Allows user to change the group name of an existing group with the command line interface.
     * Justification: This feature is important as the user should be able to change a travel group's name.
       The prevents the need for deleting a re-creating a group to change group name.
-    * Highlights: This implementation added in a new command `groupeditname` to edit a travel group's name.
     * Contribution: Built the entire framework for this feature.
 
-* **New Feature**: Constructed the `groupaddtag` and `groupremovetag` feature for AWE.
-    * What it does: Allows user to add and remove a tag from an existing group with the command line interface.
-    * Justification: This feature is important as the user should be able to add and remove tags from travel groups
-      after creating them. The prevents the need for deleting a re-creating a group to change tag status.
-    * Highlights: This implementation added 2 new commands,`groupaddtag` and `groupremovetag` to add and remove
-      tags from a specified group respectively.
+* **New Feature**: Constructed the `groupaddcontact`, `groupremovecontact`, `groupaddtag` and `groupremovetag`feature
+for AWE.
+    * What it does: Allows user to add and remove members/tags from an existing group with the command line interface.
+    * Justification: This feature is important as the user should be able to add and remove members/tags from travel
+  groups after creating them. The prevents the need for deleting a re-creating a group to change membership or tag
+  status.
     * Contribution: Built the entire framework for this feature.
 
 * **New Feature**: Developed storage functionalities for `creategroup` and `deletegroup` feature.
@@ -59,11 +47,8 @@ Given below are my contributions to the project.[RepoSense link](https://nus-cs2
     * User Guide:
         * Added documentation for the features `create group`, `group add tag`, `group remove tag`, `group add contact`,
          `group remove contact`, and `group edit name`
-        * Add details of the above features into the Command Summary table
-        * Added details for `About the Document`
-        * Added details for `Command Format`
-        * Added details for `FAQ`
-        * Added `Final Word`
+        * Added details for `About the Document`, `Command Format`, `FAQ`
+        * Added `Final Word` section
     * Developer Guide:
         * Created table of contents for ease of navigation.
         * Rearranged all user stories to ensure they follow decreasing order of priority.
@@ -75,7 +60,8 @@ Given below are my contributions to the project.[RepoSense link](https://nus-cs2
         * Added use cases for `addcontact`, `clearalldata`, `creategroup`, `help`, `groupeditname`,
          `groupaddtag`, `group remove tag`, `group add contact`, `group remove contact` commands.
         * Wrote the code for the sequence diagram of `creategroup`, upon which a bulk of the other sequence diagrams
-      were based on.
+      were based on. Refer to the sequence diagram in the
+      [Diagram Contributions to Developer Guide](#diagram-contributions-to-developer-guide) section.
 
 * **Major bug fixes**:
   * **severity.HIGH** `groupremovecontact` does not delete the group even when removing the last member of the group.
@@ -90,11 +76,6 @@ Given below are my contributions to the project.[RepoSense link](https://nus-cs2
         name to another group name that already exists within AWE.
       * Pull request: [\#360](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/360)
 
-  * **severity.MEDIUM** `groupaddcontact` does not raise a ParseException when invalid names are entered.
-  [\#430](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/430)
-      * Bug description: The `groupaddcontact` command accepts an invalid name as an argument without raising any error
-    messages.
-      * Pull request: [\#417](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/417)
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#124](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/124),
@@ -114,7 +95,35 @@ Given below are my contributions to the project.[RepoSense link](https://nus-cs2
   [#6](https://github.com/chrus-chong/ped/issues/6),
   [#7](https://github.com/chrus-chong/ped/issues/7),
   [#8](https://github.com/chrus-chong/ped/issues/8),
-  [#9](https://github.com/chrus-chong/ped/issues/9),'
+  [#9](https://github.com/chrus-chong/ped/issues/9),
   [#10](https://github.com/chrus-chong/ped/issues/10),
   [#11](https://github.com/chrus-chong/ped/issues/11),
   [#12](https://github.com/chrus-chong/ped/issues/12))
+
+<div style="page-break-after: always;"></div>
+
+### Diagram Contributions to Developer Guide
+
+<p align="center">
+  <img src="images/CreateGroupActivityDiagram.png" alt="Create Group Activity Diagram" width="400" />
+  <br>
+    Fig 1. Create Group Activity Diagram
+</p>
+
+<p align="center">
+  <img src="../images/CreateGroupSequenceDiagram.png" alt="Create Group Sequence Diagram" width="750" />
+  <br>
+    Fig 2. Create Group Sequence Diagram, upon which a bulk of the other sequence diagrams are based on
+</p>
+
+<p align="center">
+  <img src="../images/CreateGroupRef.png" alt="Create Group Reference Sequence Diagram" width="600" />
+  <br>
+    Fig 3. Reference diagram for the Create Group Sequence Diagram
+</p>
+
+<p align="center">
+  <img src="../images/GroupEditNameSequenceDiagram.png" alt="Create Group Sequence Diagram" width="750" />
+  <br>
+    Fig 5. Group Edit Name Sequence Diagram
+</p>
