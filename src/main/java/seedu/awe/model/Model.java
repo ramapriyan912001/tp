@@ -52,23 +52,23 @@ public interface Model {
     /**
      * Returns the user prefs' awe book file path.
      */
-    Path getAddressBookFilePath();
+    Path getAweFilePath();
 
     /**
      * Sets the user prefs' awe book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setAweFilePath(Path addressBookFilePath);
 
     /**
      * Replaces awe book data with the data in {@code awe}.
      */
-    void setAwe(ReadOnlyAddressBook awe);
+    void setAwe(ReadOnlyAwe awe);
 
     /** Returns the Awe. */
-    ReadOnlyAddressBook getAwe();
+    ReadOnlyAwe getAwe();
 
     /** Returns the group of the ExpenseList in Awe. */
-    Group getActiveGroupFromAddressBook() throws CommandException;
+    Group getActiveGroupFromAwe() throws CommandException;
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the awe book.
@@ -136,7 +136,7 @@ public interface Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Group} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedAwe}
      */
     ObservableList<Group> getFilteredGroupList();
 

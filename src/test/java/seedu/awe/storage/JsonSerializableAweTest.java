@@ -28,7 +28,7 @@ public class JsonSerializableAweTest {
         JsonSerializableAwe dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
                 JsonSerializableAwe.class).get();
         Awe aweFromFile = dataFromFile.toModelType();
-        Awe typicalPersonsAwe = TypicalPersons.getTypicalAddressBook();
+        Awe typicalPersonsAwe = TypicalPersons.getTypicalAwe();
         assertEquals(aweFromFile, typicalPersonsAwe);
     }
 

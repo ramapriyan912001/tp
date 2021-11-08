@@ -21,9 +21,9 @@ public class UserPrefsTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
+    public void setAweFilePath_nullPath_throwsNullPointerException() {
         resetUserPrefs();
-        assertThrows(NullPointerException.class, () -> userPrefs.setAddressBookFilePath(null));
+        assertThrows(NullPointerException.class, () -> userPrefs.setAweFilePath(null));
     }
 
     @Test

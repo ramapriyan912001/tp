@@ -2,7 +2,7 @@ package seedu.awe.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.awe.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.awe.testutil.TypicalPersons.getTypicalAwe;
 
 import java.nio.file.Path;
 
@@ -12,7 +12,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.awe.commons.core.GuiSettings;
 import seedu.awe.model.Awe;
-import seedu.awe.model.ReadOnlyAddressBook;
+import seedu.awe.model.ReadOnlyAwe;
 import seedu.awe.model.UserPrefs;
 
 public class StorageManagerTest {
@@ -54,15 +54,15 @@ public class StorageManagerTest {
          * {@link JsonAweStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonAweStorageTest} class.
          */
-        Awe original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
+        Awe original = getTypicalAwe();
+        storageManager.saveAwe(original);
+        ReadOnlyAwe retrieved = storageManager.readAwe().get();
         assertEquals(original, new Awe(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+    public void getAweFilePath() {
+        assertNotNull(storageManager.getAweFilePath());
     }
 
 }

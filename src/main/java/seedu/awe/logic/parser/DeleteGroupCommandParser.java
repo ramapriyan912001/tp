@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 import seedu.awe.logic.commands.DeleteGroupCommand;
 import seedu.awe.logic.parser.exceptions.ParseException;
 import seedu.awe.model.Model;
-import seedu.awe.model.ReadOnlyAddressBook;
+import seedu.awe.model.ReadOnlyAwe;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.group.GroupName;
 
@@ -22,7 +22,7 @@ public class DeleteGroupCommandParser implements Parser<DeleteGroupCommand> {
      * @param model Model object passed into constructor to provide list of contacts.
      */
     public DeleteGroupCommandParser(Model model) {
-        ReadOnlyAddressBook addressBook = model.getAwe();
+        ReadOnlyAwe addressBook = model.getAwe();
     }
     //assume command is of the following form
     //deletegroup gn/Berlin

@@ -26,7 +26,7 @@ import seedu.awe.model.transactionsummary.TransactionSummaryList;
  * Wraps all data at the awe-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class Awe implements ReadOnlyAddressBook {
+public class Awe implements ReadOnlyAwe {
 
     private final UniquePersonList persons;
     private final UniqueGroupList groups;
@@ -54,7 +54,7 @@ public class Awe implements ReadOnlyAddressBook {
     /**
      * Creates an Awe using the Persons in the {@code toBeCopied}
      */
-    public Awe(ReadOnlyAddressBook toBeCopied) {
+    public Awe(ReadOnlyAwe toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -123,7 +123,7 @@ public class Awe implements ReadOnlyAddressBook {
     /**
      * Resets the existing data of this {@code Awe} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyAwe newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());

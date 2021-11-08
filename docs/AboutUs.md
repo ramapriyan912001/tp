@@ -6,7 +6,7 @@ Around the World in $80 was developed by the AY2122S1-CS2103T-F13-1 team.
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+This project is based on the Awe-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 ## Project team
 

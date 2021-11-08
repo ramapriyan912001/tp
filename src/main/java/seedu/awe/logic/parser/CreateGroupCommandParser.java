@@ -20,7 +20,7 @@ import seedu.awe.logic.commands.CreateGroupCommand;
 import seedu.awe.logic.parser.exceptions.EmptyGroupException;
 import seedu.awe.logic.parser.exceptions.ParseException;
 import seedu.awe.model.Model;
-import seedu.awe.model.ReadOnlyAddressBook;
+import seedu.awe.model.ReadOnlyAwe;
 import seedu.awe.model.group.GroupName;
 import seedu.awe.model.person.Name;
 import seedu.awe.model.person.Person;
@@ -36,7 +36,7 @@ public class CreateGroupCommandParser implements Parser<CreateGroupCommand> {
      * @param model Model object passed into constructor to provide list of contacts.
      */
     public CreateGroupCommandParser(Model model) {
-        ReadOnlyAddressBook addressBook = model.getAwe();
+        ReadOnlyAwe addressBook = model.getAwe();
         this.allMembers = addressBook.getPersonList();
         this.toBeAddedToGroup = new ArrayList<>();
     }
@@ -44,7 +44,7 @@ public class CreateGroupCommandParser implements Parser<CreateGroupCommand> {
     /**
      * Returns CreateGroupCommand based on user input.
      *
-     * @param args User input into addressbook.
+     * @param args User input into awe.
      * @return CreateGroupCommand object to represent command to be executed.
      * @throws ParseException If user input is incorrectly formatted.
      */
@@ -119,12 +119,12 @@ public class CreateGroupCommandParser implements Parser<CreateGroupCommand> {
     }
 
     /**
-     * Returns person that matches a given Name object if in addressbook.
-     * If person not in addressbook, null is returned.
+     * Returns person that matches a given Name object if in awe.
+     * If person not in awe, null is returned.
      *
-     * @param memberName Name object representing person that is being searched for in the addressbook.
-     * @param members ObservableList of Person objects representing all contacts in the addressbook.
-     * @return Person object if name matches that of a person from the addressbook.
+     * @param memberName Name object representing person that is being searched for in the awe.
+     * @param members ObservableList of Person objects representing all contacts in the awe.
+     * @return Person object if name matches that of a person from the awe.
      */
     public static Person findMember(Name memberName, ObservableList<Person> members) {
         for (Person member : members) {

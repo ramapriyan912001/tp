@@ -4,7 +4,7 @@ import static seedu.awe.commons.core.Messages.MESSAGE_LISTCONTACTSCOMMAND_SUCCES
 import static seedu.awe.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.awe.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.awe.testutil.TypicalIndexes.INDEX_FIRST;
-import static seedu.awe.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.awe.testutil.TypicalPersons.getTypicalAwe;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,7 +23,7 @@ public class ListContactsCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalAwe(), new UserPrefs());
         expectedModel = new ModelManager(model.getAwe(), new UserPrefs());
     }
 

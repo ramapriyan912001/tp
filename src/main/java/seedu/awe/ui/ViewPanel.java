@@ -52,7 +52,7 @@ public class ViewPanel extends UiPart<Region> {
     public void fillInnerParts() {
         logger.info("Setting up view panels...");
 
-        contactListPanel = new ContactListPanel(logic.getFilteredPersonList(), logic.getAddressBook());
+        contactListPanel = new ContactListPanel(logic.getFilteredPersonList(), logic.getAwe());
         groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
         expenseListPanel = new ExpenseListPanel(logic.getExpenses());
         transactionSummaryListPanel = new TransactionSummaryListPanel(logic.getTransactionSummary());

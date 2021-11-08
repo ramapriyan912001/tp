@@ -8,7 +8,7 @@ import static seedu.awe.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.awe.testutil.TypicalGroups.BALI;
 import static seedu.awe.testutil.TypicalGroups.CHINA;
 import static seedu.awe.testutil.TypicalGroups.INDIA;
-import static seedu.awe.testutil.TypicalGroups.getTypicalAddressBook;
+import static seedu.awe.testutil.TypicalGroups.getTypicalAwe;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -25,8 +25,8 @@ import seedu.awe.model.group.GroupContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindGroupsCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAwe(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalAwe(), new UserPrefs());
 
     @Test
     public void equals() {

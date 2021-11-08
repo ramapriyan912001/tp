@@ -13,7 +13,7 @@ import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.logic.parser.AweParser;
 import seedu.awe.logic.parser.exceptions.ParseException;
 import seedu.awe.model.Model;
-import seedu.awe.model.ReadOnlyAddressBook;
+import seedu.awe.model.ReadOnlyAwe;
 import seedu.awe.model.expense.Expense;
 import seedu.awe.model.group.Group;
 import seedu.awe.model.payment.Payment;
@@ -50,7 +50,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getAwe());
+            storage.saveAwe(model.getAwe());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -59,7 +59,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
+    public ReadOnlyAwe getAwe() {
         return model.getAwe();
     }
 
@@ -89,8 +89,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public Path getAweFilePath() {
+        return model.getAweFilePath();
     }
 
     @Override

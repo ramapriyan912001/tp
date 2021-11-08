@@ -12,7 +12,7 @@ import seedu.awe.commons.exceptions.DataConversionException;
 import seedu.awe.commons.exceptions.IllegalValueException;
 import seedu.awe.commons.util.FileUtil;
 import seedu.awe.commons.util.JsonUtil;
-import seedu.awe.model.ReadOnlyAddressBook;
+import seedu.awe.model.ReadOnlyAwe;
 
 /**
  * A class to access Awe data stored as a json file on the hard disk.
@@ -27,32 +27,32 @@ public class JsonAweStorage implements AweStorage {
         this.filePath = filePath;
     }
 
-    public Path getAddressBookFilePath() {
+    public Path getAweFilePath() {
         return filePath;
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlyAwe> readAwe() throws DataConversionException {
+        return readAwe(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}.
+     * Similar to {@link #readAwe()}.
      *
      * @param filePath location of the data. Cannot be null.
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException {
+    public Optional<ReadOnlyAwe> readAwe(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableAwe> jsonAddressBook = JsonUtil.readJsonFile(
+        Optional<JsonSerializableAwe> jsonAwe = JsonUtil.readJsonFile(
                 filePath, JsonSerializableAwe.class);
-        if (!jsonAddressBook.isPresent()) {
+        if (!jsonAwe.isPresent()) {
             return Optional.empty();
         }
 
         try {
-            return Optional.of(jsonAddressBook.get().toModelType());
+            return Optional.of(jsonAwe.get().toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
@@ -60,21 +60,21 @@ public class JsonAweStorage implements AweStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+    public void saveAwe(ReadOnlyAwe awe) throws IOException {
+        saveAwe(awe, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyAddressBook)}.
+     * Similar to {@link #saveAwe(ReadOnlyAwe)}.
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void saveAwe(ReadOnlyAwe awe, Path filePath) throws IOException {
+        requireNonNull(awe);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableAwe(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableAwe(awe), filePath);
     }
 
 }

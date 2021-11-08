@@ -23,7 +23,7 @@ import seedu.awe.logic.commands.exceptions.CommandException;
 import seedu.awe.logic.parser.exceptions.ParseException;
 import seedu.awe.model.Model;
 import seedu.awe.model.ModelManager;
-import seedu.awe.model.ReadOnlyAddressBook;
+import seedu.awe.model.ReadOnlyAwe;
 import seedu.awe.model.UserPrefs;
 import seedu.awe.model.person.Person;
 import seedu.awe.storage.JsonAweStorage;
@@ -156,7 +156,7 @@ public class LogicManagerTest {
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+        public void saveAwe(ReadOnlyAwe addressBook, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

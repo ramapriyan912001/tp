@@ -8,7 +8,7 @@ import static seedu.awe.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.awe.testutil.Assert.assertThrows;
 import static seedu.awe.testutil.TypicalGroups.DUBAI;
 import static seedu.awe.testutil.TypicalPersons.ALICE;
-import static seedu.awe.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.awe.testutil.TypicalPersons.getTypicalAwe;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -46,8 +46,8 @@ public class AweTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        Awe newData = getTypicalAddressBook();
+    public void resetData_withValidReadOnlyAwe_replacesData() {
+        Awe newData = getTypicalAwe();
         awe.resetData(newData);
         assertEquals(newData, awe);
     }
@@ -58,7 +58,7 @@ public class AweTest {
         Person editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        AweStub newData = new AweStub(newPersons);
 
         assertThrows(DuplicatePersonException.class, () -> awe.resetData(newData));
     }
@@ -69,18 +69,18 @@ public class AweTest {
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPerson_personNotInAwe_returnsFalse() {
         assertFalse(awe.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPerson_personInAwe_returnsTrue() {
         awe.addPerson(ALICE);
         assertTrue(awe.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasPerson_personWithSameIdentityFieldsInAwe_returnsTrue() {
         awe.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
@@ -127,14 +127,14 @@ public class AweTest {
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyAwe whose persons list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class AweStub implements ReadOnlyAwe {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<Expense> expenses = FXCollections.observableArrayList();
         private final ObservableList<Payment> payments = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
+        AweStub(Collection<Person> persons) {
             this.persons.setAll(persons);
         }
 

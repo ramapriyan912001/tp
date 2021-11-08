@@ -9,7 +9,7 @@ import static seedu.awe.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.awe.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.awe.testutil.TypicalExpenses.BUFFET;
 import static seedu.awe.testutil.TypicalExpenses.SOUVENIRS;
-import static seedu.awe.testutil.TypicalExpenses.getTypicalAddressBook;
+import static seedu.awe.testutil.TypicalExpenses.getTypicalAwe;
 import static seedu.awe.testutil.TypicalGroups.BALI;
 import static seedu.awe.testutil.TypicalGroups.VIENNA_NOT_IN_GROUPS;
 
@@ -30,8 +30,8 @@ import seedu.awe.testutil.ModelBuilder;
  * Contains integration tests (interaction with the Model) for {@code FindExpensesCommand}.
  */
 public class FindExpensesCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAwe(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalAwe(), new UserPrefs());
 
     @Test
     public void equals() {

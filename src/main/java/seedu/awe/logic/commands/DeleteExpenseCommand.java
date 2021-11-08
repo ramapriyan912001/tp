@@ -50,7 +50,7 @@ public class DeleteExpenseCommand extends Command {
         }
 
         Expense expenseToDelete = model.getExpense(index.getZeroBased());
-        Group group = model.getActiveGroupFromAddressBook();
+        Group group = model.getActiveGroupFromAwe();
         Group newGroup = group.deleteExpense(expenseToDelete);
         model.setGroup(group, newGroup);
         model.deleteExpense(expenseToDelete, newGroup);
