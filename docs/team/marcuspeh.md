@@ -61,11 +61,6 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
     
 * **Developer Guide**:
     * Updated UI segment in Design with class diagram and explanation.
-<<<<<<< HEAD
-    * Added implementation, test cases and use cases for `findgroups`.
-    * Added implementation, test cases and use cases for `transactionsummary`.
-=======
->>>>>>> 22243df19d5410642b9930724787966c45ab8278
     * Added implementation and design consideration for user interface.
     * Added implementation, test cases  and use cases for `findgroups`, `transactionsummary`.
     * Added use cases for `view groups`, `find person` and `view expenses`.
