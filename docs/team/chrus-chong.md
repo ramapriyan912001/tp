@@ -105,7 +105,7 @@ for AWE.
 ### Diagram Contributions to Developer Guide
 
 <p align="center">
-  <img src="images/CreateGroupActivityDiagram.png" alt="Create Group Activity Diagram" width="400" />
+  <img src="../images/CreateGroupActivityDiagram.png" alt="Create Group Activity Diagram" width="400" />
   <br>
     Fig 1. Create Group Activity Diagram
 </p>
