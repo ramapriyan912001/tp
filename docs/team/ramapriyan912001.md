@@ -41,7 +41,7 @@ My contributions to the project can be viewed [here](https://nus-cs2103-ay2122s1
 
 
 ### Testing
-* Wrote test cases for the following classes
+* Wrote automated tests for the following classes
   * `DeleteGroupCommand`
   * `DeleteGroupCommandParser`
   * `CalculatePaymentsCommand`
@@ -78,10 +78,11 @@ My contributions to the project can be viewed [here](https://nus-cs2103-ay2122s1
     * Developer Guide:
         * Added implementation details for add contact, delete group, create group, delete expense, and calculate payments features, including sequence and activity diagrams.
         * Added use cases for editing a contact, deleting a contact, deleting a travel group, deleting an expense, calculating payments, and help.
+        * Added manual test cases for editing a contact, deleting a contact, deleting a travel group, deleting an expense, and calculating payments.
     * Created labels for issue-tracking and documentation.
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#113](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/113), [\#121](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/121), [\#166](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/166), [\#380](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/380)
-    * Collaborated with [\@chrus-chong](https://github.com/chrus-chong) on `creategroup` features.
+    * Collaborated with [@chrus-chong](https://github.com/chrus-chong) on `creategroup` features.
     * Contributed to CS2103T community by initiating discussion: [\#282](https://github.com/nus-cs2103-AY2122S1/forum/issues/282)
     * Reported bugs and suggestions for other teams in the class: [\#W11-1](https://github.com/ramapriyan912001/ped/issues)
