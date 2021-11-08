@@ -143,7 +143,7 @@ public class CreateGroupCommandParserTest {
     @Test
     public void findGroupMembers_invalidValues_failure() throws ParseException {
         resetParser();
-        //valid names and additional person not found in the model addressbook.
+        //valid names and additional person not found in the model awe.
         ArrayList<Name> membersToFindExtra = new ArrayList<>();
         membersToFindExtra.add(BOB.getName());
         membersToFindExtra.add(AMY.getName());

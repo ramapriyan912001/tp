@@ -25,20 +25,20 @@ public class ContactListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public ContactListPanel(ObservableList<Person> personList, ReadOnlyAwe addressBook) {
+    public ContactListPanel(ObservableList<Person> personList, ReadOnlyAwe awe) {
         super(FXML);
         personListView.setItems(personList);
-        personListView.setCellFactory(listView -> new PersonListViewCell(addressBook));
+        personListView.setCellFactory(listView -> new PersonListViewCell(awe));
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
     class PersonListViewCell extends ListCell<Person> {
-        private final ReadOnlyAwe addressBook;
+        private final ReadOnlyAwe awe;
 
-        public PersonListViewCell(ReadOnlyAwe addressBook) {
-            this.addressBook = addressBook;
+        public PersonListViewCell(ReadOnlyAwe awe) {
+            this.awe = awe;
         }
 
         @Override
@@ -49,7 +49,7 @@ public class ContactListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new ContactCard(person, getIndex() + 1, this.addressBook).getRoot());
+                setGraphic(new ContactCard(person, getIndex() + 1, this.awe).getRoot());
             }
         }
     }

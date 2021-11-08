@@ -76,14 +76,14 @@ public class MainApp extends Application {
      * if errors occur when reading {@code storage}'s awe book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyAwe> addressBookOptional;
+        Optional<ReadOnlyAwe> aweOptional;
         ReadOnlyAwe initialData;
         try {
-            addressBookOptional = storage.readAwe();
-            if (!addressBookOptional.isPresent()) {
+            aweOptional = storage.readAwe();
+            if (!aweOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AWE book.");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAwe);
+            initialData = aweOptional.orElseGet(SampleDataUtil::getSampleAwe);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with a sample AWE book.");
             isDataError = true;

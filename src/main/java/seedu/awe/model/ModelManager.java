@@ -40,13 +40,13 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given awe and userPrefs.
      */
-    public ModelManager(ReadOnlyAwe addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAwe awe, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(awe, userPrefs);
 
-        logger.fine("Initializing with awe book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with awe book: " + awe + " and user prefs " + userPrefs);
 
-        this.awe = new Awe(addressBook);
+        this.awe = new Awe(awe);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.awe.getPersonList());
         filteredGroups = new FilteredList<>(this.awe.getGroupList());
@@ -89,9 +89,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setAweFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAweFilePath(addressBookFilePath);
+    public void setAweFilePath(Path aweFilePath) {
+        requireNonNull(aweFilePath);
+        userPrefs.setAweFilePath(aweFilePath);
     }
 
     //=========== Awe ================================================================================

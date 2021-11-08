@@ -57,7 +57,7 @@ public interface Model {
     /**
      * Sets the user prefs' awe book file path.
      */
-    void setAweFilePath(Path addressBookFilePath);
+    void setAweFilePath(Path aweFilePath);
 
     /**
      * Replaces awe book data with the data in {@code awe}.

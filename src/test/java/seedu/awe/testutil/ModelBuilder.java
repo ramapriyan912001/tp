@@ -39,12 +39,12 @@ import seedu.awe.model.person.Person;
  */
 public class ModelBuilder {
 
-    public static final Awe DEFAULT_ADDRESSBOOK = new Awe();
+    public static final Awe DEFAULT_AWE = new Awe();
     public static final UserPrefs DEFAULT_USERPREFS = new UserPrefs();
     public static final FilteredList<Person> DEFAULT_FILTEREDPERSONS =
-            new FilteredList<Person>(DEFAULT_ADDRESSBOOK.getPersonList());
+            new FilteredList<Person>(DEFAULT_AWE.getPersonList());
     public static final FilteredList<Group> DEFAULT_FILTEREDGROUPS =
-            new FilteredList<Group>(DEFAULT_ADDRESSBOOK.getGroupList());
+            new FilteredList<Group>(DEFAULT_AWE.getGroupList());
 
     private Awe awe;
     private UserPrefs userPrefs;
@@ -90,7 +90,7 @@ public class ModelBuilder {
     }
 
     /**
-     * Adds all Person attributes from TypicalPersons into the sample addressbook.
+     * Adds all Person attributes from TypicalPersons into the sample awe.
      *
      * @param awe Awe object to be used for testing purposes.
      */
@@ -109,7 +109,7 @@ public class ModelBuilder {
     }
 
     /**
-     * Adds all Person attributes from TypicalPersons into the sample addressbook.
+     * Adds all Person attributes from TypicalPersons into the sample awe.
      *
      * @param awe Awe object to be used for testing purposes.
      */
