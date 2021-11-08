@@ -55,19 +55,11 @@ Given below are my contributions to the project. [RepoSense link](https://nus-cs
   * What happened: The cost of the expense was rounded off to zero due to it being too close to zero.
   * Pull request: [\#413](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/413)
 
-* **severity.LOW** Transaction summary lacked a dollar sign when displayed. [\#329](https://github.com/AY2122S1-CS2103T-F13-1/tp/issues/329)
-  * What happened: Displayed transaction summary lacked a dollar sign which made its purpose confusion.
-  * Pull request: [\#359](https://github.com/AY2122S1-CS2103T-F13-1/tp/pull/359)
-
 ### Testing
 * Wrote all test cases for the following classes
   * `AddExpenseCommand`
   * `AddExpenseCommandParser`
-  * `Cost`
-  * `Description`
-  * `Expense`
-  * `ExpenseList`
-  * `IndividualAmount`
+  * `Expense` model related classes
   * `FindExpenseCommandParser`
 
 ### Others
